@@ -1,3 +1,6 @@
+
+{hidden}
+
 It is critical that you understand how cascading updates and deletes work when using GORM. The key part to remember is the @belongsTo@ setting which controls which class "owns" a relationship.
 
 Whether it is a one-to-one, one-to-many or many-to-many, defining @belongsTo@ will result in updates cascading from the owning class to its dependant (the other side of the relationship), and for many-/one-to-one and one-to-many relationships deletes will also cascade.
@@ -12,6 +15,25 @@ class Airport {
     static hasMany = [flights: Flight]
 }
 {code}
+{hidden}
+
+Es fundamental que entiendas cómo cascada actualiza y elimina el trabajo al utilizar GORM. La pieza clave para recordar es el @ belongsTo @ establecer los controles que clase "posee" una relación.
+
+Si es un uno a uno, uno a muchos o muchos a muchos, definir @ belongsTo @ resultará en actualizaciones en cascada de la clase propietaria a su cargo (el otro lado de la relación) y para muchos - y uno a uno y elimina las relaciones uno a varios también será en cascada.
+
+Si te not_ _do definir @ belongsTo @ entonces no suceden cascadas y tendrá que guardar manualmente cada objeto (excepto en el caso de uno a muchos, en cuyo caso guarda será cascada automáticamente si se encuentra una nueva instancia en un @ hasMany @ colección).
+
+Aquí está un ejemplo:
+
+{code}
+clase {Aeropuerto
+    Nombre de la cadena
+    estático hasMany = [vuelos: vuelo]
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Flight {
@@ -21,6 +43,19 @@ class Flight {
 {code}
 
 If I now create an @Airport@ and add some @Flight@s to it I can save the @Airport@ and have the updates cascaded down to each flight, hence saving the whole object graph:
+
+{hidden}
+
+{code}
+clase vuelo {}
+    Número de cadena
+    Static belongsTo = [Aeropuerto: Aeropuerto]
+}
+{code}
+
+Si ahora crear un aeropuerto @ @ y agregar algunos Flight@s @ que me puedo ahorrar el aeropuerto @ @ y han las actualizaciones en cascada a cada vuelo, ahí guardar el gráfico de todo objeto:
+
+{hidden}
 
 {code}
 new Airport(name: "Gatwick")
@@ -35,6 +70,24 @@ Conversely if I later delete the @Airport@ all @Flight@s associated with it will
 def airport = Airport.findByName("Gatwick")
 airport.delete()
 {code}
+{hidden}
+
+{code}
+nuevo aeropuerto (nombre: "Gatwick")
+        .addToFlights (nuevo vuelo (número: "BA3430"))
+        .addToFlights (nuevo vuelo (número: "EZ0938"))
+        .Save()
+{code}
+
+Por el contrario si posteriormente eliminar el aeropuerto @ @ todos @ Flight@s asociados con también se eliminarán:
+
+{code}
+Aeropuerto de Def = Airport.findByName("Gatwick")
+Airport.Delete()
+{code}
+
+{hidden}
+
 
 However, if I were to remove @belongsTo@ then the above cascading deletion code *would not work*. To understand this better take a look at the summaries below that describe the default behaviour of GORM with regards to specific associations. Also read [part 2|http://blog.springsource.com/2010/07/02/gorm-gotchas-part-2/] of the GORM Gotchas series of articles to get a deeper understanding of relationships and cascading.
 
@@ -47,6 +100,22 @@ class A { static hasMany = [bees: B] }
 {code}
 class B { static belongsTo = [a: A] }
 {code}
+{hidden}
+
+Sin embargo, si tuviera que retire el anterior código de eliminación en cascada @ belongsTo @ * sería trabajo *. Para entender esto mejor echar un vistazo de los resúmenes a continuación que describen el comportamiento predeterminado de GORM en relación con las asociaciones específicas. También lectura [parte 2|http://blog.springsource.com/2010/07/02/gorm-gotchas-part-2/] de la serie GORM trampas de artículos para obtener una más profunda comprensión de las relaciones y en cascada.
+
+H5. Bidireccional uno a varios con belongsTo
+
+{code}
+clase A {estático hasMany = [las abejas: B]}
+{code}
+
+{code}
+clase B {static belongsTo = [a: A]}
+{code}
+
+{hidden}
+
 
 In the case of a bidirectional one-to-many where the many side defines a @belongsTo@ then the cascade strategy is set to "ALL" for the one side and "NONE" for the many side.
 
@@ -59,6 +128,22 @@ class A { static hasMany = [bees: B] }
 {code}
 class B {  }
 {code}
+{hidden}
+
+En el caso de un bidireccional uno a muchos, donde el lado muchos define un @ belongsTo @ entonces la cascada de estrategia se establece en "Todos" por un lado y "Ninguno" por el lado de muchos.
+
+H5. Uno unidireccional a muchos
+
+{code}
+clase A {estático hasMany = [las abejas: B]}
+{code}
+
+{code}
+clase B {}
+{code}
+
+{hidden}
+
 
 In the case of a unidirectional one-to-many where the many side defines no belongsTo then the cascade strategy is set to "SAVE-UPDATE".
 
@@ -71,6 +156,22 @@ class A { static hasMany = [bees: B] }
 {code}
 class B { A a }
 {code}
+{hidden}
+
+En el caso de un unidireccional uno a varios donde se define el lado muchos no belongsTo, a continuación, la estrategia de la cascada se establece en "Actualización de guardar".
+
+H5. Bidireccional uno a muchos, no belongsTo
+
+{code}
+clase A {estático hasMany = [las abejas: B]}
+{code}
+
+{code}
+clase B {A un}
+{code}
+
+{hidden}
+
 
 In the case of a bidirectional one-to-many where the many side does not define a @belongsTo@ then the cascade strategy is set to "SAVE-UPDATE" for the one side and "NONE" for the many side.
 
@@ -83,7 +184,28 @@ class A {  }
 {code}
 class B { static belongsTo = [a: A] }
 {code}
+{hidden}
+
+En el caso de un bidireccional de uno a varios donde el lado muchos no define un @ belongsTo @ entonces la estrategia de cascada es establece "Actualización de guardar" por un lado y "Ninguno" por el lado de muchos.
+
+H5. Uno a uno con belongsTo Unidirectional
+
+{code}
+{} clase a
+{code}
+
+{code}
+clase B {static belongsTo = [a: A]}
+{code}
+
+{hidden}
+
 
 In the case of a unidirectional one-to-one association that defines a @belongsTo@ then the cascade strategy is set to "ALL" for the owning side of the relationship (A->B) and "NONE" from the side that defines the @belongsTo@ (B->A)
 
 Note that if you need further control over cascading behaviour, you can use the [ORM DSL|guide:ormdsl].
+{hidden}
+
+En el caso de una asociación de uno a uno unidireccional que define un @ belongsTo @ entonces la cascada de estrategia está establecida en "Todo" para la parte propietaria de la relación (A-> B) y "Ninguno" en el lado que define la @ belongsTo @ (B-> A)
+
+Tenga en cuenta que si necesita más control sobre el comportamiento en cascada, puede utilizar el [ORM DSL|guide:ormdsl].

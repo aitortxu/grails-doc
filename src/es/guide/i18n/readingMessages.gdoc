@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Reading Messages in the View
 
 The most common place that you need messages is inside the view. Use the [message|tags] tag for this:
@@ -7,6 +10,20 @@ The most common place that you need messages is inside the view. Use the [messag
 {code}
 
 As long as you have a key in your @messages.properties@ (with appropriate locale suffix) such as the one below then Grails will look up the message:
+
+{hidden}
+
+h4. Lectura de mensajes en la vista
+
+Es el lugar más común que necesita mensajes dentro de la vista. Utilice la etiqueta [message|tags] para ello:
+
+{Código: xml}
+<g:message code="my.localized.content"></g:message>
+{code}
+
+Como tiene una clave en su @messages.properties@ (con el sufijo de idioma apropiado) como siguiente Grails se verá el mensaje:
+
+{hidden}
 
 {code:java}
 my.localized.content=Hola, Me llamo John. Hoy es domingo.
@@ -18,6 +35,20 @@ Messages can also include arguments, for example:
 <g:message code="my.localized.content" args="${ ['Juan', 'lunes'] }" />
 {code}
 
+{hidden}
+
+{code: java}
+My.Localized.Content=Hola, Me llamo John. Hoy es domingo.
+{code}
+
+Los mensajes también pueden incluir los argumentos, por ejemplo:
+
+{Código: xml}
+<g:message code="my.localized.content" args="${ ['Juan', 'lunes'] }"></g:message>
+{code}
+
+{hidden}
+
 The message declaration specifies positional parameters which are dynamically specified:
 
 {code:java}
@@ -27,6 +58,20 @@ my.localized.content=Hola, Me llamo {0}. Hoy es {1}.
 h4. Reading Messages in Controllers and Tag Libraries
 
 It's simple to read messages in a controller since you can invoke tags as methods:
+
+{hidden}
+
+La declaración de mensaje Especifica parámetros posicionales que dinámicamente se especifican:
+
+{code: java}
+My.Localized.Content=Hola, Me llamo {0}. Hoy es {1}.
+{code}
+
+h4. Lectura de mensajes en los controladores y las bibliotecas de etiquetas
+
+Es fácil de leer mensajes en un controlador ya puede invocar etiquetas como métodos:
+
+{hidden}
 
 {code:java}
 def show() {
@@ -39,5 +84,20 @@ The same technique can be used in [tag libraries|guide:taglibs], but if your tag
 {code:java}
 def myTag = { attrs, body ->
     def msg = g.message(code: "my.localized.content", args: ['Juan', 'lunes'])
+}
+{code}
+{hidden}
+
+{code: java}
+Def show() {}
+    Def msg = mensaje (código: "my.localized.content", args: ['Juan', 'lunes'])
+}
+{code}
+
+La misma técnica puede utilizarse en [etiqueta libraries|guide:taglibs], pero si la biblioteca de etiquetas utiliza una costumbre [namespace|guide:namespaces] debe prefijo la llamada con @ g. @:
+
+{code: java}
+Def myTag = {attrs, cuerpo->
+    Def msg = g.message (código: "my.localized.content", args: ['Juan', 'lunes'])
 }
 {code}

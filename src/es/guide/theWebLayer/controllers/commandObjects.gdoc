@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails controllers support the concept of command objects. A command object is similar to a form bean in a framework like Struts, and they are useful for populating a subset of the properties needed to update a domain class. Or where there is no domain class required for the interaction, but you need features such as [data binding|guide:dataBinding] and [validation|guide:validation].
 
 h4. Declaring Command Objects
@@ -19,6 +22,32 @@ class LoginCommand {
     }
 }
 {code}
+{hidden}
+
+Los controladores de Grails apoyan el concepto de objetos de comando. Un objeto de comando es similar a un grano de forma en un marco como puntales, y son útiles para llenar un subconjunto de las propiedades necesarias para actualizar una clase de dominio. O donde no hay ninguna clase de dominio necesaria para la interacción, pero necesita características tales como [datos binding|guide:dataBinding] y [validation|guide:validation].
+
+h4. Declarar objetos de comando
+
+Objetos de comandos normalmente se declaran en el mismo archivo de origen como un controlador, directamente debajo de la definición de clase del controlador. Por ejemplo:
+
+{code: java}
+clase UserController {}
+    ...
+}
+
+clase LoginCommand {}
+    String username
+    Contraseña de cadena
+
+restricciones estáticas = {}
+        nombre de usuario (en blanco: falso, minSize: 6)
+        contraseña (en blanco: falso, minSize: 6)
+    }
+}
+{code}
+
+{hidden}
+
 
 As this example shows, you can define [constraints|guide:constraints] in command objects just like in [domain classes|guide:GORM].
 
@@ -41,6 +70,32 @@ class LoginController {
     }
 }
 {code}
+{hidden}
+
+Como muestra este ejemplo, puede definir [constraints|guide:constraints] al mando, al igual que los objetos en [dominio classes|guide:GORM].
+
+h4. Mediante objetos de comando
+
+Para utilizar objetos de comando, acciones de controlador pueden especificar opcionalmente cualquier número de parámetros de objeto de comando. Es necesario especificar los tipos de parámetro para que Grails sepa qué objetos para crear, rellenar y validar.
+
+Antes de ejecuta la acción del controlador Grails automáticamente creará una instancia de la clase de objeto de comando, llenar sus propiedades con los parámetros de la petición de enlace y validar el objeto command. Por ejemplo:
+
+{code: java}
+clase LoginController {}
+
+Inicio de sesión de Def = {LoginCommand-> cmd
+        Si ({cmd.hasErrors())}
+            redirigir (acción: 'loginForm')
+            volver
+        }
+
+/ / trabajar con los datos de objeto de comando
+    }
+}
+{code}
+
+{hidden}
+
 
 When using methods instead of Closures for actions, you can specify command objects in arguments:
 
@@ -56,6 +111,25 @@ class LoginController {
     }
 }
 {code}
+{hidden}
+
+Cuando se utilizan métodos en lugar de cierres para acciones, puede especificar objetos de comando en argumentos:
+
+{code: java}
+clase LoginController {}
+    Def login (cmd LoginCommand) {}
+        Si ({cmd.hasErrors())}
+            redirigir (acción: 'loginForm')
+            volver
+        }
+
+/ / trabajar con los datos de objeto de comando
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Command Objects and Dependency Injection
 
@@ -76,5 +150,32 @@ class LoginCommand {
     }
 }
 {code}
+{hidden}
+
+h4. Objetos de comando y la inyección de dependencias
+
+Objetos de comandos pueden participar en inyección de dependencias. Esto es útil que si su objeto command tiene cierta lógica de validación personalizada utiliza Grails [services|guide:services]:
+
+{code}
+clase LoginCommand {}
+
+Def loginService
+
+String username
+    Contraseña de cadena
+
+restricciones estáticas = {}
+        Validador de nombre de usuario: {val, obj->
+            obj.loginService.canLogin (obj.username, obj.password)
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 In this example the command object interacts with the @loginService@ bean which is injected by name from the Spring @ApplicationContext@.
+{hidden}
+
+En este ejemplo el objeto command interactúa con @ loginService @ bean que se inyecta por nombre desde la primavera @ perful @.

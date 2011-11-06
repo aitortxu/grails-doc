@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. afterInterceptor
 
 h2. Purpose
@@ -14,6 +17,27 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. afterInterceptor
+
+h2. Fin
+
+Permite interceptación de acciones después de que han ejecutado, pero antes de que se represente la vista.
+
+h2. Ejemplos
+
+Mediante un bloque:
+{code}
+clase BookController {}
+    estático afterInterceptor = {modelo->
+        Model.foo = "bar"
+    }
+}
+{code}
+
+{hidden}
+
 
 In this example we use a more fine-grained approach, using a Groovy method pointer to specify a helper method to use and a list of action names to be intercepted:
 
@@ -31,6 +55,17 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+En este ejemplo utilizamos un enfoque más detallado, utilizando un puntero de método Groovy para especificar un método auxiliar para uso y una lista de nombres de acción a ser interceptada:
+
+{code}
+clase BookController {}
+
+afterInterceptor estática = [acción: esto.
+
+{hidden}
+
 
 In this example we use the Map syntax to constraint the @afterInterceptor@ to execute *only* for the @list@ action.
 
@@ -43,6 +78,22 @@ static afterInterceptor = { model ->
     println "Tracing action ${actionUri}"
 }
 {code}
+{hidden}
+
+En este ejemplo utilizamos la sintaxis del mapa a la restricción de la @ afterInterceptor @ para ejecutar * sólo * para la lista @ @ Acción.
+
+h2. Descripción
+
+Para definir un interceptor que se ejecuta después de una acción de utilizar la @ afterInterceptor @ propiedad:
+
+{code}
+estático afterInterceptor = {modelo->
+    Console.println "Rastreo de acción ${actionUri}"
+}
+{code}
+
+{hidden}
+
 
 The first argument of the @Closure@ is the model @Map@ that resulted from the action that executed and will be passed to the view. This lets you manipulate the model before rendering the view. The model might be empty but will not be @null@.
 
@@ -57,7 +108,30 @@ static afterInterceptor = { model, modelAndView ->
     println "View is now ${modelAndView.viewName}"
 }
 {code}
+{hidden}
+
+El primer argumento del cierre @ @ es el modelo @ mapa @ que el resultado de la acción que se ejecuta y se pasará a la vista. Esto le permite manipular el modelo antes de procesar la vista. El modelo puede estar vacío, pero no será nulo @ @.
+
+Un @ afterInterceptor @ también puede inspeccionar o modificar la primavera MVC @ ModelAndView @ objeto antes de la representación. En este caso, se convierte en el ejemplo:
+
+{code}
+estático afterInterceptor = {modelo, modelAndView->
+    Console.println "vista actual es de ${modelAndView.viewName}"
+    Si (model.someVar) {}
+        modelAndView.viewName = "/ mycontroller/someotherview"
+    }
+    Console.println "Vista es ahora de ${modelAndView.viewName}"
+}
+{code}
+
+{hidden}
+
 
 This allows the view to be changed based on the model returned by the current action. Note that the @modelAndView@ may be @null@ if the action being intercepted called @redirect@ or @render@.
 
 This example limited the intercepted actions using the @only@ argument but the @except@ argument can also be used to list the actions to not intercept, rather than those to intercept.
+{hidden}
+
+Esto permite la vista para cambiarse basado en el modelo devuelto por la acción actual. Tenga en cuenta que el @ modelAndView @ puede ser null @ @ si la acción interceptada había llamado @ redirección @ o @ render @.
+
+Este ejemplo limita las acciones interceptadas mediante la @ sólo @ argumento pero el @ excepto argumento puede utilizarse también para enumerar las acciones no interceptar, en lugar de a interceptar.

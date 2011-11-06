@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. count
 
 h2. Purpose
@@ -7,5 +10,18 @@ Returns the total number of rows in the domain class table
 h2. Examples
 
 {code:java}
+int bookCount = Book.count()
+{code}
+{hidden}
+
+h1. Conde
+
+h2. Fin
+
+Devuelve el número total de filas en la tabla de clase de dominio
+
+h2. Ejemplos
+
+{code: java}
 int bookCount = Book.count()
 {code}

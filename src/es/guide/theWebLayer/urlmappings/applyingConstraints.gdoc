@@ -1,7 +1,7 @@
+
 {hidden}
+
 URL Mappings also support Grails' unified [validation constraints|guide:constraints] mechanism, which lets you further "constrain" how a URL is matched. For example, if we revisit the blog sample code from earlier, the mapping currently looks like this:
-{hidden}
-Los mapeos de URL tambien soportan el mecanismo unificado de Grails [validation constraints|guide:constraints], el cual permite ademas "restringir" como una URL es empatada. Por ejemplo: si volvemos al codigo de ejemplo del blog, el mapeo actualmente se ve asi:
 
 {code:java}
 static mappings = {
@@ -9,28 +9,47 @@ static mappings = {
 }
 {code}
 
-{hidden}
 This allows URLs such as:
+
 {hidden}
-Esto permite URLs tales como:
+
+Asignaciones de dirección URL también apoyo Grails unificado mecanismo [validación constraints|guide:constraints], que permite que más "restringir" la coincidencia de una dirección URL. Por ejemplo, si nos revisar el código de ejemplo de blog anteriores, la asignación actualmente parece esto:
+
+{code: java}
+asignaciones estáticas = {}
+   "/ año de blog /$ $? / mes$? / día$? / id$?"(controlador: "blog", acción: "Mostrar")
+}
+{code}
+
+Esto permite que las direcciones URL como:
+
+{hidden}
 
 {code:java}
 /graemerocher/2007/01/10/my_funky_blog_entry
 {code}
 
-{hidden}
 However, it would also allow:
-{hidden}
-Sin embargo, esto permitiria tambien:
 
 {code:java}
 /graemerocher/not_a_year/not_a_month/not_a_day/my_funky_blog_entry
 {code}
 
 {hidden}
-This is problematic as it forces you to do some clever parsing in the controller code. Luckily, URL Mappings can be constrained to further validate the URL tokens:
+
+{code: java}
+/graemerocher/2007/01/10/my_funky_blog_entry
+{code}
+
+Sin embargo, también permitiría:
+
+{code: java}
+/graemerocher/not_a_year/not_a_month/not_a_day/my_funky_blog_entry
+{code}
+
 {hidden}
-Esto es problematico por que lo obliga a hacer algun parseo inteligente en el codigo del controlador. Afortunadamente, los mapeos de URL pueden ser restringidos para ademas validar los tokens de la URL:
+
+This is problematic as it forces you to do some clever parsing in the controller code. Luckily, URL Mappings can be constrained to further validate the URL tokens:
 
 {code:java}
 "/$blog/$year?/$month?/$day?/$id?" {
@@ -43,7 +62,20 @@ Esto es problematico por que lo obliga a hacer algun parseo inteligente en el co
      }
 }{code}
 
-{hidden}
 In this case the constraints ensure that the @year@, @month@ and @day@ parameters match a particular valid pattern thus relieving you of that burden later on.
 {hidden}
-En este caso las restricciones se aseguran de que los parametros @year@, @month@ y @day@ empaten con un patron particular valido asi relevandolo a usted de esa carga despues.
+
+Esto es problemático, ya que obliga a hacer algunos análisis inteligente en el código del controlador. Por suerte, asignaciones de dirección URL puede obligarse a validar aún más los tokens de URL:
+
+{code: java}
+"/ año de blog /$ $? / mes$? / día$? / id$?" {
+     controlador = "blog"
+     acción = "Mostrar"
+     {restricciones
+          Year(matches:/\\\d{4}/)
+          Month(matches:/\\\d{2}/)
+          Day(matches:/\\\d{2}/)
+     }
+} {code}
+
+En este caso las restricciones de asegurarse de que el año @ @, @ mes @ y @ día @ parámetros coinciden con un patrón válido particular así aliviar le de esa carga más tarde.

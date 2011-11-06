@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. exists
 
 h2. Purpose
@@ -12,9 +15,35 @@ if (Account.exists(accountId)) {
     // do something
 }
 {code}
+{hidden}
+
+h1. existe
+
+h2. Fin
+
+Comprueba si existe una instancia para el id especificado
+
+h2. Ejemplos
+
+{code: java}
+Def accountId =...
+Si ({Account.exists(accountId))}
+    / / hacer algo
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Parameters:
 
 * @id@ - The id of the object
+{hidden}
+
+h2. Descripción
+
+Parámetros:
+
+* @ id @ - el id del objeto

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Scope Basics
 
 You'll notice from previous examples that we used a special object called @flow@ to store objects within "flow scope". Grails flows have five different scopes you can utilize:
@@ -7,6 +10,20 @@ You'll notice from previous examples that we used a special object called @flow@
 * @flow@ - Stores objects for the scope of the flow, removing them when the flow reaches an end state
 * @conversation@ - Stores objects for the scope of the conversation including the root flow and nested subflows
 * @session@ - Stores objects in the user's session
+
+{hidden}
+
+h4. Conceptos básicos de alcance
+
+Observará de ejemplos anteriores que utilizamos un objeto especial denominado @ flujo @ para almacenar objetos de ámbito"flujo". Flujos de Grails tienen cinco ámbitos diferentes que puede utilizar:
+
+* @ solicitud @ - almacena un objeto para el alcance de la solicitud actual
+* @ flash @ - almacena el objeto de la solicitud actual y siguiente sólo
+* @ flujo @ - objetos de tiendas para el ámbito de la corriente, quitarlos cuando la corriente alcanza un estado final
+* @ conversación @ - almacena objetos para el ámbito de la conversación, incluyendo el flujo de raíz y anidados subflows
+* @ sesión @ - almacena objetos en la sesión del usuario
+
+{hidden}
 
 {note}
 Grails service classes can be automatically scoped to a web flow scope. See the documentation on [Services|guide:services] for more information.
@@ -32,6 +49,26 @@ h4. Flow Scopes and Serialization
 When placing objects in @flash@, @flow@ or @conversation@ scope they must implement @java.io.Serializable@ or an exception will be thrown. This has an impact on [domain classes|guide:GORM] in that domain classes are typically placed within a scope so that they can be rendered in a view. For example consider the following domain class:
 
 {code:java}
+{hidden}
+
+{Nota}
+Las clases de servicio de Grails pueden ser automáticamente destinadas a un ámbito de flujo de la web. Consulte la documentación de [Services|guide:services] para obtener más información.
+{Nota}
+
+Devolver un modelo mapa de una acción resultará automáticamente en el modelo en el ámbito de flujo. Por ejemplo, mediante una acción de transición, se pueden colocar objetos de flujo de @ @ alcance como sigue:
+
+{code: java}
+enterPersonalDetails {}
+    on("Submit") {}
+        [persona: nueva Person(params)]
+    } .a "enterShipping"
+   on("Return").to "showCart"
+} {code}
+
+Tenga en cuenta que una nueva solicitud siempre se crea para cada Estado, por lo que un objeto colocado en el ámbito de la solicitud en un Estado de acción (por ejemplo) no estará disponible en un Estado de vista posterior. Utilice uno de los otros ámbitos para pasar objetos de un Estado a otro. También tenga en cuenta ese flujo de Web:
+
+{hidden}
+
 class Book {
     String title
 }
@@ -42,6 +79,21 @@ To place an instance of the @Book@ class in a flow scope you will need to modify
 {code:java}
 class Book implements Serializable {
     String title
+{hidden}
+
+clase {libro
+    Título de cadena
+}
+{code}
+
+Para colocar una instancia del libro @ @ clase en un ámbito de flujo necesitará modificar lo siguiente:
+
+{code: java}
+Libro de clase implementa {Serializable
+    Título de cadena
+
+{hidden}
+
 }
 {code}
 
@@ -52,6 +104,21 @@ class Book implements Serializable {
     String title
     Author author
 }
+{hidden}
+
+}
+{code}
+
+Esto también afecta a las asociaciones y cierres que declarar dentro de una clase de dominio. Por ejemplo, considere esto:
+
+{code: java}
+Libro de clase implementa {Serializable
+    Título de cadena
+    Autor de autor
+}
+
+{hidden}
+
 {code}
 
 Here if the @Author@ association is not @Serializable@ you will also get an error. This also impacts closures used in [GORM events|guide:eventsAutoTimestamping] such as @onLoad@, @onSave@ and so on. The following domain class will cause an error if an instance is placed in a flow scope:
@@ -62,6 +129,21 @@ class Book implements Serializable {
     String title
 
     def onLoad = {
+{hidden}
+
+{code}
+
+Aquí si el autor @ @ asociación no es Serializable @ @ también producirá un error. Esto también afecta a cierres utilizados [GORM events|guide:eventsAutoTimestamping] como @ onLoad @, @ onSave @, y así sucesivamente. La siguiente clase de dominio producirá un error si una instancia se coloca en un ámbito de flujo:
+
+{code: java}
+Libro de clase implementa {Serializable
+
+Título de cadena
+
+Def onLoad = {}
+
+{hidden}
+
         println "I'm loading"
     }
 }
@@ -71,6 +153,20 @@ The reason is that the assigned block on the @onLoad@ event cannot be serialized
 
 {code:java}
 class Book implements Serializable {
+
+{hidden}
+
+Console.println "estoy cargando"
+    }
+}
+{code}
+
+La razón es que no se puede serializar el bloque asignado en el onLoad @ @ evento. Para evitar esto que debe declarar todos los eventos como @ transitorio @:
+
+{code: java}
+Libro de clase implementa {Serializable
+
+{hidden}
 
     String title
 
@@ -83,12 +179,39 @@ class Book implements Serializable {
 or as methods:
 
 {code:java}
+{hidden}
+
+Título de cadena
+
+transitorio onLoad = {}
+        Console.println "estoy cargando"
+    }
+}
+{code}
+
+o como métodos:
+
+{code: java}
+
+{hidden}
+
 class Book implements Serializable {
 
     String title
 
     def onLoad() {
         println "I'm loading"
+    }
+}
+{code}
+{hidden}
+
+Libro de clase implementa {Serializable
+
+Título de cadena
+
+Def onLoad() {}
+        Console.println "estoy cargando"
     }
 }
 {code}

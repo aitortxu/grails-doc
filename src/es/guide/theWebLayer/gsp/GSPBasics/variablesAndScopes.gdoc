@@ -1,3 +1,6 @@
+
+{hidden}
+
 Within the @<% %>@ brackets you can declare variables:
 
 {code:xml}
@@ -9,6 +12,22 @@ and then access those variables later in the page:
 {code:xml}
 <%=now%>
 {code}
+{hidden}
+
+Dentro de la @ < % > @ soportes puede declarar variables:
+
+{Código: xml}
+< % ahora = new Date() %>
+{code}
+
+y tener acceso a esas variables más tarde en la página:
+
+{Código: xml}
+<%=now%>
+{code}
+
+{hidden}
+
 
 Within the scope of a GSP there are a number of pre-defined variables, including:
 
@@ -19,6 +38,25 @@ Within the scope of a GSP there are a number of pre-defined variables, including
 * @out@ - The response writer for writing to the output stream
 * @params@ - The [params|controllers] object for retrieving request parameters
 * @request@ - The [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] instance
+{hidden}
+
+En el ámbito de un SPG hay un número de variables predefinidas, incluyendo:
+
+* @ aplicación @ - la instancia [javax.servlet.ServletContext|api:javax.servlet.ServletContext]
+* @ perful @ instancia la primavera [ApplicationContext|api:org.springframework.context.ApplicationContext]
+* @ flash @ - el objeto [flash|controllers]
+* @ grailsApplication @ - la instancia [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication]
+* @ out @ - el escritor de respuesta para escribir en la secuencia de salida
+* @ params @-[params|controllers] objeto para recuperar los parámetros de solicitud
+* @ solicitud @ - la instancia [HttpServletRequest|api:javax.servlet.http.HttpServletRequest]
+
+{hidden}
+
 * @response@ - The [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] instance
 * @session@ - The [HttpSession|api:javax.servlet.http.HttpSession] instance
 * @webRequest@ - The [GrailsWebRequest|api:org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest] instance
+{hidden}
+
+* @ respuesta @ - la instancia [HttpServletResponse|api:javax.servlet.http.HttpServletResponse]
+* @ sesión @ - la instancia [HttpSession|api:javax.servlet.http.HttpSession]
+* @ webRequest @ - la instancia [GrailsWebRequest|api:org.codehaus.groovy.grails.web.servlet.mvc.GrailsWebRequest]

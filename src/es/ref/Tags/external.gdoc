@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. external
 
 h2. Purpose
@@ -7,6 +10,18 @@ Renders the appropriate HTML linking markup for an external resource such as a C
 This is a convenience that takes the boilerplate out of the often verbose @<link>@ and @<script>@ tags, with auto-sensing of file types.
 
 This tag is aware of the [Resources plugin|http://grails.org/plugin/resources], and if it's installed it will correctly generate links to static resources processed by the plugin.
+
+{hidden}
+
+h1. externa
+
+h2. Fin
+
+Representa el formato adecuado de enlace HTML para un recurso externo, como un archivo CSS, un archivo de JavaScript o un favicon.
+
+Esto es una comodidad que toma el repetitivo de las a menudo detallado @ <link> @ y @<script></script>
+
+{hidden}
 
 h2. Examples
 
@@ -26,6 +41,22 @@ Output: <link href="/shop/images/icons/favicon.gif" rel="favicon"/>
 <g:external dir="images/icons" file="iphone.png" type="appleicon"/>
 Output: <link href="/shop/images/icons/favicon.gif" rel="apple-touch-icon"/>
 {code}
+{hidden}
+
+h2. Ejemplos
+
+Usos de ejemplo para la aplicación de la "tienda":
+
+{Código: xml}
+<g:external dir="css" file="main.css"></g:external>
+Salida: <link href="/shop/css/main.css" type="text/css" rel="stylesheet" media="screen, projector"> <g:external uri="/images/icons/favicon.ico"></g:external>
+Salida: <link href="/shop/images/icons/favicon.ico" rel="favicon"> <g:external uri="/images/icons/favicon.png"></g:external>
+Salida: <link href="/shop/images/icons/favicon.gif" rel="favicon"> <g:external dir="images/icons" file="iphone.png" type="appleicon"></g:external>
+Salida: <link href="/shop/images/icons/favicon.gif" rel="apple-touch-icon">
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -36,6 +67,20 @@ Attributes
 * @dir@ (optional) - the name of the directory containing the resource
 * @file@ (optional) - the name of the resource file
 * @absolute@ (optional) - If @true@ will prefix the link target address with the value of the @grails.serverURL@ property from @Config.groovy@, or http://localhost:<port> if there is no setting in @Config.groovy@ and not running in production.
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ base @ (opcional) - establece el prefijo que se agregará a la dirección de destino de vínculo, normalmente una dirección URL del servidor absoluta. Esto anula el comportamiento de la absoluta @ @ propiedad si ambos se especifican.
+* @ contextPath @ (opcional): la ruta de contexto (relativo a la ruta de acceso de contexto de aplicación). Valor por defecto es "" o ruta de acceso para el plugin para una vista de complemento o plantilla.
+* @ dir @ (opcional): el nombre del directorio que contiene el recurso
+* @ archivo @ (opcional): el nombre del archivo de recursos
+* @ absoluto @ (opcional): si @ verdadero @ prefijo de la dirección de destino de vínculo con el valor de la propiedad @grails.serverURL@ de @ Config.groovy@ o http://localhost:<port> Si no hay ningún valor en @Config.groovy@ y no se está ejecutando en producción.</port>
+
+{hidden}
+
 * @plugin@ (optional) - The plugin to look for the resource in
 * @type@ (optional) - The type of the link. Normally this is auto-detected by file extension, but you can override it. Each type name has an associated set of default attributes and tag type.
 * @uri@ (optional) - The app-relative URI of the resource, as an alternative to dir/file
@@ -46,6 +91,21 @@ The types supported are:
 
 * css - Sets type="text/css", rel="stylesheet", media="screen, projector"
 * js - Sets type="text/javascript", writer="js"
+{hidden}
+
+* @ plugin @ (opcional): el plugin para buscar el recurso en
+* @ tipo @ (opcional): el tipo del vínculo. Normalmente esto es detectada automáticamente por extensión de archivo, pero se puede reemplazar. El nombre de cada tipo tiene un conjunto asociado de atributos por defecto y el tipo de etiqueta.
+* @ uri @ (opcional) - URI relativos a la aplicación del recurso, como una alternativa al archivo/dir
+
+Los atributos adicionales proporcionados reemplazará a valores proporcionados como valor predeterminado para el tipo.
+
+Los tipos admitidos son:
+
+* css - conjuntos escriba = "text/css", rel = "stylesheet", media = "pantalla, proyector"
+* js - conjuntos escriba = "text/javascript", escritor = "js"
+
+{hidden}
+
 * gif - Sets rel="shortcut icon"
 * jpg - Sets rel="shortcut icon"
 * ico - Sets rel="shortcut icon"
@@ -56,3 +116,15 @@ h2. Source
 
 {source:tag=ApplicationTagLib.external}
 {source}
+{hidden}
+
+* gif - conjuntos rel = "icono de acceso directo"
+* jpg - conjuntos rel = "icono de acceso directo"
+* ico - conjuntos rel = "icono de acceso directo"
+* png - conjuntos rel = "icono de acceso directo"
+* appleicon - conjuntos rel = "icono apple-touch"
+
+h2. Fuente
+
+{source:tag=ApplicationTagLib.external}
+origen de {}

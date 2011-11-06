@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. cascade
 
 h2. Purpose
@@ -16,6 +19,29 @@ class Author {
     }
 }
 {code}
+{hidden}
+
+h1. en cascada
+
+h2. Fin
+
+Configura el comportamiento en cascada de una asociación.
+
+h2. Ejemplos
+
+{code: java}
+clase {autor
+
+estático hasMany = [libros: libro]
+
+asignación estática = {}
+        cascada de libros: 'todos-eliminar-huérfano'
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -26,6 +52,20 @@ Arguments:
 * @cascade@ - The cascading behavior to define. Can be one or more (comma-separated) of @all@, @merge@, @save-update@, @delete@, @lock@, @refresh@, @evict@, @replicate@ or @all-delete-orphan@ (one-to-many associations only).
 
 By default GORM configures a cascading policy of "all" in the case where one entity "belongs to" another. For example:
+{hidden}
+
+h2. Descripción
+
+Uso: @ association_name(cascade:string) @
+
+Argumentos:
+
+* @ cascada @ - el comportamiento en cascada para definir. Puede ser uno o más (comas) de @ all @, @ combinación @, @ guardar-actualización @, @ eliminar @, @ bloqueo, @ actualización @, @ expulsar @, @ replicar @ o @ all-eliminar-huérfano @ (sólo asociaciones de uno a muchos).
+
+De forma predeterminada GORM configura una directiva en cascada de "todos" en el caso que una entidad "pertenece a" otro. Por ejemplo:
+
+{hidden}
+
 
 {code}
 class Book {
@@ -38,6 +78,22 @@ class Author {
     static hasMany = [books: Book]
 }
 {code}
+{hidden}
+
+{code}
+clase {libro
+    Static belongsTo = [autor: autor]
+}
+{code}
+
+{code}
+clase {autor
+    estático hasMany = [libros: libro]
+}
+{code}
+
+{hidden}
+
 
 Here all persistence operations will cascade from the @Author@ domain to the @Book@ domain. So when an @Author@ is deleted so will all the associated books.
 
@@ -47,6 +103,19 @@ If the association doesn't define an owner (a "belongs to" relationship):
 class Book {
 }
 {code}
+
+{hidden}
+
+Aquí todas las operaciones de persistencia serán en cascada desde el autor @ @ dominio del libro @ @ dominio. Así que cuando se elimina un autor @ @ también lo harán todos los libros asociados.
+
+Si la asociación no define un propietario (una relación "pertenece a"):
+
+{code}
+clase {libro
+}
+{code}
+
+{hidden}
 
 {code}
 class Author {
@@ -66,7 +135,35 @@ class Author {
     }
 }
 {code}
+{hidden}
+
+{code}
+clase {autor
+    estático hasMany = [libros: libro]
+}
+{code}
+
+entonces GORM utiliza una directiva en cascada de "actualización de guardar" por defecto. Así que si se elimina un autor @ @ no eliminarán el libro @ @ dominios asociados. Utilice la cascada @ @ argumento en una asociación para personalizar este comportamiento:
+
+{code: java}
+clase {autor
+
+estático hasMany = [libros: libro]
+
+asignación estática = {}
+        cascada de libros: 'todos-eliminar-huérfano'
+    }
+}
+{code}
+
+{hidden}
+
 
 Using this configuration a @Book@ will also be deleted if it is removed (orphaned) from an @Author@'s @books@ association.
 
 See the section on [transitive persistence|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/objectstate.html#objectstate-transitive] in the Hibernate user guide.
+{hidden}
+
+Con esta configuración que también se eliminará un libro @ @ si se elimina (huérfanos) de un @ Author@'s @ libros @ asociación.
+
+Consulte la sección [transitiva persistence|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/objectstate.html

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-hibernate-cfg-xml
 
 h2. Purpose
@@ -8,6 +11,21 @@ h2. Examples
 
 bc.
 grails create-hibernate-cfg-xml
+{hidden}
+
+h1. crear-hibernación-cfg-xml
+
+h2. Fin
+
+@ Crear-hibernación-cfg-xml @ comando creará un archivo de hibernate.cfg.xml para asignaciones personalizadas de hibernación.
+
+h2. Ejemplos
+
+a c..
+Grails crear-hibernación-cfg-xml
+
+{hidden}
+
 
 h2. Description
 
@@ -18,7 +36,26 @@ Usage:
 grails create-hibernate-cfg-xml
 {code}
 
+{hidden}
+
+h2. Descripción
+
+Crea un archivo @hibernate.cfg.xml@ en el @ grails-app/conf/hibernación @ directorio. Puede agregar @<mapping>@ elementos había anotadas Java dominio clases, asignada por archivos hbm.xml o hbm.xml archivos que contienen @<database-object>@ definir DDL personalizado que GORM no admite elementos de referencia.
+
+Uso:
+{code: java}
+Grails crear-hibernación-cfg-xml
+{code}
+</database-object></mapping>
+
+{hidden}
+
 Fired Events:
 
 * @CreatedFile@ - When the file is created
 
+{hidden}
+
+Despedido de eventos:
+
+* @ CreatedFile @ - cuando se crea el archivo

@@ -1,3 +1,6 @@
+
+{hidden}
+
 This Bean builder in Grails aims to provide a simplified way of wiring together dependencies that uses Spring at its core.
 
 In addition, Spring's regular way of configuration (via XML and annotations) is static and difficult to modify and configure at runtime, other than programmatic XML creation which is both error prone and verbose. Grails' [BeanBuilder|api:grails.spring.BeanBuilder] changes all that by making it possible to programmatically wire together components at runtime, allowing you to adapt the logic based on system properties or environment variables.
@@ -7,6 +10,20 @@ This enables the code to adapt to its environment and avoids unnecessary duplica
 h4. The BeanBuilder class
 
 Grails provides a [grails.spring.BeanBuilder|api:grails.spring.BeanBuilder] class that uses dynamic Groovy to construct bean definitions. The basics are as follows:
+
+{hidden}
+
+Este generador de Bean en Grails tiene como objetivo proporcionar una manera simplificada de las dependencias juntos de cableado que utiliza la primavera en su núcleo.
+
+Además, forma regular en la primavera de configuración (a través de XML y anotaciones) es estática y difícil de modificar y configurar en tiempo de ejecución, excepto creación XML programática que es tanto error detallado y propensos. Grails' [BeanBuilder|api:grails.spring.BeanBuilder] cambia todo lo que posibilita la programación de alambre juntos los componentes en tiempo de ejecución, lo que le permite adaptar la lógica basada en propiedades del sistema o las variables de entorno.
+
+Esto permite al código para adaptarse a su entorno y evita la duplicación innecesaria de código (con diferentes configuraciones de primavera para entornos de producción, desarrollo y pruebas)
+
+h4. La clase BeanBuilder
+
+Grails proporciona una clase [grails.spring.BeanBuilder|api:grails.spring.BeanBuilder] que utiliza Groovy dinámico para construir definiciones de frijol. Los fundamentos son los siguientes:
+
+{hidden}
 
 {code:java}
 import org.apache.commons.dbcp.BasicDataSource
@@ -34,6 +51,37 @@ bb.beans {
 
 ApplicationContext appContext = bb.createApplicationContext()
 {code}
+{hidden}
+
+{code: java}
+org.apache.commons.dbcp.BasicDataSource de importación
+org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean de importación
+org.springframework.context.ApplicationContext de importación
+grails.spring.BeanBuilder de importación
+
+Def bb = BeanBuilder() nueva
+
+BB.beans {}
+
+dataSource(BasicDataSource) {}
+        driverClassName = "org.h2.Driver"
+        URL = "jdbc:h2:mem:grailsDB"
+        username = "sa"
+        Password = ""
+    }
+
+sessionFactory(ConfigurableLocalSessionFactoryBean) {}
+        dataSource = ref('dataSource')
+        hibernateProperties = ["hibernate.hbm2ddl.auto": "crear" gota,
+                               "hibernate.show_sql": "true"]
+    }
+}
+
+ApplicationContext appContext = bb.createApplicationContext()
+{code}
+
+{hidden}
+
 
 {note}
 Within [plugins|guide:plugins] and the [grails-app/conf/spring/resources.groovy|guide:springdslAdditional] file you don't need to create a new instance of @BeanBuilder@. Instead the DSL is implicitly available inside the @doWithSpring@ and @beans@ blocks respectively.
@@ -44,6 +92,20 @@ This example shows how you would configure Hibernate with a data source with the
 Each method call (in this case @dataSource@ and @sessionFactory@ calls) maps to the name of the bean in Spring. The first argument to the method is the bean's class, whilst the last argument is a block. Within the body of the block you can set properties on the bean using standard Groovy syntax.
 
 Bean references are resolved automatically using the name of the bean. This can be seen in the example above with the way the @sessionFactory@ bean resolves the @dataSource@ reference.
+{hidden}
+
+{Nota}
+Dentro de [plugins|guide:plugins] y [grails-app/conf/spring/resources.groovy|guide:springdslAdditional] archivo no es necesario crear una nueva instancia de @ BeanBuilder @. En su lugar el DSL está implícitamente disponible dentro de la @ doWithSpring @ y @ frijoles bloques @ respectivamente.
+{Nota}
+
+Este ejemplo muestra cómo se configura hibernación con un origen de datos con @ BeanBuilder @ clase.
+
+Cada método de llamada (en este caso @ dataSource @ y @ sessionFactory @ llamadas) mapas con el nombre de la soja en primavera. El primer argumento al método es clase de bean, mientras que el último argumento es un bloque. Dentro del cuerpo del bloque puede establecer propiedades en el frijol mediante la sintaxis estándar de Groovy.
+
+Las referencias de Bean se resuelven automáticamente utilizando el nombre de la soja. Esto puede verse en el ejemplo anterior con la forma @ sessionFactory @ bean resuelve el dataSource @ @ reference.
+
+{hidden}
+
 
 Certain special properties related to bean management can also be set by the builder, as seen in the following code:
 
@@ -62,6 +124,28 @@ sessionFactory(ConfigurableLocalSessionFactoryBean) { bean ->
                            "hibernate.show_sql":     "true"]
 }
 {code}
+{hidden}
+
+También se pueden definir ciertas propiedades especiales relacionadas con la gestión de frijol por el constructor, como se ve en el siguiente código:
+
+{code: java}
+sessionFactory(ConfigurableLocalSessionFactoryBean) {bean->
+    / / Autowiring comportamiento. La otra opción es 'byType'. [autowire]
+    Bean.autowire = 'nombre'
+    / / Establece el método de inicialización para 'Inicio'. [método init]
+    Bean.initMethod = "init"
+    / / Establece el método de destrucción ' destruir '. [método destruir]
+    Bean.destroyMethod = 'destruir'
+    / / Establece el ámbito de la soja. [alcance]
+    Bean.Scope = 'solicitar'
+    dataSource = ref('dataSource')
+    hibernateProperties = ["hibernate.hbm2ddl.auto": "crear" gota,
+                           "hibernate.show_sql": "true"]
+}
+{code}
+
+{hidden}
+
 
 The strings in square brackets are the names of the equivalent bean attributes in Spring's XML definition.
 
@@ -82,6 +166,30 @@ Include the @grails-spring-<version>.jar@ file in your classpath to use BeanBuil
     </param-value>
 </context-param>
 {code}
+{hidden}
+
+Las cadenas en corchetes son los nombres de los atributos de frijol equivalente en definición XML de la primavera.
+
+h4. Con BeanBuilder Spring MVC
+
+Incluir el .jar @ grails-primavera-<version>@ archivo en la ruta de clases para utilizar BeanBuilder en una aplicación MVC primavera ordinaria. A continuación, agregue los siguientes @<context-param>@ valores al archivo @/WEB-INF/web.xml@:
+
+{Código: xml}
+<context-param> <param-name>contextConfigLocation</param-name><param-value>/WEB-INF/applicationContext.groovy</param-value> 
+    
+    
+</context-param><context-param> <param-name>contextClass</param-name> <param-value>
+      org.Codehaus.Groovy.Grails.Commons.Spring.GrailsWebApplicationContext
+    </param-value>
+    
+    
+</context-param>
+{código}
+
+</context-param> </version>
+
+{hidden}
+
 
 Then create a @/WEB-INF/applicationContext.groovy@ file that does the rest:
 
@@ -97,6 +205,25 @@ beans {
     }
 }
 {code}
+{hidden}
+
+A continuación, cree un archivo @/WEB-INF/applicationContext.groovy@ que se encarga del resto:
+
+{code: java}
+org.apache.commons.dbcp.BasicDataSource de importación
+
+{frijoles
+    dataSource(BasicDataSource) {}
+        driverClassName = "org.h2.Driver"
+        URL = "jdbc:h2:mem:grailsDB"
+        username = "sa"
+        Password = ""
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Loading Bean Definitions from the File System
 
@@ -108,6 +235,21 @@ bb.loadBeans("classpath:*SpringBeans.groovy")
 
 def applicationContext = bb.createApplicationContext()
 {code}
+{hidden}
+
+h4. Definiciones de frijol de carga del sistema de archivos
+
+Puede utilizar el @ BeanBuilder @ clase para cargar scripts Groovy externos que definen frijoles utilizando la misma sintaxis de coincidencia de trazado definida aquí. Por ejemplo:
+
+{code: java}
+Def bb = BeanBuilder() nueva
+BB.loadBeans("Classpath:*SpringBeans.Groovy")
+
+applicationContext Def = bb.createApplicationContext()
+{code}
+
+{hidden}
+
 
 Here the @BeanBuilder@ loads all Groovy files on the classpath ending with @SpringBeans.groovy@ and parses them into bean definitions. An example script can be seen below:
 
@@ -131,6 +273,33 @@ beans {
     }
 }
 {code}
+{hidden}
+
+Aquí la @ BeanBuilder @ cargas Groovy todos los archivos en la ruta de clases terminando con @SpringBeans.groovy@ y les analiza en definiciones de frijol. Una secuencia de comandos de ejemplo puede verse a continuación:
+
+{code: java}
+org.apache.commons.dbcp.BasicDataSource de importación
+org.codehaus.groovy.grails.orm.hibernate.ConfigurableLocalSessionFactoryBean de importación
+
+{frijoles
+
+dataSource(BasicDataSource) {}
+        driverClassName = "org.h2.Driver"
+        URL = "jdbc:h2:mem:grailsDB"
+        username = "sa"
+        Password = ""
+    }
+
+sessionFactory(ConfigurableLocalSessionFactoryBean) {}
+        dataSource = dataSource
+        hibernateProperties = ["hibernate.hbm2ddl.auto": "crear" gota,
+                               "hibernate.show_sql": "true"]
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Adding Variables to the Binding (Context)
 
@@ -147,5 +316,28 @@ bb.loadBeans("classpath:*SpringBeans.groovy")
 
 def ctx = bb.createApplicationContext()
 {code}
+{hidden}
+
+h4. Agregar las Variables para el enlace (contexto)
+
+Si está cargando frijoles desde una secuencia de comandos puede establecer el enlace a utilizar al crear un enlace @ Groovy @:
+
+{code: java}
+enlace Def = Binding() nueva
+Binding.MaxSize = 10000
+Binding.productGroup = 'finanzas'
+
+Def bb = BeanBuilder() nueva
+BB.Binding = enlace
+BB.loadBeans("Classpath:*SpringBeans.Groovy")
+
+Def ctx = bb.createApplicationContext()
+{code}
+
+{hidden}
+
 
 Then you can access the @maxSize@ and @productGroup@ properties in your DSL files.
+{hidden}
+
+Entonces puede acceder al @ maxSize @ y @ productGroup @ propiedades en los archivos DSL.

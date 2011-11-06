@@ -1,3 +1,6 @@
+
+{hidden}
+
 As described in the section on [cascading updates|guide:cascades], the primary mechanism to control the way updates and deletes cascade from one association to another is the static [belongsTo|domainClasses] property.
 
 However, the ORM DSL gives you complete access to Hibernate's [transitive persistence|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/objectstate.html#objectstate-transitive] capabilities using the @cascade@ attribute.
@@ -8,6 +11,14 @@ Valid settings for the cascade attribute include:
 * @save-update@ - cascades only saves and updates to an association
 * @delete@ - cascades only deletes to an association
 * @lock@ - useful if a pessimistic lock should be cascaded to its associations
+{hidden}
+
+Como se describe en la sección [en cascada updates|guide:cascades], el principal mecanismo para controlar el modo actualizaciones y eliminaciones en cascada de una asociación a otro es la propiedad estática [belongsTo|domainClasses].
+
+Sin embargo, el DSL ORM permite acceso completo a hibernar [transitiva persistence|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/objectstate.html
+
+{hidden}
+
 * @refresh@ - cascades refreshes to an association
 * @evict@ - cascades evictions (equivalent to @discard()@ in GORM) to associations if set
 * @all@ - cascade _all_ operations to associations
@@ -18,6 +29,18 @@ It is advisable to read the section in the Hibernate documentation on [transitiv
 {note}
 
 To specify the cascade attribute simply define one or more (comma-separated) of the aforementioned settings as its value:
+{hidden}
+
+* @ actualización @ - cascadas actualiza a una asociación
+* @ expulsar @ - cascadas desalojos (equivalente a @ discard() @ en GORM) a asociaciones si establece
+* @ todos @ - operaciones de _all_ en cascada a asociaciones
+* @ all-eliminar-huérfano @ - se aplica sólo a uno a varios asociaciones y indica que cuando un niño se extrae una asociación entonces debería eliminarse automáticamente. Los niños también se eliminan cuando el padre o madre.
+
+{Nota}
+Es recomendable leer la sección en la documentación de hibernación en [transitiva persistence|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/objectstate.html
+
+{hidden}
+
 
 {code:java}
 class Person {
@@ -31,10 +54,35 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase persona {}
+
+Cadena firstName
+
+estático hasMany = [direcciones: dirección]
+
+asignación estática = {}
+        cascada de direcciones: "all-eliminar-huérfano"
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Address {
     String street
     String postCode
+}
+{code}
+{hidden}
+
+{code: java}
+clase {dirección
+    Calle de cadena
+    Código postal de la cadena
 }
 {code}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. upgrade
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails upgrade
 {code}
+{hidden}
+
+h1. actualización
+
+h2. Fin
+
+La actualización @ @ comando actualiza una aplicación Grails a la versión actualmente instalada de Grails si es posible.
+
+h2. Ejemplos
+
+{code: java}
+actualización de Grails
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,5 +38,22 @@ grails upgrade
 
 Fired Events:
 
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+actualización de Grails
+{code}
+
+Despedido de eventos:
+
+{hidden}
+
 * @StatusUpdate@ - During the upgrade process
 * @StatusFinal@ - After the upgrade completes
+{hidden}
+
+* @ StatusUpdate @ - durante el proceso de actualización
+* @ StatusFinal @ - después de la actualización completa

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. hasErrors
 
 h2. Purpose
@@ -7,6 +10,20 @@ Checks whether a bean, request scope, or model reference has any errors and if s
 h2. Examples
 
 Checks whether there are any errors for any bean throughout the request scope:
+
+{hidden}
+
+h1. hasErrors
+
+h2. Fin
+
+Comprueba si un grano, solicita alcance o referencia de modelo tiene errores y si es así, invoca el cuerpo de la etiqueta. Normalmente se utiliza en combinación con cualquiera [eachError|tags] o [renderErrors|tags]
+
+h2. Ejemplos
+
+Comprueba si hay algún error de cualquier bean en todo el ámbito de la solicitud:
+
+{hidden}
 
 {code:xml}
 <g:hasErrors>
@@ -21,6 +38,20 @@ Checks whether there are any errors for the specified bean
     <g:eachError><p>${it.defaultMessage}</p></g:eachError>
 </g:hasErrors>
 {code}
+{hidden}
+
+{Código: xml}<g:haserrors>
+    <g:eacherror><p>${it.defaultMessage}</p></g:eacherror>
+</g:haserrors>{code}
+
+Comprueba si hay errores para el frijol especificado
+
+{Código: xml}<g:haserrors bean="${book}">
+    <g:eacherror><p>${it.defaultMessage}</p></g:eacherror>
+</g:haserrors>{code}
+
+{hidden}
+
 
 Checks whether there are any errors for the field "title" of the specified "book" bean:
 
@@ -31,6 +62,18 @@ Checks whether there are any errors for the field "title" of the specified "book
     </div>
 </g:hasErrors>
 {code}
+{hidden}
+
+Comprueba si hay errores para el campo "título" de la haba especificado "libro":
+
+{Código: xml}<g:haserrors bean="${book}" field="title">
+    <div class="errors">
+       <g:rendererrors bean="${book}" field="title" as="list"></g:rendererrors>
+    </div>
+</g:haserrors>{code}
+
+{hidden}
+
 
 As a method call in GSP:
 
@@ -41,6 +84,18 @@ As a method call in GSP:
 {code}
 
 In this case we check for a field error on a particular field and set a CSS class on the surrounding div thus allowing us to highlight the error with a red border by appending the @errors@ CSS class.
+{hidden}
+
+Como forma de llamar en el SPG:
+
+{Código: xml}<div class="prop ${hasErrors(bean:user,field:'login', 'errors')}">
+    <label for="login"><input type="text" name="login">
+</label></div>{code}
+
+En este caso Compruebe la existencia de un error de campo en un campo concreto y definir una clase CSS de la div circundante permite resaltar el error con un borde rojo añadiendo la clase de CSS @ @ errores.
+
+{hidden}
+
 
 Checking for errors inside a nested object:
 
@@ -51,6 +106,22 @@ Checking for errors inside a nested object:
            value="${fieldValue(bean: parent, field: 'child.name'} />
 </div>
 {code}
+{hidden}
+
+Comprobación de errores dentro de un objeto anidado:
+
+{Código: xml}<div class="prop ${hasErrors(bean:parent, field:'child.name', 'errors')}">
+    <label for="child.name"></label>
+    <input type="text" name="child.name"
+           value="${fieldvalue(bean: parent, field: 'child.name'} />
+</div>
+{code} type="text" name="child.name" value=""></input type="text" name="child.name"
+           value="${fieldvalue(bean: parent, field: 'child.name'} />
+</div>
+{code}></div>
+
+{hidden}
+
 
 h2. Description
 
@@ -61,6 +132,24 @@ Attributes
 * @field@ (optional) - Check if a field of the bean or model reference has errors
 
 h2. Source
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ bean @ (opcional): el grano para comprobar errores
+* @ modelo @ (opcional): el nombre del modelo de referencia para comprobar si hay errores
+* @ campo @ (opcional) - comprobar si un campo de la referencia de frijol o modelo tiene errores
+
+h2. Fuente
+
+{hidden}
+
 
 {source:tag=ValidationTagLib.hasErrors}
 {source}
+{hidden}
+
+{source:tag=ValidationTagLib.hasErrors}
+origen de {}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 A key thing to remember about Grails is that under the surface Grails is using "Hibernate":http://www.hibernate.org/ for persistence. If you are coming from a background of using "ActiveRecord":http://wiki.rubyonrails.org/rails/pages/ActiveRecord or "iBatis":http://ibatis.apache.org/, Hibernate's "session" model may feel a little strange.
 
 Grails automatically binds a Hibernate session to the currently executing request. This lets you use the [save|domainClasses] and [delete|domainClasses] methods as well as other GORM methods transparently.
@@ -8,4 +11,21 @@ A useful feature of Hibernate over direct JDBC calls and even other frameworks i
 
 Hibernate caches database updates where possible, only actually pushing the changes when it knows that a flush is required, or when a flush is triggered programmatically. One common case where Hibernate will flush cached updates is when performing queries since the cached information might be included in the query results. But as long as you're doing non-conflicting saves, updates, and deletes, they'll be batched until the session is flushed. This can be a significant performance boost for applications that do a lot of database writes.
 
+{hidden}
+
+Una clave para recordar sobre Grails es que bajo las superficies Grails utiliza "Hibernate":http://www.hibernate.org/ de persistencia. Si viene de un fondo de utilizar "ActiveRecord":http://wiki.rubyonrails.org/rails/pages/ActiveRecord o "iBatis":http://ibatis.apache.org/, modelo de "sesión" de hibernación puede sentir un poco extraño.
+
+Grails enlaza automáticamente una sesión de hibernación a la solicitud está ejecuta actualmente. Esto le permite utilizar el [save|domainClasses] y [delete|domainClasses] métodos, así como otros métodos GORM transparente.
+
+h4. Escritura retrasada transaccional
+
+Una característica útil de hibernación durante llamadas JDBC y aún otros marcos es que cuando llama [save|domainClasses] o [delete|domainClasses] no necesariamente realizar cualquier operación de SQL * en ese punto *. Hibernación lotes de instrucciones SQL y los ejecuta lo más tarde posible, a menudo al final de la solicitud cuando baja y cierre de la sesión. Esto se hace habitualmente para usted automáticamente por Grails, que administra su período de sesiones de la hibernación.
+
+Actualizaciones de bases de datos de caché de hibernación cuando sea posible, sólo realmente empujando los cambios cuando sabe que una escalera es necesaria, o cuando una escalera se activa mediante programación. Un caso común donde Hibernate hará que se vacíe versiones en caché es al realizar consultas ya que la información almacenada en caché puede incluirse en los resultados de los consulta. Pero como que estás haciendo guarda no conflictivos, actualizaciones y eliminaciones, te lotes hasta el período de sesiones se vacía. Esto puede ser un impulso considerable en el rendimiento para aplicaciones que realizan muchas escrituras de bases de datos.
+
+{hidden}
+
 Note that flushing is not the same as committing a transaction. If your actions are performed in the context of a transaction, flushing will execute SQL updates but the database will save the changes in its transaction queue and only finalize the updates when the transaction commits.
+{hidden}
+
+Tenga en cuenta que baja no es lo mismo que cometer una transacción. Si las acciones se realizan en el contexto de una transacción, vaciado ejecutará actualizaciones SQL, pero la base de datos será sólo finalizar las actualizaciones cuando se confirma la transacción y guardar los cambios en su cola de transacciones.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 As well as associations between different domain classes, GORM also supports mapping of basic collection types.
 For example, the following class creates a @nicknames@ association that is a @Set@ of @String@ instances:
 
@@ -8,6 +11,21 @@ class Person {
 {code}
 
 GORM will map an association like the above using a join table. You can alter various aspects of how the join table is mapped using the @joinTable@ argument:
+{hidden}
+
+Así como las asociaciones entre clases de dominio diferente, GORM también admite la asignación de tipos de colección básica.
+Por ejemplo, la clase siguiente crea un alias @ @ asociación que es un conjunto @ @ de @ String @ instancias:
+
+{code: java}
+clase persona {}
+    estático hasMany = [apodos: String]
+}
+{code}
+
+GORM asignará una asociación como la anterior usando una tabla de combinación. Puede modificar varios aspectos de cómo es la tabla de ingreso asignado mediante el @ joinTable @ argumento:
+
+{hidden}
+
 
 {code:java}
 class Person {
@@ -22,6 +40,24 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase persona {}
+
+estático hasMany = [apodos: String]
+
+asignación estática = {}
+       hasMany joinTable: [nombre: 'bunch_o_nicknames',
+                           clave: 'person_id',
+                           columna: 'alias',
+                           tipo: "texto"]
+    }
+}
+{code}
+
+{hidden}
+
 
 The example above will map to a table that looks like the following:
 
@@ -31,5 +67,17 @@ The example above will map to a table that looks like the following:
 | person_id         |     nickname          |
 ---------------------------------------------
 |   1               |      Fred             |
+---------------------------------------------
+{code}
+{hidden}
+
+El ejemplo anterior se asignará a una tabla que el siguiente aspecto:
+
+* bunch_o_nicknames tabla *
+{code: java}
+---------------------------------------------
+| person_id |     apodo |
+---------------------------------------------
+|   1               |      Fred |
 ---------------------------------------------
 {code}

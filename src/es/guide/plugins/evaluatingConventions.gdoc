@@ -1,29 +1,35 @@
+
 {hidden}
+
 Before looking at providing runtime configuration based on conventions you first need to understand how to evaluate those conventions from a plugin. Every plugin has an implicit @application@ variable which is an instance of the [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication] interface.
 
 The @GrailsApplication@ interface provides methods to evaluate the conventions within the project and internally stores references to all artifact classes within your application.
 
 Artifacts implement the [GrailsClass|api:org.codehaus.groovy.grails.commons.GrailsClass] interface, which represents a Grails resource such as a controller or a tag library. For example to get all @GrailsClass@ instances you can do:
-{hidden}
-
-Como se ha comentado anteriormente, Grails se basa en el paradigma de "Convención sobre la Configuración". Antes de examinar como preparar nuestros plugins para fúncionar usando este paradigma tenemos que entender cómo se evaluan las convenciones dentro plugin. Todos los plugins tienen una variable implicita llamada @application@ que es una instancia de la interfaz [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication]
-
-La interfaz @GrailsApplication@ provee métodos para evaluar las convenciones en el proyecto y que almacena internamente referencias a todos los artefactos de la aplicación
-
-Los artefactos implementen la interfaz [GrailsClass|api:org.codehaus.groovy.grails.commons.GrailsClass] que representa un recurso de Grails, como un controlador o una librería de tags. Por ejemplo, para obtener todas las instancias de @GrailsClass@ podemos hacer:
-
 
 {code:java}
 for (grailsClass in application.allClasses) {
     println grailsClass.name
 }
 {code}
+{hidden}
+
+Antes de considerar ofrecer runtime configuración basada en convenios le primera necesidad de comprender cómo evaluar los convenios de un plugin. Cada plugin tiene una aplicación @ implícita @ variable que es una instancia de la interfaz de [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication].
+
+@ GrailsApplication @ interfaz proporciona métodos para evaluar los convenios dentro del proyecto y almacena internamente las referencias a todas las clases de artefacto dentro de su aplicación.
+
+Artefactos implementan la interfaz [GrailsClass|api:org.codehaus.groovy.grails.commons.GrailsClass], lo que representa un recurso de Grails como un controlador o una biblioteca de etiquetas. Por ejemplo, para obtener todos @ GrailsClass @ instancias puede hacer:
+
+{code: java}
+para (grailsClass en application.allClasses) {}
+    Console.println grailsClass.name
+}
+{code}
 
 {hidden}
+
+
 @GrailsApplication@ has a few "magic" properties to narrow the type of artefact you are interested in. For example to access controllers you can use:
-{hidden}
-
-@GrailsApplication@ tienne algunas propiedades "mágicas" que permiten restringirse al tipo de artefactos en los que se esta interesado. Por ejmplo, para acceder a los controladores se puede usar:
 
 {code:java}
 for (controllerClass in application.controllerClasses) {
@@ -31,27 +37,45 @@ for (controllerClass in application.controllerClasses) {
 }
 {code}
 
-{hidden}
 The dynamic method conventions are as follows:
+{hidden}
+
+@ GrailsApplication @ tiene algunas propiedades de "magia" para limitar el tipo de artefacto que le interesan. Por ejemplo, controladores de acceso puede utilizar:
+
+{code: java}
+para (controllerClass en application.controllerClasses) {}
+    Console.println controllerClass.name
+}
+{code}
+
+Los convenios de método dinámico son los siguientes:
+
+{hidden}
+
 
 * @*Classes@ - Retrieves all the classes for a particular artefact name. For example @application.controllerClasses@.
 * @get*Class@ - Retrieves a named class for a particular artefact. For example @application.getControllerClass("PersonController")@
 * @is*Class@ - Returns @true@ if the given class is of the given artefact type. For example @application.isControllerClass(PersonController)@
-{hidden}
 
-Las convenciones sobre los métodos dinámicos son las siguientes:
-
-* @*Classes@ - Devuelve todas las clases con el nombre de artefacto indicado. Un ejemplo es @application.controllerClasses@.
-* @get*Class@ - Devuelve la clase con el nombre y tipo de artefacto indicado. Un ejemplo es @application.getControllerClass("PersonController")@
-* @is*Class@ - Devuelve @true@ si la clase es del tipo de artefacto indicado. Un ejemplo es @application.isControllerClass(PersonController)@
-
-
-{hidden}
 The @GrailsClass@ interface has a number of useful methods that let you further evaluate and work with the conventions. These include:
 
 * @getPropertyValue@ - Gets the initial value of the given property on the class
 * @hasProperty@ - Returns @true@ if the class has the specified property
 * @newInstance@ - Creates a new instance of this class.
+{hidden}
+
+* @ * Clases - recupera todas las clases para un nombre particular artefacto. Por ejemplo, @ application.controllerClasses@.
+* @ get * clase - recupera una clase con nombre para un artefacto especial. Por ejemplo, @ application.getControllerClass("PersonController") @
+* @ es * clase @ - devuelve @ verdadero @ si la clase dada es el tipo de artefacto determinado. Por ejemplo, @ application.isControllerClass(PersonController) @
+
+@ GrailsClass @ interfaz tiene un número de métodos útiles que le permiten además evaluar y trabajar con los convenios. Estos incluyen:
+
+* @ getPropertyValue @ - obtiene el valor inicial de la propiedad dada en la clase
+* @ hasProperty @ - devuelve @ verdadero @ si la clase tiene la propiedad especificada
+* @ newInstance @ - crea una nueva instancia de esta clase.
+
+{hidden}
+
 * @getName@ -  Returns the logical name of the class in the application without the trailing convention part if applicable
 * @getShortName@ - Returns the short name of the class without package prefix
 * @getFullName@ - Returns the full name of the class in the application with the trailing convention part and with the package name
@@ -63,17 +87,12 @@ The @GrailsClass@ interface has a number of useful methods that let you further 
 For a full reference refer to the [javadoc API|api:org.codehaus.groovy.grails.commons.GrailsClass].
 {hidden}
 
-La interfaz @GrailsClass@ tiene una serie de métodos que permiten evaluar y trabajar conlas convenciones. Entre estos se incluyen:
+* @ getName @ - devuelve el nombre lógico de la clase de la aplicación sin la parte final de la Convención si procede
+* @ getShortName @ - devuelve el nombre corto de la clase sin prefijo de paquete
+* @ getFullName @ - devuelve el nombre completo de la clase de la aplicación con la parte final de la Convención y con el nombre de paquete
+* @ getPropertyName @ - devuelve el nombre de la clase como un nombre de propiedad
+* @ getLogicalPropertyName @ - devuelve el nombre lógico de propiedad de la clase de la aplicación sin la parte final de la Convención si procede
+* @ getNaturalName @ - devuelve el nombre de la propiedad en términos naturales (por ej. "lastName" se convierte en 'Apellido')
+* @ getPackageName @ - devuelve el nombre del paquete
 
-* @getPropertyValue@ - Obtiene el valor inicial de la propiedad en la clase.
-* @hasProperty@ - Devuelve @true@ si la clase tiene la propiedad especificada.
-* @newInstance@ - Crea una nueva instancia de la clase.
-* @getName@ -  Devuelve el nombre lógico de una clase en la aplicación pero sin el sufijo de la convención (si es que lo tiene).
-* @getShortName@ - Devuelve el nombre corto de la clase sin prefijarla con el paquete.
-* @getFullName@ - Devuelve el nombre completo de la clase en la aplicación con el sufijo de la convención y prefijandola con el nombre del paquete.
-* @getPropertyName@ - Devuelve el nombre de la clase como nombre de propiedad
-* @getLogicalPropertyName@ - Devuelve el nombre lógico de la pripiedad de la clase en la aplicación sin el sufijo de la convención (si es que lo tiene).
-* @getNaturalName@ - Devuelve el nombre de la propiedad en "lenguage naturales", esto es, 'lastName' se convierte en 'Last Name'
-* @getPackageName@ - Devuelve el nombre del paquete
-
-Para una referencia completa ir a [javadoc API|api:org.codehaus.groovy.grails.commons.GrailsClass].
+Una referencia completa, consulte [javadoc API|api:org.codehaus.groovy.grails.commons.GrailsClass].

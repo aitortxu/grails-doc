@@ -1,3 +1,6 @@
+
+{hidden}
+
 In the section on [start and end states|guide:startAndEndStates], the start state in the first example triggered a transition to the @enterPersonalDetails@ state. This state renders a view and waits for the user to enter the required information:
 
 {code:java}
@@ -8,6 +11,21 @@ enterPersonalDetails {
 {code}
 
 The view contains a form with two submit buttons that either trigger the submit event or the return event:
+{hidden}
+
+En la sección [inicial y final de states|guide:startAndEndStates], el estado de inicio en el primer ejemplo desencadena una transición a la @ enterPersonalDetails @ Estado. Esta situación representa una vista y espera al usuario que introduzca la información requerida:
+
+{code: java}
+enterPersonalDetails {}
+   on("Submit").to "enterShipping"
+   on("Return").to "showCart"
+}
+{code}
+
+La vista contiene un formulario con dos botones de envío que o bien activar el evento de envío o el retorno:
+
+{hidden}
+
 
 {code:xml}
 <g:form action="shoppingCart">
@@ -18,6 +36,20 @@ The view contains a form with two submit buttons that either trigger the submit 
 {code}
 
 However, what about the capturing the information submitted by the form? To to capture the form info we can use a flow transition action:
+{hidden}
+
+{Código: xml}
+<g:form action="shoppingCart"><!-- Other fields --><g:submitbutton name="submit" value="Continue"><g:submitbutton name="return" value="Back"></g:submitbutton></g:submitbutton>
+    
+    
+    
+</g:form>
+{code}
+
+Sin embargo, ¿qué pasa con la captura de la información presentada por el formulario? Para capturar la información de forma podemos utilizar una acción de transición de flujo:
+
+{hidden}
+
 
 {code:java}
 enterPersonalDetails {
@@ -28,6 +60,20 @@ enterPersonalDetails {
    on("return").to "showCart"
 }
 {code}
+{hidden}
+
+{code: java}
+enterPersonalDetails {}
+   on("Submit") {}
+      Flow.person = new Person(params)
+      ¿! flow.person.validate()? Error(): success()
+   } .a "enterShipping"
+   on("Return").to "showCart"
+}
+{code}
+
+{hidden}
+
 
 Notice how we perform data binding from request parameters and place the @Person@ instance within @flow@ scope. Also interesting is that we perform [validation|guide:validation] and invoke the @error()@ method if validation fails. This signals to the flow that the transition should halt and return to the @enterPersonalDetails@ view so valid entries can be entered by the user, otherwise the transition should continue and go to the @enterShipping@ state.
 
@@ -40,5 +86,20 @@ enterPersonalDetails {
       !flow.personDetails.validate() ? error() : success()
    }.to "enterShipping"
    on("return").to "showCart"
+}
+{code}
+{hidden}
+
+Observe cómo realizar el enlace de datos de parámetros de solicitud y colocar la persona @ @ instancia dentro de @ flujo @ alcance. Interesante también es que realizamos [validation|guide:validation] y invocar la @ error() @ método si se produce un error en la validación. Esto indica que el flujo que la transición debe detener y volver a @ enterPersonalDetails @ ver entradas válidas pueden ser introducidas por el usuario, de lo contrario la transición debe continuar e ir a @ enterShipping @ Estado.
+
+Como acciones regulares, acciones de flujo también apoyan la noción de [comando Objects|guide:commandObjects] definiendo el primer argumento del cierre:
+
+{code: java}
+enterPersonalDetails {}
+   on("Submit") {PersonDetailsCommand cmd->
+       Flow.personDetails = cmd
+      ¿! flow.personDetails.validate()? Error(): success()
+   } .a "enterShipping"
+   on("Return").to "showCart"
 }
 {code}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 !h1. integrate-with
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code}
 grails integrate-with --eclipse --intellij --textmate --ant --git
 {code}
+{hidden}
+
+! h1. integrar con
+
+h2. Fin
+
+El @ integrar-con @ comando permite Grails para integrarse con una variedad de IDEs y construir sistemas.
+
+h2. Ejemplos
+
+{code}
+Grails integrar-con--eclipse--intellij--textmate--hormiga--git
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -18,6 +37,19 @@ grails integrate-with [ARGUMENTS]
 {code}
 
 The @integrate-with@ command will integrate Grails with different IDEs and build systems based on the arguments provided. For example the @\--eclipse@ command will produce @.project@ and @.classpath@ files for use with Eclipse or [SpringSource Tool Suite (STS)|http://www.springsource.com/products/sts].
+
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails integrar-con [argumentos]
+{code}
+
+El @ integrar-con @ comando será integrar Grails con diferentes IDEs y construir sistemas basados en los argumentos proporcionados. Por ejemplo, el comando @ \--eclipse@ producirá @ .project y @ .classpath @ archivos para su uso con Eclipse o [SpringSource Tool Suite (STS)|http://www.springsource.com/products/sts].
+
+{hidden}
 
 The command is extensible. For example to provide a @\--myide@ command, create an @_Events.groovy@ file and handle the @IntegrateWithStart@ event:
 
@@ -29,9 +61,31 @@ eventIntegrateWithStart = {
 }
 {code}
 
+{hidden}
+
+El comando es extensible. Por ejemplo, para proporcionar un comando @ \--myide@, cree un archivo @_Events.groovy@ y manejar el @ IntegrateWithStart @ evento:
+
+{code}
+eventIntegrateWithStart = {}
+    Binding.integrateMyide = {}
+        / / tu código aquí
+    }
+}
+{code}
+
+{hidden}
+
 Fired Events:
 
 * @IntegrateWithStart@ - Fired when the script is first run
 * @Integrate[NAME]Start@ - Fired when each integration starts (eg. IntegrateEclipseStart)
 * @Integrate[NAME]End@ - Fired when each integration ends (eg. IntegrateIntellijEnd)
 * @IntegrateWithEnd@ - Fired when the script finishes
+{hidden}
+
+Despedido de eventos:
+
+* @ IntegrateWithStart @ - dispararon cuando primero se ejecuta la secuencia de comandos
+* @ Integrar [nombre] iniciar @ - dispararon cuando cada integración comienza (por ej. IntegrateEclipseStart)
+* @ Integrar [nombre] fin @ - se desencadena cuando cada integración termina (por ej. IntegrateIntellijEnd)
+* @ IntegrateWithEnd @ - dispararon cuando termina la secuencia de comandos

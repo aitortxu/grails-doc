@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. load
 
 h2. Purpose
@@ -15,6 +18,28 @@ String title = b.title
 // delete an instance without retrieving it
 Book.load(1).delete()
 {code}
+{hidden}
+
+h1. carga
+
+h2. Fin
+
+Devuelve una instancia de la clase de dominio para el identificador dado de proxy.
+
+h2. Ejemplos
+
+{code: java}
+/ / cargar una sola instancia
+Def b = Book.load(1)
+Título de cadena = b.title
+...
+
+/ / eliminar una instancia sin recuperarlos
+Book.Load(1).Delete()
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -25,3 +50,14 @@ If there is an existing instance with the same id in the Hibernate session or 2n
 Parameters:
 
 * @id@ - The id of the object to retrieve
+{hidden}
+
+h2. Descripción
+
+@ carga @ normalmente devuelve que un proxy para la instancia que es había inicializado on-demand, cuando un método distinto de @ getId() @ se invoca. @ load() @ sólo devuelve null @ @ si el identificador proporcionado es null @ @, por lo que no puede utilizar para probar la existencia. Si proporciona un identificador para una instancia que no existe, se devolverá un proxy y se producirá una excepción sólo al llamar a cualquier método de instancia excepto @ getId() @.
+
+Si existe una instancia existente con el mismo id de la sesión de hibernación o de caché de nivel 2, load() devolverá esa instancia no proxy en lugar de un servidor proxy.
+
+Parámetros:
+
+* @ id @ - el id del objeto para recuperar

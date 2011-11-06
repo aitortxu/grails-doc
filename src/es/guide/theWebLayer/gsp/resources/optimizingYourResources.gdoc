@@ -1,3 +1,6 @@
+
+{hidden}
+
 The Resources framework uses "mappers" to mutate the resources into the final format served to the user.
 
 The resource mappers are applied to each static resource once, in a specific order. You can create your own resource mappers, and several plugins provide some already for zipping, caching and minifying.
@@ -7,6 +10,20 @@ Out of the box, the Resources plugin provides bundling of resources into fewer f
 h4. Bundling multiple resources into fewer files
 
 The 'bundle' mapper operates by default on any resource with a "bundle" defined - or inherited from a @defaultBundle@ clause on the module. Modules have an implicit default bundle name the same as the name of the module.
+
+{hidden}
+
+Los usos de marco de recursos "mapeados" mutar los recursos en el formato final sirvieron para el usuario.
+
+Los Mapeados de recursos se aplican a cada recurso estático de una vez, en un orden específico. Puede crear a sus propio mapeados de recursos, y varios plugins proporcionan algunos ya para zipping, minifying y caché.
+
+Fuera de la caja, el plugin de recursos proporciona paquetes de recursos en menos archivos, que se consigue con unos mapeados que también realizan CSS reescribiendo manejar cuando se mueven los archivos CSS en un paquete.
+
+h4. Agrupación de varios recursos en menos archivos
+
+El asignador de 'paquete' Opera de forma predeterminada en cualquier recurso con un "paquete" definido - o se hereda de un @ defaultBundle @ cláusula del módulo. Los módulos tienen un paquete predeterminado implícito nombre igual al nombre del módulo.
+
+{hidden}
 
 Files of the same kind will be aggregated into this bundle file. Bundles operate across module boundaries:
 
@@ -37,6 +54,40 @@ modules = {
     }
 }
 {code}
+{hidden}
+
+Archivos del mismo tipo se agregan en este archivo de paquete. Paquetes de operan a través de límites de módulo:
+
+{code: java}
+módulos = {}
+    núcleo {}
+        dependsOn 'jquery, utils'
+        defaultBundle 'común'
+
+url del recurso: ' / js/core.js', la disposición: 'cabeza'
+        url del recurso: ' / js/ui.js', paquete: 'IU'
+        url del recurso: ' / css/main.css', paquete: 'tema'
+        url del recurso: ' / css/branding.css'
+        url del recurso: ' / css/print.css', attrs: [medios: 'imprimir']
+    }
+
+{utils
+        dependsOn 'jquery'
+
+url del recurso: ' / js/utils.js', paquete: 'común'
+    }
+
+{formas
+        dependsOn 'utils núcleo'
+
+url del recurso: ' / css/forms.css', paquete: 'IU'
+        url del recurso: ' / js/forms.js', paquete: 'IU'
+    }
+}
+{code}
+
+{hidden}
+
 
 Here you see that resources are grouped into bundles; 'common', 'ui' and 'theme' - across module boundaries.
 
@@ -47,6 +98,20 @@ h4. Making resources cache "eternally" in the client browser
 Caching resources "eternally" in the client is only viable if the resource has a unique name that changes whenever the contents change, and requires caching headers to be set on the response.
 
 The [cached-resources|http://grails.org/plugin/cached-resources] plugin provides a mapper that achieves this by hashing your files and renaming them based on this hash. It also sets the caching headers on every response for those resources. To use, simply install the cached-resources plugin.
+{hidden}
+
+Aquí puede ver que los recursos se agrupan en paquetes; 'común', 'IU' y 'tema' - a través de límites de módulo.
+
+Tenga en cuenta que auto-agrupación por módulo hace * no * ocurrir si hay sólo un recurso en el módulo.
+
+h4. Haciendo memoria caché recursos "eternamente" en el explorador del cliente
+
+Almacenamiento en caché de recursos "eternamente" en el cliente sólo es viable si el recurso tiene un nombre único que cambia cuando cambia el contenido, y requiere el almacenamiento en caché de encabezados para establecerse en la respuesta.
+
+El plugin [cached-resources|http://grails.org/plugin/cached-resources] proporciona a un asignador que logra esto mediante hash de los archivos y cambiar el nombre de ellas basadas en este hash. También establece los almacenamiento en caché los encabezados de cada respuesta para esos recursos. Para utilizar, simplemente instale el plugin de recursos almacenados en caché.
+
+{hidden}
+
 
 Note that the caching headers can only be set if your resources are being served by your application. If you have another server serving the static content from your app (e.g. Apache HTTPD), configure it to send caching headers. Alternatively you can configure it to request and proxy the resources from your container.
 
@@ -57,7 +122,26 @@ Returning gzipped resources is another way to reduce page load times and reduce 
 The [zipped-resources|http://grails.org/plugin/zipped-resources] plugin provides a mapper that automatically compresses your content, excluding by default already compressed formats such as gif, jpeg and png.
 
 Simply install the zipped-resources plugin and it works.
+{hidden}
+
+Tenga en cuenta que los encabezados de almacenamiento en caché sólo se pueden establecer si sus recursos se sirven por su aplicación. Si tiene otro servidor servir el contenido estático desde su aplicación (por ejemplo, Apache HTTPD), configurarlo para enviar encabezados de caché. También puede configurarlo a petición y proxy de los recursos de su contenedor.
+
+h4. Metiéndose recursos
+
+Devolver los recursos de gzip es otra forma de reducir los tiempos de carga de página y reducir el ancho de banda.
+
+El plugin [zipped-resources|http://grails.org/plugin/zipped-resources] proporciona un asignador comprime automáticamente su contenido, excluyendo por defecto ya comprimido formatos como gif, jpeg y png.
+
+Simplemente instale el plugin de recursos en zip y funciona.
+
+{hidden}
+
 
 h4. Minifying
 
 There are a number of CSS and JavaScript minifiers available to obfuscate and reduce the size of your code. At the time of writing none are publicly released but releases are imminent.
+{hidden}
+
+h4. Minifying
+
+Hay una serie de minifiers CSS y JavaScript para ofuscar y reducir el tamaño del código. En el momento de escribir ninguno se lanzó públicamente pero comunicados son inminentes.

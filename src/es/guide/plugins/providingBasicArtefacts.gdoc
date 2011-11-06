@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Adding a new Script
 
 A plugin can add a new script simply by providing the relevant Gant script in its scripts directory:
@@ -11,6 +14,24 @@ A plugin can add a new script simply by providing the relevant Gant script in it
         + etc.
     + lib
 {code}
+{hidden}
+
+h4. Agregar una nueva secuencia de comandos
+
+Un plugin puede agregar una nueva secuencia de comandos simplemente proporcionando el script de Gant pertinente en su directorio de secuencias de comandos:
+
+{code: java}
+  MyPlugin.groovy
+     secuencias de comandos <--adicionales scripts aquí
+     Grails-app
+          controladores
+          servicios
+          etc..
+      lib
+{code}
+
+{hidden}
+
 
 h4. Adding a new grails-app artifact (Controller, Tag Library, Service, etc.)
 
@@ -25,6 +46,24 @@ A plugin can add new artifacts by creating the relevant file within the @grails-
         + etc.  <-- additional XXX here
     + lib
 {code}
+{hidden}
+
+h4. Agregar un nuevo artefacto grails-app (controlador, biblioteca de etiquetas, servicio, etc.).
+
+Un plugin puede agregar nuevos artefactos creando el archivo pertinente dentro de la @ grails-app @ árbol. Tenga en cuenta que el complemento se carga desde donde está instalado y no se copian en el árbol de la aplicación principal.
+
+{code: java}
+  ExamplePlugin.groovy
+     secuencias de comandos
+     Grails-app
+          controladores <--controladores adicionales aquí
+          servicios <--adicionales de servicios aquí
+          etc..  <--XXX adicional aquí
+      lib
+{code}
+
+{hidden}
+
 
 h4. Providing Views, Templates and View resolution
 
@@ -37,6 +76,22 @@ However if the view uses templates that are also provided by the plugin then the
 {code}
 <g:render template="fooTemplate" plugin="amazon"/>
 {code}
+{hidden}
+
+h4. Proporciona vistas, plantillas y vista la resolución
+
+Cuando un plugin proporciona un controlador también puede proporcionar vistas predeterminadas para procesarse. Esta es una excelente manera de modularize su aplicación mediante plugins. Vista de Grails mecanismo de resolución primero buscará la vista de la aplicación se instala en y si no que se intentará buscar la vista dentro del plugin. Esto significa que puede anular vistas proporcionadas por un plugin creando GSPs correspondientes en la aplicación @ grails-app/vistas @ directorio.
+
+Por ejemplo, considere un controlador llamado @ BookController @ que es proporcionado por un plugin 'Amazonas'. Si la acción que se está ejecutando es @ lista @, Grails primero buscará una vista denominada @grails-app/views/book/list.gsp@, a continuación, si esto no funciona, se buscará la misma opinión respecto al plugin.
+
+Sin embargo si la vista utiliza plantillas que también son proporcionadas por el plugin, la sintaxis siguiente será necesaria:
+
+{code}
+<g:render template="fooTemplate" plugin="amazon"></g:render>
+{code}
+
+{hidden}
+
 
 Note the usage of the @plugin@ attribute, which contains the name of the plugin where the template resides. If this is not specified then Grails will look for the template relative to the application.
 
@@ -47,6 +102,20 @@ By default Grails excludes the following files during the packaging process:
 * @grails-app/conf/BootStrap.groovy@
 * @grails-app/conf/BuildConfig.groovy@ (although it is used to generate @dependencies.groovy@)
 * @grails-app/conf/Config.groovy@
+{hidden}
+
+Observe el uso del plugin @ @ atributo que contiene el nombre del plugin donde reside la plantilla. Si no se especifica a continuación, Grails buscará la plantilla relativo a la aplicación.
+
+h4. Artefactos excluidos
+
+Por defecto Grails excluyen los siguientes archivos durante el proceso de envasado:
+
+* @grails-app/conf/BootStrap.groovy@
+* @grails-app/conf/BuildConfig.groovy@ (aunque se usa para generar @ dependencies.groovy@)
+* @grails-app/conf/Config.groovy@
+
+{hidden}
+
 * @grails-app/conf/DataSource.groovy@ (and any other @*DataSource.groovy@)
 * @grails-app/conf/UrlMappings.groovy@
 * @grails-app/conf/spring/resources.groovy@
@@ -56,6 +125,20 @@ By default Grails excludes the following files during the packaging process:
 * SCM management files within @\*\*/.svn/\*\*@ and @\*\*/CVS/\*\*@
 
 If your plugin requires files under the @web-app/WEB-INF@ directory it is recommended that you modify the plugin's @scripts/_Install.groovy@ Gant script to install these artefacts into the target project's directory tree.
+
+{hidden}
+
+* @grails-app/conf/DataSource.groovy@ (y cualquier otro @ * DataSource.groovy@)
+* @grails-app/conf/UrlMappings.groovy@
+* @grails-app/conf/spring/resources.groovy@
+* Todo dentro de @ / web-app/WEB-INF @
+* Todo dentro de @ / web-app/plugins / \ * \ * @
+* Todo dentro de @ / prueba / \ * \ * @
+* Archivos de gestión de SCM dentro de @\*\*/.svn/\*\*@ y @ \*\*/CVS/\*\*@
+
+Si tu plugin requiere archivos bajo el @ web-app/WEB-INF @ directorio se recomienda modificar @scripts/_Install.groovy@ del plugin Gant script para instalar estos artefactos en el árbol de directorios del proyecto de destino.
+
+{hidden}
 
 In addition, the default @UrlMappings.groovy@ file is excluded to avoid naming conflicts, however you are free to add a UrlMappings definition under a different name which *will* be included. For example a file called @grails-app/conf/BlogUrlMappings.groovy@ is fine.
 
@@ -67,5 +150,23 @@ def pluginExcludes = [
     "grails-app/views/error.gsp"
 ]
 {code}
+{hidden}
+
+Además, el archivo @UrlMappings.groovy@ predeterminado está excluido para evitar conflictos de nombres, sin embargo estás libre para agregar una definición de UrlMappings bajo otro nombre que * voluntad * incluirse. Por ejemplo, un archivo llamado @grails-app/conf/BlogUrlMappings.groovy@ está muy bien.
+
+Excluye de la lista de es extensible con @ pluginExcludes @ propiedad:
+
+{code}
+/ / envasado de recursos que están excluidos de plugin
+Def pluginExcludes = [
+    "grails-app/views/error.gsp"
+]
+{code}
+
+{hidden}
+
 
 This is useful for example to include demo or test resources in the plugin repository, but not include them in the final distribution.
+{hidden}
+
+Esto es útil por ejemplo incluir recursos de demostración o prueba en el repositorio de plugin, pero no se incluyen en la distribución final.

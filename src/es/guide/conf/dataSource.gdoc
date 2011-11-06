@@ -1,3 +1,4 @@
+
 {hidden}
 
 Since Grails is built on Java technology setting up a data source requires some knowledge of JDBC (the technology that doesn't stand for Java Database Connectivity).
@@ -5,14 +6,6 @@ Since Grails is built on Java technology setting up a data source requires some 
 If you use a database other than H2 you need a JDBC driver. For example for MySQL you would need "Connector/J":http://www.mysql.com/downloads/connector/j/
 
 Drivers typically come in the form of a JAR archive. It's best to use Ivy to resolve the jar if it's available in a Maven repository, for example you could add a dependency for the MySQL driver like this:
-
-{hidden}
-
-Dado que Grails se basa en la tecnología Java configurar un origen de datos requiere algunos conocimientos de JDBC (la tecnología que no es Java Database Connectivity).
-
-Si utiliza una base de datos que no sea H2 necesita un driver JDBC. Por ejemplo para MySQL sería necesario "Connector/J":http://www.mysql.com/downloads/connector/j/
-
-Los drivers suelen empaquetarse en forma de un archivo JAR. Es mejor utilizar Ivy para resolver el jar si está disponible en un repositorio de Maven, por ejemplo podría añadir una dependencia para el controlador de MySQL como esta:
 
 {code}
 grails.project.dependency.resolution = {
@@ -29,26 +22,56 @@ grails.project.dependency.resolution = {
     }
 }
 {code}
+{hidden}
+
+Desde Grails se basa en la configuración de la tecnología Java un origen de datos requiere algunos conocimientos de JDBC (la tecnología que no soporte para Java Database Connectivity).
+
+Si utiliza una base de datos distinta H2 necesita un controlador JDBC. Por ejemplo para MySQL sería necesario "Connector/J":http://www.mysql.com/downloads/connector/j/
+
+Controladores suelen ven en forma de un archivo JAR. Es mejor utilizar Ivy para resolver el tarro si está disponible en un repositorio de Maven, por ejemplo podría añadir una dependencia para el controlador de MySQL como este:
+
+{code}
+Grails.Project.Dependency.Resolution = {}
+    Inherits("global")
+    registro "advertidos"
+    {repositorios
+        grailsPlugins()
+        grailsHome()
+        grailsCentral()
+        mavenCentral()
+    }
+    {las dependencias
+        tiempo de ejecución ' mysql:mysql-conector-java: 5.1.16'
+    }
+}
+{code}
 
 {hidden}
+
+
 Note that the built-in @mavenCentral()@ repository is included here since that's a reliable location for this library.
 
 If you can't use Ivy then just put the JAR in your project's @lib@ directory.
 
 Once you have the JAR resolved you need to get familiar Grails' DataSource descriptor file located at @grails-app/conf/DataSource.groovy@. This file contains the dataSource definition which includes the following settings:
 
-{hidden}
-
-Tenga en cuenta que el repositorio incorporado @mavenCentral()@ se incluye aquí ya es un lugar confiable para esta biblioteca.
-
-Si no puede utilizar Ivy, ponga el jar en el directorio @lib@ del proyecto.
-
-Una vez que tenga el jar resuelto necesita familiarizarse con el descriptor del origen de datos de Grails, ubicado en @grails-app/conf/DataSource.groovy@. Este archivo contiene la definición de origen de datos que incluye las siguientes opciones:
-
-{hidden}
 * @driverClassName@ - The class name of the JDBC driver
 * @username@ - The username used to establish a JDBC connection
 * @password@ - The password used to establish a JDBC connection
+{hidden}
+
+Tenga en cuenta que el incorporado @ mavenCentral() @ repositorio se incluye aquí ya es un lugar confiable para esta biblioteca.
+
+Si no puede utilizar Ivy, acabo de poner el frasco en lib @ del proyecto @ directorio.
+
+Una vez que tenga el tarro resolvió que necesita para obtener el archivo descriptor de familiares Grails DataSource ubicado en @ grails-app/conf/DataSource.groovy@. Este archivo contiene la definición de origen de datos que incluye las siguientes opciones:
+
+* @ driverClassName @ - el nombre de clase del controlador JDBC
+* @ username @ - el nombre de usuario utilizado para establecer una conexión JDBC
+* @ contraseña @ - la contraseña utilizada para establecer una conexión JDBC
+
+{hidden}
+
 * @url@ - The JDBC URL of the database
 * @dbCreate@ - Whether to auto-generate the database from the domain model - one of 'create-drop', 'create', 'update' or 'validate'
 * @pooled@ - Whether to use a pool of connections (defaults to true)
@@ -60,19 +83,20 @@ Una vez que tenga el jar resuelto necesita familiarizarse con el descriptor del 
 
 A typical configuration for MySQL may be something like:
 {hidden}
-* @driverClassName @ - el nombre de clase del controlador JDBC.
-* @username@ - el nombre de usuario utilizado para establecer una conexión JDBC.
-* @password@ - la contraseña utilizada para establecer una conexión JDBC.
-* @url@ - la URL JDBC de la base de datos.
-* @dbCreate@ - si se va a generar automáticamente la base de datos del dominio modelo - uno de 'create-drop'(borrar-crear), 'create'(crear), 'update'(actualizar) o 'validate' (valiadar).
-* @pooled@ - si va a utilizar un pool de conexiones (de forma predeterminada es true)
-* @logSql@ - habilitar el registro de SQL a stdout.
-* @formatSql@ - formato del SQL.
-* @dialect@ - clase o una cadena representa el dialecto de hibertnate utilizado para comunicarse con la base de datos. Ver el paquete [org.hibernate.dialect|http://docs.jboss.org/hibernate/stable/core/javadocs/org/hibernate/dialect/package-summary.html] para dialectos disponibles.
-* @readOnly@ - si @true@ hace el origen de datos de sólo lectura, lo que resulta en que el pool de conexiones llama a @setReadOnly(true)@ con cada @conexión@.
-* @properties@ - propiedades adicionales para establecer en el bean DataSource. Consulte la documentación de [Commons DBCP BasicDataSource|http://commons.apache.org/dbcp/api-1.2.2/org/apache/commons/dbcp/BasicDataSource.html].
+
+* @ url @ - la URL JDBC de la base de datos
+* @ dbCreate @ - si se va a generar automáticamente la base de datos del dominio modelo - uno de 'Crear gota', 'crear', 'Actualizar' o 'validar'
+* @ combinaron @ - si va a utilizar una agrupación de conexiones (de forma predeterminada en true)
+* @ logSql @ - habilitar el registro de SQL a stdout
+* @ formatSql @ - formato de sesión SQL
+* @ dialecto @ - clase o una cadena representa el dialecto de hibernación utilizado para comunicarse con la base de datos. Ver el paquete [org.hibernate.dialect|http://docs.jboss.org/hibernate/stable/core/javadocs/org/hibernate/dialect/package-summary.html] para dialectos disponibles.
+* @ readOnly @ - si @ verdadero @ hace el origen de datos de sólo lectura, lo que resulta en la agrupación de conexiones a cada conexión @ @ @ setReadOnly(true) @
+* @ propiedades @ - propiedades adicionales para establecer en el frijol DataSource. Consulte la documentación de [Commons DBCP BasicDataSource|http://commons.apache.org/dbcp/api-1.2.2/org/apache/commons/dbcp/BasicDataSource.html].
 
 Una configuración típica para MySQL puede ser algo así como:
+
+{hidden}
+
 
 {code:java}
 dataSource {
@@ -85,15 +109,25 @@ dataSource {
     password = "yourPassword"
 }
 {code}
+{hidden}
+
+{code: java}
+{dataSource
+    agrupado = true
+    dbCreate = "Actualizar"
+    URL = "jdbc:mysql: / / localhost/yourDB"
+    driverClassName = "com.mysql.jdbc.Driver"
+    dialecto = org.hibernate.dialect.MySQL5InnoDBDialect
+    username = "yourUser"
+    Password = "yourPassword"
+}
+{code}
 
 {hidden}
+
+
 {warning}
 When configuring the DataSource do not include the type or the def keyword before any of the configuration settings as Groovy will treat these as local variable definitions and they will not be processed. For example the following is invalid:
-{warning}
-{hidden}
-
-{warning}
-Cuando configurando el origen de datos se incluyen el tipo o la palabra clave de def antes de cualquiera de las opciones de configuración, Groovy tratará estas como definiciones de variables locales y no se procesarán. Por ejemplo, lo siguiente es inválido:
 {warning}
 
 {code:java}
@@ -102,12 +136,23 @@ dataSource {
     ...
 }
 {code}
+{hidden}
+
+Advertencia de {}
+Cuando configurar el origen de datos no incluyen el tipo o la palabra clave de def antes de cualquiera de las opciones de configuración como Groovy tratará como definiciones de variables locales y no se procesará. Por ejemplo, el siguiente es válido:
+Advertencia de {}
+
+{code: java}
+{dataSource
+    Boolean combinados = true / / tipo de resultados de la declaración de variable local omitido
+    ...
+}
+{code}
 
 {hidden}
+
+
 Example of advanced configuration using extra properties:
-{hidden}
-
-Ejemplo de configuración avanzada utilizando propiedades adicionales:
 {code:java}
 dataSource {
     pooled = true
@@ -129,6 +174,30 @@ dataSource {
     }
 }
 {code}
+{hidden}
+
+Ejemplo de configuración avanzada utilizando propiedades adicionales:
+{code: java}
+{dataSource
+    agrupado = true
+    dbCreate = "Actualizar"
+    URL = "jdbc:mysql: / / localhost/yourDB"
+    driverClassName = "com.mysql.jdbc.Driver"
+    dialecto = org.hibernate.dialect.MySQL5InnoDBDialect
+    username = "yourUser"
+    Password = "yourPassword"
+    {} propiedades
+        maxActive = 50
+        maxIdle = 25
+        minIdle = 5
+        Tamaño_inicial = 5
+        minEvictableIdleTimeMillis = 60000
+        timeBetweenEvictionRunsMillis = 60000
+        maxWait = 10000
+        validationQuery = "/ * ping * /"
+    }
+}
+{code}
 
 {hidden}
 
@@ -144,19 +213,20 @@ Hibernate can automatically create the database tables required for your domain 
 * any other value - does nothing
 {hidden}
 
-h4. Más sobre dbCreate
+h4. Más de dbCreate
 
-Hibernate puede crear automáticamente las tablas de base de datos necesarias para su modelo de dominio. Tiene algún control sobre cuándo y cómo lo hace a través de la propiedad @dbCreate@, que puede tomar estos valores:
+Hibernación puede crear automáticamente las tablas de base de datos necesarias para su modelo de dominio. Tener algún control sobre cuándo y cómo lo hace a través de @ dbCreate @ propiedad, que puede tomar estos valores:
 
-* *create* - borra la estructura vigente el esquema en el inicio, borrando tablas, índices, etc. primero.
-* *create-drop* - igual que *create*, pero también borra las tablas cuando se cierra la aplicación sin errores.
-* *update* - crea las tablas e índices que faltan y actualiza el esquema actual sin perder datos ni las tablas. Tenga en cuenta que esto no puede manejar correctamente muchos cambios en el esquema como cambios de nombre de columna (te dejan la antigua columna que contiene los datos existentes).
-* *validate* - no modifica la base de datos. Compara la configuración con el esquema de base de datos existente y las reporta los avisos.
+* * crear *-cae la schemaCreates vigente el esquema en el inicio, colocando tablas, índices, etc. primero.
+* * crear-caída * - igual * crear *, pero también disminuye las tablas cuando se cierra la aplicación limpiamente.
+* * actualización * - crea falta las tablas e índices y actualiza el esquema actual sin perder datos ni las tablas. Tenga en cuenta que esto no puede manejar correctamente muchos cambios en el esquema como cambios de nombre de columna (te dejan con la antigua columna que contiene los datos existentes).
+* * validar *-no modifica la base de datos. Compara la configuración con el esquema de base de datos existente y las advertencias.
 * cualquier otro valor - no hace nada
 
 {hidden}
 
+
 You can also remove the @dbCreate@ setting completely, which is recommended once your schema is relatively stable and definitely when your application and database are deployed in production. Database changes are then managed through proper migrations, either with SQL scripts or a migration tool like [Liquibase|http://www.liquibase.org/] (the "Database Migration":http://grails.org/plugin/database-migration plugin uses Liquibase and is tightly integrated with Grails and GORM).
 {hidden}
 
-También puede quitar el parámetro @dbCreate@, que es lo recomendado una vez que su esquema es relativamente estable y definitivamente cuando su base de datos y aplicaciones se implementan en producción. Los cambios de la base de datos son administrados a través de las migraciones adecuadas, con secuencias de comandos SQL o una herramienta de migración como [Liquibase|http://www.liquibase.org/] (el plugin "Database Migration":http://grails.org/plugin/database-migration utiliza Liquibase y está estrechamente integrado con Grails y GORM).
+También puede quitar el @ dbCreate @ establecer completamente, que recomienda una vez que su esquema es relativamente estable y definitivamente cuando su base de datos y aplicaciones se implementan en producción. Los cambios de la base de datos son administrados a través de las migraciones adecuadas, con secuencias de comandos SQL o una herramienta de migración como [Liquibase|http://www.liquibase.org/] (la "base de datos Migration":http://grails.org/plugin/database-migration plugin utiliza Liquibase y está estrechamente integrado con Grails y GORM).

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. bug-report
 
 h2. Purpose
@@ -9,10 +12,34 @@ h2. Examples
 {code:java}
 grails bug-report
 {code}
+{hidden}
+
+h1. informe de errores
+
+h2. Fin
+
+El comando de informe de error paquetes hasta las fuentes de su aplicación (excluyendo jars, recursos estáticos etc.) en un archivo ZIP. El nombre del archivo incluye el nombre de la aplicación y una marca de hora. Esto es útil para informar de problemas para la JIRA":http://jira.grails.org/ de Grails"
+
+h2. Ejemplos
+
+{code: java}
+informe de error de Grails
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Usage:
 {code:java}
 grails bug-report
+{code}
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+informe de error de Grails
 {code}

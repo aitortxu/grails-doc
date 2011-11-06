@@ -1,3 +1,6 @@
+
+{hidden}
+
 A many-to-one relationship is the simplest kind, and is defined with a property of the type of another domain class. Consider this example:
 
 h5. Example A
@@ -7,6 +10,20 @@ class Face {
     Nose nose
 }
 {code}
+
+{hidden}
+
+Una relación de varios a uno es el tipo más simple y se define con una propiedad del tipo de otra clase de dominio. Considere este ejemplo:
+
+H5. Ejemplo A
+
+{code}
+clase {cara
+    Nariz de nariz
+}
+{code}
+
+{hidden}
 
 {code}
 class Nose {
@@ -22,6 +39,25 @@ class Face {
     Nose nose
 }
 {code}
+{hidden}
+
+{code}
+clase {nariz
+}
+{code}
+
+En este caso tenemos una relación de varios a uno unidireccional de @ faz @ a @ nariz @. Para hacer esta relación bidireccional definir al otro lado del modo siguiente:
+
+H5. Ejemplo B
+
+{code}
+clase {cara
+    Nariz de nariz
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Nose {
@@ -34,6 +70,22 @@ In this case we use the @belongsTo@ setting to say that @Nose@ "belongs to" @Fac
 {code}
 new Face(nose:new Nose()).save()
 {code}
+{hidden}
+
+{code}
+clase {nariz
+    Static belongsTo = [cara: cara]
+}
+{code}
+
+En este caso utilizamos @ belongsTo @ valor para decir que @ nariz @ "pertenece a" @ cara @. El resultado de esto es que podemos crear una cara @ @, adjuntar una nariz @ @ instancia a él y al guardar o eliminar la cara @ @ instancia, GORM será guardar o eliminar la nariz @ @. En otras palabras, guarda y eliminaciones se cascada de @ faz @ asociado nariz @ @:
+
+{code}
+nuevo rostro (nariz: nuevo Nose()).save()
+{code}
+
+{hidden}
+
 
 The example above will save both face and nose. Note that the inverse _is not_ true and will result in an error due to a transient @Face@:
 
@@ -47,6 +99,23 @@ Now if we delete the @Face@ instance, the @Nose@ will go too:
 def f = Face.get(1)
 f.delete() // both Face and Nose deleted
 {code}
+{hidden}
+
+El ejemplo anterior salvará la cara y la nariz. Tenga en cuenta que la not_ inversa _is true y se producirá un error debido a una transitoria @ cara @:
+
+{code}
+nueva nariz (cara: nueva Face()).save() / / se producirá un error
+{code}
+
+Ahora si nos borra la cara @ @ instancia, la nariz @ @ irá demasiado:
+
+{code}
+Def f = Face.get(1)
+f.Delete() / / ambos enfrentan y nariz eliminado
+{code}
+
+{hidden}
+
 
 To make the relationship a true one-to-one, use the @hasOne@ property on the owning side, e.g. @Face@:
 
@@ -57,6 +126,20 @@ class Face {
     static hasOne = [nose:Nose]
 }
 {code}
+{hidden}
+
+Hacer la relación un cierto uso uno a uno, lado @ hasOne @ propiedad en la que posea, por ejemplo, @ cara @:
+
+H5. Ejemplo C
+
+{code}
+clase {cara
+    hasOne estática = [nariz: nariz]
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Nose {
@@ -67,6 +150,20 @@ class Nose {
 Note that using this property puts the foreign key on the inverse table to the previous example, so in this case the foreign key column is stored in the @nose@ table inside a column called @face_id@. Also, @hasOne@ only works with bidirectional relationships.
 
 Finally, it's a good idea to add a unique constraint on one side of the one-to-one relationship:
+{hidden}
+
+{code}
+clase {nariz
+    Cara cara
+}
+{code}
+
+Tenga en cuenta que con esta pone de propiedad la clave externa a la inversa de la tabla al ejemplo anterior, por lo que en este caso la columna de clave externa se almacena en la nariz @ @ tabla dentro de una columna llamada @ face_id @. También, @ hasOne @ sólo funciona con relaciones bidireccionales.
+
+Por último, es una buena idea para agregar una restricción unique en un lado de la relación uno a uno:
+
+{hidden}
+
 
 {code}
 class Face {
@@ -77,9 +174,30 @@ class Face {
     }
 }
 {code}
+{hidden}
+
+{code}
+clase {cara
+    hasOne estática = [nariz: nariz]
+
+restricciones estáticas = {}
+        nariz única: verdadero
+    }
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Nose {
     Face face
+}
+{code}
+{hidden}
+
+{code}
+clase {nariz
+    Cara cara
 }
 {code}

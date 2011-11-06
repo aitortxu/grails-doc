@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Sets of Objects
 
 By default when you define a relationship with GORM it is a @java.util.Set@ which is an unordered collection that cannot contain duplicates. In other words when you have:
@@ -7,6 +10,20 @@ class Author {
     static hasMany = [books: Book]
 }
 {code}
+
+{hidden}
+
+h4. Conjuntos de objetos
+
+De forma predeterminada al definir una relación con GORM es un @java.util.Set@ que es una colección desordenada que no puede contener duplicados. En otras palabras cuando tengas:
+
+{code}
+clase {autor
+    estático hasMany = [libros: libro]
+}
+{code}
+
+{hidden}
 
 The books property that GORM injects is a @java.util.Set@. Sets guarantee uniquenes but not order, which may not be what you want. To have custom ordering you configure the Set as a @SortedSet@:
 
@@ -18,6 +35,21 @@ class Author {
     static hasMany = [books: Book]
 }
 {code}
+{hidden}
+
+La propiedad de libros que inyecta GORM es una java.util.Set@ @. Conjuntos de garantizan uniquenes pero no la orden, que no puede ser lo que quieras. Tener orden personalizado que configura el conjunto como un @ SortedSet @:
+
+{code}
+clase {autor
+
+Libros SortedSet
+
+estático hasMany = [libros: libro]
+}
+{code}
+
+{hidden}
+
 
 In this case a @java.util.SortedSet@ implementation is used which means you must implement @java.lang.Comparable@ in your Book class:
 
@@ -32,6 +64,24 @@ class Book implements Comparable {
     }
 }
 {code}
+{hidden}
+
+En este caso una implementación de @java.util.SortedSet@ se utiliza lo que significa que debe implementar @java.lang.Comparable@ en la clase de libro:
+
+{code}
+Libro de clase implementa {comparables
+
+Título de cadena
+    Fecha releaseDate = new Date()
+
+int compareTo(obj) {}
+        releaseDate.compareTo(obj.releaseDate)
+    }
+}
+{code}
+
+{hidden}
+
 
 The result of the above class is that the Book instances in the books collection of the Author class will be ordered by their release date.
 
@@ -47,6 +97,25 @@ class Author {
     static hasMany = [books: Book]
 }
 {code}
+{hidden}
+
+El resultado de la clase anterior es que las instancias de libro en la colección de libros de la clase de autor se ordenarán por su fecha de lanzamiento.
+
+h4. Listas de objetos
+
+Para mantener los objetos en el orden en que se agregaron y para poder consultarlos por su índice como una matriz se puede definir el tipo de colección como una lista @ @:
+
+{code}
+clase {autor
+
+Lista de libros
+
+estático hasMany = [libros: libro]
+}
+{code}
+
+{hidden}
+
 
 In this case when you add new elements to the books collection the order is retained in a sequential list indexed from 0 so you can do:
 
@@ -57,6 +126,20 @@ author.books[0] // get the first book
 The way this works at the database level is Hibernate creates a @books_idx@ column where it saves the index of the elements in the collection to retain this order at the database level.
 
 When using a @List@, elements must be added to the collection before being saved, otherwise Hibernate will throw an exception (@org.hibernate.HibernateException@: null index column for collection):
+{hidden}
+
+En este caso al agregar nuevos elementos a la colección de libros la orden se mantiene en una lista secuencial indexada de 0, por lo que puede hacer:
+
+{code}
+Author.Books[0] / / obtener el primer libro
+{code}
+
+La forma en que funciona en el nivel de base de datos es que Hibernate crea un @ books_idx @ columna donde guarda el índice de los elementos de la colección para conservar este orden en el nivel de base de datos.
+
+Cuando se utiliza una lista @ @, elementos deben ser agregados a la colección antes de ser salvado, de lo contrario la hibernación producirá una excepción (@ org.hibernate.HibernateException@: columna de índice nulo para la colección):
+
+{hidden}
+
 
 {code}
 // This won't work!
@@ -69,6 +152,22 @@ def book = new Book(title: 'Misery')
 author.addToBooks(book)
 author.save()
 {code}
+{hidden}
+
+{code}
+/ / Esto no funciona!
+libro de Def = nuevo libro (título: "El resplandor")
+Book.Save()
+Author.addToBooks(Book)
+
+/ / Hacer este camino en su lugar.
+libro de Def = nuevo libro (título: 'Miseria')
+Author.addToBooks(Book)
+Author.Save()
+{code}
+
+{hidden}
+
 
 h4. Bags of Objects
 
@@ -84,6 +183,25 @@ class Author {
    static hasMany = [books: Book]
 }
 {code}
+{hidden}
+
+h4. Bolsas de objetos
+
+Si pedidos y singularidad no son una preocupación (o si se administra explícitamente) puede utilizar el tipo de hibernación [Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html] para representar colecciones asignadas.
+
+El único cambio necesario para esto es para definir el tipo de colección como una colección de @ @:
+
+{code}
+clase {autor
+
+Libros de colección
+
+estático hasMany = [libros: libro]
+}
+{code}
+
+{hidden}
+
 
 Since uniqueness and order aren't managed by Hibernate, adding to or removing from collections mapped as a Bag don't trigger a load of all existing instances from the database, so this approach will perform better and require less memory than using a @Set@ or a @List@.
 
@@ -100,6 +218,26 @@ def a = new Author()
 a.books = ["1590597583":"Grails Book"]
 a.save()
 {code}
+{hidden}
+
+Desde singularidad y orden no están gestionados por hibernar, agregando o quitando de colecciones asignados como una bolsa no desencadenar una carga de todas las instancias existentes de la base de datos, así que este enfoque se realizar mejor y requiere menos memoria que usando una lista @ @ o @ Set @.
+
+h4. Mapas de objetos
+
+Si desea que un simple mapa de valor de la cadena pares GORM esto pueden asignar con lo siguiente:
+
+{code}
+clase {autor
+    Mapa de libros / / mapa de nombres ISBN:book
+}
+
+Def un = nuevo Author()
+a.Books = ["1590597583": "Libro de Grails"]
+a.Save()
+{code}
+
+{hidden}
+
 In this case the key and value of the map MUST be strings.
 
 If you want a Map of objects then you can do this:
@@ -118,6 +256,29 @@ def book = new Book()
 book.authors = [stephen:a]
 book.save()
 {code}
+{hidden}
+
+En este caso la clave y el valor de la ruta deben ser cadenas.
+
+Si desea que un mapa de objetos, a continuación, puede hacer esto:
+
+{code}
+clase {libro
+
+Mapa de autores
+
+estático hasMany = [Autores: autor]
+}
+
+Def un = nuevo autor (nombre: "Stephen King")
+
+libro de Def = Book() nueva
+Book.Authors = [stephen: un]
+Book.Save()
+{code}
+
+{hidden}
+
 
 The static @hasMany@ property defines the type of the elements within the Map. The keys for the map *must* be strings.
 
@@ -133,6 +294,25 @@ def author = Author.get(1)
 book.author = author
 book.save()
 {code}
+{hidden}
+
+La estática @ hasMany @ propiedad define el tipo de los elementos dentro del mapa. Las claves para el mapa * debe * ser cadenas.
+
+h4. Una nota sobre los tipos de colección y rendimiento
+
+Java @ Set @ tipo no permite duplicados. Para garantizar su exclusividad al agregar una entrada a un @ Set @ Asociación Hibernate tiene que cargar las asociaciones todos la base de datos. Si tiene un gran número de entradas en la asociación puede ser costoso en términos de rendimiento.
+
+El mismo comportamiento se requiere para @ lista @ tipos, desde Hibernate necesita cargar la Asociación toda para mantener el orden. Por lo tanto, se recomienda si prevé un gran número de registros de la asociación que hacen la Asociación bidireccional para que se pueda crear el vínculo del lado inverso. Por ejemplo, considere el siguiente código:
+
+{code: java}
+libro de Def = nuevo libro (título: "Nuevo libro de Grails")
+autor de Def = Author.get(1)
+Book.Author = autor
+Book.Save()
+{code}
+
+{hidden}
+
 
 In this example the association link is being created by the child (Book) and hence it is not necessary to manipulate the collection directly resulting in fewer queries and more efficient code. Given an @Author@ with a large number of associated @Book@ instances if you were to write code like the following you would see an impact on performance:
 
@@ -143,4 +323,20 @@ author.addToBooks(book)
 author.save()
 {code}
 
+{hidden}
+
+En este ejemplo se crea el vínculo de asociación por el niño (libro) y, por tanto, no es necesario manipular la colección directamente como resultado menos consultas y código más eficiente. Dado un autor @ @ con un gran número de asociados @ libro @ instancias si tuviera que escribir código como el siguiente verá un impacto en el rendimiento:
+
+{code: java}
+libro de Def = nuevo libro (título: "Nuevo libro de Grails")
+autor de Def = Author.get(1)
+Author.addToBooks(Book)
+Author.Save()
+{code}
+
+{hidden}
+
 You could also model the collection as a Hibernate Bag as described above.
+{hidden}
+
+También podría modelar la colección como una bolsa de hibernación como se describió anteriormente.

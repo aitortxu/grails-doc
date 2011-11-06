@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Table names
 
 The database table name which the class maps to can be customized using the @table@ method:
@@ -10,6 +13,23 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+h4. Nombres de tabla
+
+El nombre de tabla de base de datos que se asigna a la clase puede personalizarse mediante la tabla @ @ método:
+
+{code: java}
+clase persona {}
+    ...
+    asignación estática = {}
+        tabla 'gente'
+    }
+}
+{code}
+
+{hidden}
+
 
 In this case the class would be mapped to a table called @people@ instead of the default name of @person@.
 
@@ -28,6 +48,28 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+En este caso la clase podría asignarse a una tabla denominada @ personas @ en lugar del nombre por defecto de @ persona @.
+
+h4. Nombres de columna
+
+También es posible personalizar la asignación de columnas individuales en la base de datos. Por ejemplo, para cambiar el nombre que puede hacer:
+
+{code: java}
+clase persona {}
+
+Cadena firstName
+
+asignación estática = {}
+        tabla 'gente'
+        columna firstName: 'First_Name'
+    }
+}
+{code}
+
+{hidden}
+
 
 Here @firstName@ is a dynamic method within the @mapping@ Closure that has a single Map parameter. Since its name corresponds to a domain class persistent field, the parameter values (in this case just @"column"@) are used to configure the mapping for that property.
 
@@ -46,6 +88,28 @@ class Address {
     }
 }
 {code}
+{hidden}
+
+Aquí @ firstName @ es un método dinámico dentro de la asignación de @ @ cierre que tiene un único parámetro de mapa. Dado que su nombre corresponde a un campo persistente dominio clase, el parámetro valores (en este caso sólo @ "columna" @) se utilizan para configurar la asignación de esa propiedad.
+
+h4. Tipo de columna
+
+GORM admite la configuración de tipos de hibernación con el DSL utilizando el atributo de tipo. Esto incluye los tipos de usuario especificando que implementan la interfaz Hibernate [org.hibernate.usertype.UserType|api:org.hibernate.usertype.UserType], que permite la personalización completa de cómo se conserva un tipo. Como un ejemplo si tuvieras un @ PostCodeType @ podría utilizarlo como sigue:
+
+{code: java}
+clase {dirección
+
+Número de cadena
+    Código postal de la cadena
+
+asignación estática = {}
+        tipo de código postal: PostCodeType
+    }
+}
+{code}
+
+{hidden}
+
 
 Alternatively if you just wanted to map it to one of Hibernate's basic types other than the default chosen by Grails you could use:
 
@@ -60,6 +124,24 @@ class Address {
     }
 }
 {code}
+{hidden}
+
+Alternativamente si sólo quería asignar a uno de los tipos básicos de hibernación distinto del predeterminado elegido por Grails podría utilizar:
+
+{code: java}
+clase {dirección
+
+Número de cadena
+    Código postal de la cadena
+
+asignación estática = {}
+        tipo de código postal: 'texto'
+    }
+}
+{code}
+
+{hidden}
+
 
 This would make the @postCode@ column map to the default large-text type for the database you're using (for example TEXT or CLOB).
 
@@ -82,6 +164,14 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+Esto haría el postal @ @ mapa de columna con el tipo de texto de gran tamaño predeterminado de la base de datos que esté utilizando (por ejemplo, texto o CLOB).
+
+Consulte la documentación de hibernación en relación con [básico Types|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/mapping.html
+
+{hidden}
+
 
 By default the @address@ association would map to a foreign key column called @address_id@. By using the above mapping we have changed the name of the foreign key column to @Person_Adress_Id@.
 
@@ -103,6 +193,31 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+De forma predeterminada la dirección @ @ Asociación sería asignar a una columna de clave externa llamada @ address_id @. Mediante el uso de la asignación anterior hemos cambiado el nombre de la columna de clave externa a @ Person_Adress_Id @.
+
+h4. Asignación de uno a muchos
+
+Puede cambiar la columna de clave externa utilizada por cambiar el nombre de la columna del lado varios de la Asociación como por ejemplo en la sección anterior sobre asociaciones uno a uno con un bidireccional de uno a varios. Sin embargo, con las asociaciones unidireccionales la clave externa debe especificarse en la propia asociación. Por ejemplo una relación de uno a varios unidireccional entre @ persona @ y @ dirección @ el código siguiente va a cambiar la clave externa en la dirección @ @ tabla:
+
+{code: java}
+clase persona {}
+
+Cadena firstName
+
+estático hasMany = [direcciones: dirección]
+
+asignación estática = {}
+        tabla 'gente'
+        columna firstName: 'First_Name'
+        columna de direcciones: 'Person_Address_Id'
+    }
+}
+{code}
+
+{hidden}
+
 
 If you don't want the column to be in the @address@ table, but instead some intermediate join table you can use the @joinTable@ parameter:
 
@@ -122,6 +237,29 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+Si no desea que la columna en la dirección @ @ tabla, pero en cambio algunos tabla intermedia combinación se puede utilizar el @ joinTable @ parámetro:
+
+{code: java}
+clase persona {}
+
+Cadena firstName
+
+estático hasMany = [direcciones: dirección]
+
+asignación estática = {}
+        tabla 'gente'
+        columna firstName: 'First_Name'
+        direcciones joinTable: [nombre: 'Person_Addresses',
+                              clave: 'Person_Id',
+                              columna: 'Address_Id']
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Many-to-Many Mapping
 
@@ -133,6 +271,21 @@ class Group {
     static hasMany = [people: Person]
 }
 {code}
+{hidden}
+
+h4. Asignación de muchos a muchos
+
+Grails, por defecto se asigna una asociación de muchos a muchos utilizando una tabla de combinación. Por ejemplo, considere esta asociación de varios a varios:
+
+{code: java}
+clase {Grupo
+    ...
+    estático hasMany = [personas: persona]
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Person {
@@ -143,6 +296,20 @@ class Person {
 {code}
 
 In this case Grails will create a join table called @group_person@ containing foreign keys called @person_id@ and @group_id@ referencing the @person@ and @group@ tables. To change the column names you can specify a column within the mappings for each class.
+{hidden}
+
+{code: java}
+clase persona {}
+    ...
+    Static belongsTo = grupo
+    estático hasMany = [grupos: grupo]
+}
+{code}
+
+En este caso Grails creará una tabla de ingreso llamada @ group_person @ que contiene las claves externas llamado @ person_id @ y @ group_id @ que hace referencia a la persona @ @ y @ group @ tablas. Para cambiar los nombres de columna puede especificar una columna dentro de las asignaciones para cada clase.
+
+{hidden}
+
 
 {code:java}
 class Group {
@@ -158,6 +325,25 @@ class Person {
    }
 }
 {code}
+{hidden}
+
+{code: java}
+clase {Grupo
+   ...
+   asignación estática = {}
+       columna de gente: 'Group_Person_Id'
+   }
+}
+clase persona {}
+   ...
+   asignación estática = {}
+       columna de grupos: 'Group_Group_Id'
+   }
+}
+{code}
+
+{hidden}
+
 
 You can also specify the name of the join table to use:
 
@@ -173,6 +359,26 @@ class Person {
    ...
    static mapping = {
        groups column: 'Group_Group_Id',
+              joinTable: 'PERSON_GROUP_ASSOCIATIONS'
+   }
+}
+{code}
+{hidden}
+
+También puede especificar el nombre de la tabla de ingreso a utilizar:
+
+{code: java}
+clase {Grupo
+   ...
+   asignación estática = {}
+       columna de gente: 'Group_Person_Id',
+              joinTable: 'PERSON_GROUP_ASSOCIATIONS'
+   }
+}
+clase persona {}
+   ...
+   asignación estática = {}
+       columna de grupos: 'Group_Group_Id',
               joinTable: 'PERSON_GROUP_ASSOCIATIONS'
    }
 }

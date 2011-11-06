@@ -1,3 +1,6 @@
+
+{hidden}
+
 A DSL is provided for declaring resources and modules. This can go either in your @Config.groovy@ in the case of application-specific resources, or more commonly in a resources artefact in @grails-app/conf@.
 
 Note that you do not need to declare all your static resources, especially images. However you must to establish dependencies or other resources-specific attributes. Any resource that is not declared is called "ad-hoc" and will still be processed using defaults for that resource type.
@@ -30,6 +33,43 @@ modules = {
     }
 }
 {code}
+{hidden}
+
+Se proporciona un DSL para declarar recursos y módulos. Esto puede ir en su @Config.groovy@ en el caso de recursos específicos de la aplicación, o más comúnmente en un artefacto de recursos en @ grails-app/conf @.
+
+Observe que no necesita declarar todos sus recursos estáticos, especialmente imágenes. Sin embargo, debe para establecer dependencias u otros atributos específicos de recursos. Cualquier recurso que no se ha declarado se llama "ad hoc" y todavía se procesarán usando valores predeterminados para ese tipo de recursos.
+
+Tenga en cuenta este archivo de configuración de ejemplo recursos, @ grails-app/conf/MyAppResources.groovy@:
+
+{code: java}
+módulos = {}
+    núcleo {}
+        dependsOn 'jquery, utils'
+
+url del recurso: ' / js/core.js', la disposición: 'cabeza'
+        url del recurso: ' / js/ui.js'
+        url del recurso: ' / css/main.css,
+        url del recurso: ' / css/branding.css'
+        url del recurso: ' / css/print.css', attrs: [medios: 'imprimir']
+    }
+
+{utils
+        dependsOn 'jquery'
+
+url del recurso: ' / js/utils.js'
+    }
+
+{formas
+        dependsOn 'utils núcleo'
+
+url del recurso: ' / css/forms.css'
+        url del recurso: ' / js/forms.js'
+    }
+}
+{code}
+
+{hidden}
+
 
 This defines three resource modules; 'core', 'utils' and 'forms'. The resources in these modules will be automatically bundled out of the box according to the module name, resulting in fewer files. You can override this with @bundle:'someOtherName'@ on each resource, or call @defaultBundle@ on the module (see [resources plugin documentation|http://grails-plugins.github.com/grails-resources]).
 
@@ -40,9 +80,30 @@ When you include an @<r:require module="forms"/>@ in your GSP, it will pull in a
 You'll also notice the @disposition:'head'@ on the @core.js@ file. This tells Resources that while it can defer all the other JS files to the end of the body, this one must go into the @<head>@.
 
 The CSS file for print styling adds custom attributes using the @attrs@ map option, and these are passed through to the @r:external@ tag when the engine renders the link to the resource, so you can customize the HTML attributes of the generated link.
+{hidden}
+
+Esto define tres módulos de recursos; 'central', 'utils' y 'formas'. Los recursos en estos módulos se incluirá automáticamente fuera de la caja con el nombre del módulo, resultando en menos archivos. Puede reemplazar con @ paquete: 'someOtherName' @ de cada recurso o llamada @ defaultBundle @ en el módulo (véase [recursos plugin documentation|http://grails-plugins.github.com/grails-resources]).
+
+Declara las dependencias entre ellos utilizando @ dependsOn @, que controla el orden de carga de los recursos.
+
+Cuando se incluye un @<r:require module="forms"></r:require>@ en el SGP, extraerá todos los recursos de 'núcleo' y 'utils' como 'jquery', todo en el orden correcto.
+
+También observará la disposición @: 'cabeza' @ en el archivo @core.js@. Esto indica que los recursos que si bien pueden aplazar todos los demás archivos JS hasta el final del cuerpo, éste debe ir en la @<head>@.
+
+Las CSS de archivos para impresión estilo agrega atributos personalizados utilizando el @ attrs @ opción de mapa, y estos pasan a través de la r @: externa @ etiqueta cuando el motor representa el enlace con el recurso, por lo que puede personalizar los atributos HTML del vínculo generado.</head>
+
+{hidden}
+
 
 There is no limit to the number of modules or xxxResources.groovy artefacts you can provide, and plugins can supply them to expose modules to applications, which is exactly how the jQuery plugin works.
 
 To define modules like this in your application's Config.groovy, you simply assign the DSL closure to the @grails.resources.modules@ Config variable.
 
 For full details of the resource DSL please see the [resources plugin documentation|http://grails-plugins.github.com/grails-resources].
+{hidden}
+
+No hay ningún límite en el número de módulos o artefactos xxxResources.groovy que puede proporcionar y plugins puede suministrar a exponer los módulos para aplicaciones, que es exactamente cómo funciona el plugin de jQuery.
+
+Definir módulos como esta en Config.groovy la aplicación, simplemente asigne el cierre DSL a la variable de configuración @grails.resources.modules@.
+
+Para obtener más detalles del recurso DSL, consulte el [recursos plugin documentation|http://grails-plugins.github.com/grails-resources].

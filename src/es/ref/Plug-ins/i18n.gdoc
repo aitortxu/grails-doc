@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. i18n
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @i18n@ plugin configures Grails' support for [Internationalization|guide:i18
 h2. Examples
 
 An example @messages.properties@ within the @grails-app/i18n@ directory:
+
+{hidden}
+
+h1. i18n
+
+h2. Fin
+
+La i18n @ @ plugin configura apoyo de Grails [Internationalization|guide:i18n].
+
+h2. Ejemplos
+
+Un ejemplo @messages.properties@ dentro de la @ grails-app/i18n @ directorio:
+
+{hidden}
 
 {code}
 default.created.message={0} {1} created
@@ -18,6 +35,20 @@ default.not.found.message={0} not found with id {1}
 
 h2. Description
 
+{hidden}
+
+{code}
+default.Created.Message={0} {1} creado
+default.Updated.Message={0} {1} actualizado
+default.Deleted.Message={0} {1} eliminado
+no se pudo eliminar default.not.Deleted.Message={0} {1}
+default.not.found.Message={0} que no se encuentra con id {1}
+{code}
+
+h2. Descripción
+
+{hidden}
+
 Refer to the section on [Internationalization|guide:i18n] in the Grails user guide which details Grails' i18n support.
 
 Configured Spring Beans:
@@ -25,3 +56,12 @@ Configured Spring Beans:
 * @messageSource@ - An instance the Spring [ReloadableResourceBundleMessageSource|api:org.springframework.context.support.ReloadableResourceBundleMessageSource] class which is used to resolve messages.
 * @localeChangeInterceptor@ - An instance of the Spring [LocaleChangeInterceptor|api:org.springframework.web.servlet.i18n.LocaleChangeInterceptor] class which is used to switch locales using a @lang@ request parameter.
 * @localeResolver@ - An instance of the Spring [CookieLocaleResolver|api:org.springframework.web.servlet.i18n.CookieLocaleResolver] class that is used to store the user locale in a cookie.
+{hidden}
+
+Consulte la sección [Internationalization|guide:i18n] en la Guía de usuario de Grails que detalla el soporte de i18n de Grails.
+
+Frijoles de primavera configurados:
+
+* @ messageSource @ - una instancia de la clase de primavera [ReloadableResourceBundleMessageSource|api:org.springframework.context.support.ReloadableResourceBundleMessageSource] que se utiliza para resolver los mensajes.
+* @ localeChangeInterceptor @ - una instancia de la clase de primavera [LocaleChangeInterceptor|api:org.springframework.web.servlet.i18n.LocaleChangeInterceptor] que se utiliza para cambiar las configuraciones regionales mediante un lang @ @ parámetro de solicitud.
+* @ localeResolver @ - una instancia de la clase de primavera [CookieLocaleResolver|api:org.springframework.web.servlet.i18n.CookieLocaleResolver] que se utiliza para almacenar la configuración regional del usuario en una cookie.

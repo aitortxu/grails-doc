@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. radioGroup
 
 h2. Purpose
@@ -11,6 +14,22 @@ h2. Examples
 <p><g:message code="${it.label}" />: ${it.radio}</p>
 </g:radioGroup>
 {code}
+{hidden}
+
+h1. radioGroup
+
+h2. Fin
+
+Genera grupos de botones de radio
+
+h2. Ejemplos
+
+{Código: xml}<g:radiogroup name="myGroup" values="[1,2,3]" value="1">
+<p><g:message code="${it.label}"></g:message>: ${it.radio}</p>
+</g:radiogroup>{code}
+
+{hidden}
+
 
 results in:
 
@@ -27,6 +46,20 @@ results in:
 <p>${it.label} ${it.radio}</p>
 </g:radioGroup>
 {code}
+{hidden}
+
+resultados en:
+
+{Código: xml}<p>Radio 1:<input type="radio" name="myGroup" value="1" checked="checked"></p>
+<p>Radio 2:<input type="radio" name="myGroup" value="2"></p>
+<p>Radio 3:<input type="radio" name="myGroup" value="3"></p>{code}
+
+{Código: xml}<g:radiogroup name="lovesGrails" labels="['Yes!','Of course!','Always!']" values="[1,2,3]">
+<p>$ ${it.label} {it.radio}</p>
+</g:radiogroup>{code}
+
+{hidden}
+
 
 results in:
 
@@ -37,6 +70,18 @@ results in:
 {code}
 
 h2. Description
+{hidden}
+
+resultados en:
+
+{Código: xml}<p>Sí!<input type="radio" name="lovesGrails" value="1"></p>
+<p>¡Claro!<input type="radio" name="lovesGrails" value="2"></p>
+<p>Siempre!<input type="radio" name="lovesGrails" value="3"></p>{code}
+
+h2. Descripción
+
+{hidden}
+
 
 The body of the tag contains the GSP to render for each value. Two variables are provided for use:
 
@@ -47,6 +92,20 @@ Attributes
 
 * @name@ (required) - The name of the group
 * @values@ (required) - The list of values for the radio buttons
+{hidden}
+
+El cuerpo de la etiqueta contiene el SGP para representar para cada valor. Dos variables están previstas de uso:
+
+* @it.label@ - la etiqueta del valor actual
+* @it.radio@ - el botón de opción<input>etiqueta para el valor actual
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre del grupo
+* @ valores @ (requerido) - la lista de valores para los botones de opción
+
+{hidden}
+
 * @value@ (optional) - The selected value
 * @labels@ (optional) - Labels for each value contained in the @values@ list. If this is ommitted the label property on the iterator variable (see below) will default to 'Radio ' + value.
 
@@ -54,3 +113,12 @@ h2. Source
 
 {source:tag=FormTagLib.radioGroup}
 {source}
+{hidden}
+
+* @ valor @ (opcional): el valor seleccionado
+* @ etiquetas @ (opcional) - etiquetas para cada valor contenido en los valores @ @ lista. Si esto es omitidos 'Radio' valor predeterminada la propiedad label en la variable de iterador (véase infra).
+
+h2. Fuente
+
+{source:tag=FormTagLib.radioGroup}
+origen de {}

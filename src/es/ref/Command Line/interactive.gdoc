@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. interactive
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Example
 {code}
 grails interactive
 {code}
+{hidden}
+
+h1. interactivo
+
+h2. Fin
+
+El @ interactivo @ comando inicia la CLI de Grails en modo interactivo, pero está en desuso desde la @ grails @ comando en ejecución sin un nombre de script hace lo mismo. La secuencia de comandos se quitará en una versión futura de Grails.
+
+h2. Ejemplo
+
+{code}
+Grails interactivos
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,7 +38,25 @@ grails [environment]* interactive
 
 Starts the Grails CLI (script runner) in interactive mode. Interactive mode behaves the same as running Grails commands from the command line, but keeps the JVM running in between scripts. A simple command shell allows running and re-running grails commands.
 
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code}
+Grails [entorno] * interactivo
+{code}
+
+La CLI de Grails (corredor de secuencia de comandos) se inicia en modo interactivo. Modo interactivo comporta igual que la ejecución de comandos de Grails desde la línea de comandos, pero mantiene la JVM ejecutando entre secuencias de comandos. Un shell de comandos simple permite ejecutar y ejecutar comandos de grails.
+
+{hidden}
+
 By keeping the JVM running, interactive mode avoids the (costly) JVM startup time for running successive Grails commands. It also allows the JVM JIT compiler to optimize Grails scripts, so repeated commands will execute more quickly after the initial run. This significantly speeds up repeated runs of unit tests for example.
 
 See also @shell@ and @console@ commands for ways to interact with a running grails app.
 
+{hidden}
+
+Manteniendo la JVM ejecutando, modo interactivo evita el tiempo de inicio JVM (costoso) para ejecutar comandos de Grails sucesivos. También permite al compilador JIT JVM optimizar secuencias de comandos de Grails para que comandos repetidos se ejecutarán más rápidamente después de la inicial ejecutar. Esto significativamente acelera repetidas ejecuciones de pruebas unitarias por ejemplo.
+
+Véase también @ shell @ y @ consola @ comandos para formas de interactuar con una aplicación grails ejecución.

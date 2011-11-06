@@ -1,3 +1,6 @@
+
+{hidden}
+
 [Shiro|http://shiro.apache.org/] is a Java POJO-oriented security framework that provides a default domain model that models realms, users, roles and permissions. With Shiro you extend a controller base class called called @JsecAuthBase@ in each controller you want secured and then provide an @accessControl@ block to setup the roles. An example below:
 
 {code:java}
@@ -16,3 +19,23 @@ class ExampleController extends JsecAuthBase {
 }{code}
 
 For more information on the Shiro plugin refer to the [documentation|http://grails.org/plugin/shiro].
+{hidden}
+
+[Shiro|http://shiro.apache.org/] es un marco de seguridad orientada a Java POJO que proporciona un modelo de dominio predeterminado que modela reinos, usuarios, roles y permisos. Con Shiro de que es extender un controlador clase base llamado llamado @ JsecAuthBase @ en cada controlador que desee segura y, a continuación, proporciona un @ accessControl @ bloque para configurar las funciones. Un ejemplo a continuación:
+
+{code: java}
+amplía la clase ExampleController JsecAuthBase {}
+    accessControl estática = {}
+        / / Todas las acciones requieren el papel de "Observador".
+        papel (nombre: 'Observadores')
+
+/ / La acción 'editar' requiere la función 'Administrador'.
+        papel (nombre: 'Administrador', acción: 'editar')
+
+/ / Alternativamente, se pueden especificar varias acciones.
+        papel (nombre: 'Administrador', sólo: ['crear', 'editar', 'salva', 'Actualizar'])
+    }
+    ...
+} {code}
+
+Para obtener más información sobre el plugin de Shiro consulte [documentation|http://grails.org/plugin/shiro].

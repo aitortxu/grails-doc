@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Returning the Model
 
 A model is a Map that the view uses when rendering. The keys within that Map correspond to variable names accessible by the view. There are a couple of ways to return a model. First, you can explicitly return a Map instance:
@@ -7,6 +10,20 @@ def show() {
     [book: Book.get(params.id)]
 }
 {code}
+
+{hidden}
+
+h4. Devolver el modelo
+
+Un modelo es un mapa que la vista utiliza al representar. Las claves dentro de ese mapa corresponden a los nombres de variables accesibles por la vista. Hay un par de maneras de devolver un modelo. En primer lugar, explícitamente puede devolver una instancia de mapa:
+
+{code: java}
+Def show() {}
+    [libro: Book.get(params.id)]
+}
+{code}
+
+{hidden}
 
 {note}
 The above does _not_ reflect what you should use with the scaffolding views - see the [scaffolding section|guide:scaffolding] for more details.
@@ -26,6 +43,29 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+{Nota}
+El anterior _NO_ hace reflexionar lo que se debe utilizar con las opiniones de andamios - ver [section|guide:scaffolding de andamios] para obtener más detalles.
+{Nota}
+
+Si ningún modelo explícito se devuelve que las propiedades del controlador se utilizará como modelo, lo que permite escribir código como éste:
+
+{code: java}
+clase BookController {}
+
+Lista de libros
+    Autores de la lista
+
+Def list() {}
+        libros = Book.list()
+        Autores = Author.list()
+    }
+}
+{code}
+
+{hidden}
+
 
 {note}
 This is possible due to the fact that controllers are prototype scoped. In other words a new controller is created for each request. Otherwise code such as the above would not be thread-safe, and all users would share the same data.
@@ -46,6 +86,30 @@ def index() {
     return new ModelAndView("/book/list", [ bookList : favoriteBooks ])
 }
 {code}
+{hidden}
+
+{Nota}
+Esto es posible debido al hecho de que los controladores son prototipo de ámbito. En otras palabras se crea un nuevo controlador para cada solicitud. Lo contrario código como lo anterior no sería seguro para subprocesos, y todos los usuarios que comparten los mismos datos.
+{Nota}
+
+En el ejemplo anterior los libros @ @ y @ autores @ propiedades estarán disponibles en la vista.
+
+Es un enfoque más avanzado devolver una instancia de la clase de primavera [ModelAndView|api:org.springframework.web.servlet.ModelAndView]:
+
+{code: java}
+org.springframework.web.servlet.ModelAndView de importación
+
+Def índice() {}
+    / / obtener algunos libros sólo para la página de índice, tal vez tus Favoritos
+    Def favoriteBooks =...
+
+/ / hacia adelante a la vista de lista para mostrarles
+    devolver ModelAndView nuevo ("/ / lista de libros", [bookList: favoriteBooks])
+}
+{code}
+
+{hidden}
+
 
 One thing to bear in mind is that certain variable names can not be used in your model:
 
@@ -55,6 +119,19 @@ One thing to bear in mind is that certain variable names can not be used in your
 Currently, no error will be reported if you do use them, but this will hopefully change in a future version of Grails.
 
 h4. Selecting the View
+
+{hidden}
+
+Una cosa es tener en cuenta es que ciertos nombres de variable no pueden utilizarse en su modelo:
+
+* @ atributos @
+* @ aplicación @
+
+Actualmente, ningún error será informado si utilizarlos, pero esperemos que esto va a cambiar en una futura versión de Grails.
+
+h4. Selección de la vista
+
+{hidden}
 
 In both of the previous two examples there was no code that specified which [view|guide:gsp] to render. So how does Grails know which one to pick? The answer lies in the conventions. Grails will look for a view at the location @grails-app/views/book/show.gsp@ for this @list@ action:
 
@@ -66,6 +143,20 @@ class BookController {
 }
 {code}
 
+{hidden}
+
+En tanto los dos ejemplos anteriores no hubo ningún código que especifica qué [view|guide:gsp] para procesar. Entonces, ¿cómo sabe que uno para elegir Grails? La respuesta se encuentra en las convenciones. Grails buscará una vista en la ubicación @grails-app/views/book/show.gsp@ de esta lista @ @ Acción:
+
+{code: java}
+clase BookController {}
+    Def show() {}
+         [libro: Book.get(params.id)]
+    }
+}
+{code}
+
+{hidden}
+
 To render a different view, use the [render|controllers] method:
 
 {code:java}
@@ -76,6 +167,21 @@ def show() {
 {code}
 
 In this case Grails will attempt to render a view at the location @grails-app/views/book/display.gsp@. Notice that Grails automatically qualifies the view location with the @book@ directory of the @grails-app/views@ directory. This is convenient, but to access shared views you need instead you can use an absolute path instead of a relative one:
+{hidden}
+
+Para emitir una opinión diferente, utilice el método [render|controllers]:
+
+{code: java}
+Def show() {}
+    Mapa de Def = [libro: Book.get(params.id)]
+    Render (vista: "Mostrar", modelo: mapa)
+}
+{code}
+
+En este caso Grails intentará representar una vista en la ubicación @ grails-app/views/book/display.gsp@. Observe que Grails automáticamente califica la ubicación de la vista con el libro @ @ directorio de las @ grails-app/vistas @ directorio. Esto es conveniente, pero para acceder a vistas compartidas que necesita en su lugar puede utilizar una ruta absoluta en lugar de una relativa:
+
+{hidden}
+
 
 {code:java}
 def show() {
@@ -85,6 +191,19 @@ def show() {
 {code}
 
 In this case Grails will attempt to render a view at the location @grails-app/views/shared/display.gsp@.
+
+{hidden}
+
+{code: java}
+Def show() {}
+    Mapa de Def = [libro: Book.get(params.id)]
+    Render (vista: "/ / visualización compartida", modelo: mapa)
+}
+{code}
+
+En este caso Grails intentará representar una vista en la ubicación @ grails-app/views/shared/display.gsp@.
+
+{hidden}
 
 Grails also supports JSPs as views, so if a GSP isn't found in the expected location but a JSP is, it will be used instead.
 
@@ -96,6 +215,20 @@ Sometimes it's easier (for example with Ajax applications) to render snippets of
 render "Hello World!"
 {code}
 
+{hidden}
+
+Grails también admite páginas JSP como vistas, por lo que si no se encuentra un sistema de preferencias Generalizadas en la ubicación esperada pero un JSP, se utilizará en su lugar.
+
+h4. Representar una respuesta
+
+A veces es más fácil (por ejemplo con las aplicaciones Ajax) representar fragmentos de texto o código a la respuesta directamente desde el controlador. Para ello, puede utilizarse el altamente flexible @ render @ método:
+
+{code: java}
+procesar "¡ Hello World!"
+{code}
+
+{hidden}
+
 The above code writes the text "Hello World!" to the response. Other examples include:
 
 {code}
@@ -106,6 +239,21 @@ render {
    }
 }
 {code}
+{hidden}
+
+El código anterior escribe el texto "¡ Hello World!" en la respuesta. Otros ejemplos son:
+
+{code}
+/ / escribir algunas marcas
+procesar {}
+   para {} (b en libros)
+      div (id: b.id, b.title)
+   }
+}
+{code}
+
+{hidden}
+
 
 {code}
 // render a specific view
@@ -116,6 +264,20 @@ render(view: 'show')
 // render a template for each item in a collection
 render(template: 'book_template', collection: Book.list())
 {code}
+{hidden}
+
+{code}
+/ / representar una vista específica
+Render (vista: 'show')
+{code}
+
+{code}
+/ / una plantilla para cada elemento de una colección de procesamiento
+Render (plantilla: 'book_template', colección: Book.list())
+{code}
+
+{hidden}
+
 
 {code}
 // render some text with encoding and content type
@@ -145,6 +307,39 @@ def login() {
     render html
 }
 {code}
+{hidden}
+
+{code}
+/ / procesamiento de texto con el tipo de codificación y contenido
+Render (texto: "<xml>algunos xml</xml>", contentType: "text/xml" codificación: "UTF-8")
+{code}
+
+Si el plan sobre el uso @ MarkupBuilder de Groovy @ para generar HTML para su uso con el render @ @ método tenga cuidado de nomenclatura enfrentamientos entre elementos HTML y Grails etiquetas, por ejemplo:
+
+{code: java}
+groovy.xml.MarkupBuilder de importación
+...
+Def login() {}
+    escritor Def = StringWriter() nueva
+    Generador de Def = MarkupBuilder(writer) nueva
+    Builder.html {}
+        {cabeza
+            Título 'Iniciar sesión'
+        }
+        cuerpo {}
+            H1 'hola'
+            {} forma
+            }
+        }
+    }
+
+html Def = writer.toString()
+    procesamiento html
+}
+{code}
+
+{hidden}
+
 
 This will actually [call the form tag|guide:tagsAsMethodCalls] (which will return some text that will be ignored by the @MarkupBuilder@). To correctly output a @<form>@ element, use the following:
 
@@ -159,3 +354,18 @@ def login() {
     // ...
 }
 {code}
+{hidden}
+
+Esto será realidad [llamar el formulario tag|guide:tagsAsMethodCalls] (que devolverá algún texto que será ignorado por la @ MarkupBuilder @). A la salida de correctamente un @<form>@ elemento, utilice el siguiente comando:
+
+{code: java}
+Def login() {}
+    // ...
+    cuerpo {}
+        H1 'hola'
+        Builder.Form {}
+        }
+    }
+    // ...
+}
+{code}</form>

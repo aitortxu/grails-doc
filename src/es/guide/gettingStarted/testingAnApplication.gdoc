@@ -1,7 +1,19 @@
+
+{hidden}
+
 The @create-*@ commands in Grails automatically create unit or integration tests for you within the @test/unit@ or @test/integration@ directory. It is of course up to you to populate these tests with valid test logic, information on which can be found in the section on [Testing|guide:testing].
 
 To execute tests you run the [test-app|commandLine] command as follows:
 
 {code}
 grails test-app
+{code}
+{hidden}
+
+El @ crear-* @ comandos en Grails automáticamente crear pruebas de unidad o integración dentro de la prueba/unidad @ @ o @ prueba/integración @ directorio. Es por supuesto usted debe llenar estas pruebas con lógica de prueba válidos, información que puede encontrarse en la sección sobre [Testing|guide: pruebas].
+
+Para ejecutar pruebas de ejecutar el comando [prueba-app|commandLine] como sigue:
+
+{code}
+prueba de Grails-app
 {code}

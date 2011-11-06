@@ -1,3 +1,6 @@
+
+{hidden}
+
 There are a number of different ways to implement Ajax which are typically broken down into:
 
 * Content Centric Ajax - Where you just use the HTML result of a remote call to update the page
@@ -7,6 +10,20 @@ There are a number of different ways to implement Ajax which are typically broke
 Most of the examples in the [Ajax|guide:ajax] section cover Content Centric Ajax where you are updating the page, but you may also want to use Data Centric or Script Centric. This guide covers the different styles of Ajax.
 
 h4. Content Centric Ajax
+
+{hidden}
+
+Hay una serie de diferentes formas de implementar Ajax que normalmente se dividen en:
+
+* Centrado en Ajax - donde sólo utiliza el resultado HTML de una llamada remota para actualizar la página de contenido
+* Datos centrado en Ajax - donde realmente enviar una respuesta XML o JSON desde el servidor y actualizar mediante programación la página
+* Centrado en Ajax - donde el servidor envía hacia abajo de una secuencia de JavaScript a evaluarse sobre la marcha de secuencias de comandos
+
+La mayoría de los ejemplos de la sección [Ajax|guide:ajax] cubre Ajax centrado en el contenido que está actualizando la página, pero también puede que desee utilizar centrado en datos o centrado en la secuencia de comandos. Esta guía abarca los diferentes estilos de Ajax.
+
+h4. Ajax centrado en el contenido
+
+{hidden}
 
 Just to re-cap, content centric Ajax involves sending some HTML back from the server and is typically done by rendering a template with the [render|controllers] method:
 
@@ -18,6 +35,20 @@ def showBook() {
 }
 {code}
 
+{hidden}
+
+Justo al resumen, Ajax centrado en el contenido consiste en el envío HTML del servidor y se hace habitualmente al representar una plantilla con el método [render|controllers]:
+
+{code: java}
+Def showBook() {}
+    Def b = Book.get(params.id)
+
+Render (plantilla: "bookTemplate", modelo: [libro: b])
+}
+{code}
+
+{hidden}
+
 Calling this on the client involves using the [remoteLink|tags] tag:
 
 {code:xml}
@@ -28,6 +59,19 @@ Calling this on the client involves using the [remoteLink|tags] tag:
    <!--existing book mark-up -->
 </div>
 {code}
+{hidden}
+
+Llamar a esto en el cliente implica el uso de la etiqueta [remoteLink|tags]:
+
+{Código: xml}
+<g:remotelink action="showBook" id="${book.id}" update="book${book.id}">Actualizar el libro</g:remotelink>
+
+<div id="book${book.id}">
+   <!--existing book mark-up -->
+</div>{code}
+
+{hidden}
+
 
 h4. Data Centric Ajax with JSON
 
@@ -42,6 +86,24 @@ def showBook() {
     render b as JSON
 }
 {code}
+{hidden}
+
+h4. Datos centrado en Ajax con JSON
+
+Ajax centrado en datos normalmente implica evaluar la respuesta del cliente y actualizar mediante programación. Para una respuesta JSON con Grails, suele utilizarse capacidad de [JSON marshalling|guide:xmlAndJSON] de Grails:
+
+{code: java}
+grails.converters.JSON de importación
+
+Def showBook() {}
+    Def b = Book.get(params.id)
+
+procesar b como JSON
+}
+{code}
+
+{hidden}
+
 
 And then on the client parse the incoming JSON request using an Ajax event handler:
 
@@ -60,6 +122,27 @@ function updateBook(e) {
     <div id="${bookId}_title">The Stand</div>
 </div>
 {code}
+{hidden}
+
+Y, a continuación, el cliente analizar la solicitud entrante de JSON mediante un controlador de eventos de Ajax:
+
+{Código: xml}
+<g:javascript>
+función updateBook(e) {}
+    libro de var = eval ("("e.responseText")") / / evaluar el JSON
+    $("Book" Book.ID "_title").innerHTML = book.title
+}
+<g:javascript><g:remotelink action="test" update="foo" onsuccess="updateBook(e)">
+    Libro de actualización
+</g:remotelink> <g:set var="bookId">book${book.id}</g:set>
+
+
+<div id="${bookId}">
+    <div id="${bookId}_title">El Stand</div>
+</div>{code}</g:javascript></g:javascript>
+
+{hidden}
+
 
 h4. Data Centric Ajax with XML
 
@@ -74,6 +157,24 @@ def showBook() {
     render b as XML
 }
 {code}
+{hidden}
+
+h4. Datos centrado en Ajax con XML
+
+En el servidor de lado utilizando XML es igualmente simple:
+
+{code: java}
+grails.converters.XML de importación
+
+Def showBook() {}
+    Def b = Book.get(params.id)
+
+procesar b como XML
+}
+{code}
+
+{hidden}
+
 
 However, since DOM is involved the client gets more complicated:
 
@@ -93,6 +194,28 @@ function updateBook(e) {
     <div id="${bookId}_title">The Stand</div>
 </div>
 {code}
+{hidden}
+
+Sin embargo, dado que está involucrado el DOM se complica el cliente:
+
+{Código: xml}
+<g:javascript>
+función updateBook(e) {}
+    var xml = e.responseXML
+    var id = xml.getElementsByTagName("book").getAttribute("id")
+    $("libro" id "_title") = xml.getElementsByTagName("title") [0] .textcontent
+}
+<g:javascript><g:remotelink action="test" update="foo" onsuccess="updateBook(e)">
+    Libro de actualización
+</g:remotelink> <g:set var="bookId">book${book.id}</g:set>
+
+
+<div id="${bookId}">
+    <div id="${bookId}_title">El Stand</div>
+</div>{code}</g:javascript></g:javascript>
+
+{hidden}
+
 
 h4. Script Centric Ajax with JavaScript
 
@@ -107,6 +230,24 @@ def showBook() {
     render "\$('book${b.id}_title')='${title}'"
 }
 {code}
+{hidden}
+
+h4. Script centrado en Ajax con JavaScript
+
+Ajax centrado en la secuencia de comandos implica el envío realmente volver JavaScript que se evalúa en el cliente. Un ejemplo de esto puede verse a continuación:
+
+{code: java}
+Def showBook() {}
+    Def b = Book.get(params.id)
+
+Response.ContentType = "text/javascript"
+    Título de cadena = b.title.encodeAsJavascript()
+    procesar "\$ ('libro$ {b.id} _title") = '$ {título}' "
+}
+{code}
+
+{hidden}
+
 
 The important thing to remember is to set the @contentType@ to @text/javascript@. If you use Prototype on the client the returned JavaScript will automatically be evaluated due to this @contentType@ setting.
 
@@ -123,6 +264,26 @@ def listBooks() {
         render template: "bookTable", model: [books: books]
     } else {
         render view: "list", model: [books: books]
+    }
+}
+{code}
+{hidden}
+
+Lo importante para recordar es establecer el contentType @ @ a @ text/javascript @. Si utiliza el prototipo en el cliente que JavaScript devuelto automáticamente será evaluado debido a este contentType @ @ configuración.
+
+Obviamente en este caso es fundamental que tengan una API de cliente acordada como no quieren cambios en el cliente rompiendo el servidor. Esta es una de las razones carriles tiene algo parecido RJS. Aunque Grails actualmente no tiene una función como RJS allí es un [dinámico JavaScript Plugin|http://grails.org/plugin/dynamic-javascript] ofrece capacidades similares.
+
+h4. Respondiendo a Ajax y peticiones no Ajax
+
+Es fácil tener la misma acción de controlador de Grails manejar Ajax y peticiones Ajax no. Grails agrega el @ isXhr() @ método a @ HttpServletRequest @ que puede utilizarse para identificar las solicitudes de Ajax. Por ejemplo podría representar un fragmento de la página utilizando una plantilla para peticiones Ajax o la página completa para regulares solicitudes HTTP:
+
+{code: java}
+Def listBooks() {}
+    libros de Def = Book.list(params)
+    Si (request.xhr) {}
+        plantilla de procesamiento: "bookTable", modelo: [libros: libros]
+    } else {}
+        vista de procesamiento: "lista", modelo: [libros: libros]
     }
 }
 {code}

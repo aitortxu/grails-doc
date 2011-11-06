@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. javascript
 
 h2. Purpose
@@ -7,6 +10,20 @@ Includes JavaScript libraries and scripts as well as providing a shorthand for i
 This tag is [Resources plugin|http://grails.org/plugin/resources] aware, and will defer to the plugin to generate links to JavaScript as appropriate. It does this by including a resource module with the same name as the library you specify.
 
 h2. Examples
+
+{hidden}
+
+h1. JavaScript
+
+h2. Fin
+
+Incluye bibliotecas de JavaScript y secuencias de comandos, así como proporcionar una forma abreviada de inline JavaScript. Especificación de que una biblioteca indica que el Ajax etiquetas qué proveedor de JavaScript para usar.
+
+Esta etiqueta es [recursos plugin|http://grails.org/plugin/resources] consciente y se remiten al plugin para generar enlaces a JavaScript según corresponda. Para ello, incluyendo un módulo de recursos con el mismo nombre que la biblioteca que especifique.
+
+h2. Ejemplos
+
+{hidden}
 
 {code:xml}
 // actually imports '/app/js/myscript.js'
@@ -18,6 +35,18 @@ h2. Examples
 <g:javascript>alert('hello')</g:javascript>
 {code}
 
+{hidden}
+
+{Código: xml}
+/ / realmente importa ' / app/js/myscript.js'
+<g:javascript src="myscript.js"></g:javascript>
+
+/ / importa todos los js necesarias para la biblioteca de scriptaculous
+<g:javascript library="scriptaculous"> </g:javascript> <g:javascript>alert('hello')</g:javascript>
+{code}
+
+{hidden}
+
 h2. Description
 
 If you do not include a "library" or "src" attribute but instead provide a body, the result is an inline script.
@@ -28,6 +57,21 @@ Attributes
 
 * @contextPath@ (optional) - the context path to use (relative to the application context path). Defaults to "" or path to the plugin for a plugin view or template.
 * @library@ (optional) - The name of the library to include. Typical values include "jquery", "prototype", "scriptaculous", "yahoo" or "dojo" but plugins can contribute new providers. If the Resources plugin is installed, no link to the library will be rendered immediately. Rather, it will include the resource module with the same name as the library and let Resources do the rest. This means you must have a resource module declared with the same name, as if you had used an @<r:use module="jquery"/>@ tag.
+{hidden}
+
+h2. Descripción
+
+Si no incluye un atributo "biblioteca" o "src" pero en cambio ofrecen un cuerpo, el resultado es una secuencia de comandos en línea.
+
+Si utiliza esta etiqueta para representar código de JavaScript en línea, se recomienda que utilice los recursos del plugin <r:script>etiqueta para producir la secuencia de comandos en línea que se incluye al final del cuerpo, o en la cabeza si es necesario - en lugar de en línea. Para un control más utilizar los recursos del plugin "<r:script>": http://grails-plugins.github.com/grails-resources/ref/Tags/script.html etiqueta directamente.
+
+Atributos
+
+* @ contextPath @ (opcional): la ruta de contexto (relativo a la ruta de acceso de contexto de aplicación). Valor por defecto es "" o ruta de acceso para el plugin para una vista de complemento o plantilla.
+* @ Biblioteca @ (opcional): el nombre de la biblioteca para incluir. Los valores típicos incluyen "jquery", "prototipo", "scriptaculous", "yahoo" o "dojo" pero plugins puede aportar nuevos proveedores. Si está instalado el plugin de recursos, no se procesará inmediatamente ningún vínculo a la biblioteca. Por el contrario, se incluyen el módulo de recursos con el mismo nombre que la biblioteca y deja recursos hacer el resto. Esto significa que debe tener un módulo de recursos ha declarado con el mismo nombre, como si hubiera utilizado un @<r:use module="jquery"></r:use>@ etiqueta.</r:script> </r:script>
+
+{hidden}
+
 * @src@ (optional) - The name of the JavaScript file to import. Will look in /appname/js directory
 * @base@ (optional) - specifies the full base url to prepend to the library name
 * @plugin@ (optional) - The plugin to look for the JavaScript in
@@ -36,3 +80,13 @@ h2. Source
 
 {source:tag=JavascriptTagLib.javascript}
 {source}
+{hidden}
+
+* @ src @ (opcional): el nombre de JavaScript de archivos para importar. Se verá en el directorio /appname/js
+* @ base @ (opcional): especifica la dirección url completa base a anteponer al nombre de la biblioteca
+* @ plugin @ (opcional): el plugin para buscar el código JavaScript en
+
+h2. Fuente
+
+{source:tag=JavascriptTagLib.javascript}
+origen de {}

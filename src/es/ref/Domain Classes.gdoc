@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. Domain Class Usage
 
 A domain class fulfills the M in the Model View Controller (MVC) pattern and represents a persistent entity that is mapped onto an underlying database table. In Grails a domain is a class that lives in the @grails-app/domain@ directory. A domain class can be created with the [create-domain-class|commandLine] command:
@@ -7,6 +10,20 @@ grails create-domain-class org.bookstore.Book
 {code}
 
 or with your favourite IDE or text editor.
+
+{hidden}
+
+h1. Uso de la clase de dominio
+
+Una clase de dominio cumple la m en el patrón modelo vista controlador (MVC) y representa una entidad persistente que se asigna a una tabla de base de datos subyacente. En Grails, un dominio es una clase que vive en el @ grails-app/dominio @ directorio. Una clase de dominio puede ser creada con el comando [crear-dominio-class|commandLine]:
+
+{code: java}
+Grails crear-dominio-clase org.bookstore.Book
+{code}
+
+o con su editor de texto o IDE favorita.
+
+{hidden}
 
 {code:java}
 package org.bookstore
@@ -18,6 +35,25 @@ class Book {
 }
 {code}
 
+{hidden}
+
+{code: java}
+paquete org.bookstore
+
+clase {libro
+    Título de cadena
+    Fecha releaseDate
+    Autor de autor
+}
+{code}
+
+{hidden}
+
 The class name, by default, is mapped to the table name in lower case and separated by underscores instead of camel case. Each property maps to individual columns.
 
 Refer to the user guide section on [GORM|guide:GORM] for more information.
+{hidden}
+
+El nombre de clase, de forma predeterminada, se asigna el nombre de tabla en minúsculas y separado por guiones bajos en lugar del caso camello. Cada propiedad se asigna a las columnas individuales.
+
+Consulte la sección de la Guía de usuario de [GORM|guide:GORM] para obtener más información.

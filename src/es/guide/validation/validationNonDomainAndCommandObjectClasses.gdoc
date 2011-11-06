@@ -1,3 +1,6 @@
+
+{hidden}
+
 [Domain classes|guide:domainClasses] and [command objects|guide:commandObjects] support validation by default.  Other classes may be made validateable by defining the static @constraints@ property in the class (as described above) and then telling the framework about them.  It is important that the application register the validateable classes with the framework.  Simply defining the @constraints@ property is not sufficient.
 
 h4. The Validateable Annotation
@@ -22,6 +25,35 @@ class User {
     }
 }
 {code}
+{hidden}
+
+[Dominio classes|guide:domainClasses] y [comando objects|guide:commandObjects] apoyo validación por defecto.  Otras clases pueden hacerse validateable por definir las restricciones @ estática @ propiedad en la clase (como se describió anteriormente) y, a continuación, diciendo el marco sobre ellos.  Es importante que la aplicación registra las clases validateable con el marco.  Simplemente definir las restricciones @ @ propiedad no es suficiente.
+
+h4. La anotación Validateable
+
+Las clases que definen las restricciones @ estática @ propiedad y se anotan con @ Validateable pueden hacerse validateable por el marco. Considere este ejemplo:
+
+{code: java}
+/ / src/groovy/com/mycompany/myapp/User.groovy
+paquete com.mycompany.myapp
+
+grails.validation.Validateable de importación
+
+@ Validateable
+clase usuario {}
+    ...
+
+restricciones estáticas = {}
+        tamaño de inicio de sesión: 5..15, en blanco: falso, único: verdadero
+        tamaño de la contraseña: 5..15, en blanco: falso
+        correo electrónico del correo electrónico: true, en blanco: falso
+        edad mínima: 18
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Registering Validateable Classes
 
@@ -29,4 +61,13 @@ If a class is not marked with @Validateable, it may still be made validateable b
 
 {code:java}
 grails.validateable.classes = [com.mycompany.myapp.User, com.mycompany.dto.Account]
+{code}
+{hidden}
+
+h4. Registro de clases Validateable
+
+Si una clase no está marcada con @ Validateable, puede todavía ser hecho validateable por el marco. Los pasos necesarios para hacer esto son para definir las restricciones @ estática @ propiedad en la clase (como se describió anteriormente) y, a continuación, contando el marco acerca de la clase asignando un valor para la propiedad @grails.validateable.classes@ en @ Config.groovy@:
+
+{code: java}
+Grails.validateable.Classes = [com.mycompany.myapp.User, com.mycompany.dto.Account]
 {code}

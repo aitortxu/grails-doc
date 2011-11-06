@@ -1,3 +1,6 @@
+
+{hidden}
+
 Now that the less attractive JSP heritage has been set aside, the following sections cover GSP's built-in tags, which are the preferred way to define GSP pages.
 
 {note}
@@ -9,6 +12,22 @@ All built-in GSP tags start with the prefix @g:@. Unlike JSP, you don't specify 
 {code:xml}
 <g:example />
 {code}
+{hidden}
+
+Ahora que ha reservado el patrimonio JSP menos atractivo, las siguientes secciones cubren etiquetas integradas del SGP, que son la forma preferida para definir las páginas del SGP.
+
+{Nota}
+La sección [etiqueta Libraries|guide:taglibs] explica cómo agregar sus propias bibliotecas de etiquetas personalizadas.
+{Nota}
+
+Todos integrado SGP etiquetas comienzan con el prefijo @ g: @. A diferencia de JSP, no especifica que las importaciones de cualquier biblioteca de etiquetas. Si una etiqueta comienza con @ g: @ automáticamente se supone que una etiqueta del SGP. Sería un ejemplo de etiqueta SPG:
+
+{Código: xml}
+<g:example></g:example>
+{code}
+
+{hidden}
+
 
 GSP tags can also have a body such as:
 
@@ -19,6 +38,20 @@ GSP tags can also have a body such as:
 {code}
 
 Expressions can be passed into GSP tag attributes, if an expression is not used it will be assumed to be a String value:
+{hidden}
+
+SPG etiquetas también pueden tener un cuerpo tales como:
+
+{Código: xml}
+<g:example>
+   Hola mundo
+</g:example>
+{code}
+
+Las expresiones pueden pasar en atributos de etiqueta del SGP, si no se utiliza una expresión se supone que un valor de cadena:
+
+{hidden}
+
 
 {code:xml}
 <g:example attr="${new Date()}">
@@ -33,6 +66,24 @@ Maps can also be passed into GSP tag attributes, which are often used for a name
    Hello world
 </g:example>
 {code}
+{hidden}
+
+{Código: xml}
+<g:example attr="${new Date()}">
+   Hola mundo
+</g:example>
+{code}
+
+También pueden pasar mapas en atributos de etiqueta del SGP, que utilizan a menudo para una sintaxis de estilo de parámetro con nombre:
+
+{Código: xml}
+<g:example attr="${new Date()}" attr2="[one:1, two:2, three:3]">
+   Hola mundo
+</g:example>
+{code}
+
+{hidden}
+
 
 Note that within the values of attributes you must use single quotes for Strings:
 
@@ -43,3 +94,14 @@ Note that within the values of attributes you must use single quotes for Strings
 {code}
 
 With the basic syntax out the way, the next sections look at the tags that are built into Grails by default.
+{hidden}
+
+Tenga en cuenta que dentro de los valores de los atributos debe utilizar comillas simples para las cadenas:
+
+{Código: xml}
+<g:example attr="${new Date()}" attr2="[one:'one', two:'two']">
+   Hola mundo
+</g:example>
+{code}
+
+Con la sintaxis básica la manera, en las siguientes secciones miran las etiquetas integradas en Grails por defecto.

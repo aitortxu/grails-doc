@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-scaffold-controller
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code}
 grails create-scaffold-controller org.bookstore.Book
 {code}
+{hidden}
+
+h1. controlador de andamio crear
+
+h2. Fin
+
+El @ crear andamio-controladores @ comando crea un controlador que scaffolds la clase de dominio determinado, basada en la Convención.
+
+h2. Ejemplos
+
+{code}
+Grails controlador de andamio crear org.bookstore.Book
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,7 +39,27 @@ Usage:
 {code:java}
 grails create-scaffold-controller [name]
 {code}
+{hidden}
+
+h2. Descripción
+
+Crea un controlador de andamios dinámico para la clase de dominio dado. Si no existe la clase de dominio, se producirá un error en el comando. Con el ejemplo anterior, este comando creará el archivo @grails-app/controllers/org/bookstore/BookController.groovy@ que declara una clase de controlador que contiene un andamio @ estático @ propiedad.
+
+Tenga en cuenta que este comando es sólo por conveniencia y también puede crear controladores de andamios dinámico en su editor de textos preferido o IDE si elige.
+
+Uso:
+{code: java}
+Grails crear andamio-controlador [nombre]
+{code}
+
+{hidden}
+
 
 Fired Events:
 
 * @CreatedFile@ - When the controller is created
+{hidden}
+
+Despedido de eventos:
+
+* @ CreatedFile @ - cuando se crea el controlador

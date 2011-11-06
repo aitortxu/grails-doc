@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails domain classes can be mapped onto many legacy schemas with an Object Relational Mapping DSL (domain specific language). The following sections takes you through what is possible with the ORM DSL.
 
 {note}
@@ -12,5 +15,23 @@ class Person {
     static mapping = {
 
     }
+}
+{code}
+{hidden}
+
+Clases de dominio de Grails pueden asignarse a muchos esquemas heredados con un DSL de asignación de objetos relacionales (lenguaje específico de dominio). Las siguientes secciones le lleva a través de lo que es posible con el DSL ORM.
+
+{Nota}
+Nada de esto es necesario si eres feliz apegarse a las convenciones establecidas por GORM para nombres de tabla, columna y así sucesivamente. Sólo se necesita esta funcionalidad si es necesario adaptar la forma GORM mapas en esquemas heredados o configura el almacenamiento en caché
+{Nota}
+
+Asignaciones personalizadas se definen mediante un una @ asignación estática @ bloque definido dentro de la clase de dominio:
+
+{code: java}
+clase persona {}
+    ...
+    asignación estática = {}
+
+}
 }
 {code}

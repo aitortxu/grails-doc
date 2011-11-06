@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails has no default mechanism for authentication as it is possible to implement authentication in many different ways. It is however, easy to implement a simple authentication mechanism using either [interceptors|guide:interceptors] or [filters|guide:filters]. This is sufficient for simple use cases but it's highly preferable to use an established security framework, for example by using the [Spring Security|guide:springSecurity] or the [Shiro|guide:shiro] plugin.
 
 Filters let you apply authentication across all controllers or across a URI space. For example you can create a new set of filters in a class called @grails-app/conf/SecurityFilters.groovy@ by running:
@@ -7,6 +10,20 @@ grails create-filters security
 {code}
 
 and implement your interception logic there:
+
+{hidden}
+
+Grails no tiene ningún mecanismo predeterminado para la autenticación, es posible implementar la autenticación de muchas maneras diferentes. Sin embargo, es fácil de implementar un mecanismo de autenticación simple utilizando ya sea [interceptors|guide:interceptors] o [filters|guide:filters]. Esto es suficiente para los casos de uso simple pero es muy preferible utilizar un marco de seguridad establecidos, por ejemplo mediante [Security|guide:springSecurity de primavera] o el complemento de [Shiro|guide:shiro].
+
+Los filtros permiten aplicar autenticación a través de todos los controladores o a través de un espacio URI. Por ejemplo puede crear un nuevo conjunto de filtros en una clase denominada @grails-app/conf/SecurityFilters.groovy@ ejecutando:
+
+{code}
+seguridad de crear filtros de Grails
+{code}
+
+y poner en práctica su lógica de intercepción allí:
+
+{hidden}
 
 {code:java}
 class SecurityFilters {
@@ -22,6 +39,17 @@ class SecurityFilters {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase SecurityFilters {}
+    filtros de Def = {}
+        loginCheck (controlador: ' *', acción: ' *') {}
+            antes = {}
+                Si (! session.user
+
+{hidden}
+
 
 Here the @loginCheck@ filter intercepts execution _before_ all actions except @login@ are executed, and if there is no user in the session then redirect to the @login@ action.
 
@@ -45,6 +73,33 @@ def login() {
     }
     else {
         render(view: "login", model: [message: "User not found"])
+    }
+}
+{code}
+{hidden}
+
+Aquí la @ loginCheck @ filtro intercepta ejecución _before_ todas las acciones excepto @ login @ se ejecutan y si no hay ningún usuario de la sesión, a continuación, redirección a login @ @ acción.
+
+Login @ @ acción propiamente dicha es demasiado simple:
+
+{code: java}
+Def login() {}
+    Si (request.get) {}
+        retorno / / procesar la vista de inicio de sesión
+    }
+
+Def u = User.findByLogin(params.login)
+    Si {} (u)
+        Si (usuario.Password == params.password) {}
+            Session.user = u
+            redirigir (acción: "Inicio")
+        }
+        Else {}
+            Render (vista: "inicio de sesión", modelo: [mensaje: "Contraseña incorrecta"])
+        }
+    }
+    Else {}
+        Render (vista: "inicio de sesión", modelo: [mensaje: "No se encontró el usuario"])
     }
 }
 {code}

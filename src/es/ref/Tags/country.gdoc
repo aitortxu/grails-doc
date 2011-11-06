@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. country
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 Country: <g:country code="${user.country}"/>
 Supported countries: <g:country code="gbr"/>, <g:country code="deu"/>
 {code}
+{hidden}
+
+h1. país
+
+h2. Fin
+
+Representa el nombre inglés de forma predeterminada para un determinado código de país 3-Carta de ISO3166_3
+
+h2. Ejemplos
+
+{Código: xml}
+País: <g:country code="${user.country}"></g:country>
+Apoyó a países: <g:country code="gbr"> </g:country>, <g:country code="deu"></g:country>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,8 +40,28 @@ For internationalized versions of the country names, define these in your messag
 Attributes
 
 * @code@ - The 3-letter lowercase ISO3166 country code
+{hidden}
+
+h2. Descripción
+
+Código de país utiliza la ISO3166_3 interna que fecha la [countrySelect|Etiqueta etiquetas] se basa en que, para procesar rápidamente el nombre de un país dado el código.
+
+Versiones internacionalizadas de los nombres de país, definir en sus paquetes de mensajes y utilizar el @<g:message>@ etiqueta en su lugar.
+
+Atributos
+
+* @ código @ - el código de país 3 letras minúsculas ISO3166</g:message>
+
+{hidden}
+
 
 h2. Source
 
 {source:tag=CountryTagLib.country}
 {source}
+{hidden}
+
+h2. Fuente
+
+{source:tag=CountryTagLib.country}
+origen de {}

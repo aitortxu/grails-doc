@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. batchSize
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. batchSize
+
+h2. Fin
+
+Personaliza la obtención de cuántos resultados durante la carga diferida.
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    ...
+    asignación estática = {}
+        batchSize 10
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -28,6 +52,24 @@ static mapping = {
     batchSize 10
 }
 {code}
+{hidden}
+
+h2. Descripción
+
+Uso: @ batchSize(integer) @
+
+Dada una asociación perezosa donde un autor @ @ tiene muchas @ Book@s, GORM realizará una consulta para el autor @ @ y consultas adicionales el asociado @ Book@s. Esto es lo que se conoce como el problema N 1 y a menudo pueden ser trabajada alrededor mediante una consulta de combinación. Sin embargo, puede ser costoso.
+
+Recuperar el lote es una optimización de carga diferida por lo que si, por ejemplo, se establece un batchSize @ @ de 10 y tiene un autor @ @ que con 30 libros, en lugar de 31 consultas obtendrá cuatro (uno para el autor @ @ y tres lotes de 10):
+
+{code}
+asignación estática = {}
+    batchSize 10
+}
+{code}
+
+{hidden}
+
 
 You can also configure @batchSize@ on a per association basis:
 
@@ -38,6 +80,20 @@ class Author {
 
     static mapping = {
         books batchSize: 10
+    }
+}
+{code}
+{hidden}
+
+También puede configurar @ batchSize @ sobre una base de asociación por:
+
+{code}
+clase {autor
+
+estático hasMany = [libros: libro]
+
+asignación estática = {}
+        libros batchSize: 10
     }
 }
 {code}

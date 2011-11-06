@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. IntelliJ IDEA
 
 [IntelliJ IDEA|http://www.jetbrains.com/idea] and the [JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy+Home] plugin offer good support for Groovy and Grails developers. Refer to the section on [Groovy and Grails|http://www.jetbrains.com/idea/features/groovy_grails.html] support on the JetBrains website for a feature overview.
@@ -7,6 +10,20 @@ To integrate Grails with IntelliJ run the following command to generate appropri
 {code}
 grails integrate-with --intellij
 {code}
+
+{hidden}
+
+h4. IntelliJ IDEA
+
+[IntelliJ IDEA|http://www.jetbrains.com/idea] y [JetGroovy|http://www.jetbrains.net/confluence/display/GRVY/Groovy inicio] plugin ofrecen buen soporte para desarrolladores Groovy y Grails. Consulte la sección [Groovy y Grails|http://www.jetbrains.com/idea/features/groovy_grails.html] soportan en el sitio Web de JetBrains para una descripción de la función.
+
+Para integrar Grails con IntelliJ, ejecute el siguiente comando para generar archivos de proyecto correspondiente:
+
+{code}
+Grails integrar con--intellij
+{code}
+
+{hidden}
 
 h4. Eclipse
 
@@ -18,6 +35,20 @@ NetBeans provides a Groovy/Grails plugin that automatically recognizes Grails pr
 
 h4. TextMate
 
+{hidden}
+
+h4. Eclipse
+
+Se recomienda que los usuarios de "Eclipse":http://www.eclipse.org/ buscan para desarrollar aplicaciones Grails echa un vistazo en [herramienta Spring Framework Suite|http://www.springsource.com/products/sts], que ofrece soporte incorporado para Grails incluyendo administración automática classpath, un editor del SGP y acceso rápido a los comandos de Grails. Consulte la página [STS Integration|http://www.grails.org/STS integración] para una visión general.
+
+h4. NetBeans
+
+NetBeans proporciona un plugin de Groovy/Grails que automáticamente reconoce proyectos Grails y proporciona la capacidad de ejecutar aplicaciones Grails en el IDE, completado de código e integración con el servidor Glassfish. Para una visión general de características consulte a la Guía de [NetBeans Integration|http://www.grails.org/NetBeans integración] en el sitio Web de Grails que fue escrito por el equipo de NetBeans.
+
+h4. TextMate
+
+{hidden}
+
 Since Grails' focus is on simplicity it is often possible to utilize more simple editors and "TextMate":http://macromates.com/ on the Mac has an excellent Groovy/Grails bundle available from the [Texmate bundles SVN|http://wiki.macromates.com/Main/SubversionCheckout].
 
 To integrate Grails with TextMate run the following command to generate appropriate project files:
@@ -28,6 +59,25 @@ grails integrate-with --textmate
 
 Alternatively TextMate can easily open any project with its command line integration by issuing the following command from the root of your project:
 
+{hidden}
+
+Dado que es foco de Grails en la simplicidad a menudo es posible utilizar más simples editores y "TextMate":http://macromates.com/ en el Mac tiene un excelente paquete de Groovy/Grails disponible en [paquetes de texmate SVN|http://wiki.macromates.com/Main/SubversionCheckout].
+
+Para integrar Grails con TextMate, ejecute el siguiente comando para generar archivos de proyecto correspondiente:
+
+{code}
+Grails integrar con--textmate
+{code}
+
+También TextMate puede abrir fácilmente cualquier proyecto con su integración de línea de comandos mediante el comando siguiente desde la raíz de su proyecto:
+
+{hidden}
+
 {code}
 mate .
+{code}
+{hidden}
+
+{code}
+mate.
 {code}

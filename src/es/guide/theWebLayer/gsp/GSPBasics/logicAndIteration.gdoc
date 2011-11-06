@@ -1,3 +1,6 @@
+
+{hidden}
+
 Using the @<% %>@ syntax you can embed loops and so on using this syntax:
 
 {code:xml}
@@ -9,6 +12,20 @@ Using the @<% %>@ syntax you can embed loops and so on using this syntax:
    </body>
 </html>
 {code}
+{hidden}
+
+Utilizando el @ < % > @ sintaxis puede incrustar bucles y así sucesivamente con esta sintaxis:
+
+{Código: xml}<html>
+   <body>
+      <% [1,2,3,4].each { num -> %>
+         <p><%="Hello ${num}!" %></p>
+      <%}%>
+   </body>
+</html>{code}
+
+{hidden}
+
 
 As well as logical branching:
 
@@ -22,3 +39,15 @@ As well as logical branching:
    </body>
 </html>
 {code}
+{hidden}
+
+Así como ramificación lógica:
+
+{Código: xml}<html>
+   <body>
+      <% if (params.hello == 'true')%>
+      <%="Hello!"%>
+      <% else %>
+      <%="Goodbye!"%>
+   </body>
+</html>{code}

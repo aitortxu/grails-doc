@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. set-version
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails set-version 1.6
 {code}
+{hidden}
+
+h1. versión de conjunto
+
+h2. Fin
+
+Establece la versión de la aplicación actual dentro del archivo de metadatos de aplicación (@ application.properties@)
+
+h2. Ejemplos
+
+{code: java}
+conjunto de Grails-versión 1.6
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,24 @@ grails set-version [number]
 
 When executing Grails retains metadata about the currently executing application inside the @GrailsApplication@ object. The version of the application is one such item of metadata. The version is used by the Grails [war|commandLine] command to produce a versioned WAR archive and can also be used by the application at runtime to validate application state.
 
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+conjunto de Grails-versión [número]
+{code}
+
+Cuando ejecuta Grails conserva metadatos acerca de la aplicación se está ejecutando dentro de la @ GrailsApplication @ objeto. La versión de la aplicación es un tal elemento de metadatos. La versión se utiliza el comando Grails [war|commandLine] para producir un archivo con versiones de guerra y también puede utilizarse la aplicación en tiempo de ejecución para validar el estado de aplicación.
+
+{hidden}
+
 Fired Events:
 
 * @StatusFinal@ - When the version has been set
+{hidden}
+
+Despedido de eventos:
+
+* @ StatusFinal @ - cuando se ha establecido la versión

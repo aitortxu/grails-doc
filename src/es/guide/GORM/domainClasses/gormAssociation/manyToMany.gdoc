@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails supports many-to-many relationships by defining a @hasMany@ on both sides of the relationship and having a @belongsTo@ on the owned side of the relationship:
 
 {code}
@@ -7,6 +10,20 @@ class Book {
     String title
 }
 {code}
+
+{hidden}
+
+Grails es compatible con las relaciones de varios a varios definiendo un @ hasMany @ a ambos lados de la relación y tener un @ belongsTo @ propiedad del lado de la relación:
+
+{code}
+clase {libro
+    Static belongsTo = autor
+    estático hasMany = [Autores: autor]
+    Título de cadena
+}
+{code}
+
+{hidden}
 
 {code}
 class Author {
@@ -18,6 +35,21 @@ class Author {
 Grails maps a many-to-many using a join table at the database level. The owning side of the relationship, in this case @Author@, takes responsibility for persisting the relationship and is the only side that can cascade saves across.
 
 For example this will work and cascade saves:
+{hidden}
+
+{code}
+clase {autor
+    estático hasMany = [libros: libro]
+    Nombre de la cadena
+}
+{code}
+
+Grails asigna un muchos a muchos utilizando una tabla de ingreso a nivel de base de datos. La parte propietaria de la relación, en este caso a @ autor @, asume la responsabilidad de conservar la relación y es lo único que se puede conectar en cascada guarda en todo.
+
+Por ejemplo se trabajará y guarda de conexión en cascada:
+
+{hidden}
+
 
 {code}
 new Author(name:"Stephen King")
@@ -27,6 +59,19 @@ new Author(name:"Stephen King")
 {code}
 
 However this will only save the @Book@ and not the authors!
+
+{hidden}
+
+{code}
+nuevo autor (nombre: "Stephen King")
+        .addToBooks (nuevo libro (título: "La tribuna"))
+        .addToBooks (nuevo libro (título: "El resplandor"))
+        .Save()
+{code}
+
+Sin embargo esto sólo guardará el libro @ @ y no los autores!
+
+{hidden}
 
 {code}
 new Book(name:"Groovy in Action")
@@ -38,5 +83,24 @@ new Book(name:"Groovy in Action")
 This is the expected behaviour as, just like Hibernate, only one side of a many-to-many can take responsibility for managing the relationship.
 
 {warning}
+{hidden}
+
+{code}
+nuevo libro (nombre: "Groovy en acción")
+        .addToAuthors (nuevo autor (nombre: "Galería Koenig"))
+        .addToAuthors (nuevo autor (nombre: "Guillaume Laforge"))
+        .Save()
+{code}
+
+Este es el comportamiento esperado, justo como la hibernación, sólo una cara de muchos a muchos puede asumir la responsabilidad de administrar la relación.
+
+Advertencia de {}
+
+{hidden}
+
 Grails' [Scaffolding|guide:scaffolding] feature *does not* currently support many-to-many relationship and hence you must write the code to manage the relationship yourself
 {warning}
+{hidden}
+
+Grails' [Scaffolding|guide:scaffolding] característica * no * soporta actualmente relación varios a varios y, por tanto, debe escribir el código para administrar la relación usted mismo
+Advertencia de {}

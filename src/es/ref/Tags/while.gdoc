@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. while
 
 h2. Purpose
@@ -12,9 +15,33 @@ h2. Examples
     <p>Current i = ${i}</p>
 </g:while>
 {code}
+{hidden}
+
+h1. mientras
+
+h2. Fin
+
+Una condición se ejecuta en un bucle hasta que la condición devuelve false @ @
+
+h2. Ejemplos
+
+{Código: xml}<g:while test="${i < 5}">
+    <%i  %>
+    <p>Actual me = ${i}</p>
+</g:while>{code}
+
+{hidden}
+
 
 h2. Description
 
 Attributes
 
 * @test@ - The conditional expression
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ prueba @ - la expresión condicional

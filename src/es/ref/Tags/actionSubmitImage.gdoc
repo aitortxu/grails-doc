@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. actionSubmitImage
 
 h2. Purpose
@@ -10,6 +13,22 @@ h2. Examples
 <g:actionSubmitImage value="Update" action="update"
                      src="${resource(dir: 'images', file: 'update.gif')}" />
 {code}
+{hidden}
+
+h1. actionSubmitImage
+
+h2. Fin
+
+Genera un botón Enviar utilizando el tipo de entrada = "imagen" con el valor indicado. Pueden agregar controladores de eventos de JavaScript utilizando los mismos nombres de atributo como en HTML.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:actionsubmitimage value="Update" action="update" src="${resource(dir: 'images', file: 'update.gif')}"></g:actionsubmitimage>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,5 +39,23 @@ Attributes
 * @action@ (optional) - The name of the action to be executed
 
 {warning:title=MS Internet Explorer Bug}
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ valor @ - la leyenda del botón y el nombre de acción cuando no definida explícitamente
+* @ src @ - el origen de la imagen para utilizar
+* @ acción @ (opcional): el nombre de la acción ejecutada
+
+{Advertencia: título = MS Internet Explorer error}
+
+{hidden}
+
 You cannot use multiple actionSubmitImage tags within the same form and have it work in Internet Explorer 6 or 7 unless you add some custom JavaScript. See [this page|http://www.quirksmode.org/bugreports/archives/2006/07/Namevalue_pairs_arent_submitted_for_image_submit_b.html] for a bit more information and a workaround.
 {warning}
+{hidden}
+
+No utilice varias etiquetas de actionSubmitImage dentro de la misma forma y tiene que trabajar en Internet Explorer 6 o 7 a menos que agregue algunos JavaScript personalizada. Consulte [este page|http://www.quirksmode.org/bugreports/archives/2006/07/Namevalue_pairs_arent_submitted_for_image_submit_b.html] para obtener un poco más información y una solución.
+Advertencia de {}

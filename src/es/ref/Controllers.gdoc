@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. Controller Usage
 
 A controller fulfills the C in the Model View Controller (MVC) pattern and is responsible for handling web requests. In Grails a controller is a class with a name that ends in the convention "Controller" and lives in the @grails-app/controllers@ directory. A controller can be created with the [create-controller|commandLine] command:
@@ -7,6 +10,20 @@ grails create-controller org.bookstore.hello
 {code}
 
 or with your favourite IDE or text editor.
+
+{hidden}
+
+h1. Uso del controlador
+
+Un controlador cumple la c en el patrón modelo vista controlador (MVC) y es responsable de administrar las solicitudes web. En Grails es una clase con un nombre que termina en la Convención "Controller" y vive en los @ grails-app/controladores @ directorio un controlador. Un controlador puede ser creado con el comando [crear-controller|commandLine]:
+
+{code: java}
+Grails controlador crear org.bookstore.hello
+{code}
+
+o con su editor de texto o IDE favorita.
+
+{hidden}
 
 {code:java}
 package org.bookstore
@@ -18,7 +35,27 @@ class HelloController {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+paquete org.bookstore
+
+clase HelloController {}
+
+Def world() {}
+        procesar "¡ Hello World!"
+    }
+}
+{code}
+
+{hidden}
+
 
 Each action in the controller is a method or a Closure and it has access to a number of implicit variables and methods.
 
 Refer to the user guide topic on [Controllers|guide:controllers] for more information.
+{hidden}
+
+Cada acción en el controlador es un método o un cierre y tiene acceso a un número de variables implícitas y métodos.
+
+Consulte el tema de guía de usuario de [Controllers|guide:controllers] para obtener más información.

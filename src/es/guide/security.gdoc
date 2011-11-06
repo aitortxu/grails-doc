@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails is no more or less secure than Java Servlets. However, Java servlets (and hence Grails) are extremely secure and largely immune to common buffer overrun and malformed URL exploits due to the nature of the Java Virtual Machine underpinning the code.
 
 Web security problems typically occur due to developer naivety or mistakes, and there is a little Grails can do to avoid common mistakes and make writing secure applications easier to write.
@@ -8,5 +11,20 @@ Grails has a few built in safety mechanisms by default.
 
 # All standard database access via [GORM|guide:GORM] domain objects is automatically SQL escaped to prevent SQL injection attacks
 # The default [scaffolding|guide:scaffolding] templates HTML escape all data fields when displayed
+{hidden}
+
+Grails es no más o menos seguro que Java Servlets. Sin embargo, servlets de Java (y por lo tanto Grails) son extremadamente seguras y en gran medida inmune al búfer común invadido y malformed URL explota debido a la naturaleza de la máquina Virtual de Java, que se basa el código.
+
+Los problemas de seguridad Web suelen producen debido a la ingenuidad de desarrollador o errores y es que Grails un poco pueden hacer para evitar errores comunes y hacer escribir aplicaciones seguras fáciles de escribir.
+
+h4. Lo hace automáticamente Grails
+
+Grails tiene un pocos construidos en los mecanismos de seguridad predeterminada.
+
+{hidden}
+
 # Grails link creating tags ([link|tags], [form|tags], [createLink|tags], [createLinkTo|tags] and others) all use appropriate escaping mechanisms to prevent code injection
 # Grails provides [codecs|guide:codecs] to let you trivially escape data when rendered as HTML, JavaScript and URLs to prevent injection attacks here.
+{hidden}
+
+

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. url
 
 h2. Purpose
@@ -9,9 +12,32 @@ h2. Examples
 {code:java}
 homePage url: true
 {code}
+{hidden}
+
+h1. URL
+
+h2. Fin
+
+Para validar que una cadena @ @ valor es una dirección URL válida.
+
+h2. Ejemplos
+
+{code: java}
+url de la página: true
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Set to @true@ if a string value must be a URL. Internally uses the @org.apache.commons.validator.UrlValidator@ class.
 
 Error Code: @className.propertyName.url.invalid@
+{hidden}
+
+h2. Descripción
+
+Establezca True @ @ si un valor de cadena debe ser una dirección URL. Utiliza internamente la clase @org.apache.commons.validator.UrlValidator@.
+
+Código de error: @className.propertyName.url.invalid@

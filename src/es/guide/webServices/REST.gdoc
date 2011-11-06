@@ -1,3 +1,6 @@
+
+{hidden}
+
 REST is not really a technology in itself, but more an architectural pattern. REST is very simple and just involves using plain XML or JSON as a communication medium, combined with URL patterns that are "representational" of the underlying system, and HTTP methods such as GET, PUT, POST and DELETE.
 
 Each HTTP method maps to an action type. For example GET for retrieving data, PUT for creating data, POST for updating and so on. In this sense REST fits quite well with [CRUD|guide:scaffolding].
@@ -11,6 +14,24 @@ static mappings = {
    "/product/$id?"(resource:"product")
 }
 {code}
+{hidden}
+
+RESTO no es realmente una tecnología en sí, sino más un patrón arquitectónico. RESTO es muy sencillo y sólo implica el uso de XML o JSON como un medio de comunicación, combinado con patrones de URL que se "representación" del sistema subyacente y métodos HTTP como GET, poner POST y eliminar.
+
+Cada método HTTP se asigna a un tipo de acción. Por ejemplo GET para recuperar datos, poner para crear datos POST de actualización y así sucesivamente. En este sentido el resto encaja muy bien con [CRUD|guide:scaffolding].
+
+h4. Patrones de URL
+
+El primer paso para implementar el resto con Grails es proporcionar RESTful [URL mappings|guide:urlmappings]:
+
+{code: java}
+asignaciones estáticas = {}
+   "id de $/product/?"(recurso: "producto")
+}
+{code}
+
+{hidden}
+
 
 This maps the URI @/product@ onto a @ProductController@. Each HTTP method such as GET, PUT, POST and DELETE map to unique actions within the controller as outlined by the table below:
 
@@ -21,6 +42,20 @@ Method     | Action
 @POST@     | @save@
 @DELETE@   | @delete@
 {table}
+{hidden}
+
+Esto asigna el identificador URI @ / producto @ en @ ProductController @. Cada método HTTP como obtener, poner, publicar y eliminar mapa único acciones dentro del controlador tal como se describe en la siguiente tabla:
+
+tabla de {}
+Método | Acción
+@ GET @ | @ show @
+@ PUT @ | @ actualización @
+@ POST @ | @ guardar @
+@ ELIMINAR @ | @ eliminar @
+tabla de {}
+
+{hidden}
+
 
 In addition, Grails provides automatic XML or JSON marshalling for you.
 
@@ -31,6 +66,20 @@ You can alter how HTTP methods are handled by using URL Mappings to [map to HTTP
     action = [GET: "show", PUT: "update", DELETE: "delete", POST: "save"]
 }
 {code}
+{hidden}
+
+Además, Grails proporciona automática XML o JSON clasificación para usted.
+
+Puede modificar cómo se tratan los métodos HTTP mediante el uso de asignaciones URL [asignar a HTTP methods|guide:mappingHTTP]:
+
+{code: java}
+"id de $/product/" (controlador: "producto") {}
+    acción = [obtener: "Mostrar", suelta: "Actualizar", eliminar: "eliminar", POST: "Guardar"]
+}
+{code}
+
+{hidden}
+
 
 However, unlike the @resource@ argument used previously, in this case Grails will not provide automatic XML or JSON marshalling unless you specify the @parseRequest@ argument:
 
@@ -41,6 +90,20 @@ However, unlike the @resource@ argument used previously, in this case Grails wil
 {code}
 
 h4. HTTP Methods
+{hidden}
+
+Sin embargo, a diferencia del @ recursos @ argumento utilizado anteriormente, en este caso Grails no proporcionará XML o JSON a menos que especifique el @ parseRequest @ argumento de clasificación automática:
+
+{code: java}
+"id de $/product/" (controlador: "producto", parseRequest: true) {}
+    acción = [obtener: "Mostrar", suelta: "Actualizar", eliminar: "eliminar", POST: "Guardar"]
+}
+{code}
+
+h4. Métodos HTTP
+
+{hidden}
+
 
 In the previous section you saw how you can easily define URL mappings that map specific HTTP methods onto specific controller actions. Writing a REST client that then sends a specific HTTP method is then easy (example in Groovy's HTTPBuilder module):
 
@@ -59,6 +122,28 @@ def http = new HTTPBuilder("http://localhost:8080/amazon")
      }
  }
 {code}
+{hidden}
+
+En la sección anterior vio cómo puede definir fácilmente las asignaciones de URL que se asignan métodos HTTP específicos en las acciones de controlador específico. Escritura de un cliente de descanso, a continuación, envía un método específico de HTTP es fácil (por ejemplo en el módulo de HTTPBuilder de Groovy):
+
+{code}
+groovyx.net.http.* de importación
+importar groovyx.net.http.ContentType.JSON estático
+
+Def http = HTTPBuilder("http://localhost:8080/amazon") nueva
+
+http.Request Method.GET (JSON) {}
+     URL.Path = ' / reserva/lista '
+     Response.Success = {resp, json->
+         para (libro de json.books) {}
+             Console.println book.title
+         }
+     }
+ }
+{code}
+
+{hidden}
+
 
 Issuing a request with a method other than @GET@ or @POST@ from a regular browser is not possible without some help from Grails. When defining a [form|tags] you can specify an alternative method such as @DELETE@:
 
@@ -69,6 +154,20 @@ Issuing a request with a method other than @GET@ or @POST@ from a regular browse
 {code}
 
 Grails will send a hidden parameter called @_method@, which will be used as the request's HTTP method. Another alternative for changing the method for non-browser clients is to use the @X-HTTP-Method-Override@ to specify the alternative method name.
+{hidden}
+
+No es posible sin la ayuda de Grails emitir una solicitud con un método distinto de @ GET @ o @ POST @ desde un navegador regular. Al definir un [form|tags] puede especificar un método alternativo como eliminar @ @:
+
+{code}
+<g:form controller="book" method="DELETE">
+    ..
+</g:form>
+{code}
+
+Grails enviará un parámetro oculto llamado @ _method @, que se utilizará como método de la solicitud HTTP. Otra alternativa para cambiar el método para clientes de navegador no es utilizar la @ X-HTTP-método-anulación @ para especificar el nombre de método alternativo.
+
+{hidden}
+
 
 h4. XML Marshalling - Reading
 
@@ -91,6 +190,21 @@ class ProductController {
     ..
 }
 {code}
+{hidden}
+
+h4. XML aplanamiento - lectura
+
+El controlador puede utilizar de Grails [XML marshalling|guide:xmlAndJSON] para implementar el método GET:
+
+{code: java}
+grails.converters.XML de importación
+
+clase ProductController {}
+    Def show() {}
+        Si (params.id
+
+{hidden}
+
 
 If there is an @id@ we search for the @Product@ by name and return it, otherwise we return all Products. This way if we go to @/products@ we get all products, otherwise if we go to @/product/MacBook@ we only get a MacBook.
 
@@ -107,6 +221,25 @@ To support updates such as @PUT@ and @POST@ you can use the [params|controllers]
      </vender>
 </product>
 {code}
+{hidden}
+
+Si hay un id @ @ buscar el producto @ @ por nombre y devolverlo, de lo contrario nos devuelven todos los productos. De esta forma si vamos a / productos @ obtener todos los productos, de lo contrario si vamos a @ / producto/MacBook @ sólo hacerse una MacBook.
+
+h4. XML de clasificación - actualizando
+
+Para admitir actualizaciones como @ PUT @ y @ POST @ puede utilizar el objeto de [params|controllers] que Grails mejora la capacidad de leer un paquete XML entrante. Dado un paquete XML entrante de:
+
+{Código: xml}<?xml version="1.0" encoding="ISO-8859-1"?>
+<product> <name>MacBook</name><vendor id="12"><name>Apple</name>
+        
+     
+</vendor> 
+    
+    </product>
+{code}
+
+{hidden}
+
 
 you can read this XML packet using the same techniques described in the [Data Binding|guide:dataBinding] section, using the [params|controllers] object:
 
@@ -122,6 +255,25 @@ def save() {
     }
 }
 {code}
+{hidden}
+
+puede leer este paquete XML utilizando las mismas técnicas que se describen en la sección [datos Binding|guide:dataBinding], con el objeto de [params|controllers]:
+
+{code: java}
+Def save() {}
+    Def p = Product(params.product) nueva
+
+Si ({p.save())}
+        procesar p como XML
+    }
+    Else {}
+        procesamiento p.errors
+    }
+}
+{code}
+
+{hidden}
+
 
 In this example by indexing into the @params@ object using the @product@ key we can automatically create and bind the XML using the @Product@ constructor. An interesting aspect of the line:
 
@@ -132,6 +284,20 @@ def p = new Product(params.product)
 is that it requires no code changes to deal with a form submission that submits form data, or an XML request, or a JSON request.
 
 {note}
+{hidden}
+
+En este ejemplo de indización en @ params @ objeto utilizando el producto @ @ clave automáticamente podemos crear y enlazar los datos XML utilizando el producto @ @ constructor. Un aspecto interesante de la línea:
+
+{code: java}
+Def p = Product(params.product) nueva
+{code}
+
+es que no requiere cambios de código para hacer frente a una presentación de forma que envía los datos del formulario, o bien solicitar una solicitud XML o un JSON.
+
+{Nota}
+
+{hidden}
+
 If you require different responses to different clients (REST, HTML etc.) you can use [content negotation|guide:contentNegotiation]
 {note}
 
@@ -142,7 +308,27 @@ The @Product@ object is then saved and rendered as XML, otherwise an error messa
    <message>The property 'title' of class 'Person' must be specified</message>
 </error>
 {code}
+{hidden}
+
+Si necesita respuestas diferentes a distintos clientes (descanso, HTML, etc.) puede utilizar [contenido negotation|guide:contentNegotiation]
+{Nota}
+
+El producto @ @ objeto, a continuación, se guarda y se procesa como XML, de lo contrario se produce un mensaje de error usando Grails' [validation|guide:validation] capacidades en el formulario:
+
+{Código: xml}
+<error>
+   <message>La propiedad 'title' de clase que debe especificarse 'Persona'</message>
+</error>
+{code}
+
+{hidden}
+
 
 h4. REST with JAX-RS
 
 There also is a [JAX-RS Plugin|http://grails.org/plugin/jaxrs] which can be used to build web services based on the Java API for RESTful Web Services ([JSR 311: JAX-RS|http://jcp.org/en/jsr/summary?id=311]).
+{hidden}
+
+h4. DESCANSAR con JAX-RS
+
+También hay un [Plugin|http://grails.org/plugin/jaxrs JAX-RS] que puede utilizarse para crear servicios web basados en la API de Java para servicios Web REST ([JSR 311: JAX-RS|http://jcp.org/en/jsr/summary?id=311]).

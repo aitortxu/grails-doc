@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. View states
 
 A view state is a one that doesn't define an @action@ or a @redirect@. So for example this is a view state:
@@ -11,6 +14,24 @@ enterPersonalDetails {
 It will look for a view called @grails-app/views/book/shoppingCart/enterPersonalDetails.gsp@ by default. Note that the @enterPersonalDetails@ state defines two events: @submit@ and @return@. The view is responsible for [triggering|guide:flowExecutionEvents] these events. Use the @render@ method to change the view to be rendered:
 
 {code:java}
+{hidden}
+
+h4. Estados de vista
+
+Un Estado de vista es que no define una acción @ @ o una redirección @ @. Así, por ejemplo, este es un Estado de vista:
+
+{code: java}
+enterPersonalDetails {}
+   on("Submit").to "enterShipping"
+   on("Return").to "showCart"
+} {code}
+
+Buscará una vista denominada @grails-app/views/book/shoppingCart/enterPersonalDetails.gsp@ por defecto. Nota que el @ enterPersonalDetails @ estado define dos eventos: @ presentar @ y @ return @. La vista es responsable de [triggering|guide:flowExecutionEvents] estos eventos. Utilice el render @ @ método para cambiar la vista para ser procesado:
+
+{code: java}
+
+{hidden}
+
 enterPersonalDetails {
    render(view: "enterDetailsView")
    on("submit").to "enterShipping"
@@ -21,6 +42,21 @@ enterPersonalDetails {
 Now it will look for @grails-app/views/book/shoppingCart/enterDetailsView.gsp@. Start the @view@ parameter with a / to use a shared view:
 
 {code:java}
+{hidden}
+
+enterPersonalDetails {}
+   Render (vista: "enterDetailsView")
+   on("Submit").to "enterShipping"
+   on("Return").to "showCart"
+}
+{code}
+
+Ahora buscará @ grails-app/views/book/shoppingCart/enterDetailsView.gsp@. Iniciar la vista @ @ parámetro con un / a utilizar una vista compartida:
+
+{code: java}
+
+{hidden}
+
 enterPersonalDetails {
    render(view: "/shared/enterDetailsView")
    on("submit").to "enterShipping"
@@ -35,6 +71,25 @@ h4. Action States
 An action state is a state that executes code but does not render a view. The result of the action is used to dictate flow transition. To create an action state you define an action to to be executed. This is done by calling the @action@ method and passing it a block of code to be executed:
 
 {code:java}
+{hidden}
+
+enterPersonalDetails {}
+   Render (vista: "/ compartido/enterDetailsView")
+   on("Submit").to "enterShipping"
+   on("Return").to "showCart"
+}
+{code}
+
+Ahora buscará @grails-app/views/shared/enterDetailsView.gsp@
+
+h4. Estados de acción
+
+Un Estado de acción es un Estado que ejecuta código pero no representar una vista. El resultado de la acción sirve para dictar la transición de flujo. Para crear un Estado de acción definir una acción para ser ejecutado. Esto se hace llamando a la acción de @ @ método y pásele un bloque de código que se ejecute:
+
+{code: java}
+
+{hidden}
+
 listBooks {
    action {
       [bookList: Book.list()]
@@ -49,6 +104,25 @@ As you can see an action looks very similar to a controller action and in fact y
 In addition, in the above example we also use an exception handler to deal with errors on the line:
 
 {code:java}
+{hidden}
+
+listBooks {}
+   acción {}
+      [bookList: Book.list()]
+   }
+   on("Success").to "showCatalogue"
+   en (excepción) .para "handleError"
+}
+{code}
+
+Como se puede ver una acción es muy similar a una acción de controlador y de hecho se pueden reutilizar acciones controlador si lo desea. Si la acción devuelve correctamente sin errores, se activará el éxito @ @ evento. En este caso desde entonces volvemos un mapa, que es considerado como el "modelo" y se coloca automáticamente en [flujo scope|guide:flowScopes].
+
+Además, en el ejemplo anterior también utilizamos un controlador de excepciones para lidiar con los errores en la línea:
+
+{code: java}
+
+{hidden}
+
 on(Exception).to "handleError"
 {code}
 
@@ -59,6 +133,21 @@ You can write more complex actions that interact with the flow request context:
 {code:java}
 processPurchaseOrder {
     action {
+{hidden}
+
+en (excepción) .para "handleError"
+{code}
+
+Esto hace que la transición de flujo a un estado llamado @ handleError @ en el caso de una excepción.
+
+Puede escribir acciones más complejas que interactúan con el contexto de la solicitud de flujo:
+
+{code: java}
+processPurchaseOrder {}
+    acción {}
+
+{hidden}
+
         def a =  flow.address
         def p = flow.person
         def pd = flow.paymentDetails
@@ -69,6 +158,21 @@ processPurchaseOrder {
         o.invoiceNumber = new Random().nextInt(9999999)
         for (item in cartItems) { o.addToItems item }
         o.save()
+{hidden}
+
+Def un = flow.address
+        Def p = flow.person
+        Def pd = flow.paymentDetails
+        Def cartItems = flow.cartItems
+        Flow.Clear()
+
+Def o = nuevo orden (persona: p, shippingAddress: una, paymentDetails: pd)
+        o.invoiceNumber = new Random().nextInt(9999999)
+        (artículo en cartItems) {o.addToItems tema}
+        o.Save()
+
+{hidden}
+
         [order: o]
     }
     on("error").to "confirmPurchase"
@@ -79,6 +183,21 @@ processPurchaseOrder {
 Here is a more complex action that gathers all the information accumulated from the flow scope and creates an @Order@ object. It then returns the order as the model. The important thing to note here is the interaction with the request context and "flow scope".
 
 h4. Transition Actions
+{hidden}
+
+[orden: o]
+    }
+    on("error").to "confirmPurchase"
+    en (excepción) .para "confirmPurchase"
+    on("Success").to "displayInvoice"
+} {code}
+
+Aquí es una acción más compleja que reúne toda la información acumulada del ámbito de aplicación de flujo y crea un pedido de @ @ objeto. A continuación, devuelve el orden como modelo. Lo importante a destacar es la interacción con el contexto de la solicitud y el "flujo de alcance".
+
+h4. Acciones de transición
+
+{hidden}
+
 
 Another form of action is what is known as a _transition_ action. A transition action is executed directly prior to state transition once an [event|guide:flowExecutionEvents] has been triggered. A simple example of a transition action can be seen below:
 
@@ -90,5 +209,23 @@ enterPersonalDetails {
    on("return").to "showCart"
 }
 {code}
+{hidden}
+
+Otra forma de acción es lo que se conoce como una acción de _transition_. Una acción de transición se ejecuta directamente antes de la transición de Estado una vez que se ha desencadenado una [event|guide:flowExecutionEvents]. Un ejemplo simple de una acción de transición puede verse a continuación:
+
+{code: java}
+enterPersonalDetails {}
+   on("Submit") {}
+       log.Trace "Va a entrar el envío"
+   } .a "enterShipping"
+   on("Return").to "showCart"
+}
+{code}
+
+{hidden}
+
 
 Notice how we pass a block of the code to @submit@ event that simply logs the transition. Transition states are very useful for [data binding and validation|guide:dataBindingAndValidation], which is covered in a later section.
+{hidden}
+
+Observe cómo pasamos un bloque de código @ presentar @ evento que simplemente inicia la transición. Estados de transición son muy útiles para [enlace de datos y validation|guide:dataBindingAndValidation], que se trata en una sección posterior.

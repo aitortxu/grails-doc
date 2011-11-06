@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. clean
 
 h2. Purpose
@@ -9,10 +12,34 @@ h2. Examples
 {code}
 grails clean
 {code}
+{hidden}
+
+h1. limpiar
+
+h2. Fin
+
+El @ limpiar @ comando elimina todo compilados los recursos de la aplicación. Desde Groovy es un lenguaje compilado, como con Java, esto a veces es útil para borrar antiguas instancias de clases y garantizar la correcta compilación. También es una buena idea para ejecutar esta secuencia de comandos antes de ejecutar pruebas o crear un archivo WAR para garantizar una compilación completa se produce.
+
+h2. Ejemplos
+
+{code}
+Grails limpios
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Usage:
 {code:java}
 grails clean
+{code}
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails limpios
 {code}

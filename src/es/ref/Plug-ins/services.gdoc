@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. services
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @services@ plugin configures Grails' support for [Services|guide:services].
 h2. Examples
 
 An example service class in the @grails-app/services@ directory:
+
+{hidden}
+
+h1. servicios
+
+h2. Fin
+
+Los servicios @ @ plugin configura apoyo de Grails [Services|guide:services].
+
+h2. Ejemplos
+
+Una clase de servicio de ejemplo en las @ grails-app/Servicios @ directorio:
+
+{hidden}
 
 {code}
 class BookService {
@@ -18,9 +35,31 @@ class BookService {
 
 h2. Description
 
+{hidden}
+
+{code}
+clase BookService {}
+    Libro [] getBooks() {}
+        Book.List() como libro]
+    }
+}
+{code}
+
+h2. Descripción
+
+{hidden}
+
 Refer to the section on [Services|guide:services] in the Grails user guide which details Grails' services.
 
 Configured Spring Beans given a service class of @BookService@:
 
 * @BookServiceServiceClass@ - The [GrailsServiceClass|api:org.codehaus.groovy.grails.commons.GrailsServiceClass] instance which implements the conventions defined within a services class.
 * @BookService@ - A bean configured according to the scope of the service: if the service is transactional then the type of the actual bean definition will be a [TransactionProxyFactoryBean|api:org.springframework.transaction.interceptor.TransactionProxyFactoryBean].
+{hidden}
+
+Consulte la sección [Services|guide:services] en la Guía de usuario de Grails que detalla los servicios de Grails.
+
+Frijoles de primavera configurado dado una clase de servicio de @ BookService @:
+
+* @ BookServiceServiceClass @ - la instancia [GrailsServiceClass|api:org.codehaus.groovy.grails.commons.GrailsServiceClass] que implementa las convenciones establecidas dentro de una clase de servicios.
+* @ BookService @ - un grano configurado de acuerdo con el alcance del servicio: si el servicio es transaccional, el tipo de la definición real de frijol será [TransactionProxyFactoryBean|api:org.springframework.transaction.interceptor.TransactionProxyFactoryBean].

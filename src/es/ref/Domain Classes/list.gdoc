@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. list
 
 h2. Purpose
@@ -22,6 +25,35 @@ def results = Book.list(max: 10, offset: 100, sort: "title", order: "desc")
 // list all books, eagerly fetching the authors association
 def results = Book.list(fetch: [authors: "eager"])
 {code}
+{hidden}
+
+h1. lista
+
+h2. Fin
+
+Se muestran las instancias de la clase de dominio.
+
+h2. Ejemplos
+
+{code: java}
+/ / lista todo
+resultados de Def = Book.list()
+
+/ / lista 10 resultados
+resultados de Def = Book.list(max: 10)
+
+/ / lista de 10 resultados, compensado por 100
+resultados de Def = Book.list (máx.: 10, desvío: 100)
+
+/ / lista de 10 resultados, desplazamiento por 100, orderd por el título en orden descendente
+resultados de Def = Book.list (máx.: 10, desvío: 100, tipo: "título", orden: "desc")
+
+/ / lista todos los libros, buscando ansiosamente los autores Asociación
+resultados de Def = Book.list (fetch: [Autores: "ansioso"])
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -32,8 +64,29 @@ Parameters:
 * @order@ - How to order the list, either @"desc"@ or @"asc"@
 * @sort@ - The property name to sort by
 * @ignoreCase@ - Whether to ignore the case when sorting. Default is @true@.
+{hidden}
+
+h2. Descripción
+
+Parámetros:
+
+* @ max @ - el número máximo de lista
+* @ offset @ - desplazamiento desde el primer resultado a la lista de
+* @ orden @ - cómo ordenar la lista, ya sea @ "desc" @ o @ "asc" @
+* @ tipo @ - nombre de la propiedad para ordenar por
+* @ ignoreCase @ - si desea ignorar el caso al ordenar. Valor predeterminado es true @ @.
+
+{hidden}
+
 * @fetch@ - The fetch policy for the object's associations as a @Map@
 * @readOnly@ - true if returned objects should not be automatically dirty-checked (simlar to @read()@)
 * @fetchSize@ - number of rows fetched by the underlying JDBC driver per round trip
 * @flushMode@ - Hibernate @FlushMode@ override, defaults to @FlushMode.AUTO@
 * @timeout@ - query timeout in seconds
+{hidden}
+
+* @ fetch @ - la política de recuperación para las asociaciones del objeto como un mapa de @ @
+* @ readOnly @ - true si devuelve objetos no debe estar sucio-comprueba automáticamente (similar a @read()@)
+* @ fetchSize @ - número de filas que se obtiene mediante el controlador JDBC subyacente por ida y vuelta
+* @ flushMode @ - Hibernate @ FlushMode @ anulación, el valor predeterminado es @FlushMode.AUTO@
+* @ timeout @ - tiempo de espera de consulta en segundos

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. select
 
 h2. Purpose
@@ -40,6 +43,41 @@ h2. Examples
 <g:select name="book.category" from="${['M', 'T', 'F']}"
           valueMessagePrefix="book.category" />
 {code}
+{hidden}
+
+h1. Seleccione
+
+h2. Fin
+
+Genera selecciona HTML.
+
+h2. Ejemplos
+
+{Código: xml}
+/ / crear una selección de un rango
+<g:select name="user.age" from="${18..65}" value="${age}" noselection="['':'-Choose your age-']"></g:select>
+
+/ / no usar ninguna selección con una propiedad de objeto que acepta valores NULL (uso ' null' como clave)
+<g:select id="type" name="type.id" value="${person?.type?.id}" noselection="${['null':'Select One...']}" from="${PersonType.list()}" optionkey="id" optionvalue="name"></g:select>
+
+/ / crear seleccionar de una lista de empresas
+/ / Nota 'optionKey' se establece en el identificador de cada elemento de la empresa
+<g:select name="user.company.id" from="${Company.list()}" value="${user?.company.id}" optionkey="id"></g:select>
+
+/ / crear múltiples seleccione
+<g:select name="cars" from="${Car.list()}" value="${person?.cars*.id}" optionkey="id" multiple="true"></g:select>
+
+/ / crear seleccionar con etiquetas internacionalizadas (esto es
+/ / útil para pequeñas listas estáticas y la restricción de inList).
+/ / espera propiedades en messages.properties:
+/ / book.category.M=Mystery
+/ / book.category.T=Thriller
+/ / book.category.F=Fantasy
+<g:select name="book.category" from="${['M', 'T', 'F']}" valuemessageprefix="book.category"></g:select>
+{code}
+
+{hidden}
+
 
 Example as a method call in GSP only:
 
@@ -50,6 +88,20 @@ ${select(from:aList,value:aValue)}
 h2. Description
 
 Attributes
+{hidden}
+
+Ejemplo como una llamada de método en el SPG sólo:
+
+{Código: xml}
+${select(from:aList,value:aValue)}
+{code}
+
+h2. Descripción
+
+Atributos
+
+{hidden}
+
 
 * @name@ (required) - The name of the select element
 * @from@ (required) - The list or range to select from
@@ -60,6 +112,20 @@ Attributes
 * @noSelection@ (optional) - A single-entry Map detailing the key and value to use for the "no selection made" choice in the select box. If there is no current selection this will be shown as it is first in the list, and if submitted with this selected, the key that you provide will be submitted. Typically this will be blank - but you can also use 'null' in the case that you're passing the ID of an object
 * @valueMessagePrefix@ (Optional) - By default the value of the @option@ element will be the result of a @toString()@ call on each element in the @from@ attribute list. Setting this allows the value to be resolved from the i18n messages. The @valueMessagePrefix@ will be suffixed with a dot ('.') and then the value attribute of the option to resolve the message. If the message could not be resolved, the value is presented.
 * @multiple@ (optional) - Set to @true@ to generate a multi-select listbox rather than a dropdown list.
+{hidden}
+
+* @ nombre @ (requerido) - el nombre del elemento select
+* @ de @ (requerido) - la lista o rango para seleccionar
+* @ valor @ (opcional) - el actual seleccionado valor que evalúa equals() @ True @ para uno de los elementos de la @ de @ lista.
+* @ optionKey @ (opcional) - por defecto @ @ atributo de cada @<option>@ elemento será el resultado de un toString() @ @ llamada en cada elemento. Esta configuración permite que el valor de una propiedad de frijol de cada elemento en la lista.
+* @ optionValue @ (opcional): por defecto, el cuerpo de cada uno @<option>@ elemento será el resultado de un toString() @ @ llamada en cada elemento de la @ de @ lista de atributos. Esta configuración permite que el valor de una propiedad de frijol de cada elemento en la lista.
+* @ claves @ (opcional) - una lista de valores que se utilizará para el atributo value de cada opción @ @ elemento.
+* @ noSelection @ (opcional): una sola entrada mapa detallando la clave y el valor que se utilizará para la elección de "ninguna selección realizada" en el cuadro de selección. Si no hay ninguna selección actual se mostrará como es primero en la lista y si se presenta con esta opción activada, la clave que usted proporcione será presentado. Normalmente esto se quedará en blanco-, pero también se puede utilizar 'null' en el caso que está pasando el identificador de un objeto
+* @ valueMessagePrefix @ (opcional) - por defecto el valor de la opción @ @ elemento será el resultado de un toString() @ @ llamada en cada elemento de la @ de @ lista de atributos. Esta configuración permite el valor resolverse desde los mensajes de i18n. @ ValueMessagePrefix @ se sufijado con un punto ('. ') y, a continuación, el atributo de valor de la opción para resolver el mensaje. Si el mensaje no se puede resolver, se presenta el valor.
+* @ múltiple @ (opcional) - establecido en true @ @ para generar un cuadro de lista de selección múltiple, en lugar de una lista desplegable.
+
+{hidden}
+
 
 The @optionKey@ and @optionValue@ attribute of the @<g:select>@ tag deserve special mention as these let you control what is displayed to the user within the resulting @<select>@ tag and also the value which is submitted in a form submission. The default behaviour is to call @toString()@ on each element in the @from@ attribute, but for example if you had a list of @Book@ domain classes this may not be useful behaviour.
 
@@ -69,6 +135,19 @@ As an example the following @<g:select>@ uses the @optionKey@ attribute to resol
 <g:select optionKey="id" optionValue="title"
           name="book.title" from="${bookList}" />
 {code}
+
+{hidden}
+
+El @ optionKey @ y @ optionValue @ atributo de la @<g:select>@ etiqueta merecen mención especial como éstas permiten controlar lo que se muestra al usuario dentro de la resultante<select>@ etiqueta y también el valor que se presenta en un envío de formularios. El comportamiento predeterminado es llamar a @ toString() @ sobre cada elemento de la @ de @ atributo, pero por ejemplo, si tiene una lista de @ libro @ dominio clases este mes de mayo no será útil comportamiento.
+
+Como ejemplo los siguientes @<g:select>@ utiliza @ optionKey @ atributo para resolver el identificador @ @ propiedad de cada libro @ @ como el valor de @ @ atributo @<option>@ etiqueta. También utiliza optionValue @ @ atributo de @<g:select>@ para mostrar el título @ @ propiedad de cada libro @ @ al usuario:
+
+{code}
+<g:select optionkey="id" optionvalue="title" name="book.title" from="${bookList}"></g:select>
+{code}
+</g:select></g:select></select></g:select>
+
+{hidden}
 
 If you require even more control over how each @<option>@ element is presented to the user you can use a closure to apply a transformation within the @optionValue@ attribute. As an example, the following code transforms each @Book@ title to upper case:
 
@@ -80,4 +159,21 @@ If you require even more control over how each @<option>@ element is presented t
 h2. Source
 
 {source:tag=FormTagLib.select}
+{hidden}
+
+Si necesita más control sobre cómo cada uno @<option>@ elemento se presenta al usuario puede utilizar un cierre para aplicar una transformación dentro de la optionValue @ @ atributo. Por ejemplo, el código siguiente transforma cada libro @ @ título en mayúsculas:
+
+{code}
+<g:select optionkey="id" optionvalue="${{it.title?.toUpperCase()}}" name="book.title" from="${bookList}"></g:select>
+{code}
+
+h2. Fuente
+
+{source:tag=FormTagLib.select}
+
+{hidden}
+
 {source}
+{hidden}
+
+origen de {}

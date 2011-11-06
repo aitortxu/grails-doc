@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-domain-class
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails create-domain-class org.bookstore.Book
 {code}
+{hidden}
+
+h1. clase de dominio crear
+
+h2. Fin
+
+El @ crear-dominio-clase @ comando crea un dominio y prueba de integración asociada para el nombre base determinado.
+
+h2. Ejemplos
+
+{code: java}
+Grails crear-dominio-clase org.bookstore.Book
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ A domain class represents the core model behind in your application and is typic
 The exact behaviour of the command depends on the argument you pass. If you don't specify a package (like "org.bookstore" in the example), then the name of the application will be used as the package. So if the application name is "bookstore" and you run @create-domain-class Book@, then the command will create the file @grails-app/domain/bookstore/Book.groovy@. Also, if you don't give your domain class an initial capital letter, it will be capitalized for you. So an argument of "org.bookstore.book" will result in a domain class called @Book@.
 
 Note that this command is just for convenience and you can also create domain classes in your favourite text editor or IDE if you choose.
+{hidden}
+
+h2. Descripción
+
+Crea una clase de dominio para el nombre base determinada. Por ejemplo, un nombre base de "org.bookstore.Book" se creará a una clase de dominio denominada libro @ @ en el @ grails-app/dominio/org/librería @ directorio.
+
+Una clase de dominio representa el modelo de núcleo detrás en su aplicación y normalmente se asigna a las tablas de base de datos. Para obtener más información sobre los modelos de dominio en Grails consulte el capítulo sobre [GORM|guide:GORM] en la Guía del usuario.
+
+El comportamiento exacto del comando depende del argumento que se pasa. Si no especifica un paquete (como "org.bookstore" en el ejemplo), se utilizará el nombre de la aplicación como el paquete. Así que si el nombre de la aplicación es "librería" y ejecutar el libro @ crear-dominio-clase @, el comando creará el archivo @ grails-app/domain/bookstore/Book.groovy@. También, si no dan su clase de dominio una mayúscula inicial, será capitalizado por usted. Así un argumento de "org.bookstore.book" se traducirá en una clase de dominio denominada libro @ @.
+
+Tenga en cuenta que este comando es sólo por conveniencia y también puede crear clases de dominio en su editor de textos preferido o IDE si elige.
+
+{hidden}
+
 
 Usage:
 {code:java}
@@ -28,3 +61,13 @@ grails create-domain-class [name]
 Fired Events:
 
 * @CreatedFile@ - When the domain class is created
+{hidden}
+
+Uso:
+{code: java}
+Grails crear-dominio-clase [nombre]
+{code}
+
+Despedido de eventos:
+
+* @ CreatedFile @ - cuando se crea la clase de dominio

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. resource
 
 h2. Purpose
@@ -7,6 +10,20 @@ Generates a link (URI) string. Can be used in an href, JavaScript, Ajax call, et
 This tag is aware of the [Resources plugin|http://grails.org/plugin/resources], and if it's installed the tag will correctly generate links to static resources processed by the plugin.
 
 h2. Examples
+
+{hidden}
+
+h1. recursos
+
+h2. Fin
+
+Genera una cadena de enlace (URI). Puede utilizarse en una href, JavaScript, llamada Ajax, etc..
+
+Esta etiqueta es consciente de la [plugin|http://grails.org/plugin/resources recursos] y si ha instalado correctamente la voluntad de etiqueta generar vínculos a recursos estáticos, procesados por el plugin.
+
+h2. Ejemplos
+
+{hidden}
 
 Example usages for the "shop" app:
 
@@ -20,6 +37,23 @@ Example usages for the "shop" app:
 // generates "http://admin.mygreatsite.com/css/main.css"
 <g:resource dir="css" file="main.css" base="http://admin.mygreatsite.com"/>
 {code}
+{hidden}
+
+Usos de ejemplo para la aplicación de la "tienda":
+
+{Código: xml}
+/ / genera "/ shop/css/main.css"
+<g:resource dir="css" file="main.css"></g:resource>
+
+/ / genera "http://portal.mygreatsite.com/css/main.css"
+<g:resource dir="css" file="main.css" absolute="true"></g:resource>
+
+/ / genera "http://admin.mygreatsite.com/css/main.css"
+<g:resource dir="css" file="main.css" base="http://admin.mygreatsite.com"></g:resource>
+{code}
+
+{hidden}
+
 
 Example as a method call in GSP only:
 
@@ -32,6 +66,22 @@ Results in:
 {code:xml}
 <link type="text/css" href="/shop/css/main.css" />
 {code}
+{hidden}
+
+Ejemplo como una llamada de método en el SPG sólo:
+
+{Código: xml}
+<link type="text/css" href="${resource(dir: 'css', file: 'main.css')}">
+{code}
+
+Resultados en:
+
+{Código: xml}
+<link type="text/css" href="/shop/css/main.css">
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -42,9 +92,31 @@ Attributes
 * @dir@ (optional) - the name of the directory containing the resource
 * @file@ (optional) - the name of the resource file
 * @absolute@ (optional) - If @true@ will prefix the link target address with the value of the @grails.serverURL@ property from @Config.groovy@, or http://localhost:<port> if there is no setting in @Config.groovy@ and not running in production.
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ base @ (opcional) - establece el prefijo que se agregará a la dirección de destino de vínculo, normalmente una dirección URL del servidor absoluta. Esto anula el comportamiento de la absoluta @ @ propiedad si ambos se especifican.
+* @ contextPath @ (opcional): la ruta de contexto (relativo a la ruta de acceso de contexto de aplicación). Valor por defecto es "" o ruta de acceso para el plugin para una vista de complemento o plantilla.
+* @ dir @ (opcional): el nombre del directorio que contiene el recurso
+* @ archivo @ (opcional): el nombre del archivo de recursos
+* @ absoluto @ (opcional): si @ verdadero @ prefijo de la dirección de destino de vínculo con el valor de la propiedad @grails.serverURL@ de @ Config.groovy@ o http://localhost:<port> Si no hay ningún valor en @Config.groovy@ y no se está ejecutando en producción.</port>
+
+{hidden}
+
 * @plugin@ (optional) - The plugin to look for the resource in
 
 h2. Source
 
 {source:tag=ApplicationTagLib.resource}
 {source}
+{hidden}
+
+* @ plugin @ (opcional): el plugin para buscar el recurso en
+
+h2. Fuente
+
+{source:tag=ApplicationTagLib.resource}
+origen de {}

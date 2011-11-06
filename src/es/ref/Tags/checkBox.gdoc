@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. checkBox
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:xml}
 <g:checkBox name="myCheckbox" value="${true}" />
 {code}
+{hidden}
+
+h1. casilla de verificación
+
+h2. Fin
+
+Genera un campo de formulario de casilla de verificación. Aplicarán todos los elementos HTML normal.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:checkbox name="myCheckbox" value="${true}"></g:checkbox>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,8 +38,28 @@ Attributes
 * @checked@ (optional) - Expression if evaluates to @true@ sets to checkbox to checked
 
 The @checkBox@ tag typically only requires the @name@ and @value@ attributes and will infer whether the checkbox should be checked from the value. The @checked@ attribute can be used to override this behaviour for fine-grained control.
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ - el nombre de la casilla de verificación
+* @ valor @ (opcional): el valor de la casilla de verificación
+* @ marcada @ (opcional) - expresión si se evalúa como true @ @ conjuntos a la casilla de verificación activada
+
+La casilla @ @ etiqueta normalmente sólo requiere el nombre de @ @ y @ valor @ atributos y será inferir si la casilla de verificación debe comprobarse el valor. El @ marcada atributo puede utilizarse para reemplazar este comportamiento para un control preciso.
+
+{hidden}
+
 
 h2. Source
 
 {source:tag=FormTagLib.checkBox}
 {source}
+{hidden}
+
+h2. Fuente
+
+{source:tag=FormTagLib.checkBox}
+origen de {}

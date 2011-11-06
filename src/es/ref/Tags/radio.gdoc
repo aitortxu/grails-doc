@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. radio
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 <g:radio name="myGroup" value="1"/>
 <g:radio name="myGroup" value="2" checked="true"/>
 {code}
+{hidden}
+
+h1. Radio
+
+h2. Fin
+
+Genera un botón de opción
+
+h2. Ejemplos
+
+{Código: xml}
+<g:radio name="myGroup" value="1"></g:radio>
+<g:radio name="myGroup" value="2" checked="true"></g:radio>
+{code}
+
+{hidden}
+
 
 results in:
 
@@ -19,6 +39,17 @@ results in:
 {code}
 
 h2. Description
+
+{hidden}
+
+resultados en:
+
+{Código: xml}<input type="radio" name="myGroup" value="1">
+<input type="radio" name="myGroup" checked="checked" value="2">{code}
+
+h2. Descripción
+
+{hidden}
 
 Attributes
 
@@ -30,3 +61,15 @@ h2. Source
 
 {source:tag=FormTagLib.radio}
 {source}
+{hidden}
+
+Atributos
+
+* @ valor @ (requerido) - el valor del botón de opción
+* @ nombre @ (requerido) - el nombre del botón de opción
+* @ marcada @ (opcional) - boolean para indicar que debe comprobarse el botón de opción
+
+h2. Fuente
+
+{source:tag=FormTagLib.radio}
+origen de {}

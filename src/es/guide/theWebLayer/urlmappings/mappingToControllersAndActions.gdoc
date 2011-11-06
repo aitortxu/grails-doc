@@ -1,28 +1,35 @@
-{hidden}
-To create a simple mapping simply use a relative URL as the method name and specify named parameters for the controller and action to map to:
+
 {hidden}
 
-Para crear un mapeo simple, simplemente use una URL relativa como el nombre del metodo y especifique los parametros nombrados para el controlador y la accion a mapear:
+To create a simple mapping simply use a relative URL as the method name and specify named parameters for the controller and action to map to:
 
 {code:java}
 "/product"(controller: "product", action: "list")
 {code}
 
-{hidden}
 In this case we've mapped the URL @/product@ to the @list@ action of the @ProductController@. Omit the action definition to map to the default action of the controller:
-{hidden}
-
-En este caso hemos mapeado la URL @/product@ hacia la accion @list@ del @ProductController@. Omitiendo la definicion de la accion a mapear hacia la accion por defecto del controllador:
 
 {code:java}
 "/product"(controller: "product")
 {code}
+{hidden}
+
+Para crear una simple asignación simplemente utilizar una dirección URL relativa como el nombre del método y especificar parámetros con nombre para el controlador y acción asignar a:
+
+{code: java}
+"/ producto" (controlador: "producto", acción: "lista")
+{code}
+
+En este caso nos hemos asignado el URL @ / producto @ a la lista @ @ Acción de @ ProductController @. Omite la definición de acción para asignar a la acción predeterminada del controlador:
+
+{code: java}
+"/ producto" (controlador: "producto")
+{code}
 
 {hidden}
+
+
 An alternative syntax is to assign the controller and action to use within a block passed to the method:
-{hidden}
-
-Una sintaxis alternativa es asignar el controlador y la accion a usar dentro del bloque pasado al metodo:
 
 {code:java}
 "/product" {
@@ -32,17 +39,31 @@ Una sintaxis alternativa es asignar el controlador y la accion a usar dentro del
 {code}
 
 {hidden}
-Which syntax you use is largely dependent on personal preference. To rewrite one URI onto another explicit URI (rather than a controller/action pair) do something like this:
+
+Una sintaxis alternativa es asignar el controlador y acción para utilizar dentro de un bloque que se pasa al método:
+
+{code: java}
+"/ producto" {}
+    controlador = "producto"
+    acción = "lista"
+}
+{code}
+
 {hidden}
 
-Cual sintaxis usar es enormemente dependiente en su preferencia personal. Para reescribir una URI en otra URI explicita (en vez del par controlador/accion) haga algo asi:
+Which syntax you use is largely dependent on personal preference. To rewrite one URI onto another explicit URI (rather than a controller/action pair) do something like this:
 
 {code}
 "/hello"(uri: "/hello.dispatch")
 {code}
 
-{hidden}
-Rewriting specific URIs is often useful when integrating with other frameworks
+Rewriting specific URIs is often useful when integrating with other frameworks.
 {hidden}
 
-Reescribir URIs especificas es comunmente util cuando se integran con otros frameworks.
+Qué sintaxis utilice depende en gran medida de la preferencia personal. Para reescribir un URI al otro explícito URI (en lugar de un par de controlador/acción) hacer algo como esto:
+
+{code}
+"/ Hola" (uri: "/ hello.dispatch")
+{code}
+
+Reescribir URIs específicas a menudo es útil cuando se integra con otros marcos.

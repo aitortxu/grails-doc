@@ -1,1 +1,7 @@
+
+{hidden}
+
 Grails also features support for the "Google Web Toolkit":http://code.google.com/webtoolkit/ through a plugin. There is comprehensive [documentation|http://grails.org/plugin/gwt] available on the Grails wiki.
+{hidden}
+
+Grails también ofrece soporte para la "Toolkit":http://code.google.com/webtoolkit/ de Google Web a través de un plugin. Existe amplia [documentation|http://grails.org/plugin/gwt] disponible en el wiki de Grails.

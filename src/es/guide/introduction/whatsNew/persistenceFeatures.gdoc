@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. The GORM API
 
 The GORM API has been formalized into a set of classes (@GormStaticApi@, @GormInstanceApi@ and @GormValidationApi@) that get statically wired into every domain class at the byte code level. The result is better code completion for IDEs, better integration with Java and the potential for more GORM implementations for other types of data stores.
@@ -12,15 +15,21 @@ def book = Book.findOrSaveWhere(author: 'Daniel Suarez', title: 'Daemon')
 def book = Book.findOrCreateByAuthorAndTitle('Daniel Suarez', 'Daemon')
 def book = Book.findOrSaveByAuthorAndTitle('Daniel Suarez', 'Daemon')
 {code}
+{hidden}
+
+H4. La API de GORMLa API de GORM ha sido formalizada en un conjunto de clases (@ GormStaticApi @, @ GormInstanceApi @ y @ GormValidationApi @) que obtenga por estáticamente cable en cada clase de dominio en el nivel de código de bytes. El resultado es mejor completar código IDEs, mejor integración con Java y el potencial para implementaciones de GORM más para otros tipos de almacenes de datos.H4. Nuevos métodos findOrCreate y findOrSaveLas clases de dominio tienen soporte para findOrCreateWhere, findOrSaveWhere, findOrCreateBy y findOrSaveBy métodos de consulta que se comportan igual que los métodos findWhere y findBy, excepto que nunca deben devolver nulas. Si una instancia correspondiente no se encuentra en la base de datos, a continuación, una nueva instancia se crea, rellena con valores representados en los parámetros de consulta y regresó. En el caso de findOrSaveWhere y findOrSaveBy, se guarda la instancia antes de ser devuelto.{Código}libro de Def = Book.findOrCreateWhere (autor: Douglas Adams, título: "Del Hitchiker Guide To The Galaxy")libro de Def = Book.findOrSaveWhere (autor: 'Daniel Suarez', título: 'Demonio')libro de Def = Book.findOrCreateByAuthorAndTitle ('Daniel Suárez', 'Demonio')libro de Def = Book.findOrSaveByAuthorAndTitle ('Daniel Suárez', 'Demonio'){Código}
+
+{hidden}
+
 
 h4. Abstract Inheritance
 
 GORM now supports abstract inheritance trees which means you can define queries and associations linking to abstract classes:
 
 {code}
-abstract class Media {
+abstract Media {
     String title
-    …
+    �
 }
 class Book extends Media {
 }
@@ -35,6 +44,12 @@ class Account {
 
 def allMedia = Media.list()
 {code}
+{hidden}
+
+H4. Herencia abstractaGORM ahora soporta árboles de herencia abstracta que significa que puede definir consultas y asociaciones de vincular a las clases abstractas:{Código}{abstracta de medios    Título de cadena    É}clase libro amplía {Media}clase álbum amplía {Media}clase cuenta {}    estático hasMany = [purchasedMedia:Media]}..Def allMedia = Media.list(){Código}
+
+{hidden}
+
 
 h4. Multiple Data Sources Support
 
@@ -50,6 +65,12 @@ class ZipCode {
    }
 }
 {code}
+{hidden}
+
+H4. Soporte de fuentes de datos múltiplesAhora es posible definir múltiples orígenes de datos en @DataSource.groovy@ y declarar uno o más orígenes de datos un dominio particular utiliza por defecto:{Código}clase {código postalCadena de códigoasignación estática = {}      DataSource 'ZIP_CODES'   }}{Código}
+
+{hidden}
+
 
 If multiple datasources are specified for a domain then you can use the name of a particular datasource as a namespace in front of any regular GORM method:
 
@@ -60,6 +81,12 @@ def zipCode = ZipCode.auditing.get(42)
 For more information see the section on [Multiple Data Sources|guide:multipleDatasources] in the user guide.
 
 h4. Database Migrations
+{hidden}
+
+Si se especifican varios orígenes de datos para un dominio puede usar el nombre de un origen de datos concreto como un espacio de nombres de cualquier método GORM regular:{Código}código postal Def = ZipCode.auditing.get(42){Código}Para obtener más información, consulte la sección sobre [varios datos Sources|guide:multipleDatasources] en la Guía del usuario.H4. Migraciones de bases de datos
+
+{hidden}
+
 
 A new [database migration plugin|http://grails.org/plugin/database-migration] has been designed and built for Grails 2.0 allowing you to apply migrations to your database, rollback changes and diff your domain model with the current state of the database.
 
@@ -70,6 +97,12 @@ A new [database reverse engineering|http://www.grails.org/plugin/db-reverse-engi
 h4. Hibernate 3.6
 
 Grails 2.0 is now built on Hibernate 3.6
+{hidden}
+
+Un nuevo [plugin|http://grails.org/plugin/database-migration migración de bases de datos] ha sido diseñado y construido para Grails 2.0 permite aplicar las migraciones a la base de datos, cambios de rollback y diff su modelo de dominio con el estado actual de la base de datos.H4. Base de datos de ingeniería inversaUn nuevo plugin [engineering|http://www.grails.org/plugin/db-reverse-engineer inversa de base de datos] ha sido diseñado y construido para Grails 2.0 que permite generar un modelo de dominio de un esquema de base de datos existente.H4. Hibernación 3.6Grails 2.0 ahora se basa en hibernación 3.6
+
+{hidden}
+
 
 h4. Bag Collections
 
@@ -77,3 +110,6 @@ You can now use Hibernate [Bag|http://docs.jboss.org/hibernate/stable/core/refer
 
 For more information see the section on [Sets, Lists and Maps|guide:sets,ListsAndMaps] in the user guide.
 
+{hidden}
+
+H4. Colecciones de bolsaAhora puede utilizar Hibernate [Bag|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/collections.html]s para colecciones asignadas para evitar los problemas de memoria y el rendimiento de la carga de grandes colecciones para imponer @ Set @ singularidad o @ lista @ orden.Para obtener más información, consulte la sección [conjuntos, listas y Maps|guide:sets, ListsAndMaps] en la Guía del usuario.

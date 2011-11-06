@@ -1,3 +1,6 @@
+
+{hidden}
+
 You can customize how GORM generates identifiers for the database using the DSL. By default GORM relies on the native database mechanism for generating ids. This is by far the best approach, but there are still many schemas that have different approaches to identity.
 
 To deal with this Hibernate defines the concept of an id generator. You can customize the id generator and the column it maps to as follows:
@@ -16,6 +19,29 @@ class Person {
 }
 
 {code}
+{hidden}
+
+Puede personalizar cómo GORM genera identificadores para la base de datos usando el DSL. De forma predeterminada GORM se basa en el mecanismo de base de datos nativa para generar identificadores. Esto es por mucho el mejor enfoque, pero todavía hay muchos esquemas que tienen diferentes enfoques de identidad.
+
+Para hacer frente a este Hibernate define el concepto de un generador de id. Puede personalizar el generador de id y la columna que asigna a los siguientes:
+
+{code: java}
+clase persona {}
+    ...
+    asignación estática = {}
+        tabla 'gente'
+        falsa versión
+        Generador de ID: 'hilo',
+           Params: [tabla: 'hi_value',
+                    columna: 'next_value',
+                    max_lo: 100]
+    }
+}
+
+{code}
+
+{hidden}
+
 
 In this case we're using one of Hibernate's built in 'hilo' generators that uses a separate table to generate ids.
 
@@ -35,3 +61,9 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+En este caso estamos utilizando uno de hibernación construido en generadores de 'hilo' que utiliza una tabla separada para generar identificadores.
+
+{Nota}
+Para obtener más información sobre los distintos generadores de hibernación se refieren a la [Hibernate referencia documentation|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/mapping.html

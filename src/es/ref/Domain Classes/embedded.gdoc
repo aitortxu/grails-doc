@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. embedded
 
 h2. Purpose
@@ -7,6 +10,20 @@ Supports embedding domain components into domain classes - otherwise known as [c
 h2. Examples
 
 Given these domain classes:
+
+{hidden}
+
+h1. incrustados
+
+h2. Fin
+
+Admite la incorporación de componentes de dominio en las clases de dominio - también conocidas como [composition|guide:gormComposition].
+
+h2. Ejemplos
+
+Habida cuenta de estas clases de dominio:
+
+{hidden}
 
 {code:java}
 class Person {
@@ -26,6 +43,29 @@ class Country {
     String name
 }
 {code}
+{hidden}
+
+{code: java}
+clase persona {}
+
+Nombre de la cadena
+    País bornInCountry
+    País livesInCountry
+
+Static incrustado = ['bornInCountry', 'livesInCountry']
+}
+
+/ / Si no desea que una tabla asociada creada para esta clase, o bien
+/ / definir en el mismo archivo como persona o poner Country.groovy bajo el
+/ / src/groovy directorio.
+clase país {}
+    Cadena iso3
+    Nombre de la cadena
+}
+{code}
+
+{hidden}
+
 
 Grails will generate a @person@ database table that looks like:
 
@@ -36,6 +76,20 @@ BORN_IN_COUNTRY_ISO3 | VARCHAR(255)
 BORN_IN_COUNTRY_NAME | VARCHAR(255)
 LIVES_IN_COUNTRY_ISO3 | VARCHAR(255)
 LIVES_IN_COUNTRY_NAME | VARCHAR(255)
+{hidden}
+
+Grails generará a una persona @ @ tabla de base de datos que se ve como:
+
+tabla de {}
+* Columna * | * Tipo *
+NOMBRE | VARCHAR
+BORN_IN_COUNTRY_ISO3 | VARCHAR
+BORN_IN_COUNTRY_NAME | VARCHAR
+LIVES_IN_COUNTRY_ISO3 | VARCHAR
+LIVES_IN_COUNTRY_NAME | VARCHAR
+
+{hidden}
+
 {table}
 
 h2. Description
@@ -46,9 +100,31 @@ The embedded component class is typically declared in the same source file as th
 
 Querying on embedded properties is no different from querying on regular relationships, so you can for example still do:
 
+{hidden}
+
+tabla de {}
+
+h2. Descripción
+
+Un componente incrustado no almacena sus datos en su propia tabla como una relación de clase de dominio regulares. En su lugar, los datos se incluyen en la tabla del propietario. Así que en el ejemplo anterior, el país @ @ campos aparecen en la persona @ @ tabla. Esto significa que las consultas son más rápidas porque no hay ninguna combinación requerida, pero puede terminar con datos duplicados en tablas.
+
+Normalmente se declara la clase de componente incrustado en el mismo archivo de origen como la clase propietaria o en su propio archivo bajo @ src/groovy @. Te _can_ poner la clase de componente bajo @ grails-app/dominio @, pero si lo hace Grails creará automáticamente una tabla dedicada para ello. Poniendo la clase bajo @ src/groovy @ normalmente es la mejor opción porque entonces puede compartir el componente a través de múltiples clases de dominio.
+
+Consulta sobre propiedades incrustadas no es diferente de consultar sobre relaciones regulares, por lo que puede hacer por ejemplo todavía:
+
+{hidden}
+
 {code:java}
 Person.findAllByBornInCountry(brazil)
 Person.findAllByLivesInCountry(france)
 {code}
 
 where @brazil@ and @france@ are instances of @Country@.
+{hidden}
+
+{code: java}
+Person.findAllByBornInCountry(Brazil)
+Person.findAllByLivesInCountry(France)
+{code}
+
+donde Brasil @ @ y @ Francia @ son instancias del país @ @.

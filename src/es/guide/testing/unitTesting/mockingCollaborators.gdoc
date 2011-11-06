@@ -1,3 +1,6 @@
+
+{hidden}
+
 Beyond the specific targeted mocking APIs there is also an all-purpose @mockFor()@ method that is available when using the @TestFor@ annotation. The signature of @mockFor@ is:
 
 {code:java}
@@ -7,6 +10,20 @@ mockFor(class, loose = false)
 This is general-purpose mocking that lets you set up either strict or loose demands on a class.
 
 This method is surprisingly intuitive to use. By default it will create a strict mock control object (one for which the order in which methods are called is important) that you can use to specify demands:
+
+{hidden}
+
+Más allá de las APIs burlona destino específicas es un uso múltiple @ mockFor() @ método que está disponible cuando se utiliza el @ TestFor @ anotación. La firma de @ mockFor @ es:
+
+{code: java}
+mockFor (clase, suelto = false)
+{code}
+
+Se trata de burlarse de propósito general que permite configurar las exigencias estrictas o sueltos en una clase.
+
+Este método es sorprendentemente intuitivo de utilizar. De forma predeterminada, que creará un objeto de estricto control simulado (uno para que el orden en que los métodos son llamados es importante) exige que se puede utilizar para especificar:
+
+{hidden}
 
 {code:java}
 
@@ -18,6 +35,21 @@ strictControl.demand.static.aStaticMethod {-> ... }
 Notice that you can mock static as well as instance methods by using the "static" property. You then specify the name of the method to mock, with an optional range argument. This range determines how many times you expect the method to be called, and if the number of invocations falls outside of that range (either too few or too many) then an assertion error will be thrown. If no range is specified, a default of "1..1" is assumed, i.e. that the method must be called exactly once.
 
 The last part of a demand is a closure representing the implementation of the mock method. The closure arguments must match the number and types of the mocked method, but otherwise you are free to add whatever you want in the body.
+{hidden}
+
+{code: java}
+
+Def strictControl = mockFor(MyService)
+strictControl.demand.someMethod(0..2) {String arg1, arg2 int->...}
+strictControl.demand.static.aStaticMethod {->...}
+{code}
+
+Observe que usted puede burlarse estática, así como los métodos de instancia utilizando la propiedad "estática". A continuación, especifique el nombre del método para burlarse, con un argumento de rango opcional. Este rango determina cuántas veces esperas que el método que se llama, y si el número de invocaciones cae fuera de ese rango (muy pocos o demasiados), a continuación, un error de aserción se iniciará. Si no se especifica ningún intervalo, predeterminado "1..1" se supone, es decir, que el método debe llamarse exactamente una vez.
+
+La última parte de una demanda es un cierre que representa la implementación del método simulado. Los argumentos de cierre deben coincidir con el número y el tipo del método burlado, pero de lo contrario estás libre para agregar lo que quieras en el cuerpo.
+
+{hidden}
+
 
 As we mentioned before, call @mockControl.createMock()@ to get an actual mock instance of the class that you are mocking. You can call this multiple times to create as many mock instances as you need. And once you have executed the test method, call @mockControl.verify()@ to check that the expected methods were called.
 
@@ -28,3 +60,14 @@ def looseControl = mockFor(MyService, true)
 {code}
 
 will create a mock control object that has only loose expectations, i.e. the order that methods are invoked does not matter.
+{hidden}
+
+Como mencionamos antes, llamar a @ mockControl.createMock() @ para obtener una instancia de simulacro real de la clase que se burla. Puede llamar a este varias veces para crear tantas instancias simulacros como necesite. Y una vez que se ejecuta el método de ensayo, llamar a @ mockControl.verify() @ para comprobar que eran llamados los métodos previstos.
+
+Por último, la llamada:
+
+{code: java}
+Def looseControl = mockFor(MyService, true)
+{code}
+
+creará un objeto de control simulado que tiene expectativas sólo sueltas, es decir, no importa el orden que se invocan los métodos.

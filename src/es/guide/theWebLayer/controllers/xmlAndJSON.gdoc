@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Using the render method to output XML
 
 Grails supports a few different ways to produce XML and JSON responses. The first is the [render|controllers] method.
@@ -18,6 +21,31 @@ def list() {
     }
 }
 {code}
+{hidden}
+
+h4. Utilizando el método de procesamiento para salida XML
+
+Grails admite varias formas diferentes para producir respuestas XML y JSON. El primero es el método [render|controllers].
+
+El render @ @ método puede pasar un bloque de código a mark-up en XML:
+
+{code}
+Def list() {}
+
+resultados de Def = Book.list()
+
+Render (contentType: "text/xml") {}
+        {libros
+            para {} (b en los resultados)
+                Book(Title: b.Title)
+            }
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 The result of this code would be something like:
 
@@ -27,6 +55,19 @@ The result of this code would be something like:
     <book title="The Shining" />
 </books>
 {code}
+
+{hidden}
+
+El resultado de este código sería algo así:
+
+{Código: xml}
+<books><book title="The Stand"><book title="The Shining"></book></book>
+    
+    
+</books>
+{code}
+
+{hidden}
 
 Be careful to avoid naming conflicts when using mark-up building. For example this code would produce an error:
 
@@ -44,6 +85,27 @@ def list() {
     }
 }
 {code}
+{hidden}
+
+Tenga cuidado de evitar conflictos de nombres cuando se utiliza el edificio de marcación. Por ejemplo, este código produciría un error:
+
+{code}
+Def list() {}
+
+libros de Def = Book.list() / / aquí los conflictos de nombres
+
+Render (contentType: "text/xml") {}
+        {libros
+            para {} (b en los resultados)
+                Book(Title: b.Title)
+            }
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 This is because there is local variable @books@ which Groovy attempts to invoke as a method.
 
@@ -65,6 +127,31 @@ def list() {
     }
 }
 {code}
+{hidden}
+
+Esto es porque hay local variable @ libros @ que Groovy intenta invocar un método.
+
+h4. Utilizando el método de procesamiento para salida JSON
+
+El render @ @ método también puede utilizarse para salida JSON:
+
+{code}
+Def list() {}
+
+resultados de Def = Book.list()
+
+Render (contentType: "texto/json") {}
+        libros = {} matriz
+            para {} (b en los resultados)
+                Título del libro: b.title
+            }
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 In this case the result would be something along the lines of:
 
@@ -74,6 +161,19 @@ In this case the result would be something along the lines of:
     {title:"The Shining"}
 ]
 {code}
+
+{hidden}
+
+En este caso el resultado sería algo a lo largo de las líneas de:
+
+{code}
+[
+    {Título: "La tribuna"},
+    {Título: "The Shining"}
+]
+{code}
+
+{hidden}
 
 The same dangers with naming conflicts described above for XML also apply to JSON building.
 
@@ -86,6 +186,22 @@ To start off with, import the @grails.converters@ package into your controller:
 {code}
 import grails.converters.*
 {code}
+{hidden}
+
+Los mismos peligros con conflictos descritos para XML de nombres también se aplican a la creación de JSON.
+
+h4. Clasificación automática de XML
+
+Grails también admite la clasificación automática de [dominio classes|guide:GORM] a XML mediante convertidores especiales.
+
+Para empezar con importar el paquete de @grails.converters@ en el controlador:
+
+{code}
+grails.converters.* de importación
+{code}
+
+{hidden}
+
 
 Now you can use the following highly readable syntax to automatically convert domain classes to XML:
 
@@ -108,6 +224,30 @@ The resulting output would look something like the following::
   </book>
 </list>
 {code}
+{hidden}
+
+Ahora puede utilizar la siguiente sintaxis muy legible para convertir automáticamente las clases de dominio en XML:
+
+{code}
+procesar Book.list() como XML
+{code}
+
+El resultado sería algo como la siguiente::
+
+{code}<?xml version="1.0" encoding="ISO-8859-1"?>
+<list>
+  <book id="1">
+    <author>Stephen King</author>
+    <title>El Stand</title>
+  </book>
+  <book id="2">
+    <author>Stephen King</author>
+    <title>El resplandor</title>
+  </book>
+</list>{code}
+
+{hidden}
+
 
 An alternative to using the converters is to use the [codecs|guide:codecs] feature of Grails. The codecs feature provides [encodeAsXML|guide:codecs] and [encodeAsJSON|guide:codecs] methods:
 
@@ -118,6 +258,19 @@ render xml
 
 For more information on XML marshalling see the section on [REST|guide:REST]
 
+{hidden}
+
+Es una alternativa al uso de los convertidores utilizar la función [codecs|guide:codecs] de Grails. La función de códecs proporciona [encodeAsXML|guide:codecs] y [encodeAsJSON|guide:codecs] métodos:
+
+{code}
+Def xml = Book.list().encodeAsXML()
+procesar xml
+{code}
+
+Para obtener más información sobre el cálculo de referencias de XML, consulte la sección [REST|guide:REST]
+
+{hidden}
+
 h4. Automatic JSON Marshalling
 
 Grails also supports automatic marshalling to JSON using the same mechanism. Simply substitute @XML@ with @JSON@:
@@ -127,6 +280,20 @@ render Book.list() as JSON
 {code}
 
 The resulting output would look something like the following:
+
+{hidden}
+
+h4. Clasificación automática de JSON
+
+Grails también es compatible con la clasificación automática en JSON mediante el mismo mecanismo. Simplemente sustituir @ XML @ con @ JSON @:
+
+{code}
+procesar Book.list() como JSON
+{code}
+
+El resultado sería algo parecido a lo siguiente:
+
+{hidden}
 
 {code}
 [
@@ -141,5 +308,26 @@ The resulting output would look something like the following:
      "title":"The Shining"}
  ]
 {code}
+{hidden}
+
+{code}
+[
+    {"id": 1,
+     "clase": "Libro",
+     "autor": "Stephen King",
+     "título": "La tribuna"},
+    {"id": 2,
+     "clase": "Libro",
+     "autor": "Stephen King",
+     "releaseDate": nueva Date(1194127343161),
+     "título": "The Shining"}
+ ]
+{code}
+
+{hidden}
+
 
 Again as an alternative you can use the @encodeAsJSON@ to achieve the same effect.
+{hidden}
+
+Una vez más como una alternativa puede utilizar el @ encodeAsJSON @ para lograr el mismo efecto.

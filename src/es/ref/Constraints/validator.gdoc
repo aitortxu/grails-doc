@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. validator
 
 h2. Purpose
@@ -62,6 +65,75 @@ class User {
     }
 }
 {code}
+{hidden}
+
+h1. Validador
+
+h2. Fin
+
+Agrega validación personalizada a un campo.
+
+h2. Ejemplos
+
+{code: java}
+incluso validador: {}
+    Volver (% 2) == 0
+}
+
+Validador de Contraseña1: {val, obj->
+    obj.password2 == val
+}
+
+Validador de magicNumber: someClosureWithTwoParameters
+
+/ / Este uno asume que tiene un mensaje de error definido como
+y esto (envuelto aquí sólo para propósitos de visualización):
+/ / classname.propertyName.custom.error=
+       Mi error muestra argumentos {3} y {4} para el valor {0}
+Validador de otherProperty: {return ['custom.error', arg1 y arg2]}
+
+/ / En el siguiente ejemplo no utilizar la validación personalizada.
+/ / Un mensaje personalizado puede ser definido en messages.properties:
+/ / user.username.blank=Please Ingrese un nombre de usuario
+/ / que se utilizará en lugar de default.blank.message
+clase usuario {}
+
+String username
+
+restricciones estáticas = {}
+        nombre de usuario en blanco: falso
+    }
+}
+
+/ / En el siguiente ejemplo, se utiliza la validación personalizada:
+/ / user.username.validator.invalid=Please Ingrese un nombre de usuario
+clase usuario {}
+
+String username
+
+restricciones estáticas = {}
+        Validador de nombre de usuario: {}
+            volver a it.length! = 0
+        }
+    }
+}
+
+/ / Siguiente podría definir el mensaje de error como:
+/ / user.username.invalid.bountyhunter=Invalid bounty hunter ({2}) intentó iniciar sesión.
+clase usuario {}
+
+String username
+
+restricciones estáticas = {}
+        Validador de nombre de usuario: {}
+            Si (! it.startsWith('boba')) regresar ['invalid.bountyhunter']
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -72,6 +144,20 @@ The closure can return:
 * @null@ or @true@ (or no return value) to indicate that the value is valid
 * @false@ to indicate an invalid value and use the default message code
 * a string to indicate the error code to append to the "classname.propertName." string used to resolve the error message. If a field-specific message cannot be resolved, the error code itself will be resolved allowing for global error messages.
+{hidden}
+
+h2. Descripción
+
+Un validador personalizado es ejecutado por un cierre que toma hasta tres parámetros. Si el cierre acepta cero o un parámetro, el valor del parámetro será el uno que se está validando ("que" en el caso de un cierre de parámetro de cero). Si acepta dos parámetros, el primero es el valor y la segunda es la instancia de clase de dominio que se está validada. Esto es útil cuando su validación necesita acceso a otros campos, por ejemplo al comprobar que dos introducido contraseñas es los mismos. Si acepta tres parámetros el primero es el valor, la segunda es la instancia y la tercera es el primavera @ errores @ objeto.
+
+El cierre puede devolver:
+
+* @ null @ o @ verdadero @ (o no devuelve ningún valor) para indicar el valor es válido
+* @ @ es false para indicar un valor no válido y utilizar el código de mensaje predeterminado
+* una cadena para indicar el código de error para anexar a la cadena "classname.propertName." para resolver el mensaje de error. Si un mensaje específico de campo no se resuelve, se resolverá el propio código de error que permite mensajes de error global.
+
+{hidden}
+
 * a list containing a string as above, and then any number of arguments following it, which are used as formatted message arguments indexed at 3 onwards. See @grails-app/i18n/message.properties@ to see how the default error message codes use the arguments.
 
 In the case of a three-parameter Closure the return value is ignored since it is expected the the @Errors@ object will be updated directly.
@@ -82,3 +168,15 @@ myField validator: { val, obj -> return propertyName == "myField" }
 {code}
 
 Error Code: @className.propertyName.validator.error@
+{hidden}
+
+* una lista que contiene una cadena que el anterior y, a continuación, cualquier número de argumentos siguientes, que son utilizados como argumentos de mensajes con formato indizado en 3 en adelante. Consulte @grails-app/i18n/message.properties@ para ver cómo los códigos de mensaje de error predeterminado utilizan los argumentos.
+
+En el caso de un cierre de tres parámetro se omite el valor devuelto ya que se prevé los errores @ @ objeto se actualizará directamente.
+
+El cierre también tiene acceso al nombre del campo que se aplica la restricción al uso de @ propertyName @:
+{code: java}
+Validador de myField: {val, obj-> retorno propertyName == "myField"}
+{code}
+
+Código de error: @className.propertyName.validator.error@

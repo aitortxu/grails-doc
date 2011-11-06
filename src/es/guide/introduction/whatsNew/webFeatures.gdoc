@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Controller Actions as Methods
 
 It is now possible to define controller actions as methods instead of using closures as in previous versions of Grails. In fact this is now the preferred way of expressing an action. For example:
@@ -12,6 +15,12 @@ def index = {
 
 }
 {code}
+{hidden}
+
+H4. Acciones de controlador como métodosAhora es posible definir acciones de controlador como métodos en lugar de usar los cierres como en versiones anteriores de Grails. De hecho ahora es la forma preferida de expresar una acción. Por ejemplo:{Código}/ / acción como un métodoDef índice() {}}/ / acción como un cierreíndice de Def = {}}{Código}
+
+{hidden}
+
 
 h4. Binding Primitive Method Action Arguments
 
@@ -23,6 +32,12 @@ It is now possible to bind form parameters to action arguments where the name of
     <input name="age" />
 </g:form>
 {code}
+{hidden}
+
+H4. Argumentos de acción del método primitivo de enlaceAhora es posible enlazar parámetros de formulario a argumentos de acción donde el nombre del elemento de formulario coincide con el nombre de argumento. Por ejemplo, dada la forma siguiente:{Código: xml}<g:form name="myForm" action="save">    <input name="name">    <input name="age"></g:form>{Código}
+
+{hidden}
+
 
 You can define an action that declares arguments for each input and automatically converts the parameters to the appropriate type:
 
@@ -33,6 +48,12 @@ def save(String name, int age) {
 {code}
 
 h4. Static Resource Abstraction
+{hidden}
+
+Puede definir una acción que declara argumentos para cada entrada y convierte automáticamente los parámetros para el tipo adecuado:{Código}Def guardar (String name, int edad) {}    / / restantes}{Código}H4. Abstracción de recurso estático
+
+{hidden}
+
 
 A new [static resource abstraction|guide:resources] is included that allows declarative handling of JavaScript, CSS and image resources including automatic ordering, compression, caching and gzip handling.
 
@@ -50,6 +71,12 @@ def index() {
     }
 }
 {code}
+{hidden}
+
+Se incluye un nuevo [recursos estáticos abstraction|guide:resources] que permite declarativa manejo de imagen, CSS y JavaScript recursos incluyendo pedidos automática, compresión, almacenamiento en caché y manejo de gzip.H4. Características de Async servlet 3.0Grails ahora soporta Servlet 3.0 incluyendo el modelo de programación asincrónico, definido por la especificación:{Código}Def índice() {}    Def ctx = startAsync()    CTX.Start {}        nuevo libro (título: "la Stand").save()        plantilla de procesamiento: "libros", model:[books:Book.list()]        CTX.Complete()    }}{Código}
+
+{hidden}
+
 
 h4. Link Generation API
 
@@ -62,6 +89,12 @@ def generateLink() {
     grailsLinkGenerator.link(controller:"book", action:"list")
 }
 {code}
+{hidden}
+
+H4. Generación de enlace APIUn propósito general @ LinkGenerator @ clase ya está disponible es utilizable en cualquier lugar dentro de una aplicación Grails y no sólo en el contexto de un controlador. Por ejemplo, si necesita generar enlaces en un servicio o un trabajo de fondo asincrónica fuera del alcance de una solicitud:{Código}LinkGenerator grailsLinkGeneratorDef generateLink() {}    grailsLinkGenerator.link (controlador: "reserva", acción: "lista")}{Código}
+
+{hidden}
+
 
 h4. Page Rendering API
 
@@ -78,6 +111,12 @@ void welcomeUser(User user) {
     }
 }
 {code}
+{hidden}
+
+H4. API de procesamiento de páginaComo la @ LinkGenerator @ el nuevo @ PageRenderer @ puede utilizarse para procesar páginas SPG fuera del alcance de una solicitud web, como en una tarea programada o servicio web. @ PageRenderer @ características de clase una API muy similar para el procesamiento de @ @ método que se encuentra dentro de los controladores:{Código}Grails.GSP.PageRenderer groovyPageRenderervoid welcomeUser (usuario) {}    contenido de Def = groovyPageRenderer.render (vista: "/ mensajes/welcomeLetter", modelo: [usuario: usuario])    sendEmail {}        a user.email        contenido del cuerpo    }}{Código}
+
+{hidden}
+
 
 The @PageRenderer@ service also allows you to pre-process GSPs into HTML templates:
 
@@ -88,6 +127,12 @@ new File("/path/to/welcome.html").withWriter { w ->
 {code}
 
 h4. Filter Exclusions
+{hidden}
+
+@ PageRenderer @ servicio permite preprocesar GSPs en plantillas HTML:{Código}Nueva File("/path/to/welcome.html").withWriter {w->    groovyPageRenderer.renderTo (vista: "por contenido de la página" w)}{Código}H4. Exclusiones de filtro
+
+{hidden}
+
 
 Filters may now express controller, action and uri exclusions to offer more options for expressing to which requests a particular filter should be applied.
 
@@ -95,21 +140,27 @@ Filters may now express controller, action and uri exclusions to offer more opti
 
 filter1(actionExclude: 'log*') {
     before = {
-        // …
+        // �
     }
 }
 filter2(controllerExclude: 'auth') {
     before = {
-        // …
+        // �
     }
 }
 
 filter3(uriExclude: '/secure*') {
     before = {
-        // …
+        // �
     }
 }
 {code}
+{hidden}
+
+Filtros pueden expresar hoy controlador, acción y exclusiones de uri para ofrecer más opciones para expresar a las solicitudes que debería aplicarse un filtro específico.{Código}filter1 (actionExclude: ' registro *') {}    antes = {}        / / É    }}Sniffer2 (controllerExclude: 'auth') {}    antes = {}        / / É    }}filter3 (uriExclude: ' / segura *') {}    antes = {}        / / É    }}{Código}
+
+{hidden}
+
 
 h4. Performance Improvements
 
@@ -120,7 +171,16 @@ h4. HTML5 Scaffolding
 There is a new HTML5-based scaffolding UI:
 
 !scaffolding-ui.png!
+{hidden}
+
+H4. Mejoras en el rendimientoUna vez más ha mejorado el rendimiento de la representación de la página del SGP mediante la optimización del compilador SGP llamadas al método en línea siempre que sea posible.H4. Andamios HTML5Hay un nuevo andamiaje basada en HTML5 UI:! ui.png andamios!
+
+{hidden}
+
 
 h4. jQuery by Default
 
 The jQuery plugin is now the default JavaScript library installed into a Grails application. For backwards compatibility a [Prototype plugin|http://grails.org/plugin/prototype] is available. Refer to the [documentation|http://grails.org/plugin/prototype] on the Prototype plugin for installation instructions.
+{hidden}
+
+H4. jQuery por defectoEl plugin jQuery ahora es la biblioteca de JavaScript por defecto instalada en una aplicación de Grails. Para atrás compatibilidad [plugin|http://grails.org/plugin/prototype de prototipo] está disponible. Consulte [documentation|http://grails.org/plugin/prototype] en el plugin de prototipo para obtener instrucciones de instalación.

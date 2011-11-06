@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. fetch
 
 h2. Purpose
@@ -16,6 +19,29 @@ class Author {
     }
 }
 {code}
+{hidden}
+
+h1. fetch
+
+h2. Fin
+
+Configura el comportamiento obtener de una asociación.
+
+h2. Ejemplos
+
+{code: java}
+clase {autor
+
+estático hasMany = [libros: libro]
+
+asignación estática = {}
+        obtención de libros: 'Unión'
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -26,6 +52,20 @@ Arguments:
 * @fetchStrategy@ - The fetching strategy to use. Either @join@ or @select@.
 
 By default GORM assumes fetching of associations is done using a @SELECT@ when the association is accessed. If you prefer that the association be fetched eagerly at the same time then you can override the behavior:
+{hidden}
+
+h2. Descripción
+
+Uso: @ association_name(fetch:string) @
+
+Argumentos:
+
+* @ fetchStrategy @ - la estrategia de obtener a utilizar. @ Combinación @ o @ select @.
+
+De forma predeterminada GORM asume la obtención de las asociaciones se realiza mediante un SELECT @ @ cuando se accede a la asociación. Si prefiere que la asociación se recuperan con impaciencia al mismo tiempo se puede reemplazar el comportamiento:
+
+{hidden}
+
 
 {code:java}
 class Author {
@@ -37,6 +77,21 @@ class Author {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase {autor
+
+estático hasMany = [libros: libro]
+
+asignación estática = {}
+        obtención de libros: 'Unión'
+    }
+}
+{code}
+
+{hidden}
+
 
 Here the @books@ association will be fetched using a join at the same time the author is retrieved, for example:
 
@@ -46,3 +101,13 @@ def author = Author.get(1)
 {code}
 
 Note that excessive use of joins can be a performance bottleneck. See the section on [Eager vs Lazing Fetching|guide:fetching] in the user guide.
+{hidden}
+
+Aquí se recuperan los libros @ @ Asociación mediante una combinación al mismo tiempo que el autor se recupera, por ejemplo:
+
+{code: java}
+autor de Def = Author.get(1)
+/ / los libros de colección es preinicializado - no hay riesgo de pereza cargar excepciones
+{code}
+
+Tenga en cuenta que el uso excesivo de las combinaciones puede ser un cuello de botella de rendimiento. Consulte la sección sobre [ansiosos vs Lazing Fetching|guide: obtención] en la Guía del usuario.

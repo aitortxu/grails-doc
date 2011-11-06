@@ -1,3 +1,6 @@
+
+{hidden}
+
 Although it is useful to decorate an entire page sometimes you may find the need to decorate independent sections of your site. To do this you can use content blocks. To get started, partition the page to be decorated using the @<content>@ tag:
 
 {code:xml}
@@ -17,6 +20,30 @@ Although it is useful to decorate an entire page sometimes you may find the need
 ... draw the body here...
 </content>
 {code}
+{hidden}
+
+Aunque es útil decorar una página entera a veces puede encontrar la necesidad para decorar las secciones independientes de su sitio. Para ello puede utilizar bloques de contenido. Para empezar, dividir la página a ser decorado con el @<content>@ etiqueta:
+
+{Código: xml}
+<content tag="navbar">
+... dibujar la barra de exploración aquí...
+</content>
+
+<content tag="header">
+... dibujar el encabezado aquí...
+</content>
+
+<content tag="footer">
+... sacar el pie aquí...
+</content>
+
+<content tag="body">
+... sacar el cuerpo aquí...
+</content>
+{código}</content>
+
+{hidden}
+
 
 Then within the layout you can reference these components and apply individual layouts to each:
 
@@ -46,3 +73,31 @@ Then within the layout you can reference these components and apply individual l
     </body>
 </html>
 {code}
+{hidden}
+
+Luego dentro de la composición puede hacer referencia a estos componentes y aplicar diseños individuales a cada uno:
+
+{Código: xml}<html>
+    <body>
+        <div id="header">
+            <g:applylayout name="headerLayout">
+                <g:pageproperty name="page.header"></g:pageproperty>
+            </g:applylayout>
+        </div>
+        <div id="nav">
+            <g:applylayout name="navLayout">
+                <g:pageproperty name="page.navbar"></g:pageproperty>
+            </g:applylayout>
+        </div>
+        <div id="body">
+            <g:applylayout name="bodyLayout">
+                <g:pageproperty name="page.body"></g:pageproperty>
+            </g:applylayout>
+        </div>
+        <div id="footer">
+            <g:applylayout name="footerLayout">
+                <g:pageproperty name="page.footer"></g:pageproperty>
+            </g:applylayout>
+        </div>
+    </body>
+</html>{code}

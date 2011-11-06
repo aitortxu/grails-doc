@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails applications are deployed as Web Application Archives (WAR files), and Grails includes the [war|commandLine] command for performing this task:
 
 {code}
@@ -7,6 +10,20 @@ grails war
 This will produce a WAR file under the @target@ directory which can then be deployed as per your container's instructions.
 
 Unlike most scripts which default to the @development@ environment unless overridden, the @war@ command runs in the @production@ environment by default. You can override this like any script by specifying the environment name, for example:
+
+{hidden}
+
+Aplicaciones Grails se implementan como archivos de aplicaciones Web (archivos de guerra), y Grails incluye el comando [war|commandLine] para realizar esta tarea:
+
+{code}
+Guerra Grails
+{code}
+
+Esto producirá un archivo de guerra bajo el destino @ @ directorio que luego puede utilizarse según instrucciones del contenedor.
+
+A diferencia de la mayoría scripts que predeterminado para el desarrollo @ @ entorno a menos que se reemplaza, la guerra @ @ comando se ejecuta en la producción de @ @ entorno por defecto. Se puede reemplazar como cualquier secuencia de comandos, especificando el nombre del medio ambiente, por ejemplo:
+
+{hidden}
 
 {code}
 grails dev war
@@ -18,6 +35,25 @@ NEVER deploy Grails using the [run-app|commandLine] command as this command sets
 
 When deploying Grails you should always run your containers JVM with the @-server@ option and with sufficient memory allocation. A good set of VM flags would be:
 
+{hidden}
+
+{code}
+Guerra de dev Grails
+{code}
+
+Advertencia de {}
+NUNCA desplegar Grails mediante el comando [run-app|commandLine] como este comando establece Grails para recarga automática en tiempo de ejecución que tiene un rendimiento severo e implicaciones de escalabilidad
+Advertencia de {}
+
+Al implementar Grails debe ejecutar siempre sus contenedores JVM con el servidor @ @ opción y asignación de memoria suficiente. Sería un buen conjunto de indicadores VM:
+
+{hidden}
+
 {code}
 -server -Xmx512M -XX:MaxPermSize=256m
+{code}
+{hidden}
+
+{code}
+-server-Xmx512M - XX: MaxPermSize = 256 m
 {code}

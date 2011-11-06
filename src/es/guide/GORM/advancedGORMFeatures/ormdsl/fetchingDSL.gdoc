@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Lazy Collections
 
 As discussed in the section on [Eager and Lazy fetching|guide:fetching], GORM collections are lazily loaded by default but you can change this behaviour with the ORM DSL. There are several options available to you, but the most common ones are:
@@ -21,6 +24,34 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+h4. Colecciones perezosos
+
+Como se explica en la sección sobre [fetching|guide con muchas ganas y perezoso: obtención], colecciones de GORM mandos… se cargan de forma predeterminada, pero puede cambiar este comportamiento con el DSL ORM. Hay varias opciones disponibles para usted, pero los más comunes son:
+
+* perezoso: falso
+* Buscar: 'Unión'
+
+y se utilizan como este:
+
+{code: java}
+clase persona {}
+
+Cadena firstName
+    Mascota mascota
+
+estático hasMany = [direcciones: dirección]
+
+asignación estática = {}
+        direcciones perezosas: falso
+        fetch mascota: 'Unión'
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Address {
@@ -34,6 +65,23 @@ class Pet {
     String name
 }
 {code}
+{hidden}
+
+{code: java}
+clase {dirección
+    Calle de cadena
+    Código postal de la cadena
+}
+{code}
+
+{code: java}
+clase {Pet
+    Nombre de la cadena
+}
+{code}
+
+{hidden}
+
 
 The first option, @lazy: false@ , ensures that when a @Person@ instance is loaded, its @addresses@ collection is loaded at the same time with a second SELECT. The second option is basically the same, except the collection is loaded with a JOIN rather than another SELECT. Typically you want to reduce the number of queries, so @fetch: 'join'@ is the more appropriate option. On the other hand, it could feasibly be the more expensive approach if your domain model and data result in more and larger results than would otherwise be necessary.
 
@@ -43,6 +91,14 @@ For more advanced users, the other settings available are:
 # lazy: false, batchSize: N
 
 where N is an integer. These let you fetch results in batches, with one query per batch. As a simple example, consider this mapping for @Person@:
+
+{hidden}
+
+La primera opción, @ perezoso: falso @, asegura que cuando una persona @ @ instancia está cargada, sus direcciones @ @ colección se carga al mismo tiempo con una selección de segunda. La segunda opción es básicamente el mismo, excepto la colección está cargada con una combinación en lugar de seleccionar otro. Normalmente desea reducir el número de consultas, así @ fetch: 'Unión' @ es la opción más adecuada. Por otro lado, podría ser factible el enfoque más caro si sus datos y el modelo de dominio como resultado más y mayores resultados que de lo contrario sería necesario.
+
+Para usuarios más avanzados, las otras opciones disponibles son:
+
+{hidden}
 
 {code}
 class Person {
@@ -55,6 +111,22 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+{code}
+clase persona {}
+
+Cadena firstName
+    Mascota mascota
+
+asignación estática = {}
+        batchSize mascota: 5
+    }
+}
+{code}
+
+{hidden}
+
 If a query returns multiple @Person@ instances, then when we access the first @pet@ property, Hibernate will fetch that @Pet@ plus the four next ones. You can get the same behaviour with eager loading by combining @batchSize@ with the @lazy: false@ option. You can find out more about these options in the [Hibernate user guide|http://docs.jboss.org/hibernate/core/3.3/reference/en/html/performance.html#performance-fetching] and this [primer on fetching strategies|http://community.jboss.org/wiki/AShortPrimerOnFetchingStrategies]. Note that ORM DSL does not currently support the "subselect" fetching strategy.
 
 h4. Lazy Single-Ended Associations
@@ -68,6 +140,12 @@ class Person {
     String firstName
 }
 {code}
+{hidden}
+
+Si una consulta devuelve múltiples @ persona @ instancias, entonces cuando tenemos acceso a la primera mascota @ @ propiedad, hibernación recupere esa mascota @ @ además de los próximos cuatro. Puede obtener el mismo comportamiento con ganas de carga combinando @ batchSize @ con el @ perezoso: falso @ opción. Puede encontrar más información sobre estas opciones en el [Hibernate usuario guide|http://docs.jboss.org/hibernate/core/3.3/reference/en/html/performance.html
+
+{hidden}
+
 
 {code:java}
 class Address {
@@ -82,6 +160,24 @@ class Address {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase {dirección
+
+Calle de cadena
+    Código postal de la cadena
+
+Static belongsTo = [persona: persona]
+
+asignación estática = {}
+        persona perezosa: falso
+    }
+}
+{code}
+
+{hidden}
+
 
 Here we configure GORM to load the associated @Person@ instance (through the @person@ property) whenever an @Address@ is loaded.
 
@@ -92,6 +188,20 @@ Hibernate uses runtime-generated proxies to facilitate single-ended lazy associa
 Consider the previous example but with a lazily-loaded @person@ association: Hibernate will set the @person@ property to a proxy that is a subclass of @Person@. When you call any of the getters (except for the @id@ property) or setters on that proxy, Hibernate will load the entity from the database.
 
 Unfortunately this technique can produce surprising results. Consider the following example classes:
+{hidden}
+
+Aquí vamos a configurar GORM para cargar la persona @ asociado @ instancia (a través de la @ persona @ propiedad) cuando se carga una dirección @ @.
+
+h4. Servidores proxy y perezosas terminó solo asociaciones
+
+Hibernación proxies generados en tiempo de ejecución de usos para facilitar asociaciones perezosas terminó solo; Hibernación dinámicamente subclases de la clase de entidad para crear al proxy.
+
+Considere el ejemplo anterior, pero con una carga mandos… @ persona @ asociación: Hibernate establecerá la persona @ @ propiedad a un proxy que es una subclase de @ persona @. Al llamar a cualquiera de los captadores (excepto para el @ id @ propiedad) o definidores en ese servidor proxy, hibernación cargará la entidad desde la base de datos.
+
+Lamentablemente, esta técnica puede producir resultados sorprendentes. Considere las siguientes clases de ejemplo:
+
+{hidden}
+
 
 {code:java}
 class Pet {
@@ -103,6 +213,21 @@ class Pet {
 class Dog extends Pet {
 }
 {code}
+{hidden}
+
+{code: java}
+clase {Pet
+    Nombre de la cadena
+}
+{code}
+
+{code: java}
+amplía la clase perro mascota {
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Person {
@@ -117,6 +242,24 @@ def person = Person.get(1)
 assert person.pet instanceof Dog
 assert Pet.get(person.petId) instanceof Dog
 {code}
+{hidden}
+
+{code: java}
+clase persona {}
+    Nombre de la cadena
+    Mascota mascota
+}
+{code}
+
+y supongamos que tenemos una sola @ persona @ instancia con un perro @ @ como pet @ @. El siguiente código funcionará como era de esperar:
+{code}
+Def persona = Person.get(1)
+valer person.pet instanceof perro
+valer Pet.get(person.petId) instanceof perro
+{code}
+
+{hidden}
+
 
 But this won't:
 
@@ -127,6 +270,20 @@ assert Pet.list()[0] instanceof Dog
 {code}
 
 The second assertion fails, and to add to the confusion, this will work:
+{hidden}
+
+Pero esto no:
+
+{code}
+Def persona = Person.get(1)
+valer person.pet instanceof perro
+valer Pet.list() [0] instanceof perro
+{code}
+
+La segunda afirmación se produce un error, y para agregar a la confusión, esto funcionará:
+
+{hidden}
+
 
 {code}
 assert Pet.list()[0] instanceof Dog
@@ -137,6 +294,20 @@ What's going on here? It's down to a combination of how proxies work and the gua
 Fortunately for us, GORM automatically unwraps the proxy when you use @get()@ and @findBy\*()@, or when you directly access the relation. That means you don't have to worry at all about proxies in the majority of cases. But GORM doesn't do that for objects returned with a query that returns a list, such as @list()@ and @findAllBy\*()@. However, if Hibernate hasn't attached the proxy to the session, those queries will return the real instances - hence why the last example works.
 
 You can protect yourself to a degree from this problem by using the @instanceOf@ method by GORM:
+{hidden}
+
+{code}
+valer Pet.list() [0] instanceof perro
+{code}
+
+¿Lo que está pasando aquí? Es a una combinación de cómo funciona los servidores proxy y las garantías que hace que la sesión de Hibernate. Cuando se carga la persona @ @ instancia, hibernación crea a un proxy para su mascota @ @ relación y atribuye a la sesión. Una vez que eso ocurre, siempre recuperan esa mascota @ @ instancia con la mascota @ @ _within relación con el mismo session_, @ get() @ o una consulta, hibernación da al proxy.
+
+Afortunadamente para nosotros, GORM automáticamente desenvuelve al proxy al utilizar @ get() @ y @ findBy\*() @ o al acceder directamente a la relación. Significa que no tiene que preocuparse en absoluto por servidores proxy en la mayoría de los casos. Pero GORM no hacerlo para objetos devueltos con una consulta que devuelve una lista, como @ list() @ y @ findAllBy\*() @. Sin embargo, si la hibernación no ha conectado al proxy para el período de sesiones, las consultas devolverá las instancias reales - por lo tanto por qué funciona el último ejemplo.
+
+Usted puede protegerse a un grado de este problema mediante el uso de instanceOf @ @ método por GORM:
+
+{hidden}
+
 
 {code:java}
 def person = Person.get(1)
@@ -149,7 +320,28 @@ However, it won't help here if casting is involved. For example, the following c
 def person = Person.get(1)
 Dog pet = Pet.list()[0]
 {code}
+{hidden}
+
+{code: java}
+Def persona = Person.get(1)
+valer Pet.list()[0].instanceOf(Dog)
+{code}
+
+Sin embargo, no ayudará aquí si está involucrado el casting. Por ejemplo, el código siguiente producirá un ClassCastException @ @ porque la primera mascota en la lista es una instancia de servidor proxy con una clase que es ni @ perro @ ni una subclase de @ perro @:
+
+{code: java}
+Def persona = Person.get(1)
+Mascota perro = Pet.list() [0]
+{code}
+
+{hidden}
+
 
 Of course, it's best not to use static types in this situation. If you use an untyped variable for the pet instead, you can access any @Dog@ properties or methods on the instance without any problems.
 
 These days it's rare that you will come across this issue, but it's best to be aware of it just in case. At least you will know why such an error occurs and be able to work around it.
+{hidden}
+
+Por supuesto, es mejor no utilizar tipos estáticos en esta situación. Si utiliza una variable sin tipo para la mascota en su lugar, puede acceder a cualquier perro @ @ propiedades o métodos de instancia sin problemas.
+
+Estos días es raro que vienes a través de esta cuestión, pero es mejor estar consciente de sólo en el caso. Por lo menos sabrá por qué tal error ocurre y poder trabajar alrededor de ella.

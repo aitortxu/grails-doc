@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-tag-lib
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails create-tag-lib org.bookstore.book
 {code}
+{hidden}
+
+h1. Crear-etiqueta-lib
+
+h2. Fin
+
+El @ crear-etiqueta-lib @ comando crea una biblioteca de etiquetas y prueba de unidad asociada para el nombre base determinado.
+
+h2. Ejemplos
+
+{code: java}
+Grails crear-etiqueta-lib org.bookstore.book
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ A tag library is a "view helper" that in MVC terms helps the view with rendering
 {note}
 Note that this command is just for convenience and you can also create controllers in your favourite text editor or IDE if you choose.
 {note}
+{hidden}
+
+h2. Descripción
+
+Crea una biblioteca de etiquetas para el nombre de base de dar. Por ejemplo un nombre de base se creará a una biblioteca de etiquetas llamado @ BookTagLib @ @org.bookstore.book@ en la @ grails-app/taglib/org/librería @ directorio.
+
+Una biblioteca de etiquetas es un "Ayudante de vista" que en términos MVC ayuda a la vista con representación proporcionando un conjunto de etiquetas reutilizables. Para obtener más información sobre las etiquetas de referirse a la sección [etiqueta Libraries|guide:taglibs] en la Guía del usuario.
+
+{Nota}
+Tenga en cuenta que este comando es sólo para conveniencia y usted también puede crear controladores en su editor de textos preferido o IDE si elige.
+{Nota}
+
+{hidden}
+
 
 Usage:
 {code:java}
@@ -28,3 +61,13 @@ grails create-tag-lib [name]
 Fired Events:
 
 * @CreatedFile@ - When the tag library has been created
+{hidden}
+
+Uso:
+{code: java}
+Grails crear-etiqueta-lib [nombre]
+{code}
+
+Despedido de eventos:
+
+* @ CreatedFile @ - cuando se creó la biblioteca de etiquetas

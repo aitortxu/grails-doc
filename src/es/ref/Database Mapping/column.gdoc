@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. column
 
 h2. Purpose
@@ -11,6 +14,24 @@ h2. Examples
         currency column: "currency", sqlType: "char", length: 3
     }
 {code}
+{hidden}
+
+h1. columna
+
+h2. Fin
+
+Personaliza una definición de columna
+
+h2. Ejemplos
+
+{code: java}
+    asignación estática = {}
+        columna moneda: "moneda", sqlType: "char", longitud: 3
+    }
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -21,6 +42,20 @@ Arguments:
 * @column@ - The name of the column as a String
 * @sqlType@ (optional) - The underlying SQL type
 * @enumType@ (optional) - The enum type in for type-safe Enum properties. Either @ordinal@ or @string@.
+{hidden}
+
+h2. Descripción
+
+Uso: @ property_name(map) @
+
+Argumentos:
+
+* @ columna @ - el nombre de la columna como una cadena
+* @ sqlType @ (opcional): escriba el SQL subyacente
+* @ enumType @ (opcional): la enumeración escriba para las propiedades de seguridad de tipos Enum. @ Ordinal @ o @ cadena @.
+
+{hidden}
+
 * @index@ (optional) - The index name
 * @unique@ (optional) - Whether it is unique
 * @length@ (optional) - The length of the column
@@ -34,6 +69,24 @@ static mapping = {
     currency column: "currency", sqlType: "char", length: 3
 }
 {code}
+{hidden}
+
+* @ índice @ (opcional): el nombre de índice
+* @ único @ (opcional): si es único
+* @ longitud @ (opcional): la longitud de la columna
+* @ precisión @ (opcional): la precisión de la columna
+* @ escala @ (opcional): la escala de la columna
+
+De forma predeterminada GORM utiliza el nombre de la propiedad y el tipo para determinar cómo asignar una propiedad en la base de datos. Por ejemplo, una cadena @ @ propiedad normalmente es asignada como VARCHAR @ @ columna. Puede personalizar estos argumentos de configuración de columna:
+
+{code: java}
+asignación estática = {}
+    columna moneda: "moneda", sqlType: "char", longitud: 3
+}
+{code}
+
+{hidden}
+
 
 If you use a Hibernate [type|databaseMapping] that requires multiple column definitions you can use the @column@ method to define each column:
 
@@ -42,6 +95,18 @@ static mapping = {
     amount type: MonetaryUserType, {
         column name: "value"
         column name: "currency", sqlType: "char", length: 3
+    }
+}
+{code}
+{hidden}
+
+Si utiliza una hibernación [type|databaseMapping] que requiere varias definiciones de columna puede utilizar la columna @ @ método para definir cada columna:
+
+{code: java}
+asignación estática = {}
+    importe tipo: MonetaryUserType {}
+        nombre de la columna: "valor"
+        nombre de la columna: "moneda", sqlType: "char", longitud: 3
     }
 }
 {code}

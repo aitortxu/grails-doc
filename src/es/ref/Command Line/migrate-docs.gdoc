@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. migrate-docs
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails migrate-docs
 {code}
+{hidden}
+
+h1. migrar docs
+
+h2. Fin
+
+Migra gdocs de estilo antiguo en el que los números de sección son los nombres de archivo para el nuevo enfoque que números de sección y títulos se ponen en un archivo toc.yml.
+
+h2. Ejemplos
+
+{code: java}
+Grails migrar-docs
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ If you already have a user guide in the old style, then this command will automa
 * @toc.yml@ - the YAML table of contents file containing the original user guide structure
 * @links.yml@ - a map of new section names to old ones (see later for more detail)
 * @rewriteRules.txt@ - a simple text file containing the mappings from old HTML filenames to new ones
+{hidden}
+
+h2. Descripción
+
+Originalmente, los archivos de origen para guías de usuario genera Grails incluyen los números de sección y títulos en los nombres de archivo gdoc. Esto hizo muy fácil ponerse en marcha, pero difícil cambiar la numeración de secciones y cambiar sus títulos desde la URL correspondiente también cambiaría. El @ [doc|commandLine] @ comando ahora le permite especificar las secciones en una tabla de contenido en forma YAML, por lo que la guía puede ser reestructurada sin romper las direcciones URL.
+
+Si ya tiene una guía de usuario de estilo antiguo, a continuación, este comando convertirá automáticamente los archivos de origen al nuevo formato. Se crean los archivos de gdoc bajo el directorio @ src/docs/migratedGuide @ junto con:
+
+* @toc.yml@ - Guía de la tabla YAML del archivo de contenido que contiene el usuario original estructura
+* @links.yml@ - un mapa de nuevos nombres de sección para los antiguos (véase más adelante para obtener más detalles)
+* @rewriteRules.txt@ - un archivo de texto simple que contiene las asignaciones de nombres de archivo HTML antiguos a los nuevos
+
+{hidden}
+
 
 The gdoc files themselves are also renamed, with the section numbers removed and the titles converted into Java property notation. This automatic conversion may not always work particularly well, so be prepared to change gdoc the filenames and their corresponding entries in the above files if necessary. For example,
 
@@ -29,5 +62,22 @@ will become
 * welcomeToTheNewWorld.gdoc
 
 Once the migration has finished, you can replace the @src/docs/guide@ directory with the contents of @migratedGuide@ and run the @doc@ command. This command is aware of the @links.yml@ file and will use it to add legacy links into the generated documentation so that old HTML fragment identifiers will continue to work.
+{hidden}
+
+También cambian de nombre los archivos gdoc, con los números de sección eliminados y los títulos se convirtieron en notación de propiedad de Java. Esta conversión automática puede no siempre funcionan particularmente bien, así que prepárese cambiar gdoc los nombres de archivo y sus correspondientes entradas en los archivos anteriores si es necesario. Por ejemplo,
+
+* 12.1 Bienvenidos a la nueva World.gdoc
+
+se convertirá en
+
+* welcomeToTheNewWorld.gdoc
+
+Una vez finalizada la migración, puede reemplazar al @ src/docs/guía @ directorio con el contenido de @ migratedGuide @ y ejecutar al doc @ @ comando. Este comando es consciente del archivo @links.yml@ y lo usará para agregar vínculos heredados en la documentación generada para que identificadores de fragmento HTML antiguos seguirá trabajando.
+
+{hidden}
+
 
 Of course, old URLs will break because the names of the HTML files have changed. Hence why the @rewriteRules@ file is created: you can use it to create the appropriate Apache HTTPD rewrite rules or the equivalent for your web server.
+{hidden}
+
+Por supuesto, viejas URL se romperán porque han cambiado los nombres de los archivos HTML. Por lo tanto por qué se crea el @ rewriteRules @ archivo: se puede utilizar para crear las normas adecuadas de reescritura de Apache HTTPD o el equivalente para el servidor web.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. createCriteria
 
 h2. Purpose
@@ -18,6 +21,12 @@ def results = c.list {
     order("holderLastName", "desc")
 }
 {code}
+{hidden}
+
+H1. createCriteriaH2. FinCrea y devuelve una instancia de Grails' [HibernateCriteriaBuilder|api:grails.orm.HibernateCriteriaBuilder] que pueden utilizarse para construir consultas de criterios.H2. Ejemplos{Código: java}Def c = Account.createCriteria()resultados de Def = {} c.list    como ("holderFirstName", "Fred %")    y {}        entre ("equilibrio", 500, 1000)        EQ ("rama", "Londres")    }    maxResults(10)    orden ("holderLastName", "desc")}{Código}
+
+{hidden}
+
 
 To use pagination you would have to make another query to retrieve the total number of matching results. A better way is to pass the pagination values as arguments to the criteria method as shown below:
 
@@ -32,6 +41,12 @@ def results = c.list (max: 10, offset: 10) {
     order("holderLastName", "desc")
 }
 {code}
+{hidden}
+
+Para utilizar paginación que tendría que hacer otra consulta para recuperar el número total de resultados coincidentes. Es una mejor manera de pasar los valores de paginación como argumentos al método de criterios, como se muestra a continuación:{Código: java}Def c = Account.createCriteria()resultados de Def = c.list (máx.: 10, desvío: 10) {}    como ("holderFirstName", "Fred %")    y {}        entre ("equilibrio", 500, 1000)        EQ ("rama", "Londres")    }    orden ("holderLastName", "desc")}{Código}
+
+{hidden}
+
 
 This will return a [PagedResultList|api:grails.orm.PagedResultList] which has a getTotalCount() method to return the total number of matching records for pagination. Two queries are still run, but they're run for you and the results and total count are combined in the @PagedResultList@.
 
@@ -42,6 +57,12 @@ println "Rendering ${results.size()} Accounts of ${results.totalCount}"
 h2. Description
 
 Criteria queries are a type-safe, advanced way to query that uses a Groovy builder to construct potentially complex queries. It is a much better alternative to using a StringBuilder to dynamically construct an HQL query. Refer to the user guide section on [Criteria|guide:criteria] for usage instructions.
+{hidden}
+
+Esto devolverá un [PagedResultList|api:grails.orm.PagedResultList] que tiene un método getTotalCount() para devolver el número total de registros coincidentes para la paginación. Dos consultas están funcionando, pero está corren para usted y recuento total de los resultados se combinan en el @ PagedResultList @.{Código: java}Console.println "Cuentas de ${results.size()} de procesamiento de ${results.totalCount}"{Código}H2. DescripciónConsultas de criterios son un tipo de seguros, avanzada forma de consulta que utiliza un constructor Groovy para construir consultas potencialmente complejas. Es una mejor alternativa al uso de un StringBuilder para construir dinámicamente una consulta HQL. Consulte la sección Guía de usuario de [Criteria|guide:criteria] para obtener instrucciones de uso.
+
+{hidden}
+
 
 Method reference:
 
@@ -52,6 +73,12 @@ Method | Description
 *scroll* | Returns a scrollable result set
 *listDistinct* | If subqueries or associations are used, one may end up with the same row multiple times in the result set. In Hibernate one would do a "CriteriaSpecification.DISTINCT_ROOT_ENTITY". In Grails one can do it by just using this method.
 {table}
+{hidden}
+
+Referencia de método:tabla de {}Método | Descripción* lista * | El método predeterminado; Devuelve todas las filas coincidentes.* get * | Devuelve un único resultado, es decir, una sola fila. Los criterios tiene que formar de este modo, sólo consultas de una fila. Este método no es debe ser confundido con un límite tan sólo la primera fila.* desplazamiento * | Devuelve un conjunto de resultados desplazable* listDistinct * | Si se usan subconsultas o asociaciones, uno puede terminar con la misma fila varias veces en el conjunto de resultados. En hibernación uno haría un "CriteriaSpecification.DISTINCT_ROOT_ENTITY". En Grails, uno puede hacerlo sólo con este método.tabla de {}
+
+{hidden}
+
 
 {warning}
 The @listDistinct()@ method does not work well with the pagination options @maxResult@ and @firstResult@. If you need distinct results with pagination, we currently recommend that you use HQL. You can find out more information from [this blog post|http://floledermann.blogspot.com/2007/10/solving-hibernate-criterias-distinct.html].
@@ -60,18 +87,30 @@ The @listDistinct()@ method does not work well with the pagination options @maxR
 If you invoke the builder with no method name
 
 {code:java}
-c { … }
+c { � }
 {code}
+{hidden}
+
+Advertencia de {}@ ListDistinct() @ método no funciona bien con las opciones de paginación @ maxResult @ y @ firstResult @. Si necesita resultados concretos con paginación, actualmente se recomienda que utilice HQL. Puede encontrar más información de [este blog post|http://floledermann.blogspot.com/2007/10/solving-hibernate-criterias-distinct.html].Advertencia de {}Si se invoca el constructor sin nombre de método{Código: java}c {É}{Código}
+
+{hidden}
+
 
 the @list()@ method will be invoked automatically. In other words, it's the equivalent of
 
 {code:java}
-c.list { … }
+c.list { � }
 {code}
 
 Below is a node reference for each criterion method:
 
 {table}
+{hidden}
+
+@ list() @ método se invoca automáticamente. En otras palabras, es el equivalente de{Código: java}c.List {É}{Código}A continuación es una referencia de nodo para cada método de criterio:tabla de {}
+
+{hidden}
+
 Node | Description | Example
 *between* | Where the property value is between two distinct values | {code}
 between("balance", 500, 1000)
@@ -85,6 +124,12 @@ eq("branch", "london", [ignoreCase: true])
  *eqProperty* | Where one property must equal another | {code}
 eqProperty("lastTx", "firstTx")
 {code}
+{hidden}
+
+Nodo | Descripción | Ejemplo* entre * | Donde el valor de la propiedad es entre dos valores distintos | {Código}entre ("equilibrio", 500, 1000){Código} * eq * | Cuando una propiedad es igual a un valor determinado. | {Código}EQ ("rama", "Londres"){Código} * eq * (entre mayúsculas y minúsculas) | Una versión de * eq * que soporta un opcional tercer parámetro de mapa para especificar que la consulta entre mayúsculas y minúsculas. | {Código}EQ ("rama", "london", [ignoreCase: true]){Código} * eqProperty * | Cuando una propiedad debe ser igual otro | {Código}eqProperty ("lastTx", "firstTx"){Código}
+
+{hidden}
+
  *gt* | Where a property is greater than a particular value | {code}
 gt("balance",1000)
 {code}
@@ -97,6 +142,12 @@ ge("balance", 1000)
  *geProperty* | Where a one property must be greater than or equal to another | {code}
 geProperty("balance", "overdraft")
 {code}
+{hidden}
+
+* gt * | Cuando una propiedad sea superior a un valor determinado | {Código}gt("balance",1000){Código} * gtProperty * | Donde una una propiedad debe ser mayor que otro | {Código}gtProperty ("equilibrio", "descubierto"){Código} * ge * | Cuando una propiedad es mayor o igual a un valor determinado | {Código}GE ("equilibrio", 1000){Código} * geProperty * | Donde una una propiedad debe ser mayor o igual a otro | {Código}geProperty ("equilibrio", "descubierto"){Código}
+
+{hidden}
+
  *idEq* | Where an objects id equals the specified value | {code}
 idEq(1)
 {code}
@@ -109,6 +160,12 @@ ilike("holderFirstName", "Steph%")
  *isEmpty* | Where a collection property is empty | {code}
 isEmpty("transactions")
 {code}
+{hidden}
+
+* idEq * | Cuando un identificador de objetos es igual al valor especificado | {Código}idEq(1){Código} * ilike * | Mayúsculas y minúsculas 'como' expresión | {Código}iLike ("holderFirstName", "Steph %"){Código} * en * | Cuando una propiedad está dentro de la lista especificada de valores. También puede ser encadenados no @ @ método donde una propiedad no está contenida dentro de la lista especificada de valores con. Nota: 'en' es una palabra Groovy reserva, por lo que debe ser escapado por comillas. | {Código}' in'("age",[18..65]) o no {'in'("age",[18..65])}{Código} * isEmpty * | Cuando una propiedad de colección está vacía | {Código}isEmpty("transactions"){Código}
+
+{hidden}
+
  *isNotEmpty* | Where a collection property is not empty | {code}
 isNotEmpty("transactions")
 {code}
@@ -121,6 +178,12 @@ isNotNull("holderGender")
  *lt* | Where a property is less than a particular value | {code}
 lt("balance", 1000)
 {code}
+{hidden}
+
+* isNotEmpty * | Que no esté vacía de una propiedad de colección | {Código}isNotEmpty("transactions"){Código} * isNull * | Cuando una propiedad es null @ @ | {Código}isNull("holderGender"){Código} * isNotNull * | Cuando una propiedad no es null @ @ | {Código}isNotNull("holderGender"){Código} * lt * | Cuando una propiedad es inferior a un valor determinado | {Código}lt ("equilibrio", 1000){Código}
+
+{hidden}
+
  *ltProperty* | Where a one property must be less than another | {code}
 ltProperty("balance", "overdraft")
 {code}
@@ -133,6 +196,12 @@ leProperty("balance", "overdraft")
  *like* | Equivalent to SQL like expression | {code}
 like("holderFirstName", "Steph%")
 {code}
+{hidden}
+
+* ltProperty * | Donde una una propiedad debe ser menor que otro | {Código}ltProperty ("equilibrio", "descubierto"){Código} * le * | Cuando una propiedad es igual o inferior a un valor determinado | {Código}le ("equilibrio", 1000){Código} * leProperty * | Donde una una propiedad debe ser menor o igual a otro | {Código}leProperty ("equilibrio", "descubierto"){Código} * como * | Equivalente a SQL como expresión | {Código}como ("holderFirstName", "Steph %"){Código}
+
+{hidden}
+
  *ne* | Where a property does not equal a particular value | {code}
 ne("branch", "London")
 {code}
@@ -145,6 +214,12 @@ order("holderLastName", "desc")
  *rlike* | Similar to like, but uses a regex. Only supported on Oracle and MySQL. | {code}
 rlike("holderFirstName", /Steph.+/)
 {code}
+{hidden}
+
+* ne * | Cuando una propiedad no es igual a un valor determinado | {Código}ne ("rama", "Londres"){Código} * neProperty * | Cuando una propiedad no coincide con otro | {Código}neProperty ("lastTx", "firstTx"){Código} * orden * | Ordenar los resultados por una propiedad determinada | {Código}orden ("holderLastName", "desc"){Código} * rlike * | Similar a gustar, pero utiliza una expresión regular. Sólo compatible con Oracle y MySQL. | {Código}RLIKE ("holderFirstName", /Steph. /){Código}
+
+{hidden}
+
  *sizeEq* | Where a collection property's size equals a particular value | {code}
 sizeEq("transactions", 10)
 {code}
@@ -157,6 +232,12 @@ sizeGe("transactions", 10)
  *sizeLt* | Where a collection property's size is less than a particular value | {code}
 sizeLt("transactions", 10)
 {code}
+{hidden}
+
+* sizeEq * | Donde el tamaño de la propiedad de una colección equivale a un valor determinado | {Código}sizeEq ("transacciones", 10){Código} * sizeGt * | Donde el tamaño de la propiedad de una colección es mayor que un valor particular | {Código}sizeGt ("transacciones", 10){Código} * sizeGe * | Donde el tamaño de la propiedad de una colección es mayor o igual a un valor determinado | {Código}sizeGe ("transacciones", 10){Código} * sizeLt * | Donde el tamaño de la propiedad de una colección es inferior a un valor determinado | {Código}sizeLt ("transacciones", 10){Código}
+
+{hidden}
+
  *sizeLe* | Where a collection property's size is less than or equal to a particular value | {code}
 sizeLe("transactions", 10)
 {code}
@@ -175,6 +256,12 @@ Name | Description | Example
 *order*(String, String) | Specifies both the sort column (the first argument) and the sort order (either 'asc' or 'desc'). | {code}
 order "age", "desc"
 {code}
+{hidden}
+
+* sizeLe * | Donde el tamaño de la propiedad de una colección es menor o igual a un valor determinado | {Código}sizeLe ("transacciones", 10){Código} * sizeNe * | Donde el tamaño de la propiedad de una colección no es igual a un valor determinado | {Código}sizeNe ("transacciones", 10){Código} * sqlRestriction * | Utilizar SQL arbitraria para modificar el resultset | {Código}sqlRestriction "char_length(first_name) = 4"{Código}tabla de {}Con buscadores dinámicos, tienes acceso a opciones como @ max @, @ tipo @, etc.. Están disponibles para consultas de criterios, pero tienen diferentes nombres:tabla de {}Nombre | Descripción | Ejemplo* orden * (String, String) | Especifica la columna de ordenación (el primer argumento) y el orden ("asc" o "desc"). | {Código}orden "edad", "desc"{Código}
+
+{hidden}
+
 *firstResult*(int) | Specifies the offset for the results. A value of 0 will return all records up to the maximum specified. | {code}
 firstResult 20
 {code}
@@ -189,6 +276,12 @@ cache @true@
 Criteria also support the notion of projections. A projection is used to change the nature of the results. For example the following query uses a projection to count the number of distinct @branch@ names that exist for each @Account@:
 
 {code:java}
+{hidden}
+
+*firstResult*(int) | Especifica el desplazamiento por los resultados. Un valor de 0 devolverá todos los registros hasta el máximo especificado. | {Código}firstResult 20{Código}*maxResults*(int) | Especifica el número máximo de registros para volver. | {Código}maxResults 10{Código}*Cache*(Boolean) | Indica si la consulta debe ser en la caché (si está activada la caché de consultas). | {Código}caché @ verdadero @{Código}tabla de {}Criterios también apoyan la noción de proyecciones. Una proyección se utiliza para cambiar la naturaleza de los resultados. Por ejemplo, la siguiente consulta utiliza una proyección para contar el número de distintas sucursales @ @ nombres que existen para cada cuenta @ @:{Código: java}
+
+{hidden}
+
 def c = Account.createCriteria()
 def branchCount = c.get {
     projections {
@@ -223,3 +316,6 @@ sum("balance"){code}
 rowCount(){code}
 
 {table}
+{hidden}
+
+Def c = Account.createCriteria()Def branchCount = {} c.get    proyecciones {}        countDistinct "rama"    }}{Código}La siguiente tabla resume las diferentes proyecciones y lo que hacen:tabla de {}Nombre | Descripción | Ejemplo* propiedad * | Devuelve la propiedad dada en los resultados devueltos | {Código: java}Property("FirstName") {código}* distintos * | Devuelve los resultados utilizando un único o una colección de nombres de propiedades distintas | {Código: java}DISTINCT("FN") o distinto (['fn', 'ln']) {código}* avg * | Devuelve el valor medio de la propiedad determinada | {Código: java}AVG("Age") {código}* Conde * | Devuelve el recuento del nombre dado propiedad | {Código: java}Count("Branch") {código}* countDistinct * | Devuelve el recuento del nombre propiedad determinada para distintas filas | {Código: java}countDistinct("branch") {código}* groupProperty * | Agrupa los resultados por la propiedad dada | {Código: java}groupProperty("lastName") {código}* max * | Devuelve el valor máximo de la propiedad determinada | {Código: java}Max("Age") {código}* min * | Devuelve el valor mínimo de la propiedad determinada | {Código: java}min("Age") {código}* suma * | Devuelve la suma de la propiedad determinada | {Código: java}Sum("balance") {código}* rowCount * | Devuelve el número de filas devueltas | {Código: java}rowCount() {código}tabla de {}

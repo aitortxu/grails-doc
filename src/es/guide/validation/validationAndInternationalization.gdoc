@@ -1,3 +1,6 @@
+
+{hidden}
+
 Another important thing to note about errors in Grails is that error messages are not hard coded anywhere. The [FieldError|api:org.springframework.validation.FieldError] class in Spring resolves messages from message bundles using Grails' [i18n|guide:i18n] support.
 
 h4. Constraints and Message Codes
@@ -18,6 +21,31 @@ class User {
     }
 }
 {code}
+{hidden}
+
+Otra cosa importante destacar sobre errores en Grails es que mensajes de error no son difíciles de codificar en cualquier lugar. La clase [FieldError|api:org.springframework.validation.FieldError] en primavera resuelve mensajes de mensaje de apoyan de paquetes usando Grails' [i18n|guide:i18n].
+
+h4. Las restricciones y los códigos de mensaje
+
+Los códigos propios son dictados por una Convención. Por ejemplo, considerar las limitaciones que hemos analizado anteriormente:
+
+{code: java}
+paquete com.mycompany.myapp
+
+clase usuario {}
+    ...
+
+restricciones estáticas = {}
+        tamaño de inicio de sesión: 5..15, en blanco: falso, único: verdadero
+        tamaño de la contraseña: 5..15, en blanco: falso
+        correo electrónico del correo electrónico: true, en blanco: falso
+        edad mínima: 18
+    }
+}
+{code}
+
+{hidden}
+
 
 If a constraint is violated Grails will by convention look for a message code of the form:
 
@@ -30,6 +58,22 @@ In the case of the @blank@ constraint this would be @user.login.blank@ so you wo
 {code:java}
 user.login.blank=Your login name must be specified!
 {code}
+{hidden}
+
+Si una restricción es voluntad de Grails violado por Convención buscar un código de mensaje del formulario:
+
+{code: java}
+[Nombre de la clase].[Nombre de la propiedad].[Código de restricción]
+{code}
+
+En el caso de blanco @ @ restricción sería @user.login.blank@ por lo que sería necesario un mensaje como el siguiente en el archivo @grails-app/i18n/messages.properties@:
+
+{code: java}
+debe especificar el nombre de inicio de sesión de User.Login.Blank=your!
+{code}
+
+{hidden}
+
 
 The class name is looked for both with and without a package, with the packaged version taking precedence. So for example, com.mycompany.myapp.User.login.blank will be used before user.login.blank. This allows for cases where your domain class message codes clash with a plugin's.
 
@@ -48,6 +92,29 @@ The [renderErrors|tags] tag will automatically look up messages for you using th
   </ul>
 </g:hasErrors>
 {code}
+{hidden}
+
+El nombre de clase es buscado con y sin un paquete, con la versión en paquete teniendo prioridad. Así, por ejemplo, se utilizará com.mycompany.myapp.User.login.blank antes de user.login.blank. Esto permite casos donde los códigos de mensaje de clase de dominio chocan con un plugin.
+
+Para una referencia sobre qué códigos son para que las restricciones consulte la Guía de referencia para cada restricción.
+
+h4. Mostrar mensajes
+
+La etiqueta [renderErrors|tags] buscará automáticamente mensajes para usted utilizando la etiqueta [message|tags]. Si necesita más control de procesamiento puede manejar usted mismo:
+
+{Código: xml}<g:haserrors bean="${user}">
+  <ul>
+   <g:eacherror var="err" bean="${user}">
+       <li><g:message error="${err}"></g:message></li>
+   </g:eacherror>
+  </ul>
+</g:haserrors>{code}
+
+{hidden}
+
 
 In this example within the body of the [eachError|tags] tag we use the [message|tags] tag in combination with its @error@ argument to read the message for the given error.
 
+{hidden}
+
+En este ejemplo dentro del cuerpo de la etiqueta [eachError|tags] usamos la etiqueta [message|tags] en combinación con su error @ @ argumento para leer el mensaje de error determinado.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. discard
 
 h2. Purpose
@@ -11,6 +14,24 @@ def b = Book.get(1)
 b.title = "Blah"
 b.discard() // changes won't be applied now
 {code}
+{hidden}
+
+h1. descartar
+
+h2. Fin
+
+Descarta los cambios que se han hecho a una instancia persistente.
+
+h2. Ejemplos
+
+{code: java}
+Def b = Book.get(1)
+b.Title = "Blah"
+b.Discard() / / los cambios no se aplican ahora
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,3 +40,8 @@ The @discard@ method informs the persistence context that the instance should no
 {note}
 Note that this method will not clean or reset the object with the original values; it will just prevent it from being automatically saved by Grails.
 {note}
+{hidden}
+
+h2. Descripción
+
+Descartar @ @ método informa el contexto de la persistencia que no se debe guardar la instancia. Descartar @ @ método es equivalente a utilizar Hibernate [evict|api:org.hibernate.Session

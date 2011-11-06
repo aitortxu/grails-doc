@@ -1,3 +1,6 @@
+
+{hidden}
+
 GSP also features tags to help you manage linking to controllers and actions. The [link|tags] tag lets you specify controller and action name pairing and it will automatically work out the link based on the [URL Mappings|guide:urlmappings], even if you change them! For example:
 
 {code:xml}
@@ -13,4 +16,21 @@ GSP also features tags to help you manage linking to controllers and actions. Th
 
 <g:link params="[sort: 'title', order: 'asc', author: currentBook.author]"
         action="list">Book List</g:link>
+{code}
+{hidden}
+
+SGP también incluye etiquetas para ayudarle a gestionar la vinculación a los controladores y las acciones. La etiqueta [link|tags] le permite especificar el controlador y la asignación de nombre de acción y automáticamente funciona el enlace basado en la [URL Mappings|guide:urlmappings], incluso si se les cambien! Por ejemplo:
+
+{Código: xml}
+<g:link action="show" id="1">Libro 1</g:link>
+
+<g:link action="show" id="${currentBook.id}">${currentBook.name}</g:link>
+
+<g:link controller="book">Casa del libro</g:link>
+
+<g:link controller="book" action="list">Lista de libros</g:link>
+
+<g:link url="[action: 'list', controller: 'book']">Lista de libros</g:link>
+
+<g:link params="[sort: 'title', order: 'asc', author: currentBook.author]" action="list">Lista de libros</g:link>
 {code}

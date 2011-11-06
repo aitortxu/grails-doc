@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. hibernate
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @hibernate@ plugin configures the Hibernate implementation of [GORM|guide:GO
 h2. Examples
 
 An example domain class:
+
+{hidden}
+
+h1. hibernación
+
+h2. Fin
+
+El @ hibernación plugin configura la aplicación de hibernación de [GORM|guide:GORM].
+
+h2. Ejemplos
+
+Un clase de ejemplo de dominio:
+
+{hidden}
 
 {code:java}
 class Book {
@@ -18,6 +35,20 @@ class Book {
 
 h2. Description
 
+{hidden}
+
+{code: java}
+clase {libro
+    Título de cadena
+    Fecha releaseDate
+    Autor de autor
+}
+{code}
+
+h2. Descripción
+
+{hidden}
+
 Refer to the section on [GORM|guide:GORM] in the Grails user guide which details how to create Grails domain classes.
 
 Configured Spring Beans:
@@ -28,4 +59,22 @@ Configured Spring Beans:
 * @sessionFactory@ -  An instance of the Hibernate [SessionFactory|api:org.hibernate.SessionFactory] class
 * @transactionManager@ - An instance of Spring's [HibernateTransactionManager|api:org.springframework.orm.hibernate3.HibernateTransactionManager] class
 * @persistenceInterceptor@ - An instance of [HibernatePersistenceContextInterceptor|api:org.codehaus.groovy.grails.orm.hibernate.support.HibernatePersistenceContextInterceptor] that abstracts away how persistence is used from the controller/view layer so that Grails can be used without GORM.
+{hidden}
+
+Consulte la sección [GORM|guide:GORM] en la Guía de usuario de Grails que detalla cómo crear clases de dominio Grails.
+
+Frijoles de primavera configurados:
+
+* @ dialectDetector @ - una instancia de [HibernateDialectDetectorFactoryBean|api:org.codehaus.groovy.grails.orm.hibernate.support.HibernateDialectDetectorFactoryBean] que intenta detectar automáticamente la hibernación [Dialect|api:org.hibernate.dialect.Dialect] que se utiliza para comunicarse con la base de datos.
+* @ hibernateProperties @ - un mapa @ @ de hibernación propiedades pasadas a @ SessionFactory @
+* @ lobHandlerDetector @ - una instancia de [SpringLobHandlerDetectorFactoryBean|api:org.codehaus.groovy.grails.orm.hibernate.support.SpringLobHandlerDetectorFactoryBean] intenta detectar automáticamente la primavera LobHandler usar basado en la base de datos.
+* @ sessionFactory @ - una instancia de la clase de hibernación [SessionFactory|api:org.hibernate.SessionFactory]
+* @ transactionManager @ - una instancia de la primavera [HibernateTransactionManager|api:org.springframework.orm.hibernate3.HibernateTransactionManager] clase
+* @ persistenceInterceptor @ - una instancia de [HibernatePersistenceContextInterceptor|api:org.codehaus.groovy.grails.orm.hibernate.support.HibernatePersistenceContextInterceptor] abstrae lejos cómo se utiliza persistencia de la capa de vista/controlador para que Grails pueden utilizarse sin GORM.
+
+{hidden}
+
 * @openSessionInViewInterceptor@ - An instance of [GrailsOpenSessionInViewFilter|api:org.codehaus.groovy.grails.orm.hibernate.support.GrailsOpenSessionInViewFilter] that deals with Grails' [Session|api:org.hibernate.Session] management.
+{hidden}
+
+* @ openSessionInViewInterceptor @ - una instancia de [GrailsOpenSessionInViewFilter|api:org.codehaus.groovy.grails.orm.hibernate.support.GrailsOpenSessionInViewFilter] que se ocupa de Grails' [Session|api:org.hibernate.Session] Administración.

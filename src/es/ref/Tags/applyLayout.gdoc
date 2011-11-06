@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. applyLayout
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:xml}
 <g:applyLayout name="myLayout" template="displaybook" params="[books: books]" />
 {code}
+{hidden}
+
+h1. applyLayout
+
+h2. Fin
+
+Se aplica al diseño especificado para el cuerpo, una plantilla determinada o una URL arbitraria, permitiendo el desarrollo de "portlet"-estilo aplicaciones y mashups
+
+h2. Ejemplos
+
+{Código: xml}
+<g:applylayout name="myLayout" template="displaybook" params="[books: books]"></g:applylayout>
+{code}
+
+{hidden}
+
 
 or
 
@@ -23,6 +42,24 @@ or
 The content to apply a layout to
 </g:applyLayout>
 {code}
+{hidden}
+
+o
+
+{Código: xml}
+<g:applylayout name="myLayout" url="http://www.google.com"></g:applylayout>
+{code}
+
+o
+
+{Código: xml}
+<g:applylayout name="myLayout">
+El contenido para aplicar un diseño
+</g:applylayout>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -33,9 +70,31 @@ Attributes
 * @url@ - (optional) The URL to retrieve the content from and apply a layout to
 * @contentType@ (optional) - The content type to use, default is "text/html"
 * @encoding@ (optional) - The encoding to use
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ - el nombre del diseño
+* @ plantilla @-(opcional) la plantilla para aplicar el diseño a
+* @ url @ - la URL (opcional) para recuperar el contenido de y aplicar un diseño
+* @ contentType @ (opcional): escriba el contenido para utilizar, por defecto es "text/html"
+* @ codificación @ (opcional) - la codificación a utilizar
+
+{hidden}
+
 * @params@ (optional) - The params to pass onto the page object (retrievable with the [pageProperty|Tags] tag)
 
 h2. Source
 
 {source:tag=RenderTagLib.applyLayout}
 {source}
+{hidden}
+
+* @ params @ (opcional): los parámetros a pasar a la página de objeto (recuperables con el [pageProperty|Etiqueta etiquetas])
+
+h2. Fuente
+
+{source:tag=RenderTagLib.applyLayout}
+origen de {}

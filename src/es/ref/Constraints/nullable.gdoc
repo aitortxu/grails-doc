@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. nullable
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 age nullable: true
 {code}
+{hidden}
+
+h1. que acepta valores NULL
+
+h2. Fin
+
+Permite que una propiedad se establece en null @ @. Por defecto Grails permite null @ @ los valores de propiedades.
+
+h2. Ejemplos
+
+{code: java}
+edad que acepta valores NULL: verdadero
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,5 +38,23 @@ This constraint influences [schema generation|guide:gormConstraints].
 Error Code: @className.propertyName.nullable@
 
 {note}
+{hidden}
+
+h2. Descripción
+
+Set @ True @ si la propiedad permite null @ @ valores.
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+Código de error: @className.propertyName.nullable@
+
+{Nota}
+
+{hidden}
+
 Web requests resulting from form submissions will have blank strings, not @null@, for properties that have no value. Keep this in mind when working with the @nullable@ constraint since a blank string will validate for both @nullable:true@ and @nullable:false@. Set the [blank|constraints] constraint to @false@ to ensure that an empty value fails validation.
 {note}
+{hidden}
+
+Web pide resultantes de las presentaciones de forma tendrá cadenas en blanco, no @ null @, para las propiedades que no tienen ningún valor. Téngalo en cuenta cuando se trabaja con el @ nullable @ restricción ya que validará una cadena en blanco para ambos @ que acepta valores NULL: cierto @ y @ que acepta valores NULL: falso @. Establecer la delimitación [blank|constraints] @ False @ para asegurar que un valor vacío no pasa la validación.
+{Nota}

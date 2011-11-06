@@ -1,4 +1,6 @@
+
 {hidden}
+
 Interactive mode is the a feature of the Grails command line which keeps the JVM running and allows for quicker execution of commands. To activate interactive mode type 'grails' at the command line and then use TAB completion to get a list of commands:
 
 !interactive-output.png!
@@ -9,22 +11,17 @@ If you need to open a file whilst within interactive mode you can use the @open@
 
 TAB completion also works for class names after the @create-*@ commands:
 
+{hidden}
+
+Modo interactivo es la característica de la línea de comandos de Grails que mantiene el funcionamiento de JVM y permite la rápida ejecución de comandos. Para activar el modo interactivo tipo 'grails' en la línea de comandos y después utilizar finalización de ficha para obtener una lista de comandos:! output.png interactivo!Si es necesario abrir un archivo mientras está en modo interactivo puede utilizar open @ @ comando que se ficha completa rutas de archivo:! cmd.png interactivo abierto!FICHA término también funciona para los nombres de clase después de la @ crear-* @ comandos:
+
+{hidden}
+
 !interactive-comlete-class.png!
 
 If you need to run an external process whilst interactive mode is running you can do so by starting the command with a !:
+
+!interactive-run-external.png!
 {hidden}
 
-El modo interactivo es una característica de la línea de comandos Grails que mantiene la JVM funcionando y permite ejecutar comandos más rápidamente. Para activar el modo interactivo escriba "grails" en la línea de comandos y después use el tabulador para obtener una lista de comandos:
-
-!interactive-output.png!
-
-Si necesita abrir un archivo cuando esté en modo interactivo se puede utilizar el comando @open@ usando el tabulador para completar las rutas de archivos:
-
-!interactive-comlete-class.png!
-
-El tabulador también funciona para las clases después del comando @create-*@ :
-
-!interactive-output.png!
-
-Si necesita ejecutar un proceso externo, cuando esté en el modo interactivo, puede hacerlo a partir del comando con un !
-!interactive-run-external.png!
+! class.png interactiva comleta!Si necesita ejecutar un proceso externo mientras ejecuta el modo interactivo le puede hacerlo iniciando el comando con un!:! external.png de ejecución interactiva!

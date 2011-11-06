@@ -1,3 +1,6 @@
+
+{hidden}
+
 GSP also supports logical and iterative tags out of the box. For logic there are [if|tags], [else|tags] and [elseif|tags] tags for use with branching:
 
 {code:xml}
@@ -8,6 +11,21 @@ GSP also supports logical and iterative tags out of the box. For logic there are
    <%-- show basic functions --%>
 </g:else>
 {code}
+{hidden}
+
+SGP también admite etiquetas lógicas e iterativos de la caja. Por lógica hay [if|tags], [else|tags] y [elseif|tags] para uso con ramificación:
+
+{Código: xml}
+<g:if test="${session.role == 'admin'}">
+   <%-- show administrative functions --%>
+</g:if>
+<g:else>
+   <%-- show basic functions --%>
+</g:else>
+{code}
+
+{hidden}
+
 
 Use the [each|tags] and [while|tags] tags for iteration:
 
@@ -21,3 +39,15 @@ Use the [each|tags] and [while|tags] tags for iteration:
     <p>Number ${num++}</p>
 </g:while>
 {code}
+{hidden}
+
+Utilice [each|tags] y [while|tags] etiquetas de iteración:
+
+{Código: xml}<g:each in="${[1,2,3]}" var="num">
+   <p>Number ${num}</p>
+</g:each>
+
+<g:set var="num" value="${1}"></g:set>
+<g:while test="${num < 5 }">
+    <p>Number ${num}</p>
+</g:while>{code}

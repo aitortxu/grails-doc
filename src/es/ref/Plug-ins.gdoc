@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. plugin Usage
 
 A plugin provides additional capability to the Grails runtime and is created with the [create-plugin|commandLine] command:
@@ -7,6 +10,20 @@ grails create-plugin simple
 {code}
 
 This will create a plugin project which can then be packaged with [package-plugin|commandLine]:
+
+{hidden}
+
+h1. plugin de uso
+
+Un plugin proporciona capacidad adicional para la ejecución de Grails y se crea con el comando [crear-plugin|commandLine]:
+
+{code: java}
+Grails plugin crear simple
+{code}
+
+Esto creará un proyecto de plugin que luego puede ser envasado con [paquete-plugin|commandLine]:
+
+{hidden}
 
 {code:java}
 grails package-plugin
@@ -18,4 +35,21 @@ and installed into Grails applications with [install-plugin|commandLine]:
 grails install-plugin ../grails-simple-0.1.zip
 {code}
 
+{hidden}
+
+{code: java}
+Grails paquete-plugin
+{code}
+
+e instalado en aplicaciones Grails con [install-plugin|commandLine]:
+
+{code: java}
+instalación de Grails-plugin.../Grails-simple-0.1.zip
+{code}
+
+{hidden}
+
 Refer to the user guide topic on [plugins|guide:plugins] for more information.
+{hidden}
+
+Consulte el tema de guía de usuario de [plugins|guide:plugins] para obtener más información.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. New Unit Testing Console Output
 
 Test output from the test-app command has been improved:
@@ -7,6 +10,20 @@ Test output from the test-app command has been improved:
 h4. New Unit Testing API
 
 There is a new unit testing API based on mixins that supports JUnit 3, 4 and Spock style tests (with Spock 0.6 and above). Example:
+
+{hidden}
+
+h4. Nueva unidad pruebas de salida de la consola
+
+Prueba de salida del comando de prueba-app ha sido mejorada:
+
+! output.png prueba!
+
+h4. Nueva unidad pruebas API
+
+Hay una nueva API de pruebas de unidad basada en mixins que es compatible con JUnit 3, 4 y pruebas de estilo de Spock (con Spock 0,6 y superior). Ejemplo:
+
+{hidden}
 
 {code:java}
 import grails.test.mixin.TestFor
@@ -21,6 +38,24 @@ class SimpleControllerTests  {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+grails.test.mixin.TestFor de importación
+
+@TestFor(SimpleController)
+clase SimpleControllerTests {}
+    void testIndex() {}
+        Controller.Home()
+
+afirman ver == "página/simple"
+        valer model.title == "Hello World"
+    }
+}
+{code}
+
+{hidden}
+
 
 The [documentation on testing|guide:testing] has also been re-written around this new framework.
 
@@ -31,7 +66,26 @@ A new in-memory GORM implementation is present that supports many more features 
 h4. Faster Unit Testing with Interactive Mode
 
 The new interactive mode (activated by typing 'grails') greatly improves the execution time of running unit and integration tests.
+{hidden}
+
+El [documentación sobre testing|guide: pruebas] también ha sido reescrito alrededor de este nuevo marco.
+
+h4. GORM pruebas de unidad
+
+Una nueva implementación de GORM en memoria es que soporta muchas más características de la unidad de fabricación de GORM API previamente pruebas de consultas de criterios, llamado a consultas y otros no admite métodos posibles.
+
+h4. Pruebas con el modo interactivo de unidades más rápido
+
+El nuevo modo interactivo (activado escribiendo 'grails') enormemente mejora el tiempo de ejecución de la ejecución de pruebas de unidad y de integración.
+
+{hidden}
+
 
 h4. Unit Test Scaffolding
 
 A unit test is now generated for scaffolded controllers
+{hidden}
+
+h4. Andamios de prueba de unidad
+
+Ahora se genera una prueba unitaria para los controladores scaffolded

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h3. Type Conversion Methods
 
 If you prefer to avoid the overhead of [Data Binding|guide:dataBinding] and simply want to convert incoming parameters (typically Strings) into another more appropriate type the [params|controllers] object has a number of convenience methods for each type:
@@ -7,6 +10,20 @@ def total = params.int('total')
 {code}
 
 The above example uses the @int@ method, and there are also methods for @boolean@, @long@, @char@, @short@ and so on. Each of these methods is null-safe and safe from any parsing errors, so you don't have to perform any additional checks on the parameters.
+
+{hidden}
+
+h3. Métodos de conversión de tipo
+
+Si prefiere evitar la sobrecarga de [datos Binding|guide:dataBinding] y simplemente quieren convertir parámetros entrantes (normalmente cadenas) en otro más adecuado tipo el objeto [params|controllers] tiene un número de métodos de conveniencia para cada tipo:
+
+{code}
+Def total = params.int('total')
+{code}
+
+El ejemplo anterior utiliza el int @ @ método, y hay también métodos para @ boolean @, @ larga @, @ char @, @ corto @ y así sucesivamente. Cada uno de estos métodos es null seguro y a salvo de los errores de análisis, por lo que no tienes que realizar las verificaciones complementarias sobre los parámetros.
+
+{hidden}
 
 Each of the conversion methods allows a default value to be passed as an optional second argument.  The default value will be returned if a corresponding entry cannot be found in the map or if an error occurs during the conversion.  Example:
 
@@ -18,6 +35,20 @@ These same type conversion methods are also available on the @attrs@ parameter o
 
 h3. Handling Multi Parameters
 
+{hidden}
+
+Cada uno de los métodos de conversión permite un valor predeterminado que se pasa como un segundo argumento opcional.  Se devolverá el valor predeterminado si no se encuentra una entrada correspondiente en el mapa o si se produce un error durante la conversión.  Ejemplo:
+
+{code}
+Def total = params.int ('total', 42)
+{code}
+
+Estos mismos métodos de conversión de tipo también están disponibles en el @ attrs @ parámetro de etiquetas del SGP.
+
+h3. Múltiples parámetros de manejo
+
+{hidden}
+
 A common use case is dealing with multiple request parameters of the same name. For example you could get a query string such as @?name=Bob&name=Judy@.
 
 In this case dealing with one parameter and dealing with many has different semantics since Groovy's iteration mechanics for @String@ iterate over each character. To avoid this problem the [params|controllers] object provides a @list@ method that always returns a list:
@@ -27,3 +58,6 @@ for (name in params.list('name')) {
     println name
 }
 {code}
+{hidden}
+
+Un caso de uso común se ocupa de múltiples parámetros de solicitud del mismo nombre. Por ejemplo se podría obtener una cadena de consulta como @? nombre = Bob

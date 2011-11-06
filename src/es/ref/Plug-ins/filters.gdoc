@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. filters
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @filters@ plugin configures Grails' support for Filters.
 h2. Examples
 
 An example filter:
+
+{hidden}
+
+h1. filtros
+
+h2. Fin
+
+Los filtros @ @ plugin configura el soporte de Grails para filtros.
+
+h2. Ejemplos
+
+Un filtro de ejemplo:
+
+{hidden}
 
 {code:java}
 class SecurityFilters {
@@ -22,6 +39,17 @@ class SecurityFilters {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase SecurityFilters {}
+    filtros de Def = {}
+        loginCheck (controlador: ' *', acción: ' *') {}
+            antes = {}
+                Si (! session.user
+
+{hidden}
+
 
 Filter rule attributes:
 * @controller@ - controller matching pattern, by default \* is replaced with .\* and a regex is compiled
@@ -32,6 +60,19 @@ Filter rule attributes:
 
 h2. Description
 
+{hidden}
+
+Atributos de regla de filtro:
+* @ controlador @ - controlador de coincidencia de patrón, por defecto \ * es reemplazado con. \ * y se compila un regex
+* @ acción @ - acción que coincidan con el patrón, por defecto \ * es reemplazado con. \ * y se compila un regex
+* @ regex @ (@ true@/@false @) - utilice la sintaxis regex (no reemplazar ' \ * 'con'. \ *')
+* @ Buscar @ (@ true@/@false @) - partidos de regla con parciales coinciden (véase @java.util.regex.Matcher.find()@)
+* @ invertir @ (@ true@/@false @) - invertir la regla (no regla)
+
+h2. Descripción
+
+{hidden}
+
 Refer to the section on [Filters|guide:filters] in the Grails user guide which details how filters work.
 
 Configured Spring Beans:
@@ -40,3 +81,13 @@ Configured Spring Beans:
 Configured Spring Beans given a filter called @SecurityFilters@:
 * @SecurityFiltersClass@ - The [GrailsFiltersClass|api:org.codehaus.groovy.grails.web.filters.GrailsFiltersClass] instance which aids in analyzing the conventions within the filter.
 * @SecurityFilters@ - A singleton reference to the filter itself to support auto-wiring into a Filter
+{hidden}
+
+Consulte la sección [Filters|guide:filters] en la Guía de usuario de Grails que detalla cómo funcionan los filtros.
+
+Frijoles de primavera configurados:
+
+* @ filterInterceptor @ - una instancia de [CompositeInterceptor|api:org.codehaus.groovy.grails.plugins.web.filters.CompositeInterceptor] compone todos los filtros juntos en un solo primavera @ Interceptor @.
+Configurar frijoles primavera dado un filtro llamado @ SecurityFilters @:
+* @ SecurityFiltersClass @ - la instancia [GrailsFiltersClass|api:org.codehaus.groovy.grails.web.filters.GrailsFiltersClass] que ayuda a analizar las convenciones dentro del filtro.
+* @ SecurityFilters @ - una referencia singleton del filtro de sí mismo para apoyar el cableado de auto en un filtro

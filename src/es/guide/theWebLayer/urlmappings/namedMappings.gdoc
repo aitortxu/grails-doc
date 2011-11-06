@@ -1,3 +1,6 @@
+
+{hidden}
+
 URL Mappings also support named mappings, that is are mappings which have a name associated with them. The name may be used to refer to a specific mapping when links are generated.
 
 The syntax for defining a named mapping is as follows:
@@ -9,6 +12,22 @@ static mappings = {
    }
 }
 {code}
+{hidden}
+
+Asignaciones de dirección URL también apoyo llamado asignaciones, que son las asignaciones que tienen un nombre asociado a ellos. El nombre puede usarse para referirse a una asignación específica cuando se generan vínculos.
+
+La sintaxis para definir una asignación de nombre es como sigue:
+
+{code: java}
+asignaciones estáticas = {}
+   nombre <mapping name="">: <url pattern="">{}
+      // ...
+   }
+}
+{código}</url> </mapping>
+
+{hidden}
+
 
 For example:
 
@@ -24,6 +43,25 @@ static mappings = {
     }
 }
 {code}
+{hidden}
+
+Por ejemplo:
+
+{code: java}
+asignaciones estáticas = {}
+    nombre personList: "/ showPeople" {}
+        controlador = 'persona'
+        acción = 'lista'
+    }
+    nombre accountDetails: "/details/$ acctNumber" {}
+        controlador = 'producto'
+        acción = 'accountDetails'
+    }
+}
+{code}
+
+{hidden}
+
 
 The mapping may be referenced in a link tag in a GSP.
 
@@ -36,6 +74,22 @@ That would result in:
 {code:xml}
 <a href="/showPeople">List People</a>
 {code}
+{hidden}
+
+Puede hacer referencia a la asignación en una etiqueta de enlace en un sistema de preferencias Generalizadas.
+
+{Código: xml}
+<g:link mapping="personList">Personas de lista</g:link>
+{code}
+
+Tendría como resultado:
+
+{Código: xml}
+<a href="/showPeople">Personas de lista</a>
+{code}
+
+{hidden}
+
 
 Parameters may be specified using the params attribute.
 
@@ -46,6 +100,20 @@ Parameters may be specified using the params attribute.
 {code}
 
 That would result in:
+{hidden}
+
+Parámetros pueden especificarse mediante el atributo params.
+
+{Código: xml}
+<g:link mapping="accountDetails" params="[acctNumber:'8675309']">
+    Mostrar cuenta
+</g:link>
+{code}
+
+Tendría como resultado:
+
+{hidden}
+
 
 {code:xml}
 <a href="/details/8675309">Show Account</a>
@@ -56,6 +124,20 @@ Alternatively you may reference a named mapping using the link namespace.
 {code:xml}
 <link:personList>List People</link:personList>
 {code}
+{hidden}
+
+{Código: xml}
+<a href="/details/8675309">Mostrar cuenta</a>
+{code}
+
+También puede hacer referencia a una asignación con nombre utilizando el espacio de nombres de enlace.
+
+{Código: xml}
+<link:personlist>Personas de lista</link:personlist>
+{code}
+
+{hidden}
+
 
 That would result in:
 
@@ -68,6 +150,22 @@ The link namespace approach allows parameters to be specified as attributes.
 {code:xml}
 <link:accountDetails acctNumber="8675309">Show Account</link:accountDetails>
 {code}
+{hidden}
+
+Tendría como resultado:
+
+{Código: xml}
+<a href="/showPeople">Personas de lista</a>
+{code}
+
+El enfoque de espacio de nombres de enlace permite parámetros especificar como atributos.
+
+{Código: xml}
+<link:accountdetails acctnumber="8675309">Mostrar cuenta</link:accountdetails>
+{code}
+
+{hidden}
+
 
 That would result in:
 
@@ -82,9 +180,34 @@ To specify attributes that should be applied to the generated @href@, specify a 
     Show Account
 </link:accountDetails>
 {code}
+{hidden}
+
+Tendría como resultado:
+
+{Código: xml}
+<a href="/details/8675309">Mostrar cuenta</a>
+{code}
+
+Para especificar los atributos que deben aplicarse a la generada @ href @, especifique un mapa @ @ valor a @ attrs @ atributo.  Estos atributos se aplicará directamente a los href, no pasado a ser utilizados como parámetros de la petición.
+
+{Código: xml}
+<link:accountdetails attrs="[class: 'fancy']" acctnumber="8675309">
+    Mostrar cuenta
+</link:accountdetails>
+{code}
+
+{hidden}
+
 
 That would result in:
 
 {code:xml}
 <a href="/details/8675309" class="fancy">Show Account</a>
+{code}
+{hidden}
+
+Tendría como resultado:
+
+{Código: xml}
+<a href="/details/8675309" class="fancy">Mostrar cuenta</a>
 {code}

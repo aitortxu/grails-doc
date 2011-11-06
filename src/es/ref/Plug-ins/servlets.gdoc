@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. servlets
 
 h2. Purpose
@@ -8,12 +11,38 @@ h2. Examples
 
 Allows attributes from the [request|controllers], [session|controllers], and [servletContext|controllers] to be be accessed with the de-reference operator:
 
+{hidden}
+
+h1. servlets
+
+h2. Fin
+
+Los servlets @ @ plugin mejora las clases de Servlet API con nuevos métodos
+
+h2. Ejemplos
+
+Permite atributos de [request|controllers], [session|controllers] y [servletContext|controllers] para ser visitada con el operador de de-reference:
+
+{hidden}
+
 {code:java}
 class BookController {
     def find() {
         def findBy = params.findBy
         def foo = request.foo
         def loggedUser = session.logged_user
+        ...
+    }
+}
+{code}
+{hidden}
+
+{code: java}
+clase BookController {}
+    Def find() {}
+        Def findBy = params.findBy
+        Def foo = request.foo
+        Def loggedUser = session.logged_user
         ...
     }
 }

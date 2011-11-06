@@ -1,14 +1,9 @@
+
 {hidden}
+
 Another great feature of URL mappings is that they automatically customize the behaviour of the [link|tags] tag so that changing the mappings don't require you to go and change all of your links.
-{hidden}
 
-Otra gran mejora del mapeo de URL es que se puede personalizar automaticamente el comportamiento de [enlaces|etiquetas] etiqueta asi que cambiar los mapeos no requiere de ir y cambiar todos sus enlaces.
-
-{hidden}
 This is done through a URL re-writing technique that reverse engineers the links from the URL mappings. So given a mapping such as the blog one from an earlier section:
-{hidden}
-
-Esto es hecho a travez de la tecnica de reescritura de la URL que hace ingenieria inversa a los links de los mapeos de URL. Asi que dado un mapeo tal como el blog de la seccion anterior:
 
 {code:java}
 static mappings = {
@@ -17,10 +12,20 @@ static mappings = {
 {code}
 
 {hidden}
-If you use the link tag as follows:
+
+Otra gran característica de asignaciones de dirección URL es que ellos automáticamente personalizar el comportamiento de la etiqueta [link|tags] para que cambiar las asignaciones no necesita ir a cambiar todos sus vínculos.
+
+Esto se realiza mediante una dirección URL reescribiendo técnica que invertir a ingenieros los vínculos de las asignaciones de dirección URL. Por lo que da una asignación como blog en una sección anterior:
+
+{code: java}
+asignaciones estáticas = {}
+   "/ año de blog /$ $? / mes$? / día$? / id$?"(controlador: "blog", acción: "Mostrar")
+}
+{code}
+
 {hidden}
 
-Si usted usa la etiqueta de enlance como sigue:
+If you use the link tag as follows:
 
 {code:xml}
 <g:link controller="blog" action="show"
@@ -33,14 +38,34 @@ Si usted usa la etiqueta de enlance como sigue:
     My Blog - October 2007 Posts
 </g:link>
 {code}
+{hidden}
+
+Si se utiliza la etiqueta link como sigue:
+
+{Código: xml}
+<g:link controller="blog" action="show" params="[blog:'fred', year:2007]">
+    Mi Blog
+</g:link>
+
+<g:link controller="blog" action="show" params="[blog:'fred', year:2007, month:10]">
+    Mi Blog - puestos de octubre de 2007
+</g:link>
+{code}
 
 {hidden}
+
+
 Grails will automatically re-write the URL in the correct format:
-{hidden}
-
-Grails automaticamente reescribira la URL en el formato correcto:
 
 {code:xml}
 <a href="/fred/2007">My Blog</a>
 <a href="/fred/2007/10">My Blog - October 2007 Posts</a>
+{code}
+{hidden}
+
+Grails automáticamente Re-escribir la dirección URL en el formato correcto:
+
+{Código: xml}
+<a href="/fred/2007">Mi Blog</a>
+<a href="/fred/2007/10">Mi Blog - puestos de octubre de 2007</a>
 {code}

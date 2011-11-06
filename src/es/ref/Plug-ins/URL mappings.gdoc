@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. URLMappings
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @URLMappings@ plugin configures Grails' URL Mapping infrastructure.
 h2. Examples
 
 An example @UrlMapping@ class:
+
+{hidden}
+
+h1. URLMappings
+
+h2. Fin
+
+@ URLMappings @ plugin configura infraestructura de asignación de dirección URL de Grails.
+
+h2. Ejemplos
+
+Un ejemplo @ UrlMapping @ clase:
+
+{hidden}
 
 {code:java}
 class UrlMappings {
@@ -23,6 +40,26 @@ class UrlMappings {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase UrlMappings {}
+
+asignaciones estáticas = {}
+        "/ acción de controlador /$ $? / id$?"{
+            {restricciones
+                / / aplicar restricciones aquí
+            }
+        }
+
+"/"(view:"/index")
+        "500"(view:'/error')
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -33,3 +70,14 @@ Configured Spring Beans:
 * @grailsUrlMappingsHolderBean@ - A [UrlMappingsHolderFactoryBean|api:org.codehaus.groovy.grails.web.mapping.UrlMappingsHolderFactoryBean] factory bean that constructs a [org.codehaus.groovy.grails.web.mapping.UrlMappingsHolder|api:org.codehaus.groovy.grails.web.mapping.UrlMappingsHolder] instance that stores all of the URL mappings.
 * @urlMappingsTargetSource@ - A Spring [HotSwappableTargetSource|api:org.springframework.aop.target.HotSwappableTargetSource] used in auto-reloading to automatically update URL mappings when changed.
 * @grailsUrlMappingsHolder@ - A Spring [ProxyFactoryBean|api:org.springframework.aop.framework.ProxyFactoryBean] that proxies onto the actual @UrlMappingsHolder@ instance using the @HotSwappableTargetSource@
+{hidden}
+
+h2. Descripción
+
+Consulte la sección [URL Mapping|guide:urlmappings] en la Guía de usuario de Grails que detalla las asignaciones de dirección URL de Grails.
+
+Frijoles de primavera configurados:
+
+* @ grailsUrlMappingsHolderBean @ - un grano de fábrica de [UrlMappingsHolderFactoryBean|api:org.codehaus.groovy.grails.web.mapping.UrlMappingsHolderFactoryBean] que crea una instancia de [org.codehaus.groovy.grails.web.mapping.UrlMappingsHolder|api:org.codehaus.groovy.grails.web.mapping.UrlMappingsHolder] que almacena todas las asignaciones de dirección URL.
+* @ urlMappingsTargetSource @ - A primavera [HotSwappableTargetSource|api:org.springframework.aop.target.HotSwappableTargetSource] en auto-recarga a automáticamente Actualizar asignaciones URL cuando cambia.
+* @ grailsUrlMappingsHolder @ - A primavera [ProxyFactoryBean|api:org.springframework.aop.framework.ProxyFactoryBean] que servidores proxy en la Real @ UrlMappingsHolder @ ejemplo utilizando la @ HotSwappableTargetSource @

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. add-proxy
 
 h2. Purpose
@@ -7,6 +10,20 @@ Adds a proxy configuration that Grails can use when communicating over the inter
 The proxy configuration can be activated with the [set-proxy|commandLine] command.
 
 h2. Examples
+
+{hidden}
+
+h1. Agregar proxy
+
+h2. Fin
+
+Agrega una configuración de proxy que Grails pueden utilizar cuando se comunican a través de internet, como con el comando [install-plugin|commandLine].
+
+La configuración del proxy se puede activar con el comando [conjunto-proxy|commandLine].
+
+h2. Ejemplos
+
+{hidden}
 
 {code:java}
 grails add-proxy client --host=proxy-server --port=4300 \
@@ -20,6 +37,23 @@ Usage:
 grails add-proxy [name] --host=[server] --port=[port] \
        --username=[username]* --password=[password]*
 {code}
+{hidden}
+
+{code: java}
+cliente de Grails Agregar proxy--host = servidor proxy--puerto = 4300 \
+       --username = invitado--password = invitado
+{code}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails Agregar-proxy [nombre]--host = [servidor]--puerto = [puerto] \
+       --username = [username] *--password = [contraseña] *
+{code}
+
+{hidden}
+
 
 Arguments:
 
@@ -29,3 +63,12 @@ Arguments:
 * @username@ (optional) - The server username
 * @password@ (optional) - The server password
 
+{hidden}
+
+Argumentos:
+
+* @ nombre @ - el nombre de la configuración de proxy
+* @ host @ - el host del servidor
+* @ puerto @ - el puerto del servidor
+* @ username @ (opcional): el nombre de usuario de servidor
+* @ contraseña @ (opcional): la contraseña del servidor

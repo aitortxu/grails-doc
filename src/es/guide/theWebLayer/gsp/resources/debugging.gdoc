@@ -1,3 +1,6 @@
+
+{hidden}
+
 When your resources are being moved around, renamed and otherwise mutated, it can be hard to debug client-side issues. Modern browsers, especially Safari, Chrome and Firefox have excellent tools that let you view all the resources requested by a page, including the headers and other information about them.
 
 There are several debugging features built in to the Resources framework.
@@ -7,6 +10,20 @@ h4. X-Grails-Resources-Original-Src Header
 Every resource served in development mode will have the X-Grails-Resources-Original-Src: header added, indicating the original source file(s) that make up the response.
 
 h4. Adding the debug flag
+
+{hidden}
+
+Cuando los recursos se mueven alrededor, renombrado y mutado lo contrario, pueden ser difícil de depurar problemas de cliente. Los navegadores modernos, especialmente Safari, Chrome y Firefox tienen excelentes herramientas que permiten que ver todos los recursos solicitados por una página, incluyendo los encabezados y otra información acerca de ellos.
+
+Hay varias características de depuración integradas en el marco de los recursos.
+
+h4. Encabezado X-Grails-recursos-Original-Src
+
+Cada recurso sirvió en el modo de desarrollo tendrá X-Grails-recursos-Original-Src: encabezado agregado, indicando la fuente original file (s) que constituyen la respuesta.
+
+h4. Agregar la bandera de depuración
+
+{hidden}
 
 If you add a query parameter *_debugResources=y* to your URL and request the page, Resources will bypass any processing so that you can see your original source files.
 
@@ -19,5 +36,24 @@ You can turn on the aforementioned debug mechanism without requiring a query par
 {code}
 grails.resources.debug = true
 {code}
+{hidden}
+
+Si agrega un parámetro de consulta * _debugResources = y * su URL y la solicitud de la página, recursos omitirá cualquier procesamiento para que puedan ver los archivos de código fuente original.
+
+Esto también agrega una marca única para todos sus URL de recursos, para derrotar a cualquier memoria caché que pueden utilizar los navegadores. Esto significa que siempre debería ver el código muy tarde al volver a cargar la página.
+
+h4. Encendido todo el tiempo de depuración
+
+Puede activar el mecanismo de depuración antes mencionados sin requerir un parámetro de consulta, pero encendido en Config.groovy:
+
+{code}
+Grails.Resources.Debug = true
+{code}
+
+{hidden}
+
 
 You can of course set this per-environment.
+{hidden}
+
+Por supuesto puede establecer por este entorno.

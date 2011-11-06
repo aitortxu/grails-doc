@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. install-dependency
 
 h2. Purpose
@@ -11,6 +14,24 @@ grails install-dependency mysql:mysql-connector-java:5.1.16
 grails install-dependency mysql:mysql-connector-java:5.1.16 --dir=lib
 grails install-dependency --group=mysql --name=mysql-connector-java --version=5.1.16
 {code}
+{hidden}
+
+h1. Dependencia de la instalación
+
+h2. Fin
+
+Instala una dependencia JAR, puesta a disposición al mecanismo de Grails [dependencia resolution|guide:ivy].
+
+h2. Ejemplos
+
+{code: java}
+mysql:mysql de instalación-dependencia de Grails-connector-java: 5.1.16
+Grails instalar dependencia mysql:mysql-conector-java:5.1.16--dir = lib
+instalación de Grails-dependencia--grupo = mysql--nombre = mysql-connector-java--versión = 5.1.16
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,6 +41,19 @@ grails install-dependency [dependency]
 {code}
 
 Arguments:
+
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails instalación-dependencia [dependencia]
+{code}
+
+Argumentos:
+
+{hidden}
 
 * @group@ - The group of the dependency
 * @name@ - The name of the dependency
@@ -31,6 +65,20 @@ The @install-dependency@ command allows the installation of a JAR dependency int
 
 In its most simple form you can pass a single argument that defines the dependency in the form "group:name:version":
 
+{hidden}
+
+* @ group @ - el grupo de la dependencia
+* @ nombre @ - el nombre de la dependencia
+* @ versión @ - la versión de la dependencia
+* @ repositorio @ - el repositorio para resolver desde
+* @ dir @ - el directorio de destino para resolver archivos JAR
+
+El @ instalación-dependencia @ comando permite la instalación de una dependencia JAR en la caché de Ivy para que no se puede resolver localmente (sin necesidad de configurar un repositorio explícitamente).
+
+En su forma más simple se puede pasar un solo argumento que define la dependencia en el formulario "versión: nombre: grupo":
+
+{hidden}
+
 {code}
 grails install-dependency mysql:mysql-connector-java:5.1.16
 {code}
@@ -41,9 +89,31 @@ Grails has some built in common public Maven repositories that will be used to r
 grails install-dependency mysql:mysql-connector-java:5.1.16 \\\\
          --repository=http://download.java.net/maven/2
 {code}
+{hidden}
+
+{code}
+mysql:mysql de instalación-dependencia de Grails-connector-java: 5.1.16
+{code}
+
+Grails ha construido algunos repositorios Maven públicos en común que se utilizará para resolver la dependencia. Si no se encuentra a la dependencia de que puede especificar su propio repositorio utiliza el repositorio @ @ argumento:
+
+{code}
+mysql:mysql de instalación-dependencia de Grails-connector-java: 5.1.16 \\\\
+         --Repository=http://Download.Java.net/Maven/2
+{code}
+
+{hidden}
+
 
 By default the JARs will be resolved to your local Ivy cache (typically @\$USER_HOME/.ivy2/cache@), if you wish the JAR files to be placed in an alternative directory you can use the @dir@ argument:
 
 {code}
 grails install-dependency mysql:mysql-connector-java:5.1.16 --dir=lib
+{code}
+{hidden}
+
+De forma predeterminada que las jarras se resolverá a su memoria caché local de Ivy (normalmente @ \$USER_HOME/.ivy2/cache@), si desea que los archivos JAR para colocarse en un directorio alternativo puede utilizar dir @ @ argumento:
+
+{code}
+Grails instalar dependencia mysql:mysql-conector-java:5.1.16--dir = lib
 {code}

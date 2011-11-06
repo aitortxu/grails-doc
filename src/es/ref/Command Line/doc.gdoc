@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. doc
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails doc
 {code}
+{hidden}
+
+h1. doc
+
+h2. Fin
+
+Genera documentación Javadoc y Groovydoc desde el actual proyecto Grails.
+
+h2. Ejemplos
+
+{code: java}
+doc Grails
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,19 @@ The documentation is generated to the following directories:
 * @docs/api@ - Location of javadoc comments
 * @docs/gapi@ - Location of groovydoc comments
 
+{hidden}
+
+h2. Descripción
+
+Desde Grails es un marco de origen mixto es útil tener documentación Java y Groovy para cubrir el sistema. El comando de doc genera Javadoc (el formato estándar para la documentación de Java) y Groovydoc comentarios.
+
+La documentación se genera en los siguientes directorios:
+
+* @ docs/api @ - ubicación de comentarios javadoc
+* @ docs/gapi @ - ubicación de groovydoc comentarios
+
+{hidden}
+
 Usage:
 {code:java}
 grails doc
@@ -28,3 +60,14 @@ Fired Events:
 
 * @DocStart@ - Before documentation generation begins
 * @DocEnd@ - After documentation generation completes
+{hidden}
+
+Uso:
+{code: java}
+doc Grails
+{code}
+
+Despedido de eventos:
+
+* @ DocStart @ - antes de generación de documentación comienza
+* @ DocEnd @ - después de la generación de documentación completa

@@ -1,3 +1,6 @@
+
+{hidden}
+
 Specific JavaScript can be called if certain events occur, all the events start with the "on" prefix and let you give feedback to the user where appropriate, or take other action:
 
 {code:xml}
@@ -8,6 +11,16 @@ Specific JavaScript can be called if certain events occur, all the events start 
               onComplete="hideProgress()">Show Book 1</g:remoteLink>
 {code}
 
+{hidden}
+
+Si ciertos eventos ocurren, todos los eventos comienzan con el prefijo "on" y le permiten dan comentarios al usuario, en su caso, o toman otras medidas, se puede llamar JavaScript específico:
+
+{Código: xml}
+<g:remotelink action="show" id="1" update="success" onloading="showProgress()" oncomplete="hideProgress()">Mostrar libro 1</g:remotelink>
+{code}
+
+{hidden}
+
 The above code will execute the "showProgress()" function which may show a progress bar or whatever is appropriate. Other events include:
 
 * @onSuccess@  - The JavaScript function to call if successful
@@ -17,6 +30,20 @@ The above code will execute the "showProgress()" function which may show a progr
 * @onLoading@  - The JavaScript function to call when the remote function is loading the response
 * @onLoaded@  - The JavaScript function to call when the remote function is completed loading the response
 * @onComplete@  - The JavaScript function to call when the remote function is complete, including any updates
+
+{hidden}
+
+El código anterior ejecutará la función "showProgress()" que puede mostrar una barra de progreso o lo que sea apropiado. Otros eventos incluyen:
+
+* @ onSuccess @ - JavaScript la función llamar si es correcto
+* @ onFailure @ - JavaScript la función llamar si la llamada
+* @ on_ERROR_CODE @ - función JavaScript el llamar a manejar especifica los códigos de error (por ejemplo on404 = "alert ('no encontrado!')")
+* @ onUninitialized @ - función JavaScript el llamar el motor de Ajax no se pudo inicializar
+* @ onLoading @ - JavaScript la función llamar cuando la función remota está cargando la respuesta
+* @ onLoaded @ - JavaScript la función llamar una vez finalizada la función remota cargar la respuesta
+* @ onComplete @ - función JavaScript el llamar al finalizar la función remota, incluyendo las actualizaciones
+
+{hidden}
 
 If you need a reference to the @XmlHttpRequest@ object you can use the implicit event parameter @e@ to obtain it:
 
@@ -30,4 +57,16 @@ If you need a reference to the @XmlHttpRequest@ object you can use the implicit 
 <g:remoteLink action="example"
               update="success"
               onSuccess="fireMe(e)">Ajax Link</g:remoteLink>
+{code}
+{hidden}
+
+Si necesita una referencia a la XmlHttpRequest @ @ objeto puede utilizar el parámetro @ e implícita evento @ para obtenerla:
+
+{Código: xml}
+<g:javascript>
+    función fireMe(e) {}
+        Alert ("XmlHttpRequest =" e)
+    }
+}
+</g:javascript> <g:remotelink action="example" update="success" onsuccess="fireMe(e)">Enlace de Ajax</g:remotelink>
 {code}

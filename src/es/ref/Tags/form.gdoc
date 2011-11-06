@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. form
 
 h2. Purpose
@@ -7,6 +10,20 @@ Creates a form that submits to a controller, action, and/or id. Beyond what is d
 h2. Examples
 
 Example controller for an application called "shop":
+
+{hidden}
+
+h1. formulario
+
+h2. Fin
+
+Crea un formulario que se somete a un controlador, acción o id. Más allá de lo que se describe a continuación, aplicarán todos los atributos HTML habituales.
+
+h2. Ejemplos
+
+Controlador de ejemplo de una aplicación llamada "comprar":
+
+{hidden}
 
 {code:java}
 class Book {
@@ -19,6 +36,22 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase {libro
+    Def list() {}
+        [libros: Book.list(params)]
+    }
+
+Def show() {}
+        [libro: Book.get(params.id)]
+    }
+}
+{code}
+
+{hidden}
+
 
 Example usages for above controller:
 
@@ -40,6 +73,22 @@ results in:
 results in:
 <form action="/shop/book/show" method="post" >...</form>
 {code}
+{hidden}
+
+Usos de ejemplo por encima de controlador:
+
+{Código: xml}
+<g:form name="myForm" action="myaction" id="1">...</g:form>
+resultados en:<form action="/shop/book/myaction/1" method="post" name="myForm" id="myForm">...</form>
+
+<g:form name="myForm" url="[action:'list',controller:'book']">...</g:form>
+resultados en:<form action="/shop/book/list" method="post" name="myForm" id="myForm">...</form>
+
+<g:form action="show">...</g:form>
+resultados en:<form action="/shop/book/show" method="post">...</form>{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -50,6 +99,20 @@ Attributes
 * @id@ (optional) - The id to use in the link
 * @fragment@ (optional) - The link fragment (often called anchor tag) to use
 * @mapping@ (optional) - The [named URL mapping|guide:namedMappings] to use to rewrite the link
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ acción @ (opcional): el nombre de la acción que se utilizan en el enlace; Si no se especifica la acción predeterminada se vincularán
+* @ controlador @ (opcional): el nombre del controlador para usar en el enlace; Si no especifica el controlador actual se vincularán
+* @ id @ (opcional): el id que se utilizan en el enlace
+* @ fragmento @ (opcional) - el fragmento de enlace (etiqueta de anclaje a menudo llamado) a utilizar
+* @ asignación @ (opcional): [nombre mapping|guide:namedMappings de URL] para reescribir el vínculo
+
+{hidden}
+
 * @params@ (optional) - A Map of request parameters
 * @url@ (optional) - A map containing the action,controller,id etc.
 * @absolute@ (optional) - If @true@ will prefix the link target address with the value of the @grails.serverURL@ property from @Config.groovy@, or http://localhost:<port> if there is no setting in @Config.groovy@ and not running in production.
@@ -60,4 +123,22 @@ Attributes
 h2. Source
 
 {source:tag=FormTagLib.form}
+{hidden}
+
+* @ params @ (opcional) - A asignar parámetros de solicitud
+* @ url @ (opcional): A map que contiene la acción, controlador, id etc..
+* @ absoluto @ (opcional): si @ verdadero @ prefijo de la dirección de destino de vínculo con el valor de la propiedad @grails.serverURL@ de @ Config.groovy@ o http://localhost:<port> Si no hay ningún valor en @Config.groovy@ y no se está ejecutando en producción.
+* @ base @ (opcional) - establece el prefijo que se agregará a la dirección de destino de vínculo, normalmente una dirección URL del servidor absoluta. Esto anula el comportamiento de la absoluta @ @ propiedad, si ambos se especifican.
+* @ nombre @ (opcional) - valor a utilizar el nombre y el id de atributo de la etiqueta form
+* @ useToken @ (opcional): definir si va a enviar un token en la petición para gestionar envíos de formularios duplicados. Consulte [manejo Submissions|guide:formtokens de forma duplicar]
+
+h2. Fuente
+
+{source:tag=FormTagLib.form}</port>
+
+{hidden}
+
 {source}
+{hidden}
+
+origen de {}

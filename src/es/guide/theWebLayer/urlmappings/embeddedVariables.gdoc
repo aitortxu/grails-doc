@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Simple Variables
 
 The previous section demonstrated how to map simple URLs with concrete "tokens". In URL mapping speak tokens are the sequence of characters between each slash, '/'. A concrete token is one which is well defined such as as @/product@. However, in many circumstances you don't know what the value of a particular token will be until runtime. In this case you can use variable placeholders within the URL for example:
@@ -8,6 +11,20 @@ static mappings = {
 }
 {code}
 
+{hidden}
+
+h4. Variables simples
+
+La sección anterior demuestra cómo asignar URL simples con "tokens" de hormigón. En la asignación de dirección URL hablar tokens son la secuencia de caracteres entre cada barra '/'. Un símbolo concreto es que está bien definido como como @ / producto @. Sin embargo, en muchos casos no sabe cuál será el valor de un símbolo concreto hasta el tiempo de ejecución. En este caso puede utilizar marcadores de posición variables dentro de la dirección URL por ejemplo:
+
+{code: java}
+asignaciones estáticas = {}
+  "id de $/product/" (controlador: "producto")
+}
+{code}
+
+{hidden}
+
 In this case by embedding a $id variable as the second token Grails will automatically map the second token into a parameter (available via the [params|controllers] object) called @id@. For example given the URL @/product/MacBook@, the following code will render "MacBook" to the response:
 
 {code:java}
@@ -17,6 +34,20 @@ class ProductController {
 {code}
 
 You can of course construct more complex examples of mappings. For example the traditional blog URL format could be mapped as follows:
+
+{hidden}
+
+En este caso mediante la incorporación de una variable de id $ como los segundo testigos Grails automáticamente asignará el segundo testigo en un parámetro (disponible a través del objeto [params|controllers]) llamado @ id @. Por ejemplo, dada la URL @ / producto/MacBook @, el código siguiente representará "MacBook" a la respuesta:
+
+{code: java}
+clase ProductController {}
+     Def índice() {procesamiento params.id}
+}
+{code}
+
+Por supuesto puede construir ejemplos más complejos de asignaciones. Por ejemplo, el formato de dirección URL de blog tradicional podría asignarse como sigue:
+
+{hidden}
 
 {code:java}
 static mappings = {
@@ -29,6 +60,22 @@ The above mapping would let you do things like:
 {code:java}
 /graemerocher/2007/01/10/my_funky_blog_entry
 {code}
+{hidden}
+
+{code: java}
+asignaciones estáticas = {}
+   "/ id de día /$ de $blog /$ año /$ $/ mes" (controlador: "blog", acción: "show")
+}
+{code}
+
+La asignación anterior dejaría hacer cosas como:
+
+{code: java}
+/graemerocher/2007/01/10/my_funky_blog_entry
+{code}
+
+{hidden}
+
 
 The individual tokens in the URL would again be mapped into the [params|controllers] object with values available for @year@, @month@, @day@, @id@ and so on.
 
@@ -41,6 +88,22 @@ static mappings = {
     "/$controller/$action?/$id?"()
 }
 {code}
+{hidden}
+
+Los tokens individuales en la dirección URL serían volver a asignar en objeto con valores de año @ @, @ mes @, @ día @, @ id @ [params|controllers] y así sucesivamente.
+
+h4. Controlador dinámico y nombres de acción
+
+Variables también pueden utilizarse para construir dinámicamente el nombre del controlador y acción. De hecho las asignaciones de Grails URL predeterminado utilizan esta técnica:
+
+{code: java}
+asignaciones estáticas = {}
+    "/ acción de controlador /$ $? / id$?"()
+}
+{code}
+
+{hidden}
+
 
 Here the name of the controller, action and id are implicitly obtained from the variables @controller@, @action@ and @id@ embedded within the URL.
 
@@ -53,6 +116,22 @@ static mappings = {
     }
 }
 {code}
+{hidden}
+
+Aquí el nombre del controlador, la acción y id implícitamente se obtienen desde el controlador de variables @ @, @ acción @ y @ id @ incrustada dentro de la dirección URL.
+
+También puede resolver el nombre de controlador y acción para ejecutar dinámicamente mediante un cierre:
+
+{code: java}
+asignaciones estáticas = {}
+    "/ controlador$" {}
+        acción = {params.goHere}
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Optional Variables
 
@@ -63,6 +142,20 @@ static mappings = {
     "/$blog/$year?/$month?/$day?/$id?"(controller:"blog", action:"show")
 }
 {code}
+{hidden}
+
+h4. Variables opcionales
+
+¿Otra característica de la asignación por defecto es la posibilidad de anexar un? al final de una variable para que sea un símbolo (token) opcional. En otro ejemplo, esta técnica podría aplicarse a la asignación de dirección URL de blog para tener una vinculación más flexible:
+
+{code: java}
+asignaciones estáticas = {}
+    "/ año de blog /$ $? / mes$? / día$? / id$?"(controlador: "blog", acción: "Mostrar")
+}
+{code}
+
+{hidden}
+
 
 With this mapping all of these URLs would match with only the relevant parameters being populated in the [params|controllers] object:
 
@@ -72,6 +165,19 @@ bc.
 /graemerocher/2007/01
 /graemerocher/2007
 /graemerocher
+
+{hidden}
+
+Con esta asignación todas estas direcciones URL coincidiría con sólo los parámetros relevantes que se rellena en el objeto [params|controllers]:
+
+a c..
+/graemerocher/2007/01/10/my_funky_blog_entry
+/graemerocher/2007/01/10
+/graemerocher/2007/01
+/ graemerocher/2007
+/graemerocher
+
+{hidden}
 
 h4. Arbitrary Variables
 
@@ -83,6 +189,21 @@ You can also pass arbitrary parameters from the URL mapping into the controller 
      year = 2007
 }
 {code}
+{hidden}
+
+h4. Variables arbitrarias
+
+También puede pasar parámetros arbitrarios de la asignación de dirección URL en el controlador por sólo establecerlos en el bloque pasado a la asignación:
+
+{code: java}
+{"/ vacaciones/victoria"
+     ID = "Marrakech"
+     año = 2007
+}
+{code}
+
+{hidden}
+
 
 This variables will be available within the [params|controllers] object passed to the controller.
 
@@ -96,5 +217,25 @@ The hard coded arbitrary variables are useful, but sometimes you need to calcula
      isEligible = { session.user != null } // must be logged in
 }
 {code}
+{hidden}
+
+Esta variables estará disponible en el objeto [params|controllers] se pasa al controlador.
+
+h4. Resolvieron dinámicamente Variables
+
+Las variables arbitrarias duro codificadas son útiles, pero a veces es necesario calcular el nombre de la variable basada en factores de tiempo de ejecución. Esto es posible mediante la asignación de un bloque a nombre de la variable:
+
+{code: java}
+{"/ vacaciones/victoria"
+     ID = {params.id}
+     isEligible = {session.user! = null} / / debe haber iniciado sesión
+}
+{code}
+
+{hidden}
+
 
 In the above case the code within the blocks is resolved when the URL is actually matched and hence can be used in combination with all sorts of logic.
+{hidden}
+
+En el caso anterior, el código dentro de los bloques se resuelve cuando el URL corresponde en realidad y, por tanto, puede utilizarse en combinación con todo tipo de lógica.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 Because a resource module can define the bundle groupings and other attributes of resources, you may find that the settings provided are not correct for your application.
 
 For example, you may wish to bundle jQuery and some other libraries all together in one file. There is a load-time and caching trade-off here, but often it is the case that you'd like to override some of these settings.
@@ -39,9 +42,62 @@ modules = {
     }
 }
 {code}
+{hidden}
+
+Debido a que las agrupaciones de paquete y otros atributos de los recursos, puede definir un módulo de recursos, es posible que la configuración proporcionada no es correcta para su aplicación.
+
+Por ejemplo, puede agrupar jQuery y algunas otras bibliotecas todos juntos en un solo archivo. Hay un tiempo de carga y almacenamiento en caché equilibrio aquí, pero a menudo es el caso de que se desea reemplazar algunos de estos valores.
+
+Para ello, el DSL es compatible con una cláusula de "anulaciones", dentro del cual puede cambiar la @ defaultBundle @ configuración de un módulo o atributos de recursos individuales que han sido declarados con un identificador único:
+
+{code: java}
+módulos = {}
+    núcleo {}
+        dependsOn 'jquery, utils'
+        defaultBundle 'monolito'
+
+url del recurso: ' / js/core.js', la disposición: 'cabeza'
+        url del recurso: ' / js/ui.js'
+        url del recurso: ' / css/main.css,
+        url del recurso: ' / css/branding.css'
+        url del recurso: ' / css/print.css', attrs: [medios: 'imprimir']
+    }
+
+{utils
+        dependsOn 'jquery'
+        defaultBundle 'monolito'
+
+url del recurso: ' / js/utils.js'
+    }
+
+{formas
+        dependsOn 'utils núcleo'
+        defaultBundle 'monolito'
+
+url del recurso: ' / css/forms.css'
+        url del recurso: ' / js/forms.js'
+    }
+
+reemplaza {}
+        {jQuery
+            defaultBundle 'monolito'
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 This will put all code into a single bundle named 'monolith'. Note that this can still result in multiple files, as separate bundles are required for head and defer dispositions, and JavaScript and CSS files are bundled separately.
 
 Note that overriding individual resources requires the original declaration to have included a unique id for the resource.
 
 For full details of the resource DSL please see the [resources plugin documentation|http://grails-plugins.github.com/grails-resources].
+{hidden}
+
+Esto pondrá todo el código en un solo paquete llamado "monolito". Tenga en cuenta que esto todavía puede resultar en varios archivos, como paquetes separados son necesarios para la cabeza y aplazar las disposiciones, y archivos JavaScript y CSS se incluyen por separado.
+
+Tenga en cuenta que reemplazar los recursos individuales requiere la Declaración original que han incluido un identificador único para el recurso.
+
+Para obtener más detalles del recurso DSL, consulte el [recursos plugin documentation|http://grails-plugins.github.com/grails-resources].

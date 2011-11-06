@@ -1,17 +1,11 @@
+
 {hidden}
+
 Grails provides a number of hooks to leverage the different parts of the system and perform runtime configuration by convention.
 
 h4. Hooking into the Grails Spring configuration
 
 First, you can hook in Grails runtime configuration by providing a property called @doWithSpring@ which is assigned a block of code. For example the following snippet is from one of the core Grails plugins that provides [i18n|guide:i18n] support:
-{hidden}
-
-Grails ofrece una serie de puntos de extensión donde inyectar código para aprovechar las diferentes partes del sistema y realizar configuración por convención en tiempo de ejecución.
-
-h4. Puntos de extensión en la configuración de Spring de Grails.
-
-En primer lugar, se puede inyectar funcionalidad en la configuración de tiempo de ejecución de Grails usando una propiedad llamada @doWithSpring@ a la que se le asigna un bloque de código. Por ejemplo el siguiente fragmento es de uno de los plugins del núcleo Grails que ofrece soporte para [i18n|guide:i18n]:
-
 
 {code:java}
 import org.springframework.web.servlet.i18n.CookieLocaleResolver
@@ -34,6 +28,37 @@ class I18nGrailsPlugin {
 }
 {code}
 {hidden}
+
+Grails proporciona un número de anzuelos para aprovechar las diferentes partes del sistema y realizar la configuración de tiempo de ejecución por la Convención.
+
+h4. Se enganchen a la configuración de primavera Grails
+
+En primer lugar, se pueden enlazar en configuración de tiempo de ejecución de Grails proporcionando una propiedad llamada @ doWithSpring @ que se asigna un bloque de código. Por ejemplo, el siguiente fragmento de código es de uno de los principales plugins Grails que proporciona soporte [i18n|guide:i18n]:
+
+{code: java}
+org.springframework.web.servlet.i18n.CookieLocaleResolver de importación
+org.springframework.web.servlet.i18n.LocaleChangeInterceptor de importación
+org.springframework.context.support.ReloadableResourceBundleMessageSource de importación
+
+clase I18nGrailsPlugin {}
+
+versión Def = "0.1"
+
+Def doWithSpring = {}
+        messageSource(ReloadableResourceBundleMessageSource) {}
+            basename = "WEB-INF/grails-app/i18n/messages"
+        }
+        localeChangeInterceptor(LocaleChangeInterceptor) {}
+            paramName = "lang"
+        }
+        localeResolver(CookieLocaleResolver)
+    }
+}
+{code}
+
+{hidden}
+
+
 This plugin configures the Grails @messageSource@ bean and a couple of other beans to manage Locale resolution and switching. It using the [Spring Bean Builder|guide:spring] syntax to do so.
 
 h4. Participating in web.xml Generation
@@ -44,15 +69,19 @@ h5. Add @servlet@ and @servlet-mapping@
 
 Consider this example from the @ControllersPlugin@:
 {hidden}
-Este plugin configura el bean de Grails @messageSource@ asi como un par de otros beans para gestionar la resolución y el cambio del Locale. Utiliza la sintaxis [Spring Bean Builder|guide:spring] para hacer esto.
 
-h4. Participar en la generación del fichero web.xml
+Este plugin configura Grails @ messageSource @ bean y un par de otros granos para administrar resolución de configuración regional y de conmutación. Que mediante la sintaxis [Spring Bean Builder|guide:spring] para hacerlo.
 
-Grails genera el fichero @WEB-INF/web.xml@ en tiempo de carga, y aunque los plugins no pueden cambiar este fichero directamente, pueden participar en su generación. Un plugin puede contener de una propiedad @doWithWebDescriptor@ que contiene un bloque de código que es pasado al @web.xml@ como un  @XmlSlurper@ @GPathResult@.
+h4. Participando en web.xml generación
 
-h5. Añadir un @servlet@ y un @servlet-mapping@
+Grails genera @ WEB-INF/web.xml @ archivo en tiempo de carga, y aunque plugins no puede modificar este archivo directamente, puede participar en la generación del archivo. Un plugin puede proporcionar un @ doWithWebDescriptor @ propiedad que se asigna un bloque de código que se pasa la @web.xml@ como un @ XmlSlurper @ @ GPathResult @.
 
-Considere este ejemplo perteneciente al @ControllersPlugins@
+H5. Agregar @ servlet @ y @ servlet-mapping @
+
+Considere este ejemplo de @ ControllersPlugin @:
+
+{hidden}
+
 
 {code:java}
 def doWithWebDescriptor = { webXml ->
@@ -68,20 +97,31 @@ def doWithWebDescriptor = { webXml ->
     }
 }
 {code}
+{hidden}
+
+{code: java}
+Def doWithWebDescriptor = {webXml->
+
+Def mappingElement = webXml. asignación de servlet
+
+Def lastMapping = mappingElement[mappingElement.size() - 1]
+    lastMapping {}
+        {} 'servlet-mapping'
+            ' servlet-name'("grails")
+            ' url-pattern'("*.dispatch")
+        }
+    }
+}
+{code}
 
 {hidden}
+
+
 Here the plugin gets a reference to the last @<servlet-mapping>@ element and appends Grails' servlet after it using XmlSlurper's ability to programmatically modify XML using closures and blocks.
 
 h5. Add @filter@ and @filter-mapping@
 
 Adding a filter with its mapping works a little differently. The location of the @<filter>@ element doesn't matter since order is not important, so it's simplest to insert your custom filter definition immediately after the last @<context-param>@ element. Order _is_ important for mappings, but the usual approach is to add it immediately after the last @<filter>@ element like so:
-{hidden}
-
-En este caso, el plugin obtiene una referencia al último elemento @<servlet-mapping>@ y añade el servlet de Grails despues de él usando la habilidad de XmlSlurper para modificar XML usando closures y bloques.
-
-h5. añadir @filter@ y @filter-mappings@
-
-Este ejemplo para añadir un filtro y su mapeo funciona de manera un poco diferente. El lugar del elemento @<filter>@ no importa dado que el orden no es importante, por lo que es más sencillo insertar nuestra definición de filtro personalizada inmediatamente despues del último elemento @<context-param>@. Por el contrario el orden si que es importante para los mapeos, pero la aproximación usual es añadir el mapeo inmediatamente despues del último elmento @<filter>@ de esta manera:
 
 {code:java}
 def doWithWebDescriptor = { webXml ->
@@ -104,12 +144,40 @@ def doWithWebDescriptor = { webXml ->
     }
 }
 {code}
+{hidden}
+
+Aquí el plugin obtiene una referencia al último @<servlet-mapping>@ elemento y anexa servlet de Grails después con capacidad de XmlSlurper para modificar mediante programación XML mediante cierres y bloques.
+
+H5. Añadir filtro @ @ y @ filtro-mapping @
+
+Agregar un filtro con su asignación funciona un poco diferente. La ubicación de la @<filter>@ elemento no importa ya orden no es importante, por lo que es más simple insertar su definición de filtro personalizado inmediatamente después de la última @<context-param>@ elemento. Orden vale importante para asignaciones, pero el enfoque habitual es agregar inmediatamente después de la última @<filter>@ elemento como tal:
+
+{code: java}
+Def doWithWebDescriptor = {webXml->
+
+Def contextParam = webXml 'parámetro de contexto'.
+
+contextParam[contextParam.size() - 1] {}
+        'filtrar' {}
+            ' filter-name'('springSecurityFilterChain')
+            ' filter-class'(DelegatingFilterProxy.name)
+        }
+    }
+
+filtro de Def = webXml 'filtro'.
+    Filter[Filter.Size() - 1] {}
+        {} 'filtro-mapping'
+            ' filter-name'('springSecurityFilterChain')
+            ' url-pattern'('/*')
+        }
+    }
+}
+{code}</filter></context-param></filter></servlet-mapping>
 
 {hidden}
+
+
 In some cases you need to ensure that your filter comes after one of the standard Grails filters, such as the Spring character encoding filter or the SiteMesh filter. Fortunately you can insert filter mappings immediately after the standard ones (more accurately, any that are in the template web.xml file) like so:
-{hidden}
-
-En algúnos casos es necesarkio asegurar que nuestro filtro se inserta despues de uno de los filtros estandar de Grails, como por ejemplo el filtro "character encoding" de Spring o el filtro de SiteMesh. Afortunadamente es posible insertar el mapeo del filtro inmediatamente despues de los estandar (más exactamente, despues de cualquiera definido en la plantilla del web.xml) de esta manera:
 
 {code:java}
 def doWithWebDescriptor = { webXml ->
@@ -129,16 +197,35 @@ def doWithWebDescriptor = { webXml ->
     }
 }
 {code}
+{hidden}
+
+En algunos casos que es necesario asegurarse de el filtro llega después de que uno de los filtros de Grails estándar, tales como el filtro o el SiteMesh de codificación de caracteres de primavera. Afortunadamente puede insertar filtro asignaciones inmediatamente después de los estándares (con mayor precisión, cualquiera que se encuentran en el archivo de plantilla web.xml) así:
+
+{code: java}
+Def doWithWebDescriptor = {webXml->
+    ...
+
+/ / Insertar el filtro de seguridad de primavera después de la primavera
+    / / filtro de codificación de caracteres.
+    filtro de Def = webXml. asignación de filtro .find {}
+        IT.'filter-name'.Text() == "charEncodingFilter"
+    }
+
+filtro {}
+        {} 'filtro-mapping'
+            ' filter-name'('springSecurityFilterChain')
+            ' url-pattern'('/*')
+        }
+    }
+}
+{code}
 
 {hidden}
+
+
 h4. Doing Post Initialisation Configuration
 
 Sometimes it is useful to be able do some runtime configuration after the Spring [ApplicationContext|api:org.springframework.context.ApplicationContext] has been built. In this case you can define a @doWithApplicationContext@ closure property.
-{hidden}
-
-h4. Haciendo configuración en la Post Instalación
-
-En determinadas ocasiones es útil ser capaz de realizar configuración en runtime despues de que el [ApplicationContext|api:org.springframework.context.ApplicationContext] de Spring haya sido construido. En este caso, es posible definir una propidad closure @doWithApplicationContext@
 
 {code:java}
 class SimplePlugin {
@@ -149,6 +236,24 @@ class SimplePlugin {
     def doWithApplicationContext = { appCtx ->
         def sessionFactory = appCtx.sessionFactory
         // do something here with session factory
+    }
+}
+{code}
+{hidden}
+
+h4. Haciendo Post configuración de inicialización.
+
+A veces es útil poder hacer alguna configuración de tiempo de ejecución después de que se ha construido la primavera [ApplicationContext|api:org.springframework.context.ApplicationContext]. En este caso se puede definir un @ doWithApplicationContext @ propiedad de cierre.
+
+{code: java}
+clase SimplePlugin {}
+
+Def nombre = "simple"
+    versión Def = "1.1"
+
+Def doWithApplicationContext = {appCtx->
+        Def sessionFactory = appCtx.sessionFactory
+        / / hacer algo con la fábrica de sesión
     }
 }
 {code}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. withSession
 
 h2. Purpose
@@ -11,9 +14,34 @@ Book.withSession { session ->
     session.clear()
 }
 {code}
+{hidden}
+
+h1. withSession
+
+h2. Fin
+
+Proporciona acceso a la hibernación @ sesión subyacente @ objeto
+
+h2. Ejemplos
+
+{code: java}
+Book.withSession {sesión->
+    Session.Clear()
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Parameters:
 
 * @closure@ - A closure which accepts a @Session@ argument
+{hidden}
+
+h2. Descripción
+
+Parámetros:
+
+* @ cierre @ - un cierre que acepta una sesión @ @ argumento

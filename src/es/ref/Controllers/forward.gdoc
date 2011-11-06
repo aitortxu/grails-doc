@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. forward
 
 h2. Purpose
@@ -15,6 +18,28 @@ forward action: "show", id: 4, params: [author: "Stephen King"]
 
 forward controller: "book", action: "show"
 {code}
+{hidden}
+
+h1. hacia delante
+
+h2. Fin
+
+Reenvía una solicitud de un controlador a otro sin emitir una redirección HTTP.
+
+h2. Ejemplos
+
+{code: java}
+reenviar la acción: "Mostrar"
+
+controlador hacia adelante: "reserva", acción: "lista"
+
+reenviar la acción: "Mostrar", id: 4, params: [autor: "Stephen King"]
+
+controlador hacia adelante: "reserva", acción: "Mostrar"
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -25,4 +50,21 @@ h4. Parameters
 * @controller@ - The controller to redirect to; defaults to the current controller if not specified
 * @action@ - The action to redirect to, either a string name or a reference to an action within the current controller
 * @id@ - The id to use in redirection
+{hidden}
+
+h2. Descripción
+
+Reenvía la acción actual a otra acción, opcionalmente pasando parámetros o errores.
+
+h4. Parámetros
+
+* @ controlador @ - el controlador para redirigir a; el valor predeterminado es el controlador actual si no se especifica
+* @ acción @ - la acción para redirigir a, un nombre de cadena o una referencia a una acción en el controlador actual
+* @ id @ - id para utilizar en la redirección
+
+{hidden}
+
 * @params@ - Parameters to pass to the action redirected to.
+{hidden}
+
+* @ params @ - parámetros para pasar a la acción a.

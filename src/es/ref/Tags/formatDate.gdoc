@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. formatDate
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:xml}
 <g:formatDate format="yyyy-MM-dd" date="${date}"/>
 {code}
+{hidden}
+
+h1. formatDate
+
+h2. Fin
+
+Formatos @java.util.Date@ instancias utilizando los patrones definidos por la clase [SimpleDateFormat|api:java.text.SimpleDateFormat].
+
+h2. Ejemplos
+
+{Código: xml}
+<g:formatdate format="yyyy-MM-dd" date="${date}"></g:formatdate>
+{code}
+
+{hidden}
+
 
 {code:xml}
 <g:formatDate date="${date}" type="datetime" style="MEDIUM"/>
@@ -21,6 +40,22 @@ h2. Examples
 {code:xml}
 <g:formatDate date="${date}" type="time" style="SHORT"/>
 {code}
+{hidden}
+
+{Código: xml}
+<g:formatdate date="${date}" type="datetime" style="MEDIUM"></g:formatdate>
+{code}
+
+{Código: xml}
+<g:formatdate date="${date}" type="datetime" style="LONG" timestyle="SHORT"></g:formatdate>
+{code}
+
+{Código: xml}
+<g:formatdate date="${date}" type="time" style="SHORT"></g:formatdate>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -31,6 +66,20 @@ Attributes
 * @formatName@ (optional) - Look up @format@ from the default MessageSource / ResourceBundle (i18n/*.properties file) with this key. If @format@ and @formatName@ are empty, @format@ is looked up with '@default.date.format@' key. Defaults to 'yyyy-MM-dd HH:mm:ss z' if the key not specified
 * @type@ (optional) - The type of format to use for the date / time. @format@ or @formatName@ aren't used when @type@ is specified. Possible values: 'date' - shows only date part, 'time' - shows only time part, 'both'/'datetime' - shows date and time
 * @timeZone@ (optional) - Sets the time zone for formatting. See [TimeZone|api:java.util.SimpleDateFormat] class.
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ fecha @ (requerido) - la fecha objeto dar formato
+* @ formato @ (opcional) - el patrón de formato que se utilizará para la fecha, consulte [SimpleDateFormat|api:java.text.SimpleDateFormat]
+* @ formatName @ (opcional) - Buscar formato @ @ desde el valor predeterminado MessageSource / ResourceBundle (archivo de i18n/*.properties) con esta clave. Si @ formato @ y @ formatName @ están vacíos, @ formato @ se busca con la tecla '@ default.date.format@'. Utiliza 'AAAA-MM-dd HH z' si no se especifica la clave
+* @ tipo @ (opcional): el tipo de formato que se utilizará para la fecha / hora. @ formato @ o @ formatName @ no se usan cuando se especifica @ tipo @. Los valores posibles: "fecha" - muestra sólo la parte de fecha, 'tiempo' - muestra sólo una parte tiempo, 'dos '/' datetime' - muestra fecha y hora
+* @ timeZone @ (opcional): define la zona horaria de formato. Clase véase [TimeZone|api:java.util.SimpleDateFormat].
+
+{hidden}
+
 * @locale@ (optional) - Force the locale for formatting.
 * @style@ (optional) - Use default date/time formatting of the country specified by the locale. Possible values: SHORT (default), MEDIUM, LONG, FULL . See [DateFormat|api:java.text.DateFormat] for explanation.
 * @dateStyle@ (optional) - Set separate @style@ for the date part.
@@ -40,3 +89,14 @@ h2. Source
 
 {source:tag=FormatTagLib.formatDate}
 {source}
+{hidden}
+
+* @ locale @ (opcional) - forzar la configuración regional para el formato.
+* @ estilo @ (opcional): utilice el formato de fecha predeterminado del país especificado por la configuración regional. Los valores posibles: corto (por defecto), mediano, largo, completo. Consulte [DateFormat|api:java.text.DateFormat] para obtener explicación.
+* @ dateStyle @ (opcional) - conjunto independiente @ estilo @ para la parte de fecha.
+* @ timeStyle @ (opcional) - conjunto independiente @ estilo @ para la parte de tiempo.
+
+h2. Fuente
+
+{source:tag=FormatTagLib.formatDate}
+origen de {}

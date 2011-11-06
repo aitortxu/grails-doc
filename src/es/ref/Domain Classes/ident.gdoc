@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. ident
 
 h2. Purpose
@@ -11,4 +14,20 @@ def b = new Book(title: "The Shining")
 b.save()
 
 println b.ident()
+{code}
+{hidden}
+
+h1. Ident
+
+h2. Fin
+
+Devuelve el valor de la propiedad de identidad de la clase de dominio, independientemente del nombre de la propiedad de identidad propia
+
+h2. Ejemplos
+
+{code: java}
+Def b = nuevo libro (título: "El resplandor")
+b.Save()
+
+Console.println b.ident()
 {code}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 Often it is useful to intercept processing based on either request, session or application state. This can be achieved with action interceptors. There are currently two types of interceptors: before and after.
 
 {note}
@@ -7,6 +10,20 @@ If your interceptor is likely to apply to more than one controller, you are almo
 h4. Before Interception
 
 The @beforeInterceptor@ intercepts processing before the action is executed. If it returns @false@ then the intercepted action will not be executed. The interceptor can be defined for all actions in a controller as follows:
+
+{hidden}
+
+A menudo es útil interceptar el procesamiento basado en el estado de la solicitud, sesión o de aplicación. Esto puede lograrse con interceptores de acción. Actualmente hay dos tipos de interceptores: antes y después.
+
+{Nota}
+Si el interceptor es probable que se aplican a más de un controlador, es casi ciertamente mejor escribir [Filter|guide:filters]. Filtros pueden aplicarse a varios controladores o URI sin necesidad de cambiar la lógica de cada controlador
+{Nota}
+
+h4. Antes de intercepción
+
+@ BeforeInterceptor @ intercepta procesamiento antes de la acción se ejecuta. Si devuelve false @ @ entonces la acción interceptada no se ejecutará. El interceptor puede definirse para todas las acciones en un controlador como sigue:
+
+{hidden}
 
 {code:java}
 def beforeInterceptor = {
@@ -31,6 +48,21 @@ def login() {
     // display login page
 }
 {code}
+{hidden}
+
+{code: java}
+Def beforeInterceptor = {}
+    Console.println "Rastreo de acción ${actionUri}"
+}
+{code}
+
+Lo anterior se declara dentro del cuerpo de la definición de controlador.  Se ejecutará antes de todas las acciones y no interfieren con el procesamiento. Un caso de uso común es muy simplista autenticación:
+
+{code: java}
+Def beforeInterceptor = [acción: esto.
+
+{hidden}
+
 
 The above code defines a method called @auth@. A private method is used so that it is not exposed as an action to the outside world. The @beforeInterceptor@ then defines an interceptor that is used on all actions _except_ the login action and it executes the @auth@ method. The @auth@ method is referenced using Groovy's method pointer syntax. Within the method it detects whether there is a user in the session, and if not it redirects to the @login@ action and returns @false@, causing the intercepted action to not be processed.
 
@@ -43,6 +75,22 @@ def afterInterceptor = { model ->
     println "Tracing action ${actionUri}"
 }
 {code}
+{hidden}
+
+El código anterior define un método denominado @ auth @. Se utiliza un método privado para que no se expone como una acción al mundo exterior. @ BeforeInterceptor @ entonces define un interceptor que se utiliza en todas las acciones _except_ el inicio de sesión de acción y se ejecuta auth @ @ método. Auth @ @ método se hace referencia mediante la sintaxis de puntero de método de Groovy. Dentro del método detecta si hay un usuario en la sesión, y si no redirige a la sesión @ @ acción y devuelve @ falso @, causando la acción interceptada a no ser procesado.
+
+h4. Después de la intercepción
+
+Utilice el @ afterInterceptor @ propiedad para definir un interceptor que se ejecuta después de una acción:
+
+{code: java}
+Def afterInterceptor = {modelo->
+    Console.println "Rastreo de acción ${actionUri}"
+}
+{code}
+
+{hidden}
+
 
 The after interceptor takes the resulting model as an argument and can hence manipulate the model or response.
 
@@ -55,6 +103,22 @@ def afterInterceptor = { model, modelAndView ->
     println "View is now ${modelAndView.viewName}"
 }
 {code}
+{hidden}
+
+El interceptor después toma el modelo resultante como un argumento y, por tanto, puede manipulan el modelo o la respuesta.
+
+Un interceptor después también podrá modificar el objeto Spring MVC [ModelAndView|api:org.springframework.web.servlet.ModelAndView] antes de la representación. En este caso, se convierte en el ejemplo anterior:
+
+{code: java}
+Def afterInterceptor = {modelo, modelAndView->
+    Console.println "vista actual es de ${modelAndView.viewName}"
+    Si (model.someVar) modelAndView.viewName = "/ mycontroller/someotherview"
+    Console.println "Vista es ahora de ${modelAndView.viewName}"
+}
+{code}
+
+{hidden}
+
 
 This allows the view to be changed based on the model returned by the current action. Note that the @modelAndView@ may be @null@ if the action being intercepted called @redirect@ or @render@.
 
@@ -65,6 +129,19 @@ Rails users will be familiar with the authentication example and how the 'except
 {code:java}
 def beforeInterceptor = [action: this.&auth, except: 'login']
 {code}
+{hidden}
+
+Esto permite la vista para cambiarse basado en el modelo devuelto por la acción actual. Tenga en cuenta que el @ modelAndView @ puede ser null @ @ si la acción interceptada había llamado @ redirección @ o @ render @.
+
+h4. Condiciones de intercepción
+
+Los usuarios de carriles estarán familiarizados con el ejemplo de autenticación y cómo la condición 'excepción' fue utilizada al ejecutar el interceptor (interceptores son llamados "filtros" en carriles; esta terminología entra en conflicto con la terminología de filtro de Servlet de Java):
+
+{code: java}
+Def beforeInterceptor = [acción: esto.
+
+{hidden}
+
 
 This executes the interceptor for all actions except the specified action. A list of actions can also be defined as follows:
 
@@ -77,3 +154,9 @@ The other supported condition is 'only', this executes the interceptor for only 
 {code:java}
 def beforeInterceptor = [action: this.&auth, only: ['secure']]
 {code}
+{hidden}
+
+Esto ejecuta el interceptor para todas las acciones excepto la acción especificada. Una lista de acciones también puede definirse como sigue:
+
+{code: java}
+Def beforeInterceptor = [acción: esto.

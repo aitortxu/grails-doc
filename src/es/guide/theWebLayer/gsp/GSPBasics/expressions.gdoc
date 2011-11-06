@@ -1,3 +1,6 @@
+
+{hidden}
+
 In GSP the @<%= %>@ syntax introduced earlier is rarely used due to the support for GSP expressions. A GSP expression is similar to a JSP EL expression or a Groovy GString and takes the form @${expr}@:
 
 {code:xml}
@@ -8,6 +11,16 @@ In GSP the @<%= %>@ syntax introduced earlier is rarely used due to the support 
 </html>
 {code}
 
+{hidden}
+
+En el sistema de preferencias Generalizadas el @ < % = % > @ sintaxis anteriormente se utiliza raramente debido al apoyo a las expresiones del SGP. Una expresión del SGP es similar a una expresión EL JSP o un GString Groovy y toma la forma @$ {expr} @:
+
+{Código: xml}<html>
+  <body>Hola ${params.name}</body>
+</html>{code}
+
+{hidden}
+
 However, unlike JSP EL you can have any Groovy expression within the @${..}@ block. Variables within the @${..}@ block are *not* escaped by default, so any HTML in the variable's string is rendered directly to the page. To reduce the risk of Cross-site-scripting (XSS) attacks, you can enable automatic HTML escaping with the @grails.views.default.codec@ setting in @grails-app/conf/Config.groovy@:
 
 {code:java}
@@ -15,3 +28,12 @@ grails.views.default.codec='html'
 {code}
 
 Other possible values are 'none' (for no default encoding) and 'base64'.
+{hidden}
+
+Sin embargo, a diferencia de JSP EL puede tener cualquier expresión Groovy dentro de la @$ {.}@ bloque. Variables dentro de la @$ {.}bloque @ son * no * escapó de manera predeterminada, por lo que cualquier código HTML en cadena de la variable se procesa directamente a la página. Para reducir el riesgo de ataques Cross-site-scripting (XSS), puede habilitar automático HTML escapar con la configuración de @grails.views.default.codec@ en @ grails-app/conf/Config.groovy@:
+
+{code: java}
+Grails.views.Default.codec='html'
+{code}
+
+Otros valores posibles son 'none' (para ninguna codificación predeterminada) y 'base64'.

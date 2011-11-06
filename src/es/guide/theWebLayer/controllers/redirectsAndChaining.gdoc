@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Redirects
 
 Actions can be redirected using the [redirect|controllers] controller method:
@@ -16,6 +19,29 @@ class OverviewController {
     }
 }
 {code}
+{hidden}
+
+h4. Redirecciones
+
+Las acciones pueden redirigirse utilizando el método de controlador [redirect|controllers]:
+
+{code}
+clase OverviewController {}
+
+Def login() {}
+
+Def find() {}
+        Si (! session.user)
+            redirigir (acción: 'iniciar sesión')
+            volver
+        }
+        ...
+    }
+}
+{code}
+
+{hidden}
+
 
 Internally the [redirect|controllers] method uses the [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] object's @sendRedirect@ method.
 
@@ -27,6 +53,21 @@ The @redirect@ method expects one of:
 // Call the login action within the same class
 redirect(action: login)
 {code}
+{hidden}
+
+El método [redirect|controllers] utiliza internamente sendRedirect @ del objeto [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] @ método.
+
+La redirección @ @ método espera uno de:
+
+* Otro cierre dentro de la misma clase de controlador:
+
+{code}
+/ / Llamar a la acción de inicio de sesión dentro de la misma clase
+Redirect(Action: login)
+{code}
+
+{hidden}
+
 
 * The name of an action (and controller name if the redirect isn't to an action in the current controller):
 
@@ -36,6 +77,19 @@ redirect(controller: 'home', action: 'index')
 {code}
 
 *  A URI for a resource relative the application context path:
+
+{hidden}
+
+* El nombre de una acción (y el nombre del controlador si la redirección no es una acción en el controlador actual):
+
+{code}
+/ / También se redirige a la acción de índice en el controlador de inicio
+redirigir (controlador: 'hogar', acción: 'índice')
+{code}
+
+* Un identificador URI a un pariente de recursos la ruta de acceso del contexto de aplicación:
+
+{hidden}
 
 {code}
 // Redirect to an explicit URI
@@ -48,6 +102,22 @@ redirect(uri: "/login.html")
 // Redirect to a URL
 redirect(url: "http://grails.org")
 {code}
+{hidden}
+
+{code}
+/ / Redirigir a un URI explícito
+redirigir (uri: "/ login.html")
+{code}
+
+* O una dirección URL completa:
+
+{code}
+/ / Redirigir a una dirección URL
+redirigir (url: "http://grails.org")
+{code}
+
+{hidden}
+
 
 Parameters can optionally be passed from one action to the next using the @params@ argument of the method:
 
@@ -58,6 +128,20 @@ redirect(action: 'myaction', params: [myparam: "myvalue"])
 These parameters are made available through the [params|controllers] dynamic property that accesses request parameters. If a parameter is specified with the same name as a request parameter, the request parameter is overridden and the controller parameter is used.
 
 Since the @params@ object is a Map, you can use it to pass the current request parameters from one action to the next:
+{hidden}
+
+Parámetros opcionalmente pueden pasar de una acción a la siguiente mediante los parámetros @ @ argumento del método:
+
+{code}
+redirigir (acción: 'myaction', params: [myparam: "myvalue"])
+{code}
+
+Estos parámetros se ponen a disposición a través de la propiedad dinámica [params|controllers] que accesos a solicitan de parámetros. Si se especifica un parámetro con el mismo nombre que un parámetro de solicitud, se reemplaza el parámetro de solicitud y se utiliza el parámetro del controlador.
+
+Dado que los parámetros @ @ objeto es un mapa, puede utilizar pasar los parámetros actuales de la solicitud de una acción a la siguiente:
+
+{hidden}
+
 
 {code}
 redirect(action: "next", params: params)
@@ -68,6 +152,20 @@ Finally, you can also include a fragment in the target URI:
 {code}
 redirect(controller: "test", action: "show", fragment: "profile")
 {code}
+{hidden}
+
+{code}
+redirigir (acción: "próximo", params: params)
+{code}
+
+Por último, también puede incluir un fragmento en el identificador URI de destino:
+
+{code}
+redirigir (controlador: "probar", acción: "show", fragmento: "perfil")
+{code}
+
+{hidden}
+
 
 which will (depending on the URL mappings) redirect to something like "/myapp/test/show#profile".
 
@@ -91,6 +189,12 @@ class ExampleChainController {
     }
 }
 {code}
+{hidden}
+
+Qué voluntad (dependiendo de las asignaciones de dirección URL) redirigir a algo como "/ programa de prueba de myapp
+
+{hidden}
+
 
 results in the model:
 
@@ -109,9 +213,38 @@ class ChainController {
     }
 }
 {code}
+{hidden}
+
+resultados en el modelo:
+
+{code}
+[uno: 1, dos: 2, tres: 3].
+{code}
+
+El modelo puede accederse en acciones posteriores de controlador de la cadena utilizando el @ chainModel @ mapa. Esta propiedad dinámica sólo existe en acciones tras la llamada a la cadena @ @ método:
+
+{code}
+clase ChainController {}
+
+Def nextInChain() {}
+        modelo de Def = chainModel.myModel
+        ...
+    }
+}
+{code}
+
+{hidden}
+
 
 Like the @redirect@ method you can also pass parameters to the @chain@ method:
 
 {code}
 chain(action: "action1", model: [one: 1], params: [myparam: "param1"])
+{code}
+{hidden}
+
+Como la redirección @ @ método también puede pasar parámetros a la cadena @ @ método:
+
+{code}
+cadena (acción: "action1", modelo: [uno: 1], params: [myparam: "param1"])
 {code}

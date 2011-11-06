@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. Database Mapping Usage
 
 Domain classes in Grails by default dictate the way they are mapped to the database using sensible defaults. You can customize these with the ORM Mapping DSL. For example create a @Book@ domain:
@@ -7,6 +10,20 @@ grails create-domain-class org.bookstore.Book
 {code}
 
 And then you can use the @mapping@ block to customize the ORM mapping behavior.
+
+{hidden}
+
+h1. Uso de asignación de base de datos
+
+Clases de dominio en Grails por defecto dictarán la forma en que se asignan a la base de datos utilizando valores predeterminados razonables. Puede personalizar estos con DSL de asignación de ORM. Por ejemplo, crear un libro @ @ dominio:
+
+{code: java}
+Grails crear-dominio-clase org.bookstore.Book
+{code}
+
+Y, a continuación, puede utilizar la asignación @ bloque @ para personalizar el comportamiento de asignación de ORM.
+
+{hidden}
 
 {code:java}
 package org.bookstore
@@ -22,6 +39,25 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+paquete org.bookstore
+
+clase {libro
+    Título de cadena
+    Fecha releaseDate
+    Autor de autor
+
+asignación estática = {}
+        tabla "libros"
+        columna de autor: "auth_id"
+    }
+}
+{code}
+
+{hidden}
+
 
 Refer to the user guide section on [ORM Mapping|guide:ormdsl] for more information.
 
@@ -34,5 +70,20 @@ grails.gorm.default.mapping = {
     cache true
     id generator: 'sequence'
     'user-type'(type: org.hibernate.type.YesNoType, class: Boolean)
+}
+{code}
+{hidden}
+
+Consulte la sección Guía de usuario de [ORM Mapping|guide:ormdsl] para obtener más información.
+
+h1. Asignación global de base de datos
+
+Puede configurar las asignaciones a nivel mundial en @grails-app/conf/Config.groovy@ como sigue:
+
+{code}
+Grails.Gorm.Default.mapping = {}
+    true de caché
+    Generador de ID: "secuencia"
+    ' tipo de usuario ' (tipo: org.hibernate.type.YesNoType, clase: Boolean)
 }
 {code}

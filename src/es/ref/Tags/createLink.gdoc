@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. createLink
 
 h2. Purpose
@@ -7,6 +10,20 @@ Creates a link that can be used where necessary (for example in an href, JavaScr
 h2. Examples
 
 Example controller for an application called "shop":
+
+{hidden}
+
+h1. createLink
+
+h2. Fin
+
+Crea un vínculo que puede utilizarse cuando sea necesario (por ejemplo en una href, JavaScript, Ajax llamada etc..)
+
+h2. Ejemplos
+
+Controlador de ejemplo de una aplicación llamada "comprar":
+
+{hidden}
 
 {code:java}
 class BookController {
@@ -22,6 +39,25 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase BookController {}
+
+defaultAction estática = "lista"
+
+Def list() {}
+        [libros: Book.list(params)]
+    }
+
+Def show() {}
+        [libro: Book.get(params.id)]
+    }
+}
+{code}
+
+{hidden}
+
 
 Example usages for above controller:
 
@@ -51,6 +87,18 @@ Example usages for above controller:
 <g:createLink controller="book" action="list"
               params="[title: 'The Shining', author: 'Stephen King', id: '1']"/>
 {code}
+{hidden}
+
+Usos de ejemplo por encima de controlador:
+
+{Código: xml}
+/ / genera "/ tienda, libro, serie/1"
+<g:createlink action="show" id="1"></g:createlink>
+
+/ / genera "/ tienda/reserva/mostrar? foo = bar
+
+{hidden}
+
 
 Example as a method call in GSP:
 
@@ -63,6 +111,22 @@ results in:
 {code:xml}
 <a href="/shop/book/list">my link</a>
 {code}
+{hidden}
+
+Ejemplo como una llamada a un método en el SPG:
+
+{code: java}
+<a href="${createLink(action: 'list')}">mi enlace</a>
+{code}
+
+resultados en:
+
+{Código: xml}
+<a href="/shop/book/list">mi enlace</a>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -73,6 +137,20 @@ Attributes
 * @id@ (optional) - The id to use in the link
 * @fragment@ (optional) - The link fragment (often called anchor tag) to use
 * @mapping@ (optional) - The [named URL mapping|guide:namedMappings] to use to rewrite the link
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ acción @ (opcional): el nombre de la acción que se utilizan en el enlace; Si no se especifica la acción predeterminada se vincularán
+* @ controlador @ (opcional): el nombre del controlador para usar en el enlace; Si no especifica el controlador actual se vincularán
+* @ id @ (opcional): el id que se utilizan en el enlace
+* @ fragmento @ (opcional) - el fragmento de enlace (etiqueta de anclaje a menudo llamado) a utilizar
+* @ asignación @ (opcional): [nombre mapping|guide:namedMappings de URL] para reescribir el vínculo
+
+{hidden}
+
 * @params@ (optional) - A Map of request parameters
 * @url@ (optional) - A Map containing the action,controller,id etc.
 * @absolute@ (optional) - If @true@ will prefix the link target address with the value of the @grails.serverURL@ property from @Config.groovy@, or http://localhost:<port> if there is no setting in @Config.groovy@ and not running in production.
@@ -82,3 +160,14 @@ h2. Source
 
 {source:tag=ApplicationTagLib.createLink}
 {source}
+{hidden}
+
+* @ params @ (opcional) - A asignar parámetros de solicitud
+* @ url @ (opcional): un mapa que contiene la acción, controlador, id etc..
+* @ absoluto @ (opcional): si @ verdadero @ prefijo de la dirección de destino de vínculo con el valor de la propiedad @grails.serverURL@ de @ Config.groovy@ o http://localhost:<port> Si no hay ningún valor en @Config.groovy@ y no se está ejecutando en producción.
+* @ base @ (opcional) - establece el prefijo que se agregará a la dirección de destino de vínculo, normalmente una dirección URL del servidor absoluta. Esto anula el comportamiento de la absoluta @ @ propiedad si ambos se especifican.
+
+h2. Fuente
+
+{source:tag=ApplicationTagLib.createLink}
+{origen de}</port>

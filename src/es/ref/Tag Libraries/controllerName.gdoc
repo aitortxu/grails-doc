@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. controllerName
 
 h2. Purpose
@@ -16,7 +19,35 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. controllerName
+
+h2. Fin
+
+Devuelve el nombre del controlador actualmente en ejecución
+
+h2. Ejemplos
+
+{code}
+clase BookController {}
+
+Def list() {}
+        log.Info "De ejecución dentro de controlador $controllerName"
+
+Render(View: actionName)
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Returns the name of the currently executing controller which is dictated by the URL mappings
+{hidden}
+
+h2. Descripción
+
+Devuelve el nombre del controlador ejecutando actualmente que es dictado por las asignaciones de dirección URL

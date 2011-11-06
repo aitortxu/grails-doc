@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. request
 
 h2. Purpose
@@ -15,6 +18,28 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. solicitud
+
+h2. Fin
+
+El objeto [request|servletAPI] es una instancia de Servlet API [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] clase.
+
+h2. Ejemplos
+
+{code}
+clase BookController {}
+    Def list() {}
+        log.Info "agente de usuario: \${request.getHeader("User-Agent")}"
+
+Render(View: actionName)
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -23,3 +48,12 @@ The [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] class is usef
 {note}
 The additional methods added to the [request|servletAPI] object are documented in the Grails Servlet API reference guide
 {note}
+{hidden}
+
+h2. Descripción
+
+La clase [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] es útil para, entre otras cosas, obtener encabezados de solicitud, almacenar atributos de solicitud el ámbito y el establecimiento de información acerca del cliente. Javadocs el Servlet API para obtener más información, consulte.
+
+{Nota}
+Los métodos adicionales agregados al objeto [request|servletAPI] están documentados en la Guía de referencia de Grails Servlet API
+{Nota}

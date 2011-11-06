@@ -1,3 +1,6 @@
+
+{hidden}
+
 By default GORM classes use @table-per-hierarchy@ inheritance mapping. This has the disadvantage that columns cannot have a @NOT-NULL@ constraint applied to them at the database level. If you would prefer to use a @table-per-subclass@ inheritance strategy you can do so as follows:
 
 {code:java}
@@ -13,5 +16,28 @@ class CreditCardPayment extends Payment {
     String cardNumber
 }
 {code}
+{hidden}
+
+Las clases de GORM predeterminado utiliza @ tabla por jerarquía @ asignación de herencia. Esto tiene el inconveniente de que las columnas no pueden tener un @ no NULL @ restricción aplicada en el nivel de base de datos. Si prefiere utilizar una @ tabla-por-subclase @ estrategia de herencia puede hacerlo como sigue:
+
+{code: java}
+clase {pago
+    Cantidad de entero
+
+asignación estática = {}
+        false tablePerHierarchy
+    }
+}
+
+clase CreditCardPayment amplía pago {}
+    Cadena cardNumber
+}
+{code}
+
+{hidden}
+
 
 The mapping of the root @Payment@ class specifies that it will not be using @table-per-hierarchy@ mapping for all child classes.
+{hidden}
+
+La asignación de la raíz @ pago @ clase especifica que va a no utilizar @ tabla por jerarquía @ asignación para todas las clases del niño.

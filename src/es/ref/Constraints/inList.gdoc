@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. inList
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 name inList: ["Joe", "Fred", "Bob"]
 {code}
+{hidden}
+
+h1. inList
+
+h2. Fin
+
+Valida que un valor se encuentra dentro de un intervalo o una colección de valores restringidos.
+
+h2. Ejemplos
+
+{code: java}
+nombre inList: ["Joe", "Fred", "Bob"]
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -17,3 +36,12 @@ Constrains a value so that it must be contained within the given list.
 This constraint influences [schema generation|guide:gormConstraints].
 
 Error Code: @className.propertyName.not.inList@
+{hidden}
+
+h2. Descripción
+
+Restringe un valor por lo que deben figurar en la lista.
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+Código de error: @className.propertyName.not.inList@

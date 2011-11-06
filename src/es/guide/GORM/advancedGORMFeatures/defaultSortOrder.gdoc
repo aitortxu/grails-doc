@@ -1,3 +1,6 @@
+
+{hidden}
+
 You can sort objects using query arguments such as those found in the [list|domainClasses] method:
 
 {code:java}
@@ -14,6 +17,27 @@ class Airport {
     }
 }
 {code}
+{hidden}
+
+Puede ordenar objetos usando argumentos de consulta, como las que se encuentran en el método [list|domainClasses]:
+
+{code: java}
+los aeropuertos de Def = Airport.list(sort:'name')
+{code}
+
+Sin embargo, también se puede declarar el orden predeterminado de una colección en la asignación:
+
+{code: java}
+clase {Aeropuerto
+    ...
+    asignación estática = {}
+        ordenar "nombre"
+    }
+}
+{code}
+
+{hidden}
+
 
 The above means that all collections of @Airport@s will by default be sorted by the airport name. If you also want to change the sort _order_, use this syntax:
 
@@ -25,6 +49,21 @@ class Airport {
     }
 }
 {code}
+{hidden}
+
+La anterior significa que todas las colecciones de @ Airport@s por defecto ser ordenados por el nombre de aeropuerto. Si desea cambiar el tipo _order_, utilice esta sintaxis:
+
+{code: java}
+clase {Aeropuerto
+    ...
+    asignación estática = {}
+        nombre del tipo: "desc"
+    }
+}
+{code}
+
+{hidden}
+
 
 Finally, you can configure sorting at the association level:
 
@@ -38,9 +77,33 @@ class Airport {
     }
 }
 {code}
+{hidden}
+
+Finalmente, puede configurar la clasificación en el nivel de asociación:
+
+{code: java}
+clase {Aeropuerto
+    ...
+    estático hasMany = [vuelos: vuelo]
+
+asignación estática = {}
+        vuelos tipo: 'número', orden: "desc"
+    }
+}
+{code}
+
+{hidden}
+
 
 In this case, the @flights@ collection will always be sorted in descending order of flight number.
 
 {warning}
 These mappings will not work for default unidirectional one-to-many or many-to-many relationships because they involve a join table. See [this issue|http://jira.codehaus.org/browse/GRAILS-4089] for more details. Consider using a @SortedSet@ or queries with sort parameters to fetch the data you need.
 {warning}
+{hidden}
+
+En este caso, los vuelos @ @ colección siempre serán ordenados en orden decreciente del número de vuelo.
+
+Advertencia de {}
+Estas asignaciones no funcionará para predeterminado unidireccional uno a varios o muchos a muchos relaciones porque implican una tabla de combinación. Para más detalles, vea [este issue|http://jira.codehaus.org/browse/GRAILS-4089]. Considere el uso de un @ SortedSet @ o consultas con parámetros de tipo para obtener los datos que necesita.
+Advertencia de {}

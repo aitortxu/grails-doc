@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. servletContext
 
 h2. Purpose
@@ -21,6 +24,34 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. servletContext
+
+h2. Fin
+
+El objeto servletContext es una instancia de Servlet API [ServletContext|api:javax.servlet.ServletContext] clase.
+
+h2. Ejemplos
+
+{code}
+clase BookController {}
+    Def doSomething() {}
+        entrada de Def
+        Intente {}
+            entrada = servletContext.getResourceAsStream("/WEB-INF/myscript.groovy")
+            Def resultado = GroovyShell().evaluate(input.text) nueva
+            resultado de procesamiento
+        }
+        Finalmente {}
+            Input.Close()
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -35,3 +66,10 @@ servletContext["mySetting"] = "foo"
 
 asset "foo" == servletContext.mySetting
 {code}
+{hidden}
+
+h2. Descripción
+
+El Servlet API [ServletContext|api:javax.servlet.ServletContext] es útil para, entre otras cosas, almacenar atributos de aplicaciones globales, lectura de recursos del servidor local y establecer información sobre el contenedor de servlet.
+
+Atributos de aplicación normalmente accesibles desde la [getAttribute|api:javax.servlet.ServletContext

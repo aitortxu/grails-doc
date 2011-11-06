@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. generate-all
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 grails generate-all org.bookstore.Book
 grails generate-all *
 {code}
+{hidden}
+
+h1. generar todo
+
+h2. Fin
+
+Genera un controlador, vistas y una prueba de unidad de controlador para la clase de dominio
+
+h2. Ejemplos
+
+{code: java}
+Grails todo generar org.bookstore.Book
+Grails generar todo *
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -21,6 +41,21 @@ Usage:
 {code:java}
 grails generate-all [name]
 {code}
+{hidden}
+
+h2. Descripción
+
+Grails admite una característica conocida como andamiaje que implica la generación de una interfaz CRUD (Create, Read, Update/Delete) para una clase de dominio dado.
+
+El comando generar, todo ello genera una implementación de CRUD incluyendo un controlador y vistas para la clase de dominio dado. Así que para un @org.bookstore.Book@ de clase de dominio se generará un controlador en @grails-app/controllers/org/bookstore/BookController.groovy@ y vistas en @ grails-app/views/libro @.
+
+Uso:
+{code: java}
+Grails generar-todos [nombre]
+{code}
+
+{hidden}
+
 
 Fired Events:
 
@@ -30,3 +65,13 @@ Fired Events:
 Arguments:
 
 * @name@ - Either a domain class name (case-sensitive) or a wildcard (\*). If you specify the wildcard then controllers and views will be generated for _all_ domain classes.
+{hidden}
+
+Despedido de eventos:
+
+* @ StatusUpdate @ - cuando comienza la generación
+* @ StatusFinal @ - cuando termina la generación
+
+Argumentos:
+
+* @ nombre @ - ya sea un dominio clase nombre (entre mayúsculas y minúsculas) o un comodín (\ *). Si especifica el comodín, a continuación, controladores y vistas se generarán para clases de dominio _all_.

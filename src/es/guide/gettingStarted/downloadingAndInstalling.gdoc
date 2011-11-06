@@ -1,3 +1,6 @@
+
+{hidden}
+
 The first step to getting up and running with Grails is to install the distribution. To do so follow these steps:
 
 * "Download":http://grails.org/Download a binary distribution of Grails and extract the resulting zip file to a location of your choice
@@ -8,8 +11,17 @@ The first step to getting up and running with Grails is to install the distribut
 ** On Unix/Linux based systems this can be done by adding @export PATH="$PATH:$GRAILS_HOME/bin"@ to your profile
 ** On Windows this is done by modifying the @Path@ environment variable under @My Computer/Advanced/Environment Variables@
 
+{hidden}
+
+Es el primer paso para obtener y ejecutar con Grails instalar la distribución. Para así seguir estos pasos:* "Download":http://grails.org/Download una distribución binaria de Grails y extraer el archivo zip resultante en una ubicación de su elección* Establecer la variable de entorno GRAILS_HOME en la ubicación donde extrajo el zip** En sistemas basados en Unix/Linux suele ser una cuestión de añadir algo como las siguientes exportación @ GRAILS_HOME = / ruta/a/grails @ a tu perfil** En Windows normalmente es un asunto de una variable de entorno bajo @ equipo mi, Advanced, entorno Variables @* A continuación, agregue el bin @ @ directorio a su ruta @ @ variable:** En Unix/Linux se basa sistemas esto puede hacerse mediante la adición de exportación @ PATH = "$ PATH:$ GRAILS_HOME/bin" @ a tu perfil** En Windows esto se hace mediante la modificación de la ruta @ @ variable de entorno bajo @ equipo mi, Advanced, entorno Variables @
+
+{hidden}
+
 If Grails is working correctly you should now be able to type @grails -version@ in the terminal window and see output similar to this:
 
 bc.
 Grails version: 2.0.0
 
+{hidden}
+
+Si Grails está funcionando correctamente ahora debería ser capaz de escribir @ grails-versión @ en la ventana de terminal y ver un resultado similar al siguiente:a c..Versión Grails: 2.0.0

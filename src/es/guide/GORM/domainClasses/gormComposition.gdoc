@@ -1,3 +1,6 @@
+
+{hidden}
+
 As well as [association|guide:gormAssociation], Grails supports the notion of composition. In this case instead of mapping classes onto separate tables a class can be "embedded" within the current table. For example:
 
 {code}
@@ -12,6 +15,25 @@ class Address {
     String code
 }
 {code}
+{hidden}
+
+Así como [association|guide:gormAssociation], Grails apoya la noción de la composición. En este caso en lugar de asignar clases en tablas independientes una clase puede ser "incrustada" dentro de la tabla actual. Por ejemplo:
+
+{code}
+clase persona {}
+    Dirección DomicilioParticular
+    Dirección workAddress
+    Static incrustado = ['DomicilioParticular', 'workAddress']
+}
+
+clase {dirección
+    Número de cadena
+    Cadena de código
+}
+{code}
+
+{hidden}
+
 
 The resulting mapping would looking like this:
 
@@ -20,3 +42,12 @@ The resulting mapping would looking like this:
 {note}
 If you define the @Address@ class in a separate Groovy file in the @grails-app/domain@ directory you will also get an @address@ table. If you don't want this to happen use Groovy's ability to define multiple classes per file and include the @Address@ class below the @Person@ class in the @grails-app/domain/Person.groovy@ file
 {note}
+{hidden}
+
+La asignación resultante sería el siguiente aspecto:
+
+! 5.2.2-composition.jpg!
+
+{Nota}
+Si se define la dirección @ @ clase en un archivo separado Groovy en el @ grails-app/dominio @ directorio también obtendrá una dirección @ @ tabla. Si no desea que esto ocurra utilizar capacidad de Groovy para definir varias clases por archivo e incluir la dirección @ @ clase por debajo de la persona @ @ clase en el archivo @grails-app/domain/Person.groovy@
+{Nota}

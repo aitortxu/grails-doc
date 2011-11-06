@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. belongsTo
 
 h2. Purpose
@@ -8,6 +11,20 @@ Defines a "belongs to" relationship where the class specified by @belongsTo@ ass
 * One-to-many: saves always cascade from the one side to the many side, but if the many side has @belongsTo@, then deletes also cascade in that direction.
 * Many-to-many: only saves cascade from the "owner" to the "dependant", not deletes.
 
+{hidden}
+
+h1. belongsTo
+
+h2. Fin
+
+Define una relación de "pertenece a" donde la clase especificada por @ belongsTo @ asume la titularidad de la relación. Esto tiene el efecto de controlar cómo ahorra y eliminaciones en cascada. El comportamiento exacto depende del tipo de relación:
+
+* Muchos-a-uno y uno a uno: guarda y elimina en cascada desde el propietario a los dependientes (la clase con el @ belongsTo @).
+* Uno para muchos: guarda siempre en cascada de un lado al lado de muchos, pero si el lado muchos tiene @ belongsTo @, a continuación, elimina también conectar en cascada en esa dirección.
+* Muchos a muchos: sólo guarda cascada desde el "propietario" a los "dependientes", no se elimina.
+
+{hidden}
+
 h2. Examples
 
 {code:java}
@@ -17,6 +34,20 @@ class Book {
    static belongsTo = [author: Author]
 }
 {code}
+
+{hidden}
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+   Título de cadena
+
+Static belongsTo = [autor: autor]
+}
+{code}
+
+{hidden}
 
 In this example the @Book@ class specifies that it belongs to the @Author@ class, hence when an @Author@ instance is deleted so are all its associated @Book@ instances.
 
@@ -29,6 +60,22 @@ class Book {
     static belongsTo = Author
 }
 {code}
+{hidden}
+
+En este ejemplo que el libro @ @ clase especifica que pertenece al autor @ @ clase, por lo tanto cuando se elimina un autor @ @ instancia tan son todos sus asociados @ libro @ instancias.
+
+h2. Descripción
+
+@ BelongsTo @ propiedad abstrae la naturaleza del comportamiento en cascada en hibernación. Si desea una clase pertenecen a otra pero no tiene una referencia posterior, puede especificar una clase o una lista de clases como el valor:
+
+{code}
+clase {libro
+    Static belongsTo = autor
+}
+{code}
+
+{hidden}
+
 
 or:
 
@@ -39,6 +86,20 @@ class Book {
 {code}
 
 Back references, i.e. properties linking back to the owner, can be added in one of two ways:
+{hidden}
+
+o:
+
+{code}
+clase {libro
+    Static belongsTo = [autor, biblioteca]
+}
+{code}
+
+Las referencias anteriores, es decir, propiedades de vinculación al propietario, pueden agregarse en uno de dos maneras:
+
+{hidden}
+
 
 {code}
 class Book {
@@ -48,6 +109,19 @@ class Book {
 }
 
 {code}
+
+{hidden}
+
+{code}
+clase {libro
+    Autor de autor
+
+Static belongsTo = autor
+}
+
+{code}
+
+{hidden}
 
 or:
 
@@ -59,4 +133,21 @@ class Book {
 
 In these examples, both techniques create an @Author@ property named @author@. Also, the Map property can specify multiple properties and types if the class belongs to more than one owner.
 
+{hidden}
+
+o:
+
+{code}
+clase {libro
+    Static belongsTo = [autor: autor]
+}
+{code}
+
+En estos ejemplos, ambas técnicas crean a un autor @ @ propiedad denominada a @ autor @. Además, la propiedad de mapa puede especificar varias propiedades y tipos si la clase pertenece a más de un propietario.
+
+{hidden}
+
 The @belongsTo@ property is simple and means you don't have to worry about the Hibernate cascading strategies, but if you need more control over cascading you can use the [ORM DSL|guide:ormdsl]. This allows fine grained control of cascading updates and deletes.
+{hidden}
+
+@ BelongsTo @ propiedad es simple y medios no tiene que preocuparse acerca de las estrategias de hibernación en cascada, pero si se necesita más control en cascada le puede utilizar [DSL|guide:ormdsl de ORM]. Esto permite el control de grano fino de actualizaciones en cascada y elimina.

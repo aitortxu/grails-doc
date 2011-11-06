@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. init
 
 h2. Purpose
@@ -8,6 +11,20 @@ h2. Examples
 
 Command line:
 
+{hidden}
+
+h1. init
+
+h2. Fin
+
+Init @ @ comando initialises la estructura de directorio apropiado para una aplicación Grails y establece algunas variables comunes para su uso por la secuencia de llamada. Normalmente se utiliza como una inclusión.
+
+h2. Ejemplos
+
+Línea de comandos:
+
+{hidden}
+
 {code}
 grails init
 {code}
@@ -15,5 +32,16 @@ grails init
 or as an include:
 
 {code:java}
+includeTargets << grailsScript("_GrailsInit")
+{code}
+{hidden}
+
+{code}
+Grails init
+{code}
+
+o como un incluyen:
+
+{code: java}
 includeTargets << grailsScript("_GrailsInit")
 {code}

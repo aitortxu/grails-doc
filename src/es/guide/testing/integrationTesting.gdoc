@@ -1,3 +1,6 @@
+
+{hidden}
+
 Integration tests differ from unit tests in that you have full access to the Grails environment within the test. Grails uses an in-memory H2 database for integration tests and clears out all the data from the database between tests.
 
 One thing to bear in mind is that logging is enabled for your application classes, but it is different from logging in tests. So if you have something like this:
@@ -10,6 +13,23 @@ class MyServiceTests extends GroovyTestCase {
     }
 }
 {code}
+{hidden}
+
+Pruebas de integración se diferencian de las pruebas unitarias en que tiene acceso completo al entorno de Grails dentro de la prueba. Grails utiliza una base de datos del H2 en memoria para pruebas de integración y borra todos los datos de la base de datos entre las pruebas.
+
+Una cosa es tener en cuenta es que el registro está habilitado para sus clases de la aplicación, pero es diferente del registro en las pruebas. Así que si tienes algo como esto:
+
+{code: java}
+amplía la clase MyServiceTests GroovyTestCase {}
+    void testSomething() {}
+        log.Info "Iniciar pruebas"
+        ...
+    }
+}
+{code}
+
+{hidden}
+
 
 the "starting tests" message is logged using a different system than the one used by the application. The @log@ property in the example above is an instance of @java.util.logging.Logger@ (inherited from the base class, not injected by Grails), which doesn't have the same methods as the @log@ property injected into your application artifacts. For example, it doesn't have @debug()@ or @trace()@ methods, and the equivalent of @warn()@ is in fact @warning()@.
 
@@ -26,6 +46,26 @@ class MyServiceTests extends GroovyTestCase {
     }
 }
 {code}
+{hidden}
+
+el mensaje "Iniciando pruebas" se registra mediante un sistema distinto que el utilizado por la aplicación. El registro de @ @ propiedad en el ejemplo anterior es una instancia de @java.util.logging.Logger@ (heredado de la clase base, no inyectada por Grails), que no tiene los mismos métodos que el registro de @ @ propiedad inyectado en los artefactos de aplicación. Por ejemplo, no tiene @ debug() @ o @ trace() @ métodos, y el equivalente de @ warn() @ es @ warning() @.
+
+h4. Transacciones
+
+Pruebas de integración ejecutan dentro de una transacción de base de datos por defecto, que se deshace al final de cada ensayo. Esto significa que los datos guardados durante la prueba no se conserva la base de datos. Agregar un @ transaccional @ propiedad a la clase de prueba para comprobar el comportamiento transaccional:
+
+{code}
+amplía la clase MyServiceTests GroovyTestCase {}
+    Static transaccional = false
+
+void testMyTransactionalServiceMethod() {}
+        ...
+    }
+}
+{code}
+
+{hidden}
+
 
 Be sure to remove any persisted data from a non-transactional test, for example in the @tearDown@ method, so these tests don't interfere with standard transactional tests that expect a clean database.
 
@@ -50,6 +90,34 @@ class FooController {
 The tests for this would be:
 
 {code:java}
+{hidden}
+
+Asegúrese de eliminar cualquier datos permanentes de una prueba no transaccional, por ejemplo en la destrucción de @ @ método, por lo que estas pruebas no interfieren con las pruebas estándar transaccionales que esperan una base de datos limpia.
+
+h4. Controladores de pruebas
+
+Para probar controladores que primero hay que entender la biblioteca de burlarse de la primavera.
+
+Grails configura automáticamente cada prueba con [MockHttpServletRequest|api:org.springframework.mock.web.MockHttpServletRequest], [MockHttpServletResponse|api:org.springframework.mock.web.MockHttpServletResponse] y [MockHttpSession|api:org.springframework.mock.web.MockHttpSession] que puede utilizar en sus pruebas. Por ejemplo, considérese el siguiente controlador:
+
+{code: java}
+clase FooController {}
+
+Def text() {}
+        "barra" de procesamiento
+    }
+
+Def someRedirect() {}
+        Redirect(Action:"bar")
+    }
+} {code}
+
+Las pruebas de esto sería:
+
+{code: java}
+
+{hidden}
+
 class FooControllerTests extends GroovyTestCase {
 
     void testText() {
@@ -60,6 +128,21 @@ class FooControllerTests extends GroovyTestCase {
 
     void testSomeRedirect() {
         def fc = new FooController()
+{hidden}
+
+amplía la clase FooControllerTests GroovyTestCase {}
+
+void testText() {}
+        Def fc = FooController() nueva
+        FC.Text()
+        assertEquals "bar", fc.response.contentAsString
+    }
+
+void testSomeRedirect() {}
+        Def fc = FooController() nueva
+
+{hidden}
+
         fc.someRedirect()
         assertEquals "/foo/bar", fc.response.redirectedUrl
     }
@@ -77,6 +160,28 @@ If your controller references a service (or other Spring beans), you have to exp
 Given a controller using a service:
 
 {code:java}
+{hidden}
+
+FC.someRedirect()
+        assertEquals "/ foo/bar", fc.response.redirectedUrl
+    }
+}
+{code}
+
+En el caso anterior respuesta @ @ es una instancia de @ MockHttpServletResponse @ que podemos utilizar para obtener el contenido generado con @ contentAsString @ (cuando se escribe en la respuesta) o la dirección URL redirigida. Estas versiones burladas del Servlet API son completamente mutables (a diferencia de las versiones reales) y, por tanto, puede establecer propiedades en la solicitud como @ contextPath @ y así sucesivamente.
+
+Grails * no * invocar [interceptors|guide:interceptors] o filtros de servlet cuando se llama a acciones durante las pruebas de integración. Debe probar interceptores y filtros en aislamiento, mediante [functional testing|guide:functionalTesting] si es necesario.
+
+h4. Controladores de pruebas con servicios
+
+Si el controlador de referencia a un servicio (o otros frijoles de primavera), tienes que explícitamente inicializar el servicio de la prueba.
+
+Dado un controlador mediante un servicio:
+
+{code: java}
+
+{hidden}
+
 class FilmStarsController {
     def popularityService
 
@@ -86,6 +191,20 @@ class FilmStarsController {
 }{code}
 
 The test for this would be:
+
+{hidden}
+
+clase FilmStarsController {}
+    Def popularityService
+
+Def actualizar() {}
+        / / hacer algo con popularityService
+    }
+} {code}
+
+La prueba de esto sería:
+
+{hidden}
 
 {code:java}
 class FilmStarsTests extends GroovyTestCase {
@@ -105,6 +224,29 @@ With command objects you just supply parameters to the request and it will autom
 Given a controller using a command object:
 
 {code:java}
+{hidden}
+
+{code: java}
+amplía la clase FilmStarsTests GroovyTestCase {}
+    Def popularityService
+
+void testInjectedServiceInController () {}
+        Def fsc = FilmStarsController() nueva
+        FSC.popularityService = popularityService
+        FSC.Update()
+    }
+} {code}
+
+h4. Objetos de comandos del controlador de prueba
+
+Con objetos de comandos sólo proporcionar parámetros para la solicitud y automáticamente hará el trabajo de objeto de comando para usted cuando se llama a la acción sin parámetros:
+
+Dado un controlador mediante un objeto de comando:
+
+{code: java}
+
+{hidden}
+
 class AuthenticationController {
     def signup(SignupForm form) {
         ...
@@ -120,6 +262,26 @@ controller.params.password = "secret"
 controller.params.passwordConfirm = "secret"
 controller.signup()
 {code}
+{hidden}
+
+clase AuthenticationController {}
+    Def signup (formulario SignupForm) {}
+        ...
+    }
+} {code}
+
+A continuación, puede probar como este:
+
+{code: java}
+controlador de Def = AuthenticationController() nueva
+Controller.params.Login = "marcpalmer"
+Controller.params.Password = "secreta"
+Controller.params.passwordConfirm = "secreta"
+Controller.signup()
+{code}
+
+{hidden}
+
 
 Grails auto-magically sees your call to @signup()@ as a call to the action and populates the command object from the mocked request parameters. During controller testing, the @params@ are mutable with a mocked request supplied by Grails.
 
@@ -138,6 +300,28 @@ def save() {
     }
 }
 {code}
+{hidden}
+
+Grails auto-mágicamente ve su llamada a @ signup() @ como una llamada a la acción y rellena el objeto de comando de los parámetros de solicitud burlado. Durante pruebas de controlador, @ params @ son mutable con una solicitud burló suministrada por Grails.
+
+h4. Controladores de pruebas y el método render
+
+El método [render|controllers] le permite representar una vista personalizada en cualquier punto dentro del cuerpo de una acción. Por ejemplo, considere el siguiente ejemplo:
+
+{code: java}
+Def save() {}
+    libro de Def = Book(params)
+    Si ({book.save())}
+        / / manejar
+    }
+    Else {}
+        Render (vista: "crear", model:[book:book])
+    }
+}
+{code}
+
+{hidden}
+
 
 In the above example the result of the model of the action is not available as the return value, but instead is stored within the @modelAndView@ property of the controller. The @modelAndView@ property is an instance of Spring MVC's [ModelAndView|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/servlet/ModelAndView.html] class and you can use it to the test the result of an action:
 
@@ -148,6 +332,20 @@ def model = bookController.modelAndView.model.book
 {code}
 
 h4. Simulating Request Data
+{hidden}
+
+En el ejemplo anterior el resultado del modelo de la acción no está disponible como el valor devuelto, pero en su lugar se almacena dentro de la @ modelAndView @ propiedad del controlador. @ ModelAndView @ propiedad es una instancia de primavera MVC [ModelAndView|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/servlet/ModelAndView.html] clase y se puede utilizar para la prueba el resultado de una acción:
+
+{code: java}
+Def bookController = new BookController()
+bookController.save()
+modelo de Def = bookController.modelAndView.model.book
+{code}
+
+h4. Simulación de solicitud de datos
+
+{hidden}
+
 
 You can use the Spring [MockHttpServletRequest|api:org.springframework.mock.web.MockHttpServletRequest] to test an action that requires request data, for example a REST web service. For example consider this action which performs data binding from an incoming request:
 
@@ -158,6 +356,20 @@ def create() {
 {code}
 
 To simulate the 'book' parameter as an XML request you could do something like the following:
+{hidden}
+
+Puede utilizar la primavera [MockHttpServletRequest|api:org.springframework.mock.web.MockHttpServletRequest] para probar una acción que requiere que los datos de la solicitud, por ejemplo un servicio web del resto. Por ejemplo, considere esta acción que realiza el enlace de datos de una solicitud entrante:
+
+{code: java}
+Def create() {}
+    [libro: nueva Book(params.book)]
+}
+{code}
+
+Para simular el parámetro 'libro' como una petición XML podría hacer algo parecido a lo siguiente:
+
+{hidden}
+
 
 {code:java}
 void testCreateWithXML() {
@@ -178,6 +390,28 @@ void testCreateWithXML() {
     assertEquals "The Stand", model.book.title
 }
 {code}
+{hidden}
+
+{code: java}
+void testCreateWithXML() {}
+
+controlador de Def = BookController() nueva
+
+Controller.Request.ContentType = 'text/xml'
+    Controller.Request.Content = '''\\\\<?xml version="1.0" encoding="ISO-8859-1"?>
+            <book>
+                <title>El Stand</title>...
+            </book>
+            '''.stripIndent().getBytes() / / Nota necesitamos los bytes
+
+modelo de Def = controller.create()
+    valer model.book
+    assertEquals "The Stand", model.book.title
+}
+{code}
+
+{hidden}
+
 
 The same can be achieved with a JSON request:
 
@@ -195,6 +429,27 @@ void testCreateWithJSON() {
     assertEquals "The Stand", model.book.title
 }
 {code}
+{hidden}
+
+Lo mismo puede lograrse con una solicitud JSON:
+
+{code: java}
+void testCreateWithJSON() {}
+
+controlador de Def = BookController() nueva
+
+Controller.Request.ContentType = "texto/json"
+    Controller.Request.Content =
+            ' {"id": 1, "clase": "Libro", "título": "la Stand"}'.getBytes()
+
+modelo de Def = controller.create()
+    valer model.book
+    assertEquals "The Stand", model.book.title
+}
+{code}
+
+{hidden}
+
 
 {note}
 With JSON don't forget the @class@ property to specify the name the target type to bind to. In XML this is implicit within the name of the @<book>@ node, but this property is required as part of the JSON packet.
@@ -205,6 +460,20 @@ For more information on the subject of REST web services see the section on [RES
 h4. Testing Web Flows
 
 Testing [Web Flows|guide:webflow] requires a special test harness called @grails.test.WebFlowTestCase@ which subclasses Spring Web Flow's [AbstractFlowExecutionTests|api:org.springframework.webflow.test.execution.AbstractFlowExecutionTests] class.
+{hidden}
+
+{Nota}
+Con JSON no olvide la clase @ @ propiedad para especificar el nombre del tipo de destino para enlazar a. En XML esto está implícito en el nombre de la @<book>@ nodo, pero esta propiedad es necesaria como parte del paquete JSON.
+{Nota}
+
+Para obtener más información sobre el tema de los servicios web de resto, consulte la sección [REST|guide:REST].
+
+h4. Pruebas Web flujos
+
+Prueba [Web Flows|guide:webflow] requiere un arnés prueba especial llamada @grails.test.WebFlowTestCase@ que subclases de Spring Web Flow [AbstractFlowExecutionTests|api:org.springframework.webflow.test.execution.AbstractFlowExecutionTests] clase</book>
+
+{hidden}
+
 
 {note}
 Subclasses of @WebFlowTestCase@ *must* be integration tests
@@ -241,6 +510,46 @@ class ExampleController {
     }
 }
 {code}
+{hidden}
+
+{Nota}
+Subclases de @ WebFlowTestCase @ * debe * ser pruebas de integración
+{Nota}
+
+Por ejemplo dado este flujo simple:
+
+{code}
+clase ExampleController {}
+
+Def exampleFlow() {}
+        Inicio {}
+            on("Go") {}
+                Flow.Hello = "mundial"
+            } .a "siguiente"
+        }
+        {siguiente
+            on("Back").to "Inicio"
+            on("Go").to "subber"
+        }
+        subber {}
+            subflow (acción: "sub")
+            on("end").to("end")
+        }
+        end()
+    }
+
+Def subFlow() {}
+        subSubflowState {}
+            subflow (controlador: "otro", acción: "otherSub")
+            on("Next").to("Next")
+        }
+        ...
+    }
+}
+{code}
+
+{hidden}
+
 
 You need to tell the test harness what to use for the "flow definition". This is done via overriding the abstract @getFlow@
  method:
@@ -253,6 +562,22 @@ class ExampleFlowTests extends WebFlowTestCase {
     ...
 }
 {code}
+{hidden}
+
+Tendrá que indicar el arnés de prueba lo que se utiliza para la "definición de flujo". Esto se realiza mediante reemplazar el abstracto @ getFlow @
+ método:
+
+{code}
+grails.test.WebFlowTestCase de importación
+
+amplía la clase ExampleFlowTests WebFlowTestCase {}
+    Def getFlow() {new ExampleController () .exampleflow}
+    ...
+}
+{code}
+
+{hidden}
+
 
 You can specify the flow id by overriding the @getFlowId@ method, otherwise the default is @test@:
 {code}
@@ -263,6 +588,20 @@ class ExampleFlowTests extends WebFlowTestCase {
     ...
 }
 {code}
+{hidden}
+
+Puede especificar el id de flujo reemplazando el @ getFlowId @ método, de lo contrario que el valor predeterminado es prueba @ @:
+{code}
+grails.test.WebFlowTestCase de importación
+
+amplía la clase ExampleFlowTests WebFlowTestCase {}
+    Cadena getFlowId() {"ejemplo"}
+    ...
+}
+{code}
+
+{hidden}
+
 
 If the flow under test calls any subflows, these (or mocks) must be registered before the calling the flow:
 {code}
@@ -280,6 +619,27 @@ protected void setUp() {
     registerFlow("example/sub", new ExampleController().subFlow)
 }
 {code}
+{hidden}
+
+Si el flujo bajo prueba cualquier llamadas subflows, estos (o se burla) deben estar registrados antes de la convocatoria el flujo:
+{code}
+protegido {void setUp()
+    Super.setUp()
+
+registerFlow("other/otherSub") {/ / registrar un simulacro simplificada
+        Inicio {}
+            on("Next").to("end")
+        }
+        end()
+    }
+
+/ / registrar el original subflow
+    registerFlow ("ejemplo/sub", nuevo ExampleController().subFlow)
+}
+{code}
+
+{hidden}
+
 
 Then you kick off the flow with the @startFlow@ method:
 
@@ -289,6 +649,19 @@ void testExampleFlow() {
     ...
 }
 {code}
+
+{hidden}
+
+A continuación, iniciará el flujo con @ startFlow @ método:
+
+{code}
+void testExampleFlow() {}
+    Def viewSelection = startFlow()
+    ...
+}
+{code}
+
+{hidden}
 
 Use the @signalEvent@ method to trigger an event:
 
@@ -300,6 +673,21 @@ void testExampleFlow() {
     assert "world" == flowScope.hello
 }
 {code}
+{hidden}
+
+Utilice el @ signalEvent @ método para desencadenar un evento:
+
+{code}
+void testExampleFlow() {}
+    ...
+    signalEvent("go")
+    afirmar "siguiente" == flowExecution.activeSession.state.id
+    afirmar "mundo" == flowScope.hello
+}
+{code}
+
+{hidden}
+
 
 Here we have signaled to the flow to execute the event "go" which causes a transition to the "next" state. In the example a transition action placed a @hello@ variable into the flow scope.
 
@@ -321,6 +709,30 @@ class FooTagLib {
     }
 }
 {code}
+{hidden}
+
+Aquí hemos señalado al flujo para ejecutar el evento "ir" que provoca una transición al Estado "siguiente". En el ejemplo de una acción de transición había colocado un Hola @ variable @ en el ámbito de aplicación de flujo.
+
+h4. Pruebas de bibliotecas de etiquetas
+
+Pruebas de bibliotecas de etiquetas es simple, porque cuando se invoca una etiqueta como un método devuelve su resultado como una cadena (técnicamente un @ StreamCharBuffer @ pero esta clase implementa todos los métodos de @ String @). Así por ejemplo, si dispone de una biblioteca de etiquetas como este:
+
+{code: java}
+clase FooTagLib {}
+
+Def bar = {attrs, cuerpo->
+        cabo<><p>¡Hola mundo!</p>"
+    }
+
+Def bodyTag = {attrs, cuerpo->
+        out <><\${attrs.name}>"
+        out < body()="" out=""><></></\${attrs.name}>"
+    }
+}
+{code}
+
+{hidden}
+
 
 The tests would look like:
 
@@ -340,6 +752,29 @@ class FooTagLibTests extends GroovyTestCase {
     }
 }
 {code}
+{hidden}
+
+Las pruebas sería:
+
+{code: java}
+amplía la clase FooTagLibTests GroovyTestCase {}
+
+void testBarTag() {}
+        assertEquals"<p>¡Hola mundo!</p>",
+                     Nueva FooTagLib () .bar (null, null).toString()
+    }
+
+void testBodyTag() {}
+        assertEquals"<p>¡Hola mundo!</p>",
+                     Nueva FooTagLib () .bodytag (nombre: "p") {}
+                         "¡ Hello World!"
+                     } .tostring()
+    }
+}
+{code}
+
+{hidden}
+
 
 Notice that for the second example, @testBodyTag@, we pass a block that returns the body of the tag. This is convenient to representing the body as a String.
 
@@ -350,6 +785,20 @@ In addition to doing simple testing of tag libraries like in the above examples,
 The @GroovyPagesTestCase@ class is a subclass of the standard @GroovyTestCase@ class and adds utility methods for testing the output of GSP rendering.
 
 {note}
+{hidden}
+
+Observe que el segundo ejemplo, @ testBodyTag @, pasamos un bloque que devuelve el cuerpo de la etiqueta. Esto es conveniente que representa el cuerpo como una cadena.
+
+h4. Pruebas de bibliotecas de etiquetas con GroovyPagesTestCase
+
+Además de hacer pruebas sencillas de bibliotecas de etiquetas como en los ejemplos anteriores, también puede utilizar la clase @grails.test.GroovyPagesTestCase@ para probar las bibliotecas de etiquetas con pruebas de integración.
+
+@ GroovyPagesTestCase @ clase es una subclase de la estándar @ GroovyTestCase @ clase y agrega métodos de utilidad para probar la salida de la representación del SGP.
+
+{Nota}
+
+{hidden}
+
 @GroovyPagesTestCase@ can only be used in an integration test.
 {note}
 
@@ -364,6 +813,25 @@ class FormatTagLib {
     }
 }
 {code}
+{hidden}
+
+@ GroovyPagesTestCase @ puede ser utilizado en una prueba de integración.
+{Nota}
+
+Por ejemplo, considere esta fecha en el formato de la biblioteca de etiquetas:
+
+{code}
+java.text.SimpleDateFormat de importación
+
+clase FormatTagLib {}
+    Def dateFormat = {attrs, cuerpo->
+        cabo << SimpleDateFormat(attrs.format) nueva << attrs.date
+    }
+}
+{code}
+
+{hidden}
+
 
 This can be easily tested as follows:
 
@@ -378,6 +846,24 @@ class FormatTagLibTests extends GroovyPagesTestCase {
     }
 }
 {code}
+{hidden}
+
+Esto puede ser fácilmente probado como sigue:
+
+{code}
+amplía la clase FormatTagLibTests GroovyPagesTestCase {}
+    void testDateFormat() {}
+        plantilla de Def =
+                '<g:dateformat format="dd-MM-yyyy" date="\${myDate}"></g:dateformat>'
+
+Def testDate =... / / crear la fecha
+        assertOutputEquals (01 de enero de 2008 ', plantilla, [myDate:testDate])
+    }
+}
+{code}
+
+{hidden}
+
 
 You can also obtain the result of a GSP using the @applyTemplate@ method of the @GroovyPagesTestCase@ class:
 
@@ -394,6 +880,26 @@ class FormatTagLibTests extends GroovyPagesTestCase {
     }
 }
 {code}
+{hidden}
+
+También puede obtener el resultado de un sistema de preferencias Generalizadas con @ applyTemplate @ método de @ GroovyPagesTestCase @ clase:
+
+{code}
+amplía la clase FormatTagLibTests GroovyPagesTestCase {}
+    void testDateFormat() {}
+        plantilla de Def =
+                '<g:dateformat format="dd-MM-yyyy" date="\${myDate}"></g:dateformat>'
+
+Def testDate =... / / crear la fecha
+        Def resultado = applyTemplate (plantilla, [myDate:testDate])
+
+assertEquals 01 de enero de 2008 ', resultado
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Testing Domain Classes
 
@@ -409,6 +915,25 @@ void testQuery() {
     assertEquals 2, Book.list().size()
 }
 {code}
+{hidden}
+
+h4. Prueba de clases de dominio
+
+Probar clases de dominio normalmente es una simple cuestión de utilizar la [GORM API|guide:GORM], pero hay algunas cosas a tener en cuenta. En primer lugar, cuando pruebas consultas a menudo es necesario "flush" para garantizar el correcto estado ha ha persistido en la base de datos. Por ejemplo, tomemos el ejemplo siguiente:
+
+{code: java}
+void testQuery() {}
+    libros de Def = [
+            nuevo libro (título: "The Stand"),
+            nuevo libro (título: "El resplandor")]
+    Books*.Save()
+
+assertEquals 2, Book.list().size()
+}
+{code}
+
+{hidden}
+
 
 This test will fail because calling [save|domainClasses] does not actually persist the @Book@ instances when called. Calling @save@ only indicates to Hibernate that at some point in the future these instances should be persisted. To commit changes immediately you "flush" them:
 
@@ -422,5 +947,25 @@ void testQuery() {
     assertEquals 2, Book.list().size()
 }
 {code}
+{hidden}
+
+Esta prueba se producirá un error porque llamar [save|domainClasses] no realmente persisten el libro @ @ instancias al llamado. Llamar a @ guardar @ sólo indica a hibernar que en algún punto en el futuro que estos casos deben conservarse. Para confirmar los cambios inmediatamente que "Vaciar" les:
+
+{code: java}
+void testQuery() {}
+    libros de Def = [
+            nuevo libro (título: "The Stand"),
+            nuevo libro (título: "El resplandor")]
+    Books*.Save(flush: true)
+
+assertEquals 2, Book.list().size()
+}
+{code}
+
+{hidden}
+
 
 In this case since we're passing the argument @flush@ with a value of @true@ the updates will be persisted immediately and hence will be available to the query later on.
+{hidden}
+
+En este caso ya que estamos pasando el argumento @ flush @ con un valor de true @ @ las actualizaciones se conservará inmediatamente y ahí estará disponible para la consulta más adelante.

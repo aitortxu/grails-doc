@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Pulling in resources with r:require
 
 To use resources, your GSP page must indicate which resource modules it requires. For example with the [jQuery plugin|http://grails.org/plugin/jquery], which exposes a "jquery" resource module, to use jQuery in any page on your site you simply add:
@@ -14,6 +17,23 @@ To use resources, your GSP page must indicate which resource modules it requires
    </body>
 </html>
 {code}
+{hidden}
+
+h4. Tirando en recursos con r: requieren
+
+Para utilizar los recursos, la página del SGP debe indicar qué módulos de recursos requiere. Por ejemplo con el [plugin|http://grails.org/plugin/jquery jQuery], que expone un módulo de recursos "jquery", para utilizar jQuery en cualquier página del sitio que simplemente agrega:
+
+{Código: xml}<html>
+   <head>
+      <r:require module="jquery"></r:require>
+      <r:layoutresources></r:layoutresources>
+   </head>
+   <body>...<r:layoutresources></r:layoutresources>
+   </body>
+</html>{code}
+
+{hidden}
+
 
 This will automatically include all resources needed for jQuery, including them at the correct locations in the page. By default the plugin sets the disposition to be "head", so they load early in the page.
 
@@ -31,6 +51,23 @@ You can call @r:require@ multiple times in a GSP page, and you use the "modules"
    </body>
 </html>
 {code}
+{hidden}
+
+Esto incluirá automáticamente todos los recursos necesarios para jQuery, incluirlos en las ubicaciones correctas en la página. De forma predeterminada el plugin establece la disposición a ser "jefe", por lo que cargarán en la página.
+
+Puede llamar a @ r: requieren varias veces en una página del SGP, y utilizar el atributo de "módulos" para proporcionar una lista de módulos:
+
+{Código: xml}<html>
+   <head>
+      <r:require modules="jquery, main, blueprint, charting"></r:require>
+      <r:layoutresources></r:layoutresources>
+   </head>
+   <body>...<r:layoutresources></r:layoutresources>
+   </body>
+</html>{code}
+
+{hidden}
+
 
 The above may result in many JavaScript and CSS files being included, in the correct order, with some JavaScript files loading at the end of the body to improve the apparent page load time.
 
@@ -41,6 +78,20 @@ h4. Rendering the links to resources with r:layoutResources
 When you have declared the resource modules that your GSP page requires, the framework needs to render the links to those resources at the correct time.
 
 To achieve this correctly, you must include the r:layoutResources tag twice in your page, or more commonly, in your GSP layout:
+{hidden}
+
+Lo anterior puede provocar muchos JavaScript y CSS archivos están incluidos en el orden correcto, con algunos archivos JavaScript cargando al final del cuerpo para mejorar el tiempo de carga de página aparente.
+
+Sin embargo, no puede utilizar r: requieren en aislamiento - según los ejemplos que debe tener el <r:layoutresources></r:layoutresources> etiqueta para realizar el procesamiento.
+
+h4. Procesar los vínculos a recursos con r: layoutResources
+
+Cuando han declarado los módulos de recursos que requiere su página del SGP, el marco debe representar los vínculos a los recursos en el momento correcto.
+
+Para lograr esto correctamente, debe incluir la etiqueta r: layoutResources dos veces en la página, o más comúnmente, en el diseño de su sistema de preferencias Generalizadas:
+
+{hidden}
+
 
 {code:xml}
 <html>
@@ -54,6 +105,21 @@ To achieve this correctly, you must include the r:layoutResources tag twice in y
    </body>
 </html>
 {code}
+{hidden}
+
+{Código: xml}<html>
+   <head>
+      <g:layouttitle></g:layouttitle>
+      <r:layoutresources></r:layoutresources>
+   </head>
+   <body>
+      <g:layoutbody></g:layoutbody>
+      <r:layoutresources></r:layoutresources>
+   </body>
+</html>{code}
+
+{hidden}
+
 
 This represents the simplest Sitemesh layout you can have that supports Resources.
 
@@ -64,6 +130,20 @@ The default disposition applied depends on the type of resource. All CSS must be
 Note that both your GSP page and your Sitemesh layout (as well as any GSP template fragments) can call r:require to depend on resources. The only limitation is that you must call r:require before the r:layoutResources that should render it.
 
 h4. Adding page-specific JavaScript code with r:script
+{hidden}
+
+Esto representa el más simple diseño Sitemesh puede tener que admite recursos.
+
+El marco de recursos tiene el concepto de una "disposición" para cada recurso. Esto es una indicación de donde en la página el recurso debe ser incluido.
+
+La disposición predeterminada aplicada depende del tipo de recurso. CSS todos deben procesarse en<head>en HTML, tan "cabeza" es el valor predeterminado para todos CSS y representará la primera r: layoutResources. Tiempos de carga de página se mejoran cuando JavaScript se cargue después el contenido de la página, por lo que es el valor predeterminado para archivos JavaScript "aplazar", lo que significa que se representa cuando se invoca la segunda r: layoutResources.
+
+Tenga en cuenta que la página del SGP y el diseño de Sitemesh (así como cualquier fragmentos de la plantilla del SGP) pueden llamar r: requieren que dependen de los recursos. La única limitación es que se debe llamar r: requieren antes de la r: layoutResources que debe hacerlo.
+
+h4. Agregar código de JavaScript específico de la página con r: secuencia de comandos</head>
+
+{hidden}
+
 
 Grails has the [javascript|tags] tag which is adapted to defer to Resources plugin if installed, but it is recommended that you call @r:script@ directly when you need to include fragments of JavaScript code.
 
@@ -83,6 +163,27 @@ Given a Sitemesh layout like this:
    </body>
 </html>
 {code}
+{hidden}
+
+Grails tiene la etiqueta [javascript|tags] que se adapta a aplazar el plugin de recursos si ha instalado, pero se recomienda llamar a @ r: secuencia de comandos @ directamente cuando necesita incluir fragmentos de código JavaScript.
+
+Esto le permite escribir algunos "en línea" JavaScript que es en realidad * no * prestados en línea, pero en el<head>o al final del cuerpo, según la disposición.
+
+Dado un diseño Sitemesh como este:
+
+{Código: xml}<html>
+   <head>
+      <g:layouttitle></g:layouttitle>
+      <r:layoutresources></r:layoutresources>
+   </head>
+   <body>
+      <g:layoutbody></g:layoutbody>
+      <r:layoutresources></r:layoutresources>
+   </body>
+</html>{code}</head>
+
+{hidden}
+
 
 ...in your GSP you can inject some JavaScript code into the head or deferred regions of the page like this:
 
@@ -101,6 +202,22 @@ Given a Sitemesh layout like this:
    </body>
 </html>
 {code}
+{hidden}
+
+.. .en el SGP puede inyectar algunos JavaScript de código en la cabeza o regiones diferidas de la página como esta:
+
+{Código: xml}<html>
+   <head>
+      <title>Pruebas de magia r: script!</title>
+   </head>
+   <body>
+      <r:script disposition="head">Window.Alert (' esto es el final de<head>');</head></r:script>
+      <r:script disposition="defer">Window.Alert ('esto es el final del cuerpo, y ha cargado la página.");</r:script>
+   </body>
+</html>{code}
+
+{hidden}
+
 
 The default disposition is "defer", so the disposition in the latter r:script is purely included for demonstration.
 
@@ -111,6 +228,20 @@ h4. Linking to images with r:img
 This tag is used to render @<img>@ markup, using the Resources framework to process the resource on the fly (if configured to do so - e.g. make it eternally cacheable).
 
 This includes any extra attributes on the @<img>@ tag if the resource has been previously declared in a module.
+{hidden}
+
+La disposición predeterminada es "aplazar", por lo que la disposición del último r: script es puramente incluida para la demostración.
+
+Tenga en cuenta que esos fragmentos de código de secuencia de comandos: r * siempre * carga después de los módulos que ha utilizado, para garantizar que cualquier requiere bibliotecas han cargado.
+
+h4. Vincular imágenes con r: img
+
+Esta etiqueta se utiliza para procesar<img>@ marcado, utilizando el marco de recursos para procesar el recurso sobre la marcha (si está configurado para hacerlo - por ejemplo, hacer eternamente incluibles).
+
+Esto incluye los atributos adicionales en el @<img>@ etiqueta si el recurso ha sido declarado previamente en un módulo.
+
+{hidden}
+
 
 With this mechanism you can specify the width, height and any other attributes in the resource declaration in the module, and they will be pulled in as necessary.
 
@@ -126,9 +257,33 @@ Example:
    </body>
 </html>
 {code}
+{hidden}
+
+Con este mecanismo se pueden especificar el ancho, altura y otros atributos en la declaración de recursos en el módulo, y se realizará que sea necesario.
+
+Ejemplo:
+
+{Código: xml}<html>
+   <head>
+      <title>R: img prueba</title>
+   </head>
+   <body>
+      <r:img uri="/images/logo.png"></r:img>
+   </body>
+</html>{code}
+
+{hidden}
+
 
 Note that Grails has a built-in @g:img@ tag as a shortcut for rendering @<img>@ tags that refer to a static resource. The Grails [img|tags] tag is Resources-aware and will delegate to @r:img@ if found. However it is recommended that you use @r:img@ directly if using the Resources plugin.
 
 Alongside the regular Grails [resource|tags] tag attributes, this also supports the "uri" attribute for increased brevity.
 
 See [r:resource documentation|http://grails-plugins.github.com/grails-resources] for full details.
+{hidden}
+
+Tenga en cuenta que Grails tiene una g @ incorporada: img @ etiqueta como método abreviado para la representación @<img>@ etiquetas que hacen referencia a un recurso estático. La etiqueta de Grails [img|tags] es consciente de los recursos y delegará a @ r: img @ si encuentra. Sin embargo se recomienda que utilice @ r: img @ directamente si utilizando el plugin de recursos.
+
+Junto con los atributos de etiqueta de Grails [resource|tags] regulares, esto también admite el atributo "uri" a la mayor brevedad.
+
+Consulte [documentation|http://grails-plugins.github.com/grails-resources r: recurso] para obtener más detalles.

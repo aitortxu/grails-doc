@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. r:resource
 
 This is equivalent to the Grails [resource|Tags] tag, returning a link to the processed static resource. Grails' own @g:resource@ tag delegates to this implementation if found, but if your code requires the Resources plugin, you should use @r:resource@ directly.
@@ -8,6 +11,25 @@ See [r:resource documentation|http://grails-plugins.github.com/grails-resources]
 
 h4. r:external
 
+{hidden}
+
+h4. r: recurso
+
+Esto es equivalente a las Grails [resource|Etiqueta etiquetas], volviendo un enlace al recurso estático transformado. 'Grails propia @ g: recurso @ delegados de etiqueta para esta aplicación si se encuentra, pero si el código requiere el plugin de recursos, debe usar @ r: recurso @ directamente.
+
+Junto a las Grails regulares [resource|Atributos de etiqueta etiquetas], esto también admite el atributo "uri" a la mayor brevedad.
+
+Consulte [documentation|http://grails-plugins.github.com/grails-resources r: recurso] para obtener más detalles.
+
+h4. r: externo
+
+{hidden}
+
 This is a resource-aware version of Grails [external|Tags] tag which renders the HTML markup necessary to include an external file resource such as CSS, JS or a favicon.
 
 See [r:resource documentation|http://grails-plugins.github.com/grails-resources] for full details.
+{hidden}
+
+Esta es una versión consciente de recurso de Grails [external|Etiqueta de etiquetas] que representa el código HTML necesario incluir un recurso de archivo externo, como CSS, JS o un favicon.
+
+Consulte [documentation|http://grails-plugins.github.com/grails-resources r: recurso] para obtener más detalles.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. hasMany
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Author {
     static hasMany = [books: Book]
 }
 {code}
+{hidden}
+
+h1. hasMany
+
+h2. Fin
+
+Define una asociación de uno a varios entre dos clases.
+
+h2. Ejemplos
+
+{code: java}
+clase {autor
+
+Nombre de la cadena
+
+estático hasMany = [libros: libro]
+}
+{code}
+
+{hidden}
+
 
 In this example we define a one-to-many relationship between the @Author@ and @Book@ classes (one @Author@ has many @Book@s)
 
@@ -24,10 +48,32 @@ By default GORM will create a property of type @java.util.Set@ using the key ins
 {code}
 static hasMany = [books: Book]
 {code}
+{hidden}
+
+En este ejemplo se define una relación de uno a varios entre el autor @ @ y @ libro @ clases (un autor @ @ tiene muchas @ Book@s)
+
+h2. Descripción
+
+De forma predeterminada GORM creará una propiedad del tipo @java.util.Set@ con la clave dentro de la definición de la @ hasMany @ mapa. Por ejemplo, considere esta definición:
+
+{code}
+estático hasMany = [libros: libro]
+{code}
+
+{hidden}
+
 
 Here a property of type @java.util.Set@ called @books@ will be created within the defining class. These can then be iterated over and manipulated:
 
 {code:java}
 def a = Author.get(1)
 for (book in a.books) { println book.title }
+{code}
+{hidden}
+
+Aquí se creará dentro de la clase define una propiedad de tipo @java.util.Set@ llamado @ libros @. Luego estos pueden itera sobre y manipular:
+
+{code: java}
+Def un = Author.get(1)
+(libro de a.books) {Console.println book.title}
 {code}

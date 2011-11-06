@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. order
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. orden
+
+h2. Fin
+
+Personaliza el orden predeterminado de los resultados de la consulta.
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    ...
+    asignación estática = {}
+        orden "desc"
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,3 +48,14 @@ Arguments:
 * @direction@ - Either "desc" or "asc" for descending and ascending respectively.
 
 By defaults results are sorted in ascending order. With the @order@ method you can alter results to be sorted in descending order. See also the [sort|databaseMapping] method.
+{hidden}
+
+h2. Descripción
+
+Uso: @ order(string) @
+
+Argumentos:
+
+* @ dirección @ - bien "desc" o "asc" descendente y ascendente respectivamente.
+
+Por defecto los resultados se ordenan en orden ascendente. Con la orden @ @ método puede alterar resultados a ordenarse en orden descendente. Vea también el método [sort|databaseMapping].

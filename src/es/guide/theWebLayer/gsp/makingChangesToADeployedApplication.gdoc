@@ -1,3 +1,6 @@
+
+{hidden}
+
 One of the main issues with deploying a Grails application (or typically any servlet-based one) is that any change to the views requires that you redeploy your whole application. If all you want to do is fix a typo on a page, or change an image link, it can seem like a lot of unnecessary work. For such simple requirements, Grails does have a solution: the  @grails.gsp.view.dir@  configuration setting.
 
 How does this work? The first step is to decide where the GSP files should go. Let's say we want to keep them unpacked in a  @/var/www/grails/my-app@  directory. We add these two lines to  @grails-app/conf/Config.groovy@ :
@@ -8,6 +11,21 @@ grails.gsp.view.dir = "/var/www/grails/my-app/"
 The first line tells Grails that modified GSP files should be reloaded at runtime. If you don't have this setting, you can make as many changes as you like but they won't be reflected in the running application until you restart. The second line tells Grails where to load the views and layouts from.
 
 {note}
+{hidden}
+
+Uno de los principales problemas con la implementación de una aplicación Grails (o uno normalmente cualquier basadas en servlet) es que cualquier cambio en los puntos de vista requiere que trasladar toda la aplicación. Si todo lo que quiere hacer es arreglar una errata en una página, o cambiar un vínculo de imagen, puede parecer mucho trabajo innecesario. Para tales requisitos simples, Grails tiene una solución: la opción de configuración @grails.gsp.view.dir@.
+
+¿Cómo funciona esto? El primer paso consiste en decidir dónde deben ir los archivos del SGP. Digamos que queremos mantenerlos desempaquetado en una @ / var/www/grails/my-app @ directorio. Añadimos estas dos líneas a @grails-app/conf/Config.groovy@:
+{code}
+Grails.GSP.Enable.Reload = true
+Grails.GSP.View.dir = "/ var/www/grails/my-app /"
+{code}
+La primera línea dice Grails que SPG archivos modificación deben cargarse en tiempo de ejecución. Si no dispone de esta opción, puede hacer tantos cambios como te gusta pero no se refleja en la aplicación que se ejecuta hasta que se reinicie. La segunda línea le dice a Grails donde las opiniones y los diseños de la carga.
+
+{Nota}
+
+{hidden}
+
 The trailing slash on the  @grails.gsp.view.dir@  value is important! Without it, Grails will look for views in the parent directory.
 {note}
 
@@ -18,6 +36,21 @@ With those settings in place, all you need to do is copy the views from your web
 mkdir -p /var/www/grails/my-app/grails-app/views
 cp -R grails-app/views/* /var/www/grails/my-app/grails-app/views
 {code}
+{hidden}
+
+La barra diagonal sobre el valor de @grails.gsp.view.dir@ es importante! Sin ella, Grails buscará vistas en el directorio principal.
+{Nota}
+
+"Grails.gsp.view.dir" es opcional. Si no se especifica, puede actualizar archivos directamente al directorio de guerra desplegados del servidor de aplicaciones. En función del servidor de aplicaciones, podrían obtener sobrescribir estos archivos cuando se reinicia el servidor. Servidores de aplicaciones más apoyan "explotó despliegue de guerra" que se recomienda en este caso.
+
+Con esos ajustes en su lugar, todo lo que necesita hacer es copiar los puntos de vista de la aplicación web en el directorio externo. En un sistema UNIX, esto sería algo así:
+{code}
+mkdir -p /var/www/grails/my-app/grails-app/views
+CP -R grails-app/views / * /var/www/grails/my-app/grails-app/views
+{code}
+
+{hidden}
+
 The key point here is that you must retain the view directory structure, including the  @grails-app/views@  bit. So you end up with the path  @/var/www/grails/my-app/grails-app/views/...@ .
 
 One thing to bear in mind with this technique is that every time you modify a GSP, it uses up permgen space. So at some point you will eventually hit "out of permgen space" errors unless you restart the server. So this technique is not recommended for frequent or large changes to the views.
@@ -28,6 +61,26 @@ There are also some System properties to control GSP reloading:
 grails.gsp.enable.reload | altervative system property for enabling the GSP reload mode without changing Config.groovy |
 grails.gsp.reload.interval | interval between checking the lastmodified time of the gsp source file, unit is milliseconds | 5000
 grails.gsp.reload.granularity | the number of milliseconds leeway to give before deciding a file is out of date. this is needed because different roundings usually cause a 1000ms difference in lastmodified times | 1000
+{hidden}
+
+El punto clave aquí es que debe conservar la estructura de directorios de vista, incluidas las @ grails-app / @ bit. Así que uno termina con la ruta @/var/www/grails/my-app/grails-app/views/...@.
+
+Una cosa es tener en cuenta con esta técnica es que cada vez que se modifica un SPG, utiliza un espacio de permgen. Así que en algún momento usted eventualmente golpeará "out of space permgen" errores a menos que reinicie el servidor. Así que esta técnica no se recomienda para cambios frecuentes o grandes a los puntos de vista.
+
+También hay algunas propiedades de sistema para controlar la recarga de SPG:
+tabla de {}
+* Nombre * | * Descripción * | * Predeterminada *
+Grails.GSP.Enable.Reload | altervative propiedad del sistema para habilitar el SGP a cargar el modo sin cambiar Config.groovy |
+Grails.GSP.Reload.Interval | intervalo entre comprobando el tiempo lastmodified del SGP archivo fuente, unidad es milisegundos | 5000
+Grails.GSP.Reload.Granularity | el número de margen de milisegundos para dar antes de decidir un archivo es obsoleto. Esto es necesario porque distintos redondeos usualmente causan un 1000ms diferencia en los tiempos de lastmodified | 1000
+
+{hidden}
+
 {table}
 
 GSP reloading is supported for precompiled GSPs since Grails 1.3.5 .
+{hidden}
+
+tabla de {}
+
+Recarga del SGP se admite precompilados GSPs desde Grails 1.3.5.

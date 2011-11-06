@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. fieldValue
 
 h2. Purpose
@@ -12,6 +15,23 @@ h2. Examples
 // or as a method
 <input type="text" value="${fieldValue(bean: book, field: 'title')}" />
 {code}
+{hidden}
+
+h1. fieldValue
+
+h2. Fin
+
+Inspecciona un grano que ha sido objeto de [datos binding|guide:dataBinding] y obtiene el valor del campo desde el valor originalmente presentado en errores @ de bean @ objeto poblada durante el enlace de datos o desde el valor de la propiedad de bean. Una vez que se obtiene el valor será automáticamente codificados en HTML.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:fieldvalue bean="${book}" field="title"></g:fieldvalue>
+
+/ / o como un método<input type="text" value="${fieldValue(bean: book, field: 'title')}">{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -22,5 +42,22 @@ Attributes
 
 h2. Source
 
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ bean @ (requerido) - instancia el grano para inspeccionar
+* @ campo @ (requerido) - el nombre del campo para obtener el valor de
+
+h2. Fuente
+
+{hidden}
+
 {source:tag=ValidationTagLib.fieldValue}
 {source}
+{hidden}
+
+{source:tag=ValidationTagLib.fieldValue}
+origen de {}

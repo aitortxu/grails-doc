@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails ships with a few convenience targets such as [create-controller|commandLine], [create-domain-class|commandLine] and so on that will create [Controllers|guide:controllers] and different artefact types for you.
 {note}
 These are just for your convenience and you can just as easily use an IDE or your favourite text editor.
@@ -7,6 +10,20 @@ For example to create the basis of an application you typically need a [domain m
 {code}
 grails create-domain-class book
 {code}
+
+{hidden}
+
+Grails barcos con unos objetivos de conveniencia como [crear-controller|commandLine], [crear-dominio-class|commandLine] y etc., que creará [Controllers|guide:controllers] y tipos diferentes de artefacto para usted.
+{Nota}
+Estos son sólo para su comodidad y facilmente puede utilizar un IDE o su editor de textos preferido.
+{Nota}
+Por ejemplo, para crear la base de una aplicación necesita normalmente [model|guide:GORM de dominio]:
+
+{code}
+libro de clase de dominio crear Grails
+{code}
+
+{hidden}
 
 This will result in the creation of a domain class at @grails-app/domain/Book.groovy@ such as:
 
@@ -18,5 +35,24 @@ class Book {
 There are many such @create-*@ commands that can be explored in the command line reference guide.
 
 {note}
+{hidden}
+
+Esto resultará en la creación de una clase de dominio @grails-app/domain/Book.groovy@ tales como:
+
+{code}
+clase {libro
+}
+{code}
+
+Hay muchos tal @ crear-* @ comandos que pueden ser explorados en la Guía de referencia de línea de comandos.
+
+{Nota}
+
+{hidden}
+
 To decrease the amount of time it takes to run Grails scripts, use the [interactive|commandLine] mode.
 {note}
+{hidden}
+
+Para reducir la cantidad de tiempo que se tarda en ejecutar secuencias de comandos de Grails, utilice el modo [interactive|commandLine].
+{Nota}

@@ -1,3 +1,4 @@
+
 {hidden}
 
 Since Grails 1.2, the documentation engine that powers the creation of this documentation has been available for your own Grails projects.
@@ -8,16 +9,6 @@ h4. Creating project documentation
 
 To use the engine you need to follow a few conventions. First, you need to create a @src/docs/guide@ directory where your documentation source files will go. Then, you need to create the source docs themselves. Each chapter should have its own gdoc file as should all numbered sub-sections. You will end up with something like:
 
-{hidden}
-
-Desde Grails 1.2, el motor de documentación usado para la creación de esta documentación ha estado disponible para sus propios proyectos de Grails.
-
-El motor de documentación utiliza una variación de la sintaxis de [Textile|http://textile.sitemonks.com/] para crear automáticamente la documentación del proyecto con enlaces, formato, etc..
-
-h4. Creación de documentación del proyecto
-
-Para utilizar el motor tiene que seguir unos convenios. En primer lugar, debe crear a un directorio @src/docs/guide@ donde irán sus archivos de documentación. A continuación, debe crear a los documentos propiamente. Cada capítulo debe tener su propio archivo de gdoc así como las subsecciones. Acabará con algo así como:
-
 {code}
 + src/docs/guide/introduction.gdoc
 + src/docs/guide/introduction/changes.gdoc
@@ -26,18 +17,31 @@ Para utilizar el motor tiene que seguir unos convenios. En primer lugar, debe cr
 + src/docs/guide/configuration/build.gdoc
 + src/docs/guide/configuration/build/controllers.gdoc
 {code}
+{hidden}
+
+Desde Grails 1.2, el motor de documentación que impulsa la creación de esta documentación ha estado disponible para sus propios proyectos de Grails.
+
+El motor de documentación utiliza una variación en la sintaxis [Textile|http://textile.sitemonks.com/] para crear automáticamente la documentación del proyecto con vinculación inteligente, formato, etc..
+
+h4. Creación de documentación del proyecto
+
+Para utilizar el motor que tiene que seguir unos convenios. En primer lugar, debe crear a un @ src/docs/guía @ directorio donde pasará sus archivos de origen de la documentación. A continuación, debe crear a los documentos de origen propios. Cada capítulo debe tener su propio archivo de gdoc como subsecciones todos numerados. Puede acabar con algo así como:
+
+{code}
+  src/docs/Guide/Introduction.gDoc
+  src/docs/Guide/Introduction/Changes.gDoc
+  src/docs/guide/gettingStarted.gdoc
+  src/docs/Guide/Configuration.gDoc
+  src/docs/Guide/Configuration/Build.gDoc
+  src/docs/Guide/Configuration/Build/Controllers.gDoc
+{code}
 
 {hidden}
+
 
 Note that you can have all your gdoc files in the top-level directory if you want, but you can also put sub-sections in sub-directories named after the parent section - as the above example shows.
 
 Once you have your source files, you still need to tell the documentation engine what the structure of your user guide is going to be. To do that, you add a @src/docs/guide/toc.yml@ file that contains the structure and titles for each section. This file is in [YAML|http://www.yaml.org/] format and basically represents the structure of the user guide in tree form. For example, the above files could be represented as:
-
-{hidden}
-
-Tenga en cuenta que puede tener todos los archivos gdoc en el directorio de nivel superior si quiere, pero también puede poner subsecciones en subdirectorios después de la sección principal, como se muestra en el ejemplo anterior.
-
-Una vez que tenga los archivos origen, aún necesita decirle al motor de documentación lo que va a ser la estructura de la Guía de Usuario. Para hacerlo, debe agregar un archivo @src/docs/guide/toc.yml@ que contiene la estructura y los títulos de cada sección. Este archivo está en formato [YAML|http://www.yaml.org/] y básicamente representa la estructura de la Guía de Usuario en forma de árbol. Por ejemplo, los archivos anteriores podrían representarse como:
 
 {code:yaml}
 introduction:
@@ -50,8 +54,27 @@ configuration:
     title: Build Config
     controllers: Specifying Controllers
 {code}
+{hidden}
+
+Tenga en cuenta que puede tener todos los archivos gdoc en el directorio de nivel superior si quieres, pero también puede poner subsecciones en subdirectorios nombrados después de la sección principal - como se muestra en el ejemplo anterior.
+
+Una vez que tenga los archivos de origen, aún necesita decirle al motor de documentación lo que va a ser la estructura de la Guía del usuario. Para hacerlo, debe agregar un archivo @src/docs/guide/toc.yml@ que contiene la estructura y los títulos de cada sección. Este archivo está en formato de [YAML|http://www.yaml.org/] y básicamente representa la estructura de la Guía del usuario en forma de árbol. Por ejemplo, los archivos anteriores podrían representarse como:
+
+{Código: yaml}
+Introducción:
+  Título: introducción
+  cambios: registro de cambios
+gettingStarted: introducción
+configuración:
+  Título: configuración
+  compilación:
+    Título: construir Config
+    controladores: especificación de controladores
+{code}
 
 {hidden}
+
+
 The format is pretty straightforward. Any section that has sub-sections is represented with the corresponding filename (minus the .gdoc extension) followed by a colon. The next line should contain @title:@ plus the title of the section as seen by the end user. Every sub-section then has its own line after the title. Leaf nodes, i.e. those without any sub-sections, declare their title on the same line as the section name but after the colon.
 
 That's it. You can easily add, remove, and move sections within the @toc.yml@ to restructure the generated user guide. You should also make sure that all section names, i.e. the gdoc filenames, should be unique since they are used for creating internal links and for the HTML filenames. Don't worry though, the documentation engine will warn you of duplicate section names.
@@ -60,21 +83,26 @@ h4. Creating reference items
 
 Reference items appear in the Quick Reference section of the documentation. Each reference item belongs to a category and a category is a directory located in the @src/docs/ref@ directory. For example, suppose you have defined a new controller method called @renderPDF@. That belongs to the @Controllers@ category so you would create a gdoc text file at the following location:
 
-{hidden}
-
-El formato es bastante sencillo. Cualquier sección que tiene subsecciones se representa con el nombre de archivo correspondiente (menos la extensión .gdoc) seguido de dos puntos. La siguiente línea debe contener @title:@ además el título de la sección como lo verá el usuario final. Así, cada subsección tiene su propia línea después del título. Los nodos hoja, es decir, aquellos sin ningún subsección, declaran su título en la misma línea que el nombre de sección pero después de los dos puntos.
-
-Eso es todo. Puede agregar, eliminar y mover secciones dentro de @toc.yml@ para reestructurar la Guía de Usuario generada. También debe asegurarse de que todos los nombres de sección, es decir, los nombres de los archivos gdoc, deben ser únicos, ya que se utilizan para crear enlaces internos y los nombres de archivo HTML. No se preocupe de ello, porque el motor de documentación le avisará de los nombres de sección duplicados.
-
-h4. Creación de elementos de referencia
-
-Elementos de referencia aparecen en la sección de referencia rápida de la documentación. Cada elemento de referencia pertenece a una categoría y una categoría es un directorio ubicado en el directorio @src/docs/ref@. Por ejemplo, suponga que ha definido un nuevo método de controlador llamado @renderPDF@. Pertenece a la categoría @controladores@  por lo que debe crear un archivo de texto gdoc en la siguiente ubicación:
-
 {code}
 + src/docs/ref/Controllers/renderPDF.gdoc
 {code}
+{hidden}
+
+El formato es bastante sencillo. Cualquier sección que tiene subsecciones se representa con el nombre de archivo correspondiente (menos la extensión .gdoc) seguido de dos puntos. La siguiente línea debe contener @ title: @ además el título de la sección visto por el usuario final. Entonces, cada subsección tiene su propia línea después del título. Los nodos hoja, es decir, aquellos sin ningún subsecciones, declaran su título en la misma línea que el nombre de sección pero después de los dos puntos.
+
+Eso es todo. Puede agregar, eliminar y mover secciones dentro de @toc.yml@ para reestructurar a la Guía del usuario generado. También debe asegurarse de que todos los nombres de sección, es decir, los nombres de gdoc archivos, deben ser únicos, ya que se utilizan para crear enlaces internos y los nombres de archivo HTML. No te preocupes aunque el motor de documentación le avisará de los nombres de sección duplicados.
+
+h4. Creación de elementos de referencia
+
+Elementos de referencia aparecen en la sección de referencia rápida de la documentación. Cada elemento de referencia pertenece a una categoría y una categoría es un directorio ubicado en la @ src/docs/ref @ directorio. Por ejemplo, suponga que ha definido un nuevo método de controlador llamado @ renderPDF @. Pertenece a los controladores @ @ categoría por lo que debe crear un archivo de texto gdoc en la siguiente ubicación:
+
+{code}
+  src/docs/ref/Controllers/renderPDF.gdoc
+{code}
 
 {hidden}
+
+
 h4. Configuring Output Properties
 
 There are various properties you can set within your @grails-app/conf/Config.groovy@ file that customize the output of the documentation such as:
@@ -88,12 +116,12 @@ There are various properties you can set within your @grails-app/conf/Config.gro
 
 h4. Configuración de las propiedades de salida
 
-Hay varias propiedades que se pueden definir en el archivo @grails-app/conf/Config.groovy@ que personalizan el resultado de la documentación, como:
+Hay varias propiedades que se pueden definir en el archivo @grails-app/conf/Config.groovy@ que personalizar la salida de la documentación, como:
 
 * *grails.doc.authors* - los autores de la documentación
 * *grails.doc.license* - la licencia del software
 * *grails.doc.copyright* - el mensaje de copyright para mostrar
-* *grails.doc.footer* - el pie de página para utilizar
+* *grails.doc.footer* - al pie de página para utilizar
 
 {hidden}
 
@@ -102,6 +130,10 @@ Other properties such as the name of the documentation and the version are pulle
 h4. Generating Documentation
 
 Once you have created some documentation (refer to the syntax guide in the next chapter) you can generate an HTML version of the documentation using the command:
+
+{code}
+grails doc
+{code}
 
 {hidden}
 
@@ -112,7 +144,7 @@ h4. Generación de documentación
 Una vez haya creado alguna documentación (consulte la Guía de sintaxis en el capítulo siguiente) puede generar una versión HTML de la documentación mediante el comando:
 
 {code}
-grails doc
+doc Grails
 {code}
 
 {hidden}
@@ -125,36 +157,51 @@ As mentioned the syntax is largely similar to Textile or Confluence style wiki m
 
 h5. Basic Formatting
 
-
+Monospace: @monospace@
+{code}
+\@monospace\@
+{code}
 {hidden}
 
 Este comando generará un @docs/manual/index.html@ que se puede abrir en un navegador para ver la documentación.
 
 h4. Sintaxis de documentación
 
-Como se ha mencionado, la sintaxis es muy similar al estilo de marcado de wiki de Textile o Confluence. Las siguientes secciones le guían a través de los fundamentos de la sintaxis.
+Como se ha mencionado, la sintaxis es muy similar al marcado de wiki textil o confluencia de estilos. Las siguientes secciones le guían a través de los fundamentos de la sintaxis.
 
-h5. Formato básico
+H5. Formato básico
 
-Monospace: @monospace@
+Monoespacio: @ monoespacio @
 {code}
 \@monospace\@
 {code}
 
-Cursiva: _italic_
+{hidden}
+
+
+Italic: _italic_
 {code}
 \_italic\_
 {code}
 
-Negrita: *bold*
+Bold: *bold*
 {code}
 *bold*
 {code}
+{hidden}
 
 Cursiva: _italic_
 {code}
 \_italic\_
 {code}
+
+Negrita: * negrita *
+{code}
+* negrita *
+{code}
+
+{hidden}
+
 
 Image:
 !http://grails.org/images/new/grailslogo_topNav.png!
@@ -163,9 +210,20 @@ Image:
 \!http://grails.org/images/new/grailslogo_topNav.png\!
 {code}
 
+h5. Linking
+
 {hidden}
 
-h5. Linking
+Imagen:
+! http://grails.org/images/new/grailslogo_topNav.png!
+
+{Código: xml}
+\!http://Grails.org/images/New/grailslogo_topNav.png\!
+{code}
+
+H5. Vincular
+
+{hidden}
 
 There are several ways to create links with the documentation generator. A basic external link can either be defined using confluence or textile style markup:
 
@@ -180,9 +238,7 @@ or
 {code}
 {hidden}
 
-h5. Enlazando
-
-Hay varias formas de crear vínculos con el generador de documentación. Un enlace externo básico  puede definirse mediante el estilo marcado de Confluence o Textile:
+Hay varias formas de crear vínculos con el generador de documentación. Un enlace externo básico tampoco puede definirse mediante confluencia o textiles estilo marcado:
 
 {code}
 [SpringSource|http://www.springsource.com/]
@@ -195,6 +251,8 @@ o
 {code}
 
 {hidden}
+
+
 For links to other sections inside the user guide you can use the @guide:@ prefix with the name of the section you want to link to:
 
 {code}
@@ -206,36 +264,46 @@ The section name comes from the corresponding gdoc filename. The documentation e
 To link to reference items you can use a special syntax:
 {hidden}
 
-Para enlaces a otras secciones dentro de la Guía de Usuario puede utilizar el prefijo @guide:@ con el nombre de la sección que desea enlazar:
+Enlaces a otras secciones dentro de la Guía de usuario puede utilizar la Guía @: @ prefijo con el nombre de la sección que desea establecer el vínculo:
 
 {code}
 [Intro|guide:introduction]
 {code}
 
-El nombre de sección proviene el nombre del archivo gdoc correspondiente. El motor de documentación le avisará si se rompen los vínculos a las secciones de la guía.
+El nombre de sección proviene el nombre del archivo gdoc correspondiente. El motor de documentación le avisará si rompen los vínculos a las secciones de la guía.
 
 Puede utilizar una sintaxis especial para vincular a elementos de referencia:
+
+{hidden}
+
 
 {code}
 [controllers|renderPDF]
 {code}
 
-{hidden}
 In this case the category of the reference item is on the left hand side of the | and the name of the reference item on the right.
 
 Finally, to link to external APIs you can use the @api:@ prefix. For example:
 
+{code}
+[String|api:java.lang.String]
+{code}
 {hidden}
 
-En este caso la categoría del elemento de referencia es el lado izquierdo de la | y el nombre del elemento de referencia es el de la derecha.
+{code}
+[controllers|renderPDF]
+{code}
 
-Finalmente, para vincular a las API externas puede utilizar el prefijo @api:@. Por ejemplo:
+En este caso la categoría del elemento de referencia es el lado izquierdo de la | y el nombre del elemento de referencia de la derecha.
+
+Finalmente, para vincular a las API externas puede utilizar la api de @: @ prefijo. Por ejemplo:
 
 {code}
 [String|api:java.lang.String]
 {code}
 
 {hidden}
+
 
 The documentation engine will automatically create the appropriate javadoc link in this case. To add additional APIs to the engine you can configure them in @grails-app/conf/Config.groovy@. For example:
 
@@ -248,14 +316,14 @@ The above example configures classes within the @org.hibernate@ package to link 
 
 {hidden}
 
-El motor de documentación creará automáticamente el vínculo javadoc apropiado en este caso. Para agregar APIs adicionales al motor se puede configurar en @grails-app/conf/Config.groovy@. Por ejemplo:
+El motor de documentación creará automáticamente el vínculo javadoc apropiado en este caso. Para agregar API adicionales al motor se puede configurar en @ grails-app/conf/Config.groovy@. Por ejemplo:
 
 {code}
-grails.doc.api.org.hibernate=
+Grails.doc.API.org.Hibernate=
             "http://docs.jboss.org/hibernate/stable/core/javadocs"
 {code}
 
-En el ejemplo anterior se configurán las clases dentro del paquete de @org.hibernate@ para vincular documentos de APIs del sitio web de Hibernate.
+En el ejemplo anterior se configura clases dentro del paquete de @org.hibernate@ para vincular documentos de API del sitio de hibernación.
 
 {hidden}
 
@@ -271,16 +339,19 @@ h4.<space>Heading4
 Unordered lists are defined with the use of the * character:
 {hidden}
 
-h5. Listas y cabeceras
+H5. Listas y títulos
 
-Las cabeceras pueden crearse mediante la especificación de la letra 'h' seguido de un número y un punto:
+Las partidas pueden crearse mediante la especificación de la letra 'h' seguido de un número y un punto:
 
 {code}
 h3.<space>Título3
 h4.<space>Heading4
 {code}
 
-Las listas desordenadas se definen con el uso del carácter * *:
+Desordenadas listas se definen con el uso de la * carácter:</space> </space>
+
+{hidden}
+
 
 {code}
 * item 1
@@ -289,19 +360,24 @@ Las listas desordenadas se definen con el uso del carácter * *:
 * item 2
 {code}
 
-{hidden}
-
 Numbered lists can be defined with the # character:
 
 {hidden}
 
-Las listas numeradas pueden definirse con el carácter #:
+{code}
+* artículo 1
+** el subelemento 1
+** el subelemento 2
+* tema 2
+{code}
+
+Listas numeradas pueden definirse con el
+
+{hidden}
 
 {code}
 # item 1
 {code}
-
-{hidden}
 
 Tables can be created using the @table@ macro:
 
@@ -309,47 +385,63 @@ Tables can be created using the @table@ macro:
  *Name* | *Number*
  Albert | 46
  Wilma | 1348
- James | 12
-{table}
+{hidden}
+
+{code}
 
 {hidden}
 
-Las tablas pueden ser generadas usando la macro @table@:
-
+ James | 12
 {table}
+
+{code}
+\{table}
  *Name* | *Number*
  Albert | 46
  Wilma | 1348
  James | 12
-{table}
+\{table}
+{code}
+{hidden}
+
+James | 12
+tabla de {}
 
 {code}
-\{table}
- *Nombre* | *Número*
+\{Table}
+ * Nombre * | * Número *
  Albert | 46
  Wilma | 1348
  James | 12
-\{table}
+\{Table}
 {code}
 
-
 {hidden}
+
 
 h5. Code and Notes
 
 You can define code blocks with the @code@ macro:
 
-{hidden}
-
-h5. Código y notas
-
-Puede definir bloques de código con la macro @code@:
-
 {code}
 class Book {
     String title
 }
 {code}
+{hidden}
+
+H5. Código y notas
+
+Puede definir bloques de código con el código @ @ macro:
+
+{code}
+clase {libro
+    Título de cadena
+}
+{code}
+
+{hidden}
+
 
 {code}
 \{code\}
@@ -359,11 +451,21 @@ class Book {
 \{code\}
 {code}
 
-{hidden}
 The example above provides syntax highlighting for Java and Groovy code, but you can also highlight XML markup:
 {hidden}
 
-El ejemplo anterior proporciona resaltado de sintaxis para código Java y Groovy, pero también puede resaltar código XML:
+{code}
+\{code\}
+clase {libro
+    Título de cadena
+}
+\{code\}
+{code}
+
+El ejemplo anterior proporciona resaltado de sintaxis para Java y Groovy código, pero también puede resaltar código XML:
+
+{hidden}
+
 
 {code:xml}
 <hello>world</hello>
@@ -374,14 +476,22 @@ El ejemplo anterior proporciona resaltado de sintaxis para código Java y Groovy
 <hello>world</hello>
 \{code\}
 {code}
+{hidden}
+
+{Código: xml}
+<hello>mundo</hello>
+{code}
+
+{code}
+\{Code:xml\}
+<hello>mundo</hello>
+\{code\}
+{code}
 
 {hidden}
+
 
 There are also a couple of macros for displaying notes and warnings:
-
-{hidden}
-
-También hay un par de macros para mostrar notas y avisos:
 
 Note:
 {note}
@@ -393,14 +503,25 @@ This is a note!
 This is a note!
 \{note\}
 {code}
+{hidden}
+
+También hay un par de macros para mostrar notas y avisos:
+
+Nota:
+{Nota}
+Se trata de una nota!
+{Nota}
+
+{code}
+\{note\}
+Se trata de una nota!
+\{note\}
+{code}
 
 {hidden}
+
 
 Warning:
-
-{hidden}
-
-Advertencia:
 
 {warning}
 This is a warning!
@@ -409,5 +530,18 @@ This is a warning!
 {code}
 \{warning\}
 This is a warning!
+\{warning\}
+{code}
+{hidden}
+
+Advertencia:
+
+Advertencia de {}
+Se trata de una advertencia!
+Advertencia de {}
+
+{code}
+\{warning\}
+Se trata de una advertencia!
 \{warning\}
 {code}

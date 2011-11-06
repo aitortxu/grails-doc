@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Using the Spring Bean DSL
 
 You can easily register new (or override existing) beans by configuring them in @grails-app/conf/spring/resources.groovy@ which uses the Grails [Spring DSL|guide:springdsl]. Beans are defined inside a @beans@ property (a Closure):
@@ -7,6 +10,20 @@ beans = {
     // beans here
 }
 {code}
+
+{hidden}
+
+h4. Con el primavera Bean DSL
+
+Puede registrar nuevos (o anulación existente) judías por configurarlos en @grails-app/conf/spring/resources.groovy@ que utiliza los Grails [primavera DSL|guide:springdsl]. Frijoles se definen dentro de un frijol @ @ propiedad (un cierre):
+
+{code: java}
+frijoles = {}
+    / / judías aquí
+}
+{code}
+
+{hidden}
 
 As a simple example you can configure a bean with the following syntax:
 
@@ -20,6 +37,23 @@ beans = {
     }
 }
 {code}
+{hidden}
+
+Como un ejemplo simple puede configurar un grano con la siguiente sintaxis:
+
+{code: java}
+my.company.MyBeanImpl de importación
+
+frijoles = {}
+    myBean(MyBeanImpl) {}
+        someProperty = 42
+        otherProperty = "azul"
+    }
+}
+{code}
+
+{hidden}
+
 
 Once configured, the bean can be auto-wired into Grails artifacts and other classes that support dependency injection (for example @BootStrap.groovy@ and integration tests) by declaring a public field whose name is your bean's name (in this case @myBean@):
 
@@ -30,6 +64,20 @@ class ExampleController {
      ...
 }
 {code}
+{hidden}
+
+Una vez configurado, el grano puede ser auto-wired en artefactos de Grails y otras clases de esa inyección de dependencias de apoyo (por ejemplo las pruebas @BootStrap.groovy@ e integración) declarando un campo público cuyo nombre es el nombre de bean (en este caso @ myBean @):
+
+{code: java}
+clase ExampleController {}
+
+Def myBean
+     ...
+}
+{code}
+
+{hidden}
+
 
 Using the DSL has the advantage that you can mix bean declarations and logic, for example based on the [environment|guide:environments]:
 
@@ -56,6 +104,36 @@ beans = {
     }
 }
 {code}
+{hidden}
+
+Utilizando el DSL tiene la ventaja que se pueden mezclar las declaraciones de frijol y lógica, por ejemplo basado en la [environment|guide:environments]:
+
+{code: java}
+grails.util.Environment de importación
+my.company.mock.MockImpl de importación
+my.company.MyBeanImpl de importación
+
+frijoles = {}
+    Switch(Environment.Current) {}
+        Case Environment.PRODUCTION:
+            myBean(MyBeanImpl) {}
+                someProperty = 42
+                otherProperty = "azul"
+            }
+            salto
+
+Case Environment.DEVELOPMENT:
+            myBean(MockImpl) {}
+                someProperty = 42
+                otherProperty = "azul"
+            }
+            salto
+    }
+}
+{code}
+
+{hidden}
+
 
 The @GrailsApplication@ object can be accessed with the @application@ variable and can be used to access the Grails configuration (amongst other things):
 
@@ -78,6 +156,32 @@ beans = {
     }
 }
 {code}
+{hidden}
+
+@ GrailsApplication @ objeto puede accederse con la aplicación @ @ variable y puede utilizarse para acceder a la configuración de Grails (entre otras cosas):
+
+{code: java}
+grails.util.Environment de importación
+my.company.mock.MockImpl de importación
+my.company.MyBeanImpl de importación
+
+frijoles = {}
+    Si (application.config.my.company.mockService) {}
+        myBean(MockImpl) {}
+            someProperty = 42
+            otherProperty = "azul"
+        }
+    } else {}
+        myBean(MyBeanImpl) {}
+            someProperty = 42
+            otherProperty = "azul"
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 {note}
 If you define a bean in @resources.groovy@ with the same name as one previously registered by Grails or an installed plugin, your bean will replace the previous registration. This is a convenient way to customize behavior without resorting to editing plugin code or other approaches that would affect maintainability.
@@ -88,6 +192,20 @@ h4. Using XML
 Beans can also be configured using a @grails-app/conf/spring/resources.xml@. In earlier versions of Grails this file was automatically generated for you by the @run-app@ script, but the DSL in @resources.groovy@ is the preferred approach now so it isn't automatically generated now. But it is still supported - you just need to create it yourself.
 
 This file is typical Spring XML file and the Spring documentation has an [excellent reference|http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/beans.html#beans-basics] on how to configure Spring beans.
+{hidden}
+
+{Nota}
+Si se define un grano en @resources.groovy@ con el mismo nombre que uno registrado previamente por Grails o un plugin instalado, el frijol reemplazará el registro anterior. Esto es una forma conveniente para personalizar el comportamiento sin recurrir a la edición de código plugin o otros enfoques que afectaría a la capacidad de mantenimiento.
+{Nota}
+
+h4. Uso de XML
+
+Frijoles también pueden configurarse utilizando un grails-app/conf/spring/resources.xml@ @. En versiones anteriores de Grails este archivo se genera automáticamente por el @ run-app @ script, pero el DSL en @resources.groovy@ es el enfoque preferido ahora por lo que no genera automáticamente ahora. Pero todavía es compatible - basta con crear usted mismo.
+
+Este archivo es típico XML de primavera y la documentación de primavera tiene una [reference|http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/beans.html excelente
+
+{hidden}
+
 
 The @myBean@ bean that we configured using the DSL would be configured with this syntax in the XML file:
 
@@ -97,6 +215,19 @@ The @myBean@ bean that we configured using the DSL would be configured with this
     <property name="otherProperty" value="blue" />
 </bean>
 {code}
+
+{hidden}
+
+@ MyBean @ bean que configurado utilizando el DSL podría configurarse con esta sintaxis del archivo XML:
+
+{Código: xml}
+<bean id="myBean" class="my.company.MyBeanImpl"><property name="someProperty" value="42"><property name="otherProperty" value="blue"></property></property>
+    
+    
+</bean>
+{code}
+
+{hidden}
 
 Like the other bean it can be auto-wired into any class that supports dependency injection:
 
@@ -108,6 +239,21 @@ class ExampleController {
 {code}
 
 h4. Referencing Existing Beans
+{hidden}
+
+Como el otro grano puede ser auto-wired en cualquier clase que admite la inyección de dependencias:
+
+{code: java}
+clase ExampleController {}
+
+Def myBean
+}
+{code}
+
+h4. Hacer referencia a frijoles existentes
+
+{hidden}
+
 
 Beans declared in @resources.groovy@ or @resources.xml@ can reference other beans by convention. For example if you had a @BookService@ class its Spring bean name would be @bookService@, so your bean would reference it like this in the DSL:
 
@@ -120,6 +266,22 @@ beans = {
     }
 }
 {code}
+{hidden}
+
+Frijoles declararon en @resources.groovy@ o @resources.xml@ pueden hacer referencia a otros granos por Convención. Por ejemplo si tuvieras un @ BookService @ su nombre de frijol de primavera de clase sería @ bookService @, por lo que el frijol referencia como este en el DSL:
+
+{code: java}
+frijoles = {}
+    myBean(MyBeanImpl) {}
+        someProperty = 42
+        otherProperty = "azul"
+        bookService = ref("bookService")
+    }
+}
+{code}
+
+{hidden}
+
 
 or like this in XML:
 
@@ -130,6 +292,20 @@ or like this in XML:
     <property name="bookService" ref="bookService" />
 </bean>
 {code}
+{hidden}
+
+o como esta en XML:
+
+{Código: xml}
+<bean id="myBean" class="my.company.MyBeanImpl"><property name="someProperty" value="42"></property><property name="otherProperty" value="blue"><property name="bookService" ref="bookService"></property></property>
+    
+    
+    
+</bean>
+{code}
+
+{hidden}
+
 
 The bean needs a public setter for the bean reference (and also the two simple properties), which in Groovy would be defined like this:
 
@@ -142,6 +318,22 @@ class MyBeanImpl {
     BookService bookService // or just "def bookService"
 }
 {code}
+{hidden}
+
+El grano necesita un establecedor público para la referencia de frijol (y también las dos propiedades simples), que en Groovy se definiría como este:
+
+{code: java}
+paquete my.company
+
+clase MyBeanImpl {}
+    Entero someProperty
+    Cadena otherProperty
+    BookService bookService / / o simplemente "def bookService"
+}
+{code}
+
+{hidden}
+
 
 or in Java like this:
 
@@ -167,7 +359,41 @@ class MyBeanImpl {
     }
 }
 {code}
+{hidden}
+
+o en Java como este:
+
+{code: java}
+paquete my.company;
+
+clase MyBeanImpl {}
+
+bookService de BookService privada;
+    privada someProperty entero;
+    private String otherProperty;
+
+public void setBookService (BookService theBookService) {}
+        this.bookService = theBookService;
+    }
+
+público void setSomeProperty (Integer someProperty) {}
+        this.someProperty = someProperty;
+    }
+
+public void setOtherProperty (String otherProperty) {}
+        this.otherProperty = otherProperty;
+    }
+}
+{code}
+
+{hidden}
+
 
 Using @ref@ (in XML or the DSL) is very powerful since it configures a runtime reference, so the referenced bean doesn't have to exist yet. As long as it's in place when the final application context configuration occurs, everything will be resolved correctly.
 
 For a full reference of the available beans see the plugin reference in the reference guide.
+{hidden}
+
+Utilizando @ ref @ (en XML o el DSL) es muy poderosa ya que configura una referencia de tiempo de ejecución, de modo que el grano que se hace referencia no tiene por qué aún existe. Mientras está en el lugar cuando se produce la configuración del contexto de aplicación final, todo se resuelve correctamente.
+
+Para una referencia completa de los granos disponibles, vea la referencia de plugin en la Guía de referencia.

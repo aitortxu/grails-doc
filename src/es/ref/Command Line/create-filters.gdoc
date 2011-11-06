@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-filters
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails create-filters logging
 {code}
+{hidden}
+
+h1. crear filtros
+
+h2. Fin
+
+Los @ crear filtros @ comando crea una clase de filtros de Grails para el nombre base determinada.
+
+h2. Ejemplos
+
+{code: java}
+Grails crear-filtros de registro
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ Note that this command is just for convenience and you can also create filters i
 {note}
 
 Usage:
+{hidden}
+
+h2. Descripción
+
+Crea una clase de filtros para el nombre de base de dar. Por ejemplo para un registro de nombre base @ @ filtros de una clase llamada @ LoggingFilters @ creará en el @ grails-app/conf @ directorio.
+
+{Nota}
+Tenga en cuenta que este comando es sólo para conveniencia y usted también puede crear filtros en su editor de textos preferido o IDE si elige.
+{Nota}
+
+Uso:
+
+{hidden}
+
 
 {code:java}
 grails create-filters [name]
@@ -27,3 +60,12 @@ grails create-filters [name]
 Fired Events:
 
 * @CreatedFile@ - When the filters class has been created
+{hidden}
+
+{code: java}
+Grails crear filtros [nombre]
+{code}
+
+Despedido de eventos:
+
+* @ CreatedFile @ - cuando se ha creado la clase de filtros

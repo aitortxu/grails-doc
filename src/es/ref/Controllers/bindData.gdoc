@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. bindData
 
 h2. Purpose
@@ -20,6 +23,33 @@ bindData(target, params, [exclude: ['firstName', 'lastName']], "author")
 // using inclusive map
 bindData(target, params, [include: ['firstName', 'lastName']], "author")
 {code}
+{hidden}
+
+h1. bindData
+
+h2. Fin
+
+Permite un control preciso de los parámetros de la petición de enlace de cadenas en objetos y los tipos necesarios (enlace de datos).
+
+h2. Ejemplos
+
+{code}
+/ / enlaces solicitan de parámetros para un objeto de destino
+bindData destino (params)
+
+/ / excluir el nombre y apellidos
+bindData (destino, params, [excluir: ['firstName', 'apellidos']])
+
+/ / sólo utilizar parámetros comenzando con "autor.", por ejemplo, author.email
+bindData (destino, params, "autor")
+bindData (destino, params, [excluir: ['firstName', 'apellidos']], "autor")
+
+/ / Mapa incluido
+bindData (destino, params, [incluyen: ['firstName', 'apellidos']], "autor")
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -30,6 +60,20 @@ Arguments:
 * @target@ - The target object to bind to
 * @params@ - A @Map@ of source parameters, often the [params|controllers] object when used in a controller
 * @includesExcludes@ - (Optional) A map with 'include' and/or 'exclude' lists containing the names of properties to either include or exclude.
+{hidden}
+
+h2. Descripción
+
+Uso: @ bindData(target, params, includesExcludes*, prefix*) @
+
+Argumentos:
+
+* @ destino @ - para enlazar con el objeto de destino
+* @ params @-@ mapa @ de parámetros de origen, a menudo el objeto [params|controllers] cuando se utiliza un controlador
+* @ includesExcludes @ - mapa (opcional) A 'incluir' o 'excluir' listas con los nombres de propiedades para incluir o excluir.
+
+{hidden}
+
 * @prefix@ - (Optional) A string representing a prefix to use to filter parameters. The method will automatically append a '.' when matching the prefix to parameters, so you can use 'author' to filter for parameters such as 'author.name'.
 
 {note}
@@ -39,3 +83,14 @@ Note that if an empty List is provided as a value for the @include@ parameter th
 The underlying implementation uses Spring's Data Binding framework. If the target is a domain class, type conversion errors are stored in the @errors@ property of the domain class.
 
 Refer to the section on [Data Binding|guide:dataBinding] in the user guide for more information.
+{hidden}
+
+* @ prefijo @-(opcional) A la cadena que representa un prefijo que se utiliza para filtrar los parámetros. El método agregará automáticamente un '.' cuando el prefijo de parámetros de coincidencia, entonces puede utilizar 'autor' para filtrar los parámetros tales como 'author.name'.
+
+{Nota}
+Tenga en cuenta que si un vacío lista se proporciona como un valor para el @ incluyen @ parámetro, a continuación, todos los campos estarán sujetos a vinculante si no están explícitamente excluidos.
+{Nota}
+
+La implementación subyacente utiliza marco de enlace de datos de la primavera. Si el destino es una clase de dominio, errores de conversión de tipo se almacenan en los errores @ @ propiedad de la clase de dominio.
+
+En la Guía del usuario para obtener más información, consulte la sección [datos Binding|guide:dataBinding].

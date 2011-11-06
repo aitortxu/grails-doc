@@ -1,3 +1,6 @@
+
+{hidden}
+
 If you have collections of objects you often need to sort and filter them. Use the [findAll|tags] and [grep|tags] tags for these tasks:
 
 {code:xml}
@@ -8,6 +11,19 @@ Stephen King's Books:
 {code}
 
 The @expr@ attribute contains a Groovy expression that can be used as a filter. The [grep|tags] tag does a similar job, for example filtering by class:
+{hidden}
+
+Si tiene colecciones de objetos, a menudo es necesario ordenar y filtrar. Utilice [findAll|tags] y [grep|tags] etiquetas para estas tareas:
+
+{Código: xml}
+Libros de Stephen King:<g:findall in="${books}" expr="it.author == 'Stephen King'">
+     <p>Título: ${it.title}</p>
+</g:findall>{code}
+
+Expr @ @ atributo contiene una expresión Groovy que puede utilizarse como un filtro. La etiqueta [grep|tags] realiza un trabajo similar, por ejemplo filtrado por clase:
+
+{hidden}
+
 
 {code:xml}
 <g:grep in="${books}" filter="NonFictionBooks.class">
@@ -22,5 +38,22 @@ Or using a regular expression:
      <p>Title: ${it}</p>
 </g:grep>
 {code}
+{hidden}
+
+{Código: xml}<g:grep in="${books}" filter="NonFictionBooks.class">
+     <p>Título: ${it.title}</p>
+</g:grep>{code}
+
+O mediante una expresión regular:
+
+{Código: xml}<g:grep in="${books.title}" filter="~/.*?Groovy.*?/">
+     <p>Título: ${se}</p>
+</g:grep>{code}
+
+{hidden}
+
 
 The above example is also interesting due to its usage of GPath. GPath is an XPath-like language in Groovy. The @books@ variable is a collection of @Book@ instances. Since each @Book@ has a @title@, you can obtain a list of Book titles using the expression @books.title@. Groovy will auto-magically iterate the collection, obtain each title, and return a new list!
+{hidden}
+
+El ejemplo anterior también es interesante debido a su uso de GPath. GPath es un lenguaje XPath en Groovy. Los libros @ @ variable es una colección de libro @ @ instancias. Dado que cada libro @ @ tiene un @ title @, puede obtener una lista de títulos de libros utilizando la expresión @ books.title@. Groovy auto mágicamente será recorrer en la colección, obtener cada título y devolver una nueva lista!

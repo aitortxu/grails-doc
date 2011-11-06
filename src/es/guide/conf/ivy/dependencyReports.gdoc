@@ -1,3 +1,4 @@
+
 {hidden}
 
 As mentioned in the previous section a Grails application consists of dependencies inherited from the framework, the plugins installed and the application dependencies itself.
@@ -12,16 +13,23 @@ By default this will generate reports in the @target/dependency-report@ director
 
 {hidden}
 
-Como se menciona en la sección anterior una aplicación Grails consiste en dependencias heredadas del framwork, los plugins instalados y las dependencias de las aplicaciones en sí.
+Como se menciona en la sección anterior una aplicación Grails consiste en dependencias hereda el marco, los plugins instalados y las dependencias de aplicaciones sí.
 
 Para obtener un informe de las dependencias de una aplicación puede ejecutar el comando [dependencia-report|commandLine]:
 
 {code}
-grails dependency-report
+informe de dependencias Grails
 {code}
 
-Por defecto esto generará informes en el directorio @target/dependency-report@. Puede especificar qué configuración (alcance) desea en un informe pasando un argumento que contiene el nombre de configuración:
+De forma predeterminada esto generará informes en @ destino/dependencia-informe @ directorio. Puede especificar qué configuración (alcance) desea un informe para pasar un argumento que contiene el nombre de configuración:
+
+{hidden}
 
 {code}
 grails dependency-report runtime
+{code}
+{hidden}
+
+{code}
+Grails informe de la dependencia runtime
 {code}

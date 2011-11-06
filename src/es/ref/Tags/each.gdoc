@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. each
 
 h2. Purpose
@@ -12,6 +15,16 @@ h2. Examples
     <p>Author: ${it.author}</p>
 </g:each>
 {code}
+{hidden}
+
+h1. cada
+
+h2. Fin
+
+Utiliza el JDK Groovy [each|http://groovy.codehaus.org/groovy-jdk/java/lang/Object.html
+
+{hidden}
+
 
 With a named item:
 
@@ -21,6 +34,17 @@ With a named item:
     <p>Author: ${book.author}</p>
 </g:each>
 {code}
+
+{hidden}
+
+Con un elemento con nombre:
+
+{Código: xml}<g:each var="book" in="${books}">
+    <p>Título: ${book.title}</p>
+    <p>Autor: ${book.author}</p>
+</g:each>{code}
+
+{hidden}
 
 With a range literal - note how the literal must be enclosed in parentheses:
 
@@ -32,6 +56,18 @@ With a range literal - note how the literal must be enclosed in parentheses:
 </ul>
 {code}
 
+{hidden}
+
+Con una gama literal - Observe cómo el literal debe estar entre paréntesis:
+
+{Código: xml}<ul>
+  <g:each var="i" in="${ (0..<100) }">
+    <li>Elemento ${i}</li>
+  </g:each>
+</ul>{code}
+
+{hidden}
+
 Another example, where a named item is necessary (otherwise the access to the title property will fail):
 
 {code:xml}
@@ -41,6 +77,20 @@ Another example, where a named item is necessary (otherwise the access to the ti
 {code}
 
 Using the status parameter to alternate the coloring of a table's rows:
+
+{hidden}
+
+Otro ejemplo, cuando sea necesario (de lo contrario fallará el acceso a la propiedad title) un elemento con nombre:
+
+{Código: xml}
+<g:each in="${itemList}" var="item">
+    <g:link action="show" id="${item.id}">${item.title}</g:link>
+</g:each>
+{code}
+
+Utilizando el parámetro status para alternar los colores de las filas de una tabla:
+
+{hidden}
 
 {code:xml}
 <tbody>
@@ -55,6 +105,22 @@ Using the status parameter to alternate the coloring of a table's rows:
   </g:each>
 </tbody>
 {code}
+{hidden}
+
+{Código: xml}<tbody>
+  <g:each status="i" in="${itemList}" var="item">
+    <!-- Alternate CSS classes for the rows. -->
+    <tr class="${ (i % 2) == 0 ? 'a' : 'b'}">
+      <td>${item.id?.encodeAsHTML()}</td>
+      <td>${item.parentId?.encodeAsHTML()}</td>
+      <td>${item.type?.encodeAsHTML()}</td>
+      <td>${item.status?.encodeAsHTML()}</td>
+    </tr>
+  </g:each>
+</tbody>{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -65,5 +131,17 @@ Attributes
 # @var@ (optional) - The name of the item, defaults to "it".
 
 {note}
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+{hidden}
+
 Note that @var@ attribute must be specified when the iterator value is to be used from within the body of a GSP Dynamic Tag, such as in @<g:link>@.
 {note}
+{hidden}
+
+Tenga en cuenta que @ var @ atributo debe ser especificado cuando el valor de iterador es para ser utilizado desde dentro del cuerpo de una etiqueta dinámica del SGP, como en @<g:link>@.
+{Nota}</g:link>

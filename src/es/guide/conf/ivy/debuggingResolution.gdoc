@@ -1,13 +1,20 @@
+
 {hidden}
 
 If you are having trouble getting a dependency to resolve you can enable more verbose debugging from the underlying engine using the @log@ method:
-
-{hidden}
-
-Si está teniendo problemas para conseguir que una dependencia se resuelva puede habilitar un modo de depueración más detallado del motor subyacente mediante el método @log@:
 
 {code}
 // log level of Ivy resolver, either 'error', 'warn',
 // 'info', 'debug' or 'verbose'
 log "warn"
+{code}
+
+{hidden}
+
+Si está teniendo problemas para conseguir una dependencia para resolver que puede habilitar más detallado del motor subyacente mediante el registro de @ @ método de depuración:
+
+{code}
+/ / nivel de hiedra registro resolución, bien 'error', 'advertir',
+/ / 'información', 'debug' o 'detallado'
+registro "advertidos"
 {code}

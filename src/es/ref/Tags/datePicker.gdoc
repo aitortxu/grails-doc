@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. datePicker
 
 h2. Purpose
@@ -18,10 +21,29 @@ h2. Examples
 
 <g:datePicker name="myDate" value="${new Date()}" precision="month"
               noSelection="['':'-Choose-']" relativeYears="[-2..7]"/>
-
-<g:datePicker name="myDate" value="${myDomainClass?.myDateField}"
-              default="${new Date().plus(7)}"/>
 {code}
+{hidden}
+
+h1. Selector
+
+h2. Fin
+
+Crea un selector de fecha que representa como HTML seleccione etiquetas para el día, mes, año, hora y segundo del día.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:datepicker name="myDate" value="${new Date()}" noselection="['':'-Choose-']"></g:datepicker>
+
+<g:datepicker name="myDate" value="${new Date()}" precision="day" years="${1930..1970}"></g:datepicker>
+
+<g:datepicker name="myDate" value="${new Date()}" precision="day" years="[1930, 1940, 1950, 1960, 1970]"></g:datepicker>
+
+<g:datepicker name="myDate" value="${new Date()}" precision="month" noselection="['':'-Choose-']" relativeyears="[-2..7]"></g:datepicker>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -29,10 +51,23 @@ Attributes
 
 * @name@ (required) - The name of the date picker field set
 * @value@ (optional) - The current value of the date picker; defaults to now if not specified
-* @default@ (optional) - A [Date|api:java.util.Date] or parsable date string (see [DateFormat|api:java.text.DateFormat]) that will be used if there is no @value@
 * @precision@ (optional) - The desired granularity of the date to be rendered
 ** Valid values are 'year', 'month', 'day', 'hour', or 'minute'
 ** Defaults to 'minute' if not specified
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre del selector de fecha de campo conjunto
+* @ valor @ (opcional): el valor actual del selector de fecha; el valor predeterminado es ahora si no se especifica
+* @ precisión @ (opcional): el nivel de detalle deseado de la fecha en que se procesa
+** Valores son 'año', 'mes', 'día', 'hora' o 'minuto'
+** Valores predeterminados a 'minuto' si no se especifica
+
+{hidden}
+
 ** Uses default values for the non-rendered date components.  Default values...
 *** month = January
 *** day = 1st day of the month
@@ -43,6 +78,25 @@ Attributes
 * @relativeYears@ (optional) - A range of int representing  values relative to @value@.  For example, a @relativeYears@ of [-2..7] and a @value@ of today will render a list of 10 years starting with 2 years ago through 7 years in the future.  This can be useful for things like credit card expiration dates or birthdates which should be bound relative to today.
 
 h2. Source
+{hidden}
+
+** Utiliza los valores predeterminados para los componentes de fecha no prestados.  Valores predeterminados...
+*** mes = enero
+*** día = 1 º día del mes
+*** hora = 00
+*** minuto = 00
+* @ noSelection @ (opcional): una sola entrada mapa detallando la clave y el valor que se utilizará para la elección de "ninguna selección realizada" en el cuadro de selección. Si no hay ninguna selección actual se mostrará como es primero en la lista y si se presenta con esta opción activada, la clave que usted proporcione será presentado. Normalmente esto se quedará en blanco.
+* @ años @ (opcional) - una lista o un rango de años para mostrar, en el orden especificado. es decir, especificar 2007..1900 para obtener una lista de orden inverso al que se remontan a 1900. Si no se especifica este atributo, una gama de años a partir del año actual - 100 al año en curso se mostrarán 100.
+* @ relativeYears @ (opcional) - una gama de int representar valores en relación al valor @ @.  Por ejemplo, un @ relativeYears @ de [-2..7] y un valor @ @ de hoy representará una lista de diez años a partir de 2 años a través de 7 años en el futuro.  Esto puede ser útil para cosas como las fechas de caducidad de la tarjeta de crédito o fechas que deben obligarse respecto a hoy.
+
+h2. Fuente
+
+{hidden}
+
 
 {source:tag=FormTagLib.datePicker}
 {source}
+{hidden}
+
+{source:tag=FormTagLib.datePicker}
+origen de {}

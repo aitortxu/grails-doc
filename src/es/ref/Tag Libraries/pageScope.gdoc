@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. pageScope
 
 h2. Purpose
@@ -19,6 +22,29 @@ class BookTagLib {
    }
 }
 {code}
+{hidden}
+
+h1. pageScope
+
+h2. Fin
+
+Una referencia al enlace del SGP que se ejecuta dentro de la biblioteca de etiquetas. Permite acceder a las variables establecidas con la etiqueta [set|tags] y los pasa a la página desde el modelo de controlador.
+
+h2. Ejemplos
+
+{code: java}
+clase BookTagLib {}
+
+padre de Def = {attrs, cuerpo->
+       pageScope.parent = "John"
+       cabo << body()} def niño = {attrs, cuerpo->
+       cabo << "mi padre es de ${pageScope.parent}"
+   }
+}
+{code}
+
+{hidden}
+
 
 {code:xml}
 <g:parent>
@@ -29,3 +55,14 @@ class BookTagLib {
 h2. Description
 
 The @pageScope@ variable contains a reference to the underlying model being manipulated by the page. It can also be used to pass variables from parent to child tags.
+{hidden}
+
+{Código: xml}
+<g:parent> <g:child></g:child> / / Salidas "mi padre es John"
+
+    </g:parent>
+{code}
+
+h2. Descripción
+
+@ PageScope @ variable contiene una referencia al modelo subyacente manipulado por la página. También puede utilizarse para pasar variables de los padres para etiquetas hijo.

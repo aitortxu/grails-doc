@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-controller
 
 h2. Purpose
@@ -8,6 +11,21 @@ h2. Examples
 
 bc.
 grails create-controller org.bookstore.book
+{hidden}
+
+h1. controlador de crear
+
+h2. Fin
+
+El @ crear controladores @ comando crea un controlador y prueba de unidad asociada para el nombre base determinado.
+
+h2. Ejemplos
+
+a c..
+Grails controlador crear org.bookstore.book
+
+{hidden}
+
 
 h2. Description
 
@@ -18,6 +36,20 @@ A controller is responsible for handling incoming web requests and performing ac
 Note that this command is just for convenience and you can also create controllers in your favourite text editor or IDE if you choose.
 
 Usage:
+{hidden}
+
+h2. Descripción
+
+Crea un controlador para el nombre base determinado. Por ejemplo un nombre base de "org.bookstore.book" un controlador llamado @ BookController @ se creará en el @ grails-app/controladores/org/librería @ directorio.
+
+Un controlador es responsable de administrar las solicitudes web entrantes y realizar acciones como redirige, vistas de representación y así sucesivamente. Para obtener más información sobre los controladores, consulte la sección [Controllers|guide:controllers]
+
+Tenga en cuenta que este comando es sólo para conveniencia y usted también puede crear controladores en su editor de textos preferido o IDE si elige.
+
+Uso:
+
+{hidden}
+
 {code:java}
 grails create-controller [name]
 {code}
@@ -25,3 +57,12 @@ grails create-controller [name]
 Fired Events:
 
 * @CreatedFile@ - When the controller is created
+{hidden}
+
+{code: java}
+Grails crear-controlador [nombre]
+{code}
+
+Despedido de eventos:
+
+* @ CreatedFile @ - cuando se crea el controlador

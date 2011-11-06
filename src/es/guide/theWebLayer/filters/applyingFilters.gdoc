@@ -1,3 +1,6 @@
+
+{hidden}
+
 To create a filter create a class that ends with the convention @Filters@ in the @grails-app/conf@ directory. Within this class define a code block called @filters@ that contains the filter definitions:
 
 {code:java}
@@ -7,6 +10,20 @@ class ExampleFilters {
    }
 }
 {code}
+
+{hidden}
+
+Para crear un filtro de crear una clase que termina con los filtros de Convención @ @ en el @ grails-app/conf @ directorio. Dentro de esta clase de definir un bloque de código llamado @ filtros @ que contiene las definiciones de filtro:
+
+{code: java}
+clase ExampleFilters {}
+   filtros de Def = {}
+        / / Tu filtra aquí
+   }
+}
+{code}
+
+{hidden}
 
 Each filter you define within the @filters@ block has a name and a scope. The name is the method name and the scope is defined using named arguments. For example to define a filter that applies to all controllers and all actions you can use wildcards:
 
@@ -18,6 +35,20 @@ sampleFilter(controller:'*', action:'*') {
 
 The scope of the filter can be one of the following things:
 
+{hidden}
+
+Cada filtro que definir dentro de los filtros @ @ bloque tiene un nombre y un ámbito. El nombre es el nombre del método y el ámbito se define utilizando argumentos con nombre. Por ejemplo, para definir un filtro que se aplica a todos los controladores y todas las acciones puede utilizar caracteres comodín:
+
+{code: java}
+sampleFilter (controlador:'* ', acción:'* ') {}
+  / / definiciones interceptor
+}
+{code}
+
+El alcance del filtro puede ser una de las siguientes cosas:
+
+{hidden}
+
 * A controller and/or action name pairing with optional wildcards
 * A URI, with Ant path matching syntax
 
@@ -28,6 +59,21 @@ Filter rule attributes:
 * @actionExclude@ - action exclusion pattern, by default \* is replaced with .\* and a regex is compiled
 * @regex@ (@true@/@false@) - use regex syntax (don't replace '\*' with '.\*')
 * @uri@ - a uri to match, expressed with as Ant style path (e.g. /book/\*\*)
+{hidden}
+
+* Un nombre de controlador o acción emparejamiento con comodines opcional
+* Un URI, con ruta de hormiga sintaxis de coincidencia
+
+Atributos de regla de filtro:
+* @ controlador @ - controlador de coincidencia de patrón, por defecto \ * es reemplazado con. \ * y se compila un regex
+* @ controllerExclude @ - patrón de exclusión de controlador, por defecto \ * es reemplazado con. \ * y se compila un regex
+* @ acción @ - acción que coincidan con el patrón, por defecto \ * es reemplazado con. \ * y se compila un regex
+* @ actionExclude @ - patrón de exclusión de la acción, por defecto \ * es reemplazado con. \ * y se compila un regex
+* @ regex @ (@ true@/@false @) - utilice la sintaxis regex (no reemplazar ' \ * 'con'. \ *')
+* @ uri @ - un uri para hacer coincidir, expresó con como ruta de estilo de hormiga (por ejemplo, / libro / \ * \ *)
+
+{hidden}
+
 * @uriExclude@ - a uri pattern to exclude, expressed with as Ant style path (e.g. /book/\*\*)
 * @find@ (@true@/@false@) - rule matches with partial match (see @java.util.regex.Matcher.find()@)
 * @invert@ (@true@/@false@) - invert the rule (NOT rule)
@@ -40,6 +86,23 @@ all(controller: '*', action: '*') {
 
 }
 {code}
+{hidden}
+
+* @ uriExclude @ - un patrón de uri para excluir, expresada con como ruta de estilo de hormiga (por ejemplo, / libro / \ * \ *)
+* @ Buscar @ (@ true@/@false @) - partidos de regla con parciales coinciden (véase @java.util.regex.Matcher.find()@)
+* @ invertir @ (@ true@/@false @) - invertir la regla (no regla)
+
+Algunos ejemplos de filtros:
+
+* Todos los controladores y acciones
+{code: java}
+todos (controlador: ' *', acción: ' *') {}
+
+}
+{code}
+
+{hidden}
+
 * Only for the @BookController@
 {code:java}
 justBook(controller: 'book', action: '*') {
@@ -52,6 +115,23 @@ notBook(controller: 'book', invert: true) {
 
 }
 {code}
+{hidden}
+
+* Sólo para @ BookController @
+{code: java}
+justBook (controlador: 'libro', acción: ' *') {}
+
+}
+{code}
+* Todos los controladores excepción @ BookController @
+{code: java}
+notBook (controlador: 'libro', invertir: true) {}
+
+}
+{code}
+
+{hidden}
+
 * All actions containing 'save' in the action name
 {code:java}
 saveInActionName(action: '*save*', find: true) {
@@ -64,6 +144,23 @@ actionBeginningWithBButNotBad(action: 'b*', actionExclude: 'bad*', find: true) {
 
 }
 {code}
+{hidden}
+
+* Todas las acciones que contiene 'Guardar' en el nombre de acción
+{code: java}
+saveInActionName (acción: ' * Guardar *', buscar: true) {}
+
+}
+{code}
+* Todas las acciones empezando por la letra 'b', excepto por las acciones a partir de la frase 'mala *'
+{code: java}
+actionBeginningWithBButNotBad (acción: ' b *', actionExclude: ' mala *', buscar: true) {}
+
+}
+{code}
+
+{hidden}
+
 * Applied to a URI space
 {code:java}
 someURIs(uri: '/book/**') {
@@ -76,9 +173,33 @@ allURIs(uri: '/**') {
 
 }
 {code}
+{hidden}
+
+* Aplicado a un espacio URI
+{code: java}
+someURIs (uri: ' / libro / **') {}
+
+}
+{code}
+* Aplica a todos URIs
+{code: java}
+allURIs (uri: ' / **') {}
+
+}
+{code}
+
+{hidden}
+
 
 In addition, the order in which you define the filters within the @filters@ code block dictates the order in which they are executed.  To control the order of execution between @Filters@ classes, you can use the @dependsOn@ property discussed in [filter dependencies|guide:filterDependencies] section.
 
 {note}
 Note: When exclude patterns are used they take precedence over the matching patterns.  For example, if action is 'b\*' and actionExclude is 'bad\*' then actions like 'best' and 'bien' will have that filter applied but actions like 'bad' and 'badlands' will not.
 {note}
+{hidden}
+
+Además, el orden en que se definen los filtros en los filtros @ @ bloque de código determina el orden en que se ejecutan.  Para controlar el orden de ejecución entre @ filtros @ clases, puede utilizar el @ dependsOn @ propiedad explica en la sección [filtro dependencies|guide:filterDependencies].
+
+{Nota}
+Nota: Cuando se utilizan los patrones de exclusión que tienen prioridad sobre los patrones coincidentes.  Por ejemplo, si la acción es 'b\ *' y actionExclude 'bad\ *' entonces acciones como 'mejor' y 'bien' tendrá ese filtro aplicado pero acciones como 'malo' y 'badlands' no lo hará.
+{Nota}

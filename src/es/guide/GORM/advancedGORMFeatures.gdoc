@@ -1,1 +1,7 @@
+
+{hidden}
+
 The following sections cover more advanced usages of GORM including caching, custom mapping and events.
+{hidden}
+
+Las siguientes secciones cubren usos más avanzados de GORM, incluyendo el almacenamiento en caché, asignación personalizada y eventos.

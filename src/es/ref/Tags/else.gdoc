@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. else
 
 h2. Purpose
@@ -12,5 +15,23 @@ h2. Examples
 </g:if>
 <g:else>
      Hello ${name}! Do I know you?
+</g:else>
+{code}
+{hidden}
+
+h1. Else
+
+h2. Fin
+
+La etiqueta más lógica
+
+h2. Ejemplos
+
+{Código: xml}
+<g:if test="${name == 'fred'}">
+     Hola Fred!
+</g:if>
+<g:else>
+     ${Name} ¡ Hola! ¿Te conozco?
 </g:else>
 {code}

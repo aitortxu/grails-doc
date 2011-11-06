@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. dataSource
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @dataSource@ plugin configures the Grails JDBC @DataSource@.
 h2. Examples
 
 A @DataSource@ configured with explicit settings in @grails-app/conf/DataSource.groovy@:
+
+{hidden}
+
+h1. dataSource
+
+h2. Fin
+
+DataSource @ @ plugin configura el JDBC Grails @ DataSource @.
+
+h2. Ejemplos
+
+Un DataSource @ @ configurado con configuración explícita en @ grails-app/conf/DataSource.groovy@:
+
+{hidden}
 
 {code:java}
 dataSource {
@@ -18,6 +35,21 @@ dataSource {
     password = "yourPassword"
 }
 {code}
+{hidden}
+
+{code: java}
+{dataSource
+    agrupado = true
+    dbCreate = "Actualizar"
+    URL = "jdbc:mysql: / / localhost/yourDB"
+    driverClassName = "com.mysql.jdbc.Driver"
+    username = "yourUser"
+    Password = "yourPassword"
+}
+{code}
+
+{hidden}
+
 
 A @DataSource@ configured to look up via JNDI:
 
@@ -28,9 +60,30 @@ dataSource {
 {code}
 
 h2. Description
+{hidden}
+
+Un DataSource @ @ configurado para buscar por medio de JNDI:
+
+{code: java}
+{dataSource
+    jndiName = "java: comp/env/MiOrigendeDatos"
+}
+{code}
+
+h2. Descripción
+
+{hidden}
+
 
 Refer to the section on [Data Sources|guide:dataSource] in the Grails user guide.
 
 Configured Spring Beans:
 
 * @dataSource@ - An instance of the Apache DBCP library's @org.apache.commons.dbcp.BasicDataSource@ class or a [JndiObjectFactoryBean|api:org.springframework.jndi.JndiObjectFactoryBean] in the case of a JNDI @DataSource@
+{hidden}
+
+Consulte la sección [datos Sources|guide:dataSource] en la Guía de usuario de Grails.
+
+Frijoles de primavera configurados:
+
+* @ dataSource @ - una instancia de la clase de @org.apache.commons.dbcp.BasicDataSource@ de la biblioteca de Apache DBCP o [JndiObjectFactoryBean|api:org.springframework.jndi.JndiObjectFactoryBean] en el caso de un JNDI @ DataSource @

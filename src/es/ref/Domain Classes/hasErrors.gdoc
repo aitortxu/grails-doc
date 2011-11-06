@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. hasErrors
 
 h2. Purpose
@@ -12,6 +15,25 @@ b.validate()
 if (b.hasErrors()) {
     b.errors.each {
         println it
+    }
+}
+{code}
+{hidden}
+
+h1. hasErrors
+
+h2. Fin
+
+Comprobar si una instancia de la clase de dominio tiene errores de validación después de una llamada a [validate|domainClasses] o [save|domainClasses], o tras [datos Binding|guide:dataBinding]
+
+h2. Ejemplos
+
+{code: java}
+Def b = nuevo libro (título: "El resplandor")
+b.Validate()
+Si ({b.hasErrors())}
+    b.Errors.each {}
+        Console.println se
     }
 }
 {code}

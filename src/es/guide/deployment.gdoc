@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails applications can be deployed in a number of ways, each of which has its pros and cons.
 
 h3. "grails run-app"
@@ -7,6 +10,20 @@ You should be very familiar with this approach by now, since it is the most comm
 This approach is not recommended at all for production deployment because the performance is poor. Checking for and loading changes places a sizable overhead on the server. Having said that, @grails prod run-app@ removes the per-request overhead and lets you fine tune how frequently the regular check takes place.
 
 Setting the system property "disable.auto.recompile" to @true@ disables this regular check completely, while the property "recompile.frequency" controls the frequency. This latter property should be set to the number of seconds you want between each check. The default is currently 3.
+
+{hidden}
+
+Aplicaciones Grails pueden implementarse en un número de formas, cada una de ellas tiene sus pros y contras.
+
+h3. "grails run-app"
+
+Debe estar muy familiarizado con este enfoque por ahora, ya que es el método más común de la ejecución de una aplicación durante la fase de desarrollo. Un servidor integrado de Tomcat se inicia que carga la aplicación web de las fuentes de desarrollo, permitiendo a recoger un cambios en los archivos de la aplicación.
+
+Este enfoque no se recomienda en absoluto para la implementación de producción debido a que el rendimiento es pobre. Buscar y cargar los cambios coloca una considerable sobrecarga en el servidor. Dicho esto, @ grails prod run-app @ elimina la sobrecarga por petición y permite que usted bien ajustar la frecuencia con la verificación regular toma lugar.
+
+Establecer la propiedad del sistema "disable.auto.recompile" true @ @ deshabilita esta verificación regular completamente, mientras que la propiedad "recompile.frequency" controla la frecuencia. Esta última propiedad debe establecerse en el número de segundos que desea que entre cada comprobación. El valor por defecto es 3.
+
+{hidden}
 
 h3. "grails run-war"
 
@@ -19,6 +36,22 @@ When it comes down to it, current java infrastructures almost mandate that web a
 {code}
 grails war
 {code}
+{hidden}
+
+h3. "la guerra de ejecución de grails"
+
+Esto es muy similar a la opción anterior, pero Tomcat se ejecuta contra el archivo empaquetado de la guerra en lugar de las fuentes de desarrollo. Recarga caliente está deshabilitado, por lo que obtendrá un buen rendimiento sin la molestia de tener que desplegar el archivo WAR en otros lugares.
+
+h3. Archivo WAR
+
+Cuando se trata de que, de infraestructuras de java actual mandato casi que las aplicaciones web se implementan como archivos de guerra, así que esto es por lejos el enfoque más común para la implementación de aplicaciones de Grails en la producción. Crear un archivo WAR es tan simple como ejecutar el comando [war|commandLine]:
+
+{code}
+Guerra Grails
+{code}
+
+{hidden}
+
 
 There are also many ways in which you can customise the WAR file that is created. For example, you can specify a path (either absolute or relative) to the command that instructs it where to place the file and what name to give it:
 
@@ -31,6 +64,22 @@ Alternatively, you can add a line to @grails-app/conf/BuildConfig.groovy@ that c
 {code}
 grails.project.war.file = "foobar-prod.war"
 {code}
+{hidden}
+
+También hay muchas maneras en que puede personalizar el archivo de la guerra que se ha creado. Por ejemplo, puede especificar una ruta (absoluta o relativa) para el comando que se indica a dónde se debe colocar el archivo y qué nombre darle:
+
+{code}
+Grails guerra /opt/java/tomcat-5.5.24/foobar.war
+{code}
+
+Como alternativa, puede añadir una línea a @grails-app/conf/BuildConfig.groovy@ que cambia el nombre de archivo y la ubicación predeterminada:
+
+{code}
+Grails.Project.War.File = "foobar-prod.war"
+{code}
+
+{hidden}
+
 
 Any command line argument that you provide overrides this setting.
 
@@ -62,6 +111,41 @@ grails.war.dependencies = {
     }
 }
 {code}
+{hidden}
+
+Cualquier argumento de línea de comandos que usted proporcione reemplaza esta configuración.
+
+También es posible controlar qué bibliotecas están incluidas en el archivo de la guerra, por ejemplo, para evitar conflictos con las bibliotecas en un directorio compartido. El comportamiento predeterminado es incluir en el archivo de guerra todas las bibliotecas requeridas por Grails, más bibliotecas contenidas en los directorios de plugin "lib" más bibliotecas figura en el directorio de la aplicación "lib". Como alternativa al comportamiento predeterminado puede especificar explícitamente la lista completa de bibliotecas para incluir en el archivo WAR estableciendo la propiedad @grails.war.dependencies@ en BuildConfig.groovy o listas de hormiga incluyen patrones o cierres que contiene la sintaxis AntBuilder. Los cierres se invocan desde dentro de un paso de copia"hormiga", por lo que pueden incluidos, únicos elementos como "conjunto de archivos", Considerando que cada elemento de una lista de patrón se incluye. Cualquier cierre o patrón asignada a la propiedad de este última se incluirán además de @ grails.war.dependencies@.
+
+Tenga cuidado con estas propiedades: si falta alguno de las bibliotecas depende de Grails, casi seguramente fallará la aplicación. Aquí hay un ejemplo que incluye un pequeño subconjunto de las dependencias de Grails estándar:
+
+{code}
+Def deps = [
+    "hibernate3.jar",
+    "groovy-all-*.jar",
+    "norma-\$ {servletVersion} .jar",
+    "jstl-\$ {servletVersion} .jar",
+    "oscache-*.jar",
+    "los comunes-registro-*.jar",
+    "sitemesh-*.jar",
+    "primavera-*.jar",
+    "log4j-*.jar",
+    "ognl-*.jar",
+    "los comunes-*.jar",
+    "xstream-1.2.1.jar",
+    "xpp3_min-1.1.3.4.O.jar"]
+
+Grails.War.Dependencies = {}
+    conjunto de archivos (dir: "bibliotecas") {}
+        para (patrón en deps) {}
+            include(Name: Pattern)
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 This example only exists to demonstrate the syntax for the properties. If you attempt to use it as is in your own application, the application will probably not work. You can find a list of dependencies required by Grails in the "dependencies.txt" file in the root directory of the unpacked distribution. You can also find a list of the default dependencies included in WAR generation in the "War.groovy" script - see the @DEFAULT_DEPS@ and @DEFAULT_J5_DEPS@ variables.
 
@@ -86,7 +170,40 @@ grails.war.resources = { stagingDir, args ->
          tofile: "\${stagingDir}/WEB-INF/web.xml")
 }
 {code}
+{hidden}
+
+En este ejemplo sólo existe para demostrar la sintaxis de las propiedades. Si intenta utilizar tal y como está en su propia aplicación, la aplicación probablemente no funcionará. Puede encontrar una lista de dependencias requeridas por Grails en el archivo "dependencies.txt" en el directorio raíz de la distribución desempaquetado. También puede encontrar una lista de las dependencias por defecto incluidos en la generación de la guerra en el guión de "War.groovy" - véase el @ DEFAULT_DEPS @ y @ DEFAULT_J5_DEPS @ variables.
+
+Las opciones de dos configuración restantes disponibles son @grails.war.copyToWebApp@ y @ grails.war.resources@. La primera de ellas permite personalizar qué archivos se incluyen en el archivo de guerra desde el directorio "web-app". El segundo le permite realizar cualquier procesamiento adicional que desee antes de que finalmente se crea el archivo WAR.
+
+{code}
+/ / Este cierre se pasa los argumentos de línea de comandos utilizados para iniciar la
+/ / proceso de la guerra.
+Grails.War.copyToWebApp = {args->
+    fileset(dir:"Web-App") {}
+        incluir (nombre: "js / **")
+        incluir (nombre: "css / **")
+        incluir (nombre: "WEB-INF / **")
+    }
+}
+
+/ / Este cierre se pasa la ubicación del directorio provisional que
+/ / se comprimen hacer el archivo WAR y los argumentos de línea de comandos.
+/ / Aquí nos reemplazar web.xml estándar con nuestra propia.
+Grails.War.Resources = {stagingDir, args->
+    copia (archivo: "grails-app/conf/custom-web.xml",
+         tofile: "\${stagingDir}/WEB-INF/web.xml")
+}
+{code}
+
+{hidden}
+
 
 h2. Application servers
 
 Ideally you should be able to simply drop a WAR file created by Grails into any application server and it should work straight away. However, things are rarely ever this simple. The [Grails website|http://grails.org/Deployment] contains an up-to-date list of application servers that Grails has been tested with, along with any additional steps required to get a Grails WAR file working.
+{hidden}
+
+h2. Servidores de aplicaciones
+
+Idealmente debería ser capaz de colocar simplemente un archivo de guerra creado por Grails en cualquier servidor de aplicaciones y debería funcionar inmediatamente. Sin embargo, las cosas son rara vez este simples. El [website|http://grails.org/Deployment Grails] contiene una lista actualizada de servidores de aplicaciones que Grails ha sido probado con, junto con las medidas adicionales necesarias para conseguir una guerra de Grails archivo de trabajo.

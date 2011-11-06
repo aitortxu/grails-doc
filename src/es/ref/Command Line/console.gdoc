@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. console
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code}
 grails console
 {code}
+{hidden}
+
+h1. consola
+
+h2. Fin
+
+Se inicia una instancia de la consola gráfica Groovy de Swing con un tiempo de ejecución de Grails inicializado.
+
+h2. Ejemplos
+
+{code}
+consola de Grails
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -18,6 +37,19 @@ Starts the Grails console, which is an extended version of the regular Groovy co
 * @grailsApplication@ - The GrailsApplication instance
 
 These are useful as they allow access to the conventions within Grails and Spring beans.
+
+{hidden}
+
+h2. Descripción
+
+Se inicia la consola de Grails, que es una versión ampliada de la consola Groovy regular. Hay un par de variables útiles registrados en el enlace:
+
+* @ ctx @ - la primavera ApplicationContext instancia
+* @ grailsApplication @ - GrailsApplication de la instancia
+
+Estas son útiles ya que permiten el acceso a las convenciones en Grails y frijoles de primavera.
+
+{hidden}
 
 Usage:
 {code}
@@ -29,5 +61,23 @@ Fired Events:
 * @StatusFinal@ - When the console is loaded
 
 Screenshot:
+{hidden}
+
+Uso:
+{code}
+Grails [entorno] * consola
+{code}
+
+Despedido de eventos:
+
+* @ StatusFinal @ - cuando se carga la consola
+
+Captura de pantalla:
+
+{hidden}
+
 
 !console.png!
+{hidden}
+
+! console.png!

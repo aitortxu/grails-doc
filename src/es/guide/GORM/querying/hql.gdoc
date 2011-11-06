@@ -1,3 +1,6 @@
+
+{hidden}
+
 GORM classes also support Hibernate's query language HQL, a very complete reference for which can be found [in the Hibernate documentation|http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/queryhql.html] of the Hibernate documentation.
 
 GORM provides a number of methods that work with HQL including [find|domainClasses], [findAll|domainClasses] and [executeQuery|domainClasses]. An example of a query can be seen below:
@@ -8,6 +11,21 @@ def results =
 {code}
 
 h4. Positional and Named Parameters
+{hidden}
+
+GORM clases también admiten lenguaje de consulta de hibernación HQL, una referencia muy completa que puede encontrarse [en la hibernación documentation|http://docs.jboss.org/hibernate/core/3.6/reference/en-US/html/queryhql.html] de la documentación de hibernación.
+
+GORM proporciona una serie de métodos que funcionan con HQL incluyendo [find|domainClasses], [findAll|domainClasses] y [executeQuery|domainClasses]. Un ejemplo de una consulta puede verse a continuación:
+
+{code: java}
+resultados de Def =
+      Book.findAll ("del libro como b donde b.title como 'Señor del %'")
+{code}
+
+h4. Parámetros posicionales y con nombre
+
+{hidden}
+
 
 In this case the value passed to the query is hard coded, however you can equally use positional parameters:
 
@@ -22,6 +40,24 @@ def author = Author.findByName("Stephen King")
 def books = Book.findAll("from Book as book where book.author = ?",
                          [author])
 {code}
+{hidden}
+
+En este caso el valor pasado a la consulta está codificado, pero igualmente puede utilizar parámetros posicionales:
+
+{code: java}
+resultados de Def =
+      Book.findAll ("del libro como b donde como b.title?", ["% de Shi"])
+
+{code}
+
+{code: java}
+autor de Def = Author.findByName ("Stephen King")
+libros de Def = Book.findAll ("libro como libro donde book.author =?",
+                         [autor])
+{code}
+
+{hidden}
+
 
 Or even named parameters:
 
@@ -31,6 +67,18 @@ def results =
                    "where b.title like :search or b.author like :search",
                    [search: "The Shi%"])
 {code}
+
+{hidden}
+
+O incluso con nombre de parámetros:
+
+{code: java}
+resultados de Def =
+      Book.findAll ("del libro como b" "donde b.title como: búsqueda o b.author como: búsqueda",
+                   [Buscar: "El % de Shi"])
+{code}
+
+{hidden}
 
 {code:java}
 def author = Author.findByName("Stephen King")
@@ -42,6 +90,20 @@ h4. Multiline Queries
 
 Use the line continuation character to separate the query across multiple lines:
 
+{hidden}
+
+{code: java}
+autor de Def = Author.findByName ("Stephen King")
+libros de Def = Book.findAll ("libro como libro donde book.author =: autor",
+                         [autor: autor])
+{code}
+
+h4. Consultas multilínea
+
+Utilice el carácter de continuación de línea para separar la consulta a través de múltiples líneas:
+
+{hidden}
+
 {code:java}
 def results = Book.findAll("\\\
 from Book as b, \\\
@@ -52,6 +114,21 @@ where b.author = a and a.surname = ?", ['Smith'])
 {note}
 Triple-quoted Groovy multiline Strings will NOT work with HQL queries.
 {note}
+{hidden}
+
+{code: java}
+resultados de Def = Book.findAll ("\\\
+del libro como b, \\\
+     Autor como un \\\
+donde b.author = un y a.surname =? ", ['Smith'])
+{code}
+
+{Nota}
+Triple cita Groovy multilínea cadenas no funcionarán con consultas HQL.
+{Nota}
+
+{hidden}
+
 
 h4. Pagination and Sorting
 
@@ -63,4 +140,15 @@ def results =
                    "b.title like 'Lord of the%' " +
                    "order by b.title asc",
                    [max: 10, offset: 20])
+{code}
+{hidden}
+
+h4. Paginación y ordenación
+
+También puede realizar paginación y ordenación mientras mediante consultas de HQL. Así que simplemente especifique las opciones de paginación como un mapa al final de la llamada al método y incluyen una cláusula "ORDER BY" en el HQL:
+
+{code: java}
+resultados de Def =
+      Book.findAll ("libro como b donde" "b.title como 'Señor del %'" "order by b.title asc",
+                   [máx.: 10, desvío: 20])
 {code}

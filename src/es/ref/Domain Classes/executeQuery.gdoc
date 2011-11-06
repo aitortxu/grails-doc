@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. executeQuery
 
 h2. Purpose
@@ -52,6 +55,60 @@ Account.executeQuery("select distinct a.number from Account a",
 Account.executeQuery("select distinct a.number from Account a",
                      null, [flushMode: FlushMode.MANUAL])
 {code}
+{hidden}
+
+h1. executeQuery
+
+h2. Fin
+
+Ejecuta [HQL queries|guide:hql]
+
+h2. Ejemplos
+
+{code: java}
+/ / simple consulta
+Account.executeQuery ("Seleccione distintas a.number en cuenta un")
+
+/ / con la lista de parámetros
+¿Account.ExecuteQuery ("Seleccione distintas a.number en cuenta una" "donde a.branch =? y a.created >? ",
+                     ['Londres', lastMonth])
+
+/ / con un único params parámetro y paginación
+Account.executeQuery ("Seleccione distintas a.number en cuenta una" "donde a.branch =?", ['Londres'],
+                     [máx.: 10, desvío: 5])
+
+/ / usar con mapa de parámetros con nombre
+Account.executeQuery ("Seleccione distintas a.number en cuenta una" "donde a.branch =: rama",
+                     [rama: 'Londres'])
+
+/ / con mapa de parámetros con nombre y parámetros de paginación
+Account.executeQuery ("Seleccione distintas a.number en cuenta una" "donde a.branch =: rama",
+                     [rama: 'Londres', máxima: 10, desvío: 5])
+
+/ / igual que el anterior
+Account.executeQuery ("Seleccione distintas a.number en cuenta una" "donde a.branch =: rama",
+                     [rama: 'Londres'], [máx.: 10, desvío: 5])
+
+y decimos a objeto de hibernación consulta subyacente no adjuntar recién obtenido
+/ / objetos del período de sesiones, sólo grabará con explícita @ guardar @
+Account.executeQuery ("Seleccione distintas a.number en cuenta un",
+                     NULL, [readOnly: verdadero])
+
+/ / solicitud de tiempo de espera después de 18 segundos
+Account.executeQuery ("Seleccione distintas a.number en cuenta un",
+                     NULL, [timeout: 18])
+
+/ / tiene objeto de consulta de hibernación volver 30 filas en un momento
+Account.executeQuery ("Seleccione distintas a.number en cuenta un",
+                     NULL, [fetchSize: 30])
+
+/ / modificar la FlushMode de la consulta (el predeterminado es @ FlushMode.AUTO@)
+Account.executeQuery ("Seleccione distintas a.number en cuenta un",
+                     NULL, [flushMode: FlushMode.MANUAL])
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -64,6 +121,22 @@ Book.executeQuery(String query, Collection positionalParams, Map metaParams)
 Book.executeQuery(String query, Map namedParams)
 Book.executeQuery(String query, Map namedParams, Map metaParams)
 {code}
+{hidden}
+
+h2. Descripción
+
+@ ExecuteQuery @ método permite la ejecución de consultas HQL arbitrarias. Consultas HQL pueden devolver instancias de clase de dominio o @ Array@s de datos especificado cuando la consulta selecciona campos individuales o los valores calculados. La sintaxis básica es:
+
+{code: java}
+Book.executeQuery (String consulta)
+Book.executeQuery (String consulta, colección positionalParams)
+Book.executeQuery (String consulta, colección positionalParams, mapa metaParams)
+Book.executeQuery (String consulta, mapa namedParams)
+Book.executeQuery (String consulta, namedParams mapa, mapa metaParams)
+{code}
+
+{hidden}
+
 
 Parameters:
 
@@ -71,3 +144,11 @@ Parameters:
 * @positionalParams@ - A @List@ of parameters for a positional parameterized query
 * @namedParams@ - A @Map@ of named parameters for a named parameterized query
 * @metaParams@ - A @Map@ of pagination parameters @max@ or/and @offset@, as well as Hibernate query parameters @readOnly@, @fetchSize@, @timeout@, and @flushMode@
+{hidden}
+
+Parámetros:
+
+* @ consulta @ - consulta An HQL
+* @ positionalParams @ - una lista @ @ de parámetros para una consulta con parámetros posicional
+* @ namedParams @ - un mapa @ @ de parámetros con nombre para un nombre con parámetros de consulta
+* @ metaParams @ - un mapa @ @ de paginación parámetros @ max @ o / y @ offset @, así como Hibernate consulta parámetros @ readOnly @, @ fetchSize @, @ timeout @ y @ flushMode @

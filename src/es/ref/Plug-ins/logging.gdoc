@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. logging
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @logging@ plugin configures Grails' support for [Logging|guide:logging] with
 h2. Examples
 
 Example log statements:
+
+{hidden}
+
+h1. registro
+
+h2. Fin
+
+El registro de @ @ plugin configura apoyo de Grails [Logging|guide:logging] con [Log4j|http://logging.apache.org/log4j/1.2/index.html].
+
+h2. Ejemplos
+
+Declaraciones de registro de ejemplo:
+
+{hidden}
 
 {code}
 log.info "Configuration data source"
@@ -18,7 +35,27 @@ catch (Exception e) {
     log.error "Error: \${e.message}", e
 }
 {code}
+{hidden}
+
+{code}
+log.Info "Origen de datos de configuración"
+
+Intente {}
+    ..
+}
+catch (excepción e) {}
+    log.error "Error: \${e.message}", e
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Refer to the section on [Logging|guide:logging] in the Grails user guide which details Grails' logging support.
+{hidden}
+
+h2. Descripción
+
+Consulte la sección [Logging|guide:logging] en la Guía de usuario de Grails que detalla el soporte de registro de Grails.

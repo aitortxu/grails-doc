@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails uses "convention over configuration" to configure itself. This typically means that the name and location of files is used instead of explicit configuration, hence you need to familiarize yourself with the directory structure provided by Grails.
 
 Here is a breakdown and links to the relevant sections:
@@ -8,6 +11,12 @@ Here is a breakdown and links to the relevant sections:
 ** @domain@ - The [application domain|guide:GORM].
 ** @i18n@ - Support for [internationalization (i18n)|guide:i18n].
 ** @services@ - The [service layer|guide:services].
+{hidden}
+
+Grails utiliza "Convención sobre configuración" para configurarse. Esto normalmente significa que se utiliza el nombre y la ubicación de archivos en lugar de configuración explícita, por lo tanto necesita para familiarizarse con la estructura de directorios proporcionada por Grails.Aquí es un desglose y enlaces a las secciones pertinentes:* @ grails-app @ - directorio de nivel superior para fuentes Groovy** @ conf @-[configuración sources|guide:conf].** @ controladores @-[Web controllers|guide:controllers] - el c en MVC.** @ dominio @-[domain|guide:GORM de aplicación].** @ i18n @ - soporte para [|guide:i18n de internacionalización (i18n)].** @ servicios @-[layer|guide:services de servicio].
+
+{hidden}
+
 ** @taglib@ - [Tag libraries|guide:taglibs].
 ** @utils@ - Grails specific utilities.
 ** @views@ - [Groovy Server Pages|guide:gsp] - The V in MVC.
@@ -16,3 +25,6 @@ Here is a breakdown and links to the relevant sections:
 ** @groovy@ - Other Groovy sources
 ** @java@ - Other Java sources
 * @test@  - [Unit and integration tests|guide:testing].
+{hidden}
+
+** @ taglib @-[etiqueta libraries|guide:taglibs].** @ utils @ - herramientas específicas de Grails.** @ vistas @-[Groovy Server Pages|guide:gsp] - la v de MVC.* @ scripts @-[Gant scripts|guide:commandLine].* @ src @ - fuentes de apoyo** @ groovy @ - Groovy otras fuentes** @ java @ - fuentes de otros Java* @ prueba @-[tests|guide de unidad e integración: pruebas].

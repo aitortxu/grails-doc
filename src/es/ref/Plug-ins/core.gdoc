@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. core
 
 h2. Purpose
@@ -8,8 +11,29 @@ h2. Description
 
 This plugin configures Grails to use Spring MVC at its core to deal with web requests. The plugin configures the @GrailsDispatcherServlet@ and necessary Spring beans (see below) for controllers, tag libraries and Groovy Server Pages (GSP)
 
+{hidden}
+
+h1. núcleo
+
+h2. Fin
+
+El plugin de núcleo agrega métodos y frijoles que dependen de otros plugins
+
+h2. Descripción
+
+Este plugin configura Grails para utilizar MVC de primavera en su núcleo para tratar las solicitudes web. El plugin configura el @ GrailsDispatcherServlet @ y frijoles de primavera necesarios (véase más abajo) para los controladores, las bibliotecas de etiquetas y páginas de servidor Groovy (SPG)
+
+{hidden}
+
 Configured Spring Beans:
 
 * @classLoader@ - A bean that refers to the GroovyClassLoader used to load this GrailsApplication
 * @classEditor@ - A PropertyEditor that populates classes with String data
 * @customEditors@ - An instance of [CustomEditorConfigurer|api:org.springframework.beans.factory.config.CustomEditorConfigurer], that uses allows the @classEditor@ bean to be used as a @PropertyEditor@
+{hidden}
+
+Frijoles de primavera configurados:
+
+* @ classLoader @ - un grano que se refiere a la GroovyClassLoader se usa para cargar esta GrailsApplication
+* @ classEditor @ - PropertyEditor A que llena las clases con datos de la cadena
+* @ customEditors @ - una instancia de [CustomEditorConfigurer|api:org.springframework.beans.factory.config.CustomEditorConfigurer], que utiliza permite la @ classEditor @ bean para utilizarse como un @ PropertyEditor @

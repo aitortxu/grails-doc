@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-app
 
 h2. Purpose
@@ -10,10 +13,35 @@ h2. Examples
 grails create-app bookstore
 cd bookstore
 {code}
+{hidden}
+
+h1. crear-app
+
+h2. Fin
+
+El punto de partida para Grails. Este comando crea una aplicación Grails utilizando el nombre especificado por el usuario. Se crea un subdirectorio dentro del directorio que fue ejecutado el comando desde entonces basándose en el nombre de aplicación especificado.
+
+h2. Ejemplos
+
+{code: java}
+librería de crear aplicaciones Grails
+librería de CD
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Usage:
 {code:java}
 grails create-app [name]
+{code}
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails crear-app [nombre]
 {code}

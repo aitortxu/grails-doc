@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. ignoreNotFound
 
 h2. Purpose
@@ -17,6 +20,30 @@ class LegacyCdDomain {
     }
 }
 {code}
+{hidden}
+
+h1. ignoreNotFound
+
+h2. Fin
+
+Especifica cómo foreign keys esa referencia se manejan sin filas en las relaciones de muchos a uno.
+
+h2. Ejemplos
+
+{code: java}
+clase LegacyCdDomain {}
+
+Título de cadena
+    Miniatura thumbnail
+
+asignación estática = {}
+        miniatura ignoreNotFound: verdadero
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Thumbnail {
@@ -27,6 +54,20 @@ class Thumbnail {
 h2. Description
 
 Usage: @association_name(ignoreNotFound: boolean)@
+{hidden}
+
+{code: java}
+clase {} miniatura
+    datos de byte]
+}
+{code}
+
+h2. Descripción
+
+Uso: @ association_name(ignoreNotFound: boolean) @
+
+{hidden}
+
 
 When the data in the database is corrupt and a foreign key references a non existent record, Hibernate will complain with a "No row with the given identifier exists" message. For example, a @LegacyCdDomain@ record may have a reference to a @Thumbnail@ record with an ID of 1234, but the database may no longer contain a @Thumbnail@ with that ID.
 
@@ -37,5 +78,22 @@ A dataset loaded with @ignoreNotFound: true@ may throw an exception during @save
 {warning}
 
 The default value for this setting is @false@. It maps to Hibernate's @not-found@ property.
+{hidden}
+
+Cuando los datos en la base de datos están dañados y una clave externa hace referencia a un registro inexistente, se quejarán de hibernación con un mensaje de "no hay ninguna fila con el identificador dado existe". Por ejemplo, @ LegacyCdDomain @ registro puede tener una referencia a una miniatura @ @ récord con un ID de 1234, pero la base de datos ya no puede contener una miniatura @ @ con ese ID.
+
+Una manera posible de cargar los datos corruptos es utilizar el @ ignoreNotFound @ opción de asignación. Si se establece en true @ @, hibernación tratará una fila falta como null @ @ asociación. Así que en el ejemplo anterior, sería cargar nuestro @ LegacyCdDomain @ instancia pero su miniatura @ @ propiedad sería nulo @ @. Especificar un valor de @ falso @ para @ ignoreNotFound @ resultará en hibernación lanzando un org.hibernate.ObjectNotFoundException@ @.
+
+Advertencia de {}
+Un conjunto de datos cargados con @ ignoreNotFound: verdadero @ puede producir una excepción durante @ save() @ debido a la falta de referencia!
+Advertencia de {}
+
+El valor predeterminado para este parámetro es false @ @. Asigna a la hibernación de @ no encontrados @ propiedad.
+
+{hidden}
+
 
 This settings can be useful if you have a legacy database with unusual behaviour when it comes to referential integrity.
+{hidden}
+
+Esta configuración puede ser útil si tiene una base de datos heredado con comportamiento inusual cuando se trata de la integridad referencial.

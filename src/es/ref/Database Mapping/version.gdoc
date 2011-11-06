@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. version
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. Versión
+
+h2. Fin
+
+Utiliza para deshabilitar el bloqueo optimista o cambiar la columna que contiene la versión.
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    ...
+    asignación estática = {}
+        falsa versión
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -26,11 +50,36 @@ static mapping = {
     version false
 }
 {code}
+{hidden}
+
+h2. Descripción
+
+Uso: @ version(string/boolean) @
+
+GORM está configurado de forma predeterminada con [locking|guide optimista: bloqueo] habilitado. Puede deshabilitar esta llamando la versión @ @ método con un argumento falso @ @:
+
+{code}
+asignación estática = {}
+    falsa versión
+}
+{code}
+
+{hidden}
+
 
 You can pass the name to the @version@ method to change the name of the database column:
 
 {code}
 static mapping = {
     version 'revision_number'
+}
+{code}
+{hidden}
+
+El nombre se puede pasar a la versión @ @ método para cambiar el nombre de la columna de base de datos:
+
+{code}
+asignación estática = {}
+    versión 'revision_number'
 }
 {code}

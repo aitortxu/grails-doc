@@ -1,3 +1,6 @@
+
+{hidden}
+
 GORM supports the registration of events as methods that get fired when certain events occurs such as deletes, inserts and updates. The following is a list of supported events:
 
 * @beforeInsert@ - Executed before an object is initially persisted to the database
@@ -8,6 +11,21 @@ GORM supports the registration of events as methods that get fired when certain 
 * @afterUpdate@ - Executed after an object has been updated
 * @afterDelete@ - Executed after an object has been deleted
 * @onLoad@ - Executed when an object is loaded from the database
+{hidden}
+
+GORM admite el registro de eventos como métodos que despiden cuando algunos eventos se produce como eliminaciones, inserta y actualizaciones. La siguiente es una lista de eventos admitidos:
+
+* @ beforeInsert @ - ejecutado antes de que un objeto se almacena inicialmente a la base de datos
+* @ beforeUpdate @ - ejecutado antes de actualiza un objeto
+* @ beforeDelete @ - ejecutado antes de eliminar un objeto
+* @ beforeValidate @ - ejecutado antes de que un objeto es validado
+* @ afterInsert @ - ejecutada después de que un objeto se almacena en la base de datos
+* @ DespuésDeActualizar @ - ejecutada después de que un objeto se ha actualizado
+* @ afterDelete @ - ejecutada después de que un objeto se ha eliminado
+* @ onLoad @ - ejecuta cuando se carga un objeto desde la base de datos
+
+{hidden}
+
 
 To add an event simply register the relevant closure with your domain class.
 
@@ -18,6 +36,20 @@ Do not attempt to flush the session within an event (such as with obj.save(flush
 h3. Event types
 
 h4. The beforeInsert event
+{hidden}
+
+Para agregar un evento simplemente registrar el cierre pertinente con la clase de dominio.
+
+Advertencia de {}
+No intentar vaciar la sesión dentro de un evento (como con obj.save(flush:true)). Dado que se activan eventos durante volcar esto causará un StackOverflowError.
+Advertencia de {}
+
+h3. Tipos de eventos
+
+h4. El evento beforeInsert
+
+{hidden}
+
 
 Fired before an object is saved to the database
 
@@ -31,6 +63,23 @@ class Person {
 }
 
 {code}
+{hidden}
+
+Despedido antes de que un objeto se guarda en la base de datos
+
+{code: java}
+clase persona {}
+   Fecha dateCreated
+
+Def beforeInsert() {}
+       dateCreated = new Date()
+   }
+}
+
+{code}
+
+{hidden}
+
 
 h4. The beforeUpdate event
 
@@ -49,6 +98,28 @@ class Person {
    }
 }
 {code}
+{hidden}
+
+h4. El evento beforeUpdate
+
+Despedido antes de actualiza un objeto existente
+
+{code: java}
+clase persona {}
+   Fecha dateCreated
+   Fecha lastUpdated
+
+Def beforeInsert() {}
+       dateCreated = new Date()
+   }
+   Def beforeUpdate() {}
+       lastUpdated = new Date()
+   }
+}
+{code}
+
+{hidden}
+
 
 h4. The beforeDelete event
 
@@ -68,6 +139,29 @@ class Person {
 }
 
 {code}
+{hidden}
+
+h4. El evento beforeDelete
+
+Despedido antes de eliminar un objeto.
+
+{code: java}
+clase persona {}
+   Nombre de la cadena
+   Fecha dateCreated
+   Fecha lastUpdated
+
+Def beforeDelete() {}
+      ActivityTrace.withNewSession {}
+         Nueva ActivityTrace (eventName: "persona Deleted",data:name).save()
+      }
+   }
+}
+
+{code}
+
+{hidden}
+
 
 Notice the usage of @withNewSession@ method above. Since events are triggered whilst Hibernate is flushing using persistence methods like @save()@ and @delete()@ won't result in objects being saved unless you run your operations with a new @Session@.
 
@@ -90,6 +184,32 @@ class Person {
    }
 }
 {code}
+{hidden}
+
+Observe el uso de @ withNewSession @ método anterior. Dado que se producen eventos mientras hibernación es vaciado mediante métodos como @ save() @ y @ delete() @ no producen en objetos que se guardan a menos que ejecuta sus operaciones con una nueva sesión @ @ persistencia.
+
+Afortunadamente la @ withNewSession @ método le permite compartir la misma conexión JDBC transaccional a pesar de que está utilizando una subyacente @ sesión diferente @.
+
+h4. El evento beforeValidate
+
+Despedido antes de que se valida un objeto.
+
+{code: java}
+clase persona {}
+   Nombre de la cadena
+
+restricciones estáticas = {}
+       nombre de tamaño: 5..45
+   }
+
+Def beforeValidate() {}
+       nombre = nombre?.Trim()
+   }
+}
+{code}
+
+{hidden}
+
 
 The @beforeValidate@ method is run before any validators are run.
 
@@ -116,6 +236,36 @@ class Person {
 def p = new Person(name: 'Jacob Brown', age: 10)
 p.validate(['age', 'name'])
 {code}
+{hidden}
+
+@ BeforeValidate @ método se ejecuta antes de que se ejecuten cualquier validadores.
+
+Soporta GORM una versión sobrecargada de @ beforeValidate @ que acepta una lista @ @ parámetro que puede incluir
+los nombres de las propiedades que están a punto de ser validado.  Se llamará a esta versión de @ beforeValidate @
+Cuando la @ validar método ha sido invocado y pasa una lista @ @ de nombres de propiedad como argumento.
+
+{code: java}
+clase persona {}
+   Nombre de la cadena
+   Ciudad de cadena
+   Edad entero
+
+restricciones estáticas = {}
+       nombre de tamaño: 5..45
+       rango de edad: 4..99
+   }
+
+Def beforeValidate (lista propertiesBeingValidated) {}
+      / / do pre validación trabajo basado en propertiesBeingValidated
+   }
+}
+
+Def p = nueva persona (nombre: 'Jacob Brown', edad: 10)
+p.Validate ('mayores', 'nombre'])
+{code}
+
+{hidden}
+
 
 {note}
 Note that when @validate@ is triggered indirectly because of a call to the @save@ method that
@@ -126,6 +276,20 @@ the property names.
 Either or both versions of @beforeValidate@ may be defined in a domain class.  GORM will
 prefer the @List@ version if a @List@ is passed to @validate@ but will fall back on the
 no-arg version if the @List@ version does not exist.  Likewise, GORM will prefer the
+{hidden}
+
+{Nota}
+Tenga en cuenta que cuando @ validar @ se desencadena indirectamente debido a una llamada a guardar @ @ método que
+el @ validar método se invoca sin argumentos, no una @ lista @ que incluye todas
+los nombres de propiedad.
+{Nota}
+
+Una o ambas versiones de @ beforeValidate @ pueden definirse en una clase de dominio.  GORM será
+prefieren la lista @ @ versión si una lista @ @ se pasa a @ validar pero recurrir a la
+versión no-arg si la lista @ @ versión no existe.  Asimismo, preferirán GORM el
+
+{hidden}
+
 no-arg version if no arguments are passed to @validate@ but will fall back on the
 @List@ version if the no-arg version does not exist.  In that case, @null@ is passed to @beforeValidate@.
 
@@ -144,6 +308,29 @@ class Person {
    }
 }
 {code}
+{hidden}
+
+no-arg versión si no hay argumentos pasan a @ validar pero recurrir a la
+@ Lista @ versión si no existe la versión no-arg.  En ese caso, se pasa null @ @ @ beforeValidate @.
+
+h4. El evento onLoad/beforeLoad
+
+Dispararon inmediatamente antes un objeto se carga desde la base de datos:
+
+{code: java}
+clase persona {}
+   Nombre de la cadena
+   Fecha dateCreated
+   Fecha lastUpdated
+
+Def onLoad() {}
+      log.Debug "Carga ${id}"
+   }
+}
+{code}
+
+{hidden}
+
 
 @beforeLoad()@ is effectively a synonym for @onLoad()@, so only declare one or the other.
 
@@ -162,6 +349,28 @@ class Person {
    }
 }
 {code}
+{hidden}
+
+@ beforeLoad() @ es un sinónimo de @ onLoad() @, tan sólo declarar uno o el otro.
+
+h4. El evento de sobrecarga
+
+Dispararon inmediatamente después de que un objeto se carga desde la base de datos:
+
+{code: java}
+clase persona {}
+   Nombre de la cadena
+   Fecha dateCreated
+   Fecha lastUpdated
+
+Def afterLoad() {}
+      nombre = "Estoy cargado"
+   }
+}
+{code}
+
+{hidden}
+
 
 h4. Custom Event Listeners
 
@@ -172,6 +381,20 @@ The values of the Map are instances of classes that implement one or more Hibern
 {table}
 *Name* | *Interface*
 auto-flush | [AutoFlushEventListener|api:org.hibernate.event.AutoFlushEventListener]
+{hidden}
+
+h4. Detectores de eventos personalizados
+
+También puede registrar clases de controlador de eventos en @grails-app/conf/spring/resources.groovy@ de una aplicación o en el @ doWithSpring @ cierre de un descriptor de plugin registrando un grano de primavera llamado @ hibernateEventListeners @. Este grano tiene una propiedad, @ listenerMap @ que especifica los oyentes para registrarse en varios eventos de hibernación.
+
+Los valores del mapa son instancias de clases que implementan una o más interfaces de agente de escucha de hibernación. Puede utilizar una clase que implementa todas las interfaces necesarias, o una clase concreta por interfaz o cualquier combinación. Aquí se enumeran las claves válidas del mapa y las interfaces correspondientes:
+
+tabla de {}
+* Nombre * | * Interfaz *
+auto-flush | [AutoFlushEventListener|api:org.hibernate.event.AutoFlushEventListener]
+
+{hidden}
+
 merge | [MergeEventListener|api:org.hibernate.event.MergeEventListener]
 create | [PersistEventListener|api:org.hibernate.event.PersistEventListener]
 create-onflush | [PersistEventListener|api:org.hibernate.event.PersistEventListener]
@@ -182,6 +405,21 @@ flush | [FlushEventListener|api:org.hibernate.event.FlushEventListener]
 flush-entity | [FlushEntityEventListener|api:org.hibernate.event.FlushEntityEventListener]
 load | [LoadEventListener|api:org.hibernate.event.LoadEventListener]
 load-collection | [InitializeCollectionEventListener|api:org.hibernate.event.InitializeCollectionEventListener]
+{hidden}
+
+combinación | [MergeEventListener|api:org.hibernate.event.MergeEventListener]
+crear | [PersistEventListener|api:org.hibernate.event.PersistEventListener]
+crear onflush | [PersistEventListener|api:org.hibernate.event.PersistEventListener]
+eliminar | [DeleteEventListener|api:org.hibernate.event.DeleteEventListener]
+verificación sucio | [DirtyCheckEventListener|api:org.hibernate.event.DirtyCheckEventListener]
+desalojar | [EvictEventListener|api:org.hibernate.event.EvictEventListener]
+vaciar | [FlushEventListener|api:org.hibernate.event.FlushEventListener]
+flush-entidad | [FlushEntityEventListener|api:org.hibernate.event.FlushEntityEventListener]
+cargar | [LoadEventListener|api:org.hibernate.event.LoadEventListener]
+colección de carga | [InitializeCollectionEventListener|api:org.hibernate.event.InitializeCollectionEventListener]
+
+{hidden}
+
 lock | [LockEventListener|api:org.hibernate.event.LockEventListener]
 refresh | [RefreshEventListener|api:org.hibernate.event.RefreshEventListener]
 replicate | [ReplicateEventListener|api:org.hibernate.event.ReplicateEventListener]
@@ -192,6 +430,21 @@ pre-load | [PreLoadEventListener|api:org.hibernate.event.PreLoadEventListener]
 pre-update | [PreUpdateEventListener|api:org.hibernate.event.PreUpdateEventListener]
 pre-delete | [PreDeleteEventListener|api:org.hibernate.event.PreDeleteEventListener]
 pre-insert | [PreInsertEventListener|api:org.hibernate.event.PreInsertEventListener]
+{hidden}
+
+bloqueo | [LockEventListener|api:org.hibernate.event.LockEventListener]
+actualizar | [RefreshEventListener|api:org.hibernate.event.RefreshEventListener]
+replicar | [ReplicateEventListener|api:org.hibernate.event.ReplicateEventListener]
+actualización de guardar | [SaveOrUpdateEventListener|api:org.hibernate.event.SaveOrUpdateEventListener]
+guardar | [SaveOrUpdateEventListener|api:org.hibernate.event.SaveOrUpdateEventListener]
+actualizar | [SaveOrUpdateEventListener|api:org.hibernate.event.SaveOrUpdateEventListener]
+pre-Load | [PreLoadEventListener|api:org.hibernate.event.PreLoadEventListener]
+pre-Update | [PreUpdateEventListener|api:org.hibernate.event.PreUpdateEventListener]
+pre-Delete | [PreDeleteEventListener|api:org.hibernate.event.PreDeleteEventListener]
+pre-INSERT | [PreInsertEventListener|api:org.hibernate.event.PreInsertEventListener]
+
+{hidden}
+
 pre-collection-recreate | [PreCollectionRecreateEventListener|api:org.hibernate.event.PreCollectionRecreateEventListener]
 pre-collection-remove | [PreCollectionRemoveEventListener|api:org.hibernate.event.PreCollectionRemoveEventListener]
 pre-collection-update | [PreCollectionUpdateEventListener|api:org.hibernate.event.PreCollectionUpdateEventListener]
@@ -202,6 +455,21 @@ post-insert | [PostInsertEventListener|api:org.hibernate.event.PostInsertEventLi
 post-commit-update | [PostUpdateEventListener|api:org.hibernate.event.PostUpdateEventListener]
 post-commit-delete | [PostDeleteEventListener|api:org.hibernate.event.PostDeleteEventListener]
 post-commit-insert | [PostInsertEventListener|api:org.hibernate.event.PostInsertEventListener]
+{hidden}
+
+previo al collection recrear | [PreCollectionRecreateEventListener|api:org.hibernate.event.PreCollectionRecreateEventListener]
+previo al collection quitar | [PreCollectionRemoveEventListener|api:org.hibernate.event.PreCollectionRemoveEventListener]
+previo a la actualización collection | [PreCollectionUpdateEventListener|api:org.hibernate.event.PreCollectionUpdateEventListener]
+post-Load | [PostLoadEventListener|api:org.hibernate.event.PostLoadEventListener]
+post-Update | [PostUpdateEventListener|api:org.hibernate.event.PostUpdateEventListener]
+post-Delete | [PostDeleteEventListener|api:org.hibernate.event.PostDeleteEventListener]
+post-INSERT | [PostInsertEventListener|api:org.hibernate.event.PostInsertEventListener]
+posterior a la actualización commit | [PostUpdateEventListener|api:org.hibernate.event.PostUpdateEventListener]
+posterior commit eliminar | [PostDeleteEventListener|api:org.hibernate.event.PostDeleteEventListener]
+posterior commit insertar | [PostInsertEventListener|api:org.hibernate.event.PostInsertEventListener]
+
+{hidden}
+
 post-collection-recreate | [PostCollectionRecreateEventListener|api:org.hibernate.event.PostCollectionRecreateEventListener]
 post-collection-remove | [PostCollectionRemoveEventListener|api:org.hibernate.event.PostCollectionRemoveEventListener]
 post-collection-update| [PostCollectionUpdateEventListener|api:org.hibernate.event.PostCollectionUpdateEventListener]
@@ -221,6 +489,30 @@ beans = {
    }
 }
 {code}
+{hidden}
+
+posterior collection recrear | [PostCollectionRecreateEventListener|api:org.hibernate.event.PostCollectionRecreateEventListener]
+posterior collection quitar | [PostCollectionRemoveEventListener|api:org.hibernate.event.PostCollectionRemoveEventListener]
+posterior collection update| [PostCollectionUpdateEventListener|api:org.hibernate.event.PostCollectionUpdateEventListener]
+tabla de {}
+
+Por ejemplo, podría registrar una clase @ AuditEventListener @ que implementa @ PostInsertEventListener @, @ PostUpdateEventListener @ y @ PostDeleteEventListener @ utilizando la siguiente en una aplicación:
+
+{code}
+frijoles = {}
+
+auditListener(AuditEventListener)
+
+hibernateEventListeners(HibernateEventListeners) {}
+      listenerMap = ['post-insert': auditListener,
+                     'post-update': auditListener,
+                     'post-delete': auditListener]
+   }
+}
+{code}
+
+{hidden}
+
 
 or use this in a plugin:
 
@@ -236,6 +528,25 @@ def doWithSpring = {
    }
 }
 {code}
+{hidden}
+
+o utilizar esto en un plugin:
+
+{code}
+Def doWithSpring = {}
+
+auditListener(AuditEventListener)
+
+hibernateEventListeners(HibernateEventListeners) {}
+      listenerMap = ['post-insert': auditListener,
+                     'post-update': auditListener,
+                     'post-delete': auditListener]
+   }
+}
+{code}
+
+{hidden}
+
 
 h4. Automatic timestamping
 
@@ -252,7 +563,32 @@ class Person {
    }
 }
 {code}
+{hidden}
+
+h4. Disparos automáticos
+
+Los ejemplos anteriores ha demostrado mediante eventos para actualizar un @ lastUpdated @ y @ dateCreated @ propiedad para realizar un seguimiento de versiones de objetos. Sin embargo, esto realmente no es necesario. Definiendo un @ lastUpdated @ y @ dateCreated @ propiedad estos se actualizará automáticamente para usted por GORM.
+
+Si esto no es el comportamiento que desee que puede deshabilitar esta característica con:
+
+{code: java}
+clase persona {}
+   Fecha dateCreated
+   Fecha lastUpdated
+   asignación estática = {}
+      false autoTimestamp
+   }
+}
+{code}
+
+{hidden}
+
 
 {warning}
 If you put @nullable: false@ constraints on either @dateCreated@ or @lastUpdated@, your domain instances will fail validation - probably not what you want. Leave constraints off these properties unless you have disabled automatic timestamping.
 {warning}
+{hidden}
+
+Advertencia de {}
+Si pones @ que acepta valores NULL: falso @ restricciones en @ dateCreated @ o @ lastUpdated @, las instancias de dominio fallará validación - probablemente no lo desea. Dejar las limitaciones de estas propiedades a menos que haya desactivado disparos automáticos.
+Advertencia de {}

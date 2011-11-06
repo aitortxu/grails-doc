@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Creating Layouts
 
 Grails leverages [Sitemesh|http://www.opensymphony.com/sitemesh/], a decorator engine, to support view layouts. Layouts are located in the @grails-app/views/layouts@ directory. A typical layout can be seen below:
@@ -17,6 +20,28 @@ Grails leverages [Sitemesh|http://www.opensymphony.com/sitemesh/], a decorator e
     </body>
 </html>
 {code}
+{hidden}
+
+h4. Crear diseños
+
+Aprovecha de Grails [Sitemesh|http://www.opensymphony.com/sitemesh/], un motor decorator, para soportar ver diseños. Los diseños se encuentran en los @ grails-app/views/diseños @ directorio. Un diseño típico puede verse a continuación:
+
+{Código: xml}<html>
+    <head>
+        <title><g:layouttitle default="An example decorator"></g:layouttitle></title>
+        <g:layouthead></g:layouthead>
+    </head>
+    <body onload="${pageProperty(name:'body.onload')}">
+        <div class="menu"><!--my common menu goes here-->
+            <div class="body">
+                <g:layoutbody></g:layoutbody>
+            </div>
+        </div>
+    </body>
+</html>{code}
+
+{hidden}
+
 
 The key elements are the [layoutHead|tags], [layoutTitle|tags] and [layoutBody|tags] tag invocations:
 
@@ -27,6 +52,20 @@ The key elements are the [layoutHead|tags], [layoutTitle|tags] and [layoutBody|t
 The previous example also demonstrates the [pageProperty|tags] tag which can be used to inspect and return aspects of the target page.
 
 h4. Triggering Layouts
+{hidden}
+
+Los elementos clave son el [layoutHead|tags], [layoutTitle|tags] y [layoutBody|tags] invocaciones de etiqueta:
+
+* @ layoutTitle @ - salidas de título de la página de destino
+* @ layoutHead @ - salidas de cabeza de la página de destino etiqueta contenido
+* @ layoutBody @ - salidas de contenido de etiqueta de cuerpo de la página de destino
+
+El ejemplo anterior también muestra la etiqueta [pageProperty|tags] que puede utilizarse para inspeccionar y devolver los aspectos de la página de destino.
+
+h4. Diseños de activación
+
+{hidden}
+
 
 There are a few ways to trigger a layout. The simplest is to add a meta tag to the view:
 
@@ -39,6 +78,20 @@ There are a few ways to trigger a layout. The simplest is to add a meta tag to t
     <body>This is my content!</body>
 </html>
 {code}
+{hidden}
+
+Hay varias formas para desencadenar un diseño. La más simple es agregar una etiqueta meta a la vista:
+
+{Código: xml}<html>
+    <head>
+        <title>Una página de ejemplo</title>
+        <meta name="layout" content="main">
+    </head>
+    <body>Este es mi contenido!</body>
+</html>{code}
+
+{hidden}
+
 
 In this case a layout called @grails-app/views/layouts/main.gsp@ will be used to layout the page. If we were to use the layout from the previous section the output would resemble this:
 
@@ -55,6 +108,22 @@ In this case a layout called @grails-app/views/layouts/main.gsp@ will be used to
     </body>
 </html>
 {code}
+{hidden}
+
+En este caso un diseño llamado @grails-app/views/layouts/main.gsp@ será utilizado para el diseño de la página. Si tuviéramos que utilizar el diseño de la sección anterior la salida podría parecerse a esto:
+
+{Código: xml}<html>
+    <head>
+        <title>Una página de ejemplo</title>
+    </head>
+    <body onload="">
+        <div class="menu"><!--my common menu goes here--></div>
+        <div class="body">Este es mi contenido!</div>
+    </body>
+</html>{code}
+
+{hidden}
+
 
 h4. Specifying A Layout In A Controller
 
@@ -67,6 +136,22 @@ class BookController {
     def list() { ... }
 }
 {code}
+{hidden}
+
+h4. Especificar un diseño de un controlador
+
+Otra forma de especificar un diseño es especificar el nombre del diseño de asignar un valor a la propiedad de "diseño" en un controlador. Por ejemplo, si tiene un controlador de tales como:
+
+{code: java}
+clase BookController {}
+    Diseño estático = 'cliente'
+
+Def list() {...}
+}
+{code}
+
+{hidden}
+
 
 You can create a layout called @grails-app/views/layouts/customer.gsp@ which will be applied to all views that the @BookController@ delegates to.  The value of the "layout" property may contain a directory structure relative to the @grails-app/views/layouts/@ directory.  For example:
 
@@ -77,6 +162,20 @@ class BookController {
     def list() { ... }
 }
 {code}
+{hidden}
+
+Puede crear un diseño llamado @grails-app/views/layouts/customer.gsp@ que se aplica a todas las vistas que @ BookController @ delegados.  El valor de la propiedad de "diseño" puede contener una estructura de directorio relativo a los @ grails-app/views/diseños / @ directorio.  Por ejemplo:
+
+{code: java}
+clase BookController {}
+    Diseño estático = 'custom/cliente'
+
+Def list() {...}
+}
+{code}
+
+{hidden}
+
 
 Views rendered from that controller would be decorated with the @grails-app/views/layouts/custom/customer.gsp@ template.
 
@@ -89,6 +188,22 @@ class BookController {
     def list() { ... }
 }
 {code}
+{hidden}
+
+Vistas procesadas desde que el controlador se decorado con la plantilla @grails-app/views/layouts/custom/customer.gsp@.
+
+h4. Diseño por Convención
+
+Otra manera de asociar los diseños es utilizar "diseño en la Convención". Por ejemplo, si tienes este controlador:
+
+{code: java}
+clase BookController {}
+    Def list() {...}
+}
+{code}
+
+{hidden}
+
 
 You can create a layout called @grails-app/views/layouts/book.gsp@, which will be applied to all views that the @BookController@ delegates to.
 
@@ -99,6 +214,20 @@ If you have both the above mentioned layouts in place the layout specific to the
 If a layout may not be located using any of those conventions, the convention of last resort is to look for the application default layout which
 is @grails-app/views/layouts/application.gsp@.  The name of the application default layout may be changed by defining a property
 in @grails-app/conf/Config.groovy@ as follows:
+{hidden}
+
+Puede crear un diseño llamado @ grails-app/views/layouts/book.gsp@, que se aplica a todas las vistas que @ BookController @ delegados.
+
+Alternativamente, puede crear un diseño llamado @grails-app/views/layouts/book/list.gsp@ que sólo se aplica a la lista @ @ acción dentro de la @ BookController @.
+
+Si tienes tanto los esquemas mencionados en su lugar el diseño específico de la acción tendrá prioridad cuando se ejecuta la acción de la lista.
+
+Si un esquema no puede se encuentra utilizando cualquiera de esos convenios, la Convención de último recurso es buscar el diseño predeterminado de aplicación que
+es @ grails-app/views/layouts/application.gsp@.  El nombre del diseño predeterminado de aplicación puede cambiarse mediante la definición de una propiedad
+en @grails-app/conf/Config.groovy@ lo siguiente:
+
+{hidden}
+
 
 {code:java}
 grails.sitemesh.default.layout = 'myLayoutName'
@@ -109,6 +238,20 @@ With that property in place, the application default layout will be @grails-app/
 h4. Inline Layouts
 
 Grails' also supports Sitemesh's concept of inline layouts with the [applyLayout|tags] tag. This can be used to apply a layout to a template, URL or arbitrary section of content. This lets you even further modularize your view structure by "decorating" your template includes.
+{hidden}
+
+{code: java}
+Grails.SiteMesh.Default.Layout = 'myLayoutName'
+{code}
+
+Con esa propiedad en su lugar, el diseño de aplicaciones predeterminado será @ grails-app/views/layouts/myLayoutName.gsp@.
+
+h4. Diseños en línea
+
+'Grails también admite el concepto de Sitemesh de diseños en línea con la etiqueta [applyLayout|tags]. Esto puede utilizarse para aplicar un diseño de una plantilla, URL o sección arbitraria de contenido. Esto le permite modularize aún más su punto de vista incluye estructura por "decorar" su plantilla.
+
+{hidden}
+
 
 Some examples of usage can be seen below:
 
@@ -121,6 +264,22 @@ Some examples of usage can be seen below:
 The content to apply a layout to
 </g:applyLayout>
 {code}
+{hidden}
+
+Algunos ejemplos de uso pueden verse a continuación:
+
+{Código: xml}
+<g:applylayout name="myLayout" template="bookTemplate" collection="${books}"></g:applylayout>
+
+<g:applylayout name="myLayout" url="http://www.google.com"></g:applylayout>
+
+<g:applylayout name="myLayout">
+El contenido para aplicar un diseño
+</g:applylayout>
+{code}
+
+{hidden}
+
 
 h4. Server-Side Includes
 
@@ -131,6 +290,20 @@ While the [applyLayout|tags] tag is useful for applying layouts to external cont
 {code}
 
 You can even combine the [include|tags] tag and the [applyLayout|tags] tag for added flexibility:
+{hidden}
+
+h4. Server-Side Includes
+
+Aunque la etiqueta [applyLayout|tags] es útil para aplicar los diseños a contenido externo, si simplemente desea incluir contenido externo en la página actual utiliza la etiqueta [include|tags]:
+
+{Código: xml}
+<g:include controller="book" action="list"></g:include>
+{code}
+
+Incluso puede combinar la etiqueta [include|tags] y el [applyLayout|tags] para una mayor flexibilidad:
+
+{hidden}
+
 
 {code:xml}
 <g:applyLayout name="myLayout">
@@ -143,5 +316,24 @@ Finally, you can also call the [include|tags] tag from a controller or tag libra
 {code:java}
 def content = include(controller:"book", action:"list")
 {code}
+{hidden}
+
+{Código: xml}
+<g:applylayout name="myLayout">
+   <g:include controller="book" action="list"></g:include>
+</g:applylayout>
+{code}
+
+Por último, también puede llamar la etiqueta [include|tags] de un controlador o la biblioteca de etiquetas como un método:
+
+{code: java}
+contenido de Def = incluir (controlador: "reserva", acción: "lista")
+{code}
+
+{hidden}
+
 
 The resulting content will be provided via the return value of the [include|tags] tag.
+{hidden}
+
+El contenido resultante se prestará mediante el valor devuelto de la etiqueta [include|tags].

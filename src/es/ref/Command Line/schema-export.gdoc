@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. schema-export
 
 h2. Purpose
@@ -15,6 +18,28 @@ grails prod schema-export export
 grails prod schema-export export --datasource=auditing
 grails prod schema-export stdout
 {code}
+{hidden}
+
+h1. esquema de exportación
+
+h2. Fin
+
+Utiliza la herramienta de SchemaExport de hibernación para generar DDL o exportar el esquema.
+
+h2. Ejemplos
+
+{code: java}
+Grails esquema-exportación
+Grails esquema-exportación--datasource = búsqueda
+Grails prod esquema de exportación
+Grails dev esquema-exportación
+Grails prod esquema exportación exportación
+Grails prod esquema exportación exportación--datasource = auditoría
+Grails prod stdout de exportación de esquema
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -25,8 +50,28 @@ grails [environment] schema-export [action] ['stdout'] [filename] [--datasource]
 
 Arguments:
 
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+export-esquema de Grails [entorno] [acción] ['Debug'] [archivo] [--datasource]
+{code}
+
+Argumentos:
+
+{hidden}
+
 * @environment@ - The environment containing the database configuration to use (dev, prod, etc...).
 * @action@ - Either 'generate' or 'export'.  The default is 'generate'. Specifying 'export' will execute the script against the specified environment's database instead of just generating the ddl file.
 * @stdout@ - Passing 'stdout' will cause the script to dump the ddl to stdout.
 * @filename@ - The name of the file to write the ddl to.  The default is ddl.sql in the project's 'target' directory.
 * @datasource@ - The @DataSource@ name suffix; defaults to the default @DataSource@ if not specified
+{hidden}
+
+* @ entorno @ - el medio ambiente que contiene la configuración de base de datos a utilizar (dev, prod, etc....).
+* @ acción @ - O 'generar' o 'Exportar'.  El valor predeterminado es "generar". Especificando la 'exportación' ejecutará la secuencia de comandos contra la base de datos del entorno especificado en lugar de generar el archivo de ddl.
+* @ stdout @ - pasando 'Debug' hará que la secuencia de comandos volcar el ddl a stdout.
+* @ @ - El nombre del archivo para escribir el ddl a nombre de archivo.  El valor predeterminado es ddl.sql en el directorio del proyecto 'destino'.
+* @ datasource @-@ DataSource @ sufijo de nombre; el valor predeterminado es el valor predeterminado @ DataSource @ si no especificado

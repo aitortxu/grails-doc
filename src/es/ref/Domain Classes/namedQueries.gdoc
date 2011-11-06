@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. namedQueries
 
 h2. Purpose
@@ -38,6 +41,51 @@ class Publication {
    }
 }
 {code}
+{hidden}
+
+h1. namedQueries
+
+h2. Fin
+
+@ NamedQueries @ propiedad estática define consultas con nombre.  Llamado a consultas de apoyo la sintaxis de generador de criterios.  En la Guía del usuario para obtener más información, consulte la sección sobre el [criterios de Builder|guide:criteria].
+
+h2. Ejemplos
+
+{code: java}
+clase {de publicación
+
+Título de cadena
+   Autor de cadena
+   DatePublished de fecha
+   Entero numberOfPages
+
+estático namedQueries = {}
+       recentPublications {}
+           Def ahora = new Date()
+           gt 'datePublished', ahora - 365
+       }
+
+oldPublicationsLargerThan {pageCount->
+           Def ahora = new Date()
+           lt 'datePublished', ahora - 365
+           gt 'numberOfPages', pageCount
+       }
+
+publicationsWithBookInTitle {}
+           como 'title', '% libro %'
+       }
+
+recentPublicationsWithBookInTitle {}
+           / / llama a otras consultas con nombre...
+           recentPublications()
+           publicationsWithBookInTitle()
+      }
+   }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 // get all recent publications...
@@ -71,6 +119,43 @@ def pubs = Publication.oldPublicationsLargerThan(350).findAllByTitleLike('%Grail
 // get all recent publications with 'Book' in their title
 def pubs = Publication.recentPublicationsWithBookInTitle().list()
 {code}
+{hidden}
+
+{code: java}
+/ / obtener todas las publicaciones recientes...
+Def recentPubs = Publication.recentPublications.list()
+
+/ / obtener hasta 10 publicaciones recientes, omitir el primer 5...
+Def recentPubs = Publication.recentPublications.list (máx.: 10, desvío: 5)
+
+/ / obtener el número de publicaciones recientes...
+Def numberOfRecentPubs = Publication.recentPublications.count()
+
+/ / obtener una reciente publicación con un identificador específico...
+Def pub = Publication.recentPublications.get(42)
+
+/ / obtener todas las publicaciones recientes donde título = 'Some título'
+pubs Def = Publication.recentPublications.findAllWhere (título: 'Algún título')
+
+/ / obtener una publicación reciente título donde = 'Some título'
+Def pub = Publication.recentPublications.findWhere (título: 'Algún título')
+
+/ se soportan buscadores dinámicos
+pubs Def = Publication.recentPublications.findAllByTitle ("Some título')
+
+/ / obtener todas las publicaciones antiguas con más de 350 páginas
+pubs Def = Publication.oldPublicationsLargerThan(350).list()
+
+/ / obtener todas las publicaciones antiguas con más de 350 páginas
+/ / y la palabra 'Grails' en el título
+pubs Def = Publication.oldPublicationsLargerThan(350).findAllByTitleLike('%Grails%')
+
+/ / obtener todas las publicaciones recientes con 'Libro' en su título
+pubs Def = Publication.recentPublicationsWithBookInTitle().list()
+{code}
+
+{hidden}
+
 
 The @list@ method on named queries supports the same attributes as the static @list@ method added to domain classes (sort, order, ignoreCase, fetch etc...).  See the [list|domainClasses] docs for details.
 
@@ -97,6 +182,36 @@ class PlantCategory {
     }
 }
 {code}
+{hidden}
+
+La lista @ @ método llamado soporta consultas los mismos atributos que la lista @ estática @ método añadido a las clases de dominio (orden, orden, ignoreCase, fetch etc....).  Consulte a la documentación de [list|domainClasses] para obtener más detalles.
+
+{Nota}
+Tenga en cuenta que llamar a algo así como @ Publication.recentPublications.get(42) @ no es lo mismo que llamar a algo como @ Publication.get(42) @.  El ex sólo devolverá una publicación @ @ si la publicación @ @ ID 42 cumple todos los criterios definidos en el @ recentPublications @ consulta con nombre.
+{Nota}
+
+El nombre de criterios apoyo @ listDistinct() @:
+
+{code: java}
+clase PlantCategory {}
+
+Conjuntos de plantas
+    Nombre de la cadena
+
+estático hasMany = [plantas: planta]
+
+estático namedQueries = {}
+        withPlantsInPatch {}
+            {plantas
+                EQ 'goesInPatch', true
+            }
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Plant {
@@ -108,6 +223,21 @@ class Plant {
 {code:java}
 PlantCategory.withPlantsInPatch.listDistinct()
 {code}
+{hidden}
+
+{code: java}
+clase {planta
+    goesInPatch Boolean
+    Nombre de la cadena
+}
+{code}
+
+{code: java}
+PlantCategory.withPlantsInPatch.listDistinct()
+{code}
+
+{hidden}
+
 
 Named criteria support additional criteria being supplied at invocation time in the form of a criteria closure:
 
@@ -129,6 +259,31 @@ def numberOfBooks = Publication.recentPublications.count {
     }
 }
 {code}
+{hidden}
+
+El nombre de apoyo criterios criterios adicionales que se suministran en vez de invocación en la forma de un cierre de criterios:
+
+{code: java}
+/ / obtener todas las publicaciones recientes con autor nombres que comiencen con Tony o Phil...
+libros de Def = {} Publication.recentPublications
+    o {}
+        como 'autor', 'Tony %'
+        como 'autor', 'Phil %'
+    }
+}
+
+/ / obtener el número de publicaciones recientes con
+/ / autor nombres que comiencen con Tony o Phil...
+Def numberOfBooks = {} Publication.recentPublications.count
+    o {}
+        como 'autor', 'Tony %'
+        como 'autor', 'Phil %'
+    }
+}
+{code}
+
+{hidden}
+
 
 Named criteria may be chained together.  When criteria are chained together, the query will be generated as if all of the chained criteria had been combined in a single criteria closure.
 
@@ -141,6 +296,22 @@ def books = Publication.oldPublicationsLargerThan(500)
                        .publicationsWithBookInTitle
                        .list()
 {code}
+{hidden}
+
+Pueden encadenar criterios con nombre.  Cuando los criterios están conectados entre sí, se generará la consulta como si todos los criterios encadenados habían sido combinados en un cierre de criterios única.
+
+{code: java}
+/ / recientes publicaciones con 'Libro' en el título
+libros de Def = Publication.recentPublications.publicationsWithBookInTitle.list()
+
+/ / antiguas publicaciones con más de 500 páginas y con 'Libro' en el título
+libros de Def = Publication.oldPublicationsLargerThan(500)
+                       .publicationsWithBookInTitle
+                       .List()
+{code}
+
+{hidden}
+
 
 When a named query involves a domain class relationship and the relationship class defines a named query, that named query may be accessed directly as a method call.  An example:
 
@@ -159,6 +330,28 @@ class Author {
     }
 }
 {code}
+{hidden}
+
+Cuando una consulta con nombre implica una relación de clase de dominio y la clase de relación define una consulta con nombre, consulta con nombre puede accederse directamente como una llamada de método.  Un ejemplo:
+
+{code: java}
+clase {autor
+
+estático hasMany = [publicaciones: publicación]
+
+estático namedQueries = {}
+         authorsWithRecentPublications {}
+             {Publicaciones
+                 / / invocando una consulta con nombre definida en la clase de publicación...
+                 recentPublications()
+             }
+         }
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Publication {
@@ -169,6 +362,21 @@ class Publication {
         recentPublications {
             def now = new Date()
             gt 'datePublished', now - 10
+        }
+    }
+}
+{code}
+{hidden}
+
+{code: java}
+clase {de publicación
+
+Autor de autor
+
+estático namedQueries = {}
+        recentPublications {}
+            Def ahora = new Date()
+            gt 'datePublished', ahora - 10
         }
     }
 }

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. withNewSession
 
 h2. Purpose
@@ -11,9 +14,34 @@ Book.withNewSession { session ->
     // do work
 }
 {code}
+{hidden}
+
+h1. withNewSession
+
+h2. Fin
+
+Proporciona una manera de ejecutar código en el contexto de una nueva sesión de hibernación que comparte el mismo recurso (conexión JDBC) transaccional como la sesión actualmente enlazado.
+
+h2. Ejemplos
+
+{code: java}
+Book.withNewSession {sesión->
+    / / trabajo
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Parameters:
 
 * @closure@ - A closure which accepts a @Session@ argument
+{hidden}
+
+h2. Descripción
+
+Parámetros:
+
+* @ cierre @ - un cierre que acepta una sesión @ @ argumento

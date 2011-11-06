@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. Tag Library Usage
 
 A tag library fulfills role of "view helper" in the Model View Controller (MVC) pattern and helps with GSP rendering. In Grails a tag library is a class with a name that ends in the convention "TagLib" and lives in the @grails-app/taglib@ directory. Use the [create-tag-lib|commandLine] command create a tag library:
@@ -7,6 +10,20 @@ grails create-tag-lib format
 {code}
 
 or with your favourite IDE or text editor.
+
+{hidden}
+
+h1. Uso de la biblioteca de etiquetas
+
+Una biblioteca de etiquetas cumple el papel de "Ayudante de vista" en el patrón modelo vista controlador (MVC) y ayuda con la representación del SGP. En Grails, una biblioteca de etiquetas es una clase con un nombre que termina en la Convención "TagLib" y vive en el @ grails-app/taglib @ directorio. Utilice el comando [crear-etiqueta-lib|commandLine] para crear una biblioteca de etiquetas:
+
+{code: java}
+formato de Grails crear-etiqueta-lib
+{code}
+
+o con su editor de texto o IDE favorita.
+
+{hidden}
 
 {code:java}
 import java.text.SimpleDateFormat
@@ -18,6 +35,25 @@ class FormatTagLib {
 }
 {code}
 
+{hidden}
+
+{code: java}
+java.text.SimpleDateFormat de importación
+
+clase FormatTagLib {}
+    Def dateFormat = {attrs, cuerpo->
+        cabo << SimpleDateFormat(attrs.format).format(attrs.value) nueva
+    }
+}
+{code}
+
+{hidden}
+
 Each Closure property in a tag library that takes one or two arguments is considered a tag. The first argument (typically named @attrs@) will contain the attributes of the tag whilst the optional second argument (typically named @body@) is Closure that represents the inner HTML of the tag declaration from the GSP.
 
 Refer to the user guide topic on [Tag Libraries|guide:taglibs] for more information.
+{hidden}
+
+Cada propiedad de cierre en una biblioteca de etiquetas que toma uno o dos argumentos es considerado una etiqueta. El primer argumento (normalmente denominado @ attrs @) contendrá los atributos de la etiqueta, mientras que el segundo argumento opcional (normalmente denominado cuerpo @ @) cierre que representa el código HTML interno de la declaración de etiqueta del SGP.
+
+Consulte el tema de guía de usuario de [etiqueta Libraries|guide:taglibs] para obtener más información.

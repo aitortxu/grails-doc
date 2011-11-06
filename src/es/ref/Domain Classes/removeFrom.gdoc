@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. removeFrom*
 
 h2. Purpose
@@ -12,4 +15,21 @@ def author = Author.findByName("Stephen King")
 def book = author.books.find { it.title = 'The Stand' }
 
 author.removeFromBooks(book)
+{code}
+{hidden}
+
+h1. Quitar *
+
+h2. Fin
+
+Lo contrario del método [addTo|domainClasses] en el que quita las instancias de una asociación.
+
+h2. Ejemplos
+
+{code: java}
+autor de Def = Author.findByName ("Stephen King")
+
+libro de Def = author.books.find {it.title = 'The Stand'}
+
+Author.removeFromBooks(Book)
 {code}

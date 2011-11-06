@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. meta
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 Version <g:meta name="app.version"/>
 Built with Grails <g:meta name="app.grails.version"/>
 {code}
+{hidden}
+
+h1. meta
+
+h2. Fin
+
+Representa las propiedades de metadatos de la aplicación.
+
+h2. Ejemplos
+
+{Código: xml}
+Versión <g:meta name="app.version"></g:meta>
+Construido con Grails <g:meta name="app.grails.version"></g:meta>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,6 +40,24 @@ Attributes
 * @name@ - The name of the metadata property to retrieve, for example "app.version"
 
 h2. Source
+{hidden}
+
+h2. Descripción
+
+Propiedades de meta se rellenan con el archivo @application.properties@ y incluyen la versión de la aplicación y la versión de Grails que requiere. Puede utilizarse para exponer algunos datos de referencia acerca de la aplicación en tiempo de ejecución. Consulte la sección de metadatos de la aplicación para obtener más detalles.
+
+Atributos
+
+* @ nombre @ - el nombre de la propiedad de metadatos para recuperar, por ejemplo "app.version"
+
+h2. Fuente
+
+{hidden}
+
 
 {source:tag=ApplicationTagLib.meta}
 {source}
+{hidden}
+
+{source:tag=ApplicationTagLib.meta}
+origen de {}

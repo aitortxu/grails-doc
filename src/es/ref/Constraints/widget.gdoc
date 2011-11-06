@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. widget
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 description widget: 'textarea'
 {code}
+{hidden}
+
+h1. widget
+
+h2. Fin
+
+Cambios del tipo de campo de formulario HTML utilizado en el andamiaje de la propiedad de clase de dominio asociado.
+
+h2. Ejemplos
+
+{code: java}
+widget de Descripción: 'textarea'
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,3 +38,14 @@ This constraint is also added to scaffolding tags for boolean (checkbox), date (
 {note}
 
 Error Code: This constraint only impacts look and does not create errors.
+{hidden}
+
+h2. Descripción
+
+Cambios la etiqueta del SGP utilizado para la edición de los valores de la propiedad de clase de dominio correspondiente en el andamiaje. Por ejemplo, las anteriores causaría el andamiaje usar<g:textarea ...=""></g:textarea>@ para 'Descripción' editar campos.
+
+{Nota}
+Esta restricción también se agrega a las etiquetas de andamios para boolean (checkbox), fecha (selector) y colección (* seleccione) propiedades, pero no tiene ningún efecto en esos casos.
+{Nota}
+
+Código de error: Esta restricción impactos sólo mirar y no crear errores.

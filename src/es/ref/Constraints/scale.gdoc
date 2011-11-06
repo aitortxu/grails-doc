@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. scale
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 salary scale: 2
 {code}
+{hidden}
+
+h1. escala
+
+h2. Fin
+
+Defina la escala deseada (es decir, el número de dígitos a la derecha del separador decimal) de números de punto flotante.
+
+h2. Ejemplos
+
+{code: java}
+escala de sueldos: 2
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -17,3 +36,12 @@ Set to the desired scale for floating point numbers (i.e., the number of digits 
 This constraint influences [schema generation|guide:gormConstraints].
 
 Error Code: N/A
+{hidden}
+
+h2. Descripción
+
+Defina la escala deseada (es decir, el número de dígitos a la derecha del separador decimal) de números de punto flotante. Esta restricción es aplicable para las propiedades de los siguientes tipos: @ java.lang.Float@, @ java.lang.Double@ y @java.math.BigDecimal@ (y sus subclases). Cuando se invoca la validación, esta restricción determina que si el número tiene más decimales distintos de cero de la escala permite. Si es así, redondea el número para el número máximo de decimales permitida por la escala. Esta restricción no generar mensajes de error de validación.
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+Código de error: N/A

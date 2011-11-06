@@ -1,3 +1,6 @@
+
+{hidden}
+
 By default, access to service methods is not synchronised, so nothing prevents concurrent execution of those methods. In fact, because the service is a singleton and may be used concurrently, you should be very careful about storing state in a service. Or take the easy (and better) road and never store state in a service.
 
 You can change this behaviour by placing a service in a particular scope. The supported scopes are:
@@ -8,6 +11,21 @@ You can change this behaviour by placing a service in a particular scope. The su
 * @flow@ - In web flows the service will exist for the scope of the flow
 * @conversation@ - In web flows the service will exist for the scope of the conversation. ie a root flow and its sub flows
 * @session@ - A service is created for the scope of a user session
+{hidden}
+
+De forma predeterminada, el acceso a métodos de servicio está sincronizado no, por lo que nada impide la ejecución simultánea de esos métodos. De hecho, porque el servicio es un conjunto unitario y puede utilizarse al mismo tiempo, debe ser muy cuidadoso a la hora de almacenar el estado de un servicio. O tomar el camino fácil (y mejor) y no almacenar el estado nunca en un servicio.
+
+Puede cambiar este comportamiento mediante la colocación de un servicio en un ámbito determinado. Los ámbitos admitidos son:
+
+* @ prototipo @ - se crea un nuevo servicio cada vez que se inyecta en otra clase
+* @ solicitud @ - se creará un nuevo servicio por solicitud
+* @ flash @ - se creará un nuevo servicio para la actual y próxima solicitud sólo
+* @ flujo @ - web corrientes el servicio existirán para el ámbito del flujo
+* @ conversación @ - web corrientes el servicio existirán para el ámbito de la conversación. es decir, un flujo de raíz y sus flujos de sub
+* @ sesión @ - se crea un servicio para el ámbito de una sesión de usuario
+
+{hidden}
+
 * @singleton@ (default) - Only one instance of the service ever exists
 
 {note}
@@ -18,4 +36,17 @@ To enable one of the scopes, add a static scope property to your class whose val
 
 {code:java}
 static scope = "flow"
+{code}
+{hidden}
+
+* @ singleton @ (predeterminado) - nunca existe sólo una instancia del servicio
+
+{Nota}
+Si su servicio es @ flash @, @ flujo @ o @ conversación @ ámbito lo debe implementar @java.io.Serializable@ y sólo puede utilizarse en el contexto de una [Flow|guide:webflow Web]
+{Nota}
+
+Para permitir que uno de los ámbitos, agregar una propiedad de ámbito estático a la clase cuyo valor es uno de los anteriores, por ejemplo
+
+{code: java}
+ámbito estático = "flujo"
 {code}

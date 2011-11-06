@@ -1,3 +1,6 @@
+
+{hidden}
+
 This is great, but usually you provide feedback to the user about what happened:
 
 {code:java}
@@ -7,6 +10,20 @@ def delete() {
     render "Book ${b.id} was deleted"
 }
 {code}
+
+{hidden}
+
+Esto es genial, pero normalmente se informar al usuario acerca de lo que sucedió:
+
+{code: java}
+Def delete() {}
+    Def b = Book.get(params.id)
+    b.Delete()
+    procesar "libro ${b.id} fue eliminado"
+}
+{code}
+
+{hidden}
 
 GSP code:
 
@@ -18,6 +35,20 @@ Delete Book
 {code}
 
 The above example will call the action and set the contents of the @message@ @div@ to the response in this case @"Book 1 was deleted"@. This is done by the @update@ attribute on the tag, which can also take a Map to indicate what should be updated on failure:
+{hidden}
+
+Código de SPG:
+
+{Código: xml}<div id="message"></div>
+<g:remotelink action="delete" id="1" update="message">
+Eliminar el libro
+</g:remotelink>
+{code}
+
+El ejemplo anterior se llame a la acción y establecer el contenido del mensaje @ @ @ div @ a la respuesta en este caso @ "se eliminó el libro 1" @. Esto se realiza la actualización @ @ atributo en la etiqueta, que también puede tener un mapa para indicar lo que debe actualizarse en caso de fallo:
+
+{hidden}
+
 
 {code:xml}
 <div id="message"></div>
@@ -28,4 +59,18 @@ Delete Book
 </g:remoteLink>
 {code}
 
+{hidden}
+
+{Código: xml}<div id="message"></div>
+<div id="error"></div>
+<g:remotelink update="[success: 'message', failure: 'error']" action="delete" id="1">
+Eliminar el libro
+</g:remotelink>
+{code}
+
+{hidden}
+
 Here the @error@ div will be updated if the request failed.
+{hidden}
+
+Aquí el error @ @ div se actualizará si la solicitud no se pudo.

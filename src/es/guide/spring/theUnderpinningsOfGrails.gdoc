@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails is actually a [Spring MVC|http://www.springframework.org/docs/MVC-step-by-step/Spring-MVC-step-by-step.html] application in disguise. Spring MVC is the Spring framework's built-in MVC web application framework. Although Spring MVC suffers from some of the same difficulties as frameworks like Struts in terms of its ease of use, it is superbly designed and architected and was, for Grails, the perfect framework to build another framework on top of.
 
 Grails leverages Spring MVC in the following areas:
@@ -8,6 +11,21 @@ Grails leverages Spring MVC in the following areas:
 * Transactions - Grails uses Spring's transaction management in [GORM|guide:GORM]
 
 In other words Grails has Spring embedded running all the way through it.
+{hidden}
+
+Grails es en realidad una aplicación [primavera MVC|http://www.springframework.org/docs/MVC-step-by-step/Spring-MVC-step-by-step.html] disfrazado. Spring MVC es incorporado MVC framework para aplicaciones web del marco primavera. Aunque Spring MVC sufre de algunas de las mismas dificultades como marcos como puntales de su facilidad de uso, tiene un avanzado diseño y diseñada y fue para Grails, el marco perfecto para construir otro marco de.
+
+Grails aprovecha la primavera MVC en las siguientes áreas:
+
+* Controlador base lógica - Grails subclases primavera de [DispatcherServlet|api:org.springframework.web.servlet.DispatcherServlet] y utiliza para delegar en Grails [controllers|guide:controllers]
+* Enlace de datos y validación - Grails' [validation|guide:validation] y [datos binding|guide:dataBinding] capacidades están construidos sobre los proporcionados por primavera
+* Runtime configuración - Convención de toda ejecución de Grails sistema está conectado por cable juntos por una primavera [ApplicationContext|api:org.springframework.context.ApplicationContext]
+* Las transacciones - Grails utiliza Administración de transacciones de la primavera en [GORM|guide:GORM]
+
+En otras palabras Grails tiene primavera incrustada que se ejecuta a través de él.
+
+{hidden}
+
 
 h4. The Grails ApplicationContext
 
@@ -18,4 +36,20 @@ Spring developers are often keen to understand how the Grails @ApplicationContex
 
 h4. Configured Spring Beans
 
+{hidden}
+
+h4. El ApplicationContext Grails
+
+Los desarrolladores de primavera a menudo están deseosos de entender cómo se construye la Grails @ ApplicationContext @ instancia. Los fundamentos de la misma son los siguientes.
+
+* Grails construye un padre @ ApplicationContext @ desde el archivo @web-app/WEB-INF/applicationContext.xml@. Este ApplicationContext @ @ configura la instancia [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication] y [GrailsPluginManager|api:org.codehaus.groovy.grails.plugins.GrailsPluginManager].
+* Utilizando este ApplicationContext @ @ como el análisis de un padre Grails los convenios con el @ GrailsApplication @ instancia y construcciones de un niño @ ApplicationContext @ se utiliza como la raíz @ perful @ de la aplicación web
+
+h4. Frijoles de primavera configurado
+
+{hidden}
+
 Most of Grails' configuration happens at runtime. Each [plugin|guide:plugins] may configure Spring beans that are registered in the @ApplicationContext@. For a reference as to which beans are configured, refer to the reference guide which describes each of the Grails plugins and which beans they configure.
+{hidden}
+
+Pasa la mayor parte de la configuración de Grails en tiempo de ejecución. Cada [plugin|guide:plugins] puede configurar judías de primavera que se registran en el ApplicationContext @ @. Para una referencia a los frijoles se configuran, consulte la Guía de referencia que describe cada uno de los plugins Grails y los frijoles configuran.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails' Web Flow integration also supports subflows. A subflow is like a flow within a flow. For example take this search flow:
 
 {code:java}
@@ -34,6 +37,47 @@ Prior to 1.3.5, the previous subflow call would look like @subflow(extendedSearc
 The subflow is another flow entirely:
 
 {code:java}
+{hidden}
+
+Integración Web de flujo de Grails también es compatible con subflows. Un subflow es como un flujo dentro de un flujo. Por ejemplo, tomar este flujo de búsqueda:
+
+{code: java}
+Def searchFlow = {}
+    displaySearchForm {}
+        on("Submit").to "executeSearch"
+    }
+    executeSearch {}
+        acción {}
+            [results:searchService.executeSearch(params.q)]
+        }
+        on("Success").to "displayResults"
+        on("error").to "displaySearchForm"
+    }
+    displayResults {}
+        on("searchDeeper").to "extendedSearch"
+        on("searchAgain").to "displaySearchForm"
+    }
+    extendedSearch {}
+        / / Extended búsqueda subflow
+        subflow (controlador: "searchExtensions", acción: "extendedSearch")
+        on("moreResults").to "displayMoreResults"
+        on("noResults").to "displayNoMoreResults"
+    }
+    displayMoreResults()
+    displayNoMoreResults()
+} {code}
+
+Hace referencia a un subflow en el extendedSearch @ @ Estado. El parámetro del controlador es opcional si el subflow se define en el mismo controlador de la llamada corriente.
+{Nota}
+Antes a 1.3.5, podría ser la anterior llamada subflow como @ subflow(extendedSearchFlow) @, con el requisito de que el nombre del Estado subflow ser el mismo que el llamado subflow (menos @ flujo @). Esta forma de llamar a un subflow es obsoleto y sólo se admite para compatibilidad con versiones anteriores.
+{Nota}
+
+El subflow es otro flujo totalmente:
+
+{code: java}
+
+{hidden}
+
 def extendedSearchFlow = {
     startExtendedSearch {
         on("findMore").to "searchMore"
@@ -44,6 +88,21 @@ def extendedSearchFlow = {
            def results = searchService.deepSearch(ctx.conversation.query)
            if (!results) return error()
            conversation.extendedResults = results
+{hidden}
+
+Def extendedSearchFlow = {}
+    startExtendedSearch {}
+        on("findMore").to "searchMore"
+        on("searchAgain").to "noResults"
+    }
+    searchMore {}
+        acción {}
+           resultados de Def = searchService.deepSearch(ctx.conversation.query)
+           Si (! resultados) devolver error()
+           Conversation.extendedResults = resultados
+
+{hidden}
+
         }
         on("success").to "moreResults"
         on("error").to "noResults"
@@ -54,10 +113,34 @@ def extendedSearchFlow = {
 
 Notice how it places the @extendedResults@ in conversation scope. This scope differs to flow scope as it lets you share state that spans the whole conversation not just the flow. Also notice that the end state (either @moreResults@ or @noResults@ of the subflow triggers the events in the main flow:
 
+{hidden}
+
+}
+        on("Success").to "moreResults"
+        on("error").to "noResults"
+    }
+    moreResults()
+    noResults()
+} {code}
+
+Observe cómo coloca @ extendedResults @ en el ámbito de la conversación. Este ámbito difiere al ámbito de flujo que le permite compartir el Estado que abarca toda la conversación no sólo el flujo. Observe también que el estado final (@ moreResults @ o @ noResults @ de la subflow desencadena los eventos en la corriente principal:
+
+{hidden}
+
 {code:java}
 extendedSearch {
     // Extended search subflow
     subflow(controller: "searchExtensions", action: "extendedSearch")
+    on("moreResults").to "displayMoreResults"
+    on("noResults").to "displayNoMoreResults"
+}
+{code}
+{hidden}
+
+{code: java}
+extendedSearch {}
+    / / Extended búsqueda subflow
+    subflow (controlador: "searchExtensions", acción: "extendedSearch")
     on("moreResults").to "displayMoreResults"
     on("noResults").to "displayNoMoreResults"
 }

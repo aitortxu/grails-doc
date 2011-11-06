@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. executeUpdate
 
 h2. Purpose
@@ -22,6 +25,16 @@ Account.executeUpdate("update Book b set b.title=:newTitle " +
                       "where b.title=:oldTitle",
                       [newTitle: 'Groovy In Action', oldTitle: 'GINA'])
 {code}
+{hidden}
+
+h1. executeUpdate
+
+h2. Fin
+
+Actualiza la base de datos con [DML estilo operations|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/batch.html
+
+{hidden}
+
 
 h2. Description
 
@@ -32,9 +45,30 @@ Book.executeUpdate(String query)
 Book.executeUpdate(String query, List positionalParams)
 Book.executeUpdate(String query, Map namedParams)
 {code}
+{hidden}
+
+h2. Descripción
+
+[GORM|guide:GORM] proporciona un deleteAll @ @ método eliminar datos deben realizarse con precaución. Para eliminar los datos puede utilizar @ executeUpdate @. La sintaxis básica es:
+
+{code: java}
+Book.ExecuteUpdate (String consulta)
+Book.ExecuteUpdate (String consulta, positionalParams de la lista)
+Book.ExecuteUpdate (String consulta, mapa namedParams)
+{code}
+
+{hidden}
+
 
 Parameters:
 
 * @query@ - An HQL query with DML-style operations
 * @positionalParams@ - A @List@ of parameters for a positional parameterized HQL query
 * @namedParams@ - A @Map@ of parameters for a named parameterized HQL query
+{hidden}
+
+Parámetros:
+
+* @ consulta @ - consulta HQL An con operaciones de DML-estilo
+* @ positionalParams @ - una lista @ @ de parámetros para una consulta HQL con parámetros posicional
+* @ namedParams @ - un mapa @ @ de parámetros para una consulta parametrizada con nombre de HQL

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. minSize
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 children minSize: 25
 {code}
+{hidden}
+
+h1. minSize
+
+h2. Fin
+
+Asegura el que tamaño del valor no cae por debajo de un valor mínimo.
+
+h2. Ejemplos
+
+{code: java}
+los niños minSize: 25
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -17,3 +36,12 @@ Sets the minimum size of a collection or number property.
 This constraint influences [schema generation|guide:gormConstraints].
 
 Error Code: @className.propertyName.minSize.notmet@
+{hidden}
+
+h2. Descripción
+
+Establece el tamaño mínimo de una colección o propiedad number.
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+Código de error: @className.propertyName.minSize.notmet@

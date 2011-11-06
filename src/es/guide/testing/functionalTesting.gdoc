@@ -1,3 +1,6 @@
+
+{hidden}
+
 Functional tests involve making HTTP requests against the running application and verifying the resultant behaviour. Grails does not ship with any support for writing functional tests directly, but there are several plugins available for this.
 
 * @Canoo Webtest@ - "http://grails.org/plugin/webtest":http://grails.org/plugin/webtest
@@ -7,6 +10,20 @@ Functional tests involve making HTTP requests against the running application an
 * @WebDriver@ - "http://grails.org/plugin/webdriver":http://grails.org/plugin/webdriver
 
 Consult the documentation for each plugin for its capabilities.
+
+{hidden}
+
+Pruebas funcionales implican hacer peticiones HTTP contra la aplicación en ejecución y verificar el comportamiento resultante. Grails no se suministran con ningún apoyo para escribir pruebas funcionales directamente, pero hay varios plugins disponibles para ello.
+
+* @ Canoa Webtest @ - http://grails.org/plugin/webtest":http://grails.org/plugin/webtest"
+* @ G-Func @ - http://grails.org/plugin/functional-test":http://grails.org/plugin/functional-test"
+* @ Geb @ - http://grails.org/plugin/geb":http://grails.org/plugin/geb"
+* @ Selenio-RC @ - http://grails.org/plugin/selenium-rc":http://grails.org/plugin/selenium-rc"
+* @ WebDriver @ - http://grails.org/plugin/webdriver":http://grails.org/plugin/webdriver"
+
+Consulte la documentación de cada plugin para sus capacidades.
+
+{hidden}
 
 h4. Common Options
 
@@ -18,6 +35,20 @@ The @-inline@ option specifies that the grails application should be started inl
 
 *This option is implicitly set unless the @baseUrl@ or @war@ options are set*
 
+{hidden}
+
+h4. Opciones comunes
+
+Hay opciones que son comunes a todos los plugins que controlan cómo se inicia la aplicación Grails, si acaso.
+
+H5. en línea
+
+La línea @ @ opción especifica que el grails aplicación debería ser iniciado en línea (es decir, como @ run-app @).
+
+* Esta opción se establece implícitamente a menos que el @ baseUrl @ o @ guerra @ opciones son conjunto *
+
+{hidden}
+
 h5. war
 
 The @-war@ option specifies that the grails application should be packaged as a war and started. This is useful as it tests your application in a production-like state, but it has a longer startup time than the @-inline@ option. It also runs the war in a forked JVM, meaning that you cannot access any internal application objects.
@@ -27,6 +58,20 @@ grails test-app functional: -war
 {code}
 
 Note that the same build/config options for the [run-war|commandLine] command apply to functional testing against the WAR.
+
+{hidden}
+
+H5. Guerra
+
+La guerra @ @ opción especifica que la aplicación de grails debe ser empaquetada como una guerra y comenzó. Esto es útil como prueba la aplicación en un Estado de producción, pero tiene un tiempo de inicio de la línea @ @ opción. También ejecuta la guerra en una JVM bifurcada, lo que significa que no puede acceder a los objetos de aplicación interna.
+
+{code: java}
+prueba de Grails-app funcional:-Guerra
+{code}
+
+Tenga en cuenta que las mismas opciones de compilación/config para el comando [run-war|commandLine] aplicarán pruebas funcionales contra la guerra.
+
+{hidden}
 
 h5. https
 
@@ -38,6 +83,20 @@ grails test-app functional: -https
 
 Note that this does not change the test _base url_ to be https, it will still be http unless the @-httpsBaseUrl@ option is also given.
 
+{hidden}
+
+H5. https
+
+El https @ @ opción da como resultado la aplicación poder recibir peticiones https, así como las solicitudes http. Es compatible con el @ en línea @ y @ guerra @ opciones.
+
+{code: java}
+prueba de Grails-app funcional: - https
+{code}
+
+Tenga en cuenta que esto no cambia la prueba _base url_ ser https, seguirá siendo http a menos que también se da el @ httpsBaseUrl @ opción.
+
+{hidden}
+
 h5. httpsBaseUrl
 
 The @-httpsBaseUrl@ causes the implicit base url to be used for tests to be a https url.
@@ -48,6 +107,20 @@ grails test-app functional: -httpsBaseUrl
 
 This option is ignored if the @-baseUrl@ option is specified.
 
+{hidden}
+
+H5. httpsBaseUrl
+
+El @ httpsBaseUrl @ provoca la dirección url base implícita a ser utilizado para las pruebas para ser un url https.
+
+{code: java}
+prueba de Grails-app funcional: - httpsBaseUrl
+{code}
+
+Esta opción se omite si se especifica la @ baseUrl @ opción.
+
+{hidden}
+
 h5. baseUrl
 
 The @baseUrl@ option allows the base url for tests to be specified.
@@ -57,3 +130,14 @@ grails test-app functional: -baseUrl=http://mycompany.com/grailsapp
 {code}
 
 This option will prevent the local grails application being started unless @-inline@ or @-war@ are given as well. To use a custom base url but still test against the local Grails application you *must* specify one of either the @-inline@ or @-war@ options.
+{hidden}
+
+H5. baseUrl
+
+BaseUrl @ @ opción permite la dirección url base para las pruebas que se especifique.
+
+{code: java}
+prueba de Grails-app funcional:-baseUrl=http://mycompany.com/grailsapp
+{code}
+
+Esta opción evitará que la aplicación de grails local comenzó a salvo en línea @ @ o @ guerra @ así. Para utilizar una dirección url base personalizada pero aún prueba contra la aplicación local de Grails le * debe * especificar uno de @ en línea @ o @ guerra @ opciones.

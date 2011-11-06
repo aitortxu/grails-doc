@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. table
 
 h2. Purpose
@@ -13,6 +16,26 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. tabla
+
+h2. Fin
+
+Personaliza el nombre de la tabla de base de datos asociado con la clase de dominio
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    asignación estática = {}
+        tabla "book_catalog"
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -23,6 +46,20 @@ Arguments:
 * @name@ - The table name
 * @schema@ (optional) - The table schema
 * @catalog@ (optional) - The table catalog
+{hidden}
+
+h2. Descripción
+
+Uso: @ table(string/map) @
+
+Argumentos:
+
+* @ nombre @ - el nombre de tabla
+* @ esquema @ (opcional): el esquema de la tabla
+* @ Catálogo @ (opcional): el catálogo de tabla
+
+{hidden}
+
 
 By default the table that Grails maps a domain class is based on the class name. Grails will take a class name and convert Java style camel-case names into table names with underscores. So for example @ProductReview@ becomes @product_review@. You can override this with the @table@ method:
 
@@ -33,9 +70,30 @@ static mapping = {
 {code}
 
 You can also specify a schema and catalog:
+{hidden}
+
+De forma predeterminada en la tabla que Grails asigna un dominio de clase se basa en el nombre de clase. Grails tomará un nombre de clase y convertir nombres de camel-caso de estilo de Java en nombres de tabla con caracteres de subrayado. Así, por ejemplo, @ ProductReview @ se convierte en @ product_review @. Puede reemplazar con la tabla @ @ método:
+
+{code}
+asignación estática = {}
+    tabla "book_catalog"
+}
+{code}
+
+También puede especificar un esquema y un catálogo:
+
+{hidden}
+
 
 {code}
 static mapping = {
     table name: "book_catalog", schema: "dbo", catalog: "CRM"
+}
+{code}
+{hidden}
+
+{code}
+asignación estática = {}
+    nombre de la tabla: "book_catalog", esquema: "dbo", catálogo: "CRM"
 }
 {code}

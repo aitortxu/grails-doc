@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. remoteField
 
 h2. Purpose
@@ -7,6 +10,20 @@ Creates a text field that sends its value to a remote link when it changes. By d
 h2. Examples
 
 Example controller for an application called "shop":
+
+{hidden}
+
+h1. remoteField
+
+h2. Fin
+
+Crea un campo de texto que envía su valor a un enlace remoto cuando cambia. De forma predeterminada que el nombre del parámetro enviado se llama 'valor', esto puede cambiarse mediante la especificación de un atributo 'paramName'.
+
+h2. Ejemplos
+
+Controlador de ejemplo de una aplicación llamada "comprar":
+
+{hidden}
 
 {code:java}
 class BookController {
@@ -18,6 +35,21 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase BookController {}
+
+Def changeTitle() {}
+       Def b = Book.get(params.id)
+       b.Title = params.value
+       b.Save()
+    }
+}
+{code}
+
+{hidden}
+
 
 Example usages for this controller:
 
@@ -27,6 +59,16 @@ Example usages for this controller:
 
 <div id="titleDiv">I'm updated with the new title!</div>
 {code}
+
+{hidden}
+
+Usos de ejemplo para este controlador:
+
+{Código: xml}<g:remotefield action="changeTitle" update="titleDiv" name="title" value="${book?.title}"></g:remotefield>
+
+<div id="titleDiv">Yo estoy actualizado con el nuevo título!</div>{code}
+
+{hidden}
 
 h2. Description
 
@@ -38,6 +80,21 @@ Attributes
 * @value@ (optional) - The initial value of the field
 * @paramName@ (optional) - The name of the parameter to send to the server
 * @action@ (optional) - the name of the action to use in the link; if not specified the default action will be linked
+{hidden}
+
+h2. Descripción
+
+Esta etiqueta crea un campo de entrada que se desencadena una petición AJAX cuando cambia su valor (normalmente cuando las usuario prensas return dentro del campo). El Javascript exacto utilizado para disparar la solicitud AJAX depende de qué biblioteca de Javascript se utiliza. Esta etiqueta también requiere el uso de cualquiera de las <g:[javascript|tags]></g:[javascript|tags]> o <g:[setprovider|tags]></g:[setprovider|tags]> etiquetas. Consulte [section|guide:ajax de AJAX] de la Guía del usuario para obtener más información.
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre del campo
+* @ valor @ (opcional): el valor inicial del campo
+* @ paramName @ (opcional): el nombre del parámetro para enviar al servidor
+* @ acción @ (opcional): el nombre de la acción que se utilizan en el enlace; Si no se especifica la acción predeterminada se vincularán
+
+{hidden}
+
 * @controller@ (optional) - the name of the controller to use in the link; if not specified the current controller will be linked
 * @id@ (optional) - The id to use in the link
 * @update@ (optional) - Either a Map containing the elements to update for 'success' or 'failure' states, or a string with the element id to update, in which case failure events would be ignored
@@ -47,6 +104,20 @@ Attributes
 * @method@ (optional) - The method to use the execute the call (defaults to POST)
 
 Events
+
+{hidden}
+
+* @ controlador @ (opcional): el nombre del controlador para usar en el enlace; Si no especifica el controlador actual se vincularán
+* @ id @ (opcional): el id que se utilizan en el enlace
+* @ actualización @ (opcional) - ya sea un mapa que contiene los elementos para la actualización de 'éxito' o 'fracaso' Estados o una cadena con el id de elemento para actualizar, en cuyo caso sucesos de error podrían ignorarse
+* @ antes @ (opcional) - JavaScript la función llamar antes de la llamada a función remota. Un punto y coma se agrega automáticamente por lo que no tendrás que proporcionar uno usted mismo en esta cadena.
+* @ después @ (opcional) - JavaScript la función llamar después de la llamada a función remota. Un punto y coma se agrega automáticamente por lo que no tendrás que proporcionar uno usted mismo en esta cadena.
+* @ asincrónica @ (opcional): si al hacer la llamada asincrónica (defaults @ true @)
+* @ método @ (opcional): el método a utilizar la ejecución de la llamada (de forma predeterminada al POST)
+
+Eventos
+
+{hidden}
 
 * @onSuccess@ (optional) - The JavaScript function to call if successful
 * @onFailure@ (optional) - The JavaScript function to call if the call fails
@@ -58,5 +129,23 @@ Events
 
 h2. Source
 
+{hidden}
+
+* @ onSuccess @ (opcional) - JavaScript la función llamar si es correcto
+* @ onFailure @ (opcional) - The JavaScript funcionar si la llamada falla
+* @ on_ERROR_CODE @ (opcional) - JavaScript la función llamar para manejar el código de error especificado (p. ej. on404 = "alert ('no encontrado!')")
+* @ onUninitialized @ (opcional) - JavaScript la función llamar si Ajax se produce un error al inicializar
+* @ onLoading @ (opcional) - JavaScript la función llamar cuando la función remota carga la respuesta
+* @ onLoaded @ (opcional) - JavaScript la función llamar una vez terminada la función remota cargar la respuesta
+* @ onComplete @ (opcional) - JavaScript la función llamar cuando finaliza la función remota, incluidas las actualizaciones
+
+h2. Fuente
+
+{hidden}
+
 {source:tag=JavascriptTagLib.remoteField}
 {source}
+{hidden}
+
+{source:tag=JavascriptTagLib.remoteField}
+origen de {}

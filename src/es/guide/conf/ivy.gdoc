@@ -1,14 +1,9 @@
+
 {hidden}
 
 Grails features a dependency resolution DSL that lets you control how plugins and JAR dependencies are resolved.
 
 You specify a @grails.project.dependency.resolution@ property inside the @grails-app/conf/BuildConfig.groovy@ file that configures how dependencies are resolved:
-
-{hidden}
-
-Grails ofrece un DSL de resolución de dependencia que le permite controlar cómo se resuelven las dependencias de plugins y de los JAR.
-
-Especifica una propiedad @grails.project.dependency.resolution@ dentro del archivo @grails-app/conf/BuildConfig.groovy@ que configura cómo se resuelven las dependencias:
 
 {code}
 grails.project.dependency.resolution = {
@@ -18,11 +13,19 @@ grails.project.dependency.resolution = {
 
 {hidden}
 
-The default configuration looks like the following:
+Grails ofrece una resolución de dependencia DSL que le permite controlar cómo se resuelven plugins y dependencias JAR.
+
+Especifica una propiedad @grails.project.dependency.resolution@ dentro del archivo @grails-app/conf/BuildConfig.groovy@ que configura cómo se resuelven las dependencias:
+
+{code}
+Grails.Project.Dependency.Resolution = {}
+   / / config aquí
+}
+{code}
 
 {hidden}
 
-La configuración por defecto el siguiente aspecto:
+The default configuration looks like the following:
 
 {code}
 grails.project.class.dir = "target/classes"
@@ -67,11 +70,59 @@ grails.project.dependency.resolution = {
     }
 }
 {code}
+{hidden}
+
+La configuración por defecto el siguiente aspecto:
+
+{code}
+Grails.Project.class.dir = "destino/classes"
+Grails.Project.Test.class.dir = "prueba/destino-clases"
+Grails.Project.Test.Reports.dir = "prueba/destino-informes"
+//Grails.Project.War.File = "target/\${appName}-\${appVersion}.war"
+
+Grails.Project.Dependency.Resolution = {}
+    / / heredan las dependencias de defecto de Grails
+    Inherits("global") {}
+        / / comentario para desactivar ehcache
+        / / excluye 'ehcache'
+    }
+    registro "advertidos"
+    {repositorios
+        grailsPlugins()
+        grailsHome()
+        grailsCentral()
+
+/ / comentario para habilitar la resolución remota de dependencia
+        / / al públicos repositorios Maven
+        //mavenCentral()
+        //mavenLocal()
+        //mavenRepo "http://snapshots.repository.codehaus.org"
+        //mavenRepo "http://repository.codehaus.org"
+        //mavenRepo "http://download.java.net/maven/2/"
+        //mavenRepo "http://repository.jboss.com/maven2/"
+    }
+    {las dependencias
+        / / especificar las dependencias aquí en cada generación, "compilación",
+        / / 'ejecución', 'test' o 'siempre' ámbitos por ejemplo.
+
+/ / runtime ' mysql:mysql-conector-java: 5.1.16'
+    }
+
+{plugins
+        compilación "\:hibernate:\$grailsVersion"
+        compilación "\:jquery:1.6.1.1"
+        compilación "\:resources:1.0"
+
+crear "\:tomcat:\$grailsVersion"
+    }
+}
+{code}
 
 {hidden}
+
 
 The details of the above will be explained in the next few sections.
 
 {hidden}
 
-Los detalles sobre lo anterior se explica en las siguientes secciones.
+Los detalles de lo anterior se explica en las siguientes secciones.

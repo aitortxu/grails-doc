@@ -1,3 +1,6 @@
+
+{hidden}
+
 Filters support all the common properties available to [controllers|guide:controllers] and [tag libraries|guide:taglibs], plus the application context:
 
 * [request|controllers] - The HttpServletRequest object
@@ -8,6 +11,12 @@ Filters support all the common properties available to [controllers|guide:contro
 * [params|controllers] - The request parameters object
 * [actionName|controllers] - The action name that is being dispatched to
 * [controllerName|controllers] - The controller name that is being dispatched to
+{hidden}
+
+Filtros admiten todas las propiedades comunes disponibles para [controllers|guide:controllers] y [etiqueta libraries|guide:taglibs], además del contexto de aplicación:* [request|controllers] - HttpServletRequest el objeto* [response|controllers] - objeto de el HttpServletResponse* [session|controllers] - HttpSession el objeto* [servletContext|controllers] - ServletContext el objeto* [flash|controllers] - el objeto flash* [params|controllers] - el objeto de parámetros de solicitud* [actionName|controllers] - el nombre de la acción que está siendo enviado a* [controllerName|controllers] - el nombre del controlador que está siendo enviado a
+
+{hidden}
+
 * [grailsApplication|controllers] - The Grails application currently running
 * [applicationContext|api:org.springframework.context.ApplicationContext] - The ApplicationContext object
 
@@ -15,3 +24,6 @@ However, filters only support a subset of the methods available to controllers a
 
 * [redirect|controllers] - For redirects to other controllers and actions
 * [render|controllers] - For rendering custom responses
+{hidden}
+
+* [grailsApplication|controllers] - aplicación de la Grails está ejecutando* [applicationContext|api:org.springframework.context.ApplicationContext] - ApplicationContext el objetoSin embargo, los filtros sólo admiten un subconjunto de los métodos disponibles para los controladores y las bibliotecas de etiquetas. Estos incluyen:* [redirect|controllers] - para redirecciones a otros controladores y acciones* [render|controllers] - para procesar las respuestas personalizadas

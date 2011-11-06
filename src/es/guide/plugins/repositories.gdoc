@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Distributing Plugins in the Grails Central Plugins Repository
 
 The preferred way to distribute plugin is to publish to the official Grails Plugins Repository. This will make your plugin visible to the [list-plugins|commandLine] command:
@@ -7,6 +10,20 @@ grails list-plugins
 {code}
 
 which lists all plugins in the Grails Plugin repository, and also the [plugin-info|commandLine] command:
+
+{hidden}
+
+h4. Distribución de Plugins en el repositorio de Plugins Central de Grails
+
+La manera preferida para distribuir plugin es publicar en el repositorio oficial de Plugins Grails. Esto hará que tu plugin visible para el comando [lista-plugins|commandLine]:
+
+{code: java}
+lista de Grails-plugins
+{code}
+
+que enumera todos los plugins en el repositorio de Plugin Grails y también el comando [plugin-info|commandLine]:
+
+{hidden}
 
 {code:java}
 grails plugin-info [plugin-name]
@@ -18,6 +35,20 @@ which outputs more information based on the meta info entered into the plugin de
 If you have created a Grails plugin and want it to be hosted in the central repository take a look at [this wiki page|http://grails.org/Creating+Plugins] which details how release your plugin.
 {note}
 
+{hidden}
+
+{code: java}
+Grails plugin-info [nombre del plugin]
+{code}
+
+que genera más información basada en la información de metadatos entrada en el descriptor de plugin.
+
+{Nota}
+Si ha creado un plugin Grails y para insertarse en el repositorio central desea echar un vistazo [este page|http://grails.org/Creating wiki Plugins] que detalla cómo liberar tu plugin.
+{Nota}
+
+{hidden}
+
 When you have access to the Grails Plugin repository, execute the release-plugin command to release your plugin:
 
 {code:java}
@@ -27,6 +58,20 @@ grails release-plugin
 This will automatically commit changes to SVN, create tags, and make your changes available to the [list-plugins|commandLine] command.
 
 h4. Configuring Additional Repositories
+
+{hidden}
+
+Cuando se tiene acceso al repositorio de Plugin Grails, ejecute el comando de liberación-plugin para liberar el plugin:
+
+{code: java}
+Grails versión-plugin
+{code}
+
+Esto automáticamente enviar cambios al SVN, crear etiquetas y realice los cambios disponibles para el comando [lista-plugins|commandLine].
+
+h4. Configuración de repositorios adicionales
+
+{hidden}
 
 The process for configuring repositories in Grails differs between versions. For version of Grails 1.2 and earlier please refer to the [Grails 1.2 documentation|http://grails.org/doc/1.2.x/guide/12.%20Plug-ins.html#12.2%20Plugin%20Repositories] on the subject. The following sections cover Grails 1.3 and above.
 
@@ -38,6 +83,12 @@ repositories {
 }
 {code}
 
+{hidden}
+
+El proceso de configuración de repositorios en Grails difiere entre las versiones. Para la versión de Grails 1.2 y versiones anteriores, consulte [documentation|http://grails.org/doc/1.2.x/guide/12 de Grails 1.2. Plug-ins.html
+
+{hidden}
+
 You can also define a SVN-based Grails repository (such as the one hosted at [http://plugins.grails.org|http://plugins.grails.org/]) using the @grailsRepo@ method:
 
 {code}
@@ -47,6 +98,20 @@ repositories {
 {code}
 
 There is a shortcut to setup the Grails central repository:
+
+{hidden}
+
+También puede definir un repositorio basado en SVN Grails (como los hospedados en [http://plugins.grails.org|http://plugins.grails.org/]) utilizando el @ grailsRepo @ método:
+
+{code}
+{repositorios
+    grailsRepo "http://myserver/mygrailsrepo"
+}
+{code}
+
+Hay un atajo para configurar el repositorio central de Grails:
+
+{hidden}
 
 {code}
 repositories {
@@ -62,6 +127,25 @@ repositories {
     grailsCentral()
 }
 {code}
+{hidden}
+
+{code}
+{repositorios
+    grailsCentral()
+}
+{code}
+
+El orden en que se resuelven plugins se basa en el orden de los repositorios. Así que en este caso el repositorio central de Grails se buscará modificada:
+
+{code}
+{repositorios
+    grailsRepo "http://myserver/mygrailsrepo"
+    grailsCentral()
+}
+{code}
+
+{hidden}
+
 
 All of the above examples use HTTP; however you can specify any [Ivy resolver|http://ant.apache.org/ivy/history/latest-milestone/settings/resolvers.html] to resolve plugins with. Below is an example that uses an SSH resolver:
 
@@ -76,6 +160,23 @@ sshResolver.latestStrategy =
 sshResolver.changingPattern = ".*SNAPSHOT"
 sshResolver.setCheckmodified(true)
 {code}
+{hidden}
+
+Todos los ejemplos anteriores utilizan HTTP; Sin embargo puede especificar cualquier [Ivy resolver|http://ant.apache.org/ivy/history/latest-milestone/settings/resolvers.html] para resolver plugins con. A continuación se presenta un ejemplo que utiliza a una resolución SSH:
+
+{code}
+Def sshResolver = new SshResolver (usuario: "myuser", host:"myhost.com")
+() sshResolver.addArtifactPattern
+        "/ ruta/a/repo/grails-[artefacto] /tags/" "LATEST_RELEASE grails-[artefacto]-[Revisión].[ext] ")
+sshResolver.latestStrategy =
+        org.apache.ivy.plugins.latest.LatestTimeStrategy() nuevo
+
+sshResolver.changingPattern = ". * instantánea"
+sshResolver.setCheckmodified(true)
+{code}
+
+{hidden}
+
 
 The above example defines an artifact pattern which tells Ivy how to resolve a plugin zip file. For a more detailed explanation on Ivy patterns see the [relevant section|http://ant.apache.org/ivy/history/2.1.0/concept.html#patterns] in the Ivy user guide.
 
@@ -86,6 +187,12 @@ In general it is recommended for Grails 1.3 and above to use standard Maven-styl
 You use the Maven publisher plugin to publish a plugin to a Maven repository. Please refer to the section of the [Maven deployment|guide:mavendeploy] user guide on the subject.
 
 h4. Publishing to Grails Compatible Repositories
+{hidden}
+
+En el ejemplo anterior se define un patrón de artefacto que dice Ivy cómo resolver un archivo zip de plugin. Para una explicación más detallada sobre los patrones de Ivy vea la [section|http://ant.apache.org/ivy/history/2.1.0/concept.html pertinentes
+
+{hidden}
+
 
 Specify the @grails.plugin.repos.distribution.myRepository@ setting within the grails-app/conf/BuildConfig.groovy file to publish a Grails plugin to a Grails-compatible repository:
 
@@ -96,8 +203,28 @@ grails.plugin.repos.distribution.myRepository =
 
 You can also provide this settings in the \$USER_HOME/.grails/settings.groovy file if you prefer to share the same settings across multiple projects.
 
+{hidden}
+
+Especifique la configuración de @grails.plugin.repos.distribution.myRepository@ en el archivo grails-app/conf/BuildConfig.groovy para publicar un plugin Grails en un repositorio de Grails-compatible con:
+
+{code}
+Grails.plugin.repos.Distribution.myRepository =
+        "https://svn.codehaus.org/grails/trunk/grails-test-plugin-repo"
+{code}
+
+También puede proporcionar esta configuración en el archivo \$USER_HOME/.grails/settings.groovy si desea compartir la misma configuración de múltiples proyectos.
+
+{hidden}
+
 Once this is done use the @repository@ argument of the @release-plugin@ command to specify the repository to release the plugin into:
 
 {code}
 grails release-plugin -repository = myRepository
+{code}
+{hidden}
+
+Una vez hecho esto utiliza el repositorio @ @ argumento de @ lanzamiento-plugin @ comando para especificar el repositorio para liberar el plugin en:
+
+{code}
+Grails versión-plugin-repositorio = myRepository
 {code}

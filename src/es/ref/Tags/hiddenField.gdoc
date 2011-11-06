@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. hiddenField
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:xml}
 <g:hiddenField name="myField" value="myValue" />
 {code}
+{hidden}
+
+h1. hiddenField
+
+h2. Fin
+
+Crea una entrada de tipo 'hidden' (un campo oculto). Aplicarán todos los elementos HTML normal.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:hiddenfield name="myField" value="myValue"></g:hiddenfield>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,5 +38,22 @@ Attributes
 
 h2. Source
 
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre del campo de texto
+* @ valor @ (opcional): el valor del campo de texto
+
+h2. Fuente
+
+{hidden}
+
 {source:tag=FormTagLib.hiddenField}
 {source}
+{hidden}
+
+{source:tag=FormTagLib.hiddenField}
+origen de {}

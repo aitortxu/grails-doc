@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails also has the concept of templates. These are useful for partitioning your views into maintainable chunks, and combined with [Layouts|guide:layouts] provide a highly re-usable mechanism for structured views.
 
 h4. Template Basics
@@ -10,6 +13,21 @@ Grails uses the convention of placing an underscore before the name of a view to
    <div>Author: ${book?.author?.name}</div>
 </div>
 {code}
+{hidden}
+
+Grails también tiene el concepto de plantillas. Estos son útiles para dividir sus puntos de vista en trozos mantenibles y combinado con [Layouts|guide:layouts] proporcionan un mecanismo altamente reutilizable para vistas estructurados.
+
+h4. Conceptos básicos de plantilla
+
+Grails utiliza la Convención de colocar un carácter de subrayado antes el nombre de una vista para identificarlo como una plantilla. Por ejemplo, puede tener una plantilla que hace libros ubicados en @ grails-app/views/book/_bookTemplate.gsp@:
+
+{Código: xml}<div class="book" id="${book?.id}">
+   <div>Título: ${libro?.Título}</div>
+   <div>Autor: ${libro?.autor?.nombre}</div>
+</div>{code}
+
+{hidden}
+
 
 Use the [render|tags] tag to render this template from one of the views in @grails-app/views/book@:
 
@@ -22,6 +40,22 @@ Notice how we pass into a model to use using the @model@ attribute of the @rende
 {code:xml}
 <g:render template="bookTemplate" var="book" collection="${bookList}" />
 {code}
+{hidden}
+
+Utilice la etiqueta [render|tags] para procesar esta plantilla de uno de los puntos de vista en @ grails-app/views/libro @:
+
+{Código: xml}
+<g:render template="bookTemplate" model="[book: myBook]"></g:render>
+{code}
+
+Observe cómo pasamos en un modelo de uso utilizando el modelo @ @ atributo de render @ @ etiqueta. Si tiene múltiples @ libro @ instancias también puede procesar la plantilla para cada libro @ @ utilizando la etiqueta de procesamiento con una colección de @ @ atributo:
+
+{Código: xml}
+<g:render template="bookTemplate" var="book" collection="${bookList}"></g:render>
+{code}
+
+{hidden}
+
 
 h4. Shared Templates
 
@@ -32,6 +66,20 @@ In this case you can place them in the root views directory at grails-app/views 
 {code:xml}
 <g:render template="/shared/mySharedTemplate" />
 {code}
+{hidden}
+
+h4. Plantillas compartidas
+
+En el ejemplo anterior tuvimos una plantilla que fue específica para sus vistas a @ grails-app/views/libro @ y @ BookController @. Sin embargo, puede que desee compartir plantillas en su aplicación.
+
+En este caso puede colocarlos en el directorio raíz de vistas en grails-app/vistas o cualquier subdirectorio por debajo de esa ubicación y luego con el atributo de plantilla utilizar una ubicación absoluta comenzando con @ / @ en lugar de una ubicación relativa. Por ejemplo si tuvieras una plantilla denominada @ grails-app/views/shared/_mySharedTemplate.gsp@, podría hacer referencia a él como:
+
+{Código: xml}
+<g:render template="/shared/mySharedTemplate"></g:render>
+{code}
+
+{hidden}
+
 
 You can also use this technique to reference templates in any directory from any view or controller:
 
@@ -42,6 +90,20 @@ You can also use this technique to reference templates in any directory from any
 h4. The Template Namespace
 
 Since templates are used so frequently there is template namespace, called @tmpl@, available that makes using templates easier. Consider for example the following usage pattern:
+{hidden}
+
+También puede utilizar esta técnica para plantillas de referencia en cualquier directorio desde cualquier vista o controlador:
+
+{Código: xml}
+<g:render template="/book/bookTemplate" model="[book: myBook]"></g:render>
+{code}
+
+h4. La plantilla Namespace
+
+Dado que las plantillas se utilizan con tanta frecuencia hay nombres de plantilla, llamado disponible @ tmpl @, que hace uso de las plantillas. Consideremos, por ejemplo, el patrón de uso siguientes:
+
+{hidden}
+
 
 {code:xml}
 <g:render template="bookTemplate" model="[book:myBook]" />
@@ -52,6 +114,20 @@ This can be expressed with the @tmpl@ namespace as follows:
 {code:xml}
 <tmpl:bookTemplate book="${myBook}" />
 {code}
+{hidden}
+
+{Código: xml}
+<g:render template="bookTemplate" model="[book:myBook]"></g:render>
+{code}
+
+Esto puede expresarse con @ tmpl @ nombres como sigue:
+
+{Código: xml}
+<tmpl:booktemplate book="${myBook}"></tmpl:booktemplate>
+{code}
+
+{hidden}
+
 
 h4. Templates in Controllers and Tag Libraries
 
@@ -63,6 +139,21 @@ def bookData() {
     render(template:"bookTemplate", model:[book:b])
 }
 {code}
+{hidden}
+
+h4. Plantillas de los controladores y las bibliotecas de etiquetas
+
+También puede procesar plantillas de controladores que utilizan el método de controlador [render|controllers]. Se trata de aplicaciones útiles para [Ajax|guide:ajax] donde se generan pequeña HTML o respuestas de datos parcialmente actualizar la página actual en lugar de realizar la nueva solicitud:
+
+{code: java}
+Def bookData() {}
+    Def b = Book.get(params.id)
+    Render (plantilla: "bookTemplate", model:[book:b])
+}
+{code}
+
+{hidden}
+
 
 The [render|controllers] controller method writes directly to the response, which is the most common behaviour. To instead obtain the result of template as a String you can use the [render|tags] tag:
 
@@ -73,5 +164,22 @@ def bookData() {
     render content
 }
 {code}
+{hidden}
+
+El método de controlador [render|controllers] escribe directamente en la respuesta, que es el comportamiento más común. En lugar de ello obtener el resultado de la plantilla como una cadena puede utilizar la etiqueta [render|tags]:
+
+{code: java}
+Def bookData() {}
+    Def b = Book.get(params.id)
+    Contenido de la cadena = g.render (plantilla: "bookTemplate", model:[book:b])
+    representar el contenido
+}
+{code}
+
+{hidden}
+
 
 Notice the usage of the @g@ namespace which tells Grails we want to use the [tag as method call|guide:tagsAsMethodCalls] instead of the [render|controllers] method.
+{hidden}
+
+Observe el uso de la @ g @ namespace que dice Grails que queremos utilizar [etiqueta] como método call|guide:tagsAsMethodCalls en lugar del método [render|controllers].

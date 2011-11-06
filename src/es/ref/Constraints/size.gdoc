@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. size
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 children size: 5..15
 {code}
+{hidden}
+
+h1. tamaño
+
+h2. Fin
+
+Utiliza una gama Groovy para limitar el tamaño de una colección, un número o la longitud de una cadena.
+
+h2. Ejemplos
+
+{code: java}
+tamaño de los niños: 5..15
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,5 +38,22 @@ Currently this constraint cannot be used in addition to [blank|constraints] or [
 {note}
 
 This constraint influences [schema generation|guide:gormConstraints].
+{hidden}
+
+h2. Descripción
+
+Establece el tamaño de una colección, propiedad de número o longitud de la cadena.
+
+{Nota}
+Actualmente esta restricción no puede utilizarse en adición a [blank|constraints] o [nullable|constraints]. Utilice un validador personalizado para estas combinaciones.
+{Nota}
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+{hidden}
+
 
 Error Code: @className.propertyName.size.toosmall@ or @className.propertyName.size.toobig@
+{hidden}
+
+Código de error: @className.propertyName.size.toosmall@ o @className.propertyName.size.toobig@

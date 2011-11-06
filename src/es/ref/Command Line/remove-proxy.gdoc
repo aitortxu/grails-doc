@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. remove-proxy
 
 h2. Purpose
@@ -7,6 +10,20 @@ Removes a proxy configuration that Grails can use when communicating over the in
 Proxy configurations can be added with the [add-proxy|commandLine] command.
 
 h2. Examples
+
+{hidden}
+
+h1. quitar-proxy
+
+h2. Fin
+
+Quita una configuración de proxy que Grails pueden utilizar cuando se comunican a través de internet, como con el comando [install-plugin|commandLine].
+
+Pueden agregarse las configuraciones de proxy con el comando [Agregar-proxy|commandLine].
+
+h2. Ejemplos
+
+{hidden}
 
 {code:java}
 grails remove-proxy client
@@ -18,7 +35,27 @@ Usage:
 {code:java}
 grails remove-proxy [name]
 {code}
+{hidden}
+
+{code: java}
+cliente de Grails quitar-proxy
+{code}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails quitar-proxy [nombre]
+{code}
+
+{hidden}
+
 
 Arguments:
 
 * @name@ - The name of the proxy configuration
+{hidden}
+
+Argumentos:
+
+* @ nombre @ - el nombre de la configuración de proxy

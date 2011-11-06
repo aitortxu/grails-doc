@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Displaying Errors
 
 Typically if you get a validation error you redirect back to the view for rendering. Once there you need some way of displaying errors. Grails supports a rich set of tags for dealing with errors. To render the errors as a list you can use [renderErrors|tags]:
@@ -7,6 +10,20 @@ Typically if you get a validation error you redirect back to the view for render
 {code}
 
 If you need more control you can use [hasErrors|tags] and [eachError|tags]:
+
+{hidden}
+
+h4. Mostrar errores
+
+Normalmente si obtiene un error de validación redirigir a la vista para la representación. Una vez se necesita alguna forma de mostrar los errores. Grails admite un conjunto de etiquetas para tratar errores. Para procesar los errores como una lista puede utilizar [renderErrors|tags]:
+
+{Código: xml}
+<g:rendererrors bean="${user}"></g:rendererrors>
+{code}
+
+Si necesita más control puede utilizar [hasErrors|tags] y [eachError|tags]:
+
+{hidden}
 
 {code:xml}
 <g:hasErrors bean="${user}">
@@ -18,6 +35,18 @@ If you need more control you can use [hasErrors|tags] and [eachError|tags]:
 </g:hasErrors>
 {code}
 
+{hidden}
+
+{Código: xml}<g:haserrors bean="${user}">
+  <ul>
+   <g:eacherror var="err" bean="${user}">
+       <li>${err}</li>
+   </g:eacherror>
+  </ul>
+</g:haserrors>{code}
+
+{hidden}
+
 h4. Highlighting Errors
 
 It is often useful to highlight using a red box or some indicator when a field has been incorrectly input. This can also be done with the [hasErrors|tags] by invoking it as a method. For example:
@@ -27,6 +56,18 @@ It is often useful to highlight using a red box or some indicator when a field h
    <input type="text" name="login" value="${fieldValue(bean:user,field:'login')}"/>
 </div>
 {code}
+
+{hidden}
+
+h4. Resaltado de errores
+
+A menudo es útil resaltar con un cuadro rojo o algún indicador cuando un campo ha sido incorrectamente de entrada. Esto también puede hacerse con el [hasErrors|tags], invocando como método. Por ejemplo:
+
+{Código: xml}<div class="value ${hasErrors(bean:user,field:" login','errors')}'="">
+   <input type="text" name="login" value="${fieldValue(bean:user,field:'login')}">
+</div>{code}
+
+{hidden}
 
 This code checks if the @login@ field of the @user@ bean has any errors and if so it adds an @errors@ CSS class to the @div@, allowing you to use CSS rules to highlight the @div@.
 
@@ -38,4 +79,19 @@ Each error is actually an instance of the [FieldError|api:org.springframework.va
 <input type="text" name="login" value="${fieldValue(bean:user,field:'login')}"/>
 {code}
 
+{hidden}
+
+Este código comprueba si la sesión @ @ campo del usuario @ @ bean tiene errores y por lo que agrega una clase de @ CSS @ errores al div @ @, permitiéndole utilizar reglas CSS para resaltar la div @ @.
+
+h4. Recuperar valores de entrada
+
+Cada error es realmente una instancia de la clase [FieldError|api:org.springframework.validation.FieldError] en la primavera, que conserva el valor de entrada original dentro de ella. Esto es útil, puede utilizar el objeto error para restaurar el valor de entrada por el usuario mediante la etiqueta [fieldValue|tags]:
+
+{Código: xml}<input type="text" name="login" value="${fieldValue(bean:user,field:'login')}">{code}
+
+{hidden}
+
 This code will check for an existing @FieldError@ in the @User@ bean and if there is obtain the originally input value for the @login@ field.
+{hidden}
+
+Este código será buscar una existente @ FieldError @ en el usuario @ @ bean y si hay obtener el valor de entrada originalmente para el login @ @ campo.

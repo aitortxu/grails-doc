@@ -1,3 +1,6 @@
+
+{hidden}
+
 Criteria is a type safe, advanced way to query that uses a Groovy builder to construct potentially complex queries. It is a much better approach than building up query strings using a @StringBuffer@.
 
 Criteria can be used either with the [createCriteria|domainClasses] or [withCriteria|domainClasses] methods. The builder uses Hibernate's Criteria API. The nodes on this builder map the static methods found in the [Restrictions|api:org.hibernate.criterion.Restrictions] class of the Hibernate Criteria API. For example:
@@ -15,6 +18,28 @@ def results = c {
     order("holderLastName", "desc")
 }
 {code}
+{hidden}
+
+Criterios es un tipo de seguro, avanzada forma de consulta que utiliza un constructor Groovy para construir consultas potencialmente complejas. Es un mejor enfoque de construcción de cadenas de consulta mediante un @ StringBuffer @.
+
+Criterios pueden ser utilizado con el [createCriteria|domainClasses] o [withCriteria|domainClasses] métodos. El generador utiliza la API de criterios de hibernación. Los nodos de este generador de asignan los métodos estáticos encontrados la clase [Restrictions|api:org.hibernate.criterion.Restrictions] de la API de criterios de hibernación. Por ejemplo:
+
+{code}
+Def c = Account.createCriteria()
+resultados de Def = {c
+    entre ("equilibrio", 500, 1000)
+    EQ ("rama", "Londres")
+    o {}
+        como ("holderFirstName", "Fred %")
+        como ("holderFirstName", "Barney %")
+    }
+    maxResults(10)
+    orden ("holderLastName", "desc")
+}
+{code}
+
+{hidden}
+
 
 This criteria will select up to 10 @Account@ objects in a List matching the following criteria:
 
@@ -25,6 +50,20 @@ This criteria will select up to 10 @Account@ objects in a List matching the foll
 The results will be sorted in descending order by @holderLastName@.
 
 If no records are found with the above criteria, an empty List is returned.
+{hidden}
+
+Este criterio seleccionará hasta 10 @ cuenta @ objetos en una lista que cumplan los criterios siguientes:
+
+* @ equilibrio @ es entre 500 y 1000
+* @ rama @ es 'Londres'
+* @ holderFirstName @ empieza por 'Fred' o 'Barney'
+
+Los resultados se ordenarán en orden descendente por @ holderLastName @.
+
+Si no se encontraron registros con los criterios anteriores, se devuelve una lista vacía.
+
+{hidden}
+
 
 h4. Conjunctions and Disjunctions
 
@@ -36,6 +75,21 @@ or {
     eq("branch", "London")
 }
 {code}
+{hidden}
+
+h4. Conjunciones y disyunciones
+
+Como se muestra en el ejemplo anterior se pueden agrupar criterios en una lógica OR mediante un @ o {} @ bloque:
+
+{code: java}
+o {}
+    entre ("equilibrio", 500, 1000)
+    EQ ("rama", "Londres")
+}
+{code}
+
+{hidden}
+
 
 This also works with logical AND:
 
@@ -45,6 +99,19 @@ and {
     eq("branch", "London")
 }
 {code}
+
+{hidden}
+
+Esto también funciona con AND lógico:
+
+{code: java}
+y {}
+    entre ("equilibrio", 500, 1000)
+    EQ ("rama", "Londres")
+}
+{code}
+
+{hidden}
 
 And you can also negate using logical NOT:
 
@@ -56,6 +123,21 @@ not {
 {code}
 
 All top level conditions are implied to be AND'd together.
+{hidden}
+
+Y usted también puede negar mediante lógica no:
+
+{code: java}
+{no
+    entre ("equilibrio", 500, 1000)
+    EQ ("rama", "Londres")
+}
+{code}
+
+Todas las condiciones de nivel superior son implicaba ser y sería juntos.
+
+{hidden}
+
 
 h4. Querying Associations
 
@@ -68,6 +150,22 @@ class Account {
     ...
 }
 {code}
+{hidden}
+
+h4. Consultar las asociaciones
+
+Las asociaciones pueden consultarse por contar con un nodo que coincida con el nombre de propiedad. Por ejemplo decir la cuenta @ @ clase tuvo muchos @ Transaction @ objetos:
+
+{code}
+clase cuenta {}
+    ...
+    estático hasMany = [transacciones: transacción]
+    ...
+}
+{code}
+
+{hidden}
+
 
 We can query this association by using the property name @transaction@ as a builder node:
 
@@ -80,6 +178,22 @@ def results = c.list {
     }
 }
 {code}
+{hidden}
+
+Nos podemos consultar esta asociación mediante la propiedad nombre @ transaction @ como un nodo builder:
+
+{code: java}
+Def c = Account.createCriteria()
+Def ahora = new Date()
+resultados de Def = {} c.list
+    las transacciones {}
+        entre ('fecha', ahora - 10, ahora)
+    }
+}
+{code}
+
+{hidden}
+
 
 The above code will find all the @Account@ instances that have performed @transactions@ within the last 10 days.
 You can also nest such association queries within logical blocks:
@@ -96,6 +210,26 @@ def results = c.list {
     }
 }
 {code}
+{hidden}
+
+El código anterior encontrará todos los @ cuenta @ instancias que han realizado transacciones @ @ en los últimos 10 días.
+También puede anidar esas consultas de asociación dentro de bloques lógicos:
+
+{code: java}
+Def c = Account.createCriteria()
+Def ahora = new Date()
+resultados de Def = {} c.list
+    o {}
+        entre ('creado', ahora - 10, ahora)
+        las transacciones {}
+            entre ('fecha', ahora - 10, ahora)
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 Here we find all accounts that have either performed transactions in the last 10 days OR have been recently created in the last 10 days.
 
@@ -112,6 +246,26 @@ def numberOfBranches = c.get {
     }
 }
 {code}
+{hidden}
+
+Aquí nos encontramos con todas las cuentas que ya han realizado transacciones en los últimos 10 días o se han creado recientemente en los últimos 10 días.
+
+h4. Consultando con proyecciones
+
+Proyecciones pueden utilizarse para personalizar los resultados. Definir un nodo "proyecciones" dentro del árbol de generador de criterios para utilizar proyecciones. Existen métodos equivalentes dentro del nodo de proyecciones a los métodos en la clase de hibernación [Projections|api:org.hibernate.criterion.Projections]:
+
+{code: java}
+Def c = Account.createCriteria()
+
+Def numberOfBranches = {} c.get
+    proyecciones {}
+        countDistinct('branch')
+    }
+}
+{code}
+
+{hidden}
+
 
 When multiple fields are specified in the projection, a List of values will be returned. A single value will be returned otherwise.
 
@@ -126,6 +280,24 @@ def peopleWithShortFirstNames = c.list {
     sqlRestriction "char_length(first_name) <= 4"
 }
 {code}
+{hidden}
+
+Cuando se especifican varios campos en la proyección, se devolverá una lista de valores. De lo contrario se devolverá un valor único.
+
+h4. Uso de restricciones de SQL
+
+Puede acceder a las capacidades de SQL restricciones de hibernación.
+
+{code: java}
+Def c = Person.createCriteria()
+
+Def peopleWithShortFirstNames = {} c.list
+    sqlRestriction "char_length(first_name) < = 4"
+}
+{code}
+
+{hidden}
+
 
 {note}
 Note that the parameter there is SQL. The @first_name@ attribute referenced in the example refers to the persistence model, not the object model like in HQL queries. The @Person@ property named @firstName@ is mapped to the @first_name@ column in the database and you must refer to that in the @sqlRestriction@ string.
@@ -136,6 +308,20 @@ Also note that the SQL used here is not necessarily portable across databases.
 h4. Using Scrollable Results
 
 You can use Hibernate's [ScrollableResults|api:org.hibernate.ScrollableResults] feature by calling the scroll method:
+{hidden}
+
+{Nota}
+Observe que el parámetro allí es SQL. First_name @ @ atributo que se hace referencia en el ejemplo se refiere al modelo de persistencia, no el modelo de objetos como en las consultas HQL. La persona @ @ propiedad denominada @ firstName @ se asigna a la first_name @ @ columna en la base de datos y debe consultar en el @ sqlRestriction @ cadena.
+
+También tenga en cuenta que el SQL utilizado aquí no es necesariamente portable en bases de datos.
+{Nota}
+
+h4. Resultados desplazable
+
+Puede utilizar Hibernate [ScrollableResults|api:org.hibernate.ScrollableResults] función llamando al método de desplazamiento:
+
+{hidden}
+
 
 {code:java}
 def results = crit.scroll {
@@ -149,6 +335,23 @@ def p = results.previous()
 def future = results.scroll(10)
 def accountNumber = results.getLong('number')
 {code}
+{hidden}
+
+{code: java}
+resultados de Def = {} crit.scroll
+    maxResults(10)
+}
+Def f = results.first()
+Def l = results.last()
+Def n = results.next()
+Def p = results.previous()
+
+Def futuro = results.scroll(10)
+Def accountNumber = results.getLong('number')
+{code}
+
+{hidden}
+
 
 To quote the documentation of Hibernate ScrollableResults:
 
@@ -159,6 +362,20 @@ A result iterator that allows moving around within the results by arbitrary incr
 Contrary to JDBC, columns of results are numbered from zero.
 
 h4. Setting properties in the Criteria instance
+{hidden}
+
+Al citar la documentación de ScrollableResults hibernación:
+
+oferta de {}
+Un iterador de resultado que permite mover todo dentro de los resultados por incrementos arbitrarios. La consulta ScrollableResults patrón es muy similar a la PreparedStatement JDBC ResultSet patrón y la semántica de los métodos de esta interfaz son similar a los métodos de nombre similar en el conjunto de resultados.
+oferta de {}
+
+Al contrario de JDBC, columnas de resultados se numeran desde cero.
+
+h4. Establecer las propiedades de la instancia de criterios
+
+{hidden}
+
 
 If a node within the builder tree doesn't match a particular criterion it will attempt to set a property on the Criteria object itself. This allows full access to all the properties in this class. This example calls @setMaxResults@ and @setFirstResult@ on the [Criteria|api:org.hibernate.Criteria] instance:
 
@@ -171,6 +388,22 @@ def results = c.list {
     fetchMode("aRelationship", FM.JOIN)
 }
 {code}
+{hidden}
+
+Si un nodo del árbol generador no coincide con un criterio concreto intentará establecer una propiedad en el propio objeto de criterios. Esto permite acceso total a todas las propiedades de esta clase. Este ejemplo llama @ setMaxResults @ y @ setFirstResult @ en la instancia [Criteria|api:org.hibernate.Criteria]:
+
+{code: java}
+org.hibernate.FetchMode de importación como FM
+...
+resultados de Def = {} c.list
+    maxResults(10)
+    firstResult(50)
+    fetchMode ("aRelationship", FM.COMBINACIÓN)
+}
+{code}
+
+{hidden}
+
 
 h4. Querying with Eager Fetching
 
@@ -186,6 +419,25 @@ def tasks = criteria.list{
     order 'priority', 'asc'
 }
 {code}
+{hidden}
+
+h4. Consultando con deseoso de obtener
+
+En la sección [con muchas ganas y Fetching|guide perezoso: obtención] discutimos cómo especificar de forma declarativa buscando evitar el problema N 1 SELECT. No obstante, también se puede lograr mediante una consulta de criterios:
+
+{code: java}
+
+criterios de Def = Task.createCriteria()
+tareas de Def = {} criteria.list
+    EQ "assignee.id", task.assignee.id
+    combinación "cesionario"
+    'proyecto' de combinación
+    orden 'prioridad', 'asc'
+}
+{code}
+
+{hidden}
+
 
 Notice the usage of the @join@ method: it tells the criteria API to use a @JOIN@ to fetch the named associations with the @Task@ instances. It's probably best not to use this for one-to-many associations though, because you will most likely end up with duplicate results. Instead, use the 'select' fetch mode:
 {code}
@@ -196,6 +448,20 @@ def results = Airport.withCriteria {
     fetchMode "flights", FM.SELECT
 }
 {code}
+{hidden}
+
+Observe el uso de la combinación de @ @ método: dice que los criterios de la API para utilizar una combinación de @ @ para traer las asociaciones con la tarea de @ @ instancias con nombre. Es probablemente mejor no utilizar esto para asociaciones de uno a muchos, porque es muy probable que puede acabar con resultados duplicados. En su lugar, utilice el modo de recuperación 'select':
+{code}
+org.hibernate.FetchMode de importación como FM
+...
+resultados de Def = {} Airport.withCriteria
+    EQ "región", "EMEA"
+    fetchMode "vuelos", FM.SELECCIONE
+}
+{code}
+
+{hidden}
+
 Although this approach triggers a second query to get the @flights@ association, you will get reliable results  - even with the @maxResults@ option.
 
 {note}
@@ -211,6 +477,26 @@ def results = Airport.withCriteria {
     }
 }
 {code}
+{hidden}
+
+Aunque este enfoque desencadena una segunda consulta para obtener los vuelos @ @ asociación, obtendrá resultados confiables - incluso con @ maxResults @ opción.
+
+{Nota}
+@ fetchMode @ y @ combinación @ son la configuración general de la consulta y sólo pueden ser especificados en el nivel superior, es decir, se pueden utilizar dentro de las proyecciones o restricciones de asociación.
+{Nota}
+
+Un punto importante a tener en cuenta es que si se incluyen asociaciones en las restricciones de la consulta, esas asociaciones automáticamente ansiosamente cargará. Por ejemplo, en esta consulta:
+{code}
+resultados de Def = {} Airport.withCriteria
+    EQ "región", "EMEA"
+    vuelos {}
+        como "número", "BA %"
+    }
+}
+{code}
+
+{hidden}
+
 the @flights@ collection would be loaded eagerly via a join even though the fetch mode has not been explicitly set.
 
 h4. Method Reference
@@ -220,6 +506,20 @@ If you invoke the builder with no method name such as:
 {code:java}
 c { ... }
 {code}
+
+{hidden}
+
+los vuelos @ @ colección deberían ser cargados con impaciencia a través de una combinación a pesar de que el modo de recuperación no se ha establecido explícitamente.
+
+h4. Referencia de método
+
+Si se invoca el constructor sin nombre de método como:
+
+{code: java}
+c { ... }
+{code}
+
+{hidden}
 
 The build defaults to listing all the results and hence the above is equivalent to:
 
@@ -231,7 +531,28 @@ c.list { ... }
 Method | Description
 *list* | This is the default method. It returns all matching rows.
 *get* | Returns a unique result set, i.e. just one row. The criteria has to be formed that way, that it only queries one row. This method is not to be confused with a limit to just the first row.
+{hidden}
+
+Valores predeterminados de la generación de enumerar todos los resultados y, por tanto, lo anterior es equivalente a:
+
+{code: java}
+c.List {...}
+{code}
+
+tabla de {}
+Método | Descripción
+* lista * | Este es el método predeterminado. Devuelve todas las filas coincidentes.
+* get * | Devuelve un único resultado establecido, es decir, una sola fila. Los criterios tiene que formar de este modo, sólo consultas de una fila. Este método no es debe ser confundido con un límite tan sólo la primera fila.
+
+{hidden}
+
 *scroll* | Returns a scrollable result set.
 *listDistinct* | If subqueries or associations are used, one may end up with the same row multiple times in the result set, this allows listing only distinct entities and is equivalent to @DISTINCT_ROOT_ENTITY@ of the [CriteriaSpecification|api:org.hibernate.criterion.CriteriaSpecification] class.
 *count* | Returns the number of matching rows.
 {table}
+{hidden}
+
+* desplazamiento * | Devuelve un conjunto de resultados desplazable.
+* listDistinct * | Si se usan subconsultas o asociaciones, uno puede terminar con la misma fila varias veces en el conjunto de resultados, esto permite enumerar sólo entidades distintas y es equivalente a @ DISTINCT_ROOT_ENTITY @ de la clase [CriteriaSpecification|api:org.hibernate.criterion.CriteriaSpecification].
+* Conde * | Devuelve el número de filas coincidentes.
+tabla de {}

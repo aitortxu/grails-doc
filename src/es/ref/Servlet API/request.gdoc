@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. request
 
 h2. Purpose
@@ -15,6 +18,28 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. solicitud
+
+h2. Fin
+
+La petición de @ @ objeto es una instancia de Servlet API [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] interfaz
+
+h2. Ejemplos
+
+{code}
+clase BookController {}
+    Def list() {}
+        log.Info "agente de usuario:" request.getHeader("User-Agent")
+
+Render(View: actionName)
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -25,6 +50,20 @@ Grails enhances the @HttpServletRequest@ instance by adding the following new pr
 * @XML@ - An instance of @XmlSlurper@'s [GPathResult|http://groovy.codehaus.org/api/groovy/util/slurpersupport/GPathResult.html] class that allows parsing of an incoming XML request (useful for REST).
 * @JSON@ - An instance of Grails' [JSONObject|api:org.codehaus.groovy.grails.web.json.JSONObject] class that allows parsing of an incoming JSON request (useful for JSON based REST).
 * @forwardURI@ - Useful for obtaining the current request URI since the @request@ objects @requestURI@ property returns the original URI, not the matched one.
+{hidden}
+
+h2. Descripción
+
+La clase [HttpServletRequest|api:javax.servlet.http.HttpServletRequest] es útil para, entre otras cosas, obtener encabezados de solicitud, almacenar atributos de solicitud el ámbito y el establecimiento de información acerca del cliente. Javadocs el Servlet API para obtener más información, consulte.
+
+Grails mejora la @ HttpServletRequest @ instancia añadiendo las siguientes nuevas propiedades y métodos:
+
+* @ XML @ - una instancia de la clase de @ XmlSlurper@'s [GPathResult|http://groovy.codehaus.org/api/groovy/util/slurpersupport/GPathResult.html] que permite el análisis de una solicitud XML entrante (útil para el resto).
+* @ JSON @ - una instancia de Grails' [JSONObject|api:org.codehaus.groovy.grails.web.json.JSONObject] clase que permite el análisis de una solicitud entrante de JSON (útil para JSON basado el resto).
+* @ forwardURI @ - útil para la obtención de la solicitud actual URI desde la petición de @ @ objetos @ requestURI @ propiedad devuelve el identificador URI original, no un coincidente.
+
+{hidden}
+
 * @get@ - Returns true if the current request is an HTTP @GET@ request.
 * @post@ - Returns true if the current request is an HTTP @POST@ request.
 * @each@ - Implementation of Groovy's @each@ method for iterating over request attributes.
@@ -35,6 +74,21 @@ Grails enhances the @HttpServletRequest@ instance by adding the following new pr
 * @xhr@ - Returns @true@ if the current request is an Ajax request.
 
 The @XML@ and @JSON@ properties are useful for XML APIs and can be used to parse incoming XML or JSON packages. For example given a request body of:
+{hidden}
+
+* @ get @ - devuelve true si la solicitud actual es un GET de HTTP @ @ solicitud.
+* @ post @ - devuelve true si la solicitud actual es un POST de HTTP @ @ solicitud.
+* @ cada uno @ - de aplicación de Groovy @ cada uno @ método para iterar por atributos de la solicitud.
+* @ Buscar @ - aplicación de Groovy predeterminado @ buscar @ método para la búsqueda de atributos de la solicitud.
+* @ findAll @ - aplicación de Groovy predeterminado @ findAll @ método para la búsqueda de atributos de la solicitud.
+* @ formato @ - el formato de solicitud, utilizado para [contenido negotiation|guide:contentNegotiation].
+* @ withFormat(Closure) @ - el método de withFormat, utilizado para [contenido negotiation|guide:contentNegotiation].
+* @ xhr @ - devuelve @ verdadero @ si la actual solicitud es una solicitud de Ajax.
+
+@ XML @ y @ JSON @ propiedades son útiles para las API XML y pueden utilizarse para analizar los paquetes entrantes de XML o JSON. Por ejemplo, dado un cuerpo de la solicitud de:
+
+{hidden}
+
 
 {code:xml}
 <book>
@@ -48,6 +102,21 @@ This can be parsed easily:
 def title = request.XML?.book?.title
 render "The Title is $title"
 {code}
+{hidden}
+
+{Código: xml}<book>
+   <title>El Stand</title>
+</book>{code}
+
+Esto se puede analizar fácilmente:
+
+{code: java}
+título de Def = solicitud.XML?.libro?.Título
+representar "El título es $título"
+{code}
+
+{hidden}
+
 
 Request attributes which are normally accessible from the [getAttribute|api:javax.servlet.ServletRequest#getAttribute(java.lang.String)] can also be indexed into using the array index operator or de-reference operator:
 
@@ -58,3 +127,6 @@ request['user'] = 'John'
 
 asset 'John' == request.user
 {code}
+{hidden}
+
+Solicitar atributos que son normalmente accesibles desde la [getAttribute|api:javax.servlet.ServletRequest

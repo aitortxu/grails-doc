@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. beforeInterceptor
 
 h2. Purpose
@@ -7,6 +10,20 @@ Allows the interception of an action before it is executed. A @beforeInterceptor
 h2. Examples
 
 Simple tracing interceptor:
+
+{hidden}
+
+h1. beforeInterceptor
+
+h2. Fin
+
+Permite la interceptación de una acción antes de ser ejecutado. @ BeforeInterceptor @ opcionalmente puede detener la ejecución de la acción.
+
+h2. Ejemplos
+
+Interceptor de seguimiento simple:
+
+{hidden}
 
 {code}
 static beforeInterceptor = {
@@ -31,6 +48,21 @@ def login() {
     // display login page
 }
 {code}
+{hidden}
+
+{code}
+estático beforeInterceptor = {}
+    Console.println "Rastreo de acción ${actionUri}"
+}
+{code}
+
+Un interceptor de seguridad trivial para implementar la funcionalidad de inicio de sesión:
+
+{code}
+beforeInterceptor estática = [acción: esto.
+
+{hidden}
+
 
 h2. Description
 
@@ -41,6 +73,20 @@ static beforeInterceptor = {
     println "Tracing action ${actionUri}"
 }
 {code}
+{hidden}
+
+h2. Descripción
+
+@ BeforeInterceptor @ intercepta procesamiento antes de la acción se ejecuta. Si devuelve false @ @, a continuación, la acción no se ejecutará. El interceptor puede definirse para todas las acciones en un controlador como sigue:
+
+{code}
+estático beforeInterceptor = {}
+    Console.println "Rastreo de acción ${actionUri}"
+}
+{code}
+
+{hidden}
+
 
 This declaration must be a class-scope Closure in the controller class. It will execute before all actions and does not interfere with processing since it returns no value. A common use case however is for simple authentication (although a [security plugin|http://grails.org/plugin/spring-security-core] is preferred):
 
@@ -59,7 +105,21 @@ def login() {
     // display login page
 }
 {code}
+{hidden}
+
+Esta declaración debe ser un ámbito de clase cierre en la clase. Se ejecutará antes de todas las acciones y no interfiere con el procesamiento ya no devuelve ningún valor. Sin embargo es un caso de uso común para la autenticación simple (aunque se prefiere un [plugin|http://grails.org/plugin/spring-security-core de seguridad]):
+
+{code}
+beforeInterceptor estática = [acción: esto.
+
+{hidden}
+
 
 This defines a method called @auth@. It is declared as a private method so it is not exposed as a controller action. The @beforeInterceptor@ then defines an interceptor that is used on all actions except the @login@ action and is configured using Groovy's method pointer syntax to execute the @auth@ method. The @auth@ method will redirect to another page if it doesn't find a user in the session, and it signifies that it has handled the response and that the requested action should not be processed by returning @false@.
 
 This example limited the intercepted actions using the @except@ argument but the @only@ argument can also be used to list the actions to be intercepted, rather than those to not intercept.
+{hidden}
+
+Esto define un método denominado @ auth @. Se declara como un método privado por lo que no está expuesta como una acción de controlador. @ BeforeInterceptor @ entonces define un interceptor que se utiliza en todas las acciones excepto el login @ @ acción y se configura mediante la sintaxis de puntero de método de Groovy para ejecutar el auth @ @ método. Auth @ @ método redirigirá a otra página si no encuentra un usuario en el período de sesiones, y significa que ha manejado la respuesta y que la acción solicitada no debe procesarse por devolver false @ @.
+
+Este ejemplo limita las acciones interceptadas mediante la @ excepto @ argumento pero el @ sólo @ argumento también puede utilizarse para enumerar las acciones a ser interceptados, en lugar de aquellos que no interceptar.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. currencySelect
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:xml}
 <g:currencySelect name="myCurrency" value="${currency}" />
 {code}
+{hidden}
+
+h1. currencySelect
+
+h2. Fin
+
+Genera una etiqueta HTML select con símbolos de moneda (por ej. «EUROS', «USD» etc..).
+
+h2. Ejemplos
+
+{Código: xml}
+<g:currencyselect name="myCurrency" value="${currency}"></g:currencyselect>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,5 +38,22 @@ Attributes
 
 h2. Source
 
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ de @ (opcional) - la moneda símbolos para seleccionar, valores predeterminados para los más importantes si no especificado
+* @ valor @ (opcional) - la moneda de valor como el código de divisa. El valor predeterminado es la moneda de la localización actual si no se especifica
+
+h2. Fuente
+
+{hidden}
+
 {source:tag=FormTagLib.currencySelect}
 {source}
+{hidden}
+
+{source:tag=FormTagLib.currencySelect}
+origen de {}

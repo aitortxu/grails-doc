@@ -1,3 +1,6 @@
+
+{hidden}
+
 In a @Filters@ class, you can specify any other @Filters@ classes that should first be executed using the @dependsOn@ property. This is used when a @Filters@ class depends on the behavior of another @Filters@ class (e.g. setting up the environment, modifying the request/session, etc.) and is defined as an array of @Filters@ classes.
 
 Take the following example @Filters@ classes:
@@ -21,6 +24,34 @@ class MyFilters {
     }
 }
 {code}
+{hidden}
+
+En @ filtros @ clase, puede especificar cualquier otro @ filtros @ clases que primero debería ejecutarse con @ dependsOn @ propiedad. Se utiliza cuando un filtros @ @ clase depende del comportamiento de otro @ filtros @ clase (por ejemplo, configurar el entorno, modificar la solicitud/sesión, etc.) y se define como un conjunto de filtros @ @ clases.
+
+Tomar el siguiente ejemplo @ filtros @ clases:
+
+{code: java}
+clase MyFilters {}
+    Def dependsOn = [MyOtherFilters]
+
+filtros de Def = {}
+        checkAwesome (uri: "/ *") {}
+            antes = {}
+                Si (request.isAwesome) {/ / hacer algo impresionante}
+            }
+        }
+
+checkAwesome2 (uri: "/ *") {}
+            antes = {}
+                Si (request.isAwesome) {/ / hacer algo más impresionante}
+            }
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class MyOtherFilters {
@@ -38,6 +69,27 @@ class MyOtherFilters {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase MyOtherFilters {}
+    filtros de Def = {}
+        makeAwesome (uri: "/ *") {}
+            antes = {}
+                Request.isAwesome = true
+            }
+        }
+        doNothing (uri: "/ *") {}
+            antes = {}
+                / / no hacer nada
+            }
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 MyFilters specifically @dependsOn@ MyOtherFilters.  This will cause all the filters in MyOtherFilters whose scope matches the current request to be executed before those in MyFilters. For a request of "/test", which will match the scope of every filter in the example, the execution order would be as follows:
 
@@ -48,4 +100,20 @@ MyFilters specifically @dependsOn@ MyOtherFilters.  This will cause all the filt
 
 The filters within the MyOtherFilters class are processed in order first, followed by the filters in the MyFilters class.  Execution order between @Filters@ classes are enabled and the execution order of filters within each @Filters@ class are preserved.
 
+{hidden}
+
+MyFilters específicamente @ dependsOn @ MyOtherFilters.  Esto hará que todos los filtros en cuyo ámbito coincide con la actual solicitud a ser ejecutado antes de las MyFilters de MyOtherFilters. Para una solicitud de "/ test", que coincidirá con el alcance de cada filtro en el ejemplo, la orden de ejecución serían los siguientes:
+
+* MyOtherFilters - makeAwesome
+* MyOtherFilters - doNothing
+* MyFilters - checkAwesome
+* MyFilters - checkAwesome2
+
+Los filtros dentro de la clase MyOtherFilters se procesan en orden en primer lugar, seguido por los filtros de la clase MyFilters.  Orden de ejecución entre @ filtros @ clases están habilitados y la orden de ejecución de filtros dentro de cada filtros @ @ clase se conservan.
+
+{hidden}
+
 If any cyclical dependencies are detected, the filters with cyclical dependencies will be added to the end of the filter chain and processing will continue.  Information about any cyclical dependencies that are detected will be written to the logs.  Ensure that your root logging level is set to at least WARN or configure an appender for the Grails Filters Plugin (@org.codehaus.groovy.grails.plugins.web.filters.FiltersGrailsPlugin@) when debugging filter dependency issues.
+{hidden}
+
+Si se detectan las dependencias cíclicas, los filtros con dependencias cíclicas se agregará al final de la cadena de filtro y procesamiento continuará.  Información sobre las dependencias cíclicas que se detectan se escribirán en los registros.  Asegúrese de que el nivel de registro de raíz al menos ADVERTIR o configurar un appender para el Plugin de filtros de Grails (@ org.codehaus.groovy.grails.plugins.web.filters.FiltersGrailsPlugin@) al depurar problemas de dependencia de filtro.

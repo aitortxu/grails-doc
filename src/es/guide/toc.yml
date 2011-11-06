@@ -1,8 +1,8 @@
 introduction:
-  title: Introduction
+  title: Introducción
   whatsNew:
-    title: What's new in Grails 2.0?
-    developmentEnvironmentFeatures: Development Environment Features
+    title: Nuevo en Grails 2.0
+    developmentEnvironmentFeatures: Entorno de desarrollo
     coreFeatures: Core Features
     webFeatures: Web Features
     persistenceFeatures: Persistence Features
@@ -23,44 +23,44 @@ gettingStarted:
   generatingAnApplication: Generating an Application
   creatingArtefacts: Creating Artefacts
 conf:
-  title: Configuración
+  title: Configuration
   config:
-    title: Configuración básica
-    builtInOptions: Opciones disponibles
+    title: Basic Configuration
+    builtInOptions: Built in options
     logging: Logging
     configGORM: GORM
-  environments: Entornos
+  environments: Environments
   dataSource:
-    title: El orígen de datos
-    dataSourcesAndEnvironments: Orígenes de datos y entornos
-    JNDIDataSources: Orígenes de datos JNDI 
-    automaticDatabaseMigration: Migraciones automáticas de bases de datos
-    transactionAwareDataSourceProxy: Proxy de origen de datos preparado para transacción
-    databaseConsole: La consola de la Base de Datos
-    multipleDatasources: Orígenes de datos multiples
-  configExternalized: Externalizando la configuración
-  versioning: Versionado
-  docengine: Documentación del projecto
+    title: The DataSource
+    dataSourcesAndEnvironments: DataSources and Environments
+    JNDIDataSources: JNDI DataSources
+    automaticDatabaseMigration: Automatic Database Migration
+    transactionAwareDataSourceProxy: Transaction-aware DataSource Proxy
+    databaseConsole: Database Console
+    multipleDatasources: Multiple Datasources
+  configExternalized: Externalized Configuration
+  versioning: Versioning
+  docengine: Project Documentation
   ivy:
-    title: Resolución de dependencias
-    configurationsAndDependencies: Configuración y dependencias
-    dependencyRepositories: Repositorios de dependencias
-    debuggingResolution: Depurando la resolución de dependencias
-    inheritedDependencies: Dependencias heredadas
-    providingDefaultDependencies: Dependencias por defecto
-    dependencyReports: Informes de dependencias
-    pluginJARDependencies: Dependencias Jar de plugins
-    mavenIntegration: Integración con Maven
-    mavendeploy: Desplegando a un repositorio Maven
-    pluginDependencies: Dependencias de plugin
+    title: Dependency Resolution
+    configurationsAndDependencies: Configurations and Dependencies
+    dependencyRepositories: Dependency Repositories
+    debuggingResolution: Debugging Resolution
+    inheritedDependencies: Inherited Dependencies
+    providingDefaultDependencies: Providing Default Dependencies
+    dependencyReports: Dependency Reports
+    pluginJARDependencies: Plugin JAR Dependencies
+    mavenIntegration: Maven Integration
+    mavendeploy: Deploying to a Maven Repository
+    pluginDependencies: Plugin Dependencies
 commandLine:
-  title: La línea de comando
-  interactiveMode: Modo interactivo
-  creatingGantScripts: Crear Scripts de Gant
-  reusingGrailsScripts: Reusar scripts de Grails
-  events: Interceptando Eventos
-  buildCustomising: Personalizar la construcción
-  antAndMaven: Ant y Maven
+  title: The Command Line
+  interactiveMode: Interactive Mode
+  creatingGantScripts: Creating Gant Scripts
+  reusingGrailsScripts: Re-using Grails scripts
+  events: Hooking into Events
+  buildCustomising: Customising the build
+  antAndMaven: Ant and Maven
 GORM:
   title: Object Relational Mapping (GORM)
   quickStartGuide:
@@ -249,10 +249,10 @@ security:
     shiro: Shiro
 plugins:
   title: Plugins
-  creatingAndInstallingPlugins: Creando e Instalando Plugins
-  repositories: Repositorios de Plugins
-  understandingPluginStructure: Entendiendo la Estructura de un Plugin
-  providingBasicArtefacts: Creando Artefactos Básicos
+  creatingAndInstallingPlugins: Creating and Installing Plugins
+  repositories: Plugin Repositories
+  understandingPluginStructure: Understanding a Plugin's Structure
+  providingBasicArtefacts: Providing Basic Artefacts
   evaluatingConventions: Evaluating Conventions
   hookingIntoBuildEvents: Hooking into Build Events
   hookingIntoRuntimeConfiguration: Hooking into Runtime Configuration

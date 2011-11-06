@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. run-war
 
 h2. Purpose
@@ -13,6 +16,26 @@ grails run-war -restart // restarts without rebuilding the war
 grails prod run-war
 grails -Dserver.port=8090 run-war
 {code}
+{hidden}
+
+h1. ejecutar la guerra
+
+h2. Fin
+
+Paquetes de la aplicación Grails actual en un archivo de archivado de aplicación Web (guerra) y ejecuta la aplicación en un contenedor de Tomcat en el puerto 8080 @ (por defecto).
+
+h2. Ejemplos
+
+{code: java}
+Grails run-guerra
+Grails run-guerra - https / / con HTTPS
+Grails run-guerra - reiniciar / / reinicia sin reconstruir la guerra
+Grails prod ejecutar la guerra
+Grails-Dserver.port=8090 ejecutar la guerra
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -23,6 +46,20 @@ grails [env]* run-war
 
 {warning}
 Unlike the @war@ command, @run-war@ default to the development environment (like most commands). To build and run a WAR file for a different environment just specify the environment name, e.g. @grails prod run-war@.
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails [env] * ejecutar la guerra
+{code}
+
+Advertencia de {}
+A diferencia de la guerra @ @ comando, @ run-guerra @ predeterminado para el entorno de desarrollo (como la mayoría de los comandos). Para generar y ejecutar un archivo WAR para un entorno diferente sólo especificar el nombre del entorno, por ejemplo, @ grails prod ejecutar la guerra @.
+
+{hidden}
+
 {warning}
 
 Arguments:
@@ -33,6 +70,21 @@ Arguments:
 Supported system properties:
 
 * @grails.server.port.http@/@server.port@ - Specifies the HTTP port to run the server on (defaults to 8080)
+{hidden}
+
+Advertencia de {}
+
+Argumentos:
+
+* @ https @ - iniciar un servidor HTTPS (en el puerto 8443 de forma predeterminada) junto con el servidor principal. Para ser claros, la aplicación será accesible a través de HTTPS _and_ HTTP.
+* @ reinicio @ - no reconstruir una guerra ya existente.
+
+Admite propiedades del sistema:
+
+* @grails.server.port.http@/@server.port@ - Especifica el puerto HTTP para ejecutar el servidor de (valor predeterminado es 8080)
+
+{hidden}
+
 * @grails.server.port.https@ - Specifies the HTTPS port to run the server on (defaults to 8443)
 * @grails.server.host@/@server.host@ - Specifies the host name to run the server on (defaults to localhost)
 * @grails.tomcat.jvmArgs@ - A list of JVM arguments to be used for the forked JVM, e.g. @\["-Xms128m", "-Xmx512m"\]@ (defaults to @\["-Xmx512m"\]@)
@@ -43,3 +95,15 @@ Fired Events:
 * @StatusUpdate@ - When the container is reloading
 
 This command packages your application into a WAR file and then runs it in the installed container. It is useful for quick deployment and/or testing. However, unlike [run-app|commandLine] this command does not support reloading as a Grails WAR archive does not ship with Groovy sources, but only compiled byte code.
+{hidden}
+
+* @grails.server.port.https@ - especifica el puerto HTTPS para ejecutar el servidor de (8443 de forma predeterminada)
+* @grails.server.host@/@server.host@ - Especifica el nombre de host para ejecutar el servidor de (localhost de forma predeterminada)
+* @grails.tomcat.jvmArgs@ - una lista de argumentos JVM que se utilizarán para la JVM bifurcada, por ejemplo, @ \["-Xms128m", "-Xmx512m" \] @ (de forma predeterminada @\["-Xmx512m"\]@)
+
+Despedido de eventos:
+
+* @ StatusFinal @ - cuando el contenedor se ha iniciado
+* @ StatusUpdate @ - cuando se recarga el contenedor
+
+Este comando paquetes de su aplicación en un archivo WAR y, a continuación, ejecuta en el contenedor instalado. Es útil para la rápida implementación y pruebas. Sin embargo, a diferencia de [run-app|commandLine] este comando no admite recarga como un archivo WAR de Grails no se suministran con Groovy fuentes, pero sólo compila código de bytes.

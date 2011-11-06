@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-service
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails create-service org.bookstore.book
 {code}
+{hidden}
+
+h1. crear servicio
+
+h2. Fin
+
+El @ crear servicio @ comando crea una clase de servicio de Grails y prueba de unidad asociada para el nombre base determinado.
+
+h2. Ejemplos
+
+{code: java}
+Grails crear servicio org.bookstore.book
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ A service class encapsulates business logic and is delegated to by controllers t
 {note}
 Note that this command is just for convenience and you can also create services in your favorite text editor or IDE if you choose.
 {note}
+{hidden}
+
+h2. Descripción
+
+Crea un servicio para el nombre de base de dar. Por ejemplo un nombre de base se creará a un servicio llamado @ BookService @ @org.bookstore.book@ en la @ grails-app/servicios/org/librería @ directorio.
+
+Una clase de servicio encapsula la lógica empresarial y es delegada por controladores para realizar la lógica del núcleo de una aplicación Grails. Para obtener más información sobre los servicios consulte la sección [Services|guide:services] en la Guía del usuario.
+
+{Nota}
+Tenga en cuenta que este comando es sólo para conveniencia y usted también puede crear servicios en su editor de textos preferido o IDE si elige.
+{Nota}
+
+{hidden}
+
 
 Usage:
 
@@ -29,3 +62,14 @@ grails create-service [name]
 Fired Events:
 
 * @CreatedFile@ - When the service has been created
+{hidden}
+
+Uso:
+
+{code: java}
+Grails crear-servicio [nombre]
+{code}
+
+Despedido de eventos:
+
+* @ CreatedFile @ - cuando se creó el servicio

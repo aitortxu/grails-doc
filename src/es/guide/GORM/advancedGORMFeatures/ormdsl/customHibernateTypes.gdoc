@@ -1,3 +1,6 @@
+
+{hidden}
+
 You saw in an earlier section that you can use composition (with the @embedded@ property) to break a table into multiple objects. You can achieve a similar effect with Hibernate's custom user types. These are not domain classes themselves, but plain Java or Groovy classes. Each of these types also has a corresponding "meta-type" class that implements [org.hibernate.usertype.UserType|api:org.hibernate.usertype.UserType].
 
 The [Hibernate reference manual|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/mapping.html#mapping-types-custom] has some information on custom types, but here we will focus on how to map them in Grails. Let's start by taking a look at a simple domain class that uses an old-fashioned (pre-Java 1.5) type-safe enum class:
@@ -14,6 +17,14 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+Se vio en una sección anterior que puede usar composición (con el @ incrustado @ propiedad) para dividir una tabla en varios objetos. Puede lograr un efecto similar con los tipos de usuario personalizado de hibernación. Estas no son las clases de dominio, pero llano Java o clases Groovy. Cada uno de estos tipos también tiene una clase correspondiente de "tipo meta" que implementa [org.hibernate.usertype.UserType|api:org.hibernate.usertype.UserType].
+
+El [Hibernate referencia manual|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/mapping.html
+
+{hidden}
+
 
 All we have done is declare the @rating@ field the enum type and set the property's type in the custom mapping to the corresponding @UserType@ implementation. That's all you have to do to start using your custom type. If you want, you can also use the other column settings such as "column" to change the column name and "index" to add it to an index.
 
@@ -35,6 +46,31 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+Todo lo que hemos hecho es declarar la calificación @ @ campo el tipo enum y establecer el tipo de la propiedad en la asignación personalizada para el correspondiente @ UserType @ aplicación. Eso es todo lo que tiene que hacer para empezar a utilizar el tipo personalizado. Si lo desea, también puede utilizar los demás valores de columna como "columna" para cambiar el nombre de la columna y el "índice" para agregar a un índice.
+
+Tipos personalizados no se limitan a sólo una sola columna, puede asignarse a tantas columnas como desee. En tales casos definen explícitamente en la asignación de las columnas que se utilice, desde Hibernate sólo puede utilizar el nombre de la propiedad de una sola columna. Afortunadamente, Grails le permite asignar varias columnas a una propiedad mediante esta sintaxis:
+
+{code: java}
+clase {libro
+
+Título de cadena
+    Autor de nombre
+    Clasificación de calificación
+
+asignación estática = {}
+        nombre tipo: NameUserType {}
+            nombre de la columna: "first_name"
+            nombre de la columna: "last_name"
+        }
+        tipo de calificación: RatingUserType
+    }
+}
+{code}
+
+{hidden}
+
 
 The above example will create "first_name" and "last_name" columns for the @author@ property. You'll be pleased to know that you can also use some of the normal column/property mapping attributes in the column definitions. For example:
 
@@ -45,6 +81,20 @@ column name: "first_name", index: "my_idx", unique: true
 The column definitions do _not_ support the following attributes: @type@, @cascade@, @lazy@, @cache@, and @joinTable@.
 
 One thing to bear in mind with custom types is that they define the _SQL types_ for the corresponding database columns. That helps take the burden of configuring them yourself, but what happens if you have a legacy database that uses a different SQL type for one of the columns? In that case, override the column's SQL type using the @sqlType@ attribute:
+{hidden}
+
+En el ejemplo anterior se creará columnas "first_name" y "last_name" para el autor @ @ propiedad. Se complace saber que también puede utilizar algunos de los atributos de asignación de propiedad de columna normal en las definiciones de columnas. Por ejemplo:
+
+{code: java}
+nombre de la columna: "first_name", índice: "my_idx", único: verdadero
+{code}
+
+Las definiciones de columnas que _NO_ apoyo los siguientes atributos: @ tipo @ @ cascada @, @ perezoso @, @ caché @ y @ joinTable @.
+
+Una cosa es tener en cuenta con tipos personalizados es que definen la types_ _SQL para las columnas de base de datos correspondiente. Que ayuda a llevar la carga de la configuración de ellos mismo, pero ¿qué sucede si tiene una base de datos heredado que utiliza un tipo diferente de SQL para una de las columnas? En ese caso, reemplazar el tipo la columna SQL utilizando el sqlType @ @ atributo:
+
+{hidden}
+
 
 {code:java}
 class Book {
@@ -62,5 +112,29 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase {libro
+
+Título de cadena
+    Autor de nombre
+    Clasificación de calificación
+
+asignación estática = {}
+        nombre tipo: NameUserType {}
+            nombre de la columna: "first_name", sqlType: "texto"
+            nombre de la columna: "last_name", sqlType: "texto"
+        }
+        tipo de calificación: RatingUserType, sqlType: "texto"
+    }
+}
+{code}
+
+{hidden}
+
 
 Mind you, the SQL type you specify needs to still work with the custom type. So overriding a default of "varchar" with "text" is fine, but overriding "text" with "yes_no" isn't going to work.
+{hidden}
+
+El tipo SQL que especifique debe seguir trabajando con el tipo personalizado. Lo reemplaza un valor predeterminado de "varchar" con "texto" está bien, pero reemplazando "texto" con "yes_no" no va a funcionar.

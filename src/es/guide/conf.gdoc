@@ -1,3 +1,4 @@
+
 {hidden}
 
 It may seem odd that in a framework that embraces "convention-over-configuration" that we tackle this topic now, but since what configuration there is typically a one-off, it is best to get it out the way.
@@ -7,8 +8,4 @@ With Grails' default settings you can actually develop an application without do
 However, typically you should configure a more robust database at some point and that is described in the following section.
 {hidden}
 
-Puede parecer extraño que en un framework que enfatiza la "Convención sobre configuración" abordemos este tema, pero como la configuración es normalmente algo que se modifica excepcionalmente, es mejor quitárselo de encima.
-
-Con la configuración predeterminada de Grails realmente puede desarrollar una aplicación sin hacer ninguna configuración alguna. Grails cuenta con un contenedor de servlet incrustado y una base de datos en memoria H2 de, por lo que no hay siquiera una base de datos que configurar.
-
-Sin embargo, normalmente debería configurar una base de datos más robusto en algún momento, como se describe en la sección siguiente.
+Puede parecer extraño que en un marco que abarca la "Convención sobre configuración" que abordamos este tema ahora, sino desde la configuración que normalmente es de uso único, es mejor poder salir del camino.Con la configuración predeterminada de Grails realmente puede desarrollar una aplicación sin hacer ninguna configuración alguna. Grails se envía con un contenedor de servlet incrustado y base de datos en memoria H2 de, por lo que no hay siquiera una base de datos para configurar.Sin embargo, normalmente debería configurar una base de datos más robusto en algún momento y que se describe en la sección siguiente.

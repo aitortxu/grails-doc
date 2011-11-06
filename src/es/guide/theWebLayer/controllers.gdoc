@@ -1,3 +1,9 @@
+
+{hidden}
+
 A controller handles requests and creates or prepares the response. A controller can generate the response directly or delegate to a view. To create a controller, simply create a class whose name ends with @Controller@ in the @grails-app/controllers@ directory (in a subdirectory if it's in a package).
 
 The default [URL Mapping|guide:urlmappings] configuration ensures that the first part of your controller name is mapped to a URI and each action defined within your controller maps to URIs within the controller name URI.
+{hidden}
+
+Un controlador gestiona las solicitudes y crea o prepara la respuesta. Un controlador puede generar la respuesta directamente o delegar a la vista. Para crear un controlador, simplemente cree una clase cuyo nombre termina con @ controlador @ en los @ grails-app/controladores @ directorio (en un subdirectorio si está en un paquete).La configuración predeterminada [URL Mapping|guide:urlmappings] asegura que la primera parte de su nombre de controlador está asignada a un URI y cada acción definido dentro de su controlador corresponde a URI en el nombre del controlador de URI.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. link
 
 h2. Purpose
@@ -7,6 +10,20 @@ Creates an html anchor tag with the @href@ set based on the specified parameters
 h2. Examples
 
 Example controller for an application called "shop":
+
+{hidden}
+
+h1. enlace
+
+h2. Fin
+
+Crea una etiqueta de anclaje html con el href @ @ conjunto basado en los parámetros especificados.
+
+h2. Ejemplos
+
+Controlador de ejemplo de una aplicación llamada "comprar":
+
+{hidden}
 
 {code:java}
 class BookController {
@@ -19,6 +36,22 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase BookController {}
+    Def list() {}
+        [libros: Book.list(params)]
+    }
+
+Def show() {}
+        [libro: Book.get(params.id)]
+    }
+}
+{code}
+
+{hidden}
+
 
 Example usages for above controller:
 
@@ -42,6 +75,19 @@ Example usages for above controller:
 
 <g:link controller="book" base="http://admin.mygreatsite.com">Book Home</g:link>
 {code}
+{hidden}
+
+Usos de ejemplo por encima de controlador:
+
+{Código: xml}
+<g:link action="show" id="1">Libro 1</g:link><g:link action="show" id="${currentBook.id}">${currentBook.name}</g:link><g:link controller="book">Casa del libro</g:link><g:link controller="book" action="list">Lista de libros</g:link><g:link url="[action:'list',controller:'book']">Lista de libros</g:link><g:link action="list" params="[sort: 'title', order: 'asc',
+                               author: currentBook.author]">
+     Lista de libros
+</g:link> <g:link controller="book" absolute="true">Libro casa</g:link><g:link controller="book" base="http://admin.mygreatsite.com">Hogar libro</g:link>
+{code}
+
+{hidden}
+
 
 Example as a method call in GSP only:
 
@@ -54,6 +100,22 @@ Results in:
 {code:xml}
 <a href="/shop/book/list">Book List</a>
 {code}
+{hidden}
+
+Ejemplo como una llamada de método en el SPG sólo:
+
+{code: java}
+< % = % link(action:'list',controller:'book') {'Lista de Libros'} >
+{code}
+
+Resultados en:
+
+{Código: xml}
+<a href="/shop/book/list">Lista de libros</a>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -64,6 +126,20 @@ Attributes
 * @elementId@ (optional) - this value will be used to populate the @id@ attribute of the generated href
 * @id@ (optional) - the id to use in the link
 * @fragment@ (optional) - The link fragment (often called anchor tag) to use
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ acción @ (opcional): el nombre de la acción que se utilizan en el enlace; Si no se especifica la acción predeterminada se vincularán
+* @ controlador @ (opcional): el nombre del controlador para usar en el enlace; Si no especifica el controlador actual se vincularán
+* @ elementId @ (opcional): este valor se utilizará para rellenar el id @ @ atributo href generado
+* @ id @ (opcional): el id que se utilizan en el enlace
+* @ fragmento @ (opcional) - el fragmento de enlace (etiqueta de anclaje a menudo llamado) a utilizar
+
+{hidden}
+
 * @mapping@ (optional) - The [named URL mapping|guide:namedMappings] to use to rewrite the link
 * @params@ (optional) - a Map of request parameters
 * @url@ (optional) - a Map containing the action, controller, id etc.
@@ -74,3 +150,15 @@ h2. Source
 
 {source:tag=ApplicationTagLib.link}
 {source}
+{hidden}
+
+* @ asignación @ (opcional): [nombre mapping|guide:namedMappings de URL] para reescribir el vínculo
+* @ params @ (opcional): un mapa de parámetros de solicitud
+* @ url @ (opcional): un mapa que contiene la acción, controlador, id etc..
+* @ absoluto @ (opcional): si @ verdadero @ prefijo de la dirección de destino de vínculo con el valor de la propiedad @grails.serverURL@ de @ Config.groovy@ o http://localhost:<port> Si no hay ningún valor en @Config.groovy@ y no se está ejecutando en producción.
+* @ base @ (opcional) - establece el prefijo que se agregará a la dirección de destino de vínculo, normalmente una dirección URL del servidor absoluta. Esto anula el comportamiento de la absoluta @ @ propiedad, si ambos se especifican.
+
+h2. Fuente
+
+{source:tag=ApplicationTagLib.link}
+{origen de}</port>

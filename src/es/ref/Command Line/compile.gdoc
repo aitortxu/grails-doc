@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. compile
 
 h2. Purpose
@@ -8,6 +11,21 @@ h2. Examples
 
 bc.
 grails compile
+{hidden}
+
+h1. compilar
+
+h2. Fin
+
+La compilación @ @ comando ejecuta la fase de compilación de las Grails facilitado el proceso, que compila las fuentes Groovy y Java.
+
+h2. Ejemplos
+
+a c..
+compilación de Grails
+
+{hidden}
+
 
 h2. Description
 
@@ -18,9 +36,31 @@ grails compile
 
 {note}
 You can enable verbose compilation for _any_ Grails task by passing the flag @-verboseCompile@ to the task (e.g. @grails run-app -verboseCompile@), or by setting the @verboseCompile@ Grails [build setting|guide:buildCustomising].
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+compilación de Grails
+{code}
+
+{Nota}
+Puede habilitar compilación detallado para la tarea de Grails _any_ pasando la bandera @-verboseCompile @ a la tarea (por ejemplo, @ grails run-app - verboseCompile @), o mediante el establecimiento de la @ verboseCompile @ Grails [construir setting|guide:buildCustomising].
+
+{hidden}
+
 {note}
 
 Fired Events:
 
 * @CompileStart@ - Before compilation begins
 * @CompileEnd@ - After compilation completes
+{hidden}
+
+{Nota}
+
+Despedido de eventos:
+
+* @ CompileStart @ - antes de compilación comienza
+* @ CompileEnd @ - después de la compilación completa

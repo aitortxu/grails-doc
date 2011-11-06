@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. notEqual
 
 h2. Purpose
@@ -9,7 +12,28 @@ h2. Examples
 {code:java}
 username notEqual: "Bob"
 {code}
+{hidden}
+
+h1. notEqual
+
+h2. Fin
+
+Asegura que una propiedad no es igual a un valor especificado
+
+h2. Ejemplos
+
+{code: java}
+nombre de usuario notEqual: "Bob"
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Error Code: @className.propertyName.notEqual@
+{hidden}
+
+h2. Descripción
+
+Código de error: @className.propertyName.notEqual@

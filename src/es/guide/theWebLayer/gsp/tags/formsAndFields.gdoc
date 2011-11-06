@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Form Basics
 
 GSP supports many different tags for working with HTML forms and fields, the most basic of which is the [form|tags] tag. This is a controller/action aware version of the regular HTML form tag. The @url@ attribute lets you specify which controller and action to map to:
@@ -7,6 +10,20 @@ GSP supports many different tags for working with HTML forms and fields, the mos
 {code}
 
 In this case we create a form called @myForm@ that submits to the @BookController@'s @list@ action. Beyond that all of the usual HTML attributes apply.
+
+{hidden}
+
+h4. Conceptos básicos de forma
+
+SPG soporta muchas etiquetas diferentes para trabajar con formularios HTML y campos, es el más básico de que la etiqueta [form|tags]. Se trata de una versión de controlador/acción consciente de la etiqueta de formulario HTML normal. @ Url @ atributo permite especificar qué controlador y acción para asignar a:
+
+{Código: xml}
+<g:form name="myForm" url="[controller:'book',action:'list']">...</g:form>
+{code}
+
+En este caso nos cree un formulario denominado @ myForm @ que envía a la lista de @ BookController@'s @ @ acción. Más allá de todos los atributos HTML habituales aplicarán.
+
+{hidden}
 
 h4. Form Fields
 
@@ -18,6 +35,21 @@ In addition to easy construction of forms, GSP supports custom tags for dealing 
 * [radio|tags] - For input fields of type 'radio'
 * [hiddenField|tags] - For input fields of type 'hidden'
 * [select|tags] - For dealing with HTML select boxes
+{hidden}
+
+h4. Campos de formulario
+
+Además de fácil construcción de formas, SGP admite etiquetas personalizadas para tratar los distintos tipos de campos, incluyendo:
+
+* [textField|tags] - para los campos de entrada de tipo 'texto'
+* [passwordField|tags] - para los campos de entrada de tipo 'contraseña'
+* [checkBox|tags] - para los campos de entrada de tipo "checkbox"
+* [radio|tags] - para los campos de entrada de tipo 'radio'
+* [hiddenField|tags] - para los campos de entrada de tipo 'hidden'
+* [select|tags] - para tratar de HTML seleccione cuadros
+
+{hidden}
+
 
 Each of these allows GSP expressions for the value:
 
@@ -28,9 +60,30 @@ Each of these allows GSP expressions for the value:
 GSP also contains extended helper versions of the above tags such as [radioGroup|tags] (for creating groups of [radio|tags] tags), [localeSelect|tags], [currencySelect|tags] and [timeZoneSelect|tags] (for selecting locales, currencies and time zones respectively).
 
 h4. Multiple Submit Buttons
+{hidden}
+
+Cada una de ellas permite expresiones del SGP para el valor:
+
+{Código: xml}
+<g:textfield name="myField" value="${myValue}"></g:textfield>
+{code}
+
+SGP también contiene versiones de auxiliares extendidos de las mencionadas etiquetas como [radioGroup|tags] (para la creación de grupos de etiquetas [radio|tags]), [localeSelect|tags], [currencySelect|tags] y [timeZoneSelect|tags] (para seleccionar configuraciones regionales, monedas y zonas horarias respectivamente).
+
+h4. Varios botones de envío
+
+{hidden}
+
 
 The age old problem of dealing with multiple submit buttons is also handled elegantly with Grails using the [actionSubmit|tags] tag. It is just like a regular submit, but lets you specify an alternative action to submit to:
 
 {code:xml}
 <g:actionSubmit value="Some update label" action="update" />
+{code}
+{hidden}
+
+El problema de la edad antigua de tratar con varios botones de envío también se maneja elegantemente con Grails utilizando la etiqueta [actionSubmit|tags]. Es como un envío ordinario, pero le permite especificar una acción alternativa para enviar a:
+
+{Código: xml}
+<g:actionsubmit value="Some update label" action="update"></g:actionsubmit>
 {code}

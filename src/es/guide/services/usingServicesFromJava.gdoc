@@ -1,3 +1,6 @@
+
+{hidden}
+
 One of the powerful things about services is that since they encapsulate re-usable logic, you can use them from other classes, including Java classes. There are a couple of ways you can reuse a service from Java. The simplest way is to move your service into a package within the @grails-app/services@ directory. The reason this is important is that it is not possible to import classes into Java from the default package (the package used when no package declaration is present). So for example the @BookService@ below cannot be used from Java as it stands:
 
 {code:java}
@@ -7,6 +10,20 @@ class BookService {
     }
 }
 {code}
+
+{hidden}
+
+Una de las poderosas cosas acerca de los servicios es que desde que encapsulan lógica reutilizable, puede utilizarlos de otras clases, incluidas las clases de Java. Hay un par de maneras que puede volver a utilizar un servicio de Java. La forma más sencilla es mover su servicio en un paquete del @ grails-app/Servicios @ directorio. Esto es importante es que no es posible importar clases Java del paquete predeterminado (el paquete utilizado cuando no hay declaración de paquete está presente). Así, por ejemplo el BookService @ @ a continuación no se puede utilizar desde Java tal como es:
+
+{code: java}
+clase BookService {}
+    void buyBook(Book book) {}
+        / / lógica
+    }
+}
+{code}
+
+{hidden}
 
 However, this can be rectified by placing this class in a package, by moving the class into a sub directory such as @grails-app/services/bookstore@ and then modifying the package declaration:
 
@@ -19,6 +36,22 @@ class BookService {
     }
 }
 {code}
+{hidden}
+
+Sin embargo, esto puede corregirse mediante la colocación de esta clase en un paquete, moviendo la clase en un subdirectorio como @ grails-app/servicios/librería @ y, a continuación, modificar la declaración de paquete:
+
+{code: java}
+librería de paquete
+
+clase BookService {}
+    void buyBook(Book book) {}
+        / / lógica
+    }
+}
+{code}
+
+{hidden}
+
 
 An alternative to packages is to instead have an interface within a package that the service implements:
 
@@ -29,6 +62,20 @@ interface BookStore {
     void buyBook(Book book)
 }
 {code}
+{hidden}
+
+Es una alternativa a los paquetes en cambio tener una interfaz dentro de un paquete que implementa el servicio:
+
+{code: java}
+librería de paquete
+
+interfaz {librería
+    void buyBook(Book book)
+}
+{code}
+
+{hidden}
+
 
 And then the service:
 
@@ -39,6 +86,20 @@ class BookService implements bookstore.BookStore {
     }
 }
 {code}
+{hidden}
+
+Y, a continuación, el servicio:
+
+{code: java}
+clase BookService implementa librería.Librería {}
+    void buyBook(Book b) {}
+        / / lógica
+    }
+}
+{code}
+
+{hidden}
+
 
 This latter technique is arguably cleaner, as the Java side only has a reference to the interface and not to the implementation class (although it's always a good idea to use packages). Either way, the goal of this exercise to enable Java to statically resolve the class (or interface) to use, at compile time.
 
@@ -58,6 +119,29 @@ public class BookConsumer {
     ...
 }
 {code}
+{hidden}
+
+Esta última técnica es posiblemente más limpia, como la parte de Java sólo tiene una referencia a la interfaz y no a la clase de implementación (aunque siempre es una buena idea utilizar paquetes). De cualquier modo, el objetivo de este ejercicio para activar Java resolver estáticamente la clase (o interfaz) para utilizar, en tiempo de compilación.
+
+Ahora que ello le puede crear una clase Java dentro de la @ src/java @ directorio y agrega un establecedor que utiliza el tipo y el nombre de la soja en primavera:
+
+{code: java}
+/ / src/java/bookstore/BookConsumer.java
+librería de paquete;
+
+public class BookConsumer {}
+
+almacenar la librería privada;
+
+public void setBookStore (librería storeInstance) {}
+        this.Store = storeInstance;
+    }
+    ...
+}
+{code}
+
+{hidden}
+
 
 Once this is done you can configure the Java class as a Spring bean in @grails-app/conf/spring/resources.xml@ (for more information see the section on [Grails and Spring|guide:spring]):
 
@@ -68,6 +152,20 @@ Once this is done you can configure the Java class as a Spring bean in @grails-a
 {code}
 
 or in @grails-app/conf/spring/resources.groovy@:
+{hidden}
+
+Una vez hecho esto se puede configurar la clase de Java como un grano de primavera en @grails-app/conf/spring/resources.xml@ (para más información, consulte la sección [Grails y Spring|guide:spring]):
+
+{Código: xml}
+<bean id="bookConsumer" class="bookstore.BookConsumer">
+    <property name="bookStore" ref="bookService"></property>
+</bean>
+{code}
+
+o en @ grails-app/conf/spring/resources.groovy@:
+
+{hidden}
+
 
 {code:java}
 import bookstore.BookConsumer
@@ -75,6 +173,17 @@ import bookstore.BookConsumer
 beans = {
     bookConsumer(BookConsumer) {
         bookStore = ref("bookService")
+    }
+}
+{code}
+{hidden}
+
+{code: java}
+librería de importación.BookConsumer
+
+frijoles = {}
+    bookConsumer(BookConsumer) {}
+        Librería = ref("bookService")
     }
 }
 {code}

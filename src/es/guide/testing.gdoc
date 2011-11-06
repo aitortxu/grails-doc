@@ -1,3 +1,6 @@
+
+{hidden}
+
 Automated testing is a key part of Grails. Hence, Grails provides many ways to making testing easier from low level unit testing to high level functional tests. This section details the different capabilities that Grails offers for testing.
 
 {note}
@@ -9,6 +12,22 @@ The first thing to be aware of is that all of the @create-\*@ and @generate-\*@ 
 {code:java}
 grails create-controller com.acme.app.simple
 {code}
+{hidden}
+
+Pruebas automatizadas es una parte clave de Grails. Por lo tanto, Grails ofrece muchas maneras de hacer pruebas más fácil desde la unidad de nivel bajo pruebas de altas niveles pruebas funcionales. Esta sección detalla las diferentes capacidades que Grails ofrece para la prueba.
+
+{Nota}
+1.3. X Grails y utilizar a continuación la jerarquía de clases de @grails.test.GrailsUnitTestCase@ para realizar pruebas en un estilo de JUnit 3. Grails 2.0. x y desaprueba sobre estas pruebas arneses en favor de los mixins que puede aplicarse a una amplia gama de diferentes tipos de pruebas (Spock, JUnit 3, Junit 4, etc.) sin crear subclases
+{Nota}
+
+Lo primero a tener en cuenta es que todos los @ crear-\ * @ y @ generar-\ * @ comandos crear unidad @ @ o @ integración @ pruebas automáticamente. Por ejemplo, si se ejecuta el comando [crear-controller|commandLine] como sigue:
+
+{code: java}
+Grails controlador crear com.acme.app.simple
+{code}
+
+{hidden}
+
 
 Grails will create a controller at @grails-app/controllers/com/acme/app/SimpleController.groovy@, and also a unit test at @test/unit/com/acme/app/SimpleControllerTests.groovy@. What Grails won't do however is populate the logic inside the test! That is left up to you.
 
@@ -19,6 +38,20 @@ The default class name suffix is @Tests@ but as of Grails 1.2.2, the suffix of @
 h4. Running Tests
 
 Test are run with the [test-app|commandLine] command:
+{hidden}
+
+Grails creará un controlador en @ grails-app/controllers/com/acme/app/SimpleController.groovy@, y también una unidad de prueba en @ test/unit/com/acme/app/SimpleControllerTests.groovy@. Sin embargo lo que Grails no es llenar la lógica dentro de la prueba! Deja a usted.
+
+{Nota}
+El sufijo de nombre de clase predeterminado es @ pruebas @ pero como de Grails 1.2.2, también se admite el sufijo de @ prueba @.
+{Nota}
+
+h4. Ejecución de pruebas
+
+Prueba se ejecuta con el comando [prueba-app|commandLine]:
+
+{hidden}
+
 
 {code:java}
 grails test-app
@@ -31,6 +64,22 @@ grails
 ...
 test-app
 {code}
+{hidden}
+
+{code: java}
+prueba de Grails-app
+{code}
+
+Tenga en cuenta que usted podrá ejecutar pruebas unitarias mucho más rápidas si utiliza un IDE o si utiliza el "modo interactivo" para la puesta en marcha Grails, evitando así la necesidad de detener la JVM:
+
+{code: java}
+Grails
+...
+aplicación de prueba
+{code}
+
+{hidden}
+
 
 The @test-app@ command will produce output such as:
 
@@ -43,6 +92,22 @@ Unit Tests Completed in 464ms ...
 
 Tests failed: 0 errors, 1 failures
 {code}
+{hidden}
+
+El @ prueba-app @ comando producirá resultados tales como:
+
+{code: java}
+-------------------------------------------------------
+Ejecutar pruebas unitarias...
+Ejecutando prueba FooTests...FALLA
+Pruebas unitarias completadas en 464ms...
+-------------------------------------------------------
+
+Pruebas de error: 0 errores, fallos 1
+{code}
+
+{hidden}
+
 
 Whilst reports will have been written out the @target/test-reports@ directory.
 
@@ -53,6 +118,20 @@ You can force a clean before running tests by passing @-clean@ to the @test-app@
 h4. Targeting Tests
 
 You can selectively target the test(s) to be run in different ways. To run all tests for a controller named @SimpleController@ you would run:
+{hidden}
+
+Aunque informes habrán sido fuera los @ destino/prueba-informes escritos @ directorio.
+
+{Nota}
+Puede forzar una limpia antes de ejecutar pruebas pasando @ limpiar @ a la @ prueba-app @ comando.
+{Nota}
+
+h4. Pruebas de selección
+
+Selectiva puede dirigir las pruebas para ejecutarse en diferentes formas. Para ejecutar todas las pruebas para un controlador llamado @ SimpleController @ ejecutar:
+
+{hidden}
+
 
 {code}
 grails test-app SimpleController
@@ -63,6 +142,20 @@ This will run any tests for the class named @SimpleController@. Wildcards can be
 {code}
 grails test-app *Controller
 {code}
+{hidden}
+
+{code}
+Grails prueba-app SimpleController
+{code}
+
+Esto ejecutará todas las pruebas para la clase denominada @ SimpleController @. Pueden utilizarse comodines...
+
+{code}
+prueba de Grails-app * Controller
+{code}
+
+{hidden}
+
 
 This will test all classes ending in @Controller@. Package names can optionally be specified...
 
@@ -75,6 +168,22 @@ or to run all tests in a package...
 {code}
 grails test-app some.org.*
 {code}
+{hidden}
+
+Esto pondrá a prueba todas las clases que termina en @ controlador @. Opcionalmente, pueden especificar nombres de paquetes...
+
+{code}
+Grails prueba-app some.org.*Controller
+{code}
+
+o para ejecutar todas las pruebas en un paquete...
+
+{code}
+Grails prueba-app some.org.*
+{code}
+
+{hidden}
+
 
 or to run all tests in a package including subpackages...
 
@@ -87,6 +196,22 @@ You can also target particular test methods...
 {code}
 grails test-app SimpleController.testLogin
 {code}
+{hidden}
+
+o para ejecutar todas las pruebas en un paquete incluyendo subpaquetes...
+
+{code}
+Grails prueba-app some.org.**.*
+{code}
+
+También puede dirigirse métodos de ensayo concreto...
+
+{code}
+Grails prueba-app SimpleController.testLogin
+{code}
+
+{hidden}
+
 
 This will run the @testLogin@ test in the @SimpleController@ tests. You can specify as many patterns in combination as you like...
 
@@ -97,6 +222,20 @@ grails test-app some.org.* SimpleController.testLogin BookController
 h4. Targeting Test Types and/or Phases
 
 In addition to targeting certain tests, you can also target test _types_ and/or _phases_ by using the @phase:type@ syntax.
+{hidden}
+
+@ TestLogin @ prueba esto ejecutará en el @ SimpleController @ pruebas. Puede especificar tantos patrones en combinación como quiera...
+
+{code}
+Grails prueba-app some.org.* SimpleController.testLogin BookController
+{code}
+
+h4. Dirigidas a tipos de prueba o fases
+
+Además de atacar ciertas pruebas, puede también destino prueba _types_ y/o _phases_ usando la fase @: tipo @ sintaxis.
+
+{hidden}
+
 
 {note}
 Grails organises tests by phase and by type. A test phase relates to the state of the Grails application during the tests, and the type relates to the testing mechanism.
@@ -107,6 +246,20 @@ Testing plugins may provide new test phases or new test types for existing phase
 {note}
 
 To execute the JUnit @integration@ tests you can run:
+{hidden}
+
+{Nota}
+Grails organiza pruebas por fase y por tipo. Una fase de prueba se relaciona con el estado de la aplicación Grails durante las pruebas, y el tipo se refiere al mecanismo de prueba.
+
+Grails viene con soporte para 4 fases de prueba (@ unidad @, @ integración @, @ funcional @ y @ otro @) y JUnit tipos de unidad @ @ y @ integración @ fases de prueba. Estos tipos de prueba tiene el mismo nombre que la fase.
+
+Plugins pruebas puede proporcionar nuevas fases de pruebas o nuevos tipos de prueba para las fases existentes. Consulte la documentación de plugin.
+{Nota}
+
+Para ejecutar la integración @ JUnit @ puede ejecutar las pruebas:
+
+{hidden}
+
 
 {code}
 grails test-app integration:integration
@@ -117,6 +270,20 @@ Both @phase@ and @type@ are optional. Their absence acts as a wildcard. The foll
 {code}
 grails test-app unit:
 {code}
+{hidden}
+
+{code}
+Grails prueba app integración: integración
+{code}
+
+@ Fase @ y @ tipo @ son opcionales. Su ausencia actúa como comodín. El comando siguiente se ejecutará que todas pruebas tipos en la unidad @ @ fase:
+
+{code}
+unidad de prueba-app de Grails:
+{code}
+
+{hidden}
+
 
 The Grails [Spock Plugin|http://grails.org/plugin/spock] is one plugin that adds new test types to Grails. It adds a @spock@ test type to the @unit@, @integration@ and @functional@ phases. To run all spock tests in all phases you would run the following:
 
@@ -129,6 +296,22 @@ To run the all of the spock tests in the @functional@ phase you would run...
 {code}
 grails test-app functional:spock
 {code}
+{hidden}
+
+Los Grails [Spock Plugin|http://grails.org/plugin/spock] es un plugin que añade nuevos tipos de prueba a Grails. Agrega un spock @ @ tipo de prueba a la unidad @ @, @ integración @ y @ funcional @ fases. Para ejecutar todas las pruebas de spock en todas las fases se ejecute lo siguiente:
+
+{code}
+prueba de Grails-app: spock
+{code}
+
+Para ejecutar pruebas de todos los spock la @ funcional @ fase deberá ejecutar...
+
+{code}
+prueba de Grails-app funcional: spock
+{code}
+
+{hidden}
+
 
 More than one pattern can be specified...
 
@@ -139,9 +322,30 @@ grails test-app unit:spock integration:spock
 h4. Targeting Tests in Types and/or Phases
 
 Test and type/phase targetting can be applied at the same time:
+{hidden}
+
+Se puede especificar más de un patrón...
+
+{code}
+Grails prueba app unidad: spock integración: spock
+{code}
+
+h4. Pruebas de selección en tipos y fases
+
+Fase de prueba y tipo/identificación puede aplicarse al mismo tiempo:
+
+{hidden}
+
 
 {code}
 grails test-app integration: unit: some.org.**.*
 {code}
 
 This would run all tests in the @integration@ and @unit@ phases that are in the package @some.org@ or a subpackage.
+{hidden}
+
+{code}
+integración de aplicaciones de prueba de Grails: unidad: some.org.**.*
+{code}
+
+Esto iría en todas las pruebas en la integración @ @ y @ unidad @ fases que se encuentran en el paquete @some.org@ o un subpackage.

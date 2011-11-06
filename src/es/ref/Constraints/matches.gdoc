@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. matches
 
 h2. Purpose
@@ -9,9 +12,32 @@ h2. Examples
 {code:java}
 login matches: "[a-zA-Z]+"
 {code}
+{hidden}
+
+h1. coincide con
+
+h2. Fin
+
+Valida que un valor de cadena coincide con una expresión regular dada.
+
+h2. Ejemplos
+
+{code: java}
+coincide con el inicio de sesión: "[a-zA-Z]"
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Applies a regular expression against a string value.
 
 Error Code: @className.propertyName.matches.invalid@
+{hidden}
+
+h2. Descripción
+
+Se aplica una expresión regular con un valor de cadena.
+
+Código de error: @className.propertyName.matches.invalid@

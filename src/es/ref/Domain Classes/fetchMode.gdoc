@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. fetchMode
 
 h2. Purpose
@@ -16,6 +19,29 @@ class Author {
     static fetchMode = [books: 'eager']
 }
 {code}
+{hidden}
+
+h1. fetchMode
+
+h2. Fin
+
+Permite la configuración de una estrategia de recuperación de asociaciones ('ansioso' o 'perezosos')
+
+h2. Ejemplos
+
+{code: java}
+clase {autor
+
+Nombre de la cadena
+
+estático hasMany = [libros: libro]
+
+fetchMode estática = [libros: 'ansioso']
+}
+{code}
+
+{hidden}
+
 
 In this example the @fetchMode@ static property specifies that the @book@ association should be fetching eagerly
 
@@ -24,3 +50,12 @@ h2. Description
 By default associations in Grails are fetched lazily (each record is read from the database only when it is first accessed from the collection). This makes sense for most cases, however in the case where you have a small number of records to fetch and/or are repeatedly required to load lazy associations (resulting in N+1 queries) it makes sense to use eager fetching.
 
 In the case of eager fetching and a one-to-many association, the instance as well as the association will be initialized when they are loaded (eagerly). However, caution should be observed when using eager fetching, since being too eager can result in your entire database being loaded into memory!
+{hidden}
+
+En este ejemplo el @ fetchMode @ propiedad estática especifica que el libro @ @ asociación debe estar buscando ansiosamente
+
+h2. Descripción
+
+Por defecto se recuperan mandos… asociaciones en Grails (se lee cada registro de la base de datos sólo cuando primero se accede desde la colección). Esto tiene sentido para la mayoría de casos, sin embargo en el caso donde tienen un pequeño número de registros que se va a recuperar o repetidamente deben cargar perezosas asociaciones (resultando en consultas N 1) tiene sentido usar deseoso de obtener.
+
+En el caso de ansioso por recuperar y una asociación de uno a muchos, la instancia, así como la asociación se inicializarán cuando se cargan (con impaciencia). Sin embargo, debe observarse precaución al utilizar deseoso de recuperar, ya que están demasiado ansioso puede resultar en su base de datos completa que se carga en la memoria!

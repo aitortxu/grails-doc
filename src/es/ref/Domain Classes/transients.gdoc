@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. transients
 
 h2. Purpose
@@ -14,5 +17,29 @@ class Author {
    static transients = ['upperCaseName']
 }
 {code}
+{hidden}
+
+h1. transitorios
+
+h2. Fin
+
+Define una lista de nombres de propiedad que no debe persistir en la base de datos. Esto a menudo es útil si tiene métodos de descriptor de acceso de sólo lectura ("captadores") que son métodos auxiliares pero get confundidos como relacionados con la persistencia.
+
+h2. Ejemplos
+
+{code: java}
+clase {autor
+   Nombre de la cadena
+   Cadena getUpperCaseName() {name.toUpperCase()}
+
+transitorios estáticas = ['upperCaseName']
+}
+{code}
+
+{hidden}
+
 
 Here we have an accessor that takes the @name@ and converts it to uppercase. It doesn't make sense to persist this derived value, so we mark it as transient adding its JavaBean property name to the @transients@ list.
+{hidden}
+
+Aquí tenemos un descriptor de acceso que toma el nombre de @ @ y se convierte en mayúsculas. No tiene sentido para conservar este valor derivado, por lo que marcamos como transitorio agregar su nombre de la propiedad JavaBean a transitorios @ @ lista.

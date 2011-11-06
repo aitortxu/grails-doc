@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. layoutHead
 
 h2. Purpose
@@ -8,6 +11,20 @@ h2. Examples
 
 Example decorated page:
 
+{hidden}
+
+h1. layoutHead
+
+h2. Fin
+
+Utilizado en diseños para representar el contenido de la etiqueta de cabeza de la página decorada. Equivalente a la SiteMesh @<decorator:head></decorator:head>@ etiqueta.
+
+h2. Ejemplos
+
+Ejemplo decorada página:
+
+{hidden}
+
 {code:xml}
 <html>
    <head>
@@ -17,6 +34,15 @@ Example decorated page:
    <body>Page to be decorated</body>
 </html>
 {code}
+
+{hidden}
+
+{Código: xml}<html>
+   <head>
+        <meta name="layout" content="myLayout">
+        <script src="myscript.js"></script></head></html>
+
+{hidden}
 
 Example decorator layout:
 
@@ -29,6 +55,16 @@ Example decorator layout:
    <body><g:layoutBody /></body>
 </html>
 {code}
+{hidden}
+
+Diseño decorador de ejemplo:
+
+{Código: xml}<html>
+   <head>
+        <script src="global.js"></script></head></html>
+
+{hidden}
+
 
 Results in:
 
@@ -41,8 +77,24 @@ Results in:
    <body>Page to be decorated</body>
 </html>
 {code}
+{hidden}
+
+Resultados en:
+
+{Código: xml}<html>
+   <head>
+        <script src="global.js"></script></head></html>
+
+{hidden}
+
 
 h2. Source
 
 {source:tag=RenderTagLib.layoutHead}
 {source}
+{hidden}
+
+h2. Fuente
+
+{source:tag=RenderTagLib.layoutHead}
+origen de {}

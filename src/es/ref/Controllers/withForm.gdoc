@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. withForm
 
 h2. Purpose
@@ -13,6 +16,26 @@ withForm {
    // bad request
 }
 {code}
+{hidden}
+
+h1. withForm
+
+h2. Fin
+
+Solía manejar envíos de formularios duplicados.
+
+h2. Ejemplos
+
+{code: java}
+withForm {}
+   / / solicitud de buena
+} .invalidtoken {}
+   / / solicitud incorrecta
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -23,6 +46,20 @@ The @withForm@ method requires the use of the @useToken@ attribute in a [form|ta
 {code}
 
 Then in your controller code you can use the @withForm@ method to handle valid and invalid requests:
+{hidden}
+
+h2. Descripción
+
+@ WithForm @ método requiere el uso de la @ useToken @ atributo [form|tags]
+
+{Código: xml}
+<g:form usetoken="true" ...="">
+{code}
+
+A continuación, en el código del controlador puede utilizar el @ withForm @ método para gestionar solicitudes válidas y no válidas:</g:form>
+
+{hidden}
+
 
 {code:java}
 withForm {
@@ -33,3 +70,14 @@ withForm {
 {code}
 
 See [Handling Duplicate Form Submissions|guide:formtokens] for more information.
+{hidden}
+
+{code: java}
+withForm {}
+   / / solicitud de buena
+} .invalidtoken {}
+   / / solicitud incorrecta
+}
+{code}
+
+Obtener más información, consulte [manejo Submissions|guide:formtokens de forma duplicar].

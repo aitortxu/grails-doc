@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. clearErrors
 
 h2. Purpose
@@ -19,5 +22,30 @@ if (b.hasErrors()) {
 
     // re-validate
     b.validate()
+}
+{code}
+{hidden}
+
+h1. clearErrors
+
+h2. Fin
+
+Restablece la lista de errores en una clase de dominio.  Esto puede resultar útil si una clase de dominio contiene errores debido a problemas o validación de enlace.  Los errores pueden corregirse mediante programación.  Validación puede continuar un error a menos que se borran los errores.
+
+h2. Ejemplos
+
+{code: java}
+Def b = nuevo libro (título: "El resplandor")
+b.Validate()
+Si ({b.hasErrors())}
+
+/ / borrar la lista de errores
+    b.clearErrors()
+
+/ / solución de problemas de validación
+    b.Author = "Stephen King"
+
+/ / subsanase
+    b.Validate()
 }
 {code}

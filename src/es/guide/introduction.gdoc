@@ -1,3 +1,6 @@
+
+{hidden}
+
 Java web development as it stands today is dramatically more complicated than it needs to be. Most modern web frameworks in the Java space are over complicated and don't embrace the Don't Repeat Yourself (DRY) principles.
 
 Dynamic frameworks like Rails, Django and TurboGears helped pave the way to a more modern way of thinking about web applications. Grails builds on these concepts and dramatically reduces the complexity of building web applications on the Java platform. What makes it different, however, is that it does so by building on already established Java technologies like Spring and Hibernate.
@@ -8,6 +11,12 @@ Grails is a full stack framework and attempts to solve as many pieces of the web
 * An expressive view technology called Groovy Server Pages (GSP)
 * A controller layer built on "Spring":http://www.springframework.org MVC
 * A command line scripting environment built on the Groovy-powered "Gant":http://groovy.codehaus.org/Gant
+{hidden}
+
+Java web desarrollo tal como es hoy en día es considerablemente más complicado de lo que debe ser. Marcos de web más modernos en el espacio de Java son más complicados y no abrazan los principios Don't repita usted mismo (seco).Marcos dinámicos como Rails, Django y TurboGears ayudó a allanar el camino hacia una forma más moderna de pensar acerca de las aplicaciones web. Grails se basa en estos conceptos y reduce considerablemente la complejidad de la creación de aplicaciones web en la plataforma Java. Lo que hace diferente, sin embargo, es que lo hace apoyándose en las tecnologías de Java ya establecidas como Spring y Hibernate.Grails es un marco de pila completo y los intentos de resolver el mayor número de piezas del rompecabezas de desarrollo web a través de la tecnología de núcleo y sus asociados plugins. En el cuadro se incluyen cosas como:* Una capa de objetos relacionales Mapping (ORM) fácil de usar basada en [Hibernate|http://www.hibernate.org]* Una tecnología de vista expresivo llamada páginas de servidor Groovy (SPG)* Una capa de controlador construida en "Spring":http://www.springframework.org MVC* Un entorno de secuencias de línea de comandos construido sobre el encendido Groovy "Gant":http://groovy.codehaus.org/Gant
+
+{hidden}
+
 * An embedded "Tomcat":http://tomcat.apache.org container which is configured for on the fly reloading
 * Dependency injection with the inbuilt Spring container
 * Support for internationalization (i18n) built on Spring's core MessageSource concept
@@ -16,3 +25,6 @@ Grails is a full stack framework and attempts to solve as many pieces of the web
 All of these are made easy to use through the power of the "Groovy":http://groovy.codehaus.org language and the extensive use of Domain Specific Languages (DSLs)
 
 This documentation will take you through getting started with Grails and building web applications with the Grails framework.
+{hidden}
+
+* Un incrustado "Tomcat":http://tomcat.apache.org contenedor que está configurado para el vuelo recarga* Inyección dependencia con el contenedor de primavera intrínseca* Soporte de internacionalización (i18n) construido en concepto de MessageSource central de primavera* Una capa de servicio transaccional construida sobre abstracción de transacción de la primaveraTodos estos hacen fácil de usar gracias a la potencia de la "lengua de Groovy":http://groovy.codehaus.org y el uso de lenguajes específicos de dominio (DSLs)Esta documentación le llevará a través de conseguir comenzó con Grails y creación de aplicaciones web con el marco de Grails.

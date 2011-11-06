@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. redirect
 
 h2. Purpose
@@ -19,6 +22,32 @@ redirect(uri: "book/list")
 
 redirect(url: "http://www.blogjava.net/BlueSUN")
 {code}
+{hidden}
+
+h1. redirigir
+
+h2. Fin
+
+Para redirigir el flujo de una acción a la siguiente mediante un HTTP redirigir.
+
+h2. Ejemplos
+
+{code: java}
+redirigir (acción: "Mostrar")
+
+redirigir (controlador: "reserva", acción: "lista")
+
+redirigir (acción: "Mostrar", id: 4, params: [autor: "Stephen King"])
+
+redirigir (controlador: "reserva", acción: "show", fragmento: "perfil")
+
+redirigir (uri: "libro/lista")
+
+redirigir (url: "http://www.blogjava.net/BlueSUN")
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -29,6 +58,20 @@ h4. Parameters
 * @action@ (optional) - the name of the action to use in the link, if not specified the default action will be linked
 * @controller@ (optional) - the name of the controller to use in the link, if not specified the current controller will be linked
 * @elementId@ (optional) - this value will be used to populate the @id@ attribute of the generated href
+{hidden}
+
+h2. Descripción
+
+Redirige la acción actual a otra acción, opcionalmente pasando parámetros o errores.
+
+h4. Parámetros
+
+* @ acción @ (opcional) - se vinculará el nombre de la acción que se utilizan en el enlace, si no se especifica la acción predeterminada
+* @ controlador @ (opcional) - se vinculará el nombre del controlador para usar en el enlace, si no se especifica el controlador actual
+* @ elementId @ (opcional): este valor se utilizará para rellenar el id @ @ atributo href generado
+
+{hidden}
+
 * @id@ (optional) - the id to use in the link
 * @fragment@ (optional) - The link fragment (often called anchor tag) to use
 * @mapping@ (optional) - The [named URL mapping|guide:namedMappings] to use to rewrite the link
@@ -37,3 +80,13 @@ h4. Parameters
 * @absolute@ (optional) - If @true@ will prefix the link target address with the value of the @grails.serverURL@ property from @Config.groovy@, or http://localhost:<port> if there is no value in @Config.groovy@ and not running in the production environment.
 * @base@ (optional) - Sets the prefix to be added to the link target address, typically an absolute server URL. This overrides the behaviour of the @absolute@ property if both are specified.
 * @permanent@ (optional) - If @true@ the redirect will be issued with a 301 HTTP status code (permanently moved), otherwise a 302 HTTP status code will be issued
+{hidden}
+
+* @ id @ (opcional): el id que se utilizan en el enlace
+* @ fragmento @ (opcional) - el fragmento de enlace (etiqueta de anclaje a menudo llamado) a utilizar
+* @ asignación @ (opcional): [nombre mapping|guide:namedMappings de URL] para reescribir el vínculo
+* @ params @ (opcional): un mapa que contenga solicitud de parámetros
+* @ url @ (opcional): un mapa que contiene la acción, controlador, id etc..
+* @ absoluto @ (opcional): si @ verdadero @ prefijo de la dirección de destino de vínculo con el valor de la propiedad @grails.serverURL@ de @ Config.groovy@ o http://localhost:<port> Si no hay ningún valor en @Config.groovy@ y no se ejecuta en el entorno de producción.
+* @ base @ (opcional) - establece el prefijo que se agregará a la dirección de destino de vínculo, normalmente una dirección URL del servidor absoluta. Esto anula el comportamiento de la absoluta @ @ propiedad si ambos se especifican.
+* @ permanente @ (opcional): si @ verdadero @ la redirección se emitirán con un código de estado HTTP 301 (movido permanentemente), de lo contrario un código de estado HTTP 302 se emitirán</port>

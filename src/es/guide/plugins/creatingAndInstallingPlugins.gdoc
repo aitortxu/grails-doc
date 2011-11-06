@@ -1,38 +1,53 @@
+
 {hidden}
+
 h4. Creating Plugins
 
 Creating a Grails plugin is a simple matter of running the command:
-{hidden}
-h4. Creación de Plugins
-
-Un plugin de Grails se crea simplemente ejecutando el siguiente comando:
 
 {code:java}
 grails create-plugin [PLUGIN NAME]
 {code}
 
-{hidden}
 This will create a plugin project for the name you specify. For example running @grails create-plugin example@ would create a new plugin project called @example@.
+
+{hidden}
+
+h4. Creación de Plugins
+
+Crear un plugin Grails es una simple cuestión de ejecutar el comando:
+
+{code: java}
+Grails crear-plugin [nombre del PLUGIN]
+{code}
+
+Esto creará un proyecto de complemento para el nombre que especifique. Por ejemplo ejecutando @ grails plugin crear ejemplo @ crearía un nuevo proyecto de plugin llamado @ ejemplo @.
+
+{hidden}
 
 The structure of a Grails plugin is very nearly the same as a Grails application project's except that in the root of the plugin directory you will find a plugin Groovy file called the "plugin descriptor".
 
 Being a regular Grails project has a number of benefits in that you can immediately test your plugin by running:
-{hidden}
-
-Esto creara un proyecto de plugin con el nombre especificado. Por ejemplo, ejecutando @grails create-plugin example@ se creará un nuevo proyecto de plugin llamado @example@
-
-La estructura de un plugin de Grails es muy parecida a la de un proyecto de aplicación excepto porque en el directorio raiz del plugin se encuentra un fichero llamado "plugin descriptor"
-
-El hecho de ser un proyecto de Grails estandar tiene muchas ventajas incluido que puedes testear tu plugin desde el primer momento simplemente ejecutando el comando:
 
 {code:java}
 grails run-app
 {code}
-{hidden}
+
 The plugin descriptor name ends with the convention @GrailsPlugin@ and is found in the root of the plugin project. For example:
+
 {hidden}
 
-El nombre del fichero descriptor del plugin tiene el sufijo @GrailsPlugin@ y se encuentra en la raiz del proyecto de plugin. Por ejemplo:
+La estructura de un plugin Grails es casi lo mismo que un proyecto de aplicación Grails, salvo que en la raíz del directorio de plugin encontrará un archivo Groovy plugin llamado "descriptor de plugin".
+
+Siendo un proyecto Grails normal tiene una serie de beneficios que inmediatamente puede probar tu plugin ejecutando:
+
+{code: java}
+Grails run-app
+{code}
+
+El nombre de descriptor de plugin termina con la Convención @ GrailsPlugin @ y se encuentra en la raíz del proyecto de plugin. Por ejemplo:
+
+{hidden}
 
 {code:java}
 class ExampleGrailsPlugin {
@@ -41,8 +56,22 @@ class ExampleGrailsPlugin {
    ...
 }
 {code}
-{hidden}
+
 All plugins must have this class in the root of their directory structure. The plugin class defines the version of the plugin and other metadata, and optionally various hooks into plugin extension points (covered shortly).
+
+{hidden}
+
+{code: java}
+clase ExampleGrailsPlugin {}
+   versión Def = "0.1"
+
+...
+}
+{code}
+
+Todos los plugins debe tener esta clase en la raíz de su estructura de directorios. La clase de plugin define la versión del plugin y otros metadatos y opcionalmente varios ganchos en puntos de extensión de plugin (cubiertas poco).
+
+{hidden}
 
 You can also provide additional information about your plugin using several special properties:
 
@@ -54,22 +83,21 @@ You can also provide additional information about your plugin using several spec
 * @description@ - full multi-line description of plugin's features
 * @documentation@ - URL of the plugin's documentation
 
-Here is an example from the [Quartz Grails plugin|http://grails.org/plugin/quartz]:
 {hidden}
 
-Todos los plugins deben tener esta clase en la raiz de su estructura de directorios. La clase del plugin define la versión del plugin asi como otros metadasos, y opcionalmente varios "hooks" en los puntos de extensión de plugins (lo veremos en detalle muy pronto).
+También puede proporcionar información adicional sobre el plugin usando varias propiedades especiales:
 
-Es posible añadir información adicional sobre el plugin usando algunas propiedades especiales:
+* @ title @ - breve descripción de una frase de tu plugin
+* @ versión @ - la versión de tu plugin. Los valores válidos son ejemplo "0,1", "0,2-instantánea", "1.1.4" etc..
+* @ grailsVersion @ - la versión de versión gama de Grails que es compatible con el plugin. EG. "1.2 > *" (indicando 1.2 o superior)
+* @ autor @ - nombre del autor del plugin
+* @ authorEmail @ - correo electrónico de contacto del autor del plugin
+* @ Descripción @ - multilínea descripción de funciones del plugin completa
+* @ documentación @ - URL de documentación del plugin
 
-* @title@ - Descripción corta (de una linea) del plugin
-* @version@ - La versión del plugin. entre los valores válidos están por ejemplo "0.1", "0.2-SNAPSHOT", "1.1.4" etc.
-* @grailsVersion@ -  La versión o el rango de versiones de Grails que soporta el plugin. Ej "1.2 > *" (indica 1.2 o superior)
-* @author@ - Nombre del autor del plugin
-* @authorEmail@ - Dirección de correo del autor del plugin
-* @description@ - Descripción completa (varias lineas) de las características del plugin
-* @documentation@ - URL de la documentación del plugin
+{hidden}
 
-Lo siguiente es un ejemplo del plugin [Quartz Grails plugin|http://grails.org/plugin/quartz]:
+Here is an example from the [Quartz Grails plugin|http://grails.org/plugin/quartz]:
 
 {code:java}
 class QuartzGrailsPlugin {
@@ -90,40 +118,83 @@ via Spring, but is made simpler by the coding by convention paradigm.\\\
 }
 {code}
 {hidden}
+
+Este es un ejemplo de la [plugin|http://grails.org/plugin/quartz de cuarzo Grails]:
+
+{code: java}
+clase QuartzGrailsPlugin {}
+    versión Def = "0.1"
+    Def grailsVersion = "1.1 > *"
+    Def autor = "Sergey Nebolsin"
+    Def authorEmail = "nebolsin@gmail.com"
+    título de Def = "Cuarzo plug-in"
+    Descripción de Def = '''\\\
+El plugin de cuarzo permite que la aplicación de Grails programar jobs\\\
+para ser ejecutada utilizando una expresión de intervalo o cron especificada. The\\\
+sistema utiliza el planificador de cuarzo Enterprise configured\\\
+a través de la primavera, pero se hace más sencilla la codificación por Convenio paradigm.\\\
+'''
+    documentación de Def = "http://grails.org/plugin/quartz"
+
+...
+}
+{code}
+
+{hidden}
+
+
 h4. Installing and Distributing Plugins
 
 To distribute a plugin you navigate to its root directory in a console and run:
-{hidden}
-
-h4. Instalando y distribuyendo Plugins
-
-Para distribuir un plugin hay que ir al directorio raíz del mismo y ejecutar:
 
 {code:java}
 grails package-plugin
 {code}
-{hidden}
+
 This will create a zip file of the plugin starting with @grails-@ then the plugin name and version. For example with the example plugin created earlier this would be @grails-example-0.1.zip@. The @package-plugin@ command will also generate a @plugin.xml@ file which contains machine-readable information about plugin's name, version, author, and so on.
+{hidden}
+
+h4. Instalación y distribución de Plugins
+
+Para distribuir un plugin que navegar a su directorio root en una consola y ejecutar:
+
+{code: java}
+Grails paquete-plugin
+{code}
+
+Esto creará un archivo zip del plugin comenzando con @ grails-@ versión y, a continuación, el nombre del plugin. Por ejemplo con el plugin de ejemplo creado anteriormente esto sería @ grails-ejemplo-0.1.zip @. @ Paquete-plugin @ comando también generará un archivo @plugin.xml@ que contiene información legible por máquina acerca del plugin nombre, versión, autor y así sucesivamente.
+
+{hidden}
+
 
 Once you have a plugin distribution file you can navigate to a Grails project and run:
-{hidden}
 
-Esto creará un fichero zip del plugin con el nombre que empieza por @grails-@ seguido del nombre del plugin y de la versión. Por ejemplo, para el plugin example creado anteriormente este nombre será @grails-example-0.1.zip@. El comando @package-plugin@ también genera un fichero con nombre @plugin.xml@ que contiene información con información sobre el nombre del plugin, versión, autor etc..
 {code:java}
 grails install-plugin /path/to/grails-example-0.1.zip
 {code}
 
-{hidden}
 If the plugin is hosted on an HTTP server you can install it with:
-{hidden}
-
-Si el plugin está alojado en un servidor HTTP, se puede instalar con el comando:
 
 {code:java}
 grails install-plugin http://myserver.com/plugins/grails-example-0.1.zip
 {code}
+{hidden}
+
+Una vez que tenga un archivo de distribución de plugin puede desplazarse a un proyecto Grails y ejecute:
+
+{code: java}
+Grails instalar plugin /path/to/grails-example-0.1.zip
+{code}
+
+Si el plugin está alojado en un servidor HTTP puede instalarlo con:
+
+{code: java}
+Grails instalar plugin http://myserver.com/plugins/grails-example-0.1.zip
+{code}
 
 {hidden}
+
+
 h4. Notes on excluded Artefacts
 
 Although the [create-plugin|commandLine] command creates certain files for you so that the plugin can be run as a Grails application, not all of these files are included when packaging a plugin. The following is a list of artefacts created, but not included by [package-plugin|commandLine]:
@@ -133,6 +204,20 @@ Although the [create-plugin|commandLine] command creates certain files for you s
 * @grails-app/conf/Config.groovy@
 * @grails-app/conf/DataSource.groovy@ (and any other @*DataSource.groovy@)
 * @grails-app/conf/UrlMappings.groovy@
+{hidden}
+
+h4. Notas sobre artefactos excluidos
+
+Aunque el comando [crear-plugin|commandLine] crea ciertos archivos para que el plugin puede ejecutarse como una aplicación Grails, no todos estos archivos se incluyen al empaquetar un plugin. La siguiente es una lista de objetos creados, pero no incluyó por [paquete-plugin|commandLine]:
+
+* @grails-app/conf/BootStrap.groovy@
+* @grails-app/conf/BuildConfig.groovy@ (aunque se usa para generar @ dependencies.groovy@)
+* @grails-app/conf/Config.groovy@
+* @grails-app/conf/DataSource.groovy@ (y cualquier otro @ * DataSource.groovy@)
+* @grails-app/conf/UrlMappings.groovy@
+
+{hidden}
+
 * @grails-app/conf/spring/resources.groovy@
 * Everything within @/web-app/WEB-INF@
 * Everything within @/web-app/plugins/\*\*@
@@ -140,34 +225,24 @@ Although the [create-plugin|commandLine] command creates certain files for you s
 * SCM management files within @\*\*/.svn/\*\*@ and @\*\*/CVS/\*\*@
 
 If you need artefacts within @WEB-INF@ it is recommended you use the @_Install.groovy@ script (covered later), which is executed when a plugin is installed, to provide such artefacts. In addition, although @UrlMappings.groovy@ is excluded you are allowed to include a @UrlMappings@ definition with a different name, such as @MyPluginUrlMappings.groovy@.
-{hidden}
 
-h4. Notas sobre artefactos excluidos
-
-Aunque el comando [create-plugin|commandLine] crea ciertos ficheros por nosotros de manera que el plugin puede ser ejecutado como una aplicación Grails normal, no todos esos ficheros son incluidos cuando empaquetamos un plugin. La siguiente lista muestra los artefactos que son creados pero no incluidos por [package-plugin|commandLine]
-
-* @grails-app/conf/BootStrap.groovy@
-* @grails-app/conf/BuildConfig.groovy@ (Aunque es usado para generar @dependencies.groovy@)
-* @grails-app/conf/Config.groovy@
-* @grails-app/conf/DataSource.groovy@ (y cualquier otro @*DataSource.groovy@)
-* @grails-app/conf/UrlMappings.groovy@
-* @grails-app/conf/spring/resources.groovy@
-* Todo lo que hay en @/web-app/WEB-INF@
-* Todo lo que hay en  @/web-app/plugins/\*\*@
-* Todo lo que hay en  @/test/\*\*@
-* Ficheros de configuración del SCM @\*\*/.svn/\*\*@ and @\*\*/CVS/\*\*@
-
-Si es necesario incluir artefactos dentro de @WEB-INF@ se recomienda usar el script @_Install.groovy@ (se verá más tarde), que es ejecutaqdo cuando un plugin va a ser instalado para crear los artefactos. Además, aunque el fichero @UrlMappings.groovy@ es escluido es posible incluir una definición @UrlMappings@ con un nombre diferente, como por ejemplo @MyPluginUrlMappings.groovy@.
-
-{hidden}
 h4. Specifying Plugin Locations
 
-An application can load plugins from anywhere on the file system, even if they have not been installed. Specify the location of the (unpacked) plugin in the application's @grails-app/conf/BuildConfig.groovy@ file:
 {hidden}
 
-h4. Especificación de la localicación de los plugins
+* @grails-app/conf/spring/resources.groovy@
+* Todo dentro de @ / web-app/WEB-INF @
+* Todo dentro de @ / web-app/plugins / \ * \ * @
+* Todo dentro de @ / prueba / \ * \ * @
+* Archivos de gestión de SCM dentro de @\*\*/.svn/\*\*@ y @ \*\*/CVS/\*\*@
 
-Una aplicación puede cargar plugins de cualquier lugar dentro del sistema de ficheros, incluso aunque no hayan sido intalados. La especificación e la localización de los plugins (desempaquetados) se realiza en el fichero @grails-app/conf/BuildConfig.groovy@
+Si necesita artefactos dentro de @ WEB-INF @ se recomienda que utilice el @_Install.groovy@ script (cubierto más adelante), que se ejecuta cuando se instala un plugin, proporcionar tales artefactos. Además, aunque se excluye @UrlMappings.groovy@ puede incluir un UrlMappings @ definición con un nombre diferente, como @ MyPluginUrlMappings.groovy@ @.
+
+h4. Especificar ubicaciones de Plugin
+
+{hidden}
+
+An application can load plugins from anywhere on the file system, even if they have not been installed. Specify the location of the (unpacked) plugin in the application's @grails-app/conf/BuildConfig.groovy@ file:
 
 {code:java}
 // Useful to test plugins you are developing.
@@ -178,36 +253,54 @@ grails.plugin.location.shiro =
 // applications are in the same directory.
 grails.plugin.location.'grails-ui' = "../grails-grails-ui"
 {code}
+{hidden}
+
+Una aplicación puede cargar plugins desde cualquier lugar en el sistema de archivos, incluso si no se ha instalado. Especifique la ubicación del plugin (descomprimido) en el archivo de @grails-app/conf/BuildConfig.groovy@ de la aplicación:
+
+{code: java}
+/ / Útil para probar plugins están desarrollando.
+Grails.plugin.Location.Shiro =
+        "/ home/dilbert/dev/plugins/grails-shiro"
+
+/ / Útil para aplicaciones modulares donde todos los plugins y
+/ / aplicaciones están en el mismo directorio.
+Grails.plugin.Location.'grails-ui' = ".../ grails-grails-IU"
+{code}
 
 {hidden}
+
+
 This is particularly useful in two cases:
 
 * You are developing a plugin and want to test it in a real application without packaging and installing it first.
 * You have split an application into a set of plugins and an application, all in the same "super-project" directory.
+
+h4. Global plugins
+
+Plugins can also be installed globally for all applications for a particular version of Grails using the @\-global@ flag, for example:
+
 {hidden}
 
 Esto es particularmente útil en dos casos:
 
-* En situaciones donde se esta desarrollando un plugin y se quiere testear en una aplicación sin empaquetarlo e instalarlo previamente.
-* Se se ha dividido una aplicación en un conjunto de plugins y una aplicación, todo dentro de un mismo "directorio global de proyecto"
+* Está desarrollando un plugin y desea probar en una aplicación real sin embalaje y instalar primero.
+* Se han separado una aplicación en un conjunto de plugins y una aplicación, todos en el mismo directorio "super-project".
+
+h4. Plugins global
+
+También puede instalarse plugins de todo el mundo para todas las aplicaciones para una versión determinada de Grails usando la bandera de @ \-global@, por ejemplo:
 
 {hidden}
-h4. Global plugins
-
-Plugins can also be installed globally for all applications for a particular version of Grails using the @\-global@ flag, for example:
-{hidden}
-
-h4. Plugins globales
-
-Es posible instalar los plugins de manera global para todas las aplicaciónes de una versión concreata de grails usando el flag @\-global@, como por ejemplo
 
 {code}
 grails install-plugin webtest -global
 {code}
 
-{hidden}
 The default location is \$USER_HOME/.grails/<grailsVersion>/global-plugins but this can be customized with the @grails.global.plugins.dir@ setting in @BuildConfig.groovy@.
 {hidden}
 
-La localización por defecto es \$USER_HOME/.grails/<grailsVersion>/global-plugins pero puede ser modificada con la propiedad  @grails.global.plugins.dir@ dentro de @BuildConfig.groovy@.
+{code}
+Grails instalar plugin webtest-mundial
+{code}
 
+La ubicación predeterminada es \$USER_HOME/.grails/<grailsversion>/global-plugins, pero esto puede personalizarse con el @grails.global.plugins.dir@ se establece en @ BuildConfig.groovy@.</grailsversion>

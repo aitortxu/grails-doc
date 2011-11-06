@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. actionName
 
 h2. Purpose
@@ -15,7 +18,34 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. actionName
+
+h2. Fin
+
+Devuelve el nombre de la acción actualmente en ejecución
+
+h2. Ejemplos
+
+{code: java}
+clase BookController {}
+    Def list() {}
+        log.Info "Ejecución acción $actionName"
+
+Render(View: actionName)
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Returns the name of the currently executing action which is dictated by the URL mappings
+{hidden}
+
+h2. Descripción
+
+Devuelve el nombre de la acción está ejecutando actualmente que es dictada por las asignaciones de dirección URL

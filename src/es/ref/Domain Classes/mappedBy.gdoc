@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. mappedBy
 
 h2. Purpose
@@ -16,6 +19,29 @@ class Airport {
                       incomingFlights: Route]
 }
 {code}
+{hidden}
+
+h1. mappedBy
+
+h2. Fin
+
+@ MappedBy @ propiedad estática agrega la capacidad para cambiar cómo se vincula una asociación bidireccional
+
+h2. Ejemplos
+
+{code: java}
+clase {Aeropuerto
+
+estático mappedBy = [outgoingFlights: 'departureAirport',
+                       incomingFlights: 'destinationAirport']
+
+estático hasMany = [outgoingFlights: ruta,
+                      incomingFlights: ruta]
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Route {
@@ -26,4 +52,20 @@ class Route {
 
 In this example the @Airport@ class defines two bidirectional one-to-many associations. Without defining @mappedBy@ this is impossible as GORM cannot differentiate which of the two properties on the other end of the association (either @departureAirport@ or @destinationAirport@ in the @Route@ class) each one-to-many should be associated with.
 
+{hidden}
+
+{code: java}
+clase {ruta
+    Aeropuerto departureAirport
+    Aeropuerto destinationAirport
+}
+{code}
+
+En este ejemplo el aeropuerto @ @ clase define dos asociaciones de uno a varios bidireccional. Sin definir @ mappedBy @ esto es imposible ya que GORM no puede diferenciar cuál de las dos propiedades en el otro extremo de la Asociación (@ departureAirport @ o @ destinationAirport @ en la ruta @ @ clase) cada uno a muchos debe ser asociado.
+
+{hidden}
+
 The solution is to define @mappedBy@ which tells the @Airport@ class how each association relates to the other side.
+{hidden}
+
+La solución consiste en definir @ mappedBy @ que dice el aeropuerto @ @ clase cómo cada asociación se relaciona con el otro lado.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. max
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 age max: new Date()
 price max: 999F
 {code}
+{hidden}
+
+h1. Max
+
+h2. Fin
+
+Asegura que un valor igual o inferior a un valor máximo.
+
+h2. Ejemplos
+
+{code: java}
+edad máxima: new Date()
+precio máximo: 999F
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -18,3 +38,12 @@ Sets the maximum value of a class that implements @java.lang.Comparable@. The ty
 This constraint influences [schema generation|guide:gormConstraints].
 
 Error Code: @className.propertyName.max.exceeded@
+{hidden}
+
+h2. Descripción
+
+Establece el valor máximo de una clase que implementa @ java.lang.Comparable@. El tipo del valor debe ser igual que la propiedad.
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+Código de error: @className.propertyName.max.exceeded@

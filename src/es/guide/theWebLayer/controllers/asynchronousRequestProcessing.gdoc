@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails support asynchronous request processing as provided by the Servlet 3.0 specification. To enable the async features you need to set your servlet target version to 3.0 in BuildConfig.groovy:
 
 {code}
@@ -8,6 +11,21 @@ With that done ensure you do a clean re-compile as some async features are enabl
 
 {note}
 With a Servlet target version of 3.0 you can only deploy on Servlet 3.0 containers such as Tomcat 7 and above.
+{hidden}
+
+Grails admiten el procesamiento de la solicitud asincrónica conforme a lo dispuesto por la especificación de Servlet 3.0. Para habilitar las características asincrónicas necesita establecer el destino de servlet 3.0 en BuildConfig.groovy:
+
+{code}
+Grails.servlet.Version = "3.0"
+{code}
+
+Con asegurar que haces un re-compile limpio como algunas características de async están habilitados en tiempo de compilación.
+
+{Nota}
+Con una versión de destino de Servlet 3.0 sólo puede desplegar en contenedores Servlet 3.0 como 7 Tomcat y encima.
+
+{hidden}
+
 {note}
 
 h4. Asynchronous Rendering
@@ -24,6 +42,27 @@ def index() {
     }
 }
 {code}
+{hidden}
+
+{Nota}
+
+h4. Procesamiento asincrónico
+
+Puede representar el contenido (plantillas, datos binarios etc.) de manera asincrónica llamando la @ startAsync @ método que devuelve una instancia del Servlet 3.0 @ AsyncContext @. Una vez que tenga una referencia a la @ AsyncContext @ puede utilizar el método de procesamiento regular de Grails para representar el contenido:
+
+{code}
+Def índice() {}
+    Def ctx = startAsync()
+    CTX.Start {}
+        nuevo libro (título: "la Stand").save()
+        plantilla de procesamiento: "libros", model:[books:Book.list()]
+        CTX.Complete()
+    }
+}
+{code}
+
+{hidden}
+
 
 Note that you must call the @complete()@ method to terminate the connection. 
 
@@ -39,6 +78,25 @@ def index() {
         ...
         // render view
         ctx.dispatch()
+    }
+}
+{code}
+{hidden}
+
+Tenga en cuenta que debe llamar la @ complete() @ método para terminar la conexión. 
+
+h4. Reanudar una solicitud asincrónica
+
+Reanudar el procesamiento de una solicitud asincrónica (por ejemplo para delegar a ver representación) utilizando el envío @ @ método de @ AsyncContext @ clase:
+
+{code}
+Def índice() {}
+    Def ctx = startAsync()
+    CTX.Start {}
+        / / do trabajo
+        ...
+        / / vista de procesamiento
+        CTX.Dispatch()
     }
 }
 {code}

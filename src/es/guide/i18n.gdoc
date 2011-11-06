@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails supports Internationalization (i18n) out of the box by leveraging the underlying Spring MVC internationalization support. With Grails you are able to customize the text that appears in a view based on the user's Locale. To quote the javadoc for the [Locale|api:java.util.Locale] class:
 
 {quote}
@@ -5,3 +8,6 @@ A Locale object represents a specific geographical, political, or cultural regio
 {quote}
 
 A Locale is made up of a [language code|http://www.loc.gov/standards/iso639-2/englangn.html] and a [country code|http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html]. For example "en_US" is the code for US english, whilst "en_GB" is the for British English.
+{hidden}
+
+Grails soporta internacionalización (i18n) fuera de la caja al aprovechar el soporte de internacionalización de primavera MVC subyacente. Con Grails es posible personalizar el texto que aparece en una vista basada en la configuración regional del usuario. Al citar el javadoc para la clase [Locale|api:java.util.Locale]:oferta de {}Un objeto del escenario representa una región geográfica, política o cultural específica. Una operación que requiere un escenario realizar su tarea se llama sensibles a la configuración regional y utiliza la configuración regional para adaptar la información para el usuario. Por ejemplo, mostrar un número es una operación regional sensibles--el número debe formatearse según a las aduanas/convenciones del país, región o cultura del usuario.oferta de {}Un escenario se compone de un [idioma code|http://www.loc.gov/standards/iso639-2/englangn.html] y [code|http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html]. Por ejemplo "en_US" es el código de inglés americano, mientras que "en_GB" es la de inglés británico.

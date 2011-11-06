@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Controlling Plugin Dependencies
 
 Plugins often depend on the presence of other plugins and can adapt depending on the presence of others. This is implemented with two properties. The first is called @dependsOn@. For example, take a look at this snippet from the Hibernate plugin:
@@ -13,6 +16,26 @@ class HibernateGrailsPlugin {
                      core: "1.0"]
 }
 {code}
+{hidden}
+
+h4. Control de las dependencias de Plugin
+
+Plugins a menudo dependen de la presencia de otros plugins y puede adaptarse en función de la presencia de otros. Esto se implementa con dos propiedades. El primero se llama @ dependsOn @. Por ejemplo, echar un vistazo de este fragmento de código desde el plugin de hibernación:
+
+{code: java}
+clase HibernateGrailsPlugin {}
+
+Def version = "1.0"
+
+Def dependsOn = [dataSource: "1.0",
+                     domainClass: "1.0",
+                     i18n: "1.0",
+                     núcleo: "1.0"]
+}
+{code}
+
+{hidden}
+
 
 The Hibernate plugin is dependent on the presence of four plugins: the @dataSource@, @domainClass@, @i18n@ and @core@ plugins.
 
@@ -25,6 +48,22 @@ def dependsOn = [foo: "* > 1.0"]
 def dependsOn = [foo: "1.0 > 1.1"]
 def dependsOn = [foo: "1.0 > *"]
 {code}
+{hidden}
+
+El plugin de hibernación depende de la presencia de cuatro plugins: dataSource @ @, @ domainClass @, @ i18n @ y @ core @ plugins.
+
+Las dependencias se cargará antes el plugin de hibernación y si no se cargan todas las dependencias, entonces el plugin no se cargará.
+
+@ DependsOn @ propiedad también soporta un lenguaje de expresión mini para especificar rangos de versión. Algunos ejemplos de la sintaxis pueden verse a continuación:
+
+{code: java}
+Def dependsOn = [foo: "* > 1.0"]
+Def dependsOn = [foo: "1.0 > 1.1"]
+Def dependsOn = [foo: "1.0 > *"]
+{code}
+
+{hidden}
+
 
 When the wildcard * character is used it denotes "any" version. The expression syntax also excludes any suffixes such as -BETA, -ALPHA etc. so for example the expression "1.0 > 1.1" would match any of the following versions:
 
@@ -35,6 +74,20 @@ When the wildcard * character is used it denotes "any" version. The expression s
 * 1.1-BETA2
 
 h4. Controlling Load Order
+{hidden}
+
+Cuando el comodín * se utilizan caracteres denota "cualquier" versión. La sintaxis de expresiones también excluye cualquier sufijos como - BETA, - ALPHA etc. así, por ejemplo, la expresión "1.0 > 1.1" coincidiría cualquiera de las siguientes versiones:
+
+* 1.1
+* 1.0
+* 1.0.1
+* 1.0.3-SNAPSHOT
+* 1.1-BETA2
+
+h4. Controlar el orden de carga
+
+{hidden}
+
 
 Using @dependsOn@ establishes a "hard" dependency in that if the dependency is not resolved, the plugin will give up and won't load.  It is possible though to have a weaker dependency using the @loadAfter@ property:
 
@@ -53,6 +106,28 @@ if (manager?.hasGrailsPlugin("controllers")) {
     grailsUrlHandlerMapping.interceptors << openSessionInViewInterceptor
 }
 {code}
+{hidden}
+
+Utilizando @ dependsOn @ establece una dependencia "dura" que si no se resuelve la dependencia, el plugin se rendirá y no carga.  Es posible aunque tienen una dependencia más débil con @ loadAfter @ propiedad:
+
+{code: java}
+Def loadAfter = ["controladores"]
+{code}
+
+Aquí se cargue el plugin después los controladores @ @ plugin si existe, de lo contrario será sólo cargada. El plugin, a continuación, puede adaptarse a la presencia de otro plugin, por ejemplo el plugin de hibernación tiene este código en su doWithSpring @ @ cierre:
+
+{code: java}
+Si (administrador?.hasGrailsPlugin("controllers")) {}
+    openSessionInViewInterceptor(OpenSessionInViewInterceptor) {}
+        flushMode = HibernateAccessor.FLUSH_MANUAL
+        sessionFactory = sessionFactory
+    }
+    grailsUrlHandlerMapping.interceptors << openSessionInViewInterceptor
+}
+{code}
+
+{hidden}
+
 
 Here the Hibernate plugin will only register an @OpenSessionInViewInterceptor@ if the @controllers@ plugin has been loaded. The @manager@ variable is an instance of the [GrailsPluginManager|api:org.codehaus.groovy.grails.plugins.GrailsPluginManager] interface and it provides methods to interact with other plugins.
 
@@ -65,6 +140,21 @@ It's not only plugin load order that you can control. You can also specify which
 def environments = ['development', 'test', 'myCustomEnv']
 def scopes = [excludes:'war']
 {code}
+{hidden}
+
+Aquí el plugin de hibernación sólo registrará un @ OpenSessionInViewInterceptor @ si se ha cargado los controladores @ @ plugin. El administrador de @ @ variable es una instancia de la interfaz de [GrailsPluginManager|api:org.codehaus.groovy.grails.plugins.GrailsPluginManager] y proporciona métodos para interactuar con otros plugins.
+
+h4. Ámbitos y entornos
+
+No es sólo orden de carga de plugin que puede controlar. También puede especificar que se debe cargar el plugin en los entornos y qué ámbitos (etapas de una generación). Simplemente declarar una o ambas de estas propiedades en el descriptor de plugin:
+
+{code}
+entornos de Def = ['desarrollo', 'test', 'myCustomEnv']
+ámbitos de Def = [excluye: 'guerra']
+{code}
+
+{hidden}
+
 
 In this example, the plugin will only load in the 'development' and 'test' environments. Nor will it be packaged into the WAR file, because it's excluded from the 'war' phase. This allows @development-only@ plugins to not be packaged for production use.
 
@@ -75,6 +165,20 @@ The full list of available scopes are defined by the enum [BuildScope|api:grails
 * @run@ - for run-app and run-war
 * @war@ - when packaging the application as a WAR file
 * @all@ - plugin applies to all scopes (default)
+{hidden}
+
+En este ejemplo, el plugin sólo se cargará en el 'desarrollo' y 'test' entornos. Ni se se empaquetan en el archivo de la guerra, porque se excluye de la fase de 'guerra'. Esto permite sólo desarrollo @ plugins no ser empaquetados para uso en producción.
+
+La lista completa de ámbitos disponibles son definidos por la enumeración [BuildScope|api:grails.util.BuildScope], pero éste es un resumen:
+
+* @ prueba @ - cuando pruebas de funcionamiento
+* @-prueba funcional @ - cuando se ejecutan pruebas funcionales
+* @ ejecutar @ - run-app y ejecutar la guerra
+* @ Guerra @ - al empaquetar la aplicación como un archivo WAR
+* @ todos @ - plugin se aplica a todos los ámbitos (predeterminado)
+
+{hidden}
+
 
 Both properties can be one of:
 
@@ -87,6 +191,22 @@ For example,
 {code}
 def environments = "test"
 {code}
+{hidden}
+
+Ambas propiedades pueden ser de:
+
+* una cadena - una única inclusión
+* una lista - una lista de entornos o ámbitos que incluyen
+* un mapa - control completo, con 'incluye' o 'excluye' claves que pueden tener valores de cadena o lista
+
+Por ejemplo,
+
+{code}
+entornos de Def = "test"
+{code}
+
+{hidden}
+
 
 will only include the plugin in the test environment, whereas
 
@@ -99,5 +219,24 @@ will include it in both the development _and_ test environments. Finally,
 {code}
 def environments = [includes: ["development", "test"]]
 {code}
+{hidden}
+
+sólo incluye el plugin en el entorno de prueba, mientras que
+
+{code}
+entornos de Def = ["desarrollo", "prueba"]
+{code}
+
+lo incluiremos en ambos entornos de prueba los _and_ de desarrollo. Por último,
+
+{code}
+entornos de Def = [incluye: ["desarrollo", "prueba"]]
+{code}
+
+{hidden}
+
 
 will do the same thing.
+{hidden}
+
+hará lo mismo.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. instanceOf
 
 h2. Purpose
@@ -7,6 +10,20 @@ Determines if a domain class instance is an instance of the specified class, res
 h2. Examples
 
 Given the domain classes:
+
+{hidden}
+
+h1. instanceOf
+
+h2. Fin
+
+Determina si una instancia de la clase de dominio es una instancia de la clase especificada, resolver la clase real si la instancia es un proxy.
+
+h2. Ejemplos
+
+Habida cuenta de las clases de dominio:
+
+{hidden}
 
 {code:java}
 class Container {
@@ -20,6 +37,23 @@ class Child {
    static belongsTo = [container: Container]
 }
 {code}
+{hidden}
+
+{code: java}
+clase contenedor {}
+   estático hasMany = [niños: niño]
+}
+{code}
+
+{code: java}
+clase {niño
+   Nombre de la cadena
+   Static belongsTo = [container: contenedor]
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Thing extends Child {}
@@ -30,6 +64,20 @@ class Other extends Child {}
 {code}
 
 Then you can determine the type of the elements in a @Container@'s @children@ collection using
+{hidden}
+
+{code: java}
+clase lo amplía niño {}
+{code}
+
+{code: java}
+clase otro extiende niño {}
+{code}
+
+A continuación, puede determinar el tipo de los elementos de un @ Container@'s @ niños @ colección mediante
+
+{hidden}
+
 
 {code:java}
 def container = Container.get(id)
@@ -45,9 +93,35 @@ for (child in container.children) {
    }
 }
 {code}
+{hidden}
+
+{code: java}
+contenedor de Def = Container.get(id)
+para (hijo de container.children) {}
+   Si ({child.instanceOf(Thing))}
+      / proceso de cosa
+   }
+   else if (child.instanceOf(Other)) {}
+      / proceso de otro
+   }
+   Else {}
+      / / manejar tipo inesperado
+   }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Parameters:
 
 * @clazz@ - the type to check
+{hidden}
+
+h2. Descripción
+
+Parámetros:
+
+* @ clazz @ - el tipo de comprobación

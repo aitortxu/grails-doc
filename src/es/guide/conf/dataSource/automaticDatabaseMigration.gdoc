@@ -1,3 +1,4 @@
+
 {hidden}
 
 The @dbCreate@ property of the @DataSource@ definition is important as it dictates what Grails should do at runtime with regards to automatically generating the database tables from [GORM|guide:GORM] classes. The options are described in the [DataSource|guide:dataSource] section:
@@ -12,15 +13,7 @@ In [development|guide:environments] mode @dbCreate@ is by default set to "create
 
 {hidden}
 
-La propiedad @dbCreate@ de la definición del @DataSource@ es importante ya que dicta lo que debe hacer Grails en tiempo de ejecución con respecto a la generación automática de las tablas de base de datos de clases [GORM|guide:GORM]. Las opciones se describen en la sección [DataSource|guide:dataSource]:
-
-* @create@
-* @create-drop@
-* @update@
-* @validate@
-* no value
-
-En modo [desarrollo|guide:environments] @dbCreate@ es por defecto "create-drop" (borrar y crear), pero en algún punto en el desarrollo (y, desde luego, una vez pase a la producción) deberá dejar de borrar y volver a crear la base de datos cada vez que inicie el servidor.
+@ DbCreate @ propiedad DataSource @ @ definición es importante ya que dicta lo que deben hacer Grails en tiempo de ejecución con respecto a la generación automática de las tablas de base de datos de clases [GORM|guide:GORM]. Las opciones se describen en la sección [DataSource|guide:dataSource]:* @ crear @* @ crear colocar @* @ actualización @* @ validar @* ningún valorEn modo [development|guide:environments] @ dbCreate @ es por defecto "crear" gota, pero en algún punto en desarrollo (y, desde luego, una vez pase a la producción) deberá dejar de caer y volver a crear la base de datos cada vez que inicie el servidor.
 
 {hidden}
 
@@ -34,11 +27,4 @@ grails install-plugin database-migration
 The plugin uses "Liquibase":http://www.liquibase.org/ and and provides access to all of its functionality, and also has support for GORM (for example generating a change set by comparing your domain classes to a database).
 {hidden}
 
-Es tentador cambiar a @update@ (actualizar) para mantener los datos existentes y sólo actualizar el esquema cuando el código cambia, pero el soporte de actualización de Hibernate es muy conservador. No realizar los cambios que podrían dar lugar a pérdida de datos y no detecta renombrado de columnas o tablas, por lo que quedará con el viejo y también con el nuevo.
-
-Grails soporta migraciones estilo Rails a través del plugin "Database Migration":http://grails.org/plugin/database-migration plugin que puede instalarse mediante la ejecución de
-
-bc.
-grails install-plugin database-migration
-
-El plugin utiliza "Liquibase":http://www.liquibase.org/ y proporciona acceso a toda su funcionalidad y también cuenta con soporte para GORM (por ejemplo generando un cambio comparando sus clases de dominio con una base de datos).
+Es tentador cambie a @ actualización @ para mantener los datos existentes y sólo actualizar el esquema cuando el código cambia, pero hibernación compatibilidad de actualización es muy conservadora. No realizar los cambios que podrían dar lugar a pérdida de datos y no detectan renombradas columnas o tablas, por lo que quedará con el viejo y también vamos a tener uno nuevo.Grails soporta migraciones de Rails estilo a través de la "base de datos Migration":http://grails.org/plugin/database-migration plugin que puede instalarse mediante la ejecución dea c..base de datos de migración de instalar plugin GrailsEl plugin utiliza "Liquibase":http://www.liquibase.org/ y proporciona acceso a toda su funcionalidad y también cuenta con soporte para GORM (por ejemplo generando un cambio establecer comparando sus clases de dominio a una base de datos).

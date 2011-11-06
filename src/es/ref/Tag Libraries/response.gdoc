@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. response
 
 h2. Purpose
@@ -14,6 +17,27 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. respuesta
+
+h2. Fin
+
+El objeto [response|servletAPI] es una instancia de Servlet API [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] clase
+
+h2. Ejemplos
+
+{code}
+clase BookController {}
+    Def downloadFile() {}
+        [] bytes bytes = / / leen bytes
+        Response.OutputStream << bytes
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -22,3 +46,12 @@ The Servlet API's @HttpServletResponse@ class can be used within Grails to perfo
 {note}
 The additional methods added to the [response|servletAPI] object are documented in the Grails Servlet API reference guide
 {note}
+{hidden}
+
+h2. Descripción
+
+@ HttpServletResponse la API Servlet @ clase puede utilizarse dentro de Grails para realizar todas las actividades típicas como escribir datos binarios, escribir directamente en la respuesta y códigos de respuesta de error envío a nombre de sólo unos cuantos. Consulte la documentación de la clase [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] en el Servlet API para obtener más información.
+
+{Nota}
+Los métodos adicionales agregados al objeto [response|servletAPI] están documentados en la Guía de referencia de Grails Servlet API
+{Nota}

@@ -1,3 +1,4 @@
+
 {hidden}
 
 If you use Maven to build your Grails project, you can use the standard Maven targets @mvn install@ and @mvn deploy@.
@@ -12,15 +13,15 @@ By default this plugin will automatically generate a valid @pom.xml@ for you unl
 
 {hidden}
 
-Si utiliza a Maven para construir su proyecto Grails, puede utilizar el target estándar de Maven @mvn install@ and @mvn deploy@.
-Si no es así, puede desplegar un proyecto Grails o un plugin en un repositorio de Maven utilizando el plugin [maven-publisher|http://grails.org/plugin/maven-publisher].
+Si utiliza a Maven para construir su proyecto Grails, puede utilizar la instalación estándar de Maven objetivos @ mvn @ y @ mvn desplegar.
+Si no es así, puede desplegar un proyecto Grails o plugin en un repositorio de Maven utilizando el plugin [maven-publisher|http://grails.org/plugin/maven-publisher].
 
-El plugin permite publicar proyectos Grails y plugins en repositorios Maven locales y remotos. Hay dos target principales adicionales agregados por el plugin:
+El plugin permite publicar proyectos Grails y plugins en repositorios Maven locales y remotos. Hay dos principales objetivos adicionales agregados por el plugin:
 
-* *maven-install* - instala un plugin o un proyecto Grails en la caché local de Maven.
-* *maven-deploy* - despliega un proyecto Grails o plugin para un repositorio Maven remoto.
+* * maven-instalación * - instala un plugin o un proyecto Grails en la caché local de Maven
+* * maven-desplegar *-implementa un proyecto Grails o plugin para un repositorio Maven remoto
 
-De forma predeterminada este plugin generará automáticamente un @pom.xml@ válido a menos que un @pom.xml@ ya está presente en la raíz del proyecto, en cuyo caso se utilizará este archivo @pom.xml@.
+De forma predeterminada este plugin generará automáticamente un @pom.xml@ válido para usted a menos que un @pom.xml@ ya está presente en la raíz del proyecto, en cuyo caso se utilizará este archivo @pom.xml@.
 
 {hidden}
 
@@ -36,12 +37,12 @@ In the case of plugins, the plugin zip file will be installed, whilst for applic
 
 {hidden}
 
-h4. maven-install
+h4. Maven-instalación
 
-El comando @maven-install@ instalará el proyecto o plugin Grails en la caché local de Maven:
+El @ maven instalar @ comando instalará el artefacto de proyecto o plugin Grails en la caché local de Maven:
 
 {code}
-grails maven-install
+Grails maven-instalación
 {code}
 
 En el caso de plugins, se instalará el archivo zip de plugin, mientras que para la aplicación se instalará el archivo WAR de aplicación.
@@ -60,27 +61,24 @@ It is assumed that you have specified the necessary @<distributionManagement>@ c
 
 {hidden}
 
-h4. maven-deploy
+h4. implementar Maven
 
-El comando @maven-deploy@ desplegará un proyecto Grails o plugin en un repositorio de Maven remoto:
+Maven @-desplegar comando desplegará un proyecto Grails o plugin en un repositorio de Maven remoto:
 
 {code}
-grails maven-deploy
+Grails implementación maven
 {code}
 
-Se supone que se ha especificado la configuración necesaria @<distributionmanagement>@ dentro de un @pom.xml@ o que especifica el @id@ del repositorio remoto en el que desplegar:
+Se supone que se ha especificado la necesaria @<distributionmanagement>@ Configuración dentro de un @pom.xml@ o especificar el id @ @ del repositorio remoto para desplegar en:
+</distributionmanagement>
+
+{hidden}
 
 {code}
 grails maven-deploy --repository=myRepo
 {code}
-	
-{hidden}
 
 The @repository@ argument specifies the 'id' for the repository. Configure the details of the repository specified by this 'id' within your @grails-app/conf/BuildConfig.groovy@ file or in your @$USER_HOME/.grails/settings.groovy@ file:
-
-{hidden}
-
-El argumento @repository@ especifica el 'id' para el repositorio. Configure los detalles del repositorio especificado por este 'id' en el archivo @grails-app/conf/BuildConfig.groovy@ o en el archivo @$USER_HOME/.grails/settings.groovy@:
 
 {code}
 grails.project.dependency.distribution = {
@@ -88,14 +86,25 @@ grails.project.dependency.distribution = {
     remoteRepository(id: "myRepo", url: "http://myserver/path/to/repo")
 }
 {code}
+{hidden}
+
+{code}
+Grails implementar maven--repositorio = myRepo
+{code}
+
+El repositorio @ @ argumento especifica el 'id' para el repositorio. Configurar los detalles del repositorio especificado por este 'id' en el archivo @grails-app/conf/BuildConfig.groovy@ o en el archivo @$USER_HOME/.grails/settings.groovy@:
+
+{code}
+Grails.Project.Dependency.Distribution = {}
+    localRepository = "/ ruta/a/mi/local"
+    remoteRepository (id: "myRepo", dirección url: "http://myserver/path/to/repo")
+}
+{code}
 
 {hidden}
+
 
 The syntax for configuring remote repositories matches the syntax from the [remoteRepository|http://maven.apache.org/ant-tasks/reference.html#remoteRepository] element in the Ant Maven tasks. For example the following XML:
-
-{hidden}
-
-La sintaxis para configurar repositorios remotos coincide con la sintaxis del elemento [remoteRepository|http://maven.apache.org/ant-tasks/reference.html#remoteRepository] en las tareas  Ant Maven. Por ejemplo, el siguiente XML:
 
 {code}
 <remoteRepository id="myRepo" url="scp://localhost/www/repository">
@@ -103,11 +112,13 @@ La sintaxis para configurar repositorios remotos coincide con la sintaxis del el
 </remoteRepository>
 {code}
 
-{hidden}
 Can be expressed as:
 {hidden}
 
-Puede ser expresada como:
+La sintaxis para configurar repositorios remotos coincide con la sintaxis de la [remoteRepository|http://maven.apache.org/ant-tasks/reference.html
+
+{hidden}
+
 
 {code}
 remoteRepository(id: "myRepo", url: "scp://localhost/www/repository") {
@@ -115,19 +126,27 @@ remoteRepository(id: "myRepo", url: "scp://localhost/www/repository") {
 }
 {code}
 
-{hidden}
-
 By default the plugin will try to detect the protocol to use from the URL of the repository (ie "http" from "http://.." etc.), however to specify a different protocol you can do:
-
-{hidden}
-
-De forma predeterminada el plugin intentará detectar el protocolo a usar desde la URL del repositorio (es decir "http" desde "http://..." etc.), sin embargo para especificar otro protocolo puede hacer:
 
 {code}
 grails maven-deploy --repository=myRepo --protocol=webdav
 {code}
+{hidden}
+
+{code}
+remoteRepository (id: "myRepo", dirección url: "scp: / / localhost/www/repositorio") {}
+    nombre de usuario de autenticación: "...", cambia: "\${userHome}/.ssh/id_dsa"
+}
+{code}
+
+De forma predeterminada el plugin intentará detectar el Protocolo a usar desde la URL del repositorio (es decir "http" desde "http://..." etc.), sin embargo para especificar otro protocolo te puede hacer:
+
+{code}
+Grails implementar maven--repositorio = myRepo--protocol = webdav
+{code}
 
 {hidden}
+
 
 The available protocols are:
 
@@ -137,6 +156,7 @@ The available protocols are:
 * ftp
 * webdav
 
+h4. Groups, Artifacts and Versions
 {hidden}
 
 Los protocolos disponibles son:
@@ -147,68 +167,70 @@ Los protocolos disponibles son:
 * ftp
 * webdav
 
-{hidden}
-
-h4. Groups, Artifacts and Versions
-
-Maven defines the notion of a 'groupId', 'artifactId' and a 'version'. This plugin pulls this information from the Grails project conventions or plugin descriptor.
-
-{hidden}
-
 h4. Versiones, artefactos y grupos
 
-Maven define la noción de 'IdGrupo', 'artifactId' y 'versión'. Este plugin extrae esta información de los convenciones de proyecto Grails o del descriptor del plugin.
-
 {hidden}
+
+
+Maven defines the notion of a 'groupId', 'artifactId' and a 'version'. This plugin pulls this information from the Grails project conventions or plugin descriptor.
 
 h5. Projects
 
 For applications this plugin will use the Grails application name and version provided by Grails when generating the @pom.xml@ file. To change the version you can run the @set-version@ command:
 
-{hidden}
-
-h5. Proyectos
-
-Para las aplicaciones de este plugin utilizará el nombre de la aplicación de Grails y la versión proporcionada por Grails al generar el archivo @pom.xml@. Para cambiar la versión puede ejecutar el comando @set-version@:
-
 {code}
 grails set-version 0.2
 {code}
+{hidden}
+
+Maven define la noción de 'IdGrupo', 'artifactId' y una 'versión'. Este plugin extrae esta información de los convenios de proyecto Grails o descriptor de plugin.
+
+H5. Proyectos
+
+Para las aplicaciones de este plugin utilizará el nombre de la aplicación de Grails y la versión proporcionada por Grails al generar el archivo @pom.xml@. Para cambiar la versión puede ejecutar la @ conjunto-versión @ comando:
+
+{code}
+conjunto de Grails-versión 0.2
+{code}
 
 {hidden}
+
 
 The Maven @groupId@ will be the same as the project name, unless you specify a different one in Config.groovy:
-
-{hidden}
-
-El @groupId@ de Maven será el mismo que el nombre del proyecto, a menos que se especifique otro diferente en Config.groovy:
 
 {code}
 grails.project.groupId="com.mycompany"
 {code}
 
-{hidden}
-
 h5. Plugins
 
 With a Grails plugin the @groupId@ and @version@ are taken from the following properties in the *GrailsPlugin.groovy descriptor:
+{hidden}
+
+Maven @ groupId @ será el mismo que el nombre del proyecto, a menos que se especifique otro diferente en Config.groovy:
+
+{code}
+Grails.Project.groupId="com.mycompany"
+{code}
+
+H5. Plugins
+
+Con un plugin Grails la @ IdGrupo @ y @ versión @ proceden de las siguientes propiedades en el descriptor de *GrailsPlugin.groovy:
 
 {hidden}
 
-h5. Plugins
-
-Con un plugin de Grails el @groupId@ y @version@ proceden de las siguientes propiedades en el descriptor de *GrailsPlugin.groovy:
 
 {code}
 String groupId = 'myOrg'
 String version = '0.1'
 {code}
 
-{hidden}
-
 The 'artifactId' is taken from the plugin name. For example if you have a plugin called @FeedsGrailsPlugin@ the @artifactId@ will be "feeds". If your plugin does not specify a @groupId@ then this defaults to "org.grails.plugins".
-
 {hidden}
 
+{code}
+String groupId = 'myOrg'
+Versión de cadena = '0.1'
+{code}
 
-El 'artifactId' se toma del nombre del plugin. Por ejemplo, si tienes un plugin llamado @FeedsGrailsPlugin@ el @artifactId@ será "feeds". Si tu plugin no especifica el @groupId@ entonces por defecto utiliza "org.grails.plugins".
+El 'artifactId' se toma desde el nombre del plugin. Por ejemplo, si tienes un plugin llamado @ FeedsGrailsPlugin @ artifactId @ @ será "feeds". Si tu plugin no especifica @ groupId @ entonces esto utiliza "org.grails.plugins".

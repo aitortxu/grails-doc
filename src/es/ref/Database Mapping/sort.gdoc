@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. sort
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. ordenar
+
+h2. Fin
+
+Personaliza la propiedad predeterminada para ordenar por resultados de consulta.
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    ...
+    asignación estática = {}
+        ordenar "releaseDate"
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,6 +48,20 @@ By default results are sorted by creation date, and you can specify the column t
 {code}
 def results = Book.list(sort:"title")
 {code}
+{hidden}
+
+h2. Descripción
+
+Uso: @ sort(string/map) @
+
+Por defecto los resultados se ordenan por fecha de creación, y puede especificar la columna order by en una consulta:
+
+{code}
+resultados de Def = Book.list(sort:"title")
+{code}
+
+{hidden}
+
 
 However, you can also configure the default sort property:
 
@@ -34,9 +72,30 @@ static mapping = {
 {code}
 
 in which case the @sort@ argument is no longer needed. You can also control the sort order:
+{hidden}
+
+Sin embargo, también puede configurar la propiedad de ordenación predeterminado:
+
+{code}
+asignación estática = {}
+    tipo "título"
+}
+{code}
+
+en cuyo caso ya no es necesario ordenar @ @ argumento. También puede controlar el orden de clasificación:
+
+{hidden}
+
 
 {code}
 static mapping = {
     sort title: "desc" // or "asc"
+}
+{code}
+{hidden}
+
+{code}
+asignación estática = {}
+    ordenar el título: "desc" / / o "asc"
 }
 {code}

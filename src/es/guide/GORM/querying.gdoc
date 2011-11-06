@@ -1,3 +1,6 @@
+
+{hidden}
+
 GORM supports a number of powerful ways to query from dynamic finders, to criteria to Hibernate's object oriented query language HQL.
 
 Groovy's ability to manipulate collections with "GPath":http://groovy.codehaus.org/GPath and methods like sort, findAll and so on combined with GORM results in a powerful combination.
@@ -7,6 +10,20 @@ However, let's start with the basics.
 h4. Listing instances
 
 Use the [list|domainClasses] method to obtain all instances of a given class:
+
+{hidden}
+
+GORM admite un número de maneras eficaces para consulta de buscadores dinámicos, criterios para el lenguaje de consulta de hibernación orientado a objetos HQL.
+
+Groovy s habilidad para manipular colecciones con "métodos como ordenar y GPath":http://groovy.codehaus.org/GPath, findAll y así sucesivamente combinan con resultados GORM en una poderosa combinación.
+
+Sin embargo, vamos a empezar con lo básico.
+
+h4. Lista de las instancias
+
+Utilice el método [list|domainClasses] para obtener todas las instancias de una clase dada:
+
+{hidden}
 
 {code}
 def books = Book.list()
@@ -18,6 +35,20 @@ The [list|domainClasses] method supports arguments to perform pagination:
 def books = Book.list(offset:10, max:20)
 {code}
 
+{hidden}
+
+{code}
+libros de Def = Book.list()
+{code}
+
+El método [list|domainClasses] admite argumentos para realizar paginación:
+
+{code}
+libros de Def = Book.list (desplazamiento: 10, max: 20)
+{code}
+
+{hidden}
+
 as well as sorting:
 
 {code}
@@ -27,6 +58,20 @@ def books = Book.list(sort:"title", order:"asc")
 Here, the @sort@ argument is the name of the domain class property that you wish to sort on, and the @order@ argument is either @asc@ for *asc*ending or @desc@ for *desc*ending.
 
 h4. Retrieval by Database  Identifier
+
+{hidden}
+
+así como ordenar:
+
+{code}
+libros de Def = Book.list (tipo: "título", orden: "asc")
+{code}
+
+Aquí, el tipo @ @ argumento es el nombre de la propiedad de clase de dominio que desea ordenar, y el orden @ @ argumento es bien asc @ @ para * asc * final o @ desc @ para * desc * final.
+
+h4. Recuperación por identificador de base de datos
+
+{hidden}
 
 The second basic form of retrieval is by database identifier using the [get|domainClasses] method:
 
@@ -38,4 +83,17 @@ You can also obtain a list of instances for a set of identifiers using [getAll|d
 
 {code}
 def books = Book.getAll(23, 93, 81)
+{code}
+{hidden}
+
+La segunda forma básica de recuperación es por identificador de base de datos utilizando el método [get|domainClasses]:
+
+{code}
+libro de Def = Book.get(23)
+{code}
+
+También puede obtener una lista de instancias de un conjunto de identificadores mediante [getAll|domainClasses]:
+
+{code}
+libros de Def = Book.getAll (23, 93, 81)
 {code}

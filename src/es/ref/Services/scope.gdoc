@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. scope
 
 h2. Purpose
@@ -12,6 +15,25 @@ class BookService {
     ...
 }
 {code}
+{hidden}
+
+h1. ámbito de aplicación
+
+h2. Fin
+
+Cambia el alcance de un servicio
+
+h2. Ejemplos
+
+{code: java}
+clase BookService {}
+    ámbito estático = "sesión"
+    ...
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -22,7 +44,27 @@ By default services are "singleton" scoped which means that clients of a service
 * @flash@ - A new service will be created for the current and next request only
 * @flow@ - In web flows the service will exist for the scope of the flow
 * @conversation@ - In web flows the service will exist for the scope of the conversation. ie a root flow and its sub flows
+{hidden}
+
+h2. Descripción
+
+Por defecto, los servicios son "singleton" ámbito de lo que significa que los clientes de un servicio sólo utilizan una única instancia (unitario) del servicio. Este comportamiento puede modificarse mediante la especificación de un ámbito @ @ atributo con los valores siguientes:
+
+* @ prototipo @ - se crea un nuevo servicio cada vez que se inyecta en otra clase
+* @ solicitud @ - se creará un nuevo servicio por solicitud
+* @ flash @ - se creará un nuevo servicio para la actual y próxima solicitud sólo
+* @ flujo @ - web corrientes el servicio existirán para el ámbito del flujo
+* @ conversación @ - web corrientes el servicio existirán para el ámbito de la conversación. es decir, un flujo de raíz y sus flujos de sub
+
+{hidden}
+
 * @session@ - A service is created for the scope of a user session
 * @singleton@ (default) - Only one instance of the service ever exists
 
 See [Scoped Services|guide:scopedServices] in the user guide for more information.
+{hidden}
+
+* @ sesión @ - se crea un servicio para el ámbito de una sesión de usuario
+* @ singleton @ (predeterminado) - nunca existe sólo una instancia del servicio
+
+En la Guía del usuario para obtener más información, consulte [ámbito Services|guide:scopedServices].

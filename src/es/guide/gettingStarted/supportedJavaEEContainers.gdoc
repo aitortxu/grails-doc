@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails runs on any container that supports Servlet 2.5 and above and is known to work on the following specific container products:
 
 * Tomcat 7
@@ -8,6 +11,12 @@ Grails runs on any container that supports Servlet 2.5 and above and is known to
 * GlassFish 2
 * Resin 4
 * Resin 3
+{hidden}
+
+Grails se ejecuta en cualquier contenedor compatible con 2.5 de Servlet y encima y es conocido por trabajar en los siguientes productos de contenedor específico:* Tomcat 7* Tomcat 6* Spring Framework tc Server* Eclipse Virgo* GlassFish 3* GlassFish 2* Resina 4* Resina 3
+
+{hidden}
+
 * JBoss 6
 * JBoss 5
 * Jetty 7
@@ -18,4 +27,13 @@ Grails runs on any container that supports Servlet 2.5 and above and is known to
 * Oracle Weblogic 10
 * Oracle Weblogic 9
 
+{hidden}
+
+* 6 JBoss* 5 JBoss* El muelle 7* En el muelle 6* IBM Websphere 7.0* IBM Websphere 6.1* Oracle Weblogic 10.3* Oracle Weblogic 10* Oracle Weblogic 9
+
+{hidden}
+
 Some containers have bugs however, which in most cases can be worked around. A [list of known deployment issues|http://grails.org/Deployment] can be found on the Grails wiki.
+{hidden}
+
+Algunos contenedores tienen fallos sin embargo, que en la mayoría de los casos pueden ser trabajadas alrededor. [Lista de despliegue conocido issues|http://grails.org/Deployment] puede encontrarse en la wiki de Grails.

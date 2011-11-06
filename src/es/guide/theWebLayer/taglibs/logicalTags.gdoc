@@ -1,8 +1,7 @@
-{hidden}
-You can also create logical tags where the body of the tag is only output once a set of conditions have been met. An example of this may be a set of security tags:
+
 {hidden}
 
-Puede tambien crear etiquetas logicas donde el cuerpo de la etiqueta es solo salida una vez que un conjunto de condiciones hallan sido cumplidas. Un ejemplo de esto pueden ser un conjunto de etiquetas de seguridad:
+You can also create logical tags where the body of the tag is only output once a set of conditions have been met. An example of this may be a set of security tags:
 
 {code:java}
 def isAdmin = { attrs, body ->
@@ -12,15 +11,31 @@ def isAdmin = { attrs, body ->
     }
 }
 {code}
+{hidden}
+
+También puede crear etiquetas lógicas donde el cuerpo de la etiqueta es salido sólo una vez que se cumplan una serie de condiciones. Un ejemplo de esto puede ser un conjunto de etiquetas de seguridad:
+
+{code: java}
+Def isAdmin = {attrs, cuerpo->
+    Def usuario = attrs.user
+    Si (el usuario
 
 {hidden}
+
+
 The tag above checks if the user is an administrator and only outputs the body content if he/she has the correct set of access privileges:
-{hidden}
-
-La etiqueta de arriba checa si el usario es un administrador y solo muestra el contenido del cuerpo si el/ella tiene el conjunto correcto de privilegios de acceso:
 
 {code:xml}
 <g:isAdmin user="${myUser}">
     // some restricted content
 </g:isAdmin>
+{code}
+{hidden}
+
+La etiqueta anterior comprueba si el usuario es un administrador y sólo envía el contenido del cuerpo si tiene el conjunto correcto de privilegios de acceso:
+
+{Código: xml}
+<g:isadmin user="${myUser}">
+    / / algunas restricción de contenido
+</g:isadmin>
 {code}

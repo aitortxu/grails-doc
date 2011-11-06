@@ -1,3 +1,6 @@
+
+{hidden}
+
 A one-to-many relationship is when one class, example @Author@, has many instances of a another class, example @Book@. With Grails you define such a relationship with the @hasMany@ setting:
 
 {code}
@@ -7,6 +10,20 @@ class Author {
     String name
 }
 {code}
+
+{hidden}
+
+Es una relación de uno a muchos cuando una clase, ejemplo @ autor @, tiene muchas instancias de una clase de otra, ejemplo @ libro @. Con Grails se define esa relación con @ hasMany @ configuración:
+
+{code}
+clase {autor
+    estático hasMany = [libros: libro]
+
+Nombre de la cadena
+}
+{code}
+
+{hidden}
 
 {code}
 class Book {
@@ -18,6 +35,21 @@ In this case we have a unidirectional one-to-many. Grails will, by default, map 
 
 {note}
 The [ORM DSL|guide:ormdsl] allows mapping unidirectional relationships using a foreign key association instead
+{hidden}
+
+{code}
+clase {libro
+    Título de cadena
+}
+{code}
+
+En este caso tenemos una relación uno a varios unidireccional. Grails asignará de forma predeterminada, este tipo de relación con una tabla de combinación.
+
+{Nota}
+[DSL|guide:ormdsl de ORM] permite asignar relaciones unidireccionales mediante una asociación de clave extranjera en su lugar
+
+{hidden}
+
 {note}
 
 Grails will automatically inject a property of type @java.util.Set@ into the domain class based on the @hasMany@ setting. This can be used to iterate over the collection:
@@ -29,6 +61,22 @@ for (book in a.books) {
     println book.title
 }
 {code}
+{hidden}
+
+{Nota}
+
+Grails automáticamente inyecta una propiedad de tipo @java.util.Set@ en la clase de dominio basada en el @ hasMany @ configuración. Esto puede utilizarse para recorrer en iteración la colección:
+
+{code}
+Def un = Author.get(1)
+
+para (libro de a.books) {}
+    Console.println book.title
+}
+{code}
+
+{hidden}
+
 
 {note}
 The default fetch strategy used by Grails is "lazy", which means that the collection will be lazily initialized on first access. This can lead to the [n+1 problem|http://www.javalobby.org/java/forums/t20533.html] if you are not careful.
@@ -45,6 +93,26 @@ class Author {
     String name
 }
 {code}
+{hidden}
+
+{Nota}
+La estrategia de recuperación predeterminada utilizada por Grails es "perezoso", lo que significa que la colección se inicializarán mandos… el primer acceso. Esto puede conducir a la [n 1 problem|http://www.javalobby.org/java/forums/t20533.html] si no se es cuidadoso.
+
+Si necesita "ansioso" buscando te puede utilizar [DSL|guide:ormdsl de ORM] o especificar deseoso de obtener como parte de una [query|guide: consultar]
+{Nota}
+
+El valor por defecto en cascada de comportamiento es conexión en cascada de guarda y actualizaciones, pero no elimina a menos que también se especifica @ belongsTo @:
+
+{code}
+clase {autor
+    estático hasMany = [libros: libro]
+
+Nombre de la cadena
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Book {
@@ -54,6 +122,19 @@ class Book {
 {code}
 
 If you have two properties of the same type on the many side of a one-to-many you have to use @mappedBy@ to specify which the collection is mapped:
+
+{hidden}
+
+{code}
+clase {libro
+    Static belongsTo = [autor: autor]
+    Título de cadena
+}
+{code}
+
+Si tiene dos propiedades del mismo tipo del lado varios de un uno a muchos tienes que usar @ mappedBy @ para especificar que la colección está asignada:
+
+{hidden}
 
 {code}
 class Airport {
@@ -68,6 +149,24 @@ class Flight {
     Airport destinationAirport
 }
 {code}
+{hidden}
+
+{code}
+clase {Aeropuerto
+    estático hasMany = [vuelos: vuelo]
+    mappedBy estática = [vuelos: "departureAirport"]
+}
+{code}
+
+{code}
+clase vuelo {}
+    Aeropuerto departureAirport
+    Aeropuerto destinationAirport
+}
+{code}
+
+{hidden}
+
 
 This is also true if you have multiple collections that map to different properties on the many side:
 
@@ -78,6 +177,20 @@ class Airport {
                        inboundFlights: "destinationAirport"]
 }
 {code}
+{hidden}
+
+Lo mismo sucede si tiene varias colecciones que se asignan a diferentes propiedades del lado varios:
+
+{code}
+clase {Aeropuerto
+    estático hasMany = [outboundFlights: vuelo, inboundFlights: vuelo]
+    estático mappedBy = [outboundFlights: "departureAirport",
+                       inboundFlights: "destinationAirport"]
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Flight {
@@ -86,3 +199,11 @@ class Flight {
 }
 {code}
 
+{hidden}
+
+{code}
+clase vuelo {}
+    Aeropuerto departureAirport
+    Aeropuerto destinationAirport
+}
+{code}

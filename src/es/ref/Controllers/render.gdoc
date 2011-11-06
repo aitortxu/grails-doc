@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. render
 
 h2. Purpose
@@ -60,6 +63,73 @@ render Book.list(params) as JSON
 render Book.get(params.id) as XML
 
 {code}
+{hidden}
+
+h1. procesamiento
+
+h2. Fin
+
+Para representar diferentes formas de respuestas de las respuestas de texto simple, a la vista y plantillas.
+
+h2. Ejemplos
+
+{code: java}
+/ / presenta el texto de respuesta
+procesar "algún texto"
+
+/ / presenta el texto de una contenido-tipo/codificación especificada
+Render (texto: "<xml>algunos xml</xml>", contentType: "text/xml" codificación: "UTF-8")
+
+/ / procesar una plantilla a la respuesta para el modelo especificado
+Def theShining = nuevo libro (título: "El resplandor", autor: "Stephen King")
+Render (plantilla: "reserva", modelo: [libro: theShining])
+
+/ / procesar cada elemento de la colección utilizando la plantilla especificada
+Render (plantilla: "reserva", colección: [b1, b2, b3])
+
+/ / procesar una plantilla a la respuesta para el frijol especificado
+Def theShining = nuevo libro (título: "El resplandor", autor: "Stephen King")
+Render (plantilla: "libro", de judías: theShining)
+
+/ / procesar la vista con el modelo especificado
+Def theShining = nuevo libro (título: "El resplandor", autor: "Stephen King")
+Render (vista: "viewName", modelo: [libro: theShining])
+
+/ / la vista con el controlador como el modelo de procesamiento
+Render (vista: "viewName")
+
+/ / procesar algunos marcado a la respuesta
+procesar {}
+    div (id: "myDiv", "algún texto dentro de la div")
+}
+
+/ / representar algún formato XML para la respuesta
+Render (contentType: "text/xml") {}
+    {libros
+         para {} (b en libros)
+             libro (título: b.title, autor: b.author)
+         }
+    }
+}
+
+/ / representar una respuesta JSON (http://www.json.org) con el atributo builder:
+Render (contentType: "texto/json") {}
+    libro (título: b.title, autor: b.author)
+}
+
+/ / procesamiento con código de Estado
+Render (Estado: 503, texto: 'No se pudo actualizar libro ${b.id}')
+
+/ / Automático aplanamiento de XML y JSON
+grails.converters.* de importación
+...
+procesar Book.list(params) como JSON
+procesar Book.get(params.id) como XML
+
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -70,6 +140,20 @@ Parameters:
 
 * @text@ (optional) - The text to render
 * @builder@ (optional) - The builder to use when rendering markup
+{hidden}
+
+h2. Descripción
+
+Un método polivalente para procesar las respuestas al cliente que mejor se ilustra con algunos ejemplos! Advertencia: este método no admite siempre varios parámetros. Por ejemplo, si especifica colección y modelo, se ignorará el parámetro del modelo.
+Parámetros
+
+Parámetros:
+
+* @ texto @ (opcional): el texto para procesar
+* @ generador @ (opcional): el generador para utilizar cuando lo marcado
+
+{hidden}
+
 * @view@ (optional) - The view to delegate the rendering to
 * @template@ (optional) - The template to render. A template is usually an HTML snippet and the file starts with an underscore ("_"). This is used mostly in AJAX requests.
 * @layout@ (optional) - The layout to use for the response
@@ -80,5 +164,24 @@ Parameters:
 * @contentType@ (optional) - The contentType of the response
 * @encoding@ (optional) - The encoding of the response
 * @converter@ (as single non-named first parameter) - A Converter that should be rendered as Response
+{hidden}
+
+* @ Vista @ (opcional): el fin de delegar la representación
+* @ plantilla @ (opcional) - la plantilla de procesamiento. Una plantilla es normalmente un fragmento de HTML y el archivo empieza con un carácter de subrayado ("_"). Esto se utiliza principalmente en solicitudes de AJAX.
+* @ Diseño @ (opcional): el diseño que se utiliza para la respuesta
+* @ var @ (opcional): el nombre de la variable que se pasó a una plantilla por defecto para el argumento predeterminado Groovy 'lo' si no especificado
+* @ bean @ (opcional): el beanto utilizar en el procesamiento
+* @ modelo @ (opcional): el modelo a utilizar en el procesamiento
+* @ colección @ (opcional) - para representar una plantilla de cada elemento de una colección
+* @ contentType @ (opcional) - contentType de la respuesta
+* @ codificación @ (opcional) - la codificación de la respuesta
+* @ converter @ (como único no nombrado primer parámetro) - convertidor que deben procesarse como respuesta
+
+{hidden}
+
 * @plugin@ (optional) - The plugin to look for the template in
 * @status@ (optional) - The HTTP status code to use
+{hidden}
+
+* @ plugin @ (opcional): el plugin para buscar la plantilla en
+* @ Estado @ (opcional) - código de estado HTTP el código para utilizar

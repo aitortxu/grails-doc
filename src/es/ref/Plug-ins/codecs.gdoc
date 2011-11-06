@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. codecs
 
 h2. Purpose
@@ -18,6 +21,29 @@ class HTMLCodec {
 assert "&lt;p&gt;Hello World!&lt;/p&gt;" == "<p>Hello World!</p>".encodeAsHTML()
 assert "<p>Hello World!</p>" == "&lt;p&gt;Hello World!&lt;/p&gt;".decodeHTML()
 {code}
+{hidden}
+
+h1. códecs
+
+h2. Fin
+
+Proporciona la posibilidad de registrar codificadores y decodificadores de datos textuales como métodos de cualquier objeto
+
+h2. Ejemplos
+
+{code}
+clase HTMLCodec {}
+    codificar estática = {theTarget->
+        HtmlUtils.htmlEscape(theTarget.toString())
+    }
+    Static descodificar = {theTarget->
+        HtmlUtils.htmlUnescape(theTarget.toString())
+    }
+}
+afirmar"
+
+{hidden}
+
 
 h2. Description
 
@@ -28,6 +54,20 @@ Provided Codecs:
 * @HTMLCodec@ - encodes/decodes HTML mark-up
 * @URLCodec@ - encodes/decodes URLs
 * @JavascriptCodec@ - encodes (escapes) JavaScript
+{hidden}
+
+h2. Descripción
+
+Este plugin busca clases con nombres que terminan en el Convención @ Codec @ y registra dinámicamente @ encodeAs [Codec] @ y @ decode [Codec] @ métodos @java.lang.Object@ para que cualquier dato puede codificado y decodificado. Para obtener más información consulte la sección [codificación y descodificación Objects|guide:codecs] en la Guía del usuario.
+
+Condición de códecs:
+
+* @ HTMLCodec @ - mark-up codifica y descodifica HTML
+* @ URLCodec @ - URL codifica y descodifica
+* @ JavascriptCodec @ - codifica (escapa) JavaScript
+
+{hidden}
+
 * @Base64Codec@ - encodes/decodes Base64 data
 * @HexCodec@ - encodes a byte array or list of integers into a hex string, and decodes hex strings into byte array
 * @MD5Codec@ - encodes a byte array or list of integers, or the characters of a string (using default system encoding) into an MD5 digest as a hex string
@@ -36,3 +76,13 @@ Provided Codecs:
 * @SHA1BytesCodec@ - encodes a byte array or list of integers, or the characters of a string (using default system encoding) into an SHA1 digest as a byte array
 * @SHA256Codec@ - encodes a byte array or list of integers, or the characters of a string (using default system encoding) into an SHA256 digest as a hex string
 * @SHA256BytesCodec@ - encodes byte array or list of integers, or the characters of a string (using default system encoding) into an SHA256 digest as a byte array
+{hidden}
+
+* @ Base64Codec @ - codifica y descodifica datos Base64
+* @ HexCodec @ - codifica una lista de enteros o matriz de bytes en una cadena hexadecimal y descodifica cadenas hexadecimales en matriz de bytes
+* @ MD5Codec @ - codifica una matriz de bytes o lista de enteros, o los caracteres de una cadena (utilizando la codificación predeterminada del sistema) en un MD5 digieren como una cadena hexadecimal
+* @ MD5BytesCodec @ - codifica una matriz de bytes o lista de enteros, o los caracteres de una cadena (utilizando la codificación predeterminada del sistema) en un MD5 digieren como una matriz de bytes
+* @ SHA1Codec @ - codifica una matriz de bytes o lista de enteros, o los caracteres de una cadena (utilizando la codificación predeterminada del sistema) en un SHA1 digieren como una cadena hexadecimal
+* @ SHA1BytesCodec @ - codifica una matriz de bytes o lista de enteros, o los caracteres de una cadena (utilizando la codificación predeterminada del sistema) en un SHA1 digieren como una matriz de bytes
+* @ SHA256Codec @ - codifica una matriz de bytes o lista de enteros, o los caracteres de una cadena (utilizando la codificación predeterminada del sistema) en un SHA256 digieren como una cadena hexadecimal
+* @ SHA256BytesCodec @ - codifica la matriz de bytes o lista de enteros, o los caracteres de una cadena (utilizando la codificación predeterminada del sistema) en un SHA256 digieren como una matriz de bytes

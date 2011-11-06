@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. withCriteria
 
 h2. Purpose
@@ -7,6 +10,20 @@ Allows inline execution of Criteria queries. See the [createCriteria|domainClass
 h2. Return value
 
 If no matching records are found, an empty List is returned.
+
+{hidden}
+
+h1. withCriteria
+
+h2. Fin
+
+Permite la ejecución en línea de consultas de criterios. Consulte el método [createCriteria|domainClasses] para referencia.
+
+h2. Valor devuelto
+
+Si no se encuentra ningún registro coincidente, se devuelve una lista vacía.
+
+{hidden}
 
 If a projection is specified:
 
@@ -24,6 +41,27 @@ def results = Book.withCriteria {
     like('title', '%Groovy%')
 }
 {code}
+{hidden}
+
+Si se especifica una proyección:
+
+* Devuelve un valor único si sólo contiene un campo
+* una lista en caso allí son varios campos en la proyección
+
+En caso contrario, devolverá una lista de instancias coincidentes de la clase llamada withCriteria.
+
+h2. Ejemplos
+
+{code: java}
+resultados de Def = {} Book.withCriteria
+    Def ahora = new Date()
+    entre ('releaseDate', ahora-7, ahora)
+    como ('title', 'Groovy %')
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -36,8 +74,30 @@ def book = Book.withCriteria(uniqueResult: true) {
     like('title', '%Groovy%')
 }
 {code}
+{hidden}
+
+h2. Descripción
+
+@ WithCriteria @ método permite la definición en línea de [Criteria|guide:criteria]. Argumentos para el [HibernateCriteriaBuilder|api:grails.orm.HibernateCriteriaBuilder] se pueden pasar como primer parámetro:
+
+{code: java}
+libro de Def = Book.withCriteria(uniqueResult: true) {}
+    Def ahora = new Date()
+    entre ('releaseDate', ahora-7, ahora)
+    como ('title', 'Groovy %')
+}
+{code}
+
+{hidden}
+
 
 Parameters:
 
 * @arguments@ (optional) - A map of named arguments to be set on the Criteria instance
 * @closure@ - A closure that defines the criteria
+{hidden}
+
+Parámetros:
+
+* @ argumentos @ (opcional): un mapa del llamado argumentos para establecerse en la instancia de criterios
+* @ cierre @ - un cierre que define los criterios

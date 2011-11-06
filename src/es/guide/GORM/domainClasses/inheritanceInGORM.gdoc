@@ -1,3 +1,6 @@
+
+{hidden}
+
 GORM supports inheritance both from abstract base classes and concrete persistent GORM entities. For example:
 
 {code}
@@ -11,6 +14,24 @@ class BlogEntry extends Content {
     URL url
 }
 {code}
+{hidden}
+
+GORM admite la herencia de clases base abstractas y entidades concretas de GORM persistentes. Por ejemplo:
+
+{code}
+clase {contenido
+     Autor de cadena
+}
+{code}
+
+{code}
+clase BlogEntry amplía contenido {}
+    URL url
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Book extends Content {
@@ -23,6 +44,22 @@ class PodCast extends Content {
     byte[] audioStream
 }
 {code}
+{hidden}
+
+{code}
+clase libro amplía contenido {}
+    Cadena ISBN
+}
+{code}
+
+{code}
+clase PodCast amplía contenido {}
+    Byte [] audioStream
+}
+{code}
+
+{hidden}
+
 
 In the above example we have a parent @Content@ class and then various child classes with more specific behaviour.
 
@@ -33,6 +70,20 @@ At the database level Grails by default uses table-per-hierarchy mapping with a 
 Table-per-hierarchy mapping has a down side in that you *cannot* have non-nullable properties with inheritance mapping. An alternative is to use table-per-subclass which can be enabled with the [ORM DSL|guide:ormdsl]
 
 However, excessive use of inheritance and table-per-subclass can result in poor query performance due to the use of outer join queries. In general our advice is if you're going to use inheritance, don't abuse it and don't make your inheritance hierarchy too deep.
+{hidden}
+
+En el ejemplo anterior tenemos un padre @ contenido @ clase y luego varias clases secundarias con comportamiento más específico.
+
+h4. Consideraciones
+
+En la base de datos de nivel Grails por defecto utiliza asignación por jerarquía de tabla con una columna de discriminador denominada clase @ @ para la clase primaria (contenido @ @) y sus subclases (@ BlogEntry @, @ libro @ etc), comparten el * mismo * tabla.
+
+Asignación de tabla por jerarquía tiene una abajo del lado en que * no puede * tienen propiedades que no aceptan valores NULL con asignación de herencia. Una alternativa es usar tabla por subclase que puede activarse con el [ORM DSL|guide:ormdsl]
+
+Sin embargo, el uso excesivo de la herencia y la tabla por subclase puede resultar en el rendimiento de las consultas pobres debido al uso de las consultas de combinación externa. En general nuestro Consejo es si va a utilizar la herencia, no abusar de él y no hacer la jerarquía de herencia demasiado profunda.
+
+{hidden}
+
 
 h4. Polymorphic Queries
 
@@ -43,4 +94,16 @@ def content = Content.list() // list all blog entries, books and podcasts
 content = Content.findAllByAuthor('Joe Bloggs') // find all by author
 
 def podCasts = PodCast.list() // list only podcasts
+{code}
+{hidden}
+
+h4. Consultas polimórficas
+
+El resultado de la herencia es que obtendrá la capacidad para realizar consultas en polymorphically. Utilizando por ejemplo [list|domainClasses] método sobre el contenido de @ @ super clase devolverá todas las subclases de contenido @ @:
+
+{code}
+contenido de Def = Content.list() / / lista todas las entradas de blog, libros y podcasts
+contenido = Content.findAllByAuthor ('Joe Bloggs') / / Buscar por autor
+
+podCasts de Def = PodCast.list() / / lista sólo podcasts
 {code}

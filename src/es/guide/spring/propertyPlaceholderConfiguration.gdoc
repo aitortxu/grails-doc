@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails supports the notion of property placeholder configuration through an extended version of Spring's [PropertyPlaceholderConfigurer|api:org.springframework.beans.factory.config.PropertyPlaceholderConfigurer], which is typically useful in combination with [externalized configuration|guide:configExternalized].
 
 Settings defined in either "ConfigSlurper":http://groovy.codehaus.org/ConfigSlurper scripts or Java properties files can be used as placeholder values for Spring configuration in @grails-app/conf/spring/resources.xml@. For example given the following entries in @grails-app/conf/Config.groovy@ (or an externalized config):
@@ -8,6 +11,21 @@ database.dbname="mysql:mydb"
 {code}
 
 You can then specify placeholders in @resources.xml@ as follows using the familiar ${..} syntax:
+{hidden}
+
+Grails es compatible con la noción de configuración del marcador de posición de propiedad a través de una versión ampliada de la primavera [PropertyPlaceholderConfigurer|api:org.springframework.beans.factory.config.PropertyPlaceholderConfigurer], que es generalmente útil en combinación con [externalizados configuration|guide:configExternalized].
+
+Configuración definida en cualquiera "secuencias de comandos de ConfigSlurper":http://groovy.codehaus.org/ConfigSlurper o archivos de propiedades Java pueden utilizarse como valores de marcador de posición para la configuración de primavera en @ grails-app/conf/spring/resources.xml@. Por ejemplo, dada las siguientes entradas en @grails-app/conf/Config.groovy@ (o una configuración externalizado):
+
+{code: java}
+Database.Driver="com.MySQL.JDBC.Driver"
+Database.dbname="MySQL:mydb"
+{code}
+
+A continuación, puede especificar marcadores de posición en @resources.xml@ como sigue utilizando la sintaxis familiar de ${.}:
+
+{hidden}
+
 
 {code:xml}
 <bean id="dataSource"
@@ -18,5 +36,17 @@ You can then specify placeholders in @resources.xml@ as follows using the famili
     <property name="url">
         <value>jdbc:${database.dbname}</value>
     </property>
+ </bean>
+{code}
+{hidden}
+
+{Código: xml}
+<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> <property name="driverClassName"><value>${database.driver}</value>
+        
+    </property><property name="url"><value>jdbc:${database.dbname}</value>
+        
+    </property> 
+    
+    
  </bean>
 {code}

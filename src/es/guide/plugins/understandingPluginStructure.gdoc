@@ -1,3 +1,6 @@
+
+{hidden}
+
 As as mentioned previously, a plugin is basically a regular Grails application with a plugin descriptor. However when installed, the structure of a plugin differs slightly. For example, take a look at this plugin directory structure:
 
 {code:java}
@@ -19,6 +22,32 @@ When a plugin is installed the contents of the @grails-app@ directory will go in
 Dealing with static resources is slightly different. When developing a plugin, just like an application, all static resources go in the @web-app@ directory. You can then link to static resources just like in an application. This example links to a JavaScript source:
 
 {code:xml}
+{hidden}
+
+Como se mencionó anteriormente, un plugin es básicamente una aplicación Grails regular con un descriptor de plugin. Sin embargo, cuando se instala, la estructura de un plugin es ligeramente diferente. Por ejemplo, echa un vistazo a esta estructura de directorios de plugin:
+
+{code: java}
+  Grails-app
+       controladores
+       dominio
+       TagLib
+     etc..
+   lib
+   src
+       Java
+       Groovy
+   Web-app
+       JS
+       CSS {código}
+
+Cuando se instala un plugin el contenido de la @ grails-app @ directorio entrará en un directorio como @ plugins/example-1.0/grails-app@. * No * se copiará en el árbol de código fuente principal. Un plugin nunca interfiere con el árbol de código fuente principal de un proyecto.
+
+Tratar con recursos estáticos es ligeramente diferente. Al desarrollar un plugin, al igual que una aplicación, todos los recursos estáticos van en el @ web-app @ directorio. Se puede entonces enlace a recursos estáticos como en una aplicación. Este enlaces de ejemplo a un origen de JavaScript:
+
+{Código: xml}
+
+{hidden}
+
 <g:resource dir="js" file="mycode.js" />
 {code}
 
@@ -29,3 +58,14 @@ There is a special @pluginContextPath@ variable that can be used whilst both dev
 At runtime the @pluginContextPath@ variable will either evaluate to an empty string or @/plugins/example@ depending on whether the plugin is running standalone or has been installed in an application
 
 Java and Groovy code that the plugin provides within the lib and @src/java@ and @src/groovy@ directories will be compiled into the main project's @web-app/WEB-INF/classes@ directory so that they are made available at runtime.
+{hidden}
+
+<g:resource dir="js" file="mycode.js"></g:resource>{code}
+
+Cuando se ejecuta el plugin en el modo de desarrollo el vínculo al recurso será resolver algo como / js/mycode.js@. Sin embargo, cuando el plugin se instala en una aplicación que la ruta cambiará automáticamente a algo así como @/plugin/example-0.1/js/mycode.js@ y Grails se ocupan de asegurarse de que los recursos están en el lugar correcto.
+
+Allí está una especial @ pluginContextPath @ variable que se puede utilizar mientras tanto desarrollando el plugin y cuando en el plugin se instala en la aplicación para saber lo que la ruta correcta para el plugin es.
+
+En tiempo de ejecución la @ pluginContextPath @ variable cualquiera evaluará a una cadena vacía o @ / plugins/ejemplo @ dependiendo de si el plugin está ejecutando independiente o se ha instalado en una aplicación
+
+Java y Groovy código que proporciona el plugin dentro de la lib y @ src/java @ y @ src/groovy @ directorios se compilarán del principal proyecto @ web-app/WEB-INF/classes @ directorio para que se hacen disponibles en tiempo de ejecución.

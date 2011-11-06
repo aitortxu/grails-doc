@@ -1,14 +1,9 @@
+
 {hidden}
 
 The previous example configuration assumes you want the same config for all environments: production, test, development etc.
 
 Grails' DataSource definition is "environment aware", however, so you can do:
-
-{hidden}
-
-La configuración del ejemplo anterior asume que desea la misma configuración para todos los entornos: producción, pruebas, desarrollo, etc..
-
-La definición de origen de datos de Grails es sensible al entorno, por lo que puedes hacer o siguiente:
 
 {code}
 dataSource {
@@ -23,6 +18,29 @@ environments {
         dataSource {
             url = "jdbc:mysql://liveip.com/liveDb"
             // other environment-specific settings here
+        }
+    }
+}
+{code}
+{hidden}
+
+La configuración de ejemplo anterior asume que desea la misma configuración para todos los entornos: producción, pruebas, desarrollo, etc..
+
+Definición de origen de datos de Grails es "entorno consciente", sin embargo, por lo que puede hacer:
+
+{code}
+{dataSource
+    agrupado = true
+    driverClassName = "com.mysql.jdbc.Driver"
+    dialecto = org.hibernate.dialect.MySQL5InnoDBDialect
+    / / otros ajustes comunes aquí
+}
+
+entornos {}
+    producción {}
+        {dataSource
+            URL = "jdbc:mysql://liveip.com/liveDb"
+            / / otras configuraciones específicas del entorno
         }
     }
 }

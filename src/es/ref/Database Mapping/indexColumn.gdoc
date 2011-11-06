@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. indexColumn
 
 h2. Purpose
@@ -16,6 +19,29 @@ class Neo {
     }
 }
 {code}
+{hidden}
+
+h1. indexColumn
+
+h2. Fin
+
+Personaliza la definición de columna de índice de una colección indizada como una lista @ @ o @ mapa @
+
+h2. Ejemplos
+
+{code: java}
+clase {Neo
+
+estático hasMany = [matriz: entero]
+
+asignación estática = {}
+        matriz indexColumn: [nombre: "the_matrix", tipo: entero]
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 def neo = new Neo()
@@ -26,6 +52,20 @@ neo.save(flush: true)
 h2. Description
 
 Usage: @association_name(indexColumn:map)@
+{hidden}
+
+{code: java}
+Def neo = Neo() nueva
+Neo.Matrix = [(1): 30, (2): 42, (3): 23]
+Neo.Save(flush: true)
+{code}
+
+h2. Descripción
+
+Uso: @ association_name(indexColumn:map) @
+
+{hidden}
+
 
 Arguments:
 
@@ -36,6 +76,20 @@ Arguments:
 * @index@ (optional) - The index name
 * @unique@ (optional) - Whether it is unique
 * @length@ (optional) - The length of the column
+{hidden}
+
+Argumentos:
+
+* @ nombre @ - el nombre de la columna como una cadena
+* @ tipo @ (opcional) - la hibernación [type|databaseMapping].
+* @ sqlType @ (opcional): escriba el SQL subyacente
+* @ enumType @ (opcional): la enumeración escriba para las propiedades de seguridad de tipos Enum. @ Ordinal @ o @ cadena @.
+* @ índice @ (opcional): el nombre de índice
+* @ único @ (opcional): si es único
+* @ longitud @ (opcional): la longitud de la columna
+
+{hidden}
+
 * @precision@ (optional) - The precision of the column
 * @scale@ (optional) - The scale of the column
 
@@ -44,5 +98,17 @@ By default when mapping an indexed collection such as a @Map@ or @List@ the inde
 {code:java}
 static mapping = {
     matrix indexColumn: [name: "the_matrix", type: Integer]
+}
+{code}
+{hidden}
+
+* @ precisión @ (opcional): la precisión de la columna
+* @ escala @ (opcional): la escala de la columna
+
+De forma predeterminada cuando una colección indizada como un mapa @ @ o @ lista @ el índice de asignación se almacena en una columna llamada @ association_name_idx @ que es un entero @ @ tipo de listas y una cadena en el caso de mapas. Puede modificar cómo es la columna de índice asignado mediante el @ indexColumn @ argumento:
+
+{code: java}
+asignación estática = {}
+    matriz indexColumn: [nombre: "the_matrix", tipo: entero]
 }
 {code}

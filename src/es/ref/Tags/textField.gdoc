@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. textField
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:xml}
 <g:textField name="myField" value="${myValue}" />
 {code}
+{hidden}
+
+h1. textField
+
+h2. Fin
+
+Crea una entrada de tipo 'texto' (un campo de texto). Un atributo implícito "id" se da el mismo valor que el nombre a menos que se especifique explícitamente uno.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:textfield name="myField" value="${myValue}"></g:textfield>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,5 +38,22 @@ Attributes
 
 h2. Source
 
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre del campo de texto
+* @ valor @ (opcional) - texto inicial que se muestra en el campo de texto. De forma predeterminada, el campo de texto estará vacío.
+
+h2. Fuente
+
+{hidden}
+
 {source:tag=FormTagLib.textField}
 {source}
+{hidden}
+
+{source:tag=FormTagLib.textField}
+origen de {}

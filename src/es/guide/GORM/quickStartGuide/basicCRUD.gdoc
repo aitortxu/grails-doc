@@ -1,3 +1,6 @@
+
+{hidden}
+
 Try performing some basic CRUD (Create/Read/Update/Delete) operations.
 
 h4. Create
@@ -8,6 +11,21 @@ To create a domain class use Map constructor to set its properties and call [sav
 def p = new Person(name: "Fred", age: 40, lastVisit: new Date())
 p.save()
 {code}
+{hidden}
+
+Intente realizar algunas operaciones CRUD (Create, Read, Update/Delete) básicas.
+
+h4. Crear
+
+Para crear una clase de dominio utilice el constructor de mapa para establecer sus propiedades y llamar [save|domainClasses]:
+
+{code}
+Def p = nueva persona (nombre: "Fred", la edad: 40, lastVisit: nuevo Date())
+p.Save()
+{code}
+
+{hidden}
+
 
 The [save|domainClasses] method will persist your class to the database using the underlying Hibernate ORM layer.
 
@@ -19,6 +37,21 @@ Grails transparently adds an implicit @id@ property to your domain class which y
 def p = Person.get(1)
 assert 1 == p.id
 {code}
+{hidden}
+
+El método [save|domainClasses] persistirá la clase a la base de datos utilizando la capa subyacente de ORM Hibernate.
+
+h4. Lectura
+
+Grails transparente agrega un implícito @ id @ propiedad a la clase de dominio que puede usar para la recuperación:
+
+{code}
+Def p = Person.get(1)
+Assert 1 == p.id
+{code}
+
+{hidden}
+
 
 This uses the [get|domainClasses] method that expects a database identifier to read the @Person@ object back from the database.
 You can also load an object in a read-only state by using the [read|domainClasses] method:
@@ -29,6 +62,20 @@ def p = Person.read(1)
 
 In this case the underlying Hibernate engine will not do any dirty checking and the object will not be persisted. Note that
 if you explicitly call the [save|domainClasses] method then the object is placed back into a read-write state.
+{hidden}
+
+Esto utiliza el método de [get|domainClasses] que espera un identificador de base de datos para leer la persona @ @ objeto de la base de datos.
+También puede cargar un objeto en un Estado de sólo lectura mediante el método [read|domainClasses]:
+
+{code: java}
+Def p = Person.read(1)
+{code}
+
+En este caso el motor subyacente de hibernación no hará ninguna comprobación de sucio y el objeto no se conservará. Tenga en cuenta que
+Si se llama al método [save|domainClasses] el objeto se coloca en un Estado de lectura y escritura.
+
+{hidden}
+
 
 In addition, you can also load a proxy for an instance by using the [load|domainClasses] method:
 
@@ -38,6 +85,19 @@ def p = Person.load(1)
 
 This incurs no database access until a method other than getId() is called. Hibernate then initializes the proxied instance, or
 throws an exception if no record is found for the specified id.
+
+{hidden}
+
+Además, también puede cargar a un proxy para una instancia mediante el método [load|domainClasses]:
+
+{code: java}
+Def p = Person.load(1)
+{code}
+
+Esto no provoca acceso de la base de datos hasta un método que se llama getId(). Hibernación luego inicializa la instancia del proxy, o
+produce una excepción si no se encuentra ningún registro para el id especificado.
+
+{hidden}
 
 h4. Update
 
@@ -49,6 +109,20 @@ p.name = "Bob"
 p.save()
 {code}
 
+{hidden}
+
+h4. Actualización
+
+Para actualizar una instancia, cambiar algunas propiedades y, a continuación, llame de nuevo [save|domainClasses]:
+
+{code}
+Def p = Person.get(1)
+p.Name = "Bob"
+p.Save()
+{code}
+
+{hidden}
+
 h4. Delete
 
 To delete an instance use the [delete|domainClasses] method:
@@ -56,4 +130,14 @@ To delete an instance use the [delete|domainClasses] method:
 {code}
 def p = Person.get(1)
 p.delete()
+{code}
+{hidden}
+
+h4. Eliminar
+
+Para eliminar una instancia utilizar el método [delete|domainClasses]:
+
+{code}
+Def p = Person.get(1)
+p.Delete()
 {code}

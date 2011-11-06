@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. flash
 
 h2. Purpose
@@ -8,6 +11,21 @@ h2. Examples
 
 bc.
 class BookController {
+{hidden}
+
+h1. Flash
+
+h2. Fin
+
+Un mapa de almacenamiento temporal que almacena objetos dentro de la sesión para la siguiente solicitud y la siguiente solicitud sólo borrar automáticamente los objetos celebró allí después de completa la siguiente solicitud.
+
+h2. Ejemplos
+
+a c..
+clase BookController {}
+
+{hidden}
+
 
     def index() {
         flash.message = "Welcome!"
@@ -18,7 +36,26 @@ class BookController {
 }
 
 h2. Description
+{hidden}
+
+Def índice() {}
+        Flash.Message = "¡ Bienvenido!"
+        redirigir (acción: 'hogar')
+    }
+
+Def home() {}
+}
+
+h2. Descripción
+
+{hidden}
+
 
 The flash object is a Map (a hash) which you can use to store key value pairs. These values are transparently stored inside the session and then cleared at the end of the next request.
 
 This pattern lets you use HTTP redirects (which is useful for "redirect after post":http://www.theserverside.com/tt/articles/article.tss?l=RedirectAfterPost ) and retain values that can retrieved from the flash object.
+{hidden}
+
+El objeto flash es un mapa (un hash) que puede utilizar para almacenar los pares de valor de la clave. Estos valores se almacenan transparente dentro del período de sesiones y despejará al final de la siguiente solicitud.
+
+Este modelo permite usar redirecciones HTTP (que es útil para "redirigir después de post":http://www.theserverside.com/tt/articles/article.tss?l=RedirectAfterPost) y conservar los valores que se pueden recuperar desde el objeto flash.

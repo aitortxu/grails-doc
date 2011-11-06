@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. message
 
 h2. Purpose
@@ -7,6 +10,20 @@ Resolves a message from the given code or error. Normally used in conjunction wi
 h2. Examples
 
 Loop through each error and output the message:
+
+{hidden}
+
+h1. Mensaje
+
+h2. Fin
+
+Resuelve un mensaje desde el código o el error. Normalmente se utiliza en combinación con [eachError|tags]
+
+h2. Ejemplos
+
+Recorrer cada error y el mensaje de salida:
+
+{hidden}
 
 {code:xml}
 <g:eachError bean="${book}">
@@ -20,6 +37,22 @@ This is typically used for built-in Grails messages, rather than user applicatio
 Output a message for a specific known code:
 
 {code:xml}
+{hidden}
+
+{Código: xml}<g:eacherror bean="${book}">
+    <li><g:message error="${it}"></g:message></li>
+</g:eacherror>{code}
+
+{Nota}
+Normalmente se utiliza para mensajes de Grails integrados, en lugar de mensajes de la aplicación de usuario. Para mensajes de la aplicación de usuario, utilice el código @ @ o @ mensaje @ parámetros como se ilustra a continuación.
+{Nota}
+
+Un mensaje para un específico conocido código de salida:
+
+{Código: xml}
+
+{hidden}
+
 <g:message code="my.message.code" />
 {code}
 
@@ -50,6 +83,40 @@ One of either the @error@ attribute, the @code@ attribute or the @message@ attri
 For a more complex example, to output your own message with parameters and a default message, you might use the following code from your controller:
 
 {code:java}
+{hidden}
+
+<g:message code="my.message.code"></g:message>{code}
+
+Un mensaje para un objeto compatible de salida.
+
+{Código: xml}
+<g:message message="${myObj}"></g:message>
+{code}
+
+{Nota}
+Objetos pasados al parámetro mensaje deben implementar la interfaz [MessageSourceResolvable|api:org.springframework.context.MessageSourceResolvable].
+{Nota}
+
+h2. Descripción
+
+Atributos
+
+* @ error @ (opcional) - para resolver el mensaje de error. Utiliza para los mensajes de Grails integrados.
+* @ código @ (opcional): el código para resolver el mensaje.  Utilizada para los mensajes de la aplicación personalizada.
+* @ mensaje @ (opcional): el objeto de resolver el mensaje. Los objetos deben implementar @ MessageSourceResolvable @.
+* @ predeterminado @ (opcional): el valor por defecto mensaje a salida si no se encuentra el error o código en @ messages.properties@.
+* @ args @ (opcional) - una lista de argumentos valores para aplicar el mensaje cuando se utiliza @ código @.
+* @ encodeAs @ (opcional): el nombre de un códec para aplicar, es decir, HTML, JavaScript, URL etc.
+* @ locale @ (opcional) reemplazar @ Locale @ para utilizar en lugar del detectado
+
+O bien el @ error @ atributo, el código @ @ atributo o el mensaje @ @ atributo es necesario. Los mensajes se resuelven en el paquete @grails-app/i18n/messages.properties@. Véase también la internacionalización.
+
+Un ejemplo más complejo, para generar su propio mensaje con parámetros y un mensaje predeterminado, puede utilizar el código siguiente desde el controlador:
+
+{code: java}
+
+{hidden}
+
 flash.message = "book.delete.message"
 flash.args = ["The Stand"]
 flash.default = "book deleted"
@@ -64,6 +131,25 @@ book.delete.message="Book {0} deleted."
 and specify the following from your view:
 
 {code:xml}
+{hidden}
+
+Flash.Message = "book.delete.message"
+Flash.args = ["The Stand"]
+Flash.default = "libro eliminado"
+{code}
+
+Luego sería especificar lo siguiente en messages.properties:
+
+{code: java}
+Book.Delete.Message="Book {0} eliminado."
+{code}
+
+y especificar los siguientes puntos de vista:
+
+{Código: xml}
+
+{hidden}
+
 <g:message code="${flash.message}" args="${flash.args}"
            default="${flash.default}"/>
 {code}
@@ -74,3 +160,13 @@ h2. Source
 
 {source:tag=ValidationTagLib.message}
 {source}
+{hidden}
+
+<g:message code="${flash.message}" args="${flash.args}" default="${flash.default}"></g:message>{code}
+
+Que daría lugar a la salida de "Reservar el Stand eliminado".  Si tenía el mensaje de la mal llamada o no se especifica en @ messages.properties@, su mensaje predeterminado del "libro eliminado" sería salida.
+
+h2. Fuente
+
+{source:tag=ValidationTagLib.message}
+origen de {}

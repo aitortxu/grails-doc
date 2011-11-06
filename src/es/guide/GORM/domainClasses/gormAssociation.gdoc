@@ -1,2 +1,8 @@
+
+{hidden}
+
 Relationships define how domain classes interact with each other. Unless specified explicitly at both ends, a relationship exists only in the direction it is defined.
 
+{hidden}
+
+Las relaciones definen qué clases de dominio interactúan entre sí. Salvo que se especifique explícitamente en ambos extremos, existe una relación sólo en la dirección que se define.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. elseif
 
 h2. Purpose
@@ -17,6 +20,30 @@ h2. Examples
     Hello unknown developer!
 </g:elseif>
 {code}
+{hidden}
+
+h1. ElseIf
+
+h2. Fin
+
+La etiqueta elseif lógico
+
+h2. Ejemplos
+
+{Código: xml}
+<g:if test="${name == 'fred'}">
+    Hola Fred!
+</g:if>
+<g:elseif test="${name == 'bob'}">
+    Hola bob!
+</g:elseif>
+<g:elseif env="development">
+    Hola desarrollador desconocido!
+</g:elseif>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,3 +51,11 @@ Attributes
 
 * @test@ - The expression to test
 * @env@ - An environment name
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ prueba @ - la expresión para probar
+* @ env @ - un nombre de entorno

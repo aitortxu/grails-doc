@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails features an external plugin to add "Dojo":http://dojotoolkit.org/ support to Grails. To install the plugin type the following command from the root of your project in a terminal window:
 
 {code:java}
@@ -9,5 +12,24 @@ This will download the current supported version of Dojo and install it into you
 {code:xml}
 <g:javascript library="dojo" />
 {code}
+{hidden}
+
+Grails incluye un plugin externo para agregar "Dojo":http://dojotoolkit.org/ apoyo a Grails. Para instalar el plugin escriba el comando siguiente desde la raíz de su proyecto en una ventana de terminal:
+
+{code: java}
+dojo de instalar plugin Grails
+{code}
+
+Esto descargará la actual versión soportada de Dojo y instalarlo en su proyecto Grails. Con que puede añadir la siguiente referencia a la parte superior de la página:
+
+{Código: xml}
+<g:javascript library="dojo"></g:javascript>
+{code}
+
+{hidden}
+
 
 Now all of Grails tags such as [remoteLink|tags], [formRemote|tags] and [submitToRemote|tags] work with Dojo remoting.
+{hidden}
+
+Ahora todos de etiquetas de Grails como [remoteLink|tags], [formRemote|tags] y [submitToRemote|tags] trabajar con remoting Dojo.

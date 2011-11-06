@@ -1,3 +1,6 @@
+
+{hidden}
+
 By default Grails ships with the "jQuery":http://jquery.com/ library, but through the [Plugin system|guide:plugins] provides support for other frameworks such as [Prototype|http://www.prototypejs.org/], [Dojo:http://dojotoolkit.org/], [Yahoo UI:http://developer.yahoo.com/yui/] and the [Google Web Toolkit|http://code.google.com/webtoolkit/].
 
 This section covers Grails' support for Ajax in general. To get started, add this line to the @<head>@ tag of your page:
@@ -8,8 +11,29 @@ This section covers Grails' support for Ajax in general. To get started, add thi
 
 You can replace @jQuery@ with any other library supplied by a plugin you have installed. This works because of Grails' support for adaptive tag libraries. Thanks to Grails' plugin system there is support for a number of different Ajax libraries including (but not limited to):
 
+{hidden}
+
+Por defecto Grails barcos con la "biblioteca de jQuery":http://jquery.com/, pero a través de la [system|guide:plugins Plugin] proporciona soporte para otros entornos como [Prototype|http://www.prototypejs.org/], [Dojo:http://dojotoolkit.org/], [Yahoo UI:http://developer.yahoo.com/yui/] y [Toolkit|http://code.google.com/webtoolkit/ de Google Web].
+
+Esta sección cubre apoyo de Grails para el Ajax en general. Para empezar, añada esta línea a la @<head>@ etiqueta de la página:
+
+{Código: xml}
+<g:javascript library="jquery"></g:javascript>
+{code}
+
+Puede sustituir @ jQuery @ con cualquier otra biblioteca suministrado por un plugin que ha instalado. Esto funciona debido a soporte de Grails para las bibliotecas de etiquetas adaptables. Gracias al sistema de plugin de Grails hay soporte para un número de diferentes bibliotecas de Ajax, incluyendo (sin limitarse a):</head>
+
+{hidden}
+
 * jQuery
 * Prototype
+* Dojo
+* YUI
+* MooTools
+{hidden}
+
+* jQuery
+* Prototipo
 * Dojo
 * YUI
 * MooTools

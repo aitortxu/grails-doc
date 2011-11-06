@@ -1,3 +1,6 @@
+
+{hidden}
+
 Now that you have an idea of locales, to use them in Grails you create message bundle file containing the different languages that you wish to render. Message bundles in Grails are located inside the @grails-app/i18n@ directory and are simple Java properties files.
 
 Each bundle starts with the name @messages@ by convention and ends with the locale. Grails ships with several message bundles for a whole range of languages within the @grails-app/i18n@ directory. For example:
@@ -10,5 +13,25 @@ messages_es.properties
 messages_fr.properties
 ...
 {code}
+{hidden}
+
+Ahora que ya tiene una idea de las configuraciones regionales, para utilizarlos en Grails crear archivo de paquete mensajes que contienen las diferentes lenguas que desea procesar. Paquetes de mensajes en Grails se encuentran dentro de la @ grails-app/i18n @ directorio y son simples archivos de propiedades Java.
+
+Cada paquete comienza con el nombre @ mensajes @ por Convención y termina con el escenario. Grails barcos con varios paquetes de mensajes para toda una gama de idiomas dentro de la @ grails-app/i18n @ directorio. Por ejemplo:
+
+{code: java}
+Messages.Properties
+messages_da.Properties
+messages_de.Properties
+messages_es.Properties
+messages_fr.Properties
+...
+{code}
+
+{hidden}
+
 
 By default Grails looks in @messages.properties@ for messages unless the user has specified a locale. You can create your own message bundle by simply creating a new properties file that ends with the locale you are interested. For example @messages_en_GB.properties@ for British English.
+{hidden}
+
+De forma predeterminada Grails busca en @messages.properties@ para los mensajes a menos que el usuario ha especificado una configuración regional. Puede crear su propio paquete de mensaje, simplemente creando un nuevo archivo de propiedades que termina con la configuración regional está interesado. Por ejemplo, @messages_en_GB.properties@ para el inglés británico.

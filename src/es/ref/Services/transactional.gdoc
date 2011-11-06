@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. transactional
 
 h2. Purpose
@@ -12,9 +15,33 @@ class BookService {
     ...
 }
 {code}
+{hidden}
+
+h1. transaccional
+
+h2. Fin
+
+Permite la demarcación de transacción automática si no conjunto o establecido en true @ @
+
+h2. Ejemplos
+
+{code: java}
+clase BookService {}
+    Static transaccional = true
+    ...
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 By default services have automatic transaction management such as propagation and so on. By setting @transactional@ to @false@ you disable automatic Spring managed transaction demarcation for every method in the service. When set to the @true@, The propagation level of the transaction is by default set to [PROPAGATION_REQUIRED|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionDefinition.html#PROPAGATION_REQUIRED].
 
 You can also configure services using Spring's [@Transactional|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/annotation/Transactional.html] annotation. See [Declarative Transactions|guide:declarativeTransactions] in the user guide for more information.
+{hidden}
+
+h2. Descripción
+
+De forma predeterminada servicios tienen administración de transacciones automáticas, como la propagación y así sucesivamente. Mediante el valor de @ transaccional @ @ falso @ deshabilitar automática primavera logró demarcación de transacción para cada método en el servicio. Cuando se establece en true @ @, el nivel de propagación de la transacción es por defecto [PROPAGATION_REQUIRED|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionDefinition.html

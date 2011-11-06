@@ -1,3 +1,6 @@
+
+{hidden}
+
 A domain class can be created with the [create-domain-class|commandLine] command:
 
 {code}
@@ -7,6 +10,20 @@ grails create-domain-class helloworld.Person
 {note}
 If no package is specified with the create-domain-class script, Grails automatically uses the application name as the package name.
 {note}
+
+{hidden}
+
+Una clase de dominio puede ser creada con el comando [crear-dominio-class|commandLine]:
+
+{code}
+Grails clase de dominio crear helloworld.Persona
+{code}
+
+{Nota}
+Si no se especifica ningún paquete con la secuencia de comandos de creación-dominio-clase, Grails utiliza automáticamente el nombre de la aplicación como el nombre del paquete.
+{Nota}
+
+{hidden}
 
 This will create a class at the location @grails-app/domain/helloworld/Person.groovy@ such as the one below:
 
@@ -18,6 +35,21 @@ class Person {
 {code}
 
 {note}
+{hidden}
+
+Esto creará una clase en la ubicación @grails-app/domain/helloworld/Person.groovy@ como el siguiente:
+
+{code}
+paquete helloworld
+
+clase persona {}
+}
+{code}
+
+{Nota}
+
+{hidden}
+
 If you have the @dbCreate@ property set to "update", "create" or "create-drop" on your [DataSource|guide:dataSource], Grails will automatically generate/modify the database tables for you.
 {note}
 
@@ -30,6 +62,23 @@ class Person {
     Date lastVisit
 }
 {code}
+{hidden}
+
+Si tienes el @ dbCreate @ propiedad establecida en "Actualizar", "crear" o "crear" gota en su [DataSource|guide:dataSource], Grails serán automáticamente generar o modificar las tablas de base de datos para usted.
+{Nota}
+
+Puede personalizar la clase agregando propiedades:
+
+{code}
+clase persona {}
+    Nombre de la cadena
+    Edad entero
+    Fecha lastVisit
+}
+{code}
+
+{hidden}
+
 
 Once you have a domain class try and manipulate it with the [shell|commandLine] or [console|commandLine] by typing:
 
@@ -38,3 +87,12 @@ grails console
 {code}
 
 This loads an interactive GUI where you can run Groovy commands with access to the Spring ApplicationContext, GORM, etc.
+{hidden}
+
+Una vez que tienes una clase de dominio intente y manipular con [shell|commandLine] o [console|commandLine], escriba:
+
+{code}
+consola de Grails
+{code}
+
+Esta carga una GUI interactiva donde puede ejecutar comandos Groovy con acceso al muelle ApplicationContext, GORM, etc..

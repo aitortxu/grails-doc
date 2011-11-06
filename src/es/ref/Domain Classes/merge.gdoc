@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. merge
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 def b = new Book(title: "The Shining")
 b = b.merge()
 {code}
+{hidden}
+
+h1. combinación
+
+h2. Fin
+
+Combina una instancia de la clase de dominio en el actual contexto de persistencia y devuelve una nueva instancia combinada.
+
+h2. Ejemplos
+
+{code: java}
+Def b = nuevo libro (título: "El resplandor")
+b = b.merge()
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,6 +40,20 @@ The @merge@ method on the other hand lets you merge a detached object's state ba
 {code}
 book = book.merge()
 {code}
+{hidden}
+
+h2. Descripción
+
+La combinación de @ @ método es similar en función al método [save|domainClasses], pero no en el comportamiento. @ combinación @ permite la fusión de "destacado" instancias como los almacenados en el HTTP [session|controllers]. Cada instancia persistente está asociado a un contexto de persistencia. Se crea un nuevo contexto de persistencia para cada [request|controllers]. El resultado es que los objetos almacenados en la sesión HTTP pierden su contexto de persistencia en solicitudes posteriores. En este caso no se puede llamar simplemente [save|domainClasses] como la clase de dominio no está asociada a un contexto actual.
+
+La combinación de @ @ método por otro lado le permite combinar el estado de un objeto separado en el actual período de sesiones de la hibernación. A diferencia de guardar @ @ método este método devuelve una nueva instancia de la clase que representa el objeto vuelve a conectar. En otras palabras, usted * debe * escribir código como éste:
+
+{code}
+libro = book.merge()
+{code}
+
+{hidden}
+
 
 If you don't use the return value of the @merge@ method then you still have access to the original unmodified detached instance and you will get errors such as lazy initialization exceptions.
 
@@ -30,8 +64,28 @@ Copy the state of the given object onto the persistent object with the same iden
 {quote}
 
 The @merge@ method is equivalent to the Hibernate [merge|api:org.hibernate.Session#merge(java.lang.Object)] method.
+{hidden}
+
+Si no utiliza el valor devuelto de la combinación de @ @ método todavía tendrá acceso a la instancia de destacado original sin modificar y obtendrá errores como excepciones de inicialización diferida.
+
+La combinación de @ @ método está definida en la documentación de hibernación como sigue:
+
+oferta de {}
+Copiar el estado del objeto especificado en el objeto persistente con el mismo identificador. Si no hay ninguna instancia persistente actualmente asociada con el período de sesiones, se cargará. Si la instancia determinada sin guardar, guardar una copia de y volver como una instancia recién persistente.
+oferta de {}
+
+La combinación de @ @ método es equivalente a la hibernación [merge|api:org.hibernate.Session
+
+{hidden}
+
 
 Parameters:
 
 * @validate@ (optional) - Set to @false@ if validation should be skipped
 * @flush@ (optional) - When set to @true@ flushes the persistence context, hence persisting the object immediately
+{hidden}
+
+Parámetros:
+
+* @ validar @ (opcional) - establecido en false @ @ si debe omitirse la validación
+* @ flush @ (opcional): cuando se establece en true @ @ vuelca el contexto de persistencia, por lo tanto persista el objeto inmediatamente

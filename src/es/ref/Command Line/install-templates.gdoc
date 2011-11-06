@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. install-templates
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails install-templates
 {code}
+{hidden}
+
+h1. instalar plantillas
+
+h2. Fin
+
+Copias de la las plantillas utilizadas por Grails durante la generación de código para el directorio del proyecto
+
+h2. Ejemplos
+
+{code: java}
+plantillas de instalación Grails
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ grails install-templates
 {code}
 
 Fired Events:
+{hidden}
+
+h2. Descripción
+
+Uso:
+
+{code: java}
+plantillas de instalación Grails
+{code}
+
+Despedido de eventos:
+
+{hidden}
+
 
 * @InstallTemplatesStart@ - Before the templates are installed
 * @StatusUpdate@ - When the templates are successfully installed
@@ -33,7 +66,30 @@ src
        scaffolding
        war
 {code}
+{hidden}
+
+* @ InstallTemplatesStart @ - antes de las plantillas se instalan
+* @ StatusUpdate @ - cuando se instalan correctamente las plantillas
+* @ InstallTemplatesEnd @ - después de las plantillas que se hayan instalado
+
+Las @ instalar plantillas @ comando copiará las plantillas Grails se utiliza para todas las actividades de generación de código para la aplicación @ src/plantillas @ directorio. Los directorios de las plantillas incluyen:
+
+{code: java}
+src
+   plantillas
+       artefactos
+       Andamio
+       Guerra
+{code}
+
+{hidden}
+
 
 The @artifacts@ directory contains the templates used by the @create-* @ commands.
 The @scaffolding@ directory contains templates used by the @generate-* @ commands.
 The @war@ directory contains the web.xml template used to generate the deployment descriptor.
+{hidden}
+
+Los artefactos @ @ directorio contiene las plantillas utilizadas por el @ crear-* @ comandos.
+Los andamios @ @ directorio contiene plantillas utilizadas por el @ generar-* @ comandos.
+La guerra @ @ directorio contiene la plantilla de web.xml utilizada para generar el descriptor de despliegue.

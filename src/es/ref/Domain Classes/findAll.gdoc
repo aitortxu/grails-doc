@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. findAll
 
 h2. Purpose
@@ -42,6 +45,54 @@ Book.findAll("from Book as b where not exists " +
 def example = new Book(author: "Dan Brown")
 Book.findAll(example)
 {code}
+{hidden}
+
+h1. findAll
+
+h2. Fin
+
+Todos los del dominio encuentra instancias de clase que coinciden con la consulta
+
+h2. Ejemplos
+
+{code: java}
+/ / todo
+Book.findAll()
+
+/ / con un parámetro posicional
+Book.findAll ("libro como b donde b.author=?", ["Dan Brown'])
+
+/ / 10 libros de Dan Brown mirando desde quinto libro ordenada por fecha de lanzamiento
+¿Book.FindAll ("libro como b donde b.author=? order by b.releaseDate",
+             ['Dan Brown'], [máx.: 10, desvío: 5])
+
+/ / uso de ejemplos con max/desplazamiento
+Def query = "del libro como b donde b.author='Dan Brown' order by b.releaseDate"
+
+/ / primera 10 libros
+Book.findAll (consulta, [máx.: 10])
+
+/ / 10 libros a partir de 5 º
+Book.findAll (consulta, [máx.: 10, desvío: 5])
+
+/ / ejemplos con parámetros con nombre
+Book.findAll ("libro como b donde b.author=:author",
+             [autor: 'Dan Brown'])
+Book.findAll ("libro como b donde b.author=:author",
+             [autor: 'Dan Brown'], [máx.: 10, desvío: 5])
+Book.findAll ("libro como b donde b.author en (: autores)",
+             [Autores: ['Dan Brown', 'Jack London']])
+
+/ / unirse ejemplos con tablas
+Book.findAll ("libro como b donde no existe" "(de pedir prestado como br where br.book = b)")
+
+/ / consulta por ejemplo
+ejemplo de Def = nuevo libro (autor: "Dan Brown")
+Book.findAll(Example)
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -51,6 +102,19 @@ The @findAll@ method allows querying with Hibernate's query language [HQL|guide:
 Book.findAll("from Book as b where b.author=:author",
              [author: 'Dan Brown'], [max: 10, offset: 5])
 {code}
+
+{hidden}
+
+h2. Descripción
+
+@ FindAll @ método permite consultar con lenguaje de consulta de hibernación [HQL|guide:hql] y consultar por ejemplo, devolver todas las instancias correspondientes. Paginación puede controlarse mediante la @ max @ y @ offset @ parámetros:
+
+{code: java}
+Book.findAll ("libro como b donde b.author=:author",
+             [autor: 'Dan Brown'], [máx.: 10, desvío: 5])
+{code}
+
+{hidden}
 
 The @findAll@ method supports the 2nd level cache:
 
@@ -70,6 +134,29 @@ Book.findAll(String query, Map namedParams)
 Book.findAll(String query, Map namedParams, Map queryParams)
 Book.findAll(Book example)
 {code}
+{hidden}
+
+@ FindAll @ método admite la caché de nivel 2:
+
+{code: java}
+Book.findAll ("libro como b donde b.author=:author",
+             [autor: 'Dan Brown'], [máx.: 10, desvío: 5, caché: verdadero])
+{code}
+
+La sintaxis básica del método es:
+
+{code: java}
+Book.findAll()
+Book.findAll (String consulta)
+Book.findAll (String consulta, colección positionalParams)
+Book.findAll (String consulta, colección positionalParams, mapa queryParams)
+Book.findAll (String consulta, mapa namedParams)
+Book.findAll (String consulta, namedParams mapa, mapa queryParams)
+Book.findAll (ejemplo de libro)
+{code}
+
+{hidden}
+
 
 {note}
 If you have a join in your HQL, the method will return a @List@ of @Array@s containing domain class instances. You may wish to use [executeQuery|domainClasses] in this case so you have more flexibility in specifying what gets returned.
@@ -80,9 +167,31 @@ Parameters:
 * @query@ - An HQL query
 * @positionalParams@ - A @List@ of parameters for a positional parametrized HQL query
 * @namedParams@ - A @Map@ of named parameters a HQL query
+{hidden}
+
+{Nota}
+Si tienes una combinación en el HQL, el método devolverá una lista @ @ de instancias de clase de dominio que contienen @ Array@s. Tal vez desee utilizar [executeQuery|domainClasses] en este caso para que tenga más flexibilidad al especificar qué obtiene regresó.
+{Nota}
+
+Parámetros:
+
+* @ consulta @ - consulta An HQL
+* @ positionalParams @ - una lista @ @ de parámetros para las consultas parametrizadas posicional HQL
+* @ namedParams @ - un mapa @ @ de parámetros con nombre una consulta HQL
+
+{hidden}
+
 * @queryParams@ - A @Map@ containing parameters 'max', and/or 'offset' and/or 'cache'
 * @example@ - An instance of the domain class for query by example
 * @readOnly@ - @true@ if returned objects should not be automatically dirty-checked (simlar to @read()@)
 * @fetchSize@ - number of rows fetched by the underlying JDBC driver per round trip
 * @flushMode@ - Hibernate @FlushMode@ override, defaults to @FlushMode.AUTO@
 * @timeout@ - query timeout in seconds
+{hidden}
+
+* @ queryParams @ - un mapa @ @ que contiene parámetros 'max' o 'offset' o 'caché'
+* @ ejemplo @ - una instancia de la clase de dominio para consulta por ejemplo
+* @ readOnly @-@ verdadero @ si devuelve objetos no deberían comprobar automáticamente sucio (similar a @read()@)
+* @ fetchSize @ - número de filas que se obtiene mediante el controlador JDBC subyacente por ida y vuelta
+* @ flushMode @ - Hibernate @ FlushMode @ anulación, el valor predeterminado es @FlushMode.AUTO@
+* @ timeout @ - tiempo de espera de consulta en segundos

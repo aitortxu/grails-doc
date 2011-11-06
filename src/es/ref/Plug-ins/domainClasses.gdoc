@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. domainClass
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @domainClass@ plugin configures Grails domain classes as prototyped beans in
 h2. Examples
 
 An example domain class:
+
+{hidden}
+
+h1. domainClass
+
+h2. Fin
+
+@ DomainClass @ plugin configura clases de dominio de Grails como prototipo judías en la primavera @ perful @
+
+h2. Ejemplos
+
+Un clase de ejemplo de dominio:
+
+{hidden}
 
 {code:java}
 class Book {
@@ -18,6 +35,20 @@ class Book {
 
 h2. Description
 
+{hidden}
+
+{code: java}
+clase {libro
+    Título de cadena
+    Fecha releaseDate
+    Autor de autor
+}
+{code}
+
+h2. Descripción
+
+{hidden}
+
 Refer to the section on [GORM|guide:GORM] in the Grails user guide which details how to create Grails domain classes.
 
 Configured Spring Beans given a domain class of @Book@:
@@ -26,3 +57,13 @@ Configured Spring Beans given a domain class of @Book@:
 * @BookPersistentClass@ - The @Class@ for the domain class @Book@
 * @BookDomainClass@ - The [GrailsDomainClass|api:org.codehaus.groovy.grails.commons.GrailsDomainClass] instance which understands the conventions defined within a domain class and is used by [GORM|guide:GORM] to perform ORM mapping.
 * @Book@ - A prototyped bean that will create a new instance of @Book@ every time requested. This bean is used to perform auto-wiring of domain classes when constructed with the @new@ operator.
+{hidden}
+
+Consulte la sección [GORM|guide:GORM] en la Guía de usuario de Grails que detalla cómo crear clases de dominio Grails.
+
+Frijoles de primavera configurado dado una clase de dominio del libro @ @:
+
+* @ BookValidator @-[GrailsDomainClassValidator|api:org.codehaus.groovy.grails.validation.GrailsDomainClassValidator] que valida definido [constraints|guide:constraints] una clase dominio.
+* @ BookPersistentClass @-@ libro @ de clase la clase @ @ para el dominio.
+* @ BookDomainClass @ - la instancia [GrailsDomainClass|api:org.codehaus.groovy.grails.commons.GrailsDomainClass] que comprende las convenciones establecidas dentro de una clase de dominio y es utilizada por [GORM|guide:GORM] para realizar la asignación de ORM.
+* @ Libro @ - un prototipo bean que creará una nueva instancia de @ libro @ cada vez que solicita. Este grano se utiliza para realizar el cableado automática de clases de dominio cuando construyó con el @ nuevo operador @.

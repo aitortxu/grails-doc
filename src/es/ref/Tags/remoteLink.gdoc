@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. remoteLink
 
 h2. Purpose
@@ -7,6 +10,20 @@ Creates a link that uses Ajax to call a remote function when clicked
 h2. Examples
 
 Example controller for an application called @shop@:
+
+{hidden}
+
+h1. remoteLink
+
+h2. Fin
+
+Crea un vínculo que Ajax se utiliza para llamar a una función remota cuando haga clic en
+
+h2. Ejemplos
+
+Controlador de ejemplo de una aplicación llamada @ Tienda @:
+
+{hidden}
 
 {code:java}
 class BookController {
@@ -24,6 +41,27 @@ class BookController {
      }
 }
 {code}
+{hidden}
+
+{code: java}
+clase BookController {}
+
+Def list() {}
+         [libros: Book.list(params)]
+     }
+
+Def show() {}
+         [libro: Book.get(params.id)]
+     }
+
+Def bookByName() {}
+         [libro: Book.findByName(params.bookName)]
+     }
+}
+{code}
+
+{hidden}
+
 
 Example usages for above controller:
 
@@ -40,6 +78,23 @@ Example usages for above controller:
     params="[sortBy:'name',offset:offset]">Test 4</g:remoteLink>
 
 {code}
+{hidden}
+
+Usos de ejemplo por encima de controlador:
+
+{Código: xml}
+<g:remotelink action="show" id="1">Prueba 1</g:remotelink>
+
+<g:remotelink action="show" id="1" update="[success:'success',failure:'error']" on404="alert('not found');">Prueba 2</g:remotelink>
+
+<g:remotelink action="show" id="1" update="success" onloading="showSpinner();">Prueba 3</g:remotelink>
+
+<g:remotelink action="show" id="1" update="success" params="[sortBy:'name',offset:offset]">Prueba 4</g:remotelink>
+
+{code}
+
+{hidden}
+
 
 As a method call in GSP:
 
@@ -50,6 +105,20 @@ my link = <%= remoteLink(action: 'show', id: 1,
 {code}
 
 h2. Description
+{hidden}
+
+Como forma de llamar en el SPG:
+
+{code: java}
+mi enlace = < % = remoteLink (acción: 'show', id: 1,
+  actualización: 'éxito', onFailure: ' showError();')
+  {"este es el organismo de enlace"} %>
+{code}
+
+h2. Descripción
+
+{hidden}
+
 
 This tag creates an HTML link to a controller action that generates an AJAX request when it is clicked. The exact Javascript used to fire off the AJAX request depends on which Javascript library is used. This tag also requires the use of either the <g:[javascript|tags]/> or <g:[setProvider|tags]/> tags. See the [AJAX section|guide:ajax] of the user guide to find out more.
 
@@ -60,6 +129,20 @@ Attributes
 * @id@ (optional) - The id to use in the link
 * @fragment@ (optional) - The link fragment (often called anchor tag) to use
 * @mapping@ (optional) - The [named URL mapping|guide:namedMappings] to use to rewrite the link
+{hidden}
+
+Esta etiqueta crea un vínculo HTML a una acción de controlador que genera una solicitud de AJAX cuando se hace clic en. El Javascript exacto utilizado para disparar la solicitud AJAX depende de qué biblioteca de Javascript se utiliza. Esta etiqueta también requiere el uso de cualquiera de las <g:[javascript|tags]></g:[javascript|tags]> o <g:[setprovider|tags]></g:[setprovider|tags]> etiquetas. Consulte [section|guide:ajax de AJAX] de la Guía del usuario para obtener más información.
+
+Atributos
+
+* @ acción @ (opcional): el nombre de la acción que se utilizan en el enlace; Si no se especifica la acción predeterminada se vincularán
+* @ controlador @ (opcional): el nombre del controlador para usar en el enlace; Si no especifica el controlador actual se vincularán
+* @ id @ (opcional): el id que se utilizan en el enlace
+* @ fragmento @ (opcional) - el fragmento de enlace (etiqueta de anclaje a menudo llamado) a utilizar
+* @ asignación @ (opcional): [nombre mapping|guide:namedMappings de URL] para reescribir el vínculo
+
+{hidden}
+
 * @params@ (optional) - a Map containing request parameters
 * @update@ (optional) - Either a Map containing the elements to update for 'success' or 'failure' states, or a string with the element id to update, in which case failure events would be ignored
 * @before@ (optional) - The JavaScript function to call before the remote function call. A semi-colon is automatically added so you don't have to provide one yourself in this string.
@@ -70,6 +153,21 @@ Attributes
 Events
 
 * @onSuccess@ (optional) - The JavaScript function to call if successful
+{hidden}
+
+* @ params @ (opcional): un mapa que contenga solicitud de parámetros
+* @ actualización @ (opcional) - ya sea un mapa que contiene los elementos para la actualización de 'éxito' o 'fracaso' Estados o una cadena con el id de elemento para actualizar, en cuyo caso sucesos de error podrían ignorarse
+* @ antes @ (opcional) - JavaScript la función llamar antes de la llamada a función remota. Un punto y coma se agrega automáticamente por lo que no tendrás que proporcionar uno usted mismo en esta cadena.
+* @ después @ (opcional) - JavaScript la función llamar después de la llamada a función remota. Un punto y coma se agrega automáticamente por lo que no tendrás que proporcionar uno usted mismo en esta cadena.
+* @ asincrónica @ (opcional): valor predeterminado si hacer la llamada asincrónica (es cierto)
+* @ método @ (opcional): el método a utilizar la ejecución de la llamada (de forma predeterminada al POST)
+
+Eventos
+
+* @ onSuccess @ (opcional) - JavaScript la función llamar si es correcto
+
+{hidden}
+
 * @onFailure@ (optional) - The JavaScript function to call if the call fails
 * @on_ERROR_CODE@ (optional) - The JavaScript function to call to handle the specified error code (eg on404="alert('not found!')"). With Prototype, this prevents execution of @onSuccess@ and @onFailure@.
 * @onUninitialized@ (optional) - The JavaScript function to call if Ajax fails to initialise
@@ -80,4 +178,22 @@ Events
 h2. Source
 
 {source:tag=JavascriptTagLib.remoteLink}
+{hidden}
+
+* @ onFailure @ (opcional) - The JavaScript funcionar si la llamada falla
+* @ on_ERROR_CODE @ (opcional) - JavaScript la función llamar para manejar el código de error especificado (p. ej. on404 = "alert ('no encontrado!')"). Con el prototipo, esto impide la ejecución de @ onSuccess @ y @ onFailure @.
+* @ onUninitialized @ (opcional) - JavaScript la función llamar si Ajax se produce un error al inicializar
+* @ onLoading @ (opcional) - JavaScript la función llamar cuando la función remota carga la respuesta
+* @ onLoaded @ (opcional) - JavaScript la función llamar una vez terminada la función remota cargar la respuesta
+* @ onComplete @ (opcional) - JavaScript la función llamar cuando finaliza la función remota, incluidas las actualizaciones
+
+h2. Fuente
+
+{source:tag=JavascriptTagLib.remoteLink}
+
+{hidden}
+
 {source}
+{hidden}
+
+origen de {}

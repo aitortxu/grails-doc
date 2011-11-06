@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails 2.0 integrates with the [Resources plugin|http://grails.org/plugin/resources] to provide sophisticated static resource management. This plugin is installed by default in new Grails applications.
 
 The basic way to include a link to a static resource in your application is to use the [resource|tags] tag. This simple approach creates a URI pointing to the file.
@@ -8,6 +11,12 @@ The issues that the Resources framework tackles are:
 
 * Web application performance tuning is difficult
 * Correct ordering of resources, and deferred inclusion of JavaScript
+{hidden}
+
+Grails 2.0 se integra con el [recursos plugin|http://grails.org/plugin/resources] para ofrecer administración sofisticados recursos estáticos. Este plugin está instalado por defecto en nuevas aplicaciones de Grails.La forma básica para incluir un vínculo a un recurso estático en su aplicación es utilizar la etiqueta [resource|tags]. Este enfoque simple crea un URI que apunta al archivo.Sin embargo modernas aplicaciones con dependencias en JavaScript y CSS varias librerías y frameworks (así como las dependencias sobre varios plugins Grails) requieren algo más potente.Las cuestiones que aborda el marco de recursos son:* Optimización de la performance de aplicaciones de web es difícil* Corregir la ordenación de los recursos y la inclusión diferido de JavaScript
+
+{hidden}
+
 * Resources that depend on others that must be loaded first
 * The need for a standard way to expose static resources in plugins and applications
 * The need for an extensible processing chain to optimize resources
@@ -18,5 +27,14 @@ The plugin achieves this by introducing new artefacts and processing the resourc
 It adds artefacts for declaring resources, for declaring "mappers" that can process resources, and a servlet filter to serve processed resources.
 
 What you get is an incredibly advanced resource system that enables you to easily create highly optimized web applications that run the same in development and in production.
+{hidden}
+
+* Recursos que dependen de otros que se deben cargar primero* La necesidad de una forma estándar exponer los recursos estáticos en plugins y aplicaciones* La necesidad de una cadena de procesamiento extensible optimizar los recursos* Prevención de inserción múltiples del mismo recursoEl plugin logra introducir nuevos artefactos y procesamiento de los recursos mediante el sistema de archivos local del servidor.Agrega artefactos para declarar los recursos, para declarar "mapeados" que pueden procesar recursos y un filtro de servlet para servir recursos transformados.Lo que se obtiene es un sistema de recursos increíblemente avanzada que permite crear fácilmente aplicaciones web altamente optimizadas que ejecutan el mismo en desarrollo y en producción.
+
+{hidden}
+
 
 The Resources plugin documentation provides a more detailed overview of the [concepts|http://grails-plugins.github.com/grails-resources/] which will be beneficial when reading the following guide.
+{hidden}
+
+La documentación de plugin de recursos proporciona una visión más detallada de la [concepts|http://grails-plugins.github.com/grails-resources/] que será beneficiosa al leer a la siguiente guía.

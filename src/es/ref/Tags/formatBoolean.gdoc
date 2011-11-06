@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. formatBoolean
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 <g:formatBoolean boolean="${myBoolean}" />
 <g:formatBoolean boolean="${myBoolean}" true="True!" false="False!" />
 {code}
+{hidden}
+
+h1. formatBoolean
+
+h2. Fin
+
+Salidas de determinado valor booleano como la etiqueta de texto especificado.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:formatboolean boolean="${myBoolean}"></g:formatboolean>
+<g:formatboolean boolean="${myBoolean}" true="True!" false="False!"></g:formatboolean>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,8 +40,28 @@ Attributes:
 @boolean@ - the boolean to output
 @true@ (optional) - text label for boolean @true@ value. @boolean.true@ or @default.boolean.true@ key is looked up from the Message Source / ResourceBundle (i18n/*.properties) if this attribute is not given.
 @false@ (optional) - text label for boolean @false@ value. @boolean.false@ or @default.boolean.false@ key is looked up from the Message Source / ResourceBundle (i18n/*.properties) if this attribute is not given.
+{hidden}
+
+h2. Descripción
+
+Salidas de determinado valor booleano como la etiqueta de texto especificado. Si no se dan el verdadero @ @ y @ falso @ opciones, el valor booleano es salida utilizando la etiqueta predeterminada.
+
+Atributos:
+
+@ boolean @ - valor booleano para salida
+@ verdadero @ (opcional): etiqueta de texto de booleano verdadero @ @ valor. clave de @Boolean.True@ o @default.boolean.true@ se busca desde el origen del mensaje / ResourceBundle (i18n/*.properties) si no se da este atributo.
+@ falso @ (opcional): etiqueta de texto de booleano false @ @ valor. clave de @Boolean.False@ o @default.boolean.false@ se busca desde el origen del mensaje / ResourceBundle (i18n/*.properties) si no se da este atributo.
+
+{hidden}
+
 
 h2. Source
 
 {source:tag=FormatTagLib.formatBoolean}
 {source}
+{hidden}
+
+h2. Fuente
+
+{source:tag=FormatTagLib.formatBoolean}
+origen de {}

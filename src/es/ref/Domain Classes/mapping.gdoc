@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. mapping
 
 h2. Purpose
@@ -22,5 +25,37 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+h1. asignación
+
+h2. Fin
+
+La asignación de @ @ propiedad estática configura cómo GORM asigna la clase de dominio a la base de datos. En la Guía del usuario para obtener más información, consulte la sección sobre el [ORM DSL|guide:ormdsl].
+
+h2. Ejemplos
+
+{code: java}
+clase persona {}
+
+Cadena firstName
+
+estático hasMany = [direcciones: dirección]
+
+asignación estática = {}
+        tabla 'gente'
+        falsa versión
+        columna ID: 'person_id'
+        columna firstName: 'First_Name'
+        direcciones perezosas: falso
+    }
+}
+{code}
+
+{hidden}
+
 
 This example uses the [ORM DSL|guide:ormdsl] to map the @Person@ class onto a table called @people@
+{hidden}
+
+Este ejemplo utiliza el [ORM DSL|guide:ormdsl] para asignar la persona @ @ clase en una tabla denominada @ personas @

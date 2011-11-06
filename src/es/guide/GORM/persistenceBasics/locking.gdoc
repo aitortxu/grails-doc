@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Optimistic Locking
 
 By default GORM classes are configured for optimistic locking. Optimistic locking is a feature of Hibernate which involves storing a version value in a special @version@ column in the database that is incremented after each update.
@@ -9,6 +12,22 @@ def airport = Airport.get(10)
 
 println airport.version
 {code}
+{hidden}
+
+h4. Bloqueo optimista
+
+De forma predeterminada las clases GORM están configuradas para bloqueo optimista. Bloqueo optimista es una característica de hibernación que consiste en almacenar un valor de versión en una versión @ especial @ columna en la base de datos que se incrementa después de cada actualización.
+
+La versión @ @ columna obtiene leer en una versión @ @ propiedad que contiene el estado cree una versión actual de instancia persistente que se puede acceder:
+
+{code}
+Aeropuerto de Def = Airport.get(10)
+
+Console.println airport.version
+{code}
+
+{hidden}
+
 
 When you perform updates Hibernate will automatically check the version property against the  version column in the database and if they differ will throw a [StaleObjectException|api:org.hibernate.StaleObjectStateException]. This will roll back the transaction if one is active.
 
@@ -25,6 +44,26 @@ catch (org.springframework.dao.OptimisticLockingFailureException e) {
     // deal with exception
 }
 {code}
+{hidden}
+
+Al realizar actualizaciones Hibernate comprobación automáticamente la propiedad version contra la columna de versión en la base de datos y si difieren producirá un [StaleObjectException|api:org.hibernate.StaleObjectStateException]. Esto deshaga la transacción si uno está activo.
+
+Esto es útil, ya que permite un cierto nivel de atomicidad sin recurrir al bloqueo pesimista que tiene una penalización de rendimiento de heredar. Lo malo es que tiene que lidiar con esta excepción si tiene escrituras altamente concurrentes. Esto requiere el vaciado del período de sesiones:
+
+{code}
+Aeropuerto de Def = Airport.get(10)
+
+Intente {}
+    Airport.Name = "Heathrow"
+    Airport.Save(flush: true)
+}
+catch (org.springframework.dao.OptimisticLockingFailureException e) {}
+    / / tratar con excepción
+}
+{code}
+
+{hidden}
+
 
 The way you deal with the exception depends on the application. You could attempt a programmatic merge of the data or go back to the user and ask them to resolve the conflict.
 
@@ -35,6 +74,20 @@ The @version@ will only be updated after flushing the session.
 {note}
 
 h4. Pessimistic Locking
+{hidden}
+
+La forma de que lidiar con la excepción depende de la aplicación. Podría tratar de una combinación de los datos mediante programación o volver al usuario y pedirles que resolver el conflicto.
+
+Como alternativa, si se convierte en un problema puede recurrir al bloqueo pesimista.
+
+{Nota}
+La versión @ @ sólo se actualizará después de vaciar el período de sesiones.
+{Nota}
+
+h4. El bloqueo pesimista
+
+{hidden}
+
 
 Pessimistic locking is equivalent to doing a SQL "SELECT * FOR UPDATE" statement and locking a row in the database. This has the implication that other read operations will be blocking until the lock is released.
 
@@ -46,6 +99,21 @@ airport.lock() // lock for update
 airport.name = "Heathrow"
 airport.save()
 {code}
+{hidden}
+
+El bloqueo pesimista es equivalente a hacer un SQL "Seleccionar * FOR UPDATE" Declaración y el bloqueo de una fila en la base de datos. Esto tiene la implicación otra lectura operaciones se bloquea hasta que se libere el bloqueo.
+
+En Grails bloqueo pesimista se realiza en una instancia existente con el método [lock|domainClasses]:
+
+{code}
+Aeropuerto de Def = Airport.get(10)
+Airport.Lock() / / bloqueo de actualización
+Airport.Name = "Heathrow"
+Airport.Save()
+{code}
+
+{hidden}
+
 
 Grails will automatically deal with releasing the lock for you once the transaction has been committed. However, in the above case what we are doing is "upgrading" from a regular SELECT to a SELECT..FOR UPDATE and another thread could still have updated the record in between the call to @get()@ and the call to @lock()@.
 
@@ -56,6 +124,20 @@ def airport = Airport.lock(10) // lock for update
 airport.name = "Heathrow"
 airport.save()
 {code}
+{hidden}
+
+Grails se ocupará automáticamente de liberar el bloqueo para una vez que la transacción se ha confirmado. Sin embargo, en el caso anterior lo que estamos haciendo es "Actualizar" seleccionar regular a un SELECT...PARA la actualización y otro subproceso podrían todavía han actualizado el registro entre la llamada a @ get() @ y la llamada a @ lock() @.
+
+Para evitar este problema puede utilizar el método estático [lock|domainClasses] para que tenga un identificador como [get|domainClasses]:
+
+{code}
+Aeropuerto de Def = Airport.lock(10) / / bloqueo de actualización
+Airport.Name = "Heathrow"
+Airport.Save()
+{code}
+
+{hidden}
+
 
 In this case only SELECT..FOR UPDATE is issued.
 
@@ -66,6 +148,20 @@ def airport = Airport.findByName("Heathrow", [lock: true])
 {code}
 
 Or using criteria:
+{hidden}
+
+En este caso sólo seleccione...Se emite para actualización.
+
+Así como el método [lock|domainClasses] también puede obtener un bloqueo pesimista mediante consultas. Por ejemplo, utilizando un buscador dinámico:
+
+{code: java}
+Aeropuerto de Def = Airport.findByName ("Heathrow", [bloqueo: verdadero])
+{code}
+
+O utilizando criterios:
+
+{hidden}
+
 
 {code:java}
 def airport = Airport.createCriteria().get {
@@ -74,3 +170,11 @@ def airport = Airport.createCriteria().get {
 }
 {code}
 
+{hidden}
+
+{code: java}
+Aeropuerto de Def = Airport.createCriteria () .get {}
+    EQ ('nombre', 'Heathrow')
+    verdadero bloqueo
+}
+{code}

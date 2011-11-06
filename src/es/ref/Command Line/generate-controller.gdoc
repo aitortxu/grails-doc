@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. generate-controller
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails generate-controller org.bookstore.Book
 {code}
+{hidden}
+
+h1. controlador de generar
+
+h2. Fin
+
+El @ crear controladores @ comando genera un controlador y prueba de unidad asociada para la clase de dominio
+
+h2. Ejemplos
+
+{code: java}
+Grails controlador generar org.bookstore.Book
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,8 +39,29 @@ Usage:
 {code:java}
 grails generate-controller [domain class name]
 {code}
+{hidden}
+
+h2. Descripción
+
+Grails admite una característica conocida como andamiaje que implica la generación de una interfaz CRUD (Create, Read, Update/Delete) para una clase de dominio dado.
+
+El @ generar controladores @ comando genera un controlador que implementa CRUD para la clase de dominio dado. Así que para un @org.bookstore.Book@ de clase de dominio que se generará un controlador @BookController.groovy@ en @ grails-app/controladores/org/librería @.
+
+Uso:
+{code: java}
+Grails generar-controlador [nombre de la clase de dominio]
+{code}
+
+{hidden}
+
 
 Fired Events:
 
 * @StatusUpdate@ - When generation begins
 * @StatusFinal@ - When generation completes
+{hidden}
+
+Despedido de eventos:
+
+* @ StatusUpdate @ - cuando comienza la generación
+* @ StatusFinal @ - cuando termina la generación

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-integration-test
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails create-integration-test book
 {code}
+{hidden}
+
+h1. prueba de integración crear
+
+h2. Fin
+
+La @ crear integración prueba-@ comando crea una prueba de integración para el nombre base determinada.
+
+h2. Ejemplos
+
+{code: java}
+libro de prueba de integración crear Grails
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ An integration test differs from a unit test in that the Grails environment is l
 Note that this command is just for convenience and you can also create integration tests in your favourite text editor or IDE if you choose.
 
 Usage:
+{hidden}
+
+h2. Descripción
+
+Crea una prueba de integración para el nombre base determinada. Por ejemplo un nombre base de "org.bookstore.book" se creará a una prueba de integración llamada @ BookTests @ en el @ prueba/integración/org/librería @ directorio.
+
+Una prueba de integración difiere de una prueba de unidad en la se carga el entorno de Grails para cada ejecución de la prueba. Consulte la sección sobre [unidad Testing|guide: pruebas] de la Guía del usuario para obtener información sobre la unidad frente a pruebas de integración.
+
+Tenga en cuenta que este comando es sólo por conveniencia y también puede crear pruebas de integración en su editor de textos preferido o IDE si elige.
+
+Uso:
+
+{hidden}
+
 {code:java}
 grails create-integration-test [name]
 {code}
@@ -26,3 +59,12 @@ grails create-integration-test [name]
 Fired Events:
 
 * @CreatedFile@ - When the integration test is created
+{hidden}
+
+{code: java}
+Grails crear integración prueba-[nombre]
+{code}
+
+Despedido de eventos:
+
+* @ CreatedFile @ - cuando se creó la prueba de integración

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. properties
 
 h2. Purpose
@@ -10,4 +13,19 @@ h2. Examples
 def b = new Book(title: "The Shining")
 b.properties = params
 b.save()
+{code}
+{hidden}
+
+h1. propiedades
+
+h2. Fin
+
+Permite el acceso a las propiedades de la clase de dominio como un mapa y se utiliza normalmente para [datos Binding|guide:dataBinding] para realizar conversiones de tipo permitiendo propiedades para establecer parámetros de solicitud o otros mapas.
+
+h2. Ejemplos
+
+{code: java}
+Def b = nuevo libro (título: "El resplandor")
+b.Properties = params
+b.Save()
 {code}

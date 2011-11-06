@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. bootstrap
 
 h2. Purpose
@@ -7,6 +10,20 @@ The [bootstrap|commandLine] command is mainly intended to be used by other scrip
 Examples of its usage include Grails' [shell|commandLine] and [console|commandLine]
 
 h2. Examples
+
+{hidden}
+
+h1. Bootstrap
+
+h2. Fin
+
+El comando [bootstrap|commandLine] es principalmente destinado a ser utilizados por otras secuencias de comandos y permite la posibilidad de iniciar una instancia de la aplicación Grails fuera del contenedor para el uso de herramientas que requieren una referencia a @ perful de Grails @.
+
+Algunos ejemplos de su uso son Grails' [shell|commandLine] y [console|commandLine]
+
+h2. Ejemplos
+
+{hidden}
 
 Add this to the top of your Gant script to use this as an include:
 
@@ -18,6 +35,21 @@ Once this is in place you can bootstrap Grails using either of these methods:
 
 * @loadApp@ - Loads and creates the @GrailsApplication@ instance
 * @configureApp@ - Loads all plugins and creates the Spring @ApplicationContext@
+{hidden}
+
+Agregue esto a la parte superior de la secuencia de comandos de Gant a utilizar esto como una inclusión:
+
+{code: java}
+includeTargets << grailsScript("_GrailsBootstrap")
+{code}
+
+Una vez hecho esto en su lugar puede iniciar Grails con cualquiera de estos métodos:
+
+* @ loadApp @ - carga y crea la @ GrailsApplication @ instancia
+* @ configureApp @ - carga todos los plugins y crea la primavera @ perful @
+
+{hidden}
+
 
 After running @loadApp@ the @GrailsApplication@ instance will be available as the @grailsApp@ variable:
 
@@ -27,6 +59,19 @@ for (grailsClass in grailsApp.allClasses) { println grailsClass }
 {code}
 
 After running @configureApp@ the [GrailsPluginManager|api:org.codehaus.groovy.grails.plugins.GrailsPluginManager] instance will be available as the @pluginManager@ variable and the Spring @ApplicationContext@ instance will be available as the @appCtx@ variable:
+
+{hidden}
+
+Después de correr @ loadApp @ GrailsApplication @ @ instancia estará disponible como @ grailsApp @ variable:
+
+{code: java}
+loadApp()
+para (grailsClass en grailsApp.allClasses) {Console.println grailsClass}
+{code}
+
+Después de ejecutar @ configureApp @ la instancia [GrailsPluginManager|api:org.codehaus.groovy.grails.plugins.GrailsPluginManager] estará disponible como @ pluginManager @ variable y la primavera @ ApplicationContext @ instancia estará disponible como @ appCtx @ variable:
+
+{hidden}
 
 {code:java}
 configureApp()
@@ -39,4 +84,18 @@ h2. Description
 Usage:
 {code:java}
 grails bootstrap
+{code}
+{hidden}
+
+{code: java}
+configureApp()
+Conexión c = appCtx.getBean('dataSource').getConnection()
+/ / hacer algo con conexión
+{code}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails bootstrap
 {code}

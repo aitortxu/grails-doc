@@ -1,3 +1,6 @@
+
+{hidden}
+
 To create a Grails application you first need to familiarize yourself with the usage of the @grails@ command which is used in the following manner:
 
 {code}
@@ -8,8 +11,29 @@ Run [create-app|commandLine] to create an application:
 
 bc.
 grails create-app helloworld
+{hidden}
+
+Para crear una aplicación Grails debe familiarizarse con el uso de la @ grails @ comando que se utiliza de la manera siguiente:
+
+{code}
+Grails [nombre de comando]
+{code}
+
+Ejecutar [crear-app|commandLine] para crear una aplicación:
+
+a c..
+Grails-app crear helloworld
+
+{hidden}
+
 
 This will create a new directory inside the current one that contains the project. Navigate to this directory in your console:
 
 bc.
 cd helloworld
+{hidden}
+
+Esto creará un nuevo directorio dentro de otra que contiene el proyecto. Vaya a este directorio en la consola:
+
+a c..
+CD helloworld

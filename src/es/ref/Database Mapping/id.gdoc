@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. id
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. ID.
+
+h2. Fin
+
+Personaliza la forma en que se genera el identificador para una clase de dominio
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    asignación estática = {}
+        Generador de ID: 'hilo',
+           Params: [tabla: 'hi_value', columna: 'next_value', max_lo: 100]
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,6 +48,18 @@ Arguments:
 * @generator@ (optional) - The name of the generator to use. Can be @increment@, @identity@, @sequence@, @hilo@, @seqhilo@, @uuid@, @guid@, @native@, @assigned@, @select@, @foreign@ or @sequence-identity@. See [Hibernate reference documentation|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/mapping.html#mapping-declaration-id-generator] for more information.
 * @composite@ (optional) - Takes a list of property names to use that form the composite identifier
 * @name@ (optional) - The property name to use as the identifier
+{hidden}
+
+h2. Descripción
+
+Uso: @ id(map) @
+
+Argumentos:
+
+* @ generador @ (opcional): el nombre del generador a utilizar. Puede ser @ incremento @, @ identidad @, @ secuencia @, @ hilo @, @ seqhilo @, @ uuid @, @ guid @, @ nativo @, @ asignado @, @ select @, @ extranjeros @ o @ identidad secuencia @. Consulte [Hibernate referencia documentation|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/mapping.html
+
+{hidden}
+
 * @params@ (optional) - Any parameters to pass to the defined identity generator
 * @column@ (optional) - The column name to map the identifier to. The remaining [column|databaseMapping] definition properties are also available.
 
@@ -35,6 +71,22 @@ static mapping = {
        params: [table: 'hi_value', column: 'next_value', max_lo: 100]
 }
 {code}
+{hidden}
+
+* @ params @ (opcional): los parámetros que se pasan al generador de identidad definida
+* @ columna @ (opcional) - la columna nombre para asignar el identificador. También están disponibles las propiedades restantes de definición [column|databaseMapping].
+
+De forma predeterminada GORM utiliza la estrategia nativa para generar un identificador de base de datos para cada entidad (normalmente una columna de incremento automático o una secuencia). Esto se puede modificar con el id @ @ métodos @ generador @ argumento:
+
+{code}
+asignación estática = {}
+    Generador de ID: 'hilo',
+       Params: [tabla: 'hi_value', columna: 'next_value', max_lo: 100]
+}
+{code}
+
+{hidden}
+
 
 You can also use the method to define a composite identifier:
 
@@ -45,6 +97,20 @@ static mapping = {
 {code}
 
 or change the name of the property that defines the identifier:
+{hidden}
+
+También puede utilizar el método para definir un identificador compuesto:
+
+{code}
+asignación estática = {}
+    compuesto de ID: ['título', 'autor']
+}
+{code}
+
+o cambiar el nombre de la propiedad que define el identificador:
+
+{hidden}
+
 
 {code}
 static mapping = {
@@ -59,5 +125,26 @@ static mapping = {
     id column: 'book_id', type: 'integer'
 }
 {code}
+{hidden}
+
+{code}
+asignación estática = {}
+    ID nombre: 'title'
+}
+{code}
+
+También puede modificar la definición de columna:
+
+{code}
+asignación estática = {}
+    columna ID: 'book_id', tipo: 'integer'
+}
+{code}
+
+{hidden}
+
 
 See the section on [Custom Database Identity|guide:identity] in the user guide for more information.
+{hidden}
+
+En la Guía del usuario para obtener más información, consulte la sección sobre [Identity|guide:identity de base de datos personalizada].

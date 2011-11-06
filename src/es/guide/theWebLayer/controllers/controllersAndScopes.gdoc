@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Available Scopes
 
 Scopes are hash-like objects where you can store variables. The following scopes are available to controllers:
@@ -7,6 +10,20 @@ Scopes are hash-like objects where you can store variables. The following scopes
 * [request|controllers] - The request object allows the storage of objects for the current request only. The request object is an instance of [HttpServletRequest|api:javax.servlet.http.HttpServletRequest]
 * [params|controllers] - Mutable map of incoming request query string or POST parameters
 * [flash|controllers] - See below
+
+{hidden}
+
+h4. Ámbitos disponibles
+
+Ámbitos son hash como objetos que se pueden almacenar variables. Están disponibles en los controladores de los ámbitos siguientes:
+
+* [servletContext|controllers] - también conocido como ámbito de aplicación, este ámbito le permite compartir el estado a través de la aplicación de toda la web. El servletContext es una instancia de [ServletContext|api:javax.servlet.ServletContext]
+* [session|controllers] - la sesión permite asociar estado con un usuario determinado y por lo general utiliza cookies para asociar una sesión con un cliente. El objeto de sesión es una instancia de [HttpSession|api:javax.servlet.http.HttpSession]
+* [request|controllers] - el objeto request permite el almacenamiento de objetos de sólo la solicitud actual. El objeto de la solicitud es una instancia de [HttpServletRequest|api:javax.servlet.http.HttpServletRequest]
+* [params|controllers] - Mutable mapa de cadena de consulta de solicitud entrante o parámetros POST
+* [flash|controllers] - ver abajo
+
+{hidden}
 
 h4. Accessing Scopes
 
@@ -21,6 +38,24 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h4. Acceso a ámbitos
+
+Ámbitos pueden accederse mediante los nombres de variable anteriormente en combinación con el operador de índice de matriz de Groovy, incluso en clases proporcionadas por el Servlet API como [HttpServletRequest|api:javax.servlet.http.HttpServletRequest]:
+
+{code: java}
+clase BookController {}
+    Def find() {}
+        Def findBy = params ["findBy"]
+        Def appContext = solicitud ["foo"]
+        Def loggedUser = sesión ["logged_user"]
+    }
+}
+{code}
+
+{hidden}
+
 
 You can also access values within scopes using the de-reference operator, making the syntax even more clear:
 
@@ -33,6 +68,22 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+También puede acceder a los valores dentro de los ámbitos mediante el operador, haciendo aún más clara la sintaxis de de-reference:
+
+{code: java}
+clase BookController {}
+    Def find() {}
+        Def findBy = params.findBy
+        Def appContext = request.foo
+        Def loggedUser = session.logged_user
+    }
+}
+{code}
+
+{hidden}
+
 
 This is one of the ways that Grails unifies access to the different scopes.
 
@@ -50,6 +101,27 @@ def delete() {
     ... // remaining code
 }
 {code}
+{hidden}
+
+Esta es una de las formas que Grails unifica el acceso a los diferentes ámbitos.
+
+h4. Con alcance de Flash
+
+Grails apoya el concepto de alcance [flash|controllers] como una tienda temporal que esté disponible para esta solicitud y la siguiente solicitud sólo atributos. Después se borran los atributos. Esto es útil para definir un mensaje directamente antes de redirigir, por ejemplo:
+
+{code: java}
+Def delete() {}
+    Def b = Book.get(params.id)
+    Si (! b) {}
+        Flash.Message = "Usuario no encontrado id $ {params.id}"
+        Redirect(Action:List)
+    }
+    ... / / restantes código
+}
+{code}
+
+{hidden}
+
 
 When the @list@ action is requested, the @message@ value will be in scope and can be used to display an information message. It will be removed from the @flash@ scope after this second request.
 
@@ -60,6 +132,20 @@ h4. Scoped Controllers
 By default, a new controller instance is created for each request. In fact, because the controller is @prototype@ scoped, it is thread-safe since each request happens on its own thread.
 
 You can change this behaviour by placing a controller in a particular scope. The supported scopes are:
+{hidden}
+
+Cuando se solicita la lista @ @ Acción, el mensaje @ @ valor estará en alcance y puede utilizarse para mostrar un mensaje de información. Se quitará de la flash @ @ alcance después de esta segunda solicitud.
+
+Observe que el nombre de atributo puede ser cualquier cosa que desee, y los valores son cadenas utilizadas para mostrar los mensajes, pero pueden ser cualquier tipo de objeto.
+
+h4. Controladores de alcance
+
+De forma predeterminada, se crea una nueva instancia de controlador para cada solicitud. De hecho, debido a que el Contralor es el prototipo @ @ ámbito, es segura para los subprocesos ya que cada solicitud ocurre en su propio hilo.
+
+Puede cambiar este comportamiento mediante la colocación de un controlador en un ámbito determinado. Los ámbitos admitidos son:
+
+{hidden}
+
 
 * @prototype@ (default) - A new controller will be created for each request (recommended for actions as Closure properties)
 * @session@ - One controller is created for the scope of a user session
@@ -70,6 +156,20 @@ To enable one of the scopes, add a static @scope@ property to your class with on
 {code:java}
 static scope = "singleton"
 {code}
+{hidden}
+
+* @ prototipo @ (predeterminado): se creará un nuevo controlador para cada solicitud (recomendado para acciones como propiedades de cierre)
+* @ sesión @ - se crea un controlador para el ámbito de una sesión de usuario
+* @ singleton @ - sólo una instancia del controlador nunca existe (recomendado para acciones como métodos)
+
+Para permitir que uno de los ámbitos, agregar que un ámbito @ estático @ propiedad a la clase con uno de los valores de ámbito válido enumerados anteriormente, por ejemplo
+
+{code: java}
+ámbito estático = "singleton"
+{code}
+
+{hidden}
+
 
 You can define the default strategy under in @Config.groovy@ with the @grails.controllers.defaultScope@ key, for example:
 
@@ -80,3 +180,14 @@ grails.controllers.defaultScope = "singleton"
 {note}
 Use scoped controllers wisely. For instance, we don't recommend having any properties in a singleton-scoped controller since they will be shared for _all_ requests. Setting a default scope other than @prototype@ may also lead to unexpected behaviors if you have controllers provided by installed plugins that expect that the scope is @prototype@.
 {note}
+{hidden}
+
+Puede definir la estrategia predeterminada bajo en @Config.groovy@ con la clave @grails.controllers.defaultScope@, por ejemplo:
+
+{code: java}
+Grails.Controllers.defaultScope = "singleton"
+{code}
+
+{Nota}
+Utilice controladores de alcance sabiamente. Por ejemplo, no recomendamos tener las propiedades en un controlador de ámbito de singleton ya compartieron para las solicitudes de _all_. Establecer un ámbito predeterminado que @ prototipo @ también puede conducir a un comportamiento inesperado si tiene controladores de plugins instalados que esperan que el ámbito es @ prototipo @.
+{Nota}

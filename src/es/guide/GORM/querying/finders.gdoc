@@ -1,3 +1,6 @@
+
+{hidden}
+
 GORM supports the concept of *dynamic finders*. A dynamic finder looks like a static method invocation, but the methods themselves don't actually exist in any form at the code level.
 
 Instead, a method is auto-magically generated using code synthesis at runtime, based on the properties of a given class. Take for example the @Book@ class:
@@ -9,6 +12,22 @@ class Book {
     Author author
 }
 {code}
+{hidden}
+
+GORM apoya el concepto de * dinámico buscadores *. Un buscador dinámico parece ser una invocación de método estático, pero en realidad no existen los métodos propios en cualquier forma en el nivel de código.
+
+En su lugar, un método automático mágicamente se genera mediante síntesis de código en tiempo de ejecución, basada en las propiedades de una clase determinada. Tomemos por ejemplo el libro @ @ clase:
+
+{code}
+clase {libro
+    Título de cadena
+    Fecha releaseDate
+    Autor de autor
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Author {
@@ -29,6 +48,30 @@ book = Book.findByReleaseDateGreaterThan(someDate)
 
 book = Book.findByTitleLikeOrReleaseDateLessThan("%Something%", someDate)
 {code}
+{hidden}
+
+{code}
+clase {autor
+    Nombre de la cadena
+}
+{code}
+
+El libro @ @ clase tiene propiedades tales como @ title @, @ releaseDate @ y @ autor @. Pueden utilizarse por el [findBy|domainClasses] y [findAllBy|domainClasses] métodos en forma de "expresiones de método":
+
+{code}
+libro de Def = Book.findByTitle ("The Stand")
+
+libro = Book.findByTitleLike ("Harry Pot %")
+
+libro = Book.findByReleaseDateBetween (firstDate, secondDate)
+
+libro = Book.findByReleaseDateGreaterThan(someDate)
+
+libro = Book.findByTitleLikeOrReleaseDateLessThan ("% algo %", someDate)
+{code}
+
+{hidden}
+
 
 h4. Method Expressions
 
@@ -39,6 +82,20 @@ Book.findBy([Property][Comparator][Boolean Operator])?[Property][Comparator]
 {code}
 
 The tokens marked with a '?' are optional. Each comparator changes the nature of the query. For example:
+{hidden}
+
+h4. Método expresiones
+
+Una expresión de método en GORM está conformada por el prefijo como [findBy|domainClasses] seguido de una expresión que combina una o más propiedades. Es la forma básica:
+
+{code}
+¿Book.FindBy ([propiedad] [Comparator] [operador booleano])?[Propiedad][Comparator]
+{code}
+
+Los tokens marcan con una '?' son opcionales. Cada comparador cambia la naturaleza de la consulta. Por ejemplo:
+
+{hidden}
+
 
 {code}
 def book = Book.findByTitle("The Stand")
@@ -49,6 +106,20 @@ book =  Book.findByTitleLike("Harry Pot%")
 In the above example the first query is equivalent to equality whilst the latter, due to the @Like@ comparator, is equivalent to a SQL @like@ expression.
 
 The possible comparators include:
+{hidden}
+
+{code}
+libro de Def = Book.findByTitle ("The Stand")
+
+libro = Book.findByTitleLike ("Harry Pot %")
+{code}
+
+En el ejemplo anterior la primera consulta es equivalente a la igualdad mientras que este último, debido al como @ @ comparación, es equivalente a un SQL @ como @ expresión.
+
+Los comparadores posibles incluyen:
+
+{hidden}
+
 
 * @InList@ - In the list of given values
 * @LessThan@ - less than a given value
@@ -59,6 +130,20 @@ The possible comparators include:
 * @Ilike@ - Similar to a @Like@, except case insensitive
 * @NotEqual@ - Negates equality
 * @Between@ - Between two values (requires two arguments)
+{hidden}
+
+* @ InList @ - en la lista de dados los valores
+* @ Menos @ - inferior a un valor determinado
+* @ LessThanEquals @ - menor o igual un valor de dar
+* @ GreaterThan @ - superior a un valor determinado
+* @ GreaterThanEquals @ - mayor que o igual a un valor determinado
+* @ Como @ - equivalente a un SQL como expresión
+* @ Ilike @ - Similar a un como @ @, salvo caso insensible
+* @ NotEqual @ - niega la igualdad
+* @ Entre @ - entre dos valores (requiere dos argumentos)
+
+{hidden}
+
 * @IsNotNull@ - Not a null value (doesn't take an argument)
 * @IsNull@ - Is a null value (doesn't take an argument)
 
@@ -72,6 +157,24 @@ def book = Book.findByReleaseDateBetween(lastWeek, now)
 books = Book.findAllByReleaseDateIsNull()
 books = Book.findAllByReleaseDateIsNotNull()
 {code}
+{hidden}
+
+* @ IsNotNull @ - no es un valor nulo (no toma un argumento)
+* @ IsNull @ - es un valor nulo (no toma un argumento)
+
+Observe que los tres últimos requieren diferentes números de argumentos del método en comparación con el resto, como se muestra en el siguiente ejemplo:
+
+{code}
+Def ahora = new Date()
+Def lastWeek =-7
+libro de Def = Book.findByReleaseDateBetween (lastWeek, ahora)
+
+libros = Book.findAllByReleaseDateIsNull()
+libros = Book.findAllByReleaseDateIsNotNull()
+{code}
+
+{hidden}
+
 
 h4. Boolean logic (AND/OR)
 
@@ -81,6 +184,19 @@ Method expressions can also use a boolean operator to combine two or more criter
 def books = Book.findAllByTitleLikeAndReleaseDateGreaterThan(
                       "%Java%", new Date() - 30)
 {code}
+
+{hidden}
+
+h4. Lógica booleana (O)
+
+Expresiones de método también pueden utilizar un operador booleano para combinar dos o más criterios:
+
+{code}
+libros de Def = Book.findAllByTitleLikeAndReleaseDateGreaterThan ()
+                      "Java %", new Date() - 30)
+{code}
+
+{hidden}
 
 In this case we're using @And@ in the middle of the query to make sure both conditions are satisfied, but you could equally use @Or@:
 
@@ -92,6 +208,21 @@ def books = Book.findAllByTitleLikeOrReleaseDateGreaterThan(
 You can combine as many criteria as you like, but they must all be combined with @And@ or all @Or@. If you need to combine @And@ and @Or@ or if the number of criteria creates a very long method name, just convert the query to a [Criteria|guide:criteria] or [HQL|guide:hql] query.
 
 h4. Querying Associations
+{hidden}
+
+En este caso estamos usando @ Y @ en medio de la consulta para asegurarse de que se cumplan las dos condiciones, pero igualmente podría utilizar @ O @:
+
+{code}
+libros de Def = Book.findAllByTitleLikeOrReleaseDateGreaterThan ()
+                      "Java %", new Date() - 30)
+{code}
+
+Puede combinar como muchos criterios como desee, pero todos deben combinarse con @ Y @ o todo @ O @. Si necesita combinar @ Y @ y @ O @ o si el número de criterios crea un nombre de método muy largo, sólo convertir la consulta a un [Criteria|guide:criteria] o [HQL|guide:hql].
+
+h4. Consultar las asociaciones
+
+{hidden}
+
 
 Associations can also be used within queries:
 
@@ -102,6 +233,20 @@ def books = author ? Book.findAllByAuthor(author) : []
 {code}
 
 In this case if the @Author@ instance is not null we use it in a query to obtain all the @Book@ instances for the given @Author@.
+{hidden}
+
+Las asociaciones también pueden utilizarse dentro de las consultas:
+
+{code}
+autor de Def = Author.findByName ("Stephen King")
+
+¿libros de Def = autor? Book.findAllByAuthor(Author):]
+{code}
+
+En este caso si el autor @ @ instancia no es nulo lo utilizamos en una consulta para obtener todos los @ libro @ instancias determinado autor @ @.
+
+{hidden}
+
 
 h4. Pagination and Sorting
 
@@ -110,4 +255,14 @@ The same pagination and sorting parameters available on the [list|domainClasses]
 {code}
 def books = Book.findAllByTitleLike("Harry Pot%",
                [max: 3, offset: 2, sort: "title", order: "desc"])
+{code}
+{hidden}
+
+h4. Paginación y ordenación
+
+La misma paginación y ordenación parámetros disponibles sobre el método [list|domainClasses] también pueden utilizarse con buscadores dinámicas mediante el suministro de un mapa como el parámetro final:
+
+{code}
+libros de Def = Book.findAllByTitleLike ("Harry Pot %",
+               [máx.: 3, desvío: 2, tipo: "título", orden: "desc"])
 {code}

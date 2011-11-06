@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. Constraints Usage
 
 Constraints provide Grails with a declarative DSL for defining validation rules, schema generation and CRUD generation meta data. For example, consider these constraints:
@@ -14,6 +17,27 @@ class User {
     }
 }
 {code}
+{hidden}
+
+h1. Uso de restricciones
+
+Restricciones proporcionan Grails con un DSL declarativo para definir reglas de validación, generación de esquemas y datos de meta de generación de CRUD. Por ejemplo, considere estas restricciones:
+
+{code: java}
+clase usuario {}
+    ...
+
+restricciones estáticas = {}
+        tamaño de inicio de sesión: 5..15, en blanco: falso, único: verdadero
+        tamaño de la contraseña: 5..15, en blanco: falso
+        correo electrónico del correo electrónico: true, en blanco: falso
+        edad mínima: 18
+    }
+}
+{code}
+
+{hidden}
+
 
 Refer to the user guide topic on [Constraints|guide:constraints] for more information.
 
@@ -26,6 +50,22 @@ grails.gorm.default.constraints = {
     '*'(nullable: true, size: 1..20)
 }
 {code}
+{hidden}
+
+Consulte el tema de guía de usuario de [Constraints|guide:constraints] para obtener más información.
+
+h1. Restricciones globales
+
+Puede aplicar restricciones a nivel mundial dentro de @grails-app/conf/Config.groovy@ como sigue:
+
+{code}
+Grails.Gorm.Default.Constraints = {}
+    ' *'(que aceptan valores NULL: true, tamaño: 1..20)
+}
+{code}
+
+{hidden}
+
 
 The wildcard signifies that the constraints apply to all properties. You can also define shared constraints:
 
@@ -36,6 +76,20 @@ grails.gorm.default.constraints = {
 {code}
 
 That can be reused in your class:
+{hidden}
+
+El comodín significa que las restricciones se aplican a todas las propiedades. También puede definir restricciones compartidas:
+
+{code}
+Grails.Gorm.Default.Constraints = {}
+    myShared (NULL: true, tamaño: 1..20)
+}
+{code}
+
+Pueden ser reutilizados en su clase:
+
+{hidden}
+
 
 {code:java}
 class User {
@@ -46,6 +100,20 @@ class User {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase usuario {}
+    ...
+
+restricciones estáticas = {}
+        Inicio de sesión (compartida: "myShared")
+    }
+}
+{code}
+
+{hidden}
+
 
 h1. Quick reference
 
@@ -56,6 +124,20 @@ creditCard | Validates that a String value is a valid credit card number | @card
 email | Validates that a String value is a valid email address. | @homeEmail(email: true)@
 inList | Validates that a value is within a range or collection of constrained values. | @name(inList: \["Joe", "Fred", "Bob"\])@
 matches | Validates that a String value matches a given regular expression. | @login(matches: "\[a-zA-Z\]+")@
+{hidden}
+
+h1. Referencia rápida
+
+tabla de {}
+Restricción | Descripción | Ejemplo
+en blanco | Valida que un valor de cadena no esté en blanco | @ login(blank:false) @
+tarjeta de crédito | Valida que un valor de cadena es un número de tarjeta de crédito válida | @ cardNumber(creditCard: true) @
+correo electrónico | Valida que un valor de cadena es una dirección de correo electrónico válida. | @ homeEmail(email: true) @
+inList | Valida que un valor se encuentra dentro de un intervalo o una colección de valores restringidos. | @ name(inList: \["Joe", "Fred", "Bob"\]) @
+coincide con | Valida que un valor de cadena coincide con una expresión regular dada. | @ login(matches: "\[a-zA-Z\]") @
+
+{hidden}
+
 max | Validates that a value does not exceed the given maximum value. | @age(max: new Date())@ @price(max: 999F)@
 maxSize | Validates that a value's size does not exceed the given maximum value. | @children(maxSize: 25)@
 min | Validates that a value does not fall below the given minimum value. | @age(min: new Date())@ @price(min: 0F)@
@@ -66,6 +148,21 @@ range | Uses a Groovy range to ensure that a property's value occurs within a sp
 scale | Set to the desired scale for floating point numbers (i.e., the number of digits to the right of the decimal point). | @salary(scale: 2)@
 size | Uses a Groovy range to restrict the size of a collection or number or the length of a String. | @children(size: 5..15)@
 unique | Constrains a property as unique at the database level | @login(unique: true)@
+{hidden}
+
+Max | Valida que un valor no supera el valor máximo especificado. | @ edad (máx.: nueva Date()) @ @ price(max: 999F) @
+maxSize | Valida que tamaño del valor no supera el valor máximo especificado. | @ children(maxSize: 25) @
+min | Valida que un valor no inferior al valor mínimo determinado. | @ edad (min: nueva Date()) @ @ price(min: 0F) @
+minSize | Valida que el tamaño del valor no cae por debajo del valor mínimo determinado. | @ children(minSize: 25) @
+notEqual | Valida que una propiedad no es igual al valor especificado | @ login(notEqual: "Bob") @
+NULL | Permite que una propiedad se establece en null @ @-@ falso @ de forma predeterminada. | @ age(nullable: true) @
+gama | Utiliza una gama Groovy para garantizar que el valor de la propiedad se produce dentro de un rango especificado | @ age(range: 18..65) @
+escala | Defina la escala deseada (es decir, el número de dígitos a la derecha del separador decimal) de números de punto flotante. | @ salary(scale: 2) @
+tamaño | Utiliza una gama Groovy para restringir el tamaño de una colección o el número o la longitud de una cadena. | @ children(size: 5..15) @
+único | Restringe una propiedad como único a nivel de base de datos | @ login(unique: true) @
+
+{hidden}
+
 url | Validates that a String value is a valid URL. | @homePage(url: true)@
 validator | Adds custom validation to a field. | See documentation
 {table}
@@ -76,9 +173,32 @@ Some constraints have no impact on persistence but customize the scaffolding. It
 
 {table}
 Constraint | Description
+{hidden}
+
+URL | Valida que un valor de cadena es una dirección URL válida. | @ homePage(url: true) @
+Validador | Agrega validación personalizada a un campo. | Consulte la documentación
+tabla de {}
+
+h1. Andamio
+
+Algunas restricciones no tienen impacto sobre persistencia pero personalizar los andamios. No es recomendable suele incluir información de interfaz de usuario en su dominio, pero es un gran conveniencia si utiliza 'Grails andamiaje ampliamente.
+
+tabla de {}
+Restricción | Descripción
+
+{hidden}
+
 display | Boolean that determines whether the property is displayed in the scaffolding views. If @true@ (the default), the property _is_ displayed.
 editable | Boolean that determines whether the property can be edited from the scaffolding views. If @false@, the associated form fields are displayed in read-only mode.
 format | Specify a display format for types that accept one, such as dates. For example, 'yyyy-MM-dd'.
 password | Boolean indicating whether this is property should be displayed with a password field. Only works on fields that would normally be displayed with a text field.
 widget | Controls what widget is used to display the property. For example, 'textArea' will force the scaffolding to use a <textArea> tag.
 {table}
+{hidden}
+
+Mostrar | Valor booleano que determina si la propiedad se muestra en las vistas de andamios. Si @ verdadero @ (predeterminado), se muestra la propiedad vale.
+puede editar | Valor booleano que determina si se puede editar la propiedad de las vistas de andamios. Si @ falso @, se muestran los campos de formulario asociado en modo de sólo lectura.
+formato | Especificar un formato de presentación para los tipos que aceptan uno, tales como las fechas. Por ejemplo, 'AAAA-MM-dd'.
+contraseña | Valor booleano que indica si se trata de propiedad debe mostrarse con un campo de contraseña. Sólo funciona en campos que normalmente se mostrará con un campo de texto.
+widget | Controla qué widget se utiliza para mostrar la propiedad. Por ejemplo, 'textArea' obligará a los andamios utilizar una etiqueta <textarea>.
+{tabla de}</textarea>

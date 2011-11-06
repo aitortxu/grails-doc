@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. sortableColumn
 
 h2. Purpose
@@ -20,6 +23,30 @@ h2. Examples
 <g:sortableColumn property="releaseDate" defaultOrder="desc"
                   title="Release Date" titleKey="book.releaseDate" />
 {code}
+{hidden}
+
+h1. sortableColumn
+
+h2. Fin
+
+Representa una columna puede ordenar para admitir la ordenación en tablas.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:sortablecolumn property="title" title="Title"></g:sortablecolumn>
+
+<g:sortablecolumn property="title" title="Title" style="width: 200px"></g:sortablecolumn>
+
+<g:sortablecolumn property="title" titlekey="book.title"></g:sortablecolumn>
+
+<g:sortablecolumn property="releaseDate" defaultorder="desc" title="Release Date"></g:sortablecolumn>
+
+<g:sortablecolumn property="releaseDate" defaultorder="desc" title="Release Date" titlekey="book.releaseDate"></g:sortablecolumn>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -30,6 +57,20 @@ Attributes
 * @property@ - name of the property relating to the field
 * @defaultOrder@ (optional) - default order for the property; choose between 'asc' (default if not provided) and 'desc'
 * @title@ (optional) - title caption for the column
+{hidden}
+
+h2. Descripción
+
+@ Title @ o @ titleKey @ atributo es necesario. @ titleKey @ tiene preferencia cuando ambos atributos se especifican como resultado en el título de título que se resuelve en contra de la fuente del mensaje. En el caso cuando no se pueda resolver el mensaje, el título se utiliza como título título.
+
+Atributos
+
+* @ propiedad @ - nombre de la propiedad relativas al campo
+* @ defaultOrder @ (opcional) - predeterminado para la propiedad; elegir entre "asc" (valor predeterminado si no siempre) y "desc"
+* @ title @ (opcional) - título título de la columna
+
+{hidden}
+
 * @titleKey@ (optional) - title key to use for the column, resolved against the message source
 * @params@ (optional) - a Map containing request parameters
 * @action@ (optional) - the name of the action to use in the link; if not specified the @list@ action will be used
@@ -38,3 +79,13 @@ h2. Source
 
 {source:tag=RenderTagLib.sortableColumn}
 {source}
+{hidden}
+
+* @ titleKey @ (opcional) - título clave que se utiliza para la columna, resuelve en contra de la fuente del mensaje
+* @ params @ (opcional): un mapa que contenga solicitud de parámetros
+* @ acción @ (opcional): el nombre de la acción que se utilizan en el enlace; Si no se especifica se utilizará la lista @ @ Acción
+
+h2. Fuente
+
+{source:tag=RenderTagLib.sortableColumn}
+origen de {}

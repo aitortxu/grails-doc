@@ -1,3 +1,6 @@
+
+{hidden}
+
 In the next view sections we'll go through the basics of GSP and what is available to you. First off let's cover some basic syntax that users of JSP and ASP should be familiar with.
 
 GSP supports the usage of @<% %>@ scriptlet blocks to embed Groovy code (again this is discouraged):
@@ -9,6 +12,20 @@ GSP supports the usage of @<% %>@ scriptlet blocks to embed Groovy code (again t
    </body>
 </html>
 {code}
+{hidden}
+
+En las siguientes secciones de vista analizaremos los aspectos básicos del SGP y lo que está a su disposición. Primero apagado vamos a cubrir algunos sintaxis básica que los usuarios de JSP y ASP deben estar familiarizados con.
+
+SPG es compatible con el uso de @ < % > @ scriptlet bloques para incrustar código Groovy (una vez más esto no se recomienda):
+
+{Código: xml}<html>
+   <body>
+     <% out << "Hello GSP!" %>
+   </body>
+</html>{code}
+
+{hidden}
+
 
 You can also use the @<%= %>@ syntax to output values:
 
@@ -19,6 +36,18 @@ You can also use the @<%= %>@ syntax to output values:
    </body>
 </html>
 {code}
+{hidden}
+
+También puede utilizar el @ < % = % > @ sintaxis a valores de salida:
+
+{Código: xml}<html>
+   <body>
+     <%="Hello GSP!" %>
+   </body>
+</html>{code}
+
+{hidden}
+
 
 GSP also supports JSP-style server-side comments (which are not rendered in the HTML response) as the following example demonstrates:
 
@@ -30,3 +59,13 @@ GSP also supports JSP-style server-side comments (which are not rendered in the 
    </body>
 </html>
 {code}
+{hidden}
+
+SGP también admite comentarios de servidor JSP estilo (que no se procesan en la respuesta HTML) como se muestra en el siguiente ejemplo:
+
+{Código: xml}<html>
+   <body>
+     <%-- This is my comment --%>
+     <%="Hello GSP!" %>
+   </body>
+</html>{code}

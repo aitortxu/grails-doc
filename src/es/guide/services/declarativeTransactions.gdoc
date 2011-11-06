@@ -1,3 +1,6 @@
+
+{hidden}
+
 h3. Default Declarative Transactions
 
 Services are typically involved with coordinating logic between [domain classes|guide:GORM], and hence often involved with persistence that spans large operations. Given the nature of services, they frequently require transactional behaviour. You can use programmatic transactions with the [withTransaction|domainClasses] method, however this is repetitive and doesn't fully leverage the power of Spring's underlying transaction abstraction.
@@ -9,6 +12,12 @@ class CountryService {
     static transactional = false
 }
 {code}
+{hidden}
+
+H3. Transacciones declarativa predeterminadoServicios normalmente están involucrados con la lógica coordinación entre [dominio classes|guide:GORM] y, por tanto, a menudo participan con persistencia que abarca grandes operaciones. Dada la naturaleza de los servicios, que con frecuencia requieren comportamiento transaccional. Puede utilizar transacciones mediante programación con el método [withTransaction|domainClasses], sin embargo esto es repetitivo y no aprovecha el poder de primavera subyacente abstracción de transacción del.Los servicios permiten demarcación de transacción, que es una forma declarativa de definir qué métodos se van a ser transaccional. Todos los servicios son transaccionales por defecto. Para desactivar este conjunto el @ transaccional @ propiedad @ false @:{Código: java}clase CountryService {}    Static transaccional = false}{Código}
+
+{hidden}
+
 
 You may also set this property to @true@ to make it clear that the service is intentionally transactional.
 
@@ -19,6 +28,12 @@ Warning: [dependency injection|guide:dependencyInjectionServices] is the *only* 
 The result is that all methods are wrapped in a transaction and automatic rollback occurs if a method throws a runtime exception (i.e. one that extends @RuntimeException@) or an @Error@. The propagation level of the transaction is by default set to [PROPAGATION_REQUIRED|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionDefinition.html#PROPAGATION_REQUIRED].
 
 {warning}
+{hidden}
+
+También puede establecer esta propiedad en true @ @ para que sea claro que el servicio es intencionalmente transaccional.Advertencia de {}Advertencia: [dependencia injection|guide:dependencyInjectionServices] es el * sólo * forma en que funcionan las transacciones declarativas. No obtendrá un servicio transaccional si usas el @ nuevo operador como @ nueva BookService() @ @Advertencia de {}El resultado es que todos los métodos están envueltos en una transacción y reversión automática se produce si un método produce una excepción de tiempo de ejecución (es decir, uno que se extiende de @ RuntimeException @) o un Error @ @. El nivel de propagación de la transacción es por defecto [PROPAGATION_REQUIRED|http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/transaction/TransactionDefinition.html
+
+{hidden}
+
 Checked exceptions do *not* roll back transactions. Even though Groovy blurs the distinction between checked and unchecked exceptions, Spring isn't aware of this and its default behaviour is used, so it's important to understand the distinction between checked and unchecked exceptions.
 {warning}
 
@@ -29,6 +44,12 @@ Grails also fully supports Spring's @Transactional@ annotation for cases where y
 {note}
 Annotating a service method with @Transactional@ disables the default Grails transactional behavior for that service (in the same way that adding @transactional=false@ does) so if you use any annotations you must annotate all methods that require transactions.
 {note}
+{hidden}
+
+Comprueban hacen excepciones * no * deshacer transacciones. Aunque Groovy desdibuja la distinción entre activada y desactivadas excepciones, la primavera no es consciente de ello y su comportamiento predeterminado que se utiliza, por lo que es importante que entienda la diferencia entre excepciones checked y unchecked.Advertencia de {}H3. Configuración personalizada de transacciónGrails también apoya plenamente @ transaccional la primavera @ anotación para casos en que necesite más un control preciso sobre las transacciones en un nivel por método o necesidad especifican un nivel de propagación alternativo.{Nota}Anotar un método de servicio con @ transaccional @ deshabilita el comportamiento transaccional de Grails predeterminado para ese servicio (de la misma manera que añadir @ transaccional = false @ hace) por lo que si utiliza todas las anotaciones deberán anotar todos los métodos que requieren las transacciones.{Nota}
+
+{hidden}
+
 
 In this example @listBooks@ uses a read-only transaction, @updateBook@ uses a default read-write transaction, and @deleteBook@ is not transactional (probably not a good idea given its name).
 
@@ -44,14 +65,20 @@ class BookService {
 
     @Transactional
     def updateBook() {
-        // …
+        // �
     }
 
     def deleteBook() {
-        // …
+        // �
     }
 }
 {code}
+{hidden}
+
+En este ejemplo @ listBooks @ utiliza una transacción de sólo lectura, @ updateBook @ utiliza un valor predeterminado read-write transacción y @ deleteBook @ no es transaccional (probablemente no es buena idea dada su nombre).{Código}org.springframework.transaction.annotation.Transactional de importaciónclase BookService {}@ Transactional(readOnly = true)    Def listBooks() {}        Book.List()    }@ Transaccional    Def updateBook() {}        / / É    }Def deleteBook() {}        / / É    }}{Código}
+
+{hidden}
+
 
 You can also annotate the class to define the default transaction behavior for the whole service, and then override that default per-method. For example, this service is equivalent to one that has no annotations (since the default is implicitly @transactional=true@):
 
@@ -66,14 +93,20 @@ class BookService {
     }
 
     def updateBook() {
-        // …
+        // �
     }
 
     def deleteBook() {
-        // …
+        // �
     }
 }
 {code}
+{hidden}
+
+Puede anotar también la clase para definir el comportamiento predeterminado de transacción para el servicio completo y luego reemplazar ese defecto por método. Por ejemplo, este servicio es equivalente a uno que no tiene anotaciones (puesto que el valor por defecto es implícitamente @ transaccional = true @):{Código}org.springframework.transaction.annotation.Transactional de importación@ Transaccionalclase BookService {}Def listBooks() {}        Book.List()    }Def updateBook() {}        / / É    }Def deleteBook() {}        / / É    }}{Código}
+
+{hidden}
+
 
 This version defaults to all methods being read-write transactional (due to the class-level annotation), but the @listBooks@ method overrides this to use a read-only transaction:
 
@@ -89,17 +122,26 @@ class BookService {
     }
 
     def updateBook() {
-        // …
+        // �
     }
 
     def deleteBook() {
-        // …
+        // �
     }
 }
 {code}
+{hidden}
+
+Esta versión por defecto para todos los métodos de ser lectura transaccional (debido a la anotación de nivel de clase), pero el @ listBooks @ anulaciones de método a utilizar una transacción sólo lectura:{Código}org.springframework.transaction.annotation.Transactional de importación@ Transaccionalclase BookService {}@ Transactional(readOnly = true)    Def listBooks() {}        Book.List()    }Def updateBook() {}        / / É    }Def deleteBook() {}        / / É    }}{Código}
+
+{hidden}
+
 
 Although @updateBook@ and @deleteBook@ aren't annotated in this example, they inherit the configuration from the class-level annotation.
 
 For more information refer to the section of the Spring user guide on [Using \@Transactional|http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html#transaction-declarative-annotations].
 
 Unlike Spring you do not need any prior configuration to use @Transactional@; just specify the annotation as needed and Grails will detect them up automatically.
+{hidden}
+
+Aunque @ updateBook @ y @ deleteBook @ no están anotados en este ejemplo, heredan la configuración de la anotación de nivel de clase.Para obtener más información, consulte la sección del usuario primavera guía sobre [utilizando \@Transactional|http://static.springsource.org/spring/docs/3.0.x/spring-framework-reference/html/transaction.html

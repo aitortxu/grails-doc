@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. dynamicUpdate
 
 h2. Purpose
@@ -16,6 +19,29 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. dynamicUpdate
+
+h2. Fin
+
+Si desea crear dinámicamente @ actualización @ consultas
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+
+...
+
+asignación estática = {}
+        true dynamicUpdate
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,3 +50,12 @@ Usage: @dynamicUpdate(boolean)@
 By default Hibernate generates all queries at startup and caches them. This helps performance since insert, update, and delete queries don't have to be dynamically generated at runtime. However, there are certain circumstances where dynamic queries are useful.
 
 For example if you were using custom @UserType@ to hash passwords, every time an UPDATE occurred, the password would get re-hashed. The @dynamicUpdate@ method lets you turn off the dynamic creation of queries that uses only the properties that are needed to perform the update.
+{hidden}
+
+h2. Descripción
+
+Uso: @ dynamicUpdate(boolean) @
+
+De forma predeterminada Hibernate genera todas las consultas al inicio y almacena en caché les. Esto ayuda a rendimiento como insert, update y delete consultas no tienen que generar dinámicamente en tiempo de ejecución. Sin embargo, hay ciertas circunstancias donde consultas dinámicas son útiles.
+
+Por ejemplo si estuviera utilizando personalizado @ UserType @ para contraseñas hash, ocurrió cada vez una actualización, la contraseña podría obtener re-hashed. @ DynamicUpdate @ método permite desactivar la creación dinámica de consultas que utiliza sólo las propiedades que son necesarios para realizar la actualización.

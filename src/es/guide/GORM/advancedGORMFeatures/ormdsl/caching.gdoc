@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Setting up caching
 
 "Hibernate":http://www.hibernate.org/ features a second-level cache with a customizable cache provider. This needs to be configured in the @grails-app/conf/DataSource.groovy@ file as follows:
@@ -9,6 +12,22 @@ hibernate {
     cache.provider_class='org.hibernate.cache.EhCacheProvider'
 }
 {code}
+{hidden}
+
+h4. Configurar el almacenamiento en caché
+
+"Hibernate":http://www.hibernate.org/ cuenta con una memoria caché de segundo nivel con un proveedor de caché personalizables. Esto necesita ser configurado en el archivo @grails-app/conf/DataSource.groovy@ como sigue:
+
+{code: java}
+hibernación {}
+    Cache.use_second_level_cache=true
+    Cache.use_query_cache=true
+    Cache.provider_class='org.Hibernate.Cache.EhCacheProvider'
+}
+{code}
+
+{hidden}
+
 
 You can customize any of these settings, for example to use a distributed caching mechanism.
 
@@ -19,6 +38,15 @@ For further reading on caching and in particular Hibernate's second-level cache,
 h4. Caching instances
 
 Call the @cache@ method in your mapping block to enable caching with the default settings:
+{hidden}
+
+Puede personalizar cualquiera de estas opciones, por ejemplo, para utilizar un mecanismo de almacenamiento en caché distribuido.
+
+{Nota}
+Para más información sobre la memoria caché y en la memoria caché de segundo nivel de hibernación particular, consulte la [hibernación documentation|http://docs.jboss.org/hibernate/stable/core/reference/en-US/html/performance.html
+
+{hidden}
+
 
 {code:java}
 class Person {
@@ -29,6 +57,20 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase persona {}
+    ...
+    asignación estática = {}
+        tabla 'gente'
+        true de caché
+    }
+}
+{code}
+
+{hidden}
+
 
 This will configure a 'read-write' cache that includes both lazy and non-lazy properties. You can customize this further:
 
@@ -41,6 +83,22 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+Esto va a configurar un caché 'lectura' que incluye propiedades de vagos y no perezosos. Se puede personalizar aún más:
+
+{code: java}
+clase persona {}
+    ...
+    asignación estática = {}
+        tabla 'gente'
+        uso de caché: 'sólo lectura', incluyen: no perezoso
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Caching associations
 
@@ -60,6 +118,29 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+h4. Almacenamiento en caché de las asociaciones
+
+Así como la capacidad para utilizar instancias de caché para caché niveles segunda de hibernación también puede caché (asociaciones) colecciones de objetos. Por ejemplo:
+
+{code: java}
+clase persona {}
+
+Cadena firstName
+
+estático hasMany = [direcciones: dirección]
+
+asignación estática = {}
+        tabla 'gente'
+        falsa versión
+        columna de direcciones: 'Dirección', caché: verdadero
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Address {
@@ -69,6 +150,19 @@ class Address {
 {code}
 
 This will enable a 'read-write' caching mechanism on the @addresses@ collection. You can also use:
+
+{hidden}
+
+{code: java}
+clase {dirección
+    Número de cadena
+    Código postal de la cadena
+}
+{code}
+
+Esto permitirá un mecanismo de almacenamiento en caché 'lectura' en las direcciones @ @ colección. También se puede utilizar:
+
+{hidden}
 
 {code:java}
 cache: 'read-write' // or 'read-only' or 'transactional'
@@ -80,6 +174,20 @@ h4. Caching Queries
 
 You can cache queries such as dynamic finders and criteria. To do so using a dynamic finder you can pass the @cache@ argument:
 
+{hidden}
+
+{code: java}
+memoria caché: 'lectura' / / o "sólo lectura" o "transaccional"
+{code}
+
+configurar el uso de la memoria caché.
+
+h4. Almacenamiento en caché de consultas
+
+Puede almacenar en caché las consultas como buscadores de dinámicas y criterios. Hacerlo mediante un buscador dinámico puede pasar la caché @ @ argumento:
+
+{hidden}
+
 {code:java}
 def person = Person.findByFirstName("Fred", [cache: true])
 {code}
@@ -89,6 +197,20 @@ In order for the results of the query to be cached, you must enable caching in y
 {note}
 
 You can also cache criteria queries:
+
+{hidden}
+
+{code: java}
+Def persona = Person.findByFirstName ("Fred", [caché: verdadero])
+{code}
+
+{Nota}
+A fin de que los resultados de la consulta para almacenar en caché, debe habilitar el almacenamiento en caché en su asignación como se describe en la sección anterior.
+{Nota}
+
+También puede caché consultas de criterios:
+
+{hidden}
 
 {code:java}
 def people = Person.withCriteria {
@@ -100,8 +222,29 @@ def people = Person.withCriteria {
 h4. Cache usages
 
 Below is a description of the different cache settings and their usages:
+{hidden}
+
+{code: java}
+Def personas = {} Person.withCriteria
+    como ('nombre', 'Fr %')
+    true de caché
+}
+{code}
+
+h4. Usos de la memoria caché
+
+A continuación se ofrece una descripción de la configuración de la caché diferente y sus usos:
+
+{hidden}
+
 
 * @read-only@ - If your application needs to read but never modify instances of a persistent class, a read-only cache may be used.
 * @read-write@ - If the application needs to update data, a read-write cache might be appropriate.
 * @nonstrict-read-write@ - If the application only occasionally needs to update data (ie. if it is very unlikely that two transactions would try to update the same item simultaneously) and strict transaction isolation is not required, a @nonstrict-read-write@ cache might be appropriate.
 * @transactional@ - The @transactional@ cache strategy provides support for fully transactional cache providers such as JBoss TreeCache. Such a cache may only be used in a JTA environment and you must specify @hibernate.transaction.manager_lookup_class@ in the @grails-app/conf/DataSource.groovy@ file's @hibernate@ config.
+{hidden}
+
+* @ sólo lectura @ - si la aplicación necesita leer pero no modificar instancias de una clase persistente, una caché de sólo lectura puede utilizarse.
+* @ lectura-escritura @ - si la aplicación necesita para actualizar los datos, una caché de lectura y escritura puede ser apropiado.
+* @ nonstrict-lectura @ - si la aplicación necesita sólo ocasionalmente para actualizar los datos (es decir. Si es muy poco probable que dos transacciones intentaría actualizar simultáneamente el mismo tema) y aislamiento de transacciones estricta no es necesario, un @ nonstrict-lectura @ caché puede ser apropiado.
+* @ transaccional @ - el @ transaccional @ estrategia de caché proporciona soporte para proveedores de caché completamente transaccional como JBoss TreeCache. Dicha caché sólo podrá utilizarse en un entorno de JTA y debe especificar @ @hibernate.transaction.manager_lookup_class@ en el archivo @grails-app/conf/DataSource.groovy@ de la hibernación @ config.

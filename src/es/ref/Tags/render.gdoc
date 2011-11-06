@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. render
 
 h2. Purpose
@@ -7,6 +10,20 @@ Applies an inbuilt or user-defined Groovy template against a model so that templ
 h2. Examples
 
 Example domain class:
+
+{hidden}
+
+h1. procesamiento
+
+h2. Fin
+
+Aplica una plantilla Groovy intrínseca o definida por el usuario contra un modelo de modo que pueden compartir y reutilizar plantillas
+
+h2. Ejemplos
+
+Clase de dominio de ejemplo:
+
+{hidden}
 
 {code:java}
 class Book {
@@ -21,6 +38,22 @@ Example template:
 <p>${it.title}</p>
 <p>${it.author}</p>
 {code}
+{hidden}
+
+{code: java}
+clase {libro
+    Título de cadena
+    Autor de cadena
+}
+{code}
+
+Plantilla de ejemplo:
+
+{code: java}<p>${it.title}</p>
+<p>${it.author}</p>{code}
+
+{hidden}
+
 
 This template can now be reused whether you have a @List@ of @Book@s or a single @Book@. For a @List@ the template will be repeated for each instance:
 
@@ -33,6 +66,22 @@ and for a single instance the template is rendered once:
 {code:xml}
 <g:render template="displaybook" bean="${book}" />
 {code}
+{hidden}
+
+Esta plantilla se puede reutilizar ahora si tienes una lista @ de @ Book@s @ o un solo libro @ @. Para obtener una lista @ @ la plantilla se repetirá para cada instancia:
+
+{Código: xml}
+<g:render template="displaybook" collection="${books}"></g:render>
+{code}
+
+y para una única instancia de la plantilla se procesa una vez:
+
+{Código: xml}
+<g:render template="displaybook" bean="${book}"></g:render>
+{code}
+
+{hidden}
+
 
 You can also create a template for a particular type of model. For example this template:
 
@@ -42,6 +91,17 @@ You can also create a template for a particular type of model. For example this 
 {code}
 
 could be used with this model:
+
+{hidden}
+
+También puede crear una plantilla para un tipo particular de modelo. Por ejemplo esta plantilla:
+
+{Código: xml}<p>${book.title}</p>
+<p>${author.fullName}</p>{code}
+
+podría utilizarse con este modelo:
+
+{hidden}
 
 {code:xml}
 <g:render template="displaybook" model="['book':book,'author':author]" />
@@ -53,6 +113,20 @@ It is also possible to define the name of the variable to be used by the templat
 
 Example template:
 
+{hidden}
+
+{Código: xml}
+<g:render template="displaybook" model="['book':book,'author':author]"></g:render>
+{code}
+
+La desventaja de este enfoque es que la plantilla es menos reutilizable.
+
+También es posible definir el nombre de la variable que se utilizará la plantilla en la etiqueta de procesamiento:
+
+Plantilla de ejemplo:
+
+{hidden}
+
 {code:java}
 <p>${myBook.title}</p>
 <p>${myBook.author}</p>
@@ -63,6 +137,19 @@ Example render tag call for the above template
 {code:xml}
 <g:render template="displaybook" collection="${books}" var="myBook"/>
 {code}
+{hidden}
+
+{code: java}<p>${myBook.title}</p>
+<p>${myBook.author}</p>{code}
+
+Ejemplo de procesamiento llamada de etiqueta para la plantilla anterior
+
+{Código: xml}
+<g:render template="displaybook" collection="${books}" var="myBook"></g:render>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -73,6 +160,20 @@ Attributes
 * @contextPath@ (optional) - the context path to use (relative to the application context path). Defaults to "" or path to the plugin for a plugin view or template.
 * @template@ (required) - The name of the template to apply
 * @bean@ (optional) - The bean to apply the template against
+{hidden}
+
+h2. Descripción
+
+Tenga en cuenta que si el valor del atributo de plantilla se inicia con un '/' se resolverán relativa al directorio de puntos de vista. Esto es útil para compartir plantillas entre vistas. Sin el líder '/' será primero resolverse respecto a la directorio de visualización del controlador actual, fallando que, el nivel superior considera directorio. En cualquier caso el archivo de plantilla debe estar nombrado con un líder subrayado ("_") pero se hace referencia en el atributo de la plantilla sin ese guión bajo o el sufijo '.gsp'.
+
+Atributos
+
+* @ contextPath @ (opcional): la ruta de contexto (relativo a la ruta de acceso de contexto de aplicación). Valor por defecto es "" o ruta de acceso para el plugin para una vista de complemento o plantilla.
+* @ plantilla @ (requerido) - el nombre de la plantilla que se aplicará
+* @ bean @ (opcional): el grano para aplicar la plantilla contra
+
+{hidden}
+
 * @model@ (optional) - The model to apply the template against as a @java.util.Map@
 * @collection@ (optional) - A collection of model objects to apply the template to
 * @var@ (optional) - The variable name of the bean to be referenced in the template
@@ -83,4 +184,22 @@ See [render|controllers] in the user guide for more information.
 h2. Source
 
 {source:tag=RenderTagLib.render}
+{hidden}
+
+* @ modelo @ (opcional): el modelo para aplicar la plantilla contra como un @java.util.Map@
+* @ colección @ (opcional) - una colección de modelo de objetos para aplicar la plantilla
+* @ var @ (opcional): el nombre de la variable de frijol que se hace referencia en la plantilla
+* @ plugin @ (opcional): el plugin para buscar la plantilla en
+
+En la Guía del usuario para obtener más información, consulte [render|controllers].
+
+h2. Fuente
+
+{source:tag=RenderTagLib.render}
+
+{hidden}
+
 {source}
+{hidden}
+
+origen de {}

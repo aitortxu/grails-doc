@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. unique
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 username unique: true
 {code}
+{hidden}
+
+h1. único
+
+h2. Fin
+
+Restringe una propiedad como único a nivel de base de datos
+
+h2. Ejemplos
+
+{code: java}
+nombre de usuario único: verdadero
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ It is possible (though unlikely in practice) for uniqueness validation to pass b
 {warning}
 
 You can also define multi-column @unique@ constraints by declaring the other field(s) to be included as the parameter value. If there is one other field, specify its name, but if there are more than one use a List, for example:
+{hidden}
+
+h2. Descripción
+
+Establezca en true @ @ si la propiedad debe ser única. Esto es una llamada persistente y realizará consultas a la base de datos.
+
+Advertencia de {}
+Es posible (aunque poco probable en la práctica) para la validación de exclusividad pasar pero para guardar posterior al fracaso. Si otro guarda o actualiza pasa al actualizar la base de datos entre la verificación de Grails y el guardar real de la instancia, se producirá un error en la llamada. La única forma de evitarlo sería utilizar una transacción SERIALIZABLE @ @ nivel de aislamiento, pero esto es muy malo para el rendimiento.
+Advertencia de {}
+
+También puede definir multi-column @ único @ restricciones al declarar los otros campos para ser incluido en el valor del parámetro. Si hay un campo de otro, especifique su nombre, pero si hay más de un uso una lista, por ejemplo:
+
+{hidden}
+
 
 Example:
 
@@ -29,6 +62,20 @@ group unique: 'department'
 In this example the @group@ name must be unique in one @department@ but there might be groups with same name in different departments, i.e. the group name isn't unique by itself.
 
 Another example:
+{hidden}
+
+Ejemplo:
+
+{code: java}
+grupo único: 'Departamento'
+{code}
+
+En este ejemplo el grupo @ @ nombre debe ser único en un solo departamento @ @ pero podría haber grupos con el mismo nombre en diferentes departamentos, es decir, el nombre del grupo no es único por sí solo.
+
+Otro ejemplo:
+
+{hidden}
+
 
 {code:java}
 username(unique: ['group', 'department'])
@@ -39,3 +86,14 @@ In this example @login@ must be unique in @group@ and @department@. There might 
 This constraint influences [schema generation|guide:gormConstraints].
 
 Error Code: @className.propertyName.unique@
+{hidden}
+
+{code: java}
+nombre de usuario (único: ['grupo', 'Departamento'])
+{code}
+
+En este ejemplo @ login @ debe ser único en @ group @ y @ departamento @. Puede haber conexiones mismos en diferentes grupos o departamentos diferentes.
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+Código de error: @className.propertyName.unique@

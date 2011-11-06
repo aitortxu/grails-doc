@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. joinTable
 
 h2. Purpose
@@ -7,6 +10,20 @@ Customizes the join table used for undirectional one-to-many, many-to-many and p
 h2. Examples
 
 Basic collection type:
+
+{hidden}
+
+h1. joinTable
+
+h2. Fin
+
+Personaliza la tabla de combinación utilizada para tipos de colección undirectional de uno a muchos, muchos a muchos y primitivo.
+
+h2. Ejemplos
+
+Tipo de colección básica:
+
+{hidden}
 
 {code:java}
 class Book {
@@ -19,6 +36,22 @@ class Book {
 
 }
 {code}
+{hidden}
+
+{code: java}
+clase {libro
+
+estático hasMany = [chapterPageCounts: entero]
+
+asignación estática = {}
+        chapterPageCounts indexColumn: [nombre: "chapter_number", tipo: Integer],
+                          joinTable: [columna: "page_count"]
+
+}
+{code}
+
+{hidden}
+
 
 Enum collection types:
 
@@ -37,6 +70,28 @@ class Truck {
     }
 }
 {code}
+{hidden}
+
+Tipos de colección de enumeración:
+
+{code: java}
+enum VehicleStatus {, al ralentí, aceleración, DESACELERACIÓN}
+{code}
+
+{code: java}
+clase {} camión
+
+estático hasMany = [Estados: VehicleStatus]
+
+asignación estática = {}
+        Estados joinTable: [nombre: 'VEHICLE_STATUS_LOG',
+                           clave: 'TRUCK_ID', columna: 'Estado']
+    }
+}
+{code}
+
+{hidden}
+
 
 Many-to-many:
 
@@ -54,6 +109,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+Varios a varios:
+
+{code: java}
+clase {libro
+
+Título de cadena
+
+Static belongsTo = autor
+
+estático hasMany = [Autores: autor]
+
+asignación estática = {}
+        Autores joinTable: [nombre: "mm_author_books", clave: 'mm_book_id']
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Author {
@@ -67,6 +143,23 @@ class Author {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase {autor
+
+Nombre de la cadena
+
+estático hasMany = [libros: libro]
+
+asignación estática = {}
+        libros joinTable: [nombre: "mm_author_books", clave: 'mm_author_id']
+    }
+}
+{code}
+
+{hidden}
+
 
 Unidirectional One-to-many:
 
@@ -82,6 +175,25 @@ class Employee {
     }
 }
 {code}
+{hidden}
+
+Uno unidireccional a muchos:
+
+{code: java}
+clase {empleado
+
+estático hasMany = [proyectos: proyecto]
+
+asignación estática = {}
+        proyectos joinTable: [nombre: 'EMP_PROJ',
+                             columna: 'PROJECT_ID',
+                             clave: 'EMPLOYEE_ID']
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class Project {  }
@@ -92,9 +204,30 @@ h2. Description
 Usage: @association_name(joinTable:map)@
 
 Arguments:
+{hidden}
+
+{code: java}
+clase proyecto {}
+{code}
+
+h2. Descripción
+
+Uso: @ association_name(joinTable:map) @
+
+Argumentos:
+
+{hidden}
+
 
 * @name@ - The table name
 * @key@ (optional) - The foreign key
 * @column@ (optional) - The inverse column
 
 GORM has various strategies for mapping association types. Some of them, such as basic collection types and many-to-many associations, use a join table. You can customize how this join table is created using the @joinTable@ argument.
+{hidden}
+
+* @ nombre @ - el nombre de tabla
+* @ clave @ (opcional): la clave externa
+* @ columna @ (opcional) - la columna inversa
+
+GORM tiene varias estrategias para la asignación de tipos de asociación. Algunos de ellos, como los tipos de colección básica y asociaciones de muchos a muchos, utilizan una tabla de combinación. Puede personalizar cómo esta tabla de combinación se crea usando el @ joinTable @ argumento.

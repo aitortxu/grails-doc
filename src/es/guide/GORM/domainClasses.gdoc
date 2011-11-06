@@ -1,3 +1,6 @@
+
+{hidden}
+
 When building Grails applications you have to consider the problem domain you are trying to solve. For example if you were building an [Amazon|http://www.amazon.com/]-style bookstore you would be thinking about books, authors, customers and publishers to name a few.
 
 These are modeled in GORM as Groovy classes, so a @Book@ class may have a title, a release date, an ISBN number and so on. The next few sections show how to model the domain in GORM.
@@ -7,6 +10,20 @@ To create a domain class you run the [create-domain-class|commandLine] command a
 {code}
 grails create-domain-class org.bookstore.Book
 {code}
+
+{hidden}
+
+Al crear aplicaciones Grails que tienes que tener en cuenta el dominio del problema que intenta resolver. Por ejemplo, si estaban construyendo una [Amazon|http://www.amazon.com/]-style librería. podría estar pensando libros, autores, clientes y editores a nombre de algunos
+
+Estos se modelan en GORM como clases Groovy, por lo que un libro @ @ clase puede tener un título, una fecha de lanzamiento, un número de ISBN y así sucesivamente. Las siguientes secciones muestran cómo modelar el dominio en GORM.
+
+Para crear una clase de dominio se ejecuta el comando [crear-dominio-class|commandLine] como sigue:
+
+{code}
+Grails crear-dominio-clase org.bookstore.Book
+{code}
+
+{hidden}
 
 The result will be a class at @grails-app/domain/org/bookstore/Book.groovy@:
 
@@ -18,6 +35,21 @@ class Book {
 {code}
 
 This class will map automatically to a table in the database called @book@ (the same name as the class). This behaviour is customizable through the [ORM Domain Specific Language|guide:ormdsl]
+{hidden}
+
+El resultado será una clase en @ grails-app/domain/org/bookstore/Book.groovy@:
+
+{code}
+paquete org.bookstore
+
+clase {libro
+}
+{code}
+
+Esta clase se asigna automáticamente a una tabla en la base de datos llamada @ libro @ (el mismo nombre que la clase). Este comportamiento es personalizable mediante [ORM dominio específico Language|guide:ormdsl]
+
+{hidden}
+
 
 Now that you have a domain class you can define its properties as Java types. For example:
 
@@ -30,5 +62,24 @@ class Book {
     String ISBN
 }
 {code}
+{hidden}
+
+Ahora que tiene una clase de dominio puede definir sus propiedades como tipos de Java. Por ejemplo:
+
+{code}
+paquete org.bookstore
+
+clase {libro
+    Título de cadena
+    Fecha releaseDate
+    Cadena ISBN
+}
+{code}
+
+{hidden}
+
 
 Each property is mapped to a column in the database, where the convention for column names is all lower case separated by underscores. For example @releaseDate@ maps onto a column @release_date@. The SQL types are auto-detected from the Java types, but can be customized with [Constraints|guide:constraints] or the [ORM DSL|guide:ormdsl].
+{hidden}
+
+Cada propiedad se asigna a una columna de la base de datos, donde la Convención de nombres de columna es minúscula todos separado por guiones bajos. Por ejemplo @ releaseDate @ mapas en una columna @ release_date @. Los tipos SQL son la detección automática de los tipos de Java, pero pueden personalizarse con [Constraints|guide:constraints] o [DSL|guide:ormdsl de ORM].

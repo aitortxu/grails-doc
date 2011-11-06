@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. formRemote
 
 h2. Purpose
@@ -7,6 +10,20 @@ Creates a form tag that uses a remote uri to execute an Ajax call, serializing t
 h2. Examples
 
 Example controller for an application called "shop":
+
+{hidden}
+
+h1. formRemote
+
+h2. Fin
+
+Crea una etiqueta de formulario que utiliza un uri remoto ejecutar Ajax llamada, serializar los elementos de formulario y caer en una forma normal presentar si no se admite JavaScript.
+
+h2. Ejemplos
+
+Controlador de ejemplo de una aplicación llamada "comprar":
+
+{hidden}
 
 {code:java}
 class BookController {
@@ -19,6 +36,22 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase BookController {}
+    Def show() {}
+        [libro: Book.get(params.id)]
+    }
+
+Def byAuthor() {}
+        [libros: Book.findByAuthor params.author (params)]
+    }
+}
+{code}
+
+{hidden}
+
 
 Example usages for this controller:
 
@@ -30,6 +63,19 @@ Example usages for this controller:
 
 <div id="updateMe">this div is updated with the result of the show call</div>
 {code}
+{hidden}
+
+Usos de ejemplo para este controlador:
+
+{Código: xml}
+<g:formremote name="myForm" on404="alert('not found!')" update="updateMe" url="[controller: 'book', action:'show']">
+    Id de libro:<input name="id" type="text">
+</g:formremote>
+
+<div id="updateMe">Este div se actualiza con el resultado de la convocatoria del espectáculo</div>{code}
+
+{hidden}
+
 
 {code:xml}
 <g:formRemote name="myForm" update="updateMe"
@@ -40,6 +86,18 @@ Example usages for this controller:
 
 <div id="updateMe">this div is updated with the result of the byAuthor call</div>
 {code}
+{hidden}
+
+{Código: xml}
+<g:formremote name="myForm" update="updateMe" url="[controller: 'book', action: 'byAuthor',
+                    params: [sort: 'title', order: 'desc']]">
+    Autor:<input name="author" type="text">
+</g:formremote>
+
+<div id="updateMe">Este div se actualiza con el resultado de la llamada byAuthor</div>{code}
+
+{hidden}
+
 
 You can override both the form method and action to use when JavaScript is unavailable by providing @method@ and @action@ attributes. This example will submit the form to @/<context>/book/show@ using a GET if JavaScript is unavailable:
 
@@ -52,6 +110,19 @@ You can override both the form method and action to use when JavaScript is unava
 
 <div id="updateMe"><!-- this div is updated with the result of the submit --></div>
 {code}
+{hidden}
+
+Se pueden reemplazar el método de formulario y acción para utilizar cuando JavaScript no está disponible, proporcionando @ método @ y @ acción @ atributos. Este ejemplo va a presentar el formulario para @ /<context>/libro/mostrar @ utilizando un GET si JavaScript no está disponible:
+
+{Código: xml}
+<g:formremote name="myForm" update="updateMe" method="GET" action="${createLink(controller: 'book', action: 'show')}" url="[controller: 'book', action: 'show']">
+    Id de libro:<input name="id" type="text">
+</g:formremote>
+
+<div id="updateMe"><!-- this div is updated with the result of the submit --></div>{code}</context>
+
+{hidden}
+
 
 h2. Description
 
@@ -62,6 +133,20 @@ Attributes
 * @name@ (required) - The name of the form. This attribute will be assigned to @id@ attribute if not present, otherwise, the value of this attribute will be omitted
 * @url@ (required) - The url to submit to as either a Map (containing values for the controller, action, id, and params) or a URL string
 * @id@ (optional) - The id of the form rendered to the output. If @id@ is not set, the value of @name@ will be assigned
+{hidden}
+
+h2. Descripción
+
+Esta etiqueta crea un formulario que se activa una petición AJAX cuando se presenten. El Javascript exacto utilizado para disparar la solicitud AJAX depende de qué biblioteca de Javascript se utiliza. Esta etiqueta también requiere el uso de cualquiera de las <g:[javascript|tags]></g:[javascript|tags]> o <g:[setprovider|tags]></g:[setprovider|tags]> etiquetas. Consulte [section|guide:ajax de AJAX] de la Guía del usuario para obtener más información.
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre del formulario. Este atributo se asignará a @ id @ atributo si no se omitirá la presente, de lo contrario, el valor de este atributo
+* @ url @ (requerido) - la dirección url para presentarle como un mapa (que contiene los valores para el controlador, acción, id y params) o una dirección URL de cadena
+* @ id @ (opcional): el identificador del formulario prestados a la salida. Si @ id @ no está establecida, se asignará el valor de @ name @
+
+{hidden}
+
 * @action@ (optional) - The action to execute as a fallback, defaults to the url if not specified
 * @update@ (optional) - Either a Map containing the elements to update for 'success' or 'failure' states, or a string with the element id to update, in which case failure events would be ignored
 * @before@ (optional) - The JavaScript function to call before the remote function call. A semi-colon is automatically added so you don't have to provide one yourself in this string.
@@ -72,6 +157,21 @@ Attributes
 Events
 
 * @onSuccess@ (optional) - The JavaScript function to call if successful
+{hidden}
+
+* @ acción @ (opcional): la acción que se ejecute como un respaldo, valores predeterminados para la dirección url si no se especifica
+* @ actualización @ (opcional) - ya sea un mapa que contiene los elementos para la actualización de 'éxito' o 'fracaso' Estados o una cadena con el id de elemento para actualizar, en cuyo caso sucesos de error podrían ignorarse
+* @ antes @ (opcional) - JavaScript la función llamar antes de la llamada a función remota. Un punto y coma se agrega automáticamente por lo que no tendrás que proporcionar uno usted mismo en esta cadena.
+* @ después @ (opcional) - JavaScript la función llamar después de la llamada a función remota. Un punto y coma se agrega automáticamente por lo que no tendrás que proporcionar uno usted mismo en esta cadena.
+* @ asincrónica @ (opcional): si al hacer la llamada asincrónica (defaults @ true @)
+* @ método @ (opcional): el método a utilizar la ejecución de la llamada (de forma predeterminada al POST)
+
+Eventos
+
+* @ onSuccess @ (opcional) - JavaScript la función llamar si es correcto
+
+{hidden}
+
 * @onFailure@ (optional) - The JavaScript function to call if the call fails
 * @on_ERROR_CODE@ (optional) - The JavaScript function to call to handle the specified error code (eg on404="alert('not found!')")
 * @onUninitialized@ (optional) - The JavaScript function to call if Ajax fails to initialise
@@ -82,4 +182,22 @@ Events
 h2. Source
 
 {source:tag=JavascriptTagLib.formRemote}
+{hidden}
+
+* @ onFailure @ (opcional) - The JavaScript funcionar si la llamada falla
+* @ on_ERROR_CODE @ (opcional) - JavaScript la función llamar para manejar el código de error especificado (p. ej. on404 = "alert ('no encontrado!')")
+* @ onUninitialized @ (opcional) - JavaScript la función llamar si Ajax se produce un error al inicializar
+* @ onLoading @ (opcional) - JavaScript la función llamar cuando la función remota carga la respuesta
+* @ onLoaded @ (opcional) - JavaScript la función llamar una vez terminada la función remota cargar la respuesta
+* @ onComplete @ (opcional) - JavaScript la función llamar cuando finaliza la función remota, incluidas las actualizaciones
+
+h2. Fuente
+
+{source:tag=JavascriptTagLib.formRemote}
+
+{hidden}
+
 {source}
+{hidden}
+
+origen de {}

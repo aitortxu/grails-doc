@@ -1,3 +1,6 @@
+
+{hidden}
+
 GSP also supports a few JSP-style page directives.
 
 The import directive lets you import classes into the page. However, it is rarely needed due to Groovy's default imports and [GSP Tags|guide:tags]:
@@ -8,6 +11,20 @@ The import directive lets you import classes into the page. However, it is rarel
 
 GSP also supports the contentType directive:
 
+{hidden}
+
+SGP también soporta algunas directivas de página JSP estilo.
+
+La Directiva de importación le permite importar las clases en la página. Sin embargo, rara vez es necesaria debido a las importaciones por defecto de Groovy y [SPG Tags|guide:tags]:
+
+{Código: xml}
+< % @ import="java.awt.* de la página" %>
+{code}
+
+SGP también apoya la Directiva contentType:
+
+{hidden}
+
 {code:xml}
 
 <%@ page contentType="text/json" %>
@@ -15,3 +32,12 @@ GSP also supports the contentType directive:
 {code}
 
 The contentType directive allows using GSP to render other formats.
+{hidden}
+
+{Código: xml}
+
+< % @ página contentType = "texto/json" %>
+
+{code}
+
+La Directiva contentType permite usar SGP para procesar otros formatos.

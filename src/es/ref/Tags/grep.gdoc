@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. grep
 
 h2. Purpose
@@ -17,6 +20,28 @@ Stephen King's non-fiction Books:
      <p>Title: ${it}</p>
 </g:grep>
 {code}
+{hidden}
+
+h1. grep
+
+h2. Fin
+
+Utiliza el JDK Groovy @ grep @ método para iterar por cada elemento del objeto especificado que coincidan con la
+atributo especificado de "filtro". El filtro puede ser diferentes instancias, como clases, patrones de regex etc..
+
+h2. Ejemplos
+
+{Código: xml}
+Libros de no ficción de Stephen King:<g:grep in="${books}" filter="NonFictionBooks.class">
+     <p>Título: ${it.title}</p>
+</g:grep>
+
+<g:grep in="${books.title}" filter="~/.*Groovy.*/">
+     <p>Título: ${se}</p>
+</g:grep>{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,3 +49,11 @@ Attributes
 
 * @in@ - The object to iterative over
 * @filter@ - The filter instance such as a class, regular expression or anything that implements @isCase@
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ en @ - el objeto más iterativo
+* @ filtro @ - la instancia de filtro como una clase, la expresión regular o cualquier cosa que implementa @ isCase @

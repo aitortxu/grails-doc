@@ -1,3 +1,6 @@
+
+{hidden}
+
 To implement the typical "hello world!" example run the [create-controller|commandLine] command:
 
 bc.
@@ -8,6 +11,21 @@ This will create a new controller (Refer to the section on [Controllers|guide:co
 {note}
 If no package is specified with create-controller script, Grails automatically uses the application name as the package name. This default is configurable with the @grails.project.groupId@ attribute in Config.groovy.
 {note}
+{hidden}
+
+Para implementar el típico ejemplo "hello world!", ejecute el comando [crear-controller|commandLine]:
+
+a c..
+Hola de crear controladores de Grails
+
+Esto creará un nuevo controlador (consulte la sección [Controllers|guide:controllers] para obtener más información) en los @ grails-app/controladores @ directorio llamado @ helloworld/HelloController.groovy@.
+
+{Nota}
+Si no se especifica ningún paquete con guión de controlador crear, Grails utiliza automáticamente el nombre de la aplicación como el nombre del paquete. Este defecto es configurable con el atributo @grails.project.groupId@ en Config.groovy.
+{Nota}
+
+{hidden}
+
 
 Controllers are capable of dealing with web requests and to fulfil the "hello world!" use case our implementation needs to look like the following:
 
@@ -21,6 +39,23 @@ class HelloController {
     }
 }
 {code}
+{hidden}
+
+Los controladores son capaces de tratar las solicitudes web y para cumplir con el caso de uso "¡ hello world!" nuestra implementación debe ser similar al siguiente:
+
+{code: java}
+paquete helloworld
+
+clase HelloController {}
+
+Def world() {}
+        procesar "¡ Hello World!"
+    }
+}
+{code}
+
+{hidden}
+
 
 Job done. Now start-up the container with another new command called [run-app|commandLine]:
 
@@ -31,7 +66,25 @@ This will start-up a server on port 8080 and you should now be able to access yo
 
 The result will look something like the following screenshot:
 
+{hidden}
+
+Trabajo realizado. Ahora la puesta en marcha el contenedor con otro nuevo comando llamado [run-app|commandLine]:
+
+a c..
+Grails run-app
+
+Esto será puesta en marcha de un servidor en el puerto 8080 y ahora debería poder acceder a su solicitud con la dirección URL: @ http://localhost:8080/helloworld@
+
+El resultado será algo parecido a la siguiente pantalla:
+
+{hidden}
+
 !intropage.png!
 
 This is the Grails intro page which is rendered by the @web-app/index.gsp@ file. You will note it has a detected the presence of your controller and clicking on the link to our controller we can see the text "Hello World!" printed to the browser window.
 
+{hidden}
+
+! intropage.png!
+
+Ésta es la página de introducción de Grails que se procesa por el @ web-app/index.gsp @ file. Notará que tiene un detectado la presencia de su controlador y haga clic en el enlace a nuestro controlador podemos ver el texto "Hello World!" impreso a la ventana del navegador.

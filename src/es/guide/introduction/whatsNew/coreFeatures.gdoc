@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Binary Plugins
 
 Grails plugins can now be packaged as JAR files and published to standard maven repositories. This even works for GSP and static resources (with resources plugin 1.0.1). See the section on [Binary plugins|guide:binaryPlugins] for more information.
@@ -8,4 +11,21 @@ Grails 2.0 comes with Groovy 1.8 which includes many new [features and enhanceme
 
 h4. Spring 3.1 Profile Support
 
+{hidden}
+
+h4. Plugins binarios
+
+Plugins Grails puede ahora empaquetado como archivos JAR y publicado en los repositorios maven estándar. Esto funciona incluso para SGP y recursos estáticos (con recursos plugin 1.0.1). Para obtener más información, consulte la sección sobre [binario plugins|guide:binaryPlugins].
+
+h4. Groovy 1.8
+
+Grails 2.0 viene con 1,8 Groovy que incluye muchas nuevas características y notas de la versión de enhancements|http://docs.codehaus.org/display/GROOVY/Groovy 1,8]
+
+h4. Soporte de perfil de primavera 3.1
+
+{hidden}
+
 Grails' existing environment support has been bridged into the Spring 3.1 profile support. For example when running with a custom Grails environment called "production", a Spring profile of "production" is activated so that you can use Spring's bean configuration APIs to configure beans for a specific profile.
+{hidden}
+
+Soporte para entornos existente de Grails ha sido puente en el soporte de perfil de primavera 3.1. Por ejemplo, cuando se ejecuta con un entorno de Grails personalizado denominado "producción", un perfil de primavera de la "producción" se activa para que pueda utilizar API de configuración de frijol de la primavera para configurar frijoles para un perfil específico.

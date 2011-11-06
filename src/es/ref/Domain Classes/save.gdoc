@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. save
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 def b = new Book(title: "The Shining")
 b.save()
 {code}
+{hidden}
+
+h1. guardar
+
+h2. Fin
+
+Guarda una nueva instancia de la clase de dominio o actualiza una instancia modificada persistente en la base de datos, conexión en cascada de actualizaciones a las instancias de niño si es necesario.
+
+h2. Ejemplos
+
+{code: java}
+Def b = nuevo libro (título: "El resplandor")
+b.Save()
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,6 +40,20 @@ b.save(flush: true)
 {code}
 
 The @save@ method returns @null@ if [validation|guide:validation] failed and the instance was not persisted, or the instance itself if successful. This lets you use "Groovy truth" (@null@ is considered @false@) to write code like the following:
+{hidden}
+
+h2. Descripción
+
+Guardar @ @ método informa el contexto de la persistencia que una instancia debería guardar o actualizada. El objeto no se conservará inmediatamente si no se utiliza el color @ @ argumento:
+
+{code: java}
+b.Save(flush: true)
+{code}
+
+Guardar @ @ método devuelve null @ @ si falla [validation|guide:validation] y no se conserva la instancia, o la instancia si tiene éxito. Esto le permite utilizar "Verdad Groovy" (@ null @ es considerado falso @ @) para escribir código como el siguiente:
+
+{hidden}
+
 
 {code:java}
 if (!b.save()) {
@@ -30,6 +64,20 @@ if (!b.save()) {
 {code}
 
 Parameters:
+{hidden}
+
+{code: java}
+Si (! b.save()) {}
+    b.Errors.each {}
+        Console.println se
+    }
+}
+{code}
+
+Parámetros:
+
+{hidden}
+
 
 * @validate@ (optional) - Set to @false@ if validation should be skipped
 * @flush@ (optional) - When set to @true@ flushes the persistence context, persisting the object immediately and updating the @version@ column for [optimistic locking|guide:locking]
@@ -40,3 +88,14 @@ Parameters:
 {note}
 By default GORM classes are configured for [optimistic locking|guide:locking], which is a feature of Hibernate that involves storing an incrementing version in the table. This value is only updated in the database when the Hibernate session is flushed.
 {note}
+{hidden}
+
+* @ validar @ (opcional) - establecido en false @ @ si debe omitirse la validación
+* @ flush @ (opcional): cuando se establece en true @ @ vuelca el contexto de persistencia, persiste el objeto inmediatamente y actualizar la versión @ @ columna [locking|guide optimista: bloqueo]
+* @ Insertar @ (opcional): cuando se establece en true @ @ obligará a hibernar hacer un INSERT SQL; Esto es útil en determinadas situaciones (por ejemplo, al uso de los identificadores asignados) y Hibernate no puede detectar si se va a hacer una inserción o una actualización
+* @ failOnError @ (opcional): cuando se establece en true @ @ guardar @ @ método con tirar un @grails.validation.ValidationException@ si falla [validation|guide:validation]. Este comportamiento también puede activarse mediante la propiedad @grails.gorm.failOnError@ en @ grails-app/conf/Config.groovy@. Si se establece la propiedad de configuración y el argumento se pasa al método, el argumento de método siempre tendrá prioridad.  Para obtener más detalles acerca de la propiedad de configuración y otras opciones de configuración GORM, consulte la sección [GORM configuración Options|guide:configGORM] de la Guía del usuario.
+* @ deepValidate @ (opcional): determina si deben validarse también las asociaciones de la instancia de dominio, es decir, si cascadas de validación. Esto es @ cierto @ por defecto-@ falso @ para deshabilitar la validación en cascada.
+
+{Nota}
+Clases GORM están configuradas de forma predeterminada para [locking|guide optimista: bloqueo], que es una característica de hibernación que consiste en almacenar una versión aumenta en la tabla. Este valor sólo se actualiza la base de datos cuando se vacía la sesión de Hibernate.
+{Nota}

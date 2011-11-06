@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. findOrSaveWhere
 
 h2. Purpose
@@ -7,6 +10,20 @@ Uses named arguments corresponding to property names of the domain class to exec
 h2. Examples
 
 Given the domain class:
+
+{hidden}
+
+h1. findOrSaveWhere
+
+h2. Fin
+
+Utiliza argumentos correspondientes a los nombres de propiedad de la clase de dominio para ejecutar una consulta regresar el primer resultado coincidente. Este método se comporta igual que [findWhere|domainClasses], salvo que nunca devolverá null @ @. Si una instancia correspondiente no se encuentra en la base de datos, a continuación, una nueva instancia, rellena con los valores de los parámetros de consulta, guardada y regresó.  La diferencia entre este método y [findOrCreateWhere|domainClasses] es que este método permitirá ahorrar una instancia recién creada donde no [findOrCreateWhere|domainClasses].
+
+h2. Ejemplos
+
+Teniendo en cuenta la clase de dominio:
+
+{hidden}
 
 {code:java}
 class Book {
@@ -20,6 +37,23 @@ class Book {
    }
 }
 {code}
+{hidden}
+
+{code: java}
+clase {libro
+
+Título de cadena
+   Fecha releaseDate
+   Autor de cadena
+
+restricciones estáticas = {}
+      releaseDate NULL: verdadero
+   }
+}
+{code}
+
+{hidden}
+
 
 You can query in the form:
 
@@ -30,5 +64,22 @@ def book = Book.findOrSaveWhere(author: "Stephen King", title: "The Stand")
 h2. Description
 
 Parameters:
+{hidden}
+
+Se puede consultar en el formulario:
+
+{code: java}
+libro de Def = Book.findOrSaveWhere (autor: "Stephen King", título: "The Stand")
+{code}
+
+h2. Descripción
+
+Parámetros:
+
+{hidden}
+
 
 * @queryParams@ - A Map of key/value pairs to be used in the query. If no matching instance is found then this data is used to initialize a new instance.
+{hidden}
+
+* @ queryParams @ - un mapa de pares clave/valor para ser utilizado en la consulta. Si no se encuentra ninguna instancia coincidente esta información se utiliza para inicializar una nueva instancia.

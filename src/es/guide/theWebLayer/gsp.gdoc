@@ -1,3 +1,6 @@
+
+{hidden}
+
 Groovy Servers Pages (or GSP for short) is Grails' view technology. It is designed to be familiar for users of technologies such as ASP and JSP, but to be far more flexible and intuitive.
 
 GSPs live in the @grails-app/views@ directory and are typically rendered automatically (by convention) or with the [render|controllers] method such as:
@@ -7,6 +10,20 @@ render(view: "index")
 {code}
 
 A GSP is typically a mix of mark-up and GSP tags which aid in view rendering.
+
+{hidden}
+
+Groovy servidores de páginas (o SPG para abreviar) es la tecnología de vista de Grails. Está diseñado para ser familiar para los usuarios de tecnologías como ASP, JSP, sino a ser mucho más flexible e intuitiva.
+
+GSPs viven en las @ grails-app/vistas @ directorio y normalmente se procesan automáticamente (por Convención) o con el método [render|controllers], como:
+
+{code: java}
+Render (vista: "índice")
+{code}
+
+Un SPG suele ser una mezcla de marcación y SGP etiquetas que ayuda a representar a la vista.
+
+{hidden}
 
 {note}
 Although it is possible to have Groovy logic embedded in your GSP and doing this will be covered in this document, the practice is strongly discouraged. Mixing mark-up and code is a *bad* thing and most GSP pages contain no code and needn't do so.
@@ -19,8 +36,31 @@ def show() {
     [book: Book.get(params.id)]
 }
 {code}
+{hidden}
+
+{Nota}
+Aunque es posible tener lógica Groovy incrustada en su SGP y haciendo que esto se tratarán en este documento, se aconseja la práctica. Mezcla de marcación y código es un * cosa mala * y la mayoría de las páginas del SGP no contener ningún código y no es necesario hacerlo.
+{Nota}
+
+Un sistema de preferencias Generalizadas normalmente tiene un "modelo" que es un conjunto de variables que se utilizan para el procesamiento de la vista. El modelo se pasa a la vista del SGP desde un controlador. Por ejemplo, considere la siguiente acción de controlador:
+
+{code: java}
+Def show() {}
+    [libro: Book.get(params.id)]
+}
+{code}
+
+{hidden}
+
 
 This action will look up a @Book@ instance and create a model that contains a key called @book@. This key can then be referenced within the GSP view using the name @book@:
+
+{code}
+${book.title}
+{code}
+{hidden}
+
+Esta acción será buscar un libro @ @ instancia y crear un modelo que contiene una clave llamada @ libro @. A continuación, se puede hacer referencia a esta clave dentro de la vista del SGP mediante el nombre @ libro @:
 
 {code}
 ${book.title}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. min
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 age min: new Date()
 price min: 0F
 {code}
+{hidden}
+
+h1. min
+
+h2. Fin
+
+Asegura que un valor no inferior a un valor mínimo.
+
+h2. Ejemplos
+
+{code: java}
+edad mínima: new Date()
+precio mínimo: 0F
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -18,3 +38,12 @@ Sets the minimum value of a class that implements @java.lang.Comparable@. The ty
 This constraint influences [schema generation|guide:gormConstraints].
 
 Error Code: @className.propertyName.min.notmet@
+{hidden}
+
+h2. Descripción
+
+Establece el valor mínimo de una clase que implementa @ java.lang.Comparable@. El tipo del valor debe ser igual que la propiedad.
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+Código de error: @className.propertyName.min.notmet@

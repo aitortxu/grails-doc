@@ -1,3 +1,6 @@
+
+{hidden}
+
 The previous section on on XML and JSON responses covered simplistic examples of rendering XML and JSON responses. Whilst the XML builder used by Grails is the standard "XmlSlurper":http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper found in Groovy, the JSON builder is a custom implementation specific to Grails.
 
 h4. JSONBuilder and Grails versions
@@ -9,6 +12,22 @@ For backwards compatibility the old @JSONBuilder@ class is used with the @render
 {code}
 grails.json.legacy.builder = false
 {code}
+{hidden}
+
+La sección anterior sobre las respuestas de XML y JSON había cubierto ejemplos simplistas de procesamiento de XML y JSON respuestas. Mientras que el generador de XML utilizado por Grails es la norma "XmlSlurper":http://groovy.codehaus.org/Reading XML mediante XmlSlurper de Groovy en Groovy, el generador de JSON es una implementación personalizada específica de Grails.
+
+h4. Versiones de JSONBuilder y Grails
+
+JSONBuilder se comporta diferente dependiendo de la versión de Grails que utilice. Versión debajo de 1.2 se utiliza la clase deprecated [grails.web.JSONBuilder|api:grails.web.JSONBuilder]. Esta sección cubre el uso de la JSONBuilder de 1,2 Grails
+
+De atrás compatibilidad con el viejo @ JSONBuilder @ clase se utiliza con el render @ @ método para aplicaciones antiguas; para utilizar la más reciente y mejor @ JSONBuilder @ clase establecer lo siguiente en @ Config.groovy@:
+
+{code}
+Grails.JSON.Legacy.Builder = false
+{code}
+
+{hidden}
+
 
 h4. Rendering Simple Objects
 
@@ -19,6 +38,20 @@ render(contentType: "text/json") {
     hello = "world"
 }
 {code}
+{hidden}
+
+h4. Objetos de representación simples
+
+Para procesar un simple objeto JSON acaba de establecer propiedades en el marco de la clausura:
+
+{code}
+Render (contentType: "texto/json") {}
+    Hola = "mundial"
+}
+{code}
+
+{hidden}
+
 
 The above will produce the JSON:
 
@@ -29,6 +62,20 @@ The above will produce the JSON:
 h4. Rendering JSON Arrays
 
 To render a list of objects simple assign a list:
+{hidden}
+
+Lo anterior producirá la JSON:
+
+{code}
+{"Hola": "mundo"}
+{code}
+
+h4. Arreglos de discos de representación JSON
+
+Para representar una lista de objetos simples asignar una lista:
+
+{hidden}
+
 
 {code}
 render(contentType: "text/json") {
@@ -41,6 +88,22 @@ This will produce:
 {code}
 {"categories":["a","b","c"]}
 {code}
+{hidden}
+
+{code}
+Render (contentType: "texto/json") {}
+    categorías = ['a', ' b', 'c']
+}
+{code}
+
+Esto producirá:
+
+{code}
+{"categorías": ["a", "b", "c"]}
+{code}
+
+{hidden}
+
 
 You can also render lists of complex objects, for example:
 
@@ -51,6 +114,20 @@ render(contentType: "text/json") {
 {code}
 
 This will produce:
+{hidden}
+
+También puede procesar listas de objetos complejos, por ejemplo:
+
+{code}
+Render (contentType: "texto/json") {}
+    categorías = [{a = "A"}, {b = "B"}]
+}
+{code}
+
+Esto producirá:
+
+{hidden}
+
 
 {code}
 {"categories":[ {"a":"A"} , {"b":"B"}] }
@@ -65,6 +142,24 @@ render(contentType: "text/json") {
     element 3
 }
 {code}
+{hidden}
+
+{code}
+{"categorías": [{"a": "A"}, {"b": "B"}]}
+{code}
+
+Utilice el elemento @ especial @ método para devolver una lista como la raíz:
+
+{code}
+Render (contentType: "texto/json") {}
+    elemento 1
+    elemento 2
+    elemento 3
+}
+{code}
+
+{hidden}
+
 
 The above code produces:
 
@@ -75,6 +170,20 @@ The above code produces:
 h4. Rendering Complex Objects
 
 Rendering complex objects can be done with Closures. For example:
+{hidden}
+
+El código anterior se produce:
+
+{code}
+[1,2,3]
+{code}
+
+h4. Representación de objetos complejos
+
+Representación de objetos complejos puede hacerse con cierres. Por ejemplo:
+
+{hidden}
+
 
 {code}
 render(contentType: "text/json") {
@@ -85,6 +194,20 @@ render(contentType: "text/json") {
     }
 }
 {code}
+{hidden}
+
+{code}
+Render (contentType: "texto/json") {}
+    categorías = ['a', ' b', 'c']
+    título = "Hola JSON"
+    información = {}
+        páginas = 10
+    }
+}
+{code}
+
+{hidden}
+
 
 The above will produce the JSON:
 
@@ -95,6 +218,20 @@ The above will produce the JSON:
 h4. Arrays of Complex Objects
 
 As mentioned previously you can nest complex objects within arrays using Closures:
+{hidden}
+
+Lo anterior producirá la JSON:
+
+{code}
+{"categorías": ["a", "b", "c"], "título": "Hola JSON", "información": {"páginas": 10}}
+{code}
+
+h4. Matrices de objetos complejos
+
+Como se mencionó anteriormente se pueden anidar objetos complejos dentro de arreglos de discos mediante cierres:
+
+{hidden}
+
 
 {code}
 render(contentType: "text/json") {
@@ -114,6 +251,29 @@ render(contentType: "text/json") {
     }
 }
 {code}
+{hidden}
+
+{code}
+Render (contentType: "texto/json") {}
+    categorías = [{a = "A"}, {b = "B"}]
+}
+{code}
+
+Puede utilizar la matriz @ @ método para acumular dinámicamente:
+
+{code}
+resultados de Def = Book.list()
+Render (contentType: "texto/json") {}
+    libros = {} matriz
+        para {} (b en los resultados)
+            Título del libro: b.title
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Direct JSONBuilder API Access
 
@@ -135,4 +295,27 @@ println result.toString()
 
 def sw = new StringWriter()
 result.render sw
+{code}
+{hidden}
+
+h4. JSONBuilder API de acceso directo
+
+Si no tiene acceso al render @ @ método, pero aún desea producir JSON puede utilizar la API directamente:
+
+{code}
+Generador de Def = JSONBuilder() nueva
+
+resultado de Def = {} builder.build
+    categorías = ['a', ' b', 'c']
+    título = "Hola JSON"
+    información = {}
+        páginas = 10
+    }
+}
+
+/ / Imprime el texto JSON
+Console.println result.toString()
+
+Def sw = StringWriter() nueva
+result.Render sw
 {code}

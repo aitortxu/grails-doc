@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. textArea
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:xml}
 <g:textArea name="myField" value="myValue" rows="5" cols="40"/>
 {code}
+{hidden}
+
+h1. textArea
+
+h2. Fin
+
+Crea un elemento de área de texto HTML. Un atributo implícito "id" se da el mismo valor que nombre a menos que se especifique explícitamente uno.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:textarea name="myField" value="myValue" rows="5" cols="40"></g:textarea>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,24 @@ Attributes
 * @escapeHtml@ (optional) - Sets whether the given value will be encoded as HTML. Default value is @true@.
 
 h2. Source
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre del área de texto
+* @ valor @ (opcional) - texto inicial que se muestra en el área de texto. De forma predeterminada, el área de texto estará vacío.
+* @ escapeHtml @ (opcional): establece si el valor especificado se codificarán como HTML. Valor predeterminado es true @ @.
+
+h2. Fuente
+
+{hidden}
+
 
 {source:tag=FormTagLib.textArea}
 {source}
+{hidden}
+
+{source:tag=FormTagLib.textArea}
+origen de {}

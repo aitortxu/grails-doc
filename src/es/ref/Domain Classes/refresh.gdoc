@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. refresh
 
 h2. Purpose
@@ -11,6 +14,24 @@ def b = Book.get(1)
 ...
 b.refresh()
 {code}
+{hidden}
+
+h1. actualizar
+
+h2. Fin
+
+Un Estado de clases de dominio de la base de datos se actualiza
+
+h2. Ejemplos
+
+{code: java}
+Def b = Book.get(1)
+...
+b.Refresh()
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -21,3 +42,8 @@ Re-reads the state of the given instance from the underlying database. It is ina
 * where a database trigger alters the object state upon insert or update
 * after executing direct SQL (e.g. a bulk update) in the same Session
 * after inserting a Blob or Clob
+{hidden}
+
+h2. Descripción
+
+Equivalente a la hibernación [refresh|api:org.hibernate.Session

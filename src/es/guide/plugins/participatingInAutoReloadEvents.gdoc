@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Monitoring Resources for Changes
 
 Often it is valuable to monitor resources for changes and perform some action when they occur. This is how Grails implements advanced reloading of application state at runtime. For example, consider this simplified snippet from the Grails @ServicesPlugin@:
@@ -26,6 +29,39 @@ class ServicesGrailsPlugin {
     }
 }
 {code}
+{hidden}
+
+h4. Supervisión de los recursos de los cambios
+
+A menudo es valiosa para monitorear los recursos para los cambios y realizar alguna acción cuando se producen. Se trata de cómo implementa Grails avanzada de recarga de estado de la aplicación en tiempo de ejecución. Por ejemplo, considere este fragmento de código simplificado de Grails @ ServicesPlugin @:
+
+{code: java}
+clase ServicesGrailsPlugin {}
+    ...
+    Def watchedResources = "file:./grails-app/services/*Service.groovy"
+
+...
+    Def onChange = {event->
+        Si (event.source) {}
+            Def serviceClass = application.addServiceClass(event.source)
+            Def serviceName = "\${serviceClass.propertyName"}
+            Def frijoles = {frijoles
+                "$serviceName"(serviceClass.getClazz()) {bean->
+                    Bean.autowire = true
+                }
+            }
+            Si (event.ctx) {}
+                () Event.ctx.registerBeanDefinition
+                        serviceName,
+                        beans.getBeanDefinition(serviceName))
+            }
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 First it defines @watchedResources@ as either a String or a List of strings that contain either the references or patterns of the resources to watch. If the watched resources specify a Groovy file, when it is changed it will automatically be reloaded and passed into the @onChange@ closure in the @event@ object.
 
@@ -36,6 +72,20 @@ The @event@ object defines a number of useful properties:
 * @event.plugin@ - The plugin object that manages the resource (usually @this@)
 * @event.application@ - The @GrailsApplication@ instance
 * @event.manager@ - The @GrailsPluginManager@ instance
+{hidden}
+
+En primer lugar define @ watchedResources @ como una cadena o una lista de cadenas que contienen tanto las referencias o patrones de los recursos para ver. Si el seguimiento recursos especifican un Groovy archivo, cuando se cambia automáticamente ser recargada y pasó a la onChange @ @ cierre en el evento @ @ objeto.
+
+El evento @ @ objeto define una serie de propiedades útiles:
+
+* @event.source@ - el origen del evento, la clase @ reloaded @ o un recurso de primavera @ @
+* @event.ctx@ - la primavera @ ApplicationContext @ instancia
+* @event.plugin@ - el objeto de plugin que administra el recurso (normalmente @ esto @)
+* @event.application@-@ GrailsApplication @ instancia
+* @event.manager@-@ GrailsPluginManager @ instancia
+
+{hidden}
+
 
 These objects are available to help you apply the appropriate changes based on what changed. In the "Services" example above, a new service bean is re-registered with the @ApplicationContext@ when one of the service classes changes.
 
@@ -46,6 +96,20 @@ In addition to reacting to changes, sometimes a plugin needs to "influence" anot
 Take for example the Services and Controllers plugins. When a service is reloaded, unless you reload the controllers too, problems will occur when you try to auto-wire the reloaded service into an older controller Class.
 
 To get around this, you can specify which plugins another plugin "influences". This means that when one plugin detects a change, it will reload itself and then reload its influenced plugins. For example consider this snippet from the @ServicesGrailsPlugin@:
+{hidden}
+
+Estos objetos están disponibles para ayudar a aplicar los cambios apropiados basados en lo que ha cambiado. En el ejemplo anterior de "Servicios", un nuevo bean de servicio es encubriéndose con ApplicationContext @ @ cuando cambia una de las clases de servicio.
+
+h4. Influir en otros Plugins
+
+Además de reaccionar a los cambios, a veces un plugin necesita para "influir" en otra.
+
+Tomemos, por ejemplo, los servicios y controladores de plugins. Cuando un servicio se vuelve a cargar, a menos que volver a cargar los controladores demasiado, se producen problemas cuando se intenta alambre de auto servicio ha vuelto a cargar en un controlador anterior clase.
+
+Para evitar esto, puede especificar qué plugins plugin otro "influencias". Esto significa que cuando un plugin detecta un cambio, recargar a sí mismo y, a continuación, volver a cargar sus plugins influenciado. Por ejemplo, considere este fragmento de la @ ServicesGrailsPlugin @:
+
+{hidden}
+
 
 {code:java}
 def influences = ['controllers']
@@ -58,6 +122,22 @@ If there is a particular plugin that you would like to observe for changes but n
 {code:java}
 def observe = ["controllers"]
 {code}
+{hidden}
+
+{code: java}
+Def influencias = ['controladores']
+{code}
+
+h4. Observando otros plugins
+
+Si hay un plugin particular que desea observar cambios pero no es necesario ver los recursos que supervisa le pueden utilizar la propiedad de "observar":
+
+{code: java}
+Def observar = ["controladores"]
+{code}
+
+{hidden}
+
 
 In this case when a controller is changed you will also receive the event chained from the controllers plugin.
 
@@ -68,3 +148,14 @@ def observe = ["*"]
 {code}
 
 The Logging plugin does exactly this so that it can add the @log@ property back to _any_ artefact that changes while the application is running.
+{hidden}
+
+En este caso cuando se cambia un controlador también recibirá el evento encadenado desde el plugin de controladores.
+
+También es posible para un plugin observar todos los plugins cargados por utilizar un carácter comodín:
+
+{code: java}
+Def observar = ["*"]
+{code}
+
+El plugin de registro hace exactamente esto por lo que puede agregar el registro @ @ propiedad al artefacto _any_ que cambia mientras se ejecuta la aplicación.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. setProvider
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 <%-- Enable adaptive AJAX tags based on jQuery --%>
 <g:setProvider library="jquery"/>
 {code}
+{hidden}
+
+h1. setProvider
+
+h2. Fin
+
+Permite la adaptación etiquetas AJAX en una vista o una plantilla sin generar un vínculo a los archivos Javascript como el <g:[javascript|tags]></g:[javascript|tags]> etiqueta. Útil para respuestas HTML de AJAX y al usar el plugin de recursos y <r:require> </r:require>.
+
+h2. Ejemplos
+
+{Código: xml}
+< %--Habilitar etiquetas de AJAX adaptativos basados en jQuery--% >
+<g:setprovider library="jquery"></g:setprovider>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,4 +40,21 @@ The tag must be declared before any AJAX tags, so it's typically found at the be
 Attributes
 
 * @library@ (required) - The name of the library to include. Typical values include "jquery", "prototype", "scriptaculous", "yahoo" or "dojo" but plugins can contribute new providers.
+{hidden}
+
+h2. Descripción
+
+Activa adaptables AJAX de etiquetas como <g:[formremote|tags]></g:[formremote|tags]> y <g:[remotelink|tags]></g:[remotelink|tags]> sin generar código HTML. Se trata básicamente de la <g:[javascript|tags]></g:[javascript|tags]> etiqueta sin el vínculo generado a los archivos Javascript.
+
+La etiqueta debe declararse antes de las etiquetas de AJAX, por lo que normalmente se encuentra al comienzo de un sistema de preferencias Generalizadas o en la<head>elemento. Puede utilizarse en plantillas parciales del SGP, así como opiniones. También es idempotente, por lo que puede llamarse varias veces como la misma biblioteca se declara cada vez. Esto es importante si se utiliza la etiqueta en plantillas parciales que pueden incluir en una vista (que también tiene la etiqueta) o directamente como una respuesta de AJAX.
+
+Atributos
+
+* @ Biblioteca @ (requerido) - el nombre de la biblioteca para incluir. Los valores típicos incluyen "jquery", "prototipo", "scriptaculous", "yahoo" o "dojo" pero plugins puede aportar nuevos proveedores.</head>
+
+{hidden}
+
 * @plugin@ (optional) - The plugin that provides the adaptive AJAX support.
+{hidden}
+
+* @ plugin @ (opcional): el plugin proporciona el soporte de AJAX adaptable.

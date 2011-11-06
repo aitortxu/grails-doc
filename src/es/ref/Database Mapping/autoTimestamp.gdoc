@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. autoTimestamp
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. autoTimestamp
+
+h2. Fin
+
+Deshabilita automáticamente disparos cuando se establece en false
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    ...
+    asignación estática = {}
+        false autoTimestamp
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,5 +48,18 @@ By default when you have properties called @dateCreated@ and/or @lastUpdated@ in
 {code}
 static mapping = {
     autoTimestamp false
+}
+{code}
+{hidden}
+
+h2. Descripción
+
+Uso: @ autoTimestamp(boolean) @
+
+De forma predeterminada cuando se tienen propiedades denominadas @ dateCreated @ o @ lastUpdated @ en una clase de dominio, Grails automáticamente mantiene su estado en la base de datos. Se puede deshabilitar esta opción @ autoTimestamp @ @ false @:
+
+{code}
+asignación estática = {}
+    false autoTimestamp
 }
 {code}

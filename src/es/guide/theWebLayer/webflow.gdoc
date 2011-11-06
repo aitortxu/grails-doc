@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Overview
 
 Grails supports the creation of web flows built on the "Spring Web Flow":http://www.springsource.org/webflow project. A web flow is a conversation that spans multiple requests and retains state for the scope of the flow. A web flow also has a defined start and end state.
@@ -8,6 +11,21 @@ Web flow is essentially an advanced state machine that manages the "flow" of exe
 
 {note}
 From Grails 1.2 onwards Webflow is no longer in Grails core, so you must install the Webflow plugin to use this feature: @grails install-plugin webflow@
+{hidden}
+
+h4. Visión general
+
+Grails es compatible con la creación de flujos de web construido sobre el "proyecto de primavera Web Flow":http://www.springsource.org/webflow. Un flujo de web es una conversación que abarca varias solicitudes y conserva el estado en el ámbito de la corriente. Un flujo de web también tiene un estado inicial y final definido.
+
+Flujos de Web no requieren una sesión HTTP, pero en su lugar, almacene su estado en forma serializada, que luego se restaura mediante una clave de ejecución de flujo que Grails pasa alrededor como un parámetro de solicitud. Esto hace que las corrientes mucho más escalable que otras formas de una aplicación que utilizan el HttpSession y su heredan la memoria y preocupaciones de clustering.
+
+Flujo de Web es esencialmente una máquina de estado avanzado que administra el "flujo" de ejecución de un Estado a otro. Dado que el estado es administrado por usted, no tiene que preocuparse por asegurar que los usuarios introduzcan una acción de algún flujo de paso múltiple, como flujo de web gestiona para. Esto hace web flujo perfecto para los casos de uso, como compras de carros, reservas de hotel y cualquier aplicación que tiene múltiples flujos de trabajo de página.
+
+{Nota}
+De Grails 1.2 en adelante Webflow ya no está en el núcleo de Grails, así que debe instalar el plugin Webflow para utilizar esta característica: @ grails instalar plugin webflow @
+
+{hidden}
+
 {note}
 
 h4. Creating a Flow
@@ -26,5 +44,31 @@ class BookController {
    }
 }
 {code}
+{hidden}
+
+{Nota}
+
+h4. Crear un flujo
+
+Para crear un flujo de crear un controlador de Grails regular y agregue una acción que termina con el flujo de Convención @ @. Por ejemplo:
+
+{code: java}
+clase BookController {}
+
+Def índice() {}
+      redirigir (acción: "shoppingCart")
+   }
+
+Def shoppingCartFlow = {}
+        ...
+   }
+}
+{code}
+
+{hidden}
+
 
 Notice when redirecting or referring to the flow as an action we omit the @Flow@ suffix. In other words the name of the action of the above flow is @shoppingCart@.
+{hidden}
+
+Observe al redireccionar o refiriéndose a la corriente como una acción omite el flujo @ @ sufijo. En otras palabras, el nombre de la acción de la corriente arriba es @ shoppingCart @.

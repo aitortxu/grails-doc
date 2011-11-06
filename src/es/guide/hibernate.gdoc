@@ -1,1 +1,7 @@
+
+{hidden}
+
 If [GORM|guide:GORM] (Grails Object Relational Mapping) is not flexible enough for your liking you can alternatively map your domain classes using Hibernate, either with XML mapping files or JPA annotations. You will be able to map Grails domain classes onto a wider range of legacy systems and have more flexibility in the creation of your database schema. Best of all, you will still be able to call all of the dynamic persistent and query methods provided by GORM!
+{hidden}
+
+Si [GORM|guide:GORM] (Grails objeto relacional Mapping) no es lo suficientemente flexible como para su gusto o bien puede asignar sus clases de dominio mediante la hibernación, con archivos de asignación XML o anotaciones JPA. Podrá asignar clases de dominio Grails en una gama más amplia de sistemas heredados y tener más flexibilidad en la creación de su esquema de base de datos. Lo mejor de todo, todavía podrá llamar a toda la dinámica persistente y consultar los métodos proporcionados por GORM!

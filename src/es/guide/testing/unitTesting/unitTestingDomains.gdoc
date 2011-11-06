@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Overview
 
 {note}
@@ -8,6 +11,21 @@ Domain class interaction can be tested without involving a database connection u
 
 * String-based HQL queries
 * composite identifiers
+{hidden}
+
+h4. Visión general
+
+{Nota}
+El apoyo burlona descrito aquí se utiliza mejor cuando pruebas no dominio artefactos que utilizan las clases de dominio, que le permite concentrarse en las pruebas el artefacto sin necesidad de una base de datos. Pero cuando se prueba la persistencia es mejor utilizar pruebas de integración que configurar Hibernate y utilizan una base de datos.
+{Nota}
+
+Interacción de clase de dominio se puede probar sin la participación de una conexión de base de datos utilizando @ DomainClassUnitTestMixin @. Esta implementación imita el comportamiento de GORM contra un en memoria @ ConcurrentHashMap @ aplicación. Tenga en cuenta que esto tiene sus limitaciones en comparación con una implementación real de GORM. Las siguientes características de GORM para hibernar sólo pueden ser probadas en una prueba de integración:
+
+* Basado en cadena consultas HQL
+* compuestos identificadores
+
+{hidden}
+
 * dirty checking methods
 * any direct interaction with Hibernate
 
@@ -18,6 +36,21 @@ However a large, commonly-used portion of the GORM API can be mocked using @Doma
 * Named Queries
 * Query-by-example
 * GORM Events
+{hidden}
+
+* sucios métodos de comprobación
+* cualquier interacción directa con la hibernación
+
+Sin embargo una porción grande y utilizados de la API de GORM puede burló con @ DomainClassUnitTestMixin @ incluyendo:
+
+* Simple persistencia métodos como @ save() @, @ delete() @ etc.
+* Dinámicos Finders
+* Nombre de consultas
+* Consulta por ejemplo
+* GORM eventos
+
+{hidden}
+
 
 If something isn't supported then @GrailsUnitTestMixin@'s @mockFor@ method can come in handy to mock the missing pieces. Alternatively you can write an integration test which bootstraps the complete Grails environment at a cost of test execution time.
 
@@ -34,6 +67,26 @@ class SimpleControllerTests {
 
 }
 {code}
+{hidden}
+
+Si algo no es compatible, a continuación, @ GrailsUnitTestMixin@'s @ mockFor @ método puede venir bien a burlarse de las piezas faltantes. También puede escribir un ensayo de integración que bootstraps el entorno completo de Grails a un costo de tiempo de ejecución de prueba.
+
+h4. Los conceptos básicos
+
+@ DomainClassUnitTestMixin @ suele utilizarse en combinación con las pruebas de un controlador, el servicio o etiqueta biblioteca donde el dominio es colaborador simulacro definido por la mofa @ @ anotación:
+
+{code: java}
+grails.test.mixin.* de importación
+
+@TestFor(SimpleController)
+@Mock(simple)
+clase SimpleControllerTests {}
+
+}
+{code}
+
+{hidden}
+
 
 The example above tests the @SimpleController@ class and mocks the behavior of the @Simple@ domain class as well. For example consider a typical scaffolded @save@ controller action:
 
@@ -54,6 +107,30 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+El ejemplo anterior prueba @ SimpleController @ clase y burla del comportamiento de la Simple @ @ así como clase de dominio. Por ejemplo, considere una típica scaffolded @ guardar @ acción del controlador:
+
+{code: java}
+clase BookController {}
+    Def save() {}
+        libro de Def = Book(params) nueva
+        Si (book.save(flush: true)) {}
+            Flash.Message = (mensaje
+                    Código: 'default.created.message',
+                    args: [mensaje (código: 'book.label',
+                                   valor predeterminado: 'Libro'), book.id])} "
+            redirigir (acción: "Mostrar", id: book.id)
+        }
+        Else {}
+            Render (vista: "crear", modelo: [bookInstance: libro])
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 Tests for this action can be written as follows:
 
@@ -83,6 +160,39 @@ class BookControllerTests {
     }
 }
 {code}
+{hidden}
+
+Pruebas de esta acción pueden escribirse como sigue:
+
+{code: java}
+grails.test.mixin.* de importación
+
+@TestFor(BookController)
+@Mock(Book)
+clase BookControllerTests {}
+
+void testSaveInvalidBook() {}
+        Controller.Save()
+
+valer model.bookInstance! = null
+        afirman ver == ' / reserva/crear '
+    }
+
+void testSaveValidBook() {}
+        params.Title = "The Stand"
+        params.pages = "500"
+
+Controller.Save()
+
+valer response.redirectedUrl == '/ mostrar/libro/1'
+        valer flash.message! = null
+        valer Book.count() == 1
+    }
+}
+{code}
+
+{hidden}
+
 
 @Mock@ annotation also supports a list of mock collaborators if you have more than one domain to mock:
 
@@ -93,6 +203,20 @@ class BookControllerTests {
    ...
 }
 {code}
+{hidden}
+
+@ Mock @ anotación también soporta una lista de colaboradores simulacros si tienes más de un dominio a burlarse de:
+
+{code: java}
+@TestFor(BookController)
+@ Mock([Book, Author])
+clase BookControllerTests {}
+   ...
+}
+{code}
+
+{hidden}
+
 
 Alternatively you can also use the @DomainClassUnitTestMixin@ directly with the @TestMixin@ annotation:
 
@@ -103,6 +227,20 @@ class BookControllerTests {
    ...
 }
 {code}
+{hidden}
+
+También puede utilizar @ DomainClassUnitTestMixin @ directamente con @ TestMixin @ anotación:
+
+{code: java}
+@TestFor(BookController)
+@TestMixin(DomainClassUnitTestMixin)
+clase BookControllerTests {}
+   ...
+}
+{code}
+
+{hidden}
+
 
 And then call the @mockDomain@ method to mock domains during your test:
 
@@ -112,6 +250,19 @@ void testSave() {
     mockDomain(Book)
 }
 {code}
+
+{hidden}
+
+Y, a continuación, llame el @ mockDomain @ método burlarse de dominios durante la prueba:
+
+{code: java}
+void testSave() {}
+    mockDomain(Author)
+    mockDomain(Book)
+}
+{code}
+
+{hidden}
 
 The @mockDomain@ method also includes an additional parameter that lets you pass a Map of Maps to configure a domain, which is useful for fixture-like data:
 
@@ -123,6 +274,21 @@ void testSave() {
             [title: "Along Came a Spider", pages: 300] ])
 }
 {code}
+{hidden}
+
+@ MockDomain @ método incluye también un parámetro adicional que permite pasar de un mapa de mapas para configurar un dominio, lo que resulta útil para datos de sujeción como:
+
+{code: java}
+void testSave() {}
+    mockDomain (libro [
+            [Título: "The Stand", páginas: 1000],
+            [Título: "El resplandor", páginas: 400],
+            [Título: "A lo largo de llegó a Spider", páginas: 300]])
+}
+{code}
+
+{hidden}
+
 
 h4. Testing Constraints
 
@@ -144,6 +310,31 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h4. Pruebas de restricciones
+
+Sus restricciones contienen lógica y esa lógica es muy susceptible a errores - el tipo de errores que pueden ser difíciles de localizar (especialmente como predeterminada @ save() @ no produce una excepción cuando se produce un error). Si su respuesta es que es demasiado duro o complicados, ya no es una excusa. Introduzca el @ mockForConstraintsTests() @ método.
+
+Este método es una versión mucho más reducido de la @ mockDomain() @ método que simplemente añade @ validate() @ método en una clase de dominio dado. Todo lo que tienes que hacer es burlarse de la clase, crear una instancia con datos de población y, a continuación, llame a @ validate() @. A continuación puede acceder a los errores @ @ propiedad para determinar si el error de validación. Así que si todo lo que estamos haciendo es burlarse de la @ validate() @ método, ¿por qué la lista opcional de casos de prueba? Eso es lo que podemos probar la @ único @ restricción como pronto se verá.
+
+Así, supongamos que tenemos una clase de dominio simple:
+
+{code: java}
+clase {libro
+
+Título de cadena
+    Autor de cadena
+
+restricciones estáticas = {}
+        título en blanco: falso, único: verdadero
+        autor en blanco: falso, minSize: 5
+    }
+}
+{code}
+
+{hidden}
+
 
 Don't worry about whether the constraints are sensible (they're not!), they are for demonstration only. To test these constraints we can do the following:
 
@@ -178,7 +369,50 @@ class BookTests {
     }
 }
 {code}
+{hidden}
+
+No se preocupe si las restricciones son razonables (no son!), son sólo la demostración. Para probar estas restricciones que podemos hacer lo siguiente:
+
+{code: java}
+@TestFor(Book)
+clase BookTests {}
+    void testConstraints() {}
+
+Def existingBook = new (libro
+                Título: "Miseria",
+                Autor: "Stephen King")
+
+mockForConstraintsTests (libro, [existingBook])
+
+/ / validación debe fallar si ambas propiedades son nulas
+        libro de Def = Book() nueva
+
+valer! book.validate()
+        afirmar "null" == book.errors["title"]
+        afirmar "null" == book.errors["author"]
+
+/ / Así que vamos a demostrar las restricciones únicas y minSize
+
+libro = nuevo libro (título: "Miseria", autor: "JK")
+        valer! book.validate()
+        afirmar "único" == book.errors["title"]
+        afirmar "minSize" == book.errors["author"]
+
+/ / Validación debe pasar!
+        libro = nuevo libro (título: "El resplandor", autor: "Stephen King")
+        valer book.validate()
+    }
+}
+{code}
+
+{hidden}
+
 
 You can probably look at that code and work out what's happening without any further explanation. The one thing we will explain is the way the @errors@ property is used. First, is a real Spring @Errors@ instance, so you can access all the properties and methods you would normally expect. Second, this particular @Errors@ object also has map/property access as shown. Simply specify the name of the field you are interested in and the map/property access will return the name of the constraint that was violated. Note that it is the constraint name, not the message code (as you might expect).
 
 That's it for testing constraints. One final thing we would like to say is that testing the constraints in this way catches a common error: typos in the "constraints" property name! It is currently one of the hardest bugs to track down normally, and yet a unit test for your constraints will highlight the problem straight away.
+{hidden}
+
+Probablemente puede mirar ese código y averiguar lo que está ocurriendo sin ninguna explicación. Único lo que vamos a explicar la forma que se utiliza los errores @ @ propiedad. En primer lugar, es un verdadero primavera @ errores @ instancia, para poder acceder a todas las propiedades y métodos que esperaría normalmente. En segundo lugar, este particular @ errores @ objeto también tiene acceso de mapa o propiedad como se muestra. Simplemente especifique el nombre del campo que le interesan y el acceso de mapa o propiedad devolverá el nombre de la restricción que fue violado. Tenga en cuenta que es el nombre de la restricción, no el código de mensaje (como se puede esperar).
+
+Eso es para probar las restricciones. Una última cosa que queremos decir es que prueba las limitaciones de esta manera detecta un error común: errores ortográficos en nombre de la propiedad de "restricciones"! Actualmente es uno de los errores más difíciles rastrear normalmente, y aún una prueba unitaria para sus restricciones pondrá de relieve el problema inmediatamente.

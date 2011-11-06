@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. set-proxy
 
 h2. Purpose
@@ -7,6 +10,20 @@ Activates a proxy configuration Grails should use when communicating over the in
 Proxy configurations are defined using the [add-proxy|commandLine] command
 
 h2. Examples
+
+{hidden}
+
+h1. proxy de conjunto
+
+h2. Fin
+
+Activa una configuración de proxy que Grails deben utilizar cuando se comunican a través de internet, como con el comando [install-plugin|commandLine].
+
+Las configuraciones de proxy se definen mediante el comando [Agregar-proxy|commandLine]
+
+h2. Ejemplos
+
+{hidden}
 
 {code:java}
 grails add-proxy client --host=proxy-server --port=4300 \
@@ -20,7 +37,29 @@ Usage:
 {code:java}
 grails set-proxy [configuration]
 {code}
+{hidden}
+
+{code: java}
+cliente de Grails Agregar proxy--host = servidor proxy--puerto = 4300 \
+       --username = invitado--password = invitado
+cliente de proxy de conjunto de Grails
+{code}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails conjunto-proxy [configuración]
+{code}
+
+{hidden}
+
 
 Arguments:
 
 * @configuration@ - The proxy configuration name
+{hidden}
+
+Argumentos:
+
+* @ configuración @ - el nombre de configuración de proxy

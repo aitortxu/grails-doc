@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-script
 
 h2. Purpose
@@ -7,6 +10,20 @@ The @create-script@ command creates a new Grails executable script that can be r
 h2. Examples
 
 The command:
+
+{hidden}
+
+h1. crear script
+
+h2. Fin
+
+El @ crear scripts @ comando crea un nuevo script ejecutable de Grails que puede ejecutar con el @ grails @ comando desde una ventana de terminal.
+
+h2. Ejemplos
+
+El comando:
+
+{hidden}
 
 {code:java}
 grails create-script execute-report
@@ -22,6 +39,25 @@ target(doStuff: "The implementation task") {
    // logic here
 }
 {code}
+{hidden}
+
+{code: java}
+crear script Grails ejecutar-informe
+{code}
+
+Crea un script llamado @scripts/ExecuteReport.groovy@ tales como:
+
+{code: java}
+destino ('default': "aquí va la descripción de la secuencia de comandos!") {
+    doStuff()
+}
+destino (doStuff: "La tarea de implementación") {}
+   / / lógica aquí
+}
+{code}
+
+{hidden}
+
 
 The command can then be run with:
 
@@ -32,6 +68,20 @@ grails execute-report
 h2. Description
 
 The command will translate lower case command names separated by hyphens into a valid Groovy camel-cased class name. For example @create-controller@ would become a script called @scripts/CreateController.groovy@.
+{hidden}
+
+A continuación, puede ejecutar el comando con:
+
+{code: java}
+Grails ejecutar-informe
+{code}
+
+h2. Descripción
+
+El comando traducirá minúsculas comando nombres separaron por guiones en un nombre de clase válido de camello causa Groovy. Por ejemplo @ crear controladores @ se convertiría en un script llamado @ scripts/CreateController.groovy@.
+
+{hidden}
+
 
 The script generated is a "Gant":http://groovy.codehaus.org/Gant script which can use Gant's capabilities to depend on other scripts from Grails core. Refer to the section on [Command Line Scripting|guide:commandLine] in the user guide.
 
@@ -42,5 +92,22 @@ grails create-script [name]
 {code}
 
 Fired Events:
+{hidden}
+
+La secuencia de comandos generada es un "Gant":http://groovy.codehaus.org/Gant script que puede utilizar las capacidades de Gant a depender de otras secuencias de comandos del núcleo de Grails. Consulte la sección [línea de comandos Scripting|guide:commandLine] en la Guía del usuario.
+
+Uso:
+
+{code: java}
+Grails crear-script [nombre]
+{code}
+
+Despedido de eventos:
+
+{hidden}
+
 
 * @CreatedFile@ - When the script has been created
+{hidden}
+
+* @ CreatedFile @ - cuando se ha creado la secuencia de comandos

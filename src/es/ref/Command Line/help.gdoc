@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. help
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 grails help
 grails help run-app
 {code}
+{hidden}
+
+h1. Ayuda
+
+h2. Fin
+
+Muestra la ayuda de línea de comandos de Grails
+
+h2. Ejemplos
+
+{code: java}
+Grails ayuda
+ayudan de Grails run-app
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,4 +40,20 @@ grails help [command_name]*
 
 Arguments:
 
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails ayudan [command_name] *
+{code}
+
+Argumentos:
+
+{hidden}
+
 * @command_name@ - The command name to display help for
+{hidden}
+
+* @ command_name @ - el nombre del comando para mostrar la ayuda de

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. lock
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 def book = Book.get(1)
 book.lock()
 {code}
+{hidden}
+
+h1. bloqueo
+
+h2. Fin
+
+El bloqueo @ @ método obtiene un bloqueo pesimista mediante un SQL @ select... for update @.
+
+h2. Ejemplos
+
+{code: java}
+libro de Def = Book.get(1)
+Book.Lock()
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -18,3 +38,8 @@ The @lock@ method obtains a pessimistic lock on an instance, locking the row in 
 The lock is automatically released when the transaction commits. In Grails this is typically after an action has finished executing.
 
 Refer to the section on [Optimistic and Pessimistic locking|guide:locking] in the user guide for info.
+{hidden}
+
+h2. Descripción
+
+El bloqueo @ @ método obtiene un bloqueo pesimista en una instancia, el bloqueo de la fila en la base de datos con @ select... for update @. El bloqueo @ @ método es equivalente a utilizar Hibernate [LockMode.UPGRADE|api:org.hibernate.LockMode

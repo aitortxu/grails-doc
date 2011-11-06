@@ -1,1 +1,7 @@
+
+{hidden}
+
 Although Grails [controllers|guide:controllers] support fine grained interceptors, these are only really useful when applied to a few controllers and become difficult to manage with larger applications. Filters on the other hand can be applied across a whole group of controllers, a URI space or to a specific action. Filters are far easier to plugin and maintain completely separately to your main controller logic and are useful for all sorts of cross cutting concerns such as security, logging, and so on.
+{hidden}
+
+Aunque Grails [controllers|guide:controllers] apoyan interceptores de grano finos, sólo son realmente útiles cuando se aplica a algunos controladores y difícil de administrar con aplicaciones más grandes. Por otro lado se pueden aplicar filtros a través de un conjunto de controladores, un espacio URI o a una acción específica. Filtros son mucho más fáciles de plugin y mantener completamente por separado a la lógica del controlador principal y son útiles para todo tipo de Cruz corte de problemas tales como la seguridad, registro y así sucesivamente.

@@ -1,3 +1,4 @@
+
 {hidden}
 
 Grails provides the ability to hook into scripting events. These are events triggered during execution of Grails target and plugin scripts.
@@ -10,25 +11,23 @@ Event handlers are defined in scripts called @_Events.groovy@. Grails searches f
 
 * @USER_HOME/.grails/scripts@ - user-specific event handlers
 * @PROJECT_HOME/scripts@ - applicaton-specific event handlers
+{hidden}
+
+Grails proporciona la capacidad para enlazar a eventos de secuencias de comandos. Estos son eventos activados durante la ejecución de secuencias de comandos de Grails plugin y de destino.
+
+El mecanismo es deliberadamente simple y vagamente especificado. La lista de posibles sucesos no es fijo en modo alguno, por lo que es posible enlazar en eventos activados por las secuencias de comandos de plugin, para que no hay ningún caso equivalente en las secuencias de comandos de destino principal.
+
+h4. Definición de controladores de eventos
+
+Los controladores de eventos se definen en secuencias de comandos llamados @ _Events.groovy@. Búsquedas de Grails para estas secuencias de comandos en las siguientes ubicaciones:
+
+* @USER_HOME/.grails/scripts@ - controladores de eventos específicos del usuario
+* @ PROJECT_HOME/scripts @ - controladores de eventos específicos de la aplicación
+
+{hidden}
+
 * @PLUGINS_HOME/*/scripts@ - plugin-specific event handlers
 * @GLOBAL_PLUGINS_HOME/*/scripts@ - event handlers provided by global plugins
-
-{hidden}
-
-Grails proporciona la capacidad de interceptar eventos de scripts. Estos eventos son activados durante la ejecución de scripts de Grails y plugins.
-
-El mecanismo es deliberadamente simple y vagamente especificado. La lista de posibles eventos no es fija en modo alguno, por lo que es posible enlazar eventos activados por los scripts de plugin, para los que no hay evento equivalente en los scripts del núcleo.
-
-h4. Definición de manejadores de eventos
-
-Los controladores de eventos se definen en un scripts llamado @_Events.groovy@. Grails busca estos scripts en las siguientes ubicaciones:
-
-* @USER_HOME/.grails/scripts@ - manejadores de eventos específicos del usuario.
-* @PROJECT_HOME/scripts @ - manejadores de eventos específicos de la aplicación.
-* @PLUGINS_HOME / * / scripts @ - manejadores de eventos específicos de plugin.
-* @GLOBAL_PLUGINS_HOME / * / scripts @ - manejadores de eventos proporcionados por plugins globales.
-
-{hidden}
 
 Whenever an event is fired, _all_ the registered handlers for that event are executed. Note that the registration of handlers is performed automatically by Grails, so you just need to declare them in the relevant @_Events.groovy@ file.
 
@@ -49,25 +48,29 @@ eventStatusFinal = { msg ->
 {code}
 {hidden}
 
-Cuando se desencadena un evento, se ejecutan _todos_ los manejadores registrados para ese evento. Tenga en cuenta que el registro de controladores se realiza automáticamente por Grails, por lo que sólo es necesario declararlos en el archivo @_Events.groovy@ pertinente.
+* @ PLUGINS_HOME / * / scripts @ - controladores de eventos específicos de plugin
+* @ GLOBAL_PLUGINS_HOME / * / scripts @ - controladores de eventos proporcionados por plugins global
 
-Los manejadores de eventos son bloques definidos en @ _Events.groovy@, con un nombre que empieza con "event". En el ejemplo siguiente se puede colocar en el directorio/scripts para demostrar esta característica:
+Cuando se desencadena un evento, _all_ se ejecutan los controladores registrados para ese evento. Tenga en cuenta que el registro de controladores se realiza automáticamente por Grails, por lo que sólo es necesario declararlos en el archivo @_Events.groovy@ pertinentes.
+
+Los controladores de eventos son bloques definidos en @ _Events.groovy@, con un nombre que empieza con "evento". En el ejemplo siguiente se puede colocar en el directorio/scripts para demostrar la función:
 
 {code}
-eventCreatedArtefact = { type, name ->
-   println "Created $type $name"
+eventCreatedArtefact = {tipo, nombre->
+   Console.println "Nombre $creado $tipo"
 }
 
-eventStatusUpdate = { msg ->
-   println msg
+eventStatusUpdate = {msg->
+   msg Console.println
 }
 
-eventStatusFinal = { msg ->
-   println msg
+eventStatusFinal = {msg->
+   msg Console.println
 }
 {code}
 
 {hidden}
+
 
 You can see here the three handlers @eventCreatedArtefact@, @eventStatusUpdate@, @eventStatusFinal@. Grails provides some standard events, which are documented in the command line reference guide. For example the [compile|commandLine] command fires the following events:
 
@@ -80,14 +83,14 @@ To trigger an event simply include the Init.groovy script and call the event() c
 
 {hidden}
 
-Aquí puede ver tres controladores @eventCreatedArtefact@, @eventStatusUpdate@, @eventStatusFinal@. Grails proporciona algunos eventos estándar, que se describen en la Guía de referencia de línea de comandos. Por ejemplo, el comando [compile|commandLine] dispara los siguientes eventos:
+Aquí puede ver los tres controladores @ eventCreatedArtefact @, @ eventStatusUpdate @, @ eventStatusFinal @. Grails proporciona algunos eventos estándar, que se describen en la Guía de referencia de línea de comandos. Por ejemplo, el comando [compile|commandLine] dispara los siguientes eventos:
 
-* @ CompileStart @ - llamado cuando se inicia la compilación, pasando el tipo de compilación - código fuente o pruebas
-* @ CompileEnd @ - llamada una vez finalizada la compilación, pasando el tipo de compilación - código fuente o pruebas
+* @ CompileStart @ - llamado cuando se inicia la compilación, pasando el tipo de compilación - fuente o pruebas
+* @ CompileEnd @ - llamada una vez finalizada la compilación, pasando el tipo de compilación - fuente o pruebas
 
 h4. Activación de eventos
 
-Para desencadenar un evento simplemente debe incluir la secuencia de comandos Init.groovy y llamar a la closure event():
+Para desencadenar un evento simplemente incluir la secuencia de comandos Init.groovy y llamar a la clausura de event():
 
 {hidden}
 
@@ -106,12 +109,12 @@ Below is a table of some of the common events that can be leveraged:
 {code}
 includeTargets << grailsScript("_GrailsEvents")
 
-event("StatusFinal", ["Super duper plugin action complete!"])
+evento ("StatusFinal", ["súper acción de plugin duper completo!"])
 {code}
 
-h4. Eventos habituales
+h4. Eventos comunes
 
-A continuación es una tabla de algunos de los eventos habituales que se pueden utilizar:
+A continuación es una tabla de algunos de los eventos comunes que se pueden aprovechar:
 
 {hidden}
 
@@ -125,6 +128,21 @@ Event | Parameters | Description
  Exiting | returnCode | Called when the scripting environment is about to exit cleanly
  PluginInstalled | pluginName | Called after a plugin has been installed
  CompileStart | kind | Called when compilation starts, passing the kind of compile - source or tests
+{hidden}
+
+tabla de {}
+Evento | Parámetros | Descripción
+ StatusUpdate | mensaje | Pasa una cadena que indica el Estado y progreso de script actual
+ StatusError | mensaje | Pasa una cadena que indica un mensaje de error en el script actual
+ StatusFinal | mensaje | Pasa una cadena que indica el mensaje de estado de la secuencia final, es decir, al completar un objetivo, incluso si el destino no cierra el entorno de secuencias de comandos
+ CreatedArtefact | artefactType, artefactName | Se llama cuando una secuencia de comandos de creación-xxxx ha terminado y ha creado un artefacto
+ CreatedFile | nombre de archivo | Llamada siempre que se crea un origen del proyecto presentado, sin incluir los archivos constantemente administrado por Grails
+ Salir | returnCode | Se llama cuando el entorno de secuencias de comandos está a punto de salir limpiamente
+ PluginInstalled | NombredePlugin | Se llama después de que se ha instalado un plugin
+ CompileStart | tipo | Se llama cuando comienza la compilación, pasando el tipo de compilación - fuente o pruebas
+
+{hidden}
+
  CompileEnd | kind | Called when compilation is finished, passing the kind of compile - source or tests
  DocStart | kind | Called when documentation generation is about to start - javadoc or groovydoc
  DocEnd | kind | Called when documentation generation has ended - javadoc or groovydoc
@@ -133,19 +151,9 @@ Event | Parameters | Description
 {table}
 {hidden}
 
-{table}
-Evento | Parámetros | Descripción
- StatusUpdate | mensaje | Pasa una cadena que indica el Estado y progreso de script actual.
- StatusError | mensaje | Pasa una cadena que indica un mensaje de error en el script actual.
- StatusFinal | mensaje | Pasa una cadena que indica el mensaje de estado final del script, es decir, al completar un target, incluso no cierra el entorno de script.
- CreatedArtefact | artefactType, artefactName | Se llama cuando un script create-xxxx ha terminado y ha creado un artefacto
- CreatedFile | nombre de archivo | Llamada siempre que se crea un fichero en el proyecto, sin incluir los archivos administrado por Grails.
- Exiting | returnCode | Se llama cuando el entorno de script está a punto de cerrarse.
- PluginInstalled | Nombre de Plugin | Se llama después de que se ha instalado un plugin.
- CompileStart | tipo | Se llama cuando comienza la compilación, pasando el tipo de compilación - código fuente o pruebas
-CompileEnd | tipo | Se llama cuando finaliza la compilación, pasando el tipo de compilación -  código fuente o pruebas
+CompileEnd | tipo | Se llama cuando finaliza compilación, pasando el tipo de compilación - fuente o pruebas
  DocStart | tipo | Se llama cuando la generación de documentación está a punto de empezar - javadoc o groovydoc
  DocEnd | tipo | Se llama cuando se ha finalizado la generación de documentación - javadoc o groovydoc
- SetClasspath | rootLoader | Llamado durante la inicialización del classpath para que los plugins pueda insertar entradas en el classpath con rootLoader.addURL(...). Dese cuenta de que esto inserta nuevas rutas *después* de que los scripts se cargen por lo que no se puede utilizar esto para cargar una clase su script de eventos necesita, aunque se puede hacer esto si carga la clase por su nombre.
- PackagingEnd | ninguno | Llamado al final del empaquetamiento (que se llama antes de arrancar el servidor Tomcat y después de generar el web.xml)
-{table}
+ SetClasspath | rootLoader | Llamado durante la inicialización de classpath para que plugins puede aumentar la ruta de clases con rootLoader.addURL(...). Nota que esto aumenta la ruta de clases * después * secuencias de eventos se cargan por lo que se puede utilizar esto para cargar una clase que se debe importar la secuencia de eventos, aunque se puede hacer esto si carga la clase por su nombre.
+ PackagingEnd | ninguno | Llama al final de los envases (que se llama antes al servidor Tomcat se inicia y después se genera web.xml)
+tabla de {}

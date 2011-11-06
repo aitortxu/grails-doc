@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. creditCard
 
 h2. Purpose
@@ -9,9 +12,32 @@ h2. Examples
 {code:java}
 cardNumber creditCard: true
 {code}
+{hidden}
+
+h1. tarjeta de crédito
+
+h2. Fin
+
+Valida que un valor de cadena es un número válido de tarjeta de crédito
+
+h2. Ejemplos
+
+{code: java}
+cardNumber creditCard: verdadero
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Set to @true@ if a string must be a credit card number. Internally uses the @org.apache.commons.validator.CreditCardValidator@ class.
 
 Error Code: @className.propertyName.creditCard.invalid@
+{hidden}
+
+h2. Descripción
+
+Establecido en true @ @ si una cadena debe ser un número de tarjeta de crédito. Utiliza internamente la clase @org.apache.commons.validator.CreditCardValidator@.
+
+Código de error: @className.propertyName.creditCard.invalid@

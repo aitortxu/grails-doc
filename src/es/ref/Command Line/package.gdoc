@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. package
 
 h2. Purpose
@@ -8,6 +11,20 @@ h2. Examples
 
 As an include:
 
+{hidden}
+
+h1. paquete
+
+h2. Fin
+
+Se ejecuta la fase de presentación de tiempo de ejecución de Grails. Esto es principalmente útil cuando se utiliza por otras secuencias de comandos.
+
+h2. Ejemplos
+
+Como un incluyen:
+
+{hidden}
+
 {code:java}
 includeTargets << grailsScript("_GrailsPackage")
 {code}
@@ -17,6 +34,20 @@ As a command:
 {code:java}
 grails package
 {code}
+
+{hidden}
+
+{code: java}
+includeTargets << grailsScript("_GrailsPackage")
+{code}
+
+Como un comando:
+
+{code: java}
+paquete Grails
+{code}
+
+{hidden}
 
 h2. Description
 
@@ -30,5 +61,25 @@ Add this to the top of your Gant script to use this as an include:
 {code:java}
 includeTargets << grailsScript("_GrailsPackage")
 {code}
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+paquete Grails
+{code}
+
+Agregue esto a la parte superior de la secuencia de comandos de Gant a utilizar esto como una inclusión:
+
+{code: java}
+includeTargets << grailsScript("_GrailsPackage")
+{code}
+
+{hidden}
+
 
 Once this is in place you can call the @packageApp@ target or other targets defined in the script.
+{hidden}
+
+Una vez hecho esto en su lugar puede llamar a @ packageApp @ destino u otros objetivos definidos en la secuencia de comandos.

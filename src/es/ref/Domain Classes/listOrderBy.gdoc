@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. listOrderBy*
 
 h2. Purpose
@@ -16,6 +19,29 @@ def results = Book.listOrderByTitle(max: 10)
 // 10 results, offset from 100
 def results = Book.listOrderByTitle(max: 10, offset: 100, order: "desc")
 {code}
+{hidden}
+
+h1. listOrderBy *
+
+h2. Fin
+
+Enumera todas las instancias de la clase de dominio ordenado por la propiedad en la expresión de método
+
+h2. Ejemplos
+
+{code: java}
+/ / todo
+resultados de Def = Book.listOrderByAuthor()
+
+/ / 10 resultados
+resultados de Def = Book.listOrderByTitle(max: 10)
+
+/ / 10 resultados, desvío de 100
+resultados de Def = Book.listOrderByTitle (máx.: 10, desvío: 100, orden: "desc")
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,3 +50,12 @@ Parameters:
 * @max@ - The maximum number to list
 * @offset@ - The offset from the first result to list from
 * @order@ - The order to list by, either @"desc"@ or @"asc"@
+{hidden}
+
+h2. Descripción
+
+Parámetros:
+
+* @ max @ - el número máximo de lista
+* @ offset @ - desplazamiento desde el primer resultado a la lista de
+* @ orden @ - el orden de lista por cualquiera @ "desc" @ o @ "asc" @

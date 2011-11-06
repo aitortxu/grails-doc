@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. getDirtyPropertyNames
 
 h2. Purpose
@@ -16,7 +19,35 @@ for (name in names) {
     ...
 }
 {code}
+{hidden}
+
+h1. getDirtyPropertyNames
+
+h2. Fin
+
+Recuperar los nombres de campos modificados en una instancia de la clase de dominio.
+
+h2. Ejemplos
+
+{code: java}
+Def b = Book.get(1)
+someMethodThatMightModifyTheInstance(b)
+
+nombres de Def = b.dirtyPropertyNames
+para (nombre de nombres) {}
+    Def originalValue = b.getPersistentValue(name)
+    ...
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 This method is useful mostly for audit logging or other work done in a *beforeUpdate* event callback. Hibernate caches the original state of all loaded instances for dirty checking during a flush and this method exposes the names of modified fields so you can compare them with the current state.
+{hidden}
+
+h2. Descripción
+
+Este método es útil principalmente para el registro de auditoría u otros trabajos realizados en un * beforeUpdate * callback evento. Hibernación cachés el estado original de instancias todo cargados de sucio comprobar durante una escalera y este método expone los nombres de los campos modificados por lo que se puede comparar con el estado actual.

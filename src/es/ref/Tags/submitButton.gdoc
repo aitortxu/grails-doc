@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. submitButton
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:xml}
 <g:submitButton name="update" value="Update" />
 {code}
+{hidden}
+
+h1. submitButton
+
+h2. Fin
+
+Crea un botón de envío mediante el valor indicado como título. Pueden agregar controladores de eventos de JavaScript utilizando los mismos nombres de parámetro como en HTML.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:submitbutton name="update" value="Update"></g:submitbutton>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,5 +38,22 @@ Attributes
 
 h2. Source
 
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre del botón
+* @ valor @ (requerido) - el título del botón y el nombre de acción cuando no explícitamente definidas.
+
+h2. Fuente
+
+{hidden}
+
 {source:tag=FormTagLib.submitButton}
 {source}
+{hidden}
+
+{source:tag=FormTagLib.submitButton}
+origen de {}

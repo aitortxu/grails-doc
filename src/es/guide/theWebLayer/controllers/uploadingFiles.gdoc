@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Programmatic File Uploads
 
 Grails supports file uploads using Spring's [MultipartHttpServletRequest|api:org.springframework.web.multipart.MultipartHttpServletRequest] interface. The first step for file uploading is to create a multipart form like this:
@@ -9,6 +12,21 @@ Upload Form: <br />
         <input type="submit" />
     </g:uploadForm>
 {code}
+{hidden}
+
+h4. Carga de archivos mediante programación
+
+Grails soporta archivos cargas utilizando primavera [MultipartHttpServletRequest|api:org.springframework.web.multipart.MultipartHttpServletRequest] interfaz. Es el primer paso para la carga de archivos crear un formulario de varias partes como esta:
+
+{Código: xml}
+Cargar el formulario:<br>
+    <g:uploadform action="upload">
+        <input type="file" name="myFile">
+        <input type="submit">
+    </g:uploadform>{code}
+
+{hidden}
+
 
 The @uploadForm@ tag conveniently adds the @enctype="multipart/form-data"@ attribute to the standard @<g:form>@ tag.
 
@@ -27,6 +45,28 @@ def upload() {
     response.sendError(200, 'Done')
 }
 {code}
+{hidden}
+
+@ UploadForm @ etiqueta añade convenientemente la @ enctype = "multipart/form-data" @ atributo para el estándar @<g:form>@ etiqueta.
+
+Luego hay una serie de maneras de manejar la carga de archivos. Uno es trabajar directamente con la instancia de primavera [MultipartFile|api:org.springframework.web.multipart.MultipartFile]:
+
+{code: java}
+Def upload() {}
+    Def f = request.getFile('myFile')
+    Si (f.empty) {}
+        Flash.Message = 'archivo no puede estar vacío'
+        Render (vista: 'uploadForm')
+        volver
+    }
+
+f.transferTo (nuevo File('/some/local/dir/myfile.txt'))
+    Response.sendError (200, 'Hecho')
+}
+{código}</g:form>
+
+{hidden}
+
 
 This is convenient for doing transfers to other destinations and manipulating the file directly as you can obtain an @InputStream@ and so on with the [MultipartFile|api:org.springframework.web.multipart.MultipartFile] interface.
 
@@ -44,6 +84,27 @@ class Image {
     }
 }
 {code}
+{hidden}
+
+Esto es conveniente para hacer las transferencias a otros destinos y manipular el archivo directamente como usted puede obtener un InputStream @ @ y así sucesivamente con la interfaz [MultipartFile|api:org.springframework.web.multipart.MultipartFile].
+
+h4. Carga de archivos a través del enlace de datos
+
+También se puede realizar la carga de archivos mediante el enlace de datos. Tenga en cuenta esta imagen @ @ clase de dominio:
+
+{code: java}
+clase {imagen
+    Byte [] myFile
+
+restricciones estáticas = {}
+        / / Limitación de tamaño de archivo de carga a 2 MB
+        maxSize myFile: 1024 * 1024 * 2
+    }
+}
+{code}
+
+{hidden}
+
 
 If you create an image using the @params@ object in the constructor as in the example below, Grails will automatically bind the file's contents as a @byte[]@ to the @myFile@ property:
 
@@ -54,9 +115,30 @@ def img = new Image(params)
 It's important that you set the [size|constraints] or [maxSize|constraints] constraints, otherwise your database may be created with a small column size that can't handle reasonably sized files. For example, both H2 and MySQL default to a blob size of 255 bytes for @byte[]@ properties.
 
 It is also possible to set the contents of the file as a string by changing the type of the @myFile@ property on the image to a String type:
+{hidden}
+
+Si crea una imagen utilizando los parámetros @ @ objeto en el constructor como en el ejemplo siguiente, Grails enlazará automáticamente el contenido del archivo como un @ byte [de] @ a myFile @ @ propiedad:
+
+{code: java}
+Def img = Image(params) nueva
+{code}
+
+Es importante que puede definir el [size|constraints] o [maxSize|constraints] restricciones, caso contrario puede ser creada la base de datos con una pequeña columna de tamaño que no puede manejar archivos de tamaños razonable. Por ejemplo, H2 y MySQL predeterminado para un tamaño de blob de 255 bytes para @ byte [] @ propiedades.
+
+También es posible establecer el contenido del archivo como una cadena, cambiando el tipo de myFile @ @ propiedad en la imagen a un tipo de cadena:
+
+{hidden}
+
 
 {code:java}
 class Image {
    String myFile
+}
+{code}
+{hidden}
+
+{code: java}
+clase {imagen
+   Cadena myFile
 }
 {code}

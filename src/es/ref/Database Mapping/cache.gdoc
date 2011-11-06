@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. cache
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. memoria caché
+
+h2. Fin
+
+Habilita la caché de segundo nivel de hibernación para la clase de dominio.
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    ...
+    asignación estática = {}
+        true de caché
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,6 +48,19 @@ Arguments:
 * @usage@ - The cache usage. Can be @read-only@, @read-write@, @nonstrict-read-write@ or @transactional@
 * @include@ (optional) - Whether to include non-lazy associations. Can be @all@ or @non-lazy@
 
+{hidden}
+
+h2. Descripción
+
+Uso: @ cache(boolean/string/map) @
+
+Argumentos:
+
+* @ uso @ - el uso de la memoria caché. Puede ser @, @ lectura-escritura @, @ nonstrict-lectura @ o @ sólo lectura transaccional @
+* @ incluyen @ (opcional) - si se incluyen asociaciones no perezosos. Puede ser @ all @ o @ no perezoso @
+
+{hidden}
+
 You enable caching per domain class, for example:
 
 {code}
@@ -33,6 +70,20 @@ static mapping = {
 {code}
 
 This will configure the domain class to use a 'read-write' cache, but you can configure whatever cache policy is appropriate (and supported by the cache implementation):
+
+{hidden}
+
+Activar la caché por clase de dominio, por ejemplo:
+
+{code}
+asignación estática = {}
+    true de caché
+}
+{code}
+
+Esto va a configurar la clase de dominio para utilizar un caché 'read-write', pero puede configurar cualquier directiva de caché es adecuado (y apoyado por la aplicación de caché):
+
+{hidden}
 
 {code}
 static mapping = {
@@ -47,6 +98,24 @@ static mapping = {
     cache usage: 'read-only', include: 'non-lazy'
 }
 {code}
+{hidden}
+
+{code}
+asignación estática = {}
+    caché "transaccional"
+}
+{code}
+
+o
+
+{code}
+asignación estática = {}
+    uso de caché: 'sólo lectura', incluyen: no perezoso
+}
+{code}
+
+{hidden}
+
 
 You can also configure the cache policy on a per-association basis:
 
@@ -60,5 +129,25 @@ class Author {
     }
 }
 {code}
+{hidden}
+
+También puede configurar la Directiva de caché de forma por la Asociación:
+
+{code}
+clase {autor
+
+estático hasMany = [libros: libro]
+
+asignación estática = {}
+        libros de caché: verdadera / / o 'lectura' etc..
+    }
+}
+{code}
+
+{hidden}
+
 
 For more information see the section on [Caching|guide:caching] in the user guide.
+{hidden}
+
+Para obtener más información, consulte la sección sobre [Caching|guide: almacenamiento en caché] en la Guía del usuario.

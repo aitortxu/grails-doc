@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. install-plugin
 
 h2. Purpose
@@ -12,6 +15,25 @@ grails install-plugin shiro 1.1
 grails install-plugin ../grails-bar-1.0.zip
 grails install-plugin http://foo.com/grails-bar-1.0.zip
 {code}
+{hidden}
+
+h1. instalar plugin
+
+h2. Fin
+
+Instala un plugin desde el repositorio central de SVN de Grails, un archivo o una dirección URL
+
+h2. Ejemplos
+
+{code: java}
+Grails instalar plugin shiro
+Grails instalar plugin shiro 1.1
+instalación de Grails-plugin.../Grails-Bar-1.0.zip
+Grails instalar plugin http://foo.com/grails-bar-1.0.zip
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -22,6 +44,20 @@ grails install-plugin [URL/File]
 {code}
 
 Fired Events:
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails instalación-plugin [nombre] [versión] *
+Grails instalación-plugin [URL/archivo]
+{code}
+
+Despedido de eventos:
+
+{hidden}
+
 
 * @StatusUpdate@ - Fired at various points during the plugin installation
 * @StatusError@ - When an error occurs during plugin installation
@@ -31,6 +67,19 @@ Fired Events:
 The @install-plugin@ command is a versatile command that installs plugins from the Grails central SVN repository at [http://svn.codehaus.org/grails-plugins/|http://svn.codehaus.org/grails-plugins/], a local file, or a remote URL.
 
 To install a plugin from the remote central repository, for example the "shiro" plugin, use the @install-plugin@ command followed by the plugin name:
+
+{hidden}
+
+* @ StatusUpdate @ - dispararon en varios momentos durante la instalación de plugin
+* @ StatusError @ - cuando se produce un error durante la instalación del plugin
+* @ StatusFinal @ - cuando está instalado el plugin
+* @ PluginInstalled @ - cuando está instalado el plugin
+
+El @ instalar plugin @ comando es un comando versátil que instala los plugins desde el repositorio central de SVN de Grails en [http://svn.codehaus.org/grails-plugins/|http://svn.codehaus.org/grails-plugins/], un archivo local o un URL remoto.
+
+Para instalar un plugin desde el repositorio central remoto, por ejemplo el plugin "shiro", utilizar el @ instalar plugin @ comando seguido del nombre del plugin:
+
+{hidden}
 
 {code:java}
 grails install-plugin shiro
@@ -42,6 +91,20 @@ This will install the latest version of the plugin. To install a specific versio
 grails install-plugin shiro 1.1
 {code}
 
+{hidden}
+
+{code: java}
+Grails instalar plugin shiro
+{code}
+
+Esto instalará la última versión del plugin. Para instalar una versión específica especificarla como argumento:
+
+{code: java}
+Grails instalar plugin shiro 1.1
+{code}
+
+{hidden}
+
 To find out what plugins are available use the [list-plugins|commandLine] command.
 
 To install from a URL, simply specify the absolute URL to the plugin package:
@@ -52,6 +115,25 @@ grails install-plugin http://foo.com/grails-bar-1.0.zip
 
 To install from a local file, specify the absolute or relative path to the file:
 
+{hidden}
+
+Para averiguar qué complementos están disponible utilizar el comando [lista-plugins|commandLine].
+
+Para instalar desde una dirección URL, simplemente especifique la dirección URL absoluta para el paquete de plugin:
+
+{code: java}
+Grails instalar plugin http://foo.com/grails-bar-1.0.zip
+{code}
+
+Para instalar desde un archivo local, especifique la ruta de acceso absoluta o relativa al archivo:
+
+{hidden}
+
 {code:java}
 grails install-plugin ../grails-bar-1.0.zip
+{code}
+{hidden}
+
+{code: java}
+instalación de Grails-plugin.../Grails-Bar-1.0.zip
 {code}

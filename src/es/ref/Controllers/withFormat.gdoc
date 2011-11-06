@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. withFormat
 
 h2. Purpose
@@ -22,6 +25,35 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. withFormat
+
+h2. Fin
+
+Representa diferentes respuestas basadas en la solicitud entrante @ aceptar @ encabezado, parámetro de formato o extensión URI. Para obtener más información, consulte [contenido negotiation|guide:contentNegotiation].
+
+h2. Ejemplos
+
+{code: java}
+grails.converters.XML de importación
+
+clase BookController {}
+
+Def list() {}
+        libros de Def = Book.list()
+
+withFormat {}
+            HTML bookList:books
+            JS {procesamiento "alert('hello')"}
+            XML {libros de procesamiento XML}
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -34,6 +66,22 @@ withFormat {
     xml { render books as XML }
 }
 {code}
+{hidden}
+
+h2. Descripción
+
+@ WithFormat @ acepta un cierre que contiene métodos correspondientes a los distintos tipos de contenido que desea responder a. Por ejemplo:
+
+{code: java}
+withFormat {}
+    bookList HTML: libros
+    JS {procesamiento "alert('hello')"}
+    XML {libros de procesamiento XML}
+}
+{code}
+
+{hidden}
+
 
 Here we invoke three methods called @html@, @js@ and @xml@ that use mime type names configured in @grails-app/conf/Config.groovy@ (See [content negotiation|guide:contentNegotiation] for more information). The call to @html@ accepts a model (a Map) which is passed on to the view. Grails searches for a view called @grails-app/views/book/list.html.gsp@ and if that is not found fallback to @grails-app/views/book/list.gsp@.
 
@@ -45,6 +93,21 @@ withFormat {
     html { ... }
 }
 {code}
+{hidden}
+
+Aquí se invoca tres métodos llamado @ html @, @ js @ y @ xml @ usar nombres de tipo mime configurados en @grails-app/conf/Config.groovy@ (véase [contenido negotiation|guide:contentNegotiation] para obtener más información). La llamada a @ html @ acepta un modelo (un mapa), que se transmite a la vista. Grails busca una vista denominada @grails-app/views/book/list.html.gsp@ y si no que se encuentra respaldo a @ grails-app/views/book/list.gsp@.
+
+Tenga en cuenta que el orden de los tipos es significativo si el formato de solicitud es "all" o si más de un tipo de contenido tiene la misma clasificación de "q" en el encabezado accept. En el primer caso, el primer controlador de tipo del bloque es ejecutado ("html" en el corto ejemplo anterior). El último caso es más confuso porque posee sólo si hay más de un tipo de contenido con la más alta calificación de "q" para que tenga un controlador de tipo * y * tienes más de un controlador de tipo que coinciden con la calificación de "q". Por ejemplo, si la solicitud tiene "text/html" y "application/xml" con una calificación de "q" de 1.0, entonces este código:
+
+{code}
+withFormat {}
+    XML {...}
+    HTML {...}
+}
+{code}
+
+{hidden}
+
 
 will use the "xml" type handler for the request.
 
@@ -56,6 +119,21 @@ request.withFormat {
     html { .. }
 }
 {code}
+{hidden}
+
+Utilice el controlador de tipo "xml" para la solicitud.
+
+Otro factor importante señalar es que el @ withFormat @ método trata con el formato _response_ y no el formato de solicitud. Grails 2.0, hay un independiente @ withFormat @ método disponible sobre que la petición de @ @ puede utilizar para controlar el formato de solicitud que es dictado por el CONTENT_TYPE @ @ encabezado de la solicitud:
+
+{code: java}
+Request.withFormat {}
+    XML {.}
+    HTML {.}
+}
+{code}
+
+{hidden}
+
 
 If you require that the model be lazily executed you can pass a Closure instead of a Map:
 
@@ -66,4 +144,20 @@ withFormat {
 }
 {code}
 
+{hidden}
+
+Si necesita que el modelo sea ejecutado mandos… se puede pasar un cierre en lugar de un mapa:
+
+{code: java}
+withFormat {}
+    HTML {[bookList: Book.list()]}
+    ...
+}
+{code}
+
+{hidden}
+
 This way the @html@ Closure will only be executed if the @html@ format is matched.
+{hidden}
+
+De esta forma el html @ @ cierre sólo se ejecutará si se compara el html @ @ formato.

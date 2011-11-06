@@ -1,3 +1,6 @@
+
+{hidden}
+
 By default the user locale is detected from the incoming @Accept-Language@ header. However, you can provide users the capability to switch locales by simply passing a parameter called @lang@ to Grails as a request parameter:
 
 {code:java}
@@ -5,3 +8,12 @@ By default the user locale is detected from the incoming @Accept-Language@ heade
 {code}
 
 Grails will automatically switch the user's locale and store it in a cookie so subsequent requests will have the new header.
+{hidden}
+
+De forma predeterminada la configuración regional del usuario se detecta desde el entrante @ Accept-Language @ encabezado. Sin embargo, puede proporcionar a los usuarios la capacidad para cambiar las configuraciones regionales simplemente pasando un parámetro denominado a @ lang @ a Grails como un parámetro de solicitud:
+
+{code: java}
+/ libro/lista? lang = es
+{code}
+
+Grails automáticamente Cambiar configuración regional del usuario y almacenarlo en una cookie para que solicitudes posteriores tendrán la nueva cabecera.

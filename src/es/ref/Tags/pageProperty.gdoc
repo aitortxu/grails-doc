@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. pageProperty
 
 h2. Purpose
@@ -7,6 +10,20 @@ Used in layouts to output the contents a property of the decorated page. Equival
 h2. Examples
 
 Example decorated page:
+
+{hidden}
+
+h1. pageProperty
+
+h2. Fin
+
+Utilizado en diseños para salida el contenido una propiedad de la página decorada. Equivalente a la SiteMesh @<decorator:getproperty></decorator:getproperty>@ etiqueta.
+
+h2. Ejemplos
+
+Ejemplo decorada página:
+
+{hidden}
 
 {code:xml}
 <html>
@@ -18,6 +35,15 @@ Example decorated page:
 </html>
 {code}
 Example decorator layout:
+{hidden}
+
+{Código: xml}<html>
+   <head>
+        <meta name="layout" content="myLayout">
+        <script src="myscript.js"></script></head></html>
+
+{hidden}
+
 
 {code:xml}
 <html>
@@ -28,6 +54,14 @@ Example decorator layout:
    <body onload="${pageProperty(name:'body.onload')}"><g:layoutBody /></body>
 </html>
 {code}
+{hidden}
+
+{Código: xml}<html>
+   <head>
+        <script src="global.js"></script></head></html>
+
+{hidden}
+
 Results in:
 
 {code:xml}
@@ -39,8 +73,24 @@ Results in:
    <body onload="alert('hello');">Page to be decorated</body>
 </html>
 {code}
+{hidden}
+
+Resultados en:
+
+{Código: xml}<html>
+   <head>
+        <script src="global.js"></script></head></html>
+
+{hidden}
+
 
 h2. Source
 
 {source:tag=RenderTagLib.pageProperty}
 {source}
+{hidden}
+
+h2. Fuente
+
+{source:tag=RenderTagLib.pageProperty}
+origen de {}

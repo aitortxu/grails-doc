@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. range
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 age range: 18..65
 {code}
+{hidden}
+
+h1. gama
+
+h2. Fin
+
+Utiliza una gama Groovy para garantizar que el valor de la propiedad es dentro de un rango especificado
+
+h2. Ejemplos
+
+{code: java}
+rango de edad: 18..65
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -17,3 +36,12 @@ Set to a Groovy range which can contain numbers in the form of an @IntRange@, da
 This constraint influences [schema generation|guide:gormConstraints].
 
 Error Code: @className.propertyName.range.toosmall@ or @className.propertyName.range.toobig@
+{hidden}
+
+h2. Descripción
+
+Establecer una gama Groovy que puede contener números en forma de un @ IntRange @, fechas o cualquier objeto que implementa @ comparables @ y proporciona @ siguiente @ y @ anterior @ métodos para la navegación.
+
+Esta restricción influencias [esquema generation|guide:gormConstraints].
+
+Código de error: @className.propertyName.range.toosmall@ o @className.propertyName.range.toobig@

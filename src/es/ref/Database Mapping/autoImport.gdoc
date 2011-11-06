@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. autoImport
 
 h2. Purpose
@@ -14,6 +17,27 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. autoImport
+
+h2. Fin
+
+Activar o desactivar la importación automática de clases de este dominio en las consultas HQL.
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+    ...
+    asignación estática = {}
+        false autoImport
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,5 +48,18 @@ By default the domain classes are auto-imported in HQL queries so you aren't req
 {code:java}
 static mapping = {
     autoImport false
+}
+{code}
+{hidden}
+
+h2. Descripción
+
+Uso: @ autoImport(boolean) @
+
+De forma predeterminada las clases de dominio son auto importado en consultas HQL por lo que no son necesarios para especificar el nombre de toda clase incluyendo el paquete, pero si tiene nombres de clase de dominio duplicados en diferentes paquetes los nombres ya no son únicos, causando un org.hibernate.DuplicateMappingException@ @. Deshabilitar la importación automática de uno o dos de ellos para solucionar esto, si @ autoImport @ @ false @. Recuerde que debe usar el nombre de clase completo en la consulta HQL para referencias a estas clases.
+
+{code: java}
+asignación estática = {}
+    false autoImport
 }
 {code}

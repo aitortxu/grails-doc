@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. attach
 
 h2. Purpose
@@ -18,7 +21,37 @@ if (!b.isAttached()) {
     b.attach()
 }
 {code}
+{hidden}
+
+h1. adjuntar
+
+h2. Fin
+
+Asocia una instancia de dominio "destacado" el actual período de sesiones de la hibernación
+
+h2. Ejemplos
+
+{code: java}
+Def b = Book.get(1)
+b.Title = "Blah"
+b.Save(flush:true)
+
+b.Discard()
+
+...
+Si (! b.isAttached()) {}
+    b.Attach()
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Hibernate manages persistent instances in a persistence Session. A new Session is created per request and is closed at the end of the request. If an object is retrieved from the Session and placed into a web scope such as the HttpSession it will be "detached" from the Hibernate Session once the Session is closed and discarded. You can use the @attach()@ method to re-attach an existing persistent instance to the persistence Session of the current request.
+{hidden}
+
+h2. Descripción
+
+Hibernación administra casos persistentes en una persistencia de período de sesiones. Una nueva sesión es creada por petición y se cierra al final de la solicitud. Si un objeto es obtenido de la sesión y se coloca en un ámbito de web como el HttpSession se va ser "destacado" desde la sesión de hibernación una vez que la sesión se cierra y se descartan. Puede utilizar @ attach() @ método de reasociación una instancia existente de persistente a la persistencia de período de sesiones de la solicitud actual.

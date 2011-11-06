@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. The Basics
 
 You use the @grails.test.mixin.TestFor@ annotation to unit test controllers. Using @TestFor@ in this manner activates the @grails.test.mixin.web.ControllerUnitTestMixin@ and its associated API. For example:
@@ -12,6 +15,25 @@ class SimpleControllerTests {
     }
 }
 {code}
+{hidden}
+
+h4. Los conceptos básicos
+
+Utilizar la anotación @grails.test.mixin.TestFor@ para controladores de prueba de unidad. Utilizando @ TestFor @ de esta manera activa la @grails.test.mixin.web.ControllerUnitTestMixin@ y su API asociada. Por ejemplo:
+
+{code: java}
+grails.test.mixin.TestFor de importación
+
+@TestFor(SimpleController)
+clase SimpleControllerTests {}
+    void testSomething() {}
+
+}
+}
+{code}
+
+{hidden}
+
 
 Adding the @TestFor@ annotation to a controller causes a new @controller@ field to be automatically created for the controller under test.
 
@@ -29,6 +51,27 @@ class SimpleController {
     }
 }
 {code}
+{hidden}
+
+Agregar el @ TestFor @ anotación a un controlador provoca un nuevo controlador @ @ campo para crear automáticamente para el controlador de prueba.
+
+{Nota}
+@ TestFor @ anotación también automáticamente será anotar cualquier métodos públicos comenzando con anotación de @ prueba "probar" con JUnit 4. Si cualquiera de su método de ensayo no comienzan con "test" simplemente agregar esto manualmente
+{Nota}
+
+Para probar el más simple "Hello World"-ejemplo de estilo que puede hacer lo siguiente:
+
+{code: java}
+/ / Test clase
+clase SimpleController {}
+    Def hello() {}
+        procesar "Hola"
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 void testHello() {
@@ -39,6 +82,20 @@ void testHello() {
 {code}
 
 The @response@ object is an instance of @org.codehaus.groovy.grails.plugins.testing.GrailsMockHttpServletResponse@ which extends Spring's @org.springframework.mock.web.MockHttpServletResponse@ and has a number of useful methods for inspecting the state of the response.
+{hidden}
+
+{code: java}
+void testHello() {}
+    Controller.Hello()
+
+valer response.text == 'hola'
+}
+{code}
+
+La respuesta de @ @ objeto es una instancia de @org.codehaus.groovy.grails.plugins.testing.GrailsMockHttpServletResponse@ que se extiende @org.springframework.mock.web.MockHttpServletResponse@ de primavera y tiene un número de métodos útiles para inspeccionar el estado de la respuesta.
+
+{hidden}
+
 
 For example to test a redirect you can use the @redirectUrl@ property:
 
@@ -51,6 +108,22 @@ class SimpleController {
     ...
 }
 {code}
+{hidden}
+
+Por ejemplo, para probar una redirección puede usar @ redirectUrl @ propiedad:
+
+{code: java}
+/ / Test clase
+clase SimpleController {}
+    Def índice() {}
+        redirigir la acción: 'hola'
+    }
+    ...
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 void testIndex() {
@@ -61,6 +134,20 @@ void testIndex() {
 {code}
 
 h4. Testing View Rendering
+{hidden}
+
+{code: java}
+void testIndex() {}
+    Controller.Index()
+
+valer response.redirectedUrl == 'hola/simple'
+}
+{code}
+
+h4. Pruebas de procesamiento de vista
+
+{hidden}
+
 
 To test view rendering you can inspect the state of the controller's @modelAndView@ property (an instance of @org.springframework.web.servlet.ModelAndView@) or you can use the @view@ and @model@ properties provided by the mixin:
 
@@ -73,6 +160,22 @@ class SimpleController {
     ...
 }
 {code}
+{hidden}
+
+Para probar la vista representación le puede inspeccionar el estado de modelAndView @ del controlador @ propiedad (una instancia de @ org.springframework.web.servlet.ModelAndView@) o puede utilizar la vista @ @ y @ modelo @ propiedades proporcionada por el mixin:
+
+{code: java}
+/ / Test clase
+clase SimpleController {}
+    Def home() {}
+        vista de procesamiento: "Home Page", modelo: [Título: "Hola mundo"]
+    }
+    ...
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 void testIndex() {
@@ -82,6 +185,19 @@ void testIndex() {
     assert model.title == "Hello World"
 }
 {code}
+
+{hidden}
+
+{code: java}
+void testIndex() {}
+    Controller.Home()
+
+afirman ver == "página/simple"
+    valer model.title == "Hello World"
+}
+{code}
+
+{hidden}
 
 h4. Testing Template Rendering
 
@@ -96,6 +212,24 @@ class SimpleController {
     }
 }
 {code}
+{hidden}
+
+h4. Pruebas de procesamiento de plantilla
+
+A diferencia de la representación de la vista, realmente tratará de representación de la plantilla escribir la plantilla directamente en la respuesta en lugar de devolver un @ ModelAndView @, por tanto, requiere un enfoque diferente a las pruebas.
+
+Considere la siguiente acción de controlador:
+
+{code: java}
+clase SimpleController {}
+    Def display() {}
+        plantilla de procesamiento: "fragmentos"
+    }
+}
+{code}
+
+{hidden}
+
 
 In this example the controller will look for a template in @grails-app/views/simple/_snippet.gsp@. You can test this as follows:
 
@@ -106,6 +240,19 @@ void testDisplay() {
 }
 {code}
 
+{hidden}
+
+En este ejemplo, el controlador buscará una plantilla en @ grails-app/views/simple/_snippet.gsp@. Se puede probar lo siguiente:
+
+{code: java}
+void testDisplay() {}
+    Controller.Display()
+    valer response.text == 'contenido de plantilla'
+}
+{code}
+
+{hidden}
+
 However, you may not want to render the real template, but just test that is was rendered. In this case you can provide mock Groovy Pages:
 
 {code:java}
@@ -115,6 +262,20 @@ void testDisplay() {
     assert response.text == 'mock contents'
 }
 {code}
+
+{hidden}
+
+Sin embargo, puede que no desee procesar la plantilla real, pero sólo prueba que se dictó. En este caso puede proporcionar páginas Groovy simulacro:
+
+{code: java}
+void testDisplay() {}
+    views['/simple/_snippet.GSP'] = 'burlarse de contenido'
+    Controller.Display()
+    valer response.text == 'burlarse de contenido'
+}
+{code}
+
+{hidden}
 
 h4. Testing XML and JSON Responses
 
@@ -127,6 +288,22 @@ def renderXml() {
     }
 }
 {code}
+{hidden}
+
+h4. Pruebas de XML y JSON respuestas
+
+XML y JSON respuesta también se escriben directamente en la respuesta. Las capacidades burlona de Grails proporcionan algunas comodidades para probar la respuesta XML y JSON. Por ejemplo, considere las siguientes medidas:
+
+{code: java}
+Def renderXml() {}
+    Render(ContentType:"text/xml") {}
+        Book(Title:"Great")
+    }
+}
+{code}
+
+{hidden}
+
 
 This can be tested using the @xml@ property of the response:
 
@@ -137,6 +314,20 @@ void testRenderXml() {
     assert "Great" == response.xml.@title.text()
 }
 {code}
+{hidden}
+
+Esto puede comprobarse mediante xml @ @ propiedad de la respuesta:
+
+{code: java}
+void testRenderXml() {}
+    Controller.renderXml()
+    afirmar "<book title="Great"></book>" == response.text
+    afirma "Gran" == response.xml.@title.text()
+}
+{code}
+
+{hidden}
+
 
 The @xml@ property is a parsed result from Groovy's "XmlSlurper":http://groovy.codehaus.org/Reading+XML+using+Groovy's+XmlSlurper class which is very convenient for parsing XML.
 
@@ -150,6 +341,23 @@ def renderJson() {
     }
 }
 {code}
+{hidden}
+
+El xml @ @ propiedad es un resultado analizado desde Groovy del "XmlSlurper":http://groovy.codehaus.org/Reading XML utilizando XmlSlurper clase de Groovy que es muy conveniente para analizar XML.
+
+Pruebas de respuestas JSON son bastante similar, en su lugar utiliza json @ @ propiedad:
+
+{code: java}
+/ / Acción de controlador
+Def renderJson() {}
+    Render(ContentType:"text/JSON") {}
+        libro = "Grande"
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 // test
@@ -162,6 +370,22 @@ void testRenderJson() {
 }
 
 {code}
+{hidden}
+
+{code: java}
+/ / test
+void testRenderJson() {}
+
+Controller.renderJson()
+
+afirmar ' {"libro": "Gran"}' == response.text
+    afirma "Gran" == response.json.book
+}
+
+{code}
+
+{hidden}
+
 
 The @json@ property is an instance of @org.codehaus.groovy.grails.web.json.JSONElement@ which is a map-like structure that is useful for parsing JSON responses.
 
@@ -176,6 +400,24 @@ def consumeBook() {
     render b.title
 }
 {code}
+{hidden}
+
+Json @ @ propiedad es una instancia de @org.codehaus.groovy.grails.web.json.JSONElement@ que es una estructura mapa que es útil para analizar las respuestas JSON.
+
+h4. Pruebas de XML y JSON solicitudes
+
+Grails proporciona varias maneras convenientes analizar automáticamente los paquetes entrantes de XML y JSON. Por ejemplo, se pueden enlazar las solicitudes entrantes JSON o XML mediante el enlace de datos de Grails:
+
+{code}
+Def consumeBook() {}
+    Def b = Book(params['book']) nueva
+
+procesamiento b.title
+}
+{code}
+
+{hidden}
+
 
 To test this Grails provides an easy way to specify an XML or JSON packet via the @xml@ or @json@ properties. For example the above action can be tested by specifying a String containing the XML:
 
@@ -187,6 +429,21 @@ void testConsumeBookXml() {
     assert response.text == 'The Shining'
 }
 {code}
+{hidden}
+
+Para probar esta Grails proporciona una forma fácil para especificar un paquete XML o JSON mediante el xml @ @ o @ json @ propiedades. Por ejemplo la acción anterior puede probarse mediante la especificación de una cadena que contiene el XML:
+
+{code}
+void testConsumeBookXml() {}
+    Request.xml = '<book><title>El resplandor</title></book>'
+    Controller.consumeBook()
+
+valer response.text == 'El resplandor'
+}
+{code}
+
+{hidden}
+
 
 Or alternatively a domain instance can be specified and it will be auto-converted into the appropriate XML request:
 
@@ -198,6 +455,21 @@ void testConsumeBookXml() {
     assert response.text == 'The Shining'
 }
 {code}
+{hidden}
+
+O también se puede especificar una instancia de dominio y será automáticamente convertida en la correspondiente solicitud XML:
+
+{code}
+void testConsumeBookXml() {}
+    Request.XML = nuevo libro (título: "El resplandor")
+    Controller.consumeBook()
+
+valer response.text == 'El resplandor'
+}
+{code}
+
+{hidden}
+
 
 The same can be done for JSON requests:
 
@@ -209,6 +481,21 @@ void testConsumeBookJson() {
     assert response.text == 'The Shining'
 }
 {code}
+{hidden}
+
+Lo mismo puede hacerse para solicitudes de JSON:
+
+{code}
+void testConsumeBookJson() {}
+    Request.JSON = nuevo libro (título: "El resplandor")
+    Controller.consumeBook()
+
+valer response.text == 'El resplandor'
+}
+{code}
+
+{hidden}
+
 
 If you prefer not to use Grails' data binding but instead manually parse the incoming XML or JSON that can be tested too. For example consider the controller action below:
 
@@ -224,6 +511,25 @@ def consume() {
     }
 }
 {code}
+{hidden}
+
+Si prefiere no utilizar datos de Grails vinculante sino manualmente analizar el XML entrante o JSON que puede comprobarse demasiado. Por ejemplo, considere la acción de controlador a continuación:
+
+{code}
+Def consume() {}
+    Request.withFormat {}
+        {XML
+            procesar la solicitud.XML.@Title
+        }
+        {JSON
+            procesar la solicitud.JSON.Title
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 To test the XML request you can specify the XML as a string:
 
@@ -236,6 +542,22 @@ void testConsumeXml() {
     assert response.text == 'The Stand'
 }
 {code}
+{hidden}
+
+Para probar la solicitud XML puede especificar el XML como una cadena:
+
+{code}
+void testConsumeXml() {}
+    Request.xml = '<book title="The Stand"></book>'
+
+Controller.consume()
+
+valer response.text == 'The Stand'
+}
+{code}
+
+{hidden}
+
 
 And, of course, the same can be done for JSON:
 
@@ -247,6 +569,21 @@ void testConsumeJson() {
     assert response.text == 'The Stand'
 }
 {code}
+{hidden}
+
+Y, por supuesto, lo mismo puede hacerse para JSON:
+
+{code}
+void testConsumeJson() {}
+    Request.JSON = ' {Título: "La tribuna"}'
+    Controller.consume()
+
+valer response.text == 'The Stand'
+}
+{code}
+
+{hidden}
+
 
 h4. Testing Spring Beans
 
@@ -260,6 +597,23 @@ class SimpleController {
     }
 }
 {code}
+{hidden}
+
+h4. Pruebas de frijoles de primavera
+
+Cuando están disponibles usando @ TestFor @ sólo un subconjunto de las habas de primavera disponibles para una aplicación en ejecución Grails. Si desea hacer disponibles adicionales judías que pueden hacerlo con @ defineBeans @ método de @ GrailsUnitTestMixin @:
+
+{code: java}
+clase SimpleController {}
+    SimpleService simpleService
+    Def hello() {}
+        procesamiento simpleService.sayHello()
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 void testBeanWiring() {
@@ -272,6 +626,22 @@ void testBeanWiring() {
     assert response.text == "Hello World"
 }
 {code}
+{hidden}
+
+{code: java}
+void testBeanWiring() {}
+    defineBeans {}
+        simpleService(SimpleService)
+    }
+
+Controller.Hello()
+
+valer response.text == "Hello World"
+}
+{code}
+
+{hidden}
+
 
 The controller is auto-wired by Spring just like in a running Grails application. Autowiring even occurs if you instantiate subsequent instances of the controller:
 
@@ -288,6 +658,26 @@ void testAutowiringViaNew() {
     assert controller2.simpleService != null
 }
 {code}
+{hidden}
+
+El controlador está auto-wired en primavera como en una aplicación que se ejecuta de Grails. Autowiring se produce incluso si se crea una instancia instancias posteriores del controlador:
+
+{code: java}
+void testAutowiringViaNew() {}
+    defineBeans {}
+        simpleService(SimpleService)
+    }
+
+Def controller1 = new SimpleController()
+    Def complementario2 = new SimpleController()
+
+valer controller1.simpleService! = null
+    valer controller2.simpleService! = null
+}
+{code}
+
+{hidden}
+
 
 h4. Testing Mime Type Handling
 
@@ -303,6 +693,25 @@ def sayHello() {
     }
 }
 {code}
+{hidden}
+
+h4. Pruebas de manejo de tipo Mime
+
+Puede probar mime tipo de manipulación y @ withFormat @ método sencillamente mediante la configuración de formato de la respuesta @ @ atributo:
+
+{code: java}
+/ / Acción de controlador
+Def sayHello() {}
+    datos de Def = [Hola: "Mundo"]
+    withFormat {}
+        XML {procesar datos XML}
+        datos HTML
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 // test
@@ -316,6 +725,23 @@ void testSayHello() {
     assert expected == response.text
 }
 {code}
+{hidden}
+
+{code: java}
+/ / test
+void testSayHello() {}
+    Response.Format = 'xml'
+    Controller.sayHello()
+
+Cadena esperada = '<?xml version="1.0" encoding="UTF-8"?>'  
+                      '<map><entry key="Hello">World</entry></map>'
+
+afirman espera == response.text
+}
+{code}
+
+{hidden}
+
 
 h4. Testing Duplicate Form Submissions
 
@@ -330,6 +756,24 @@ def handleForm() {
     }
 }
 {code}
+{hidden}
+
+h4. Pruebas de duplicar envíos de formularios
+
+Pruebas de envíos de formularios duplicados son un poco más. Por ejemplo, si tiene una acción que maneja como un formulario:
+
+{code: java}
+Def handleForm() {}
+    withForm {}
+        procesar "Bien"
+    } .invalidtoken {}
+        procesar "Malos"
+    }
+}
+{code}
+
+{hidden}
+
 
 you want to verify the logic that is executed on a good form submission and the logic that is executed on a duplicate submission. Testing the bad submission is simple. Just invoke the controller:
 
@@ -339,6 +783,19 @@ void testDuplicateFormSubmission() {
     assert "Bad" == response.text
 }
 {code}
+
+{hidden}
+
+desea comprobar la lógica que se ejecuta en una presentación de buena forma y la lógica que se ejecuta en una presentación duplicada. Prueba de la mala presentación es simple. Al invocar el controlador:
+
+{code: java}
+void testDuplicateFormSubmission() {}
+    Controller.handleForm()
+    afirman "Malos" == response.text
+}
+{code}
+
+{hidden}
 
 Testing the successful submission requires providing an appropriate @SynchronizerToken@:
 
@@ -354,6 +811,25 @@ void testValidFormSubmission() {
     assert "Good" == response.text
 }
 {code}
+{hidden}
+
+La exitosa presentación de pruebas requiere proporcionar una adecuada @ SynchronizerToken @:
+
+{code: java}
+org.codehaus.groovy.grails.web.servlet.mvc.SynchronizerToken de importación
+...
+
+void testValidFormSubmission() {}
+    Def símbolo (token) = SynchronizerToken.store(session)
+    Params[SynchronizerToken.key] = token.currentToken.toString()
+
+Controller.handleForm()
+    afirma "Buena" == response.text
+}
+{code}
+
+{hidden}
+
 
 If you test both the valid and the invalid request in the same test be sure to reset the response between executions of the controller:
 
@@ -364,6 +840,20 @@ response.reset()
 ...
 controller.handleForm() // second execution
 {code}
+{hidden}
+
+Si se prueba la validez y la petición no válida en la misma prueba Asegúrese de restablecer la respuesta entre ejecuciones del controlador:
+
+{code: java}
+Controller.handleForm() / / primera ejecución
+...
+Response.Reset()
+...
+Controller.handleForm() / / segunda ejecución
+{code}
+
+{hidden}
+
 
 h4. Testing File Upload
 
@@ -375,6 +865,21 @@ def uploadFile() {
     file.transferTo(new File("/local/disk/myFile"))
 }
 {code}
+{hidden}
+
+h4. Pruebas de carga de archivos
+
+Utilice el @ GrailsMockMultipartFile @ clase para probar la carga de archivos. Por ejemplo, considere la siguiente acción de controlador:
+
+{code: java}
+Def uploadFile() {}
+    Archivo MultipartFile = request.getFile("myFile")
+    File.transferTo (nuevo File("/local/disk/myFile"))
+}
+{code}
+
+{hidden}
+
 
 To test this action you can register a @GrailsMockMultipartFile@ with the request:
 
@@ -387,6 +892,22 @@ void testFileUpload() {
     assert file.targetFileLocation.path == "/local/disk/myFile"
 }
 {code}
+{hidden}
+
+Para probar esta acción puede registrar un @ GrailsMockMultipartFile @ con la solicitud:
+
+{code: java}
+void testFileUpload() {}
+    archivo final = new GrailsMockMultipartFile ("myFile", .bytes "foo")
+    Request.addFile(File)
+    Controller.uploadFile()
+
+valer file.targetFileLocation.path == "/ disco/local/myFile"
+}
+{code}
+
+{hidden}
+
 
 The @GrailsMockMultipartFile@ constructor arguments are the name and contents of the file. It has a mock implementation of the @transferTo@ method that simply records the @targetFileLocation@ and doesn't write to disk.
 
@@ -404,6 +925,27 @@ def handleCommand(SimpleCommand simple) {
     }
 }
 {code}
+{hidden}
+
+@ GrailsMockMultipartFile @ argumentos del constructor son el nombre y el contenido del archivo. Tiene una aplicación simulacro de @ transferTo @ método que simplemente registra el @ targetFileLocation @ y no escribe en el disco.
+
+h4. Objetos de comandos de prueba
+
+Existe apoyo especial para manejar con @ mockCommandObject @ método prueba objeto de comando. Por ejemplo, considere las siguientes medidas:
+
+{code: java}
+Def handleCommand (simple SimpleCommand) {}
+    Si ({simple.hasErrors())}
+        procesar "Malos"
+    }
+    Else {}
+        procesar "Bien"
+    }
+}
+{code}
+
+{hidden}
+
 
 To test this you mock the command object, populate it and then validate it as follows:
 
@@ -418,6 +960,24 @@ void testInvalidCommand() {
     assert response.text == 'Bad'
 }
 {code}
+{hidden}
+
+Para probar esto burlan el objeto command, llenarla y, a continuación, validar como sigue:
+
+{code: java}
+void testInvalidCommand() {}
+    Def cmd = mockCommandObject(SimpleCommand)
+    cmd.Name = '' / / no permite nombres en blanco
+
+cmd.Validate()
+    Controller.handleCommand(cmd)
+
+valer response.text == 'Malas'
+}
+{code}
+
+{hidden}
+
 
 h4. Testing Calling Tag Libraries
 
@@ -428,6 +988,20 @@ def showMessage() {
     render g.message(code: "foo.bar")
 }
 {code}
+{hidden}
+
+h4. Pruebas de llamar a las bibliotecas de etiquetas
+
+Puede probar llamar a bibliotecas de etiquetas con @ ControllerUnitTestMixin @, aunque el mecanismo para probar la etiqueta denominada varía de etiqueta a la etiqueta. Por ejemplo, para probar una llamada al mensaje @ @ etiqueta, agregar un mensaje a la @ messageSource @. Tenga en cuenta las siguientes medidas:
+
+{code: java}
+Def showMessage() {}
+    procesamiento g.message (código: "foo.bar")
+}
+{code}
+
+{hidden}
+
 
 This can be tested as follows:
 
@@ -438,5 +1012,18 @@ void testRenderBasicTemplateWithTags() {
     controller.showMessage()
 
     assert response.text == "Hello World"
+}
+{code}
+{hidden}
+
+Esto puede comprobarse como sigue:
+
+{code: java}
+void testRenderBasicTemplateWithTags() {}
+    messageSource.addMessage ("foo.bar", request.locale, "Hello World")
+
+Controller.showMessage()
+
+valer response.text == "Hello World"
 }
 {code}

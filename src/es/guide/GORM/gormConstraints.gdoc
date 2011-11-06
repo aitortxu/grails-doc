@@ -1,3 +1,6 @@
+
+{hidden}
+
 Although constraints are covered in the [Validation|guide:constraints] section, it is important to mention them here as some of the constraints can affect the way in which the database schema is generated.
 
 Where feasible, Grails uses a domain class's constraints to influence the database columns generated for the corresponding domain class properties.
@@ -8,6 +11,21 @@ Consider the following example.  Suppose we have a domain model with the followi
 String name
 String description
 {code}
+{hidden}
+
+Aunque las restricciones se tratan en la sección [Validation|guide:constraints], es importante mencionarlas aquí como algunas de las restricciones pueden afectar la manera en que se genera el esquema de base de datos.
+
+Siempre que sea factible, Grails utiliza las limitaciones de la clase de dominio para influir en las columnas de base de datos generadas por las propiedades de la clase de dominio correspondiente.
+
+Considere el siguiente ejemplo.  Supongamos que tenemos un modelo de dominio con las siguientes propiedades:
+
+{code}
+Nombre de la cadena
+Descripción de la cadena
+{code}
+
+{hidden}
+
 
 By default, in MySQL, Grails would define these columns as
 
@@ -18,6 +36,20 @@ description | varchar(255)
 {table}
 
 But perhaps the business rules for this domain class state that a description can be up to 1000 characters in length.  If that were the case, we would likely define the column as follows _if_ we were creating the table with an SQL script.
+{hidden}
+
+De forma predeterminada, en MySQL, Grails definiría estas columnas como
+
+tabla de {}
+Columna | Tipo de datos
+nombre | VARCHAR
+Descripción | VARCHAR
+tabla de {}
+
+Pero tal vez las reglas de negocio para esta clase de dominio establecen que una descripción puede ser hasta 1.000 caracteres de longitud.  Si ese fuera el caso, es probable que nos definiría la columna como sigue _if_ estábamos creando la tabla con una secuencia de comandos SQL.
+
+{hidden}
+
 
 {table}
 Column | Data Type
@@ -31,6 +63,23 @@ static constraints = {
     description maxSize: 1000
 }
 {code}
+{hidden}
+
+tabla de {}
+Columna | Tipo de datos
+Descripción | TEXTO
+tabla de {}
+
+Lo más probable es que queremos tener algunos validación basada en la aplicación para asegurarse de que no supere ese carácter 1000 límite _before_, persistimos en ningún registro.  En Grails, logramos esta validación con [constraints|guide:constraints].  Nos gustaría añadir la siguiente declaración de restricción a la clase de dominio.
+
+{code}
+restricciones estáticas = {}
+    Descripción maxSize: 1000
+}
+{code}
+
+{hidden}
+
 
 This constraint would provide both the application-based validation we want and it would also cause the schema to be generated as shown above.  Below is a description of the other constraints that influence schema generation.
 
@@ -41,6 +90,20 @@ h4. Constraints Affecting String Properties
 * [size|constraints]
 
 If either the @maxSize@ or the @size@ constraint is defined, Grails sets the maximum column length based on the constraint value.
+{hidden}
+
+Esta restricción proporciona tanto la validación basada en aplicaciones que también nos quieren y causaría el esquema que se genere como se muestra arriba.  A continuación se ofrece una descripción de las limitaciones que influyen en la generación de esquema.
+
+h4. Restricciones que afectan a las propiedades de cadena
+
+* [inList|constraints]
+* [maxSize|constraints]
+* [size|constraints]
+
+Si se define la maxSize @ @ o el tamaño @ @ restricción, Grails establece la longitud de la columna máxima en función del valor de la restricción.
+
+{hidden}
+
 
 In general, it's not advisable to use both constraints on the same domain class property.  However, if both the @maxSize@ constraint and the @size@ constraint are defined, then Grails sets the column length to the minimum of the @maxSize@ constraint and the upper bound of the size constraint.  (Grails uses the minimum of the two, because any length that exceeds that minimum will result in a validation error.)
 
@@ -51,6 +114,20 @@ h4. Constraints Affecting Numeric Properties
 * [min|constraints]
 * [max|constraints]
 * [range|constraints]
+{hidden}
+
+En general, no es recomendable utilizar ambas restricciones sobre la misma propiedad de clase de dominio.  Sin embargo, si se definen maxSize @ @ restricción y el tamaño de @ @ restricción, Grails establece la longitud de la columna en el mínimo de maxSize @ @ restricción y el límite superior de la restricción de tamaño.  (Grails utiliza el mínimo de los dos, porque cualquier longitud que supere ese mínimo dará como resultado un error de validación).
+
+Si se define la @ inList @ restricción (y maxSize @ @ y el tamaño de @ @ limitaciones no están definidos), Grails establece la longitud de la columna máxima en función de la longitud de la cadena más larga en la lista de valores válidos.  Por ejemplo, dada una lista incluidos los valores de "Java", "Groovy" y "C", Grails serían establecer la longitud de la columna 6 (es decir, el número de caracteres de la cadena "Groovy").
+
+h4. Restricciones que afectan a las propiedades numéricas
+
+* [min|constraints]
+* [max|constraints]
+* [range|constraints]
+
+{hidden}
+
 
 If the @max@, @min@, or @range@ constraint is defined, Grails attempts to set the column precision based on the constraint value.  (The success of this attempted influence is largely dependent on how Hibernate interacts with the underlying DBMS.)
 
@@ -61,6 +138,20 @@ In general, it's not advisable to combine the pair @min@/@max@ and @range@ const
 If the scale constraint is defined, then Grails attempts to set the column [scale|constraints] based on the constraint value.  This rule only applies to floating point numbers (i.e., @java.lang.Float@, @java.Lang.Double@, @java.lang.BigDecimal@, or subclasses of @java.lang.BigDecimal@). The success of this attempted influence is largely dependent on how Hibernate interacts with the underlying DBMS.
 
 The constraints define the minimum/maximum numeric values, and Grails derives the maximum number of digits for use in the precision. Keep in mind that specifying only one of @min@/@max@ constraints will not affect schema generation (since there could be large negative value of property with max:100, for example), unless the specified constraint value requires more digits than default Hibernate column precision is (19 at the moment). For example:
+{hidden}
+
+Si se define la @ max @, @ min @ o @ gama @ restricción, Grails intenta establecer la precisión de la columna basándose en el valor de la restricción.  (El éxito de este intento influencia depende en gran medida cómo Hibernate interactúa con el DBMS subyacente.)
+
+En general, no es aconsejable combinar el par @ min@/@max @ y @ gama @ restricciones juntos en la misma propiedad de clase de dominio.  Sin embargo, si ambos de estas restricciones se define, Grails utiliza el valor mínimo de precisión de las limitaciones.  (Grails utiliza el mínimo de los dos, porque cualquier longitud que supera esa mínima precisión dará como resultado un error de validación).
+
+* [scale|constraints]
+
+Si se define la restricción de escala, Grails intenta establecer la columna [scale|constraints] basándose en el valor de la restricción.  Esta regla se aplica sólo a flotante números (por ejemplo, @ java.lang.Float@, @ java.Lang.Double@, @ java.lang.BigDecimal@ o subclases de @ java.lang.BigDecimal@). El éxito de este intento influencia depende en gran medida cómo Hibernate interactúa con el DBMS subyacente.
+
+Las restricciones de definen los valores numéricos de mínimo y máximo, y Grails deriva el número máximo de dígitos para su uso en la precisión. Tenga en cuenta que especificar sólo uno de @ min@/@max @ restricciones no afectarán a la generación de esquema (ya que podría haber gran valor negativo de propiedad con max: 100, por ejemplo), a menos que el valor de la restricción especificada requiere más dígitos de precisión de columna de hibernación predeterminada es (19 en este momento). Por ejemplo:
+
+{hidden}
+
 
 {code}
 someFloatValue max: 1000000, scale: 3
@@ -71,6 +162,20 @@ would yield:
 {code}
 someFloatValue DECIMAL(19, 3) // precision is default
 {code}
+{hidden}
+
+{code}
+someFloatValue máx.: 1000000, escala: 3
+{code}
+
+daría por resultado:
+
+{code}
+someFloatValue DECIMAL (19, 3) / / precisión es el predeterminado
+{code}
+
+{hidden}
+
 
 but
 
@@ -82,6 +187,21 @@ would yield:
 {code}
 someFloatValue DECIMAL(25, 5) // precision = digits in max + scale
 {code}
+{hidden}
+
+pero
+
+{code}
+someFloatValue máx.: 12345678901234567890, escala: 5
+{code}
+
+daría por resultado:
+{code}
+someFloatValue DECIMAL (25, 5) / / precisión = dígitos en escala máxima
+{code}
+
+{hidden}
+
 
 and
 
@@ -93,4 +213,17 @@ would yield:
 
 {code}
 someFloatValue DECIMAL(8, 2) // precision = digits in min + default scale
+{code}
+{hidden}
+
+y
+
+{code}
+someFloatValue máx.: 100, min:-100000
+{code}
+
+daría por resultado:
+
+{code}
+someFloatValue DECIMAL (8, 2) / / precisión = dígitos en escala por defecto de min
 {code}

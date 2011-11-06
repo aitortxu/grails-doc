@@ -1,1 +1,7 @@
+
+{hidden}
+
 Ajax is the driving force behind the shift to richer web applications. These types of applications in general are better suited to agile, dynamic frameworks written in languages like "Groovy":http://groovy.codehaus.org and "Ruby":http://www.ruby-lang.org/. Grails provides support for building Ajax applications through its Ajax tag library. For a full list of these see the Tag Library Reference.
+{hidden}
+
+Ajax es la fuerza que impulsa el cambio a aplicaciones web más ricos. Estos tipos de aplicaciones en general son más adecuados para marcos ágiles, dinámicos, escritos en lenguajes como "Groovy":http://groovy.codehaus.org y "Ruby":http://www.ruby-lang.org/. Grails proporciona soporte para crear aplicaciones Ajax a través de su biblioteca de etiquetas de Ajax. Para obtener una lista completa de estos consulte la referencia de la biblioteca de etiquetas.

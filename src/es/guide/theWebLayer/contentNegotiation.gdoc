@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails has built in support for [Content negotiation|http://en.wikipedia.org/wiki/Content_negotiation] using either the HTTP @Accept@ header, an explicit format request parameter or the extension of a mapped URI.
 
 h4. Configuring Mime Types
@@ -17,6 +20,30 @@ grails.mime.types = [ xml: ['text/xml', 'application/xml'],
                       html: ['text/html','application/xhtml+xml']
                     ]
 {code}
+{hidden}
+
+Grails ha construido en apoyo a [contenido negotiation|http://en.wikipedia.org/wiki/Content_negotiation] utilizando HTTP @ aceptar @ encabezado, un parámetro de solicitud explícita de formato o la extensión de un URI asignada.
+
+h4. Configuración de tipos Mime
+
+Antes de empezar a tratar con negociación de contenido que necesita decirle a Grails qué tipos de contenido que desea apoyar. Por defecto Grails viene configurados con un número de diferentes tipos de contenido dentro de @grails-app/conf/Config.groovy@ mediante la configuración de @grails.mime.types@:
+
+{code: java}
+Grails.MIME.types = [xml: ['text/xml', 'application/xml'],
+                      texto: 'text-plain',
+                      JS: "text/javascript",
+                      RSS: 'aplicación/rss xml',
+                      átomo: 'aplicación/atom xml',
+                      CSS: "text/css"
+                      CSV: "texto/csv"
+                      todos: ' * / *',
+                      JSON: 'texto/json',
+                      HTML: ['text/html', 'aplicación/xhtml xml']
+                    ]
+{code}
+
+{hidden}
+
 
 The above bit of configuration allows Grails to detect to format of a request containing either the 'text/xml' or 'application/xml' media types as simply 'xml'. You can add your own types by simply adding new entries into the map.
 
@@ -27,6 +54,20 @@ Every incoming HTTP request has a special [Accept|http://www.w3.org/Protocols/rf
 {code:java}
 */*
 {code}
+{hidden}
+
+El bit de configuración anterior permite Grails para detectar al formato de una solicitud que contenga cualquiera 'text/xml' o 'application/xml' medios tipos simplemente como 'xml'. Puede agregar sus propios tipos simplemente agregando nuevas entradas en el mapa.
+
+h4. Negociación de contenido mediante el encabezado Accept
+
+Cada solicitud HTTP entrante tiene un encabezado de [Accept|http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html] especial que define qué tipos de medios (o tipos mime) un cliente puede "Aceptar". En los navegadores antiguos normalmente es:
+
+{code: java}
+*/*
+{code}
+
+{hidden}
+
 
 Which simply means anything. However, on newer browser something all together more useful is sent such as (an example of a Firefox @Accept@ header):
 
@@ -37,6 +78,19 @@ text/plain;q=0.8, image/png, */*;q=0.5
 
 Grails parses this incoming format and adds a @property@ to the [response|servletAPI] object that outlines the preferred response format. For the above example the following assertion would pass:
 
+{hidden}
+
+Simplemente que significa algo. Sin embargo, el explorador más reciente algo todos juntos más útil es enviado como (un ejemplo de una aceptación de Firefox @ @ encabezado):
+
+{code}
+texto/xml, aplicación/xml, xml application/xhtml, text/html; q = 0.9,
+text/plain; q = 0,8, image/png, * / *; q = 0,5
+{code}
+
+Grails analiza este formato entrante y agrega una propiedad @ @ al objeto [response|servletAPI] que describe el formato de respuesta preferida. En el ejemplo anterior sería pasar la siguiente afirmación:
+
+{hidden}
+
 {code:java}
 assert 'html' == response.format
 {code}
@@ -46,6 +100,20 @@ Why? The @text/html@ media type has the highest "quality" rating of 0.9, therefo
 {code:java}
 assert 'all' == response.format
 {code}
+
+{hidden}
+
+{code: java}
+afirmar 'html' == response.format
+{code}
+
+¿Por qué? La @ text/html @ tipo de medios de comunicación tiene la más alta calificación de "calidad" de 0,9, por lo tanto, es la más alta prioridad. Si tienes un explorador antiguo como se mencionó anteriormente, que el resultado es ligeramente diferente:
+
+{code: java}
+afirmar 'todos' == response.format
+{code}
+
+{hidden}
 
 In this case 'all' possible formats are accepted by the client. To deal with different kinds of requests from [Controllers|guide:controllers] you can use the [withFormat|controllers] method that acts as kind of a switch statement:
 
@@ -64,6 +132,28 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+En este caso 'todos' los formatos posibles son aceptados por el cliente. Para hacer frente a diferentes tipos de solicitudes de [Controllers|guide:controllers] puede utilizar el método [withFormat|controllers] que actúa como especie de una instrucción switch:
+
+{code: java}
+grails.converters.XML de importación
+
+clase BookController {}
+
+Def list() {}
+        libros de Def = Book.list()
+        withFormat {}
+            bookList HTML: libros
+            JS {procesamiento "alert('hello')"}
+            XML {libros de procesamiento XML}
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 If the preferred format is @html@ then Grails will execute the @html()@ call only. This causes Grails to look for a view called either @grails-app/views/books/list.html.gsp@ or @grails-app/views/books/list.gsp@. If the format is @xml@ then the closure will be invoked and an XML response rendered.
 
@@ -74,6 +164,20 @@ When using [withFormat|controllers] make sure it is the last call in your contro
 {note}
 
 h4. Request format vs. Response format
+{hidden}
+
+Si el formato preferido es html @ @ Grails ejecutará la @ html() @ llamada sólo. Esto hace que Grails buscar una vista denominada @grails-app/views/books/list.html.gsp@ o @ grails-app/views/books/list.gsp@. Si el formato xml @ @, a continuación, se invocará el cierre y representa una respuesta XML.
+
+¿Cómo manejamos el formato de "todos"? Simplemente ordenar los tipos de contenido dentro de su withFormat @ bloque @ para que cualquiera que desee ejecutar viene primero. Así en el ejemplo anterior, "todos" activarán el html @ @ controlador.
+
+{Nota}
+Cuando se utiliza [withFormat|controllers] hacen seguro es la última llamada en su acción de controlador el valor devuelto de la @ withFormat @ método es usado por la acción de dictar lo que sucede a continuación.
+{Nota}
+
+h4. Formato de solicitud frente a formato de la respuesta
+
+{hidden}
+
 
 As of Grails 2.0, there is a separate notion of the _request_ format and the _response_ format. The request format is dictated by the @CONTENT_TYPE@ header and is typically used to detect if the incoming request can be parsed into XML or JSON, whilst the response format uses the file extension, format parameter or ACCEPT header to attempt to deliver an appropriate response to the client.
 
@@ -89,6 +193,25 @@ request.withFormat {
     }
 }
 {code}
+{hidden}
+
+Grails 2.0, hay una noción separada de la _request_ y el formato de _response_. El formato de solicitud es dictado por el CONTENT_TYPE @ @ encabezado y suele utilizarse para detectar si se puede analizar la solicitud entrante en XML o JSON, mientras que el formato de la respuesta utiliza la extensión de archivo, formato de parámetro o encabezado ACCEPT para intentar ofrecer una respuesta adecuada al cliente.
+
+[WithFormat|controllers] disponible en ofertas de controladores específicamente con el formato de la respuesta. Si desea añadir lógica que trata con el formato de solicitud, a continuación, le puede hacerlo usando un independiente @ withFormat @ método disponible a petición:
+
+{code: java}
+Request.withFormat {}
+    {XML
+        / / Lee XML
+    }
+    {JSON
+        / / Lee JSON
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Content Negotiation with the format Request Parameter
 
@@ -99,6 +222,20 @@ If fiddling with request headers if not your favorite activity you can override 
 {code}
 
 You can also define this parameter in the [URL Mappings|guide:urlmappings] definition:
+{hidden}
+
+h4. Negociación de contenido con el formato de solicitud de parámetro
+
+Si trasteo con encabezados de solicitud si no su actividad favorita puede anular el formato utilizado especificando un formato @ @ parámetro de solicitud:
+
+{code: java}
+/ libro/lista? formato = xml
+{code}
+
+También puede definir este parámetro en la definición de [URL Mappings|guide:urlmappings]:
+
+{hidden}
+
 
 {code:java}
 "/book/list"(controller:"book", action:"list") {
@@ -109,6 +246,20 @@ You can also define this parameter in the [URL Mappings|guide:urlmappings] defin
 h4. Content Negotiation with URI Extensions
 
 Grails also supports content negotiation using URI extensions. For example given the following URI:
+{hidden}
+
+{code: java}
+"/ reserva/lista" (controlador: "reserva", acción: "lista") {}
+    formato = "xml"
+}
+{code}
+
+h4. Negociación de contenido con extensiones URI
+
+Grails también apoya la negociación de contenido utilizando las extensiones de URI. Por ejemplo, dada la siguiente URI:
+
+{hidden}
+
 
 {code:java}
 /book/list.xml
@@ -119,6 +270,20 @@ Grails will remove the extension and map it to @/book/list@ instead whilst simul
 {code:java}
 grails.mime.file.extensions = false
 {code}
+{hidden}
+
+{code: java}
+/Book/List.XML
+{code}
+
+Grails eliminará la extensión y asignarla a @ / libro/lista @ en su lugar mientras que simultáneamente al establecer el formato contenido en xml @ @ basado en esta extensión. Este comportamiento está habilitado de forma predeterminada, por lo que si desea desactivarlo, debe establecer la propiedad @grails.mime.file.extensions@ en @grails-app/conf/Config.groovy@ @ false @:
+
+{code: java}
+Grails.MIME.File.Extensions = false
+{code}
+
+{hidden}
+
 
 h4. Testing Content Negotiation
 
@@ -134,6 +299,25 @@ void testJavascriptOutput() {
     assertEquals "alert('hello')", controller.response.contentAsString
 }
 {code}
+{hidden}
+
+h4. Pruebas de negociación de contenido
+
+Para probar la negociación de contenido en una prueba de unidad o integración (consulte la sección sobre [Testing|guide: pruebas]) o bien puede manipular los encabezados de solicitud entrante:
+
+{code: java}
+void testJavascriptOutput() {}
+    controlador de Def = TestController() nueva
+    Controller.Request.AddHeader "Aceptar",
+              "text/javascript, text/html, aplicación/xml, xml de texto / * / *"
+
+Controller.testAction()
+    assertEquals "alert('hello')", controller.response.contentAsString
+}
+{code}
+
+{hidden}
+
 
 Or you can set the format parameter to achieve a similar effect:
 
@@ -143,6 +327,19 @@ void testJavascriptOutput() {
     controller.params.format = 'js'
 
     controller.testAction()
+    assertEquals "alert('hello')", controller.response.contentAsString
+}
+{code}
+{hidden}
+
+O puede establecer el parámetro de formato para conseguir un efecto similar:
+
+{code: java}
+void testJavascriptOutput() {}
+    controlador de Def = TestController() nueva
+    Controller.params.Format = 'js'
+
+Controller.testAction()
     assertEquals "alert('hello')", controller.response.contentAsString
 }
 {code}

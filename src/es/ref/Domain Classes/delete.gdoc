@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. delete
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 def book = Book.get(1)
 book.delete()
 {code}
+{hidden}
+
+h1. eliminar
+
+h2. Fin
+
+Elimina una instancia persistente.
+
+h2. Ejemplos
+
+{code: java}
+libro de Def = Book.get(1)
+Book.Delete()
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,10 +40,26 @@ Calling @delete@ on a transient instance will result in an error
 {warning}
 
 Parameters:
+{hidden}
+
+h2. Descripción
+
+Eliminar @ @ método informa el contexto de la persistencia que se suprima una instancia persistente. Equivalente a la hibernación [delete|api:org.hibernate.Session
+
+{hidden}
+
 
 * @flush@ - If set to @true@ the persistent context will be flushed resulting in the instance being deleted immediately. For example:
 
 {code:java}
 def book = Book.get(1)
 book.delete(flush: true)
+{code}
+{hidden}
+
+* @ flush @ - si se vaciará establecido en true @ @ el contexto persistente resultante en la instancia de ser eliminada inmediatamente. Por ejemplo:
+
+{code: java}
+libro de Def = Book.get(1)
+Book.Delete(flush: true)
 {code}

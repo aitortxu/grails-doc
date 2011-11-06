@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. findBy*
 
 h2. Purpose
@@ -7,6 +10,20 @@ Dynamic method that uses the properties of the domain class to execute a query r
 h2. Examples
 
 Given the domain class @Book@:
+
+{hidden}
+
+h1. findBy *
+
+h2. Fin
+
+Método dinámico que utiliza las propiedades de la clase de dominio para ejecutar una consulta regresar el primer resultado coincidente.
+
+h2. Ejemplos
+
+Teniendo en cuenta el clase de dominio @ libro @:
+
+{hidden}
 
 {code:java}
 class Book {
@@ -18,6 +35,21 @@ class Book {
 {code}
 
 The following are all possible:
+{hidden}
+
+{code: java}
+clase {libro
+    Título de cadena
+    Fecha releaseDate
+    Autor de cadena
+    Rústica booleano
+}
+{code}
+
+Los siguientes son posibles:
+
+{hidden}
+
 
 {code:java}
 def b = Book.findByTitle("The Shining")
@@ -34,6 +66,26 @@ b = Book.findPaperbackByAuthor("Douglas Adams")
 b = Book.findNotPaperbackByAuthor("Douglas Adams")
 b = Book.findByAuthorInList(["Douglas Adams", "Hunter S. Thompson"])
 {code}
+{hidden}
+
+{code: java}
+Def b = Book.findByTitle ("el resplandor")
+b = Book.findByTitleAndAuthor ("La suma de todos los miedos", "Tom Clancy")
+b = Book.findByReleaseDateBetween (firstDate, Date()) nueva
+b = Book.findByReleaseDateGreaterThanEquals(firstDate)
+b = Book.findByReleaseDateLessThanEquals(firstDate)
+b = Book.findByTitleLike("%Hobbit%")
+b = Book.findByTitleIlike("%Hobbit%") / / ignora el caso
+b = Book.findByTitleNotEqual ("Harry Potter")
+b = Book.findByReleaseDateIsNull()
+b = Book.findByReleaseDateIsNotNull()
+b = Book.findPaperbackByAuthor ("Douglas Adams")
+b = Book.findNotPaperbackByAuthor ("Douglas Adams")
+b = Book.findByAuthorInList (["Douglas Adams", "Hunter S. Thompson"])
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -44,6 +96,20 @@ The following operator names can be used within the respective dynamic methods:
 * @LessThan@
 * @LessThanEquals@
 * @GreaterThan@
+{hidden}
+
+h2. Descripción
+
+GORM apoya la noción de [dinámico Finders|guide:finders]. El findBy @ * @ método busca el primer resultado de la expresión de método dado.
+
+Los siguientes nombres de operador pueden utilizarse dentro de los respectivos métodos dinámicos:
+
+* @ Menos @
+* @ LessThanEquals @
+* @ GreaterThan @
+
+{hidden}
+
 * @GreaterThanEquals@
 * @Between@
 * @Like@
@@ -54,6 +120,26 @@ The following operator names can be used within the respective dynamic methods:
 * @NotEqual@
 * @And@
 * @Or@
+{hidden}
+
+* @ GreaterThanEquals @
+* @ Entre @
+* @ Como @
+* @ Ilike @ (es decir, ignorecase como)
+* @ IsNotNull @
+* @ IsNull @
+* @ No @
+* @ NotEqual @
+* @ Y @
+* @ O @
+
+{hidden}
+
 * @InList@
 
 The above operator names can be considered keywords, and you will run into problems when querying domain classes that have one of these names used as property names. For more information on [dynamic finders|guide:finders] refer to the user guide.
+{hidden}
+
+* @ InList @
+
+Los nombres de operador anterior pueden considerarse como palabras clave, y ejecutará en problemas al consultar las clases de dominio que tienen uno de estos nombres utilizados como nombres de propiedad. Para obtener más información sobre [finders|guide:finders dinámico] consulte la Guía del usuario.

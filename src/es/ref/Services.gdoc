@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. Service Usage
 
 A service contains business logic that can be reused across a Grails application. In Grails a service is a class with a name that ends in the convention "Service" and lives in the @grails-app/services@ directory. A service can be created with the [create-service|commandLine] command:
@@ -7,6 +10,20 @@ grails create-service org.bookstore.Book
 {code}
 
 or with your favourite IDE or text editor.
+
+{hidden}
+
+h1. Uso del servicio
+
+Un servicio contiene lógica del negocio que se puede reutilizar en una aplicación de Grails. En Grails, un servicio es una clase con un nombre que termina en la Convención "Servicio" y vive en los @ grails-app/Servicios @ directorio. Un servicio puede ser creado con el comando [crear-service|commandLine]:
+
+{code: java}
+Grails crear servicio org.bookstore.Book
+{code}
+
+o con su editor de texto o IDE favorita.
+
+{hidden}
 
 {code:java}
 package org.bookstore
@@ -18,4 +35,21 @@ class BookService {
 }
 {code}
 
+{hidden}
+
+{code: java}
+paquete org.bookstore
+
+clase BookService {}
+    Libro [] getBooks() {}
+        Book.List() como libro]
+    }
+}
+{code}
+
+{hidden}
+
 Refer to the user guide topic on [Services|guide:services] for more information.
+{hidden}
+
+Consulte el tema de guía de usuario de [Services|guide:services] para obtener más información.

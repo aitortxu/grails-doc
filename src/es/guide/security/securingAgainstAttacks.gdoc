@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. SQL injection
 
 Hibernate, which is the technology underlying GORM domain classes, automatically escapes data when committing to database so this is not an issue. However it is still possible to write bad dynamic HQL code that uses unchecked request parameters. For example doing the following is vulnerable to HQL injection attacks:
@@ -8,6 +11,20 @@ def vulnerable() {
 }
 {code}
 
+{hidden}
+
+h4. Inyección SQL
+
+Hibernación, que es las tecnología subyacentes GORM dominio clases, automáticamente datos escapa al confirmar a base de datos, por lo que no es un problema. Sin embargo es posible escribir mal código HQL dinámico que utiliza parámetros de solicitud sin marcar. Por ejemplo, lo siguiente es vulnerable a los ataques de inyección de HQL:
+
+{code: java}
+Def vulnerable() {}
+    libros de Def = Book.find ("libro como b donde b.title =" "params.title"'")
+}
+{code}
+
+{hidden}
+
 or the analagous call using a GString:
 
 {code:java}
@@ -17,6 +34,20 @@ def vulnerable() {
 {code}
 
 Do *not* do this. Use named or positional parameters instead to pass in parameters:
+
+{hidden}
+
+o las analagous llamada utilizando un GString:
+
+{code: java}
+Def vulnerable() {}
+    libros de Def = Book.find ("libro como b donde b.title = '$ {params.title}'")
+}
+{code}
+
+Hacer * no * hacer esto. Utilizar parámetros con nombre o posicionales en lugar de pasar parámetros:
+
+{hidden}
 
 {code:java}
 def safe() {
@@ -33,6 +64,26 @@ def safe() {
                           [title: params.title])
 }
 {code}
+{hidden}
+
+{code: java}
+Def safe() {}
+    libros de Def = Book.find ("libro como b donde b.title =?",
+                          [params.title])
+}
+{code}
+
+o
+
+{code: java}
+Def safe() {}
+    libros de Def = Book.find ("libro como b donde b.title =: título",
+                          [Título: params.title])
+}
+{code}
+
+{hidden}
+
 
 h4. Phishing
 
@@ -43,6 +94,20 @@ h4. XSS - cross-site scripting injection
 It is important that your application verifies as much as possible that incoming requests were originated from your application and not from another site. Ticketing and page flow systems can help this and Grails' support for "Spring Web Flow":http://www.springsource.org/webflow includes security like this by default.
 
 It is also important to ensure that all data values rendered into views are escaped correctly. For example when rendering to HTML or XHTML you must call [encodeAsHTML|guide:codecs] on every object to ensure that people cannot maliciously inject JavaScript or other HTML into data or tags viewed by others. Grails supplies several [Dynamic Encoding Methods|guide:codecs] for this purpose and if your output escaping format is not supported you can easily write your own codec.
+{hidden}
+
+h4. Phishing
+
+Esto realmente un relaciones públicas emitir en términos de evitar el secuestro de su marca y una política declarada de comunicación con sus clientes. Los clientes necesitan saber cómo identificar los mensajes de correo electrónico válidas.
+
+h4. XSS - Inyección de secuencias de comandos entre sitios
+
+Es importante que la aplicación comprueba tanto como sea posible que las solicitudes entrantes fueron originadas desde su aplicación y no de otro sitio. Sistemas de flujo de tickets y la página pueden ayudar esto y el apoyo de Grails para "primavera Web Flow":http://www.springsource.org/webflow incluye seguridad así por defecto.
+
+También es importante asegurarse de que todos los valores de datos en vistas se escapan correctamente. Por ejemplo cuando el procesamiento HTML o XHTML le debe llamar en cada objeto para garantizar que las personas [encodeAsHTML|guide:codecs] no se malintencionadamente inyectar JavaScript o otro HTML datos o etiquetas vistos por otros. Grails suministra varios [dinámico codificación Methods|guide:codecs] para ello y si su salida escapando de formato no es compatible le fácilmente puede escribir su propio codec.
+
+{hidden}
+
 
 You must also avoid the use of request parameters or data fields for determining the next URL to redirect the user to. If you use a @successURL@ parameter for example to determine where to redirect a user to after a successful login, attackers can imitate your login procedure using your own site, and then redirect the user back to their own site once logged in, potentially allowing JavaScript code to then exploit the logged-in account on the site.
 
@@ -53,6 +118,20 @@ CSRF involves unauthorized commands being transmitted from a user that a website
 The best way to decrease risk against these types of attacks is to use the @useToken@ attribute on your forms. See [Handling Duplicate Form Submissions|guide:formtokens] for more information on how to use it. An additional measure would be to not use remember-me cookies.
 
 h4. HTML/URL injection
+{hidden}
+
+También debe evitar el uso de parámetros de solicitud o campos de datos para determinar la siguiente URL para redirigir al usuario. Si usas un @ successURL @ parámetro por ejemplo para determinar dónde se redirige a un usuario después de un inicio de sesión correcto, los atacantes pueden imitar su procedimiento de inicio de sesión utilizando su propio sitio, y luego redirigir al usuario volver a su sitio una vez conectado, permitiendo potencialmente código JavaScript para luego explotar la cuenta ha iniciado la sesión en el sitio.
+
+h4. Falsificación de cross-site request
+
+CSRF implica comandos no autorizados que se transmiten de un usuario que confía en un sitio Web. Un ejemplo típico sería otro sitio Web incrustar un enlace para realizar una acción en el sitio Web si el usuario se autentica todavía.
+
+La mejor manera de disminuir el riesgo contra estos tipos de ataques es utilizar el @ useToken @ atributo en los formularios. Consulte [manejo Submissions|guide:formtokens de forma duplicar] para obtener más información sobre cómo usarlo. Una medida adicional podría ser no usar recuerda-me cookies.
+
+h4. Inyección de HTML/URL
+
+{hidden}
+
 
 This is where bad data is supplied such that when it is later used to create a link in a page, clicking it will not cause the expected behaviour, and may redirect to another site or alter request parameters.
 
@@ -66,6 +145,23 @@ Load balancers and other appliances are more likely to be useful here, but there
 def safeMax = Math.max(params.max?.toInteger(), 100) // limit to 100 results
 return Book.list(max:safeMax)
 {code}
+{hidden}
+
+Esto es donde se suministran datos erróneos que cuando más tarde se utiliza para crear un vínculo en una página, haga clic en no provocar el comportamiento esperado y puede redirigir a otro sitio o modificar parámetros de solicitud.
+
+Inyección de HTML/URL se maneja fácilmente con el [codecs|guide:codecs] suministrados por Grails y las bibliotecas de etiquetas suministradas por Grails todos usan [encodeAsURL|guide:codecs] cuando proceda. Si crea sus propias etiquetas que generan las direcciones URL debe ser consciente de ello demasiado.
+
+h4. Denegación de servicio
+
+Equilibradores de carga y otros dispositivos tienen más probabilidades de ser útil aquí, pero también hay cuestiones relacionadas con la excesivas consultas por ejemplo donde se crea un vínculo por un atacante para establecer el valor máximo del resultado para que una consulta podría rebasar los límites de memoria del servidor o ralentizar el sistema. La solución aquí es siempre desinfecte parámetros de solicitud antes de pasarlas a buscadores dinámicos u otros métodos de consulta GORM:
+
+{code: java}
+Def safeMax = Math.max(params.max?.toInteger(), 100) / / limitar a 100 resultados
+volver a Book.list(max:safeMax)
+{code}
+
+{hidden}
+
 
 h4. Guessable IDs
 
@@ -76,3 +172,14 @@ Therefore you must assert that the requesting user is allowed to view the object
 Not doing this is "security through obscurity" which is inevitably breached, just like having a default password of "letmein" and so on.
 
 You must assume that every unprotected URL is publicly accessible one way or another.
+{hidden}
+
+h4. IDs guessable
+
+Muchas aplicaciones utilizan la última parte de la dirección URL como un "id" de algún objeto para recuperar de GORM o en otros lugares. Especialmente en el caso de GORM son fácilmente guessable como son generalmente secuenciales enteros.
+
+Por lo tanto debe afirmar que se permite al usuario que solicita para ver el objeto con el id solicitado antes de devolver la respuesta para el usuario.
+
+No hacerlo es "seguridad por oscuridad" que inevitablemente es violada, al igual que tener una contraseña predeterminada "letmein" y así sucesivamente.
+
+Debe asumir que cada URL sin protección es accesible al público una u otra manera.

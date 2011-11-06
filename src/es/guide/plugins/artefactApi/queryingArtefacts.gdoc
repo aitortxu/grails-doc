@@ -1,3 +1,6 @@
+
+{hidden}
+
 As a plugin developer, it can be important for you to find out about what domain classes, controllers, or other types of artefact are available in an application. For example, the [Searchable plugin|http://grails.org/plugin/searchable] needs to know what domain classes exist so it can check them for any @searchable@ properties and index the appropriate ones. So how does it do it? The answer lies with the @grailsApplication@ object, and instance of [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication] that's available automatically in controllers and GSPs and can be [injected|guide:dependencyInjectionServices] everywhere else.
 
 The @grailsApplication@ object has several important properties and methods for querying artefacts. Probably the most common is the one that gives you all the classes of a particular artefact type:
@@ -7,6 +10,21 @@ for (cls in grailsApplication.<artefactType>Classes) {
     ...
 }
 {code}
+
+{hidden}
+
+Como desarrollador de plugin, puede ser importante saber sobre qué dominio clases, controladores u otro tipo de artefacto está disponible en una aplicación. Por ejemplo, necesita saber qué clases de dominio existe por lo que les pueden comprobar cualquiera @ [plugin|http://grails.org/plugin/searchable búsqueda] búsqueda @ índice los apropiados y propiedades. Entonces, ¿cómo hace? La respuesta se encuentra con @ grailsApplication @ objeto e instancia de [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication] disponible automáticamente en controladores y GSPs y puede ser [injected|guide:dependencyInjectionServices] en otros lugares.
+
+@ GrailsApplication @ objeto tiene varias importantes propiedades y métodos para consultar artefactos. Probablemente el más común es el que le da todas las clases de un tipo de artefacto particular:
+
+{code}
+para (cls en grailsApplication<artefacttype> .{Clases)
+    ...
+}
+{code}
+</artefacttype>
+
+{hidden}
 
 In this case, @artefactType@ is the property name form of the artefact type. With core Grails you have:
 
@@ -18,6 +36,20 @@ In this case, @artefactType@ is the property name form of the artefact type. Wit
 * bootstrap
 * urlMappings
 
+{hidden}
+
+En este caso, @ artefactType @ es la forma de nombre de la propiedad del tipo de artefacto. Con núcleo Grails tiene:
+
+* el dominio
+* controlador
+* tagLib
+* el servicio
+* codec
+* bootstrap
+* urlMappings
+
+{hidden}
+
 So for example, if you want to iterate over all the domain classes, you use:
 
 {code}
@@ -27,6 +59,20 @@ for (cls in grailsApplication.domainClasses) {
 {code}
 
 and for URL mappings:
+
+{hidden}
+
+Así, por ejemplo, si desea iterar por todas las clases de dominio, utiliza:
+
+{code}
+para (cls en grailsApplication.domainClasses) {}
+    ...
+}
+{code}
+
+y para asignaciones de dirección URL:
+
+{hidden}
 
 {code}
 for (cls in grailsApplication.urlMappingsClasses) {
@@ -38,6 +84,21 @@ You need to be aware that the objects returned by these properties are not insta
 
 * @shortName@ - the class name of the artefact without the package (equivalent of @Class.simpleName@).
 * @logicalPropertyName@ - the artefact name in property form without the 'type' suffix. So @MyGreatController@ becomes 'myGreat'.
+{hidden}
+
+{code}
+para (cls en grailsApplication.urlMappingsClasses) {}
+    ...
+}
+{code}
+
+Debe ser consciente de que los objetos devueltos por estas propiedades no son instancias de [Class|api:java.lang.Class]. Al contrario, son instancias de [GrailsClass|api:org.codehaus.groovy.grails.commons.GrailsClass] que tiene algunas propiedades particularmente útiles y métodos, incluyendo uno para la clase @ subyacente @:
+
+* @ shortName @ - el nombre de clase de artefacto sin el paquete (equivalente a @ Class.simpleName@).
+* @ logicalPropertyName @ - el nombre de artefacto en forma de propiedad sin el sufijo «tipo». Por lo tanto @ MyGreatController @ se convierte en 'myGreat'.
+
+{hidden}
+
 * @isAbstract()@ - a boolean indicating whether the artefact class is abstract or not.
 * @getPropertyValue(name)@ - returns the value of the given property, whether it's a static or an instance one. This works best if the property is initialised on declaration, e.g. @static transactional = true@.
 
@@ -47,3 +108,14 @@ The artefact API also allows you to fetch classes by name and check whether a cl
 * is<type>Class(Class clazz)
 
 The first method will retrieve the @GrailsClass@ instance for the given name, e.g. 'MyGreatController'. The second will check whether a class is a particular type of artefact. For example, you can use @grailsApplication.isControllerClass(org.example.MyGreatController)@ to check whether @MyGreatController@ is in fact a controller.
+{hidden}
+
+* @ isAbstract() @ - un valor booleano que indica si la clase de artefacto es abstracta o no.
+* @ getPropertyValue(name) @ - devuelve el valor de la propiedad determinada, ya sea un estático o una instancia de uno. Esto funciona mejor si la propiedad es inicializada en la declaración, por ejemplo, @ estática transaccional = true @.
+
+El artefacto API también permite recuperar las clases por nombre y comprobar si una clase es un artefacto:
+
+* get<type>clase (String name)
+* es<type>clase (clase clazz)
+
+El primer método recuperará la @ GrailsClass @ instancia para el nombre, por ejemplo, 'MyGreatController'. El segundo comprobará si una clase es un tipo particular de artefacto. Por ejemplo, puede utilizar @ grailsApplication.isControllerClass(org.example.MyGreatController) @ para comprobar si @ MyGreatController @ es de hecho una controlador.</type> </type>

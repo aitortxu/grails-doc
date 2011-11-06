@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Viewing the generated source code
 
  * Adding "?showSource=true" or "&showSource=true" to the url shows the generated Groovy source code for the view instead of rendering it. It won't show the source code of included templates. This only works in development mode
@@ -7,6 +10,14 @@ h4. Viewing the generated source code
 h4. Debugging GSP code with a debugger
 
  * See "Debugging GSP in STS":http://contraptionsforprogramming.blogspot.com/2010/08/debuggable-gsps-in-springsource-tool.html
+
+{hidden}
+
+h4. Ver el código fuente generado
+
+* Agregar "? showSource = true" o "
+
+{hidden}
 
 h4. Viewing information about templates used to render a single url
 
@@ -18,6 +29,18 @@ Usage is simple: append "?debugTemplates" or "&debugTemplates" to the url and vi
 "debugTemplates" is restricted to development mode. It won't work in production.
 
 Here is an example of comments added by debugTemplates :
+{hidden}
+
+h4. Ver información acerca de plantillas que se utilizan para representar una sola url
+
+Plantillas de SGP son reutilizadas en aplicaciones web grandes utilizando la @ g: procesar @ taglib. Varias plantillas pequeñas pueden utilizarse para representar una sola página.
+Podría ser difícil de averiguar qué plantilla SGP representa realmente el html en el resultado.
+Las plantillas de depuración-función agrega comentarios html a la salida. Los comentarios contienen información de depuración acerca del SGP plantillas que se utilizan para procesar la página.
+
+El uso es simple: anexar "? debugTemplates" o "
+
+{hidden}
+
 {code}
 <!-- GSP #2 START template: /home/.../views/_carousel.gsp
      precompiled: false lastmodified: ... -->
@@ -28,4 +51,14 @@ Here is an example of comments added by debugTemplates :
      rendering time: 115 ms -->
 {code}
 
+{hidden}
+
+{code}
+<!--SGP
+
+{hidden}
+
 Each comment block has a unique id so that you can find the start & end of each template call.
+{hidden}
+
+Cada bloque de comentario tiene un identificador único para que pueda encontrar el inicio

@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails is built on Spring and uses Spring's Transaction abstraction for dealing with programmatic transactions. However, GORM classes have been enhanced to make this simpler with the [withTransaction|domainClasses] method. This method has a single parameter, a Closure, which has a single parameter which is a Spring [TransactionStatus|api:org.springframework.transaction.TransactionStatus] instance.
 
 Here's an example of using @withTransaction@ in a controller methods:
@@ -21,9 +24,44 @@ def transferFunds() {
     }
 }
 {code}
+{hidden}
+
+Grails se basa en primavera y utiliza la abstracción de transacción de la primavera para tratar las transacciones mediante programación. Sin embargo, se han mejorado las clases GORM para hacer esto más simple con el método [withTransaction|domainClasses]. Este método tiene un solo parámetro, un cierre, que tiene un único parámetro que es una instancia de primavera [TransactionStatus|api:org.springframework.transaction.TransactionStatus].
+
+Este es un ejemplo del uso de @ withTransaction @ en métodos de controlador:
+
+{code: java}
+Def transferFunds() {}
+    Account.withTransaction {Estado->
+        fuente de Def = Account.get(params.from)
+        Def dest = Account.get(params.to)
+
+cantidad de Def = params.amount.toInteger()
+        Si (source.active) {}
+            Si (dest.active) {}
+                cantidad de-= de Source.balance
+                dest.amount = cantidad
+            }
+            Else {}
+                Status.setRollbackOnly()
+            }
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 In this example we rollback the transaction if the destination account is not active. Also, if an unchecked @Exception@ or @Error@ (but not a checked @Exception@, even though Groovy doesn't require that you catch checked exceptions) is thrown during the process the transaction will automatically be rolled back.
 
 You can also use "save points" to rollback a transaction to a particular point in time if you don't want to rollback the entire transaction. This can be achieved through the use of Spring's [SavePointManager|api:org.springframework.transaction.SavepointManager] interface.
 
 The @withTransaction@ method deals with the begin/commit/rollback logic for you within the scope of the block.
+{hidden}
+
+En este ejemplo nos deshacer la transacción si la cuenta de destino no está activa. Además, si una marcada excepción @ @ o @ Error @ (pero no una facturado @ excepción @, aunque Groovy no requiere que atrapar excepciones facturados) se produce durante el proceso de la transacción automáticamente se deshace.
+
+También puede utilizar "guardar puntos" para deshacer una transacción a un punto determinado en el tiempo si no desea deshacer la transacción completa. Esto puede lograrse mediante el uso de primavera [SavePointManager|api:org.springframework.transaction.SavepointManager] interfaz.
+
+@ WithTransaction @ método aborda la lógica begin/commit y rollback para usted en el ámbito del bloque.

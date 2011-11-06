@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. attributes
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 birthDate attributes: [year: 2000..2011]
 {code}
+{hidden}
+
+h1. atributos
+
+h2. Fin
+
+Agrega los atributos personalizados para etiquetas de andamios.
+
+h2. Ejemplos
+
+{code: java}
+atributos de la fecha de nacimiento: [año: 2000..2011]
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,9 +38,30 @@ Adds extra attributes to the GSP tag used to display the edit field for the spec
 {code}
 
 Hence, the scaffolded view would limit a user to the years 2000-2011, as dictated by the g:datePicker tag.
+{hidden}
+
+h2. Descripción
+
+Agrega atributos adicionales a la etiqueta de SGP utilizada para mostrar el campo de edición para la propiedad de clase de dominio especificado. Por ejemplo, la etiqueta procesada en andamios para el nacimiento de @ @ propiedad anterior sería:
+
+{Código: xml}
+<g:datepicker name="birthDate" ...="" year="2000..2011" ...=""></g:datepicker>
+{code}
+
+Por lo tanto, la vista scaffolded limitaría un usuario para los años 2000-2011, dictados por la etiqueta g:datePicker.
+
+{hidden}
+
 
 {note}
 This constraint only works for boolean (checkbox), date (datePicker), and collection (*select) properties.
 {note}
 
 Error Code: This constraint only impacts the scaffolding and does not create errors.
+{hidden}
+
+{Nota}
+Esta restricción sólo funciona para boolean (checkbox), fecha (selector) y colección (* seleccione) propiedades.
+{Nota}
+
+Código de error: Esta restricción sólo afecta a los andamios y no crear errores.

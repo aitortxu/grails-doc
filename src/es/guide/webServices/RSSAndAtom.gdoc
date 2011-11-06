@@ -1,7 +1,7 @@
+
 {hidden}
+
 No direct support is provided for RSS or Atom within Grails. You could construct RSS or ATOM feeds with the [render|controllers] method's XML capability. There is however a "Feeds plugin":http://grails.org/plugin/feeds available for Grails that provides a RSS and Atom builder using the popular "ROME":https://rome.dev.java.net/ library. An example of its usage can be seen below:
-{hidden}
-No hay soporte directo proveido dentro de Grails para RSS y Atom. Usted podria construir RSS o ATOM feeds con los metodos de [render|controllers] con la capacidad de XML. Hay sin embargo un "plugin de Feeds":http://grails.org/plugin/feeds disponible para Grails que provee un constructor de RSS y ATOM usando la libreria popular "ROME":https://rome.dev.java.net/. Un ejemplo de su uso pude verse a continuacion:
 
 {code:java}
 def feed() {
@@ -13,6 +13,25 @@ def feed() {
             entry(article.title) {
                 link = "http://your.test.server/article/\${article.id}"
                 article.content // return the content
+            }
+        }
+    }
+}
+{code}
+{hidden}
+
+Ningún apoyo directo está prevista RSS o Atom dentro de Grails. Puede crear RSS o ATOM alimenta con capacidad XML del método [render|controllers]. Existe sin embargo un "Feeds plugin":http://grails.org/plugin/feeds disponible para Grails que proporciona un constructor RSS y Atom utilizando la "biblioteca popular de ROME":https://rome.dev.java.net/. Un ejemplo de su uso puede verse a continuación:
+
+{code: java}
+Def feed() {}
+    Render (feedType: "rss", feedVersion: "2.0") {}
+        título = "Mi prueba de alimentación"
+        enlace = "http://your.test.server/yourController/feed"
+
+(artículo en Article.list()) {}
+            Entry(article.Title) {}
+                enlace = "http://your.test.server/article/\${article.id"}
+                article.Content / / devolver el contenido
             }
         }
     }

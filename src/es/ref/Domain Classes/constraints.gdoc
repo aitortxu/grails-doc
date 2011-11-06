@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. constraints
 
 h2. Purpose
@@ -18,6 +21,31 @@ class Book {
     }
 }
 {code}
+{hidden}
+
+h1. restricciones
+
+h2. Fin
+
+Permite la definición de restricciones de validación declarativa. Consulte [Validation|guide:validation] en la Guía del usuario.
+
+h2. Ejemplos
+
+{code: java}
+clase {libro
+
+Título de cadena
+    Autor de autor
+
+restricciones estáticas = {}
+        título en blanco: falso, tamaño: 5..150
+        autor que acepta valores NULL: verdadero
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -28,11 +56,34 @@ def b = new Book()
 assert !b.validate()
 {code}
 
+{hidden}
+
+h2. Descripción
+
+Las restricciones se definen mediante las restricciones declarativas DSL como se describe en la sección [Validation|guide:validation] de la Guía del usuario. Una vez evaluados, validación puede aplicarse mediante el uso del método [validate|domainClasses]:
+
+{code: java}
+Def b = Book() nueva
+valer! b.validate()
+{code}
+
+{hidden}
+
 A list of [ConstrainedProperty|api:org.codehaus.groovy.grails.validation.ConstrainedProperty] instances applied against the domain class by the @constraints@ property is available at runtime:
 
 {code:java}
 for (constraint in b.constraints) {
     println it.name
     println it.maxSize
+}
+{code}
+{hidden}
+
+Una lista de instancias de [ConstrainedProperty|api:org.codehaus.groovy.grails.validation.ConstrainedProperty] contra la clase de dominio aplicadas las restricciones @ @ propiedad está disponible en tiempo de ejecución:
+
+{code: java}
+para (restricción de b.constraints) {}
+    Console.println it.name
+    Console.println it.maxSize
 }
 {code}

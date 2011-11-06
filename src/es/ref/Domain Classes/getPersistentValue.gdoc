@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. getPersistentValue
 
 h2. Purpose
@@ -18,7 +21,37 @@ if (b.isDirty('name')) {
     }
 }
 {code}
+{hidden}
+
+h1. getPersistentValue
+
+h2. Fin
+
+Recuperar el valor original de un campo para una instancia de la clase de dominio.
+
+h2. Ejemplos
+
+{code: java}
+Def b = Book.get(1)
+someMethodThatMightModifyTheInstance(b)
+
+Si ({b.isDirty('name'))}
+    Def currentName = b.name
+    Def originalName = b.getPersistentValue('name')
+    Si (currentName! = originalName) {}
+        ...
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 This method is useful mostly for audit logging or other work done in a *beforeUpdate* event callback. Hibernate caches the original state of all loaded instances for dirty checking during a flush and this method exposes that data so you can compare it with the current state.
+{hidden}
+
+h2. Descripción
+
+Este método es útil principalmente para el registro de auditoría u otros trabajos realizados en un * beforeUpdate * callback evento. Hibernación cachés el estado original de instancias todo cargados de sucio comprobar durante una escalera y este método expone los datos, por lo que se puede comparar con el estado actual.

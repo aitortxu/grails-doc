@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. The Basics
 
 Testing URL mappings can be done with the @TestFor@ annotation testing a particular URL mappings class. For example to test the default URL mappings you can do the following:
@@ -8,6 +11,21 @@ class UrlMappingsTests {
 
 }
 {code}
+{hidden}
+
+h4. Los conceptos básicos
+
+Prueba de asignaciones de dirección URL puede hacerse con @ TestFor @ anotación pruebas de una determinada clase de asignaciones de dirección URL. Por ejemplo, para probar las asignaciones de dirección URL predeterminado puede hacer lo siguiente:
+
+{code: java}
+@TestFor(UrlMappings)
+clase UrlMappingsTests {}
+
+}
+{code}
+
+{hidden}
+
 
 {note}
 Note that since the default @UrlMappings@ class is in the default package your test must also be in the default package
@@ -18,6 +36,20 @@ With that done there are a number of useful methods that are defined by the @gra
 * @assertForwardUrlMapping@ - Asserts a URL mapping is forwarded for the given controller class (note that controller will need to be defined as a mock collaborate for this to work)
 * @assertReverseUrlMapping@ - Asserts that the given URL is produced when reverse mapping a link to a given controller and action
 * @assertUrlMapping@ - Asserts a URL mapping is valid for the given URL. This combines the @assertForwardUrlMapping@ and @assertReverseUrlMapping@ assertions
+{hidden}
+
+{Nota}
+Tenga en cuenta que desde el defecto @ UrlMappings @ clase está en el paquete por defecto la prueba debe estar también en el paquete predeterminado
+{Nota}
+
+Con hay un número de métodos útiles que se definen por el @grails.test.mixin.web.UrlMappingsUnitTestMixin@ para probar las asignaciones de dirección URL. Estos incluyen:
+
+* @ assertForwardUrlMapping @ - afirma se reenvía una asignación de dirección URL para la clase de controlador determinado (tenga en cuenta que el controlador tendrá que definirse como un simulacro colaborar para que funcione)
+* @ assertReverseUrlMapping @ - afirma que el URL determinada se produce cuando inversa la asignación de un vínculo a un determinado controlador y acción
+* @ assertUrlMapping @ - afirma que una asignación de dirección URL es válida para la dirección URL determinada. Esto combina el @ assertForwardUrlMapping @ y @ assertReverseUrlMapping @ aserciones
+
+{hidden}
+
 
 h4. Asserting Forward URL Mappings
 
@@ -29,6 +61,21 @@ static mappings = {
     "/action2"(controller: "simple", action: "action2")
 }
 {code}
+{hidden}
+
+h4. Afirmando adelante asignaciones de dirección URL
+
+Utilice @ assertForwardUrlMapping @ para afirmar que una dirección URL determinada se asigna a un determinado controlador. Por ejemplo, considere las siguientes asignaciones de dirección URL:
+
+{code: java}
+asignaciones estáticas = {}
+    "/ action1" (controlador: "simple", acción: "action1")
+    "/ action2" (controlador: "simple", acción: "action2")
+}
+{code}
+
+{hidden}
+
 
 The following test can be written to assert these URL mappings:
 
@@ -47,6 +94,28 @@ void testUrlMappings() {
     }
 }
 {code}
+{hidden}
+
+La siguiente prueba puede escribirse afirmar estas asignaciones de dirección URL:
+
+{code: java}
+void testUrlMappings() {}
+
+assertForwardUrlMapping ("/ action1", controlador: 'simple',
+                                        acción: "action1")
+
+assertForwardUrlMapping ("/ action2", controlador: 'simple',
+                                        acción: "action2")
+
+shouldFail {}
+        assertForwardUrlMapping ("/ action2", controlador: 'simple',
+                                            acción: "action1")
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Assert Reverse URL Mappings
 
@@ -68,6 +137,31 @@ class SimpleControllerTests {
 
         def model = controller.list()
         assert model != null
+    }
+}
+{code}
+{hidden}
+
+h4. Afirmar las asignaciones URL inversa
+
+Utilice @ assertReverseUrlMapping @ para comprobar que enlaces correctos son producidos para su asignación de dirección URL cuando se utiliza el enlace @ @ etiqueta en vistas del SGP. Una prueba de ejemplo es en gran medida idéntica a la anterior lista excepto usar @ assertReverseUrlMapping @ en vez de @ assertForwardUrlMapping @. Tenga en cuenta que puede combinar estas 2 afirmaciones con @ assertUrlMapping @.
+
+h4. Simulación de asignación de controlador
+
+Además de las afirmaciones para comprobar la validez de las asignaciones de dirección URL puede simular también asignación a un controlador utilizando tu UrlMappings @ @ como un colaborador simulacro y @ mapURI @ método. Por ejemplo:
+
+{code: java}
+@TestFor(SimpleController)
+@Mock(UrlMappings)
+clase SimpleControllerTests {}
+
+void testControllerMapping() {}
+
+Controlador de SimpleController = mapURI('/simple/list')
+        afirma controlador! = null
+
+modelo de Def = controller.list()
+        afirman modelo! = null
     }
 }
 {code}

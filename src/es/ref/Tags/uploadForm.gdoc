@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. uploadForm
 
 h2. Purpose
@@ -11,6 +14,22 @@ h2. Examples
     <input type="file" name="myFile" />
 </g:uploadForm>
 {code}
+{hidden}
+
+h1. uploadForm
+
+h2. Fin
+
+Crea un formulario que puede enviar datos de varias partes para carga de archivos.
+
+h2. Ejemplos
+
+{Código: xml}<g:uploadform name="myUpload">
+    <input type="file" name="myFile">
+</g:uploadform>{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -21,9 +40,31 @@ Attributes
 * @action@ (optional) - the name of the action to use in the link; if not specified the default action will be linked
 * @controller@ (optional) - the name of the controller to use in the link; if not specified the current controller will be linked
 * @id@ (optional) - The id to use in the link
+{hidden}
+
+h2. Descripción
+
+Idéntica a la etiqueta estándar [form|tags] salvo que establece la enctype @ @ atributo @ "multipart/form-data" @ automáticamente.
+
+Atributos
+
+* @ acción @ (opcional): el nombre de la acción que se utilizan en el enlace; Si no se especifica la acción predeterminada se vincularán
+* @ controlador @ (opcional): el nombre del controlador para usar en el enlace; Si no especifica el controlador actual se vincularán
+* @ id @ (opcional): el id que se utilizan en el enlace
+
+{hidden}
+
 * @url@ (optional) - A map containing the action, controller, id etc.
 
 h2. Source
 
 {source:tag=FormTagLib.uploadForm}
 {source}
+{hidden}
+
+* @ url @ (opcional): A map que contiene la acción, controlador, id etc..
+
+h2. Fuente
+
+{source:tag=FormTagLib.uploadForm}
+origen de {}

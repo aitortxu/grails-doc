@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. run-app
 
 h2. Purpose
@@ -7,6 +10,20 @@ Runs a Grails application in an embedded servlet container
 {warning}
 This target is _not_ intended to be used for application deployment. There are many optimizations implemented when  generating a WAR file for deployment that are not available to @run-app@ since @run-app@ is optimized for developer productivity, not performance.
 {warning}
+
+{hidden}
+
+h1. Run-app
+
+h2. Fin
+
+Se ejecuta una aplicación Grails en un contenedor de servlet incrustado
+
+Advertencia de {}
+Este objetivo es _no_ destinados a ser utilizados para la implementación de aplicaciones. Hay muchas optimizaciones aplicadas al generar un archivo WAR de implementación que no están disponibles para @ run-app @ desde @ run-app @ está optimizado para la productividad del desarrollador, no de rendimiento.
+Advertencia de {}
+
+{hidden}
 
 h2. Examples
 
@@ -18,6 +35,21 @@ grails -Dserver.port=8090 -Denable.jndi=true -Ddisable.auto.recompile=true run-a
 {code}
 
 h2. Description
+{hidden}
+
+h2. Ejemplos
+
+{code: java}
+Grails run-app
+Grails run-app - https / / con HTTPS
+prueba de Grails run-app
+Grails-Dserver.port=8090-Denable.jndi=true-Ddisable.auto.recompile=true run-app
+{code}
+
+h2. Descripción
+
+{hidden}
+
 
 Usage:
 {code:java}
@@ -27,6 +59,19 @@ grails [env]* run-app
 Arguments:
 
 * @https@ - Start an HTTPS server (on port 8443 by default) alongside the main server. Just to be clear, the application will be accessible via HTTPS _and_ HTTP.
+
+{hidden}
+
+Uso:
+{code: java}
+Grails [env] * run-app
+{code}
+
+Argumentos:
+
+* @ https @ - iniciar un servidor HTTPS (en el puerto 8443 de forma predeterminada) junto con el servidor principal. Para ser claros, la aplicación será accesible a través de HTTPS _and_ HTTP.
+
+{hidden}
 
 Supported system properties:
 
@@ -38,6 +83,20 @@ Supported system properties:
 
 Fired Events:
 
+{hidden}
+
+Admite propiedades del sistema:
+
+* @disable.auto.recompile@ - desactiva auto-recompilación de fuentes de Java, que puede ser el procesador intensivo (valor predeterminado es false @ @)
+* @recompile.frequency@ - especifica la frecuencia (en segundos) controles de Grails para cambios a Java y Groovy fuentes en su proyecto (3 de forma predeterminada).
+* @grails.server.port.http@/@server.port@ - Especifica el puerto HTTP para ejecutar el servidor de (valor predeterminado es 8080)
+* @grails.server.port.https@ - especifica el puerto HTTPS para ejecutar el servidor de (8443 de forma predeterminada)
+* @grails.server.host@/@server.host@ - Especifica el nombre de host para ejecutar el servidor de (localhost de forma predeterminada)
+
+Despedido de eventos:
+
+{hidden}
+
 * @StatusFinal@ - When the container has been started
 * @StatusUpdate@ - When the container is reloading
 
@@ -46,4 +105,15 @@ This command starts Grails in an embedded servlet container that can serve HTTP 
 {code}
 grails uninstall-plugin tomcat
 grails install-plugin jetty
+{code}
+{hidden}
+
+* @ StatusFinal @ - cuando el contenedor se ha iniciado
+* @ StatusUpdate @ - cuando se recarga el contenedor
+
+Este comando inicia Grails en un contenedor de servlet incrustado que puede atender las solicitudes HTTP. El contenedor predeterminado es "Tomcat":http://tomcat.apache.org pero contenedores alternativos son compatibles a través del sistema de plugin. Por ejemplo, para ejecutar Grails con embarcadero ejecutar estos dos comandos:
+
+{code}
+Grails plugin desinstalar tomcat
+muelle de instalar plugin Grails
 {code}

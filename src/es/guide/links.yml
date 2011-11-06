@@ -1,160 +1,160 @@
-introduction: 1. Introduction
-whatsNew: 1.1 What's new in Grails 2.0?
-developmentEnvironmentFeatures: 1.1.1 Development Environment Features
-coreFeatures: 1.1.2 Core Features
-webFeatures: 1.1.3 Web Features
-persistenceFeatures: 1.1.4 Persistence Features
-testingFeatures: 1.1.5 Testing Features
-gettingStarted: 2. Getting Started
-downloadingAndInstalling: 2.1 Downloading and Installing
-upgradingFromPreviousVersionsOfGrails: 2.2 Upgrading from previous versions of Grails
-creatingAnApplication: 2.3 Creating an Application
-aHelloWorldExample: 2.4 A Hello World Example
-ide: 2.5 Getting Set-up in an IDE
-conventionOverConfiguration: 2.6 Convention over Configuration
-runningAnApplication: 2.7 Running an Application
-testingAnApplication: 2.8 Testing an Application
-deployingAnApplication: 2.9 Deploying an Application
-supportedJavaEEContainers: 2.10 Supported Java EE Containers
-generatingAnApplication: 2.11 Generating an Application
-creatingArtefacts: 2.12 Creating Artefacts
-conf: 3. Configuración
+introduction: 1. Introducción
+whatsNew: 1.1 Nuevo en Grails 2.0
+developmentEnvironmentFeatures: 1.1.1 Entorno de desarrollo
+coreFeatures: 1.1.2 Características principales
+webFeatures: 1.1.3 Características Web
+persistenceFeatures: 1.1.4 Características de persistencia
+testingFeatures: 1.1.5 Características de prueba
+gettingStarted: 2. Comenzando
+downloadingAndInstalling: 2.1 Descarge e instalación
+upgradingFromPreviousVersionsOfGrails: 2.2 Actualizar desde una versión previa de Grails
+creatingAnApplication: 2.3 Crear un aplicación
+aHelloWorldExample: 2.4 El ejemplo Hello World
+ide: 2.5 Configurando un entorno de desarrollo
+conventionOverConfiguration: 2.6 Convención sobre cofiguración
+runningAnApplication: 2.7 Ejecutar una aplicación
+testingAnApplication: 2.8 Probar una aplicación
+deployingAnApplication: 2.9 Desplegar una aplicación
+supportedJavaEEContainers: 2.10 Contenedores Java EE soportados
+generatingAnApplication: 2.11 Generar una aplicación
+creatingArtefacts: 2.12 Crear Artefactos
+conf: 3. Configuración 
 config: 3.1 Configuración básica
-builtInOptions: 3.1.1 Opciones disponibles
+builtInOptions: 3.1.1 Opciones incorporadas
 logging: 3.1.2 Logging
 configGORM: 3.1.3 GORM
 environments: 3.2 Entornos
-dataSource: 3.3 El orígen de datos
-dataSourcesAndEnvironments: 3.3.1 Orígenes de datos y entornos
-JNDIDataSources: 3.3.2 Orígenes de datos JNDI 
+dataSource: 3.3 Las fuentes de datos
+dataSourcesAndEnvironments: 3.3.1 Fuentes de datos y entornos
+JNDIDataSources: 3.3.2 Fuentes de datos JNDI 
 automaticDatabaseMigration: 3.3.3 Migraciones automáticas de bases de datos
-transactionAwareDataSourceProxy: 3.3.4 Proxy de origen de datos preparado para transacción
-databaseConsole: 3.3.5 La consola de la Base de Datos
-multipleDatasources: 3.3.6 Orígenes de datos multiples
-configExternalized: 3.4 Externalizando la configuración
-versioning: 3.5 Versionado
-docengine: 3.6 Documentación del projecto
+transactionAwareDataSourceProxy: 3.3.4 Proxys que permiten tranTransaction-aware DataSource Proxy
+databaseConsole: 3.3.5 La consola de la base de datos
+multipleDatasources: 3.3.6 Multiples fuentes de datos
+configExternalized: 3.4 Externalizar la configuración
+versioning: 3.5 Versionear
+docengine: 3.6 Documentación del proyectos
 ivy: 3.7 Resolución de dependencias
-configurationsAndDependencies: 3.7.1 Configuración y dependencias
+configurationsAndDependencies: 3.7.1 Configuraciones y dependencias
 dependencyRepositories: 3.7.2 Repositorios de dependencias
-debuggingResolution: 3.7.3 Depurando la resolución de dependencias
-inheritedDependencies: 3.7.4 Dependencias heredadas
-providingDefaultDependencies: 3.7.5 Dependencias por defecto
+debuggingResolution: 3.7.3 Depurando la resolución
+inheritedDependencies: 3.7.4 Dependencia heredadas
+providingDefaultDependencies: 3.7.5 Proporcionando dependencias por defecto
 dependencyReports: 3.7.6 Informes de dependencias
-pluginJARDependencies: 3.7.7 Dependencias Jar de plugins
+pluginJARDependencies: 3.7.7 Insertando dependencias de JAR
 mavenIntegration: 3.7.8 Integración con Maven
 mavendeploy: 3.7.9 Desplegando a un repositorio Maven
-pluginDependencies: 3.7.10 Dependencias de plugin
+pluginDependencies: 3.7.10 PDependencias de plugin
 commandLine: 4. La línea de comando
-creatingGantScripts: 4.1 Crear scripts de Gant
-reusingGrailsScripts: 4.2 Reusar scripts de Grails
-events: 4.3 interceptando Eventos
-buildCustomising: 4.4 Personalizar la construcción
+creatingGantScripts: 4.1 Creando Scripts de Gant
+reusingGrailsScripts: 4.2 Reutilizando Scripts de Grails
+events: 4.3 Eventos
+buildCustomising: 4.4 Personalizando la construcción
 antAndMaven: 4.5 Ant y Maven
-GORM: 5. Object Relational Mapping (GORM)
-quickStartGuide: 5.1 Quick Start Guide
-basicCRUD: 5.1.1 Basic CRUD
-domainClasses: 5.2 Domain Modelling in GORM
-gormAssociation: 5.2.1 Association in GORM
-manyToOneAndOneToOne: 5.2.1.1 Many-to-one and one-to-one
+GORM: 5. Mapeo de objetos relacional (GORM)
+quickStartGuide: 5.1 Guía rápida
+basicCRUD: 5.1.1 CRUD básico
+domainClasses: 5.2 Modelando dominios con GORM
+gormAssociation: 5.2.1 Asociaciones con GORM
+manyToOneAndOneToOne: 5.2.1.1 Many-to-one y one-to-one
 oneToMany: 5.2.1.2 One-to-many
 manyToMany: 5.2.1.3 Many-to-many
-basicCollectionTypes: 5.2.1.4 Basic Collection Types
-gormComposition: 5.2.2 Composition in GORM
-inheritanceInGORM: 5.2.3 Inheritance in GORM
-sets,ListsAndMaps: 5.2.4 Sets, Lists and Maps
-persistenceBasics: 5.3 Persistence Basics
-savingAndUpdating: 5.3.1 Saving and Updating
-deletingObjects: 5.3.2 Deleting Objects
-cascades: 5.3.3 Understanding Cascading Updates and Deletes
+basicCollectionTypes: 5.2.1.4 Tipos básicos de colecciones
+gormComposition: 5.2.2 Composición en GORM
+inheritanceInGORM: 5.2.3  Herencia en GORM
+sets,ListsAndMaps: 5.2.4 Sets, Listas y Mapas
+persistenceBasics: 5.3 Persistencia básica
+savingAndUpdating: 5.3.1 Salvar y actualizar
+deletingObjects: 5.3.2 Borrando objetos
+cascades: 5.3.3 Entender la actualizaciones y borrados en cascada
 fetching: 5.3.4 Eager and Lazy Fetching
-locking: 5.3.5 Pessimistic and Optimistic Locking
+locking: 5.3.5 Bloque optimista y pesimista 
 modificationChecking: 5.3.6 Modification Checking
 querying: 5.4 Querying with GORM
-finders: 5.4.1 Dynamic Finders
+finders: 5.4.1 Buscadores dinámicos-Dynamic Finders
 criteria: 5.4.2 Criteria
 hql: 5.4.3 Hibernate Query Language (HQL)
-advancedGORMFeatures: 5.5 Advanced GORM Features
-eventsAutoTimestamping: 5.5.1 Events and Auto Timestamping
-ormdsl: 5.5.2 Custom ORM Mapping
-tableAndColumnNames: 5.5.2.1 Table and Column Names
-caching: 5.5.2.2 Caching Strategy
-inheritanceStrategies: 5.5.2.3 Inheritance Strategies
-identity: 5.5.2.4 Custom Database Identity
-compositePrimaryKeys: 5.5.2.5 Composite Primary Keys
-databaseIndices: 5.5.2.6 Database Indices
-optimisticLockingAndVersioning: 5.5.2.7 Optimistic Locking and Versioning
-fetchingDSL: 5.5.2.8 Eager and Lazy Fetching
-customCascadeBehaviour: 5.5.2.9 Custom Cascade Behaviour
-customHibernateTypes: 5.5.2.10 Custom Hibernate Types
-derivedProperties: 5.5.2.11 Derived Properties
-customNamingStrategy: 5.5.2.12 Custom Naming Strategy
-defaultSortOrder: 5.5.3 Default Sort Order
-programmaticTransactions: 5.6 Programmatic Transactions
-gormConstraints: 5.7 GORM and Constraints
-theWebLayer: 6. The Web Layer
-controllers: 6.1 Controllers
-understandingControllersAndActions: 6.1.1 Understanding Controllers and Actions
-controllersAndScopes: 6.1.2 Controllers and Scopes
-modelsAndViews: 6.1.3 Models and Views
-redirectsAndChaining: 6.1.4 Redirects and Chaining
-interceptors: 6.1.5 Controller Interceptors
+advancedGORMFeatures: 5.5 Características avanzadas de GORM
+eventsAutoTimestamping: 5.5.1 Eventos y Auto Timestamping
+ormdsl: 5.5.2 Mapeo personalizado de ORM
+tableAndColumnNames: 5.5.2.1 Nombres de tablas y columnas
+caching: 5.5.2.2 Estrategias de cacheo
+inheritanceStrategies: 5.5.2.3 Estrategias de herencia
+identity: 5.5.2.4 Claves personalizas de base de datos
+compositePrimaryKeys: 5.5.2.5 Claves primarias compuestas
+databaseIndices: 5.5.2.6 Índices de bases de datos
+optimisticLockingAndVersioning: 5.5.2.7 Bloqueo optimista y versioneado
+fetchingDSL: 5.5.2.8 Carga perezosa y Eager
+customCascadeBehaviour: 5.5.2.9 Comportamiento en cascada personalizado
+customHibernateTypes: 5.5.2.10 Tipos personalizados de Hibernate 
+derivedProperties: 5.5.2.11 Propiedades derivadas
+customNamingStrategy: 5.5.2.12 Estrategias personalizadas de nombrado
+defaultSortOrder: 5.5.3 Orden por defecto
+programmaticTransactions: 5.6 Transacciones por programa
+gormConstraints: 5.7 GORM y Constraints
+theWebLayer: 6. La capa Web
+controllers: 6.1 Controladores
+understandingControllersAndActions: 6.1.1 Entendiendo los Controladores y las Acciones
+controllersAndScopes: 6.1.2 Controladores y Scopes
+modelsAndViews: 6.1.3 Modelos y Vistas
+redirectsAndChaining: 6.1.4 Redirecciones y encadenamiento
+interceptors: 6.1.5 interceptores de Controladores
 dataBinding: 6.1.6 Data Binding
-XML: 6.1.7 XML and JSON Responses
-moreOnJSONBuilder: 6.1.8 More on JSONBuilder
-uploadingFiles: 6.1.9 Uploading Files
-commandObjects: 6.1.10 Command Objects
-formtokens: 6.1.11 Handling Duplicate Form Submissions
-typeConverters: 6.1.12 Simple Type Converters
-asynchronousRequestProcessing: 6.1.13 Asynchronous Request Processing
+XML: 6.1.7 Responses XML y JSON
+moreOnJSONBuilder: 6.1.8 Más sobre JSONBuilder
+uploadingFiles: 6.1.9 Subiendo ficheros
+commandObjects: 6.1.10 Objetos Comando
+formtokens: 6.1.11 Gestionando el envío duplicado de formularios
+typeConverters: 6.1.12 Conversores de tipos simples
+asynchronousRequestProcessing: 6.1.13 Proceso de peticiones asíncronas
 gsp: 6.2 Groovy Server Pages
-GSPBasics: 6.2.1 GSP Basics
-variablesAndScopes: 6.2.1.1 Variables and Scopes
-logicAndIteration: 6.2.1.2 Logic and Iteration
-pageDirectives: 6.2.1.3 Page Directives
-expressions: 6.2.1.4 Expressions
-tags: 6.2.2 GSP Tags
-variablesAndScopes: 6.2.2.1 Variables and Scopes
-logicAndIteration: 6.2.2.2 Logic and Iteration
-searchAndFiltering: 6.2.2.3 Search and Filtering
-linksAndResources: 6.2.2.4 Links and Resources
-formsAndFields: 6.2.2.5 Forms and Fields
-tagsAsMethodCalls: 6.2.2.6 Tags as Method Calls
-viewsAndTemplates: 6.2.3 Views and Templates
-layouts: 6.2.4 Layouts with Sitemesh
-resources: 6.2.5 Static Resources
-includingResourcesUsingTheResourceTags: 6.2.5.1 Including resources using the resource tags
-otherResourceTags: 6.2.5.2 Other resource tags
-declaringResources: 6.2.5.3 Declaring resources
-overridingPluginResources: 6.2.5.4 Overriding plugin resources
-optimizingYourResources: 6.2.5.5 Optimizing your resources
-debugging: 6.2.5.6 Debugging
-preventingProcessingOfResources: 6.2.5.7 Preventing processing of resources
-otherResourcesPlugins: 6.2.5.8 Other Resources-aware plugins
-sitemeshContentBlocks: 6.2.6 Sitemesh Content Blocks
-makingChangesToADeployedApplication: 6.2.7 Making Changes to a Deployed Application
-GSPDebugging: 6.2.8 GSP Debugging
-taglibs: 6.3 Tag Libraries
-variablesAndScopes: 6.3.1 Variables and Scopes
-simpleTags: 6.3.2 Simple Tags
-logicalTags: 6.3.3 Logical Tags
-iterativeTags: 6.3.4 Iterative Tags
-namespaces: 6.3.5 Tag Namespaces
-usingJSPTagLibraries: 6.3.6 Using JSP Tag Libraries
-tagReturnValue: 6.3.7 Tag return value
+GSPBasics: 6.2.1 GSP básico
+variablesAndScopes: 6.2.1.1 Variables y Scopes
+logicAndIteration: 6.2.1.2 Lógica e Iteraciones
+pageDirectives: 6.2.1.3 Directivas de página
+expressions: 6.2.1.4 Expresiones
+tags: 6.2.2 Tags GSP 
+variablesAndScopes: 6.2.2.1 Variables y alcance
+logicAndIteration: 6.2.2.2 Lógica e Iteraciones
+searchAndFiltering: 6.2.2.3 Búsquedas y filtros
+linksAndResources: 6.2.2.4 Enlaces y recursos
+formsAndFields: 6.2.2.5 Formularios y campos
+tagsAsMethodCalls: 6.2.2.6 Tags como llamadas a métodos
+viewsAndTemplates: 6.2.3 Vistas y Templates
+layouts: 6.2.4 Layouts con Sitemesh
+resources: 6.2.5 Recursos estáticos
+includingResourcesUsingTheResourceTags: 6.2.5.1 Incluir recursos usando los tags de recursos
+otherResourceTags: 6.2.5.2 Otros tags de recursos
+declaringResources: 6.2.5.3 Declarando recursos
+overridingPluginResources: 6.2.5.4 Sobreescribir el plugin resources
+optimizingYourResources: 6.2.5.5 Optimizar los recursos
+debugging: 6.2.5.6 Depurando
+preventingProcessingOfResources: 6.2.5.7 Evitando el procesamiento de recursos
+otherResourcesPlugins: 6.2.5.8 Manejo de recursos desde otros plugins
+sitemeshContentBlocks: 6.2.6 Bloques de contenido Sitemesh
+makingChangesToADeployedApplication: 6.2.7 Haciendo cámbios en el despliegue de aplicaciones
+GSPDebugging: 6.2.8 Depurando GSP
+taglibs: 6.3 Librerías de Tags
+variablesAndScopes: 6.3.1 Variables y Scopes
+simpleTags: 6.3.2 Tags simples
+logicalTags: 6.3.3 Tags Lógicos
+iterativeTags: 6.3.4 Tags Iterativos
+namespaces: 6.3.5 Espacios de nombres con Tags
+usingJSPTagLibraries: 6.3.6 Usando las librerías de tags JSP
+tagReturnValue: 6.3.7 Valor de retorno de los Tags
 urlmappings: 6.4 URL Mappings
-mappingToControllersAndActions: 6.4.1 Mapping to Controllers and Actions
-embeddedVariables: 6.4.2 Embedded Variables
-mappingToViews: 6.4.3 Mapping to Views
-mappingToResponseCodes: 6.4.4 Mapping to Response Codes
-mappingHTTP: 6.4.5 Mapping to HTTP methods
-mappingWildcards: 6.4.6 Mapping Wildcards
+mappingToControllersAndActions: 6.4.1 Mapeando los Controladores y las Actiones
+embeddedVariables: 6.4.2 Variables embebidas
+mappingToViews: 6.4.3 Mapeando las Vistas
+mappingToResponseCodes: 6.4.4 Mapeando los códigos de respuestas
+mappingHTTP: 6.4.5 Mapeando métodos HTTP
+mappingWildcards: 6.4.6 Mapeando Wildcards
 automaticLinkRewriting: 6.4.7 Automatic Link Re-Writing
-applyingConstraints: 6.4.8 Applying Constraints
+applyingConstraints: 6.4.8 Aplicando Constraints
 namedMappings: 6.4.9 Named URL Mappings
 webflow: 6.5 Web Flow
-startAndEndStates: 6.5.1 Start and End States
-actionStatesAndViewStates: 6.5.2 Action States and View States
+startAndEndStates: 6.5.1 Estados inicial y final
+actionStatesAndViewStates: 6.5.2 Estados de acción y estados de vista Action States and View States
 flowExecutionEvents: 6.5.3 Flow Execution Events
 flowScopes: 6.5.4 Flow Scopes
 dataBindingAndValidation: 6.5.5 Data Binding and Validation
@@ -217,11 +217,11 @@ providingBasicArtefacts: 12.4 Providing Basic Artefacts
 evaluatingConventions: 12.5 Evaluating Conventions
 hookingIntoBuildEvents: 12.6 Hooking into Build Events
 hookingIntoRuntimeConfiguration: 12.7 Hooking into Runtime Configuration
-addingDynamicMethodsAtRuntime: 12.8 Adding Dynamic Methods at Runtime
-participatingInAutoReloadEvents: 12.9 Participating in Auto Reload Events
-understandingPluginLoadOrder: 12.10 Understanding Plug-in Load Order
-binaryPlugins: 12.11 Binary Plugins
-webServices: 13. Web Services
+addingDynamicMethodsAtRuntime: 12.8 Añadir métodos dinámicos en tiempo de ejecución
+participatingInAutoReloadEvents: 12.9 Participar en Eventos de Auto-carga
+understandingPluginLoadOrder: 12.10 Entender el ordén de la carga de Plug-ins
+binaryPlugins: 12.11 Plugins binarios
+webServices: 13. Servicios Web 
 REST: 13.1 REST
 SOAP: 13.2 SOAP
 RSSAndAtom: 13.3 RSS and Atom

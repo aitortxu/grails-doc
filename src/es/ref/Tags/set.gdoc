@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. set
 
 h2. Purpose
@@ -15,6 +18,25 @@ h2. Examples
     <g:set var="counter" value="${counter + 1}" /><br/>
 </g:each>
 {code}
+{hidden}
+
+h1. conjunto
+
+h2. Fin
+
+Establece el valor de una variable accesible con la página del SGP.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:set var="tomorrow" value="${new Date()   1}"></g:set>
+
+<g:set var="counter" value="${1}"></g:set>
+<g:each in="${list}">
+    ${contador}.</g:each>
+
+{hidden}
+
 
 Using scopes:
 
@@ -24,6 +46,19 @@ Using scopes:
 {code}
 
 Using the body contents:
+
+{hidden}
+
+Uso de ámbitos:
+
+{Código: xml}
+<g:set var="foo" value="${new Date()}" scope="page"></g:set>
+<g:set var="bar" value="${new Date() - 7}" scope="session"></g:set>
+{code}
+
+Utilizando el contenido del cuerpo:
+
+{hidden}
 
 {code:java}
 <g:set var="foo">Hello!</g:set>
@@ -35,9 +70,32 @@ Attributes
 
 * @var@ - The name of the variable
 * @value@ - The initial value
+{hidden}
+
+{code: java}
+<g:set var="foo">Hola!</g:set>
+{code}
+
+h2. Descripción
+
+Atributos
+
+* @ var @ - el nombre de la variable
+* @ valor @ - el valor inicial
+
+{hidden}
+
 * @scope@ - Scope to set variable in, one of @request@, @page@, @flash@ or @session@. Defaults to @page@.
 
 h2. Source
 
 {source:tag=ApplicationTagLib.set}
 {source}
+{hidden}
+
+* @ alcance @ - Scope para definir la variable en una solicitud @ @, @ page @, @ flash @ o @ sesión @. El valor predeterminado es @ page @.
+
+h2. Fuente
+
+{source:tag=ApplicationTagLib.set}
+origen de {}

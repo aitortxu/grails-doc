@@ -1,7 +1,7 @@
+
 {hidden}
+
 Grails also lets you map HTTP response codes to controllers, actions or views. Just use a method name that matches the response code you are interested in:
-{hidden}
-Grails tambien le permite mapear codigos de respuesta HTTP hacia los controllers, actions o vistas. Solo use un nombre de metodo que empate el codigo de respuesta en el cual esta interesado:
 
 {code:java}
 static mappings = {
@@ -12,9 +12,20 @@ static mappings = {
 {code}
 
 {hidden}
-Or you can specify custom error pages:
+
+Grails también le permite asignar códigos de respuesta HTTP a controladores, acciones o vistas. Sólo tiene que utilizar un nombre de método que coincida con el código de respuesta que le interesan:
+
+{code: java}
+asignaciones estáticas = {}
+   "403" (controlador: "errores", acción: "prohibido")
+   "404" (controlador: "errores", acción: "notFound")
+   "500" (controlador: "errores", acción: "serverError")
+}
+{code}
+
 {hidden}
-O puede especificar paginas de error personalizadas:
+
+Or you can specify custom error pages:
 
 {code:java}
 static mappings = {
@@ -25,14 +36,22 @@ static mappings = {
 {code}
 
 {hidden}
-h4. Declarative Error Handling
-{hidden}
-h4. Manejo Declarativo de Errores
+
+O puede especificar páginas de error personalizadas:
+
+{code: java}
+asignaciones estáticas = {}
+   "403" (vista: "/ errores/prohibido")
+   "404" (vista: "/ errores/notFound")
+   "500" (vista: "/ errores/serverError")
+}
+{code}
 
 {hidden}
+
+h4. Declarative Error Handling
+
 In addition you can configure handlers for individual exceptions:
-{hidden}
-Ademas puede configurar los manejadores para excepciones individuales:
 
 {code:java}
 static mappings = {
@@ -47,16 +66,32 @@ static mappings = {
    "500"(view: "/errors/serverError")
 }
 {code}
+{hidden}
+
+h4. Tratamiento de errores declarativa
+
+Además puede configurar los controladores de excepciones individuales:
+
+{code: java}
+asignaciones estáticas = {}
+   "403" (vista: "/ errores/prohibido")
+   "404" (vista: "/ errores/notFound")
+   "500" (controlador: "errores", acción: "illegalArgument",
+         excepción: IllegalArgumentException)
+   "500" (controlador: "errores", acción: "nullPointer",
+         excepción: NullPointerException)
+   "500" (controlador: "errores", acción: "customException",
+         excepción: MyException)
+   "500" (vista: "/ errores/serverError")
+}
+{code}
 
 {hidden}
+
+
 With this configuration, an @IllegalArgumentException@ will be handled by the @illegalArgument@ action in @ErrorsController@, a @NullPointerException@ will be handled by the @nullPointer@ action, and a @MyException@ will be handled by the @customException@ action. Other exceptions will be handled by the catch-all rule and use the @/errors/serverError@ view.
-{hidden}
-Con esta configuracion, una @IllegalArgumentException@ sera manejada por la accion @illegalArgument@ en @ErrorsController@, una @NullPointerException@ sera manejada por la accion @nullPointer@, y @MyException@ sera manejada por la accion @customException@. Otras excepciones seran manejadas por la regla catch-all y usa la vista @/errors/serverError@.
 
-{hidden}
 You can access the exception from your custom error handing view or controller action using the request's @exception@ attribute like so:
-{hidden}
-Puede acceder a la excepcion desde su vista de error personalizada o la accion del controlador usando el atributo @exception@ de la peticion de esta manera:
 
 {code:java}
 class ErrorController {
@@ -66,11 +101,29 @@ class ErrorController {
     }
 }
 {code}
+{hidden}
+
+Con esta configuración, controlará un @ IllegalArgumentException @ illegalArgument @ @ acción en @ ErrorsController @, @ NullPointerException @ será manejada por el @ nullPointer @ acción y controlará @ MyException @ customException @ @ acción. Otras excepciones serán gestionados por la regla de comodín y utilizan el @ / errores/serverError @ vista.
+
+Puede acceder a la excepción de su error personalizado entrega vista o controlador de acción utilizando excepción @ la solicitud @ atributo como tal:
+
+{code: java}
+clase ErrorController {}
+    Def handleError() {}
+        excepción de Def = request.exception
+        / / realizar el procesamiento adecuado para tratar la excepción
+    }
+}
+{code}
+
+{hidden}
 
 
 {warning}
-{hidden}
 If your error-handling controller action throws an exception as well, you'll end up with a @StackOverflowException@.
-{hidden}
-Si su accion del manejador de errores del controller arroja una excepcion tambien, terminara con una @StackOverflowException@.
 {warning}
+{hidden}
+
+Advertencia de {}
+Si la acción de controlador de gestión de errores produce una excepción, así, acabará con una StackOverflowException @ @.
+Advertencia de {}

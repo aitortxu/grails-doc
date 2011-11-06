@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. blank
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 login blank: false
 {code}
+{hidden}
+
+h1. en blanco
+
+h2. Fin
+
+Valida que un valor de cadena no esté en blanco.
+
+h2. Ejemplos
+
+{code: java}
+Inicio de sesión en blanco: falso
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,3 +38,14 @@ Error Code: @className.propertyName.blank@
 {note}
 If the string is @null@, it won't validate with @blank: true@. In this case, set the [nullable|constraints] constraint to @true@.
 {note}
+{hidden}
+
+h2. Descripción
+
+Establecido en false @ @ si un valor de cadena no puede estar en blanco.
+
+Código de error: @className.propertyName.blank@
+
+{Nota}
+Si la cadena es null @ @, no validar con @ en blanco: verdadero @. En este caso, establecer la delimitación [nullable|constraints] @ true @.
+{Nota}

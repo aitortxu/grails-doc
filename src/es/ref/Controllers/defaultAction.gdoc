@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. defaultAction
 
 h2. Purpose
@@ -7,6 +10,20 @@ Specifies the default action to be executed if none is specified in the URI.
 This is unnecessary if you have an action named "index" and want it to be the default, since that happens automatically.
 
 h2. Examples
+
+{hidden}
+
+h1. defaultAction
+
+h2. Fin
+
+Especifica la acción predeterminada para ser ejecutado si no se especifica en el identificador URI.
+
+Esto no es necesario si tiene una acción denominada "índice" y quiere que sea el predeterminado, ya sucede automáticamente.
+
+h2. Ejemplos
+
+{hidden}
 
 {code:java}
 class BookController {
@@ -18,6 +35,22 @@ class BookController {
     }
 
     def show() {
+        [bookInstance: Book.get(params.id)]
+    }
+}
+{code}
+{hidden}
+
+{code: java}
+clase BookController {}
+
+defaultAction estática = "lista"
+
+Def list() {}
+        [libros: Book.list()]
+    }
+
+Def show() {}
         [bookInstance: Book.get(params.id)]
     }
 }

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. findAll
 
 h2. Purpose
@@ -12,6 +15,23 @@ Stephen King's Books:
      <p>Title: ${it.title}</p>
 </g:findAll>
 {code}
+{hidden}
+
+h1. findAll
+
+h2. Fin
+
+Utiliza el JDK Groovy @ findAll @ método para iterar por cada elemento del objeto especificado que coincidan con la expresión de GPath en el atributo "expr"
+
+h2. Ejemplos
+
+{Código: xml}
+Libros de Stephen King:<g:findall in="${books}" expr="it.author == 'Stephen King'">
+     <p>Título: ${it.title}</p>
+</g:findall>{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,3 +39,11 @@ Attributes
 
 * @in@ - The object to iterative over
 * @expr@ - A GPath expression
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ en @ - el objeto más iterativo
+* @ expr @ - expresión A GPath

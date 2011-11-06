@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. isAttached
 
 h2. Purpose
@@ -13,7 +16,32 @@ if (!b.isAttached()) {
     b.attach()
 }
 {code}
+{hidden}
+
+h1. isAttached
+
+h2. Fin
+
+Devuelve si la instancia de dominio está conectada a una sesión activa de hibernación. Este método se utiliza a menudo en conjunción con el [merge|domainClasses] o [attach|domainClasses] métodos.
+
+h2. Ejemplos
+
+{code: java}
+Libro b = session.book
+...
+Si (! b.isAttached()) {}
+    b.Attach()
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 Persistent instances are associated with a persistence Session. A new Session is created for each request and is closed at the end of the request. If an object is read from the session and placed into a web scope such as the HttpSession it is seen as detached, since the persistence session has been closed. You can use the [attach|domainClasses] method to re-attach an existing persistent instance to the persistence session of the current request.
+{hidden}
+
+h2. Descripción
+
+Casos persistentes están asociados con una persistencia de período de sesiones. Una nueva sesión se crea para cada solicitud y se cierra al final de la solicitud. Si un objeto se lee desde el período de sesiones y colocado en un ámbito de web como el HttpSession es visto como destacado, ya que se ha cerrado la sesión de persistencia. Puede utilizar el método [attach|domainClasses] a reasociación una instancia existente de persistente del período de sesiones de la persistencia de la solicitud actual.

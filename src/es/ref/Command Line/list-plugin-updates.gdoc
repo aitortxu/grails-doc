@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. list-plugin-updates
 
 h2. Purpose
@@ -10,6 +13,23 @@ Usage:
 {code:java}
 grails list-plugin-updates
 {code}
+{hidden}
+
+h1. lista de versiones de plugin
+
+h2. Fin
+
+Muestra las versiones de plugins actualizados disponibles desde el repositorio estándar de Grails
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails-plugin-actualizaciones de la lista
+{code}
+
+{hidden}
+
 
 Lists the plugins that are updateable in the Grails standard repository. Note: This command can take a while to execute depending on your internet connectivity. Typical output looks like this:
 
@@ -20,9 +40,30 @@ Plugins with available updates are listed below:
 acegi               0.4               0.5.2
 console             0.1               0.2.2
 {code}
+{hidden}
+
+Enumera los plugins que son actualizables en el repositorio estándar de Grails. Nota: Este comando puede tardar un rato para ejecutar dependiendo de tu conexión a internet. Salida típica tiene el siguiente aspecto:
+
+{code}
+Plugins con actualizaciones disponibles son los siguientes:
+-------------------------------------------------------------
+<plugin>            <current>         <available>
+Acegi 0.5.2 0.4
+la consola de 0,1 0.2.2
+{código}</available></current></plugin>
+
+{hidden}
+
 
 The first column contains the plugin name, the second the installed version and the last the current version. If you require more info about a plugin you can use the [plugin-info|commandLine] command. If you wish to update a plugin you can use the plugin name and/or version in combination with the [install-plugin|commandLine].
 
 {note}
 Note: If you are behind a proxy you may want to consider using the [set-proxy|commandLine] command prior to running this command.
 {note}
+{hidden}
+
+La primera columna contiene el nombre del plugin, el segundo la versión instalada y la última la versión actual. Si necesita más información sobre un plugin puede utilizar el comando [plugin-info|commandLine]. Si desea actualizar un plugin puede utilizar el nombre de plugin o versión en combinación con [install-plugin|commandLine].
+
+{Nota}
+Nota: Si estás detrás de un proxy puede considerar usar el comando [conjunto-proxy|commandLine] antes de ejecutar este comando.
+{Nota}

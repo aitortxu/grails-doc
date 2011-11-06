@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails supports setting of bean properties via [configuration|guide:conf]. This is often useful when used in combination with [externalized configuration|guide:configExternalized].
 
 You define a @beans@ block with the names of beans and their values:
@@ -9,6 +12,22 @@ beans {
     }
 }
 {code}
+{hidden}
+
+Grails admite la configuración de las propiedades judías a través de [configuration|guide:conf]. Esto es útil cuando se utiliza en combinación con [externalizados configuration|guide:configExternalized].
+
+Definir un frijol @ @ bloque con los nombres de frijoles y sus valores:
+
+{code: java}
+{frijoles
+    bookService {}
+        webServiceURL = "http://www.amazon.com"
+    }
+}
+{code}
+
+{hidden}
+
 
 The general format is:
 
@@ -20,4 +39,17 @@ The same configuration in a Java properties file would be:
 
 {code:java}
 beans.bookService.webServiceURL=http://www.amazon.com
+{code}
+{hidden}
+
+El formato general es:
+
+{code: java}
+[nombre de frijol].[nombre de la propiedad] = [valor]
+{code}
+
+La misma configuración en un archivo de propiedades Java sería:
+
+{code: java}
+beans.bookService.webServiceURL=http://www.Amazon.com
 {code}

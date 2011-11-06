@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. session
 
 h2. Purpose
@@ -18,6 +21,31 @@ class UserController {
     def login() {}
 }
 {code}
+{hidden}
+
+h1. período de sesiones
+
+h2. Fin
+
+La sesión @ @ objeto es una instancia de Servlet API [HttpSession|api:javax.servlet.http.HttpSession] clase
+
+h2. Ejemplos
+
+{code}
+clase UserController {}
+
+Def logout() {}
+        log.Info "agente de usuario:" request.getHeader("User-Agent")
+        Session.Invalidate()
+        redirigir (acción: "login")
+    }
+
+Def login() {}
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -32,3 +60,10 @@ session["user"] = "John"
 
 asset "John" == session.user
 {code}
+{hidden}
+
+h2. Descripción
+
+La clase [HttpSession|api:javax.servlet.http.HttpSession] es útil para los datos de sesión asociada con un cliente.
+
+Atributos de sesión normalmente accesibles desde la [getAttribute|api:javax.servlet.http.HttpSession

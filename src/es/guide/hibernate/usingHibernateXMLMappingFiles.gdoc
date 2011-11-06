@@ -1,3 +1,6 @@
+
+{hidden}
+
 Mapping your domain classes with XML is pretty straightforward. Simply create a @hibernate.cfg.xml@ file in your project's @grails-app/conf/hibernate@ directory, either manually or with the [create-hibernate-cfg-xml|commandLine] command, that contains the following:
 
 {code:xml}
@@ -13,6 +16,25 @@ Mapping your domain classes with XML is pretty straightforward. Simply create a 
     </session-factory>
 </hibernate-configuration>
 {code}
+{hidden}
+
+Asignación de las clases de dominio con XML es bastante sencillo. Simplemente cree un archivo @hibernate.cfg.xml@ en su proyecto @ grails-app/conf/hibernación @ directorio, ya sea manualmente o con el comando [crear-hibernación-cfg-xml|commandLine], que contiene lo siguiente:
+
+{Código: xml}<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Example mapping file inclusion -->
+        <mapping resource="org.example.Book.hbm.xml"></mapping>
+        ...
+    </session-factory>
+</hibernate-configuration>
+{code}
+
+{hidden}
+
 
 The individual mapping files, like 'org.example.Book.hbm.xml' in the above example, also go into the @grails-app/conf/hibernate@ directory. To find out how to map domain classes with XML, check out the [Hibernate manual|http://docs.jboss.org/hibernate/core/3.3/reference/en/html/mapping.html].
 
@@ -23,6 +45,20 @@ hibernate {
     config.location = "file:/path/to/my/hibernate.cfg.xml"
 }
 {code}
+{hidden}
+
+Los archivos de asignación individual, como 'org.example.Book.hbm.xml' en el ejemplo anterior, también ir a la @ grails-app/conf/hibernación @ directorio. Para averiguar cómo asignar clases de dominio con XML, consulte [manual|http://docs.jboss.org/hibernate/core/3.3/reference/en/html/mapping.html de hibernación].
+
+Si no le conviene la ubicación predeterminada del archivo @hibernate.cfg.xml@, se puede cambiar mediante la especificación de una ubicación alternativa en @ grails-app/conf/DataSource.groovy@:
+
+{code}
+hibernación {}
+    config.Location = "file:/path/to/my/hibernate.cfg.xml"
+}
+{code}
+
+{hidden}
+
 
 or even a list of locations:
 
@@ -33,4 +69,20 @@ hibernate {
 }
 {code}
 
+{hidden}
+
+o incluso una lista de ubicaciones:
+
+{code}
+hibernación {}
+    config.Location = ["file:/path/to/one/hibernate.cfg.xml",
+                       "file:/path/to/two/hibernate.cfg.xml"]
+}
+{code}
+
+{hidden}
+
 Grails also lets you write your domain model in Java or reuse an existing one that already has Hibernate mapping files. Simply place the mapping files into @grails-app/conf/hibernate@ and either put the Java files in @src/java@ or the classes in the project's @lib@ directory if the domain model is packaged as a JAR. You still need the @hibernate.cfg.xml@ though!
+{hidden}
+
+Grails también le permite escribir su modelo de dominio en Java o volver a utilizar uno existente que ya tiene los archivos de asignación de hibernación. Simplemente lugar la asignación de archivos en @ grails-app/conf/hibernación y cualquiera puede poner los archivos Java en @ src/java @ o las clases de lib @ del proyecto @ directorio si el modelo de dominio está empaquetado como una jarra. Aunque todavía necesitan la @hibernate.cfg.xml@!

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. if
 
 h2. Purpose
@@ -19,6 +22,32 @@ h2. Examples
      $cache.getContent('1234')
 </g:if>
 {code}
+{hidden}
+
+h1. Si
+
+h2. Fin
+
+La lógica si etiqueta a cambiar en un entorno actual o expresiones.
+
+h2. Ejemplos
+
+{Código: xml}
+<g:if test="${name == 'fred'}">
+     ${Name} ¡ Hola!
+</g:if>
+
+<g:if env="development">
+     Modo de dev - depurar: $someDebug
+</g:if>
+
+<g:if env="production" test="${cacheEnabled}">
+     $Cache.getContent('1234')
+</g:if>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -28,3 +57,13 @@ Attributes
 * @env@ - An environment name
 
 At least one of the attributes must be supplied. If both are supplied they are combined using AND.
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ prueba @ - la expresión para probar
+* @ env @ - un nombre de entorno
+
+Al menos uno de los atributos debe suministrarse. Si ambos son suministrados se combinan mediante and.

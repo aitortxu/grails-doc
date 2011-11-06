@@ -1,3 +1,6 @@
+
+{hidden}
+
 As discussed in the section on [Optimistic and Pessimistic Locking|guide:locking], by default GORM uses optimistic locking and automatically injects a @version@ property into every class which is in turn mapped to a @version@ column at the database level.
 
 If you're mapping to a legacy schema that doesn't have version columns (or there's some other reason why you don't want/need this feature) you can disable this with the @version@ method:
@@ -11,6 +14,24 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+Como se explica en la sección de [Optimistic y Locking|guide pesimista: bloqueo] por defecto GORM usos optimistas el bloqueo y automáticamente se inyecta una versión @ @ propiedad en cada clase que a su vez está asignado a una versión @ @ columna a nivel de base de datos.
+
+Si eres asignación a un esquema heredado que no tiene columnas de versión (o hay otras razones por qué usted no quiere/necesidad esta característica) puede desactivar con la versión @ @ método:
+
+{code: java}
+clase persona {}
+    ...
+    asignación estática = {}
+        tabla 'gente'
+        falsa versión
+    }
+}
+{code}
+
+{hidden}
+
 
 {note}
 If you disable optimistic locking you are essentially on your own with regards to concurrent updates and are open to the risk of users losing data (due to data overriding) unless you use [pessimistic locking|guide:locking]
@@ -33,5 +54,34 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+{Nota}
+Si desactiva el bloqueo optimista se encuentra esencialmente en su propia con respecto a versiones simultáneas y están abiertos para el riesgo de pérdida de datos (debido a datos reemplazar) a menos que utilice usuarios [locking|guide pesimista: bloqueo]
+{Nota}
+
+h4. Tipos de columnas de versión
+
+Por mapas de Grails predeterminado se incrementa en una unidad la versión @ @ propiedad como una larga @ @ se actualiza cada vez que una instancia. Pero hibernación también admite usando un Timestamp @ @, por ejemplo:
+
+{code: java}
+java.sql.Timestamp de importación
+
+clase persona {}
+
+...
+    Versión de timestamp
+
+asignación estática = {}
+        tabla 'gente'
+    }
+}
+{code}
+
+{hidden}
+
 
 There's a slight risk that two updates occurring at nearly the same time on a fast server can end up with the same timestamp value but this risk is very low. One benefit of using a @Timestamp@ instead of a @Long@ is that you combine the optimistic locking and last-updated semantics into a single column.
+{hidden}
+
+Existe un pequeño riesgo de que dos actualizaciones que se producen casi al mismo tiempo en un servidor rápido pueden acabar con el mismo valor de fecha y hora, pero este riesgo es muy bajo. Una ventaja de utilizar un Timestamp @ @ en lugar de una larga @ @ es combinar el bloqueo optimista y semántica última actualización en una sola columna.

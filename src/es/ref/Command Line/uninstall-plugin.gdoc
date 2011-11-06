@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. uninstall-plugin
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails uninstall-plugin shiro
 {code}
+{hidden}
+
+h1. plugin desinstalar
+
+h2. Fin
+
+Desinstala un plugin instalado desde una aplicación.
+
+h2. Ejemplos
+
+{code: java}
+Grails plugin desinstalar shiro
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -18,3 +37,13 @@ grails uninstall-plugin [name]
 {code}
 
 This command will perform a @clean@ and then uninstall the plugin for the given name if it is already installed. The command will remove any metadata referring to the plugin from @application.properties@ and execute the plugin's @scripts/_Uninstall.groovy@ file if it exists.
+{hidden}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails desinstalar-plugin [nombre]
+{code}
+
+Este comando realizará un @ limpiar y desinstale el plugin para el nombre si ya está instalado. El comando quitar cualquier metadato refiriéndose al plugin de @application.properties@ y ejecutar el archivo de @scripts/_Uninstall.groovy@ del plugin si existe.

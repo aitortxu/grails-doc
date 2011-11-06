@@ -1,3 +1,6 @@
+
+{hidden}
+
 By default Grails uses Hibernate's @ImprovedNamingStrategy@ to convert domain class Class and field names to SQL table and column names by converting from camel-cased Strings to ones that use underscores as word separators. You can customize these on a per-instance basis in the @mapping@ closure but if there's a consistent pattern you can specify a different @NamingStrategy@ class to use.
 
 Configure the class name to be used in @grails-app/conf/DataSource.groovy@ in the @hibernate@ section, e.g.
@@ -15,6 +18,28 @@ hibernate {
     naming_strategy = com.myco.myproj.CustomNamingStrategy
 }
 {code}
+{hidden}
+
+Por defecto Grails utiliza @ ImprovedNamingStrategy de hibernación @ para convertir la clase de dominio y los nombres de campo en tabla SQL y nombres de columna mediante la conversión de cadenas causa camello a aquellos que utilizan caracteres de subrayado como separadores de palabras. Puede personalizar estos basándose en la asignación de @ @ cierre por instancias pero si existe un patrón consistente puede especificar una diferente @ NamingStrategy @ clase a utilizar.
+
+Configurar el nombre de clase para ser utilizado en @grails-app/conf/DataSource.groovy@ en el @ hibernación @ sección, por ejemplo,
+
+{code: java}
+{dataSource
+    agrupado = true
+    dbCreate = "Crear gota"
+    ...
+}
+
+hibernación {}
+    Cache.use_second_level_cache = true
+    ...
+    naming_strategy = com.myco.myproj.CustomNamingStrategy
+}
+{code}
+
+{hidden}
+
 
 You can use an existing class or write your own, for example one that prefixes table names and column names:
 
@@ -35,4 +60,31 @@ class CustomNamingStrategy extends ImprovedNamingStrategy {
     }
 }
 {code}
+{hidden}
+
+Puede utilizar una clase existente o escribir su propio, por ejemplo uno que prefijos cuadro nombres y nombres de columna:
+
+{code: java}
+paquete com.myco.myproj
+
+org.hibernate.cfg.ImprovedNamingStrategy de importación
+org.hibernate.util.StringHelper de importación
+
+amplía la clase CustomNamingStrategy ImprovedNamingStrategy {}
+
+Cadena classToTableName(String className) {}
+        "table_" StringHelper.unqualify(className)
+    }
+
+Cadena propertyToColumnName(String propertyName) {}
+        "col_" StringHelper.unqualify(propertyName)
+    }
+}
+{code}
+
+{hidden}
+
+
+{hidden}
+
 

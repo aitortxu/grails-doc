@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. formatNumber
 
 h2. Purpose
@@ -9,6 +12,21 @@ h2. Examples
 {code:xml}
 <g:formatNumber number="${myNumber}" format="\\$###,##0" />
 {code}
+{hidden}
+
+h1. formatNumber
+
+h2. Fin
+
+Da formato a un número utilizando los patrones definidos por la clase [DecimalFormat|api:java.text.DecimalFormat]. También soporta atributos utilizados en la JSTL @ formatNumber @ etiqueta.
+
+h2. Ejemplos
+
+{Código: xml}
+< número g:formatNumber = "$ {myNumber}" format = "\\$
+
+{hidden}
+
 
 Example of formatting an EUR currency amount:
 {code:xml}
@@ -19,6 +37,20 @@ Example of formatting a USD currency amount:
 {code:xml}
 <g:formatNumber number="${myCurrencyAmount}" type="currency" currencyCode="USD" />
 {code}
+{hidden}
+
+Ejemplo de una cantidad de moneda euros de formato:
+{Código: xml}
+<g:formatnumber number="${myCurrencyAmount}" type="currency" currencycode="EUR"></g:formatnumber>
+{code}
+
+Ejemplo de formato de una cantidad de moneda USD:
+{Código: xml}
+<g:formatnumber number="${myCurrencyAmount}" type="currency" currencycode="USD"></g:formatnumber>
+{code}
+
+{hidden}
+
 
 For USD, the currency symbol will be based on the locale of the request. For the "en_US" locale, the result is "$123.45" and for "fi_FI" locale, the formatting is "123,45 USD". The formatting rules come from the [Currency|api:java.util.Currency] class.
 
@@ -31,6 +63,22 @@ Example of formatting a number showing 2 fraction digits:
 {code:xml}
 <g:formatNumber number="${myNumber}" type="number" maxFractionDigits="2" />
 {code}
+{hidden}
+
+USD, el símbolo de moneda se basará en el escenario de la solicitud. Para el escenario "en_US", el resultado es "$ 123.45" y para "fi_FI" de los escenarios, el formato es "123,45 USD". Las reglas de formato provienen de la clase [Currency|api:java.util.Currency].
+
+Ejemplo de la izquierda, relleno de un número con ceros:
+{Código: xml}
+<g:formatnumber number="${myNumber}" type="number" minintegerdigits="9"></g:formatnumber>
+{code}
+
+Ejemplo de formato de un número de 2 dígitos de fracción:
+{Código: xml}
+<g:formatnumber number="${myNumber}" type="number" maxfractiondigits="2"></g:formatnumber>
+{code}
+
+{hidden}
+
 
 Example of formatting a number showing 2 fraction digits, rounding with RoundingMode.HALF_DOWN:
 {code:xml}
@@ -41,6 +89,19 @@ Example of formatting a number showing 2 fraction digits, rounding with Rounding
 h2. Description
 
 Attributes
+{hidden}
+
+Ejemplo de dar formato a un número que muestra 2 dígitos de fracción, redondeo con RoundingMode.HALF_DOWN:
+{Código: xml}
+<g:formatnumber number="${myNumber}" type="number" maxfractiondigits="2" roundingmode="HALF_DOWN"></g:formatnumber>
+{code}
+
+h2. Descripción
+
+Atributos
+
+{hidden}
+
 
 * @number@ (required) - The number object to formate
 * @format@ (optional) - The formatting pattern to use for the number, see [DecimalFormat|api:java.text.DecimalFormat]
@@ -51,6 +112,20 @@ Attributes
 * @minIntegerDigits@ (optional) - Sets the minimum number of digits allowed in the integer portion of a number.
 * @maxIntegerDigits@ (optional) - Sets the maximum number of digits allowed in the integer portion of a number.
 * @minFractionDigits@ (optional) - Sets the minimum number of digits allowed in the fraction portion of a number.
+{hidden}
+
+* @ número @ (requerido) - el número de objetos a Formiato
+* @ formato @ (opcional) - el patrón de formato que se utilizará para el número, consulte [DecimalFormat|api:java.text.DecimalFormat]
+* @ formatName @ (opcional) - Buscar formato @ @ desde el valor predeterminado MessageSource / ResourceBundle (archivo de i18n/*.properties) con esta clave. Buscar el valor predeterminado MessageSource @ formato @ / ResourceBundle (archivo de i18n/*.properties) con esta clave. Si @ formato @ y @ formatName @ están vacíos, @ formato @ se busca con la tecla '@ default.number.format@'. Si la clave no está presente, se utiliza '0' formato patrón.
+* @ tipo @ (opcional): el tipo de formateador utilizar: 'número', 'moneda' o '%'. @ formato @ o @ formatName @ no se usan cuando se especifica @ tipo @.
+* @ locale @ (opcional): reemplazar la configuración regional de la solicitud, valor de cadena o [Locale|api:java.util.Locale]
+* @ groupingUsed @ (opcional): definir si la agrupación se utilizará en este formato.
+* @ minIntegerDigits @ (opcional) - establece el número mínimo de dígitos permitidos en la parte entera de un número.
+* @ maxIntegerDigits @ (opcional) - establece el número máximo de dígitos permitidos en la parte entera de un número.
+* @ minFractionDigits @ (opcional) - establece el número mínimo de dígitos permitidos en la parte de la fracción de un número.
+
+{hidden}
+
 * @maxFractionDigits@ (optional) - Sets the maximum number of digits allowed in the fraction portion of a number.
 * @currencyCode@ (optional) - The standard currency code ('EUR', 'USD', etc.), uses formatting settings for the currency. type='currency' attribute is recommended.
 * @currencySymbol@ (optional) - Force the currency symbol to some symbol, recommended way is to use @currencyCode@ attribute instead (takes symbol information from [Currency|api:java.util.Currency])
@@ -60,3 +135,14 @@ h2. Source
 
 {source:tag=FormatTagLib.formatNumber}
 {source}
+{hidden}
+
+* @ maxFractionDigits @ (opcional) - establece el número máximo de dígitos permitidos en la parte de la fracción de un número.
+* @ currencyCode @ (opcional): el código de moneda estándar ('Euros', 'USD', etc.), utiliza configuración de formato de la moneda. tipo = 'moneda' atributo es recomendable.
+* @ currencySymbol @ (opcional) - forzar el símbolo de moneda a un símbolo, forma recomendada es utilizar en su lugar @ currencyCode @ atributo (símbolo de toma información de [Currency|api:java.util.Currency])
+* @ roundingMode @ (opcional) - conjuntos [RoundingMode|api:java.math.RoundingMode] utilizan en esta DecimalFormat. Los valores usuales: @ HALF_UP @, @ HALF_DOWN @. Si roundingMode es innecesario @ @ y un @ ArithemeticException @ se produce, se devolverá el número original formateado con formato de número por defecto.
+
+h2. Fuente
+
+{source:tag=FormatTagLib.formatNumber}
+origen de {}

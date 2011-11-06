@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. discriminator
 
 h2. Purpose
@@ -11,6 +14,24 @@ class Content {
     ...
 }
 {code}
+{hidden}
+
+h1. discriminador
+
+h2. Fin
+
+Personaliza la columna discriminador utilizada en asignación de tabla por subclase herencia.
+
+h2. Ejemplos
+
+{code: java}
+clase {contenido
+    ...
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class PodCast extends Content {
@@ -20,6 +41,19 @@ class PodCast extends Content {
     }
 }
 {code}
+
+{hidden}
+
+{code: java}
+clase PodCast amplía contenido {}
+    ...
+    asignación estática = {}
+        discriminador "audio"
+    }
+}
+{code}
+
+{hidden}
 
 h2. Description
 
@@ -31,6 +65,21 @@ Arguments:
 * @value@ - The value to use for the discriminator
 * @formula@ (optional) - an SQL expression that is executed to evaluate the type of class. Use this or @column@ but not both
 * @type@ (optional defaults to string) - the Hibernate type, used for the where clause condition to know if it needs to wrap it with '
+{hidden}
+
+h2. Descripción
+
+Uso: @ discriminator(string/map) @
+
+Argumentos:
+
+* @ columna @ (opcional) - nombre de la columna para almacenar el discriminador
+* @ valor @ - el valor que se utiliza para el discriminador
+* @ fórmula @ (opcional) - una expresión SQL que se ejecuta para evaluar el tipo de clase. Uso este o @ columna @ pero no tanto
+* @ Escriba @ (opcionales valores predeterminados a cadena) - el tipo de hibernación, usado para el donde la condición de la cláusula para saber si necesita envolverlo con '
+
+{hidden}
+
 
 By default when mapping inheritance Grails uses a single-table model where all classes share the same table. A discriminator column is used to determine the type for each row, by default the full class name. You can use the @discriminator@ method to customize what's stored:
 
@@ -48,6 +97,27 @@ class PodCast extends Content {
     }
 }
 {code}
+{hidden}
+
+De forma predeterminada al asignar herencia Grails utiliza un modelo de tabla única donde todas las clases comparten la misma tabla. Una columna de discriminador se utiliza para determinar el tipo de cada fila, de forma predeterminada el nombre de clase completo. Puede utilizar el discriminador @ @ método para personalizar lo que está almacenado:
+
+{code: java}
+clase {contenido
+    ...
+}
+{code}
+
+{code: java}
+clase PodCast amplía contenido {}
+    ...
+    asignación estática = {}
+        discriminador "audio"
+    }
+}
+{code}
+
+{hidden}
+
 
 You can also customize the discriminator column name:
 
@@ -59,6 +129,21 @@ class Content {
     }
 }
 {code}
+{hidden}
+
+También puede personalizar el nombre de columna discriminador:
+
+{code: java}
+clase {contenido
+    ...
+    asignación estática = {}
+        columna discriminador: "content_type"
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class PodCast extends Content {
@@ -68,6 +153,19 @@ class PodCast extends Content {
     }
 }
 {code}
+
+{hidden}
+
+{code: java}
+clase PodCast amplía contenido {}
+    ...
+    asignación estática = {}
+        valor discriminador: "audio"
+    }
+}
+{code}
+
+{hidden}
 
 Or you can use a formula:
 
@@ -80,12 +178,38 @@ class Content {
     }
 }
 {code}
+{hidden}
+
+O puede utilizar una fórmula:
+
+{code: java}
+clase {contenido
+    ...
+    asignación estática = {}
+        valor discriminador: "1", tipo: "entero",
+            fórmula: "caso cuando CLASS_TYPE 'a', 'b', 'c', a continuación, 0 end else 1",
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class PodCast extends Content {
     ...
     static mapping = {
         discriminator value: "0"
+    }
+}
+{code}
+{hidden}
+
+{code: java}
+clase PodCast amplía contenido {}
+    ...
+    asignación estática = {}
+        valor discriminador: "0"
     }
 }
 {code}

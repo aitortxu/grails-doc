@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. create-unit-test
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails create-unit-test org.bookstore.book
 {code}
+{hidden}
+
+h1. prueba de unidad crear
+
+h2. Fin
+
+La @ crear unidad de prueba-@ comando crea una prueba unitaria para el nombre base determinada.
+
+h2. Ejemplos
+
+{code: java}
+Grails prueba de unidad crear org.bookstore.book
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -19,6 +38,20 @@ A unit test differs from an integration test in that the Grails environment is n
 Refer to the section on [Unit Testing|guide:testing] of the user guide for information on unit vs. integration testing.
 
 {note}
+{hidden}
+
+h2. Descripción
+
+Crea una prueba unitaria para el nombre base determinada. Por ejemplo para un nombre de base de @org.bookstore.book@ una prueba de unidad llamada @ BookTests @ se creará en el @ prueba/unidad/org/librería @ directorio.
+
+Una prueba unitaria difiere de un ensayo de integración en que no se ha cargado el entorno Grails para cada ejecución de la prueba y se queda hasta realizar la burla apropiado mediante GroovyMock o una biblioteca de simulacro, como "EasyMock":http://www.easymock.org/.
+
+Consulte la sección sobre [unidad Testing|guide: pruebas] de la Guía del usuario para obtener información sobre la unidad frente a pruebas de integración.
+
+{Nota}
+
+{hidden}
+
 Note that this command is just for convenience and you can also create integration tests in your favourite text editor or IDE if you choose.
 {note}
 
@@ -29,5 +62,23 @@ grails create-unit-test [name]
 {code}
 
 Fired Events:
+{hidden}
+
+Tenga en cuenta que este comando es sólo por conveniencia y también puede crear pruebas de integración en su editor de textos preferido o IDE si elige.
+{Nota}
+
+Uso:
+
+{code: java}
+Grails crear unidad de prueba-[nombre]
+{code}
+
+Despedido de eventos:
+
+{hidden}
+
 
 * @CreatedFile@ - When the unit test is created
+{hidden}
+
+* @ CreatedFile @ - cuando se creó la prueba unitaria

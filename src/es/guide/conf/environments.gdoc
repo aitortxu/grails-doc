@@ -1,14 +1,9 @@
+
 {hidden}
 
 h4. Per Environment Configuration
 
 Grails supports the concept of per environment configuration. The @Config.groovy@, @DataSource.groovy@, and @BootStrap.groovy@ files in the @grails-app/conf@ directory can use per-environment configuration using the syntax provided by "ConfigSlurper":http://groovy.codehaus.org/ConfigSlurper. As an example consider the following default @DataSource@ definition provided by Grails:
-
-{hidden}
-
-h4. Configuración por entornos
-
-Grails es compatible con el concepto de configuración por entornos. Los archivos @Config.groovy@, @DataSource.groovy@ y @BootStrap.groovy@ en el directorio @grails-app/conf@ pueden utilizar configuración por entorno por medio con la sintaxis proporcionada por "ConfigSlurper":http://groovy.codehaus.org/ConfigSlurper. Como ejemplo, considere la siguiente definición por defecto del @DataSource@ proporcionada por Grails:
 
 {code:java}
 dataSource {
@@ -38,8 +33,43 @@ environments {
     }
 }
 {code}
+{hidden}
+
+h4. Por la configuración del entorno
+
+Grails es compatible con el concepto de por la configuración del entorno. Los archivos de @ Config.groovy@, @ DataSource.groovy@ y @BootStrap.groovy@ en el @ grails-app/conf @ directorio pueden utilizar configuración de por medio con la sintaxis proporcionada por "ConfigSlurper":http://groovy.codehaus.org/ConfigSlurper. Como ejemplo, considere el siguiente predeterminado @ DataSource @ definición proporcionada por Grails:
+
+{code: java}
+{dataSource
+    agrupado = false
+    driverClassName = "org.h2.Driver"
+    username = "sa"
+    Password = ""
+}
+entornos {}
+    desarrollo {}
+        {dataSource
+            dbCreate = "Crear gota"
+            URL = "jdbc:h2:mem:devDb"
+        }
+    }
+    prueba {}
+        {dataSource
+            dbCreate = "Actualizar"
+            URL = "jdbc:h2:mem:testDb"
+        }
+    }
+    producción {}
+        {dataSource
+            dbCreate = "Actualizar"
+            URL = "jdbc:h2:prodDb"
+        }
+    }
+}
+{code}
 
 {hidden}
+
 
 Notice how the common configuration is provided at the top level and then an @environments@ block specifies per environment settings for the @dbCreate@ and @url@ properties of the @DataSource@.
 
@@ -52,17 +82,18 @@ grails [environment] [command name]
 {code}
 {hidden}
 
-Observe cómo la configuración común se proporciona en el nivel superior y, a continuación, especifica un bloque @environments@ especificando valores por entorno para @dbCreate@ y la propiedad @url@ para el @DataSource@.
+Observe cómo la configuración común se proporciona en el nivel superior y, a continuación, especifica un entornos @ bloque @ por valores del entorno de @ dbCreate @ y @ url @ propiedades DataSource @ @.
 
-h4. Empaquetado y ejecución para distintos entornos
+h4. Embalaje y ejecución para distintos entornos
 
-La [línea de comando|guide:commandLine] de Grails tiene capacidad para ejecutar cualquier comando dentro del contexto de un entorno específico. El formato es:
+Grails' [comando line|guide:commandLine] ha construido en la capacidad para ejecutar cualquier comando dentro del contexto de un entorno específico. El formato es:
 
 {code: java}
 Grails [entorno] [nombre de comando]
 {code}
 
 {hidden}
+
 
 In addition, there are 3 preset environments known to Grails: @dev@, @prod@, and @test@ for @development@, @production@ and @test@. For example to create a WAR for the @test@ environment you wound run:
 
@@ -77,13 +108,13 @@ grails -Dgrails.env=UAT run-app
 {code}
 {hidden}
 
-Además, hay 3 entornos preestablecidos para Grails: @dev@, @prod@, y @test@, para @development@, @production@ y @test@. Por ejemplo, para crear un WAR para el entorno de @test@ puede ejecutar:
+Además, hay 3 entornos preestablecidos conocidos a Grails: @ dev @, @ prod @ y @ prueba @ @ desarrollo @, @ producción @ y @ prueba @. Por ejemplo, para crear una guerra para la prueba @ @ entorno que herida ejecutar:
 
-{code:java}
-grails test war
+{code: java}
+Grails prueba guerra
 {code}
 
-Para otros entornos puede pasar una variable @grails.env@ para cualquier comando:
+Para otros entornos de destino puede pasar una variable @grails.env@ para cualquier comando:
 
 {code: java}
 Grails-Dgrails.env=UAT run-app
@@ -91,15 +122,10 @@ Grails-Dgrails.env=UAT run-app
 
 {hidden}
 
+
 h4. Programmatic Environment Detection
 
 Within your code, such as in a Gant script or a bootstrap class you can detect the environment using the [Environment|api:grails.util.Environment] class:
-
-{hidden}
-
-h4. Detección de entorno mediante programación
-
-Dentro del código, como en un script de Gant o una clase de bootstrap se puede detectar el entorno mediante la clase [Environment|api:grails.util.Environment]:
 
 {code:java}
 import grails.util.Environment
@@ -115,6 +141,26 @@ switch (Environment.current) {
         break
 }
 {code}
+{hidden}
+
+h4. Detección de medio ambiente mediante programación
+
+Dentro del código, como en un guión de Gant o una clase de arranque se puede detectar el entorno mediante la clase [Environment|api:grails.util.Environment]:
+
+{code: java}
+grails.util.Environment de importación
+
+...
+
+Switch (Environment.current) {}
+    Case Environment.DEVELOPMENT:
+        configureForDevelopment()
+        salto
+    Case Environment.PRODUCTION:
+        configureForProduction()
+        salto
+}
+{code}
 
 {hidden}
 
@@ -122,12 +168,6 @@ switch (Environment.current) {
 h4. Per Environment Bootstrapping
 
 Its often desirable to run code when your application starts up on a per-environment basis. To do so you can use the @grails-app/conf/BootStrap.groovy@ file's support for per-environment execution:
-
-{hidden}
-
-h4. Bootstrap por entorno
-
-A menudo es deseable ejecutar código cuando la aplicación se inicia dependiendo del entorno. Para ello puede utilizar el soporte por entornos del archivo @grails-app/conf/BootStrap.groovy@ :
 
 {code}
 def init = { ServletContext ctx ->
@@ -142,6 +182,25 @@ def init = { ServletContext ctx ->
     ctx.setAttribute("foo", "bar")
 }
 {code}
+{hidden}
+
+h4. Por medio ambiente Bootstrapping
+
+Sus a menudo deseable para ejecutar código cuando la aplicación se inicia en una base de por medio. Para ello puede utilizar la compatibilidad del archivo @grails-app/conf/BootStrap.groovy@ para su ejecución al entorno:
+
+{code}
+init Def = {ServletContext ctx->
+    entornos {}
+        producción {}
+            CTX.SetAttribute ("env", "prod")
+        }
+        desarrollo {}
+            CTX.SetAttribute ("env", "dev")
+        }
+    }
+    CTX.SetAttribute ("foo", "bar")
+}
+{code}
 
 {hidden}
 
@@ -150,19 +209,29 @@ h4. Generic Per Environment Execution
 
 The previous @BootStrap@ example uses the @grails.util.Environment@ class internally to execute. You can also use this class yourself to execute your own environment specific logic:
 
-{hidden}
-
-h4. Ejecución genérica por entorno
-
-En el ejemplo anterior de @BootStrap@ se utiliza la clase @grails.util.Environment@ internamente para ejecutar. También puede utilizar esta clase para ejecutar su propia lógica específica del entorno:
-
 {code}
 Environment.executeForCurrentEnvironment {
     production {
-        // hacer algo en producción
+        // do something in production
     }
     development {
-        // hacer algo en desarrollo
+        // do something only in development
+    }
+}
+{code}
+{hidden}
+
+h4. Genérico por el entorno de ejecución
+
+La anterior BootStrap @ @ en el ejemplo se utiliza la clase @grails.util.Environment@ internamente para ejecutar. También puede utilizar esta clase para ejecutar su propia lógica específica del entorno:
+
+{code}
+Environment.executeForCurrentEnvironment {}
+    producción {}
+        / / hacer algo en producción
+    }
+    desarrollo {}
+        / / hacer algo sólo en desarrollo
     }
 }
 {code}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails defines the notion of a service layer. The Grails team discourages the embedding of core application logic inside controllers, as it does not promote reuse and a clean separation of concerns.
 
 Services in Grails are the place to put the majority of the logic in your application, leaving controllers responsible for handling request flow with redirects and so on.
@@ -9,6 +12,22 @@ You can create a Grails service by running the [create-service|commandLine] comm
 {code:java}
 grails create-service helloworld.simple
 {code}
+{hidden}
+
+Grails define la noción de una capa de servicio. El equipo de Grails desalienta la incorporación de la lógica de la aplicación principal dentro de los controladores, como no promueve la reutilización y la separación limpia de preocupaciones.
+
+Servicios de Grails son el lugar para poner la mayor parte de la lógica de la aplicación, dejando los controladores responsable de gestionar el flujo de solicitud con redirecciones y así sucesivamente.
+
+h4. Creación de un servicio
+
+Puede crear un servicio de Grails ejecutando el comando [crear-service|commandLine] desde la raíz de su proyecto en una ventana de terminal:
+
+{code: java}
+Grails crear servicio helloworld.simple
+{code}
+
+{hidden}
+
 
 {note}
 If no package is specified with the create-service script, Grails automatically uses the application name as the package name.
@@ -20,5 +39,19 @@ The above example will create a service at the location @grails-app/services/hel
 package helloworld
 
 class SimpleService {
+}
+{code}
+{hidden}
+
+{Nota}
+Si no se especifica ningún paquete con el servicio de crear secuencias de comandos, Grails utiliza automáticamente el nombre de la aplicación como el nombre del paquete.
+{Nota}
+
+En el ejemplo anterior se creará un servicio en la ubicación @ grails-app/services/helloworld/SimpleService.groovy@. Nombre del servicio termina con el Convención @ servicio @, salvo que un servicio es una simple clase Groovy:
+
+{code: java}
+paquete helloworld
+
+clase {SimpleService
 }
 {code}

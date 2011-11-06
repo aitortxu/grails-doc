@@ -1,3 +1,6 @@
+
+{hidden}
+
 To map a domain class with annotations, create a new class in @src/java@ and use the annotations defined as part of the EJB 3.0 spec (for more info on this see the [Hibernate Annotations Docs|http://annotations.hibernate.org/]):
 
 {code:java}
@@ -41,6 +44,54 @@ public class Book {
     }
 }
 {code}
+{hidden}
+
+Para asignar una clase de dominio con anotaciones, crear una nueva clase en @ src/java @ y utilizar las anotaciones definidas como parte de la especificación EJB 3.0 (para más información al respecto, consulte el [Docs|http://annotations.hibernate.org/ de anotaciones de hibernación]):
+
+{code: java}
+paquete com.books;
+
+Import javax.persistence.Entity;
+Import javax.persistence.GeneratedValue;
+Import javax.persistence.Id;
+
+@ Entidad
+public class libro {}
+    id privado de largo;
+    título de cadena privada;
+    Descripción de cadena privada;
+    privada fecha fecha;
+
+@ Id
+    @ GeneratedValue
+    {getId() mucho público
+        Devuelve id;
+    }
+
+{} public void setId (id. de largo)
+        this.id = id;
+    }
+
+Public String getTitle() {
+        devolver el título;
+    }
+
+{} public void setTitle (título de cadena)
+        this.Title = título;
+    }
+
+Public String getDescription() {
+        volver a descripción;
+    }
+
+{pública void descripciónDelConjunto (String description)
+        this.Description = descripción;
+    }
+}
+{code}
+
+{hidden}
+
 
 Then register the class with the Hibernate @sessionFactory@ by adding relevant entries to the @grails-app/conf/hibernate/hibernate.cfg.xml@ file as follows:
 
@@ -54,6 +105,27 @@ Then register the class with the Hibernate @sessionFactory@ by adding relevant e
     </session-factory>
 </hibernate-configuration>
 {code}
+{hidden}
+
+Luego registrar la clase con la hibernación @ sessionFactory @ agregando las entradas correspondientes en el archivo @grails-app/conf/hibernate/hibernate.cfg.xml@ como sigue:
+
+{Código: xml}
+<!DOCTYPE hibernate-configuration SYSTEM
+  "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"><hibernate-configuration><session-factory><mapping package="com.books"><mapping class="com.books.Book"></mapping></mapping>
+        
+        
+    </session-factory>
+    
+</hibernate-configuration>
+{code}
+
+{hidden}
+
 See the previous section for more information on the @hibernate.cfg.xml@ file.
 
 When Grails loads it will register the necessary dynamic methods with the class. To see what else you can do with a Hibernate domain class see the section on [Scaffolding|guide:scaffolding].
+{hidden}
+
+Consulte la sección anterior para obtener más información sobre el archivo @hibernate.cfg.xml@.
+
+Cuando se carga Grails registrará los métodos dinámicos necesarios con la clase. Para ver qué más se puede hacer con una hibernación clase de dominio consulte la sección [Scaffolding|guide:scaffolding].

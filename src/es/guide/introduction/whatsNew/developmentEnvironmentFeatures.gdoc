@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Interactive Mode and Console Enhancements
 
 Grails 2.0 features brand new console output that is more concise and user friendly to consume. An example of the new output when running tests can be seen below:
@@ -7,6 +10,20 @@ Grails 2.0 features brand new console output that is more concise and user frien
 In general Grails makes its best effort to display update information on a single line and only present the information that is crucial. This means that while in previous versions of Grails the [war|commandLine] command produced many lines of output, in Grails 2.0 only 1 line of output is produced:
 
 !war-output.png!
+
+{hidden}
+
+h4. Modo interactivo y mejoras de consola
+
+Grails 2.0 presenta nueva salida de la consola que es más conciso y fácil de usar consumir. Un ejemplo de la salida nuevo cuando se ejecutan pruebas puede verse a continuación:
+
+! output.png prueba!
+
+En general Grails hace su mejor esfuerzo para mostrar información de actualización en una sola línea y sólo presentan la información es crucial. Esto significa que mientras que en las versiones anteriores de Grails el comando [war|commandLine] produjo muchas líneas de salida, en Grails 2.0 sólo 1 línea de salida se produce:
+
+! output.png de guerra!
+
+{hidden}
 
 In addition simply typing 'grails' at the command line activates the new interactive mode which features TAB completion, command history and keeps the JVM running to ensure commands execute much quicker than otherwise
 
@@ -18,6 +35,20 @@ h4. Reloading Agent
 
 Grails 2.0 reloading mechanism no longer uses class loaders, but instead uses a JVM agent to reload changes to class files. This results in greatly improved reliability when reloading changes and also ensures that the class files stored in disk remain consistent with the class files loaded in memory, which reduces the need to run the [clean|commandLine] command.
 
+{hidden}
+
+Además simplemente escribiendo 'grails' en la línea de comandos activa el nuevo modo interactivo que terminación de ficha de características, historial de comandos y mantiene la JVM ejecutando para comandos ejecutar mucho más rápido que lo contrario
+
+! output.png interactivo!
+
+Para obtener más información sobre las nuevas características de la consola, consulte la sección de la guía que cubre el [consola y interactiva mode|guide:interactiveMode].
+
+h4. Agente de carga
+
+Grails 2.0 recarga mecanismo ya no utiliza cargadores de clases, pero en su lugar se utiliza a un agente JVM para volver a cargar los cambios a los archivos de clase. Esto da como resultado mucho mayor confiabilidad al volver a cargar los cambios y también asegura que los archivos de clase almacenados en disco sean compatibles con los archivos de clase cargados en la memoria, lo que reduce la necesidad de ejecutar el comando [clean|commandLine].
+
+{hidden}
+
 h4. New Test Report and Documentation Templates
 
 There are new templates for displaying test results that are clearer and more user friendly than the previous reports:
@@ -28,6 +59,20 @@ In addition, the Grails documentation engine has received a facelift with a new 
 
 !doc-template.png!
 
+{hidden}
+
+h4. Nuevo informe de prueba y plantillas de documentación
+
+Hay nuevas plantillas para mostrar los resultados de las pruebas que son más claros y más amigable que los informes anteriores:
+
+! template.png prueba!
+
+Además, el motor de la documentación de Grails ha recibido un lavado de cara con una nueva plantilla para presentar documentación de aplicación y plugin Grails:
+
+! template.png doc!
+
+{hidden}
+
 See the section on the [documentation engine|guide:docengine] for more usage info.
 
 h4. Use a TOC for Project Docs
@@ -37,6 +82,20 @@ The old documentation engine relied on you putting section numbers into the gdoc
 You can now use logical names for your gdoc files and define the structure and section titles in a YAML table-of-contents file, as described in the section on the [documentation engine|guide:docengine]. The logical names appear in the URLs, so as long as you don't change those, your URLs will always remain the same no matter how much restructuring or changing of titles you do.
 
 Grails 2.0 even provides a [migrate-docs|commandLine] command to aid you in migrating existing gdoc user guides.
+
+{hidden}
+
+Consulte la sección sobre el [documentación engine|guide:docengine] para obtener más información de uso.
+
+h4. Utilizar una tabla de contenido para documentos de proyecto
+
+El viejo motor de documentación se basó en que poner números de sección en los nombres de archivo gdoc. Aunque conveniente, esto efectivamente hizo difícil reestructurar la Guía del usuario mediante la inserción de nuevos capítulos y secciones. Además, toda esa reestructuración o cambiar el nombre de títulos de la sección provocado cambios importantes a la URL.
+
+Ahora puede utilizar nombres lógicos para los archivos de gdoc y definir las estructura y la sección títulos en un archivo de tabla de contenido YAML, como se describe en la sección [engine|guide:docengine de documentación]. Los nombres lógicos aparecen en las direcciones URL, así como aquellos no cambia, su URL siempre seguirá siendo el mismo sin importar cuánto reestructuración o el cambio de títulos que hacer.
+
+Grails 2.0 incluso proporciona un comando [migrar-docs|commandLine] para ayudarle en migración guías de usuario gdoc existentes.
+
+{hidden}
 
 h4. Enhanced Error Reporting and Diagnosis
 
@@ -55,6 +114,28 @@ In addition stack trace filtering has been further enhanced to display only rele
 |   908 | run          in     ''
 ^   662 | run . . . .  in Thread.java
 {code}
+{hidden}
+
+h4. Informes de errores mejoradas y diagnóstico
+
+Error de diagnóstico de problema y presentación de informe ha mejorado mucho con una nueva vista de errores que analiza las trazas de la pila y recursivamente muestra las áreas problemáticas en el código:
+
+! view.png errores!
+
+Además filtrado de seguimiento de pila ha sido más mejorado para mostrar información de seguimiento sólo pertinentes:
+
+{code}
+   Línea | Método
+->>   9 | getValue en Book.groovy
+- - - - - - - - - - - - - - - - - - - - - - - - -
+|     7 | getBookValue en BookService.groovy
+|   886 | runTask. .  en ThreadPoolExecutor.java
+|   908 | ejecutar ''
+^ 662 | ejecutar....  en Thread.java
+{code}
+
+{hidden}
+
 
 h4. H2 Database and Console
 
@@ -65,6 +146,20 @@ Grails 2.0 now uses the H2 database instead of HSQLDB, and enables the H2 databa
 h4. Plugin Usage Tracking
 
 To enhance community awareness of the most popular plugins an opt-in plugin usage tracking system has been included where users can participate in providing feedback to the plugin community on which plugins are most popular.
+{hidden}
+
+h4. H2 Base de datos y la consola
+
+Grails 2.0 ahora utiliza la base de datos H2 en lugar de HSQLDB y permite que la consola de base de datos de H2 en el modo de desarrollo (en el /dbconsole URI) para que la base de datos en la memoria se puede consultar fácilmente desde el navegador:
+
+! h2-console.png!
+
+h4. Rastreo de uso plugin
+
+Para aumentar la sensibilización de la comunidad de los plugins más populares un uso de opt-in plugin sistema de seguimiento ha incluido donde los usuarios pueden participar en proporcionar información a la comunidad de plugin que plugins son más populares.
+
+{hidden}
+
 
 This will help drive the roadmap and increase support of key plugins while reducing the need to support older or less popular plugins thus helping plugin development teams focus their efforts.
 
@@ -75,6 +170,19 @@ There are numerous improvements to dependency resolution handling via Ivy includ
 
 * Grails now makes a best effort to cache the previous resolve and avoid resolving again unless you change @BuildConfig.groovy@.
 * Plugins dependencies now appear in the dependency report generated by @grails dependency-report@
+{hidden}
+
+Esto ayudará a la hoja de ruta y el aumento admiten plugins clave mientras reduce la necesidad de apoyar más o menos populares plugins contribuyendo plugin enfoque de equipos de desarrollo en sus esfuerzos de unidad.
+
+h4. Mejoras de resolución de dependencia
+
+Hay numerosas mejoras en la resolución de dependencias manipulación mediante Ivy incluyendo:
+
+* Grails hace ahora un mejor esfuerzo para almacenar en caché la determinación anterior y evitar resolver nuevamente a menos que cambie a @ BuildConfig.groovy@.
+* Plugins dependencias ahora aparecen en el informe de la dependencia generado por informe de dependencias @ grails @
+
+{hidden}
+
 * Plugins published with the release plugin now publish their transitive plugin dependencies in the generated POM which are later resolved.
 * It is now possible to customize the ivy cache directory via @BuildConfig.groovy@
 
@@ -85,6 +193,21 @@ grails.project.dependency.resolution = {
 {code}
 
 * It is now possible to completely disable resolution from inherited repositories (repositories defined by other plugins):
+{hidden}
+
+* Plugins publicados con el plugin de liberación ahora publicar sus dependencias transitivas plugin en el POM generado que se resuelven más tarde.
+* Ahora es posible personalizar el directorio de caché de hiedra vía @BuildConfig.groovy@
+
+{code}
+Grails.Project.Dependency.Resolution = {}
+    cacheDir "ivy/destino-cache"
+}
+{code}
+
+* Ahora es posible deshabilitar completamente la resolución de repositorios heredados (repositorios definidos por otros plugins):
+
+{hidden}
+
 
 {code}
 grails.project.dependency.resolution = {
@@ -96,11 +219,35 @@ grails.project.dependency.resolution = {
     ...
 }
 {code}
+{hidden}
+
+{code}
+Grails.Project.Dependency.Resolution = {}
+
+{repositorios
+        hereda falso / / si desea heredar las definiciones de repositorio de plugins
+        ...
+    }
+    ...
+}
+{code}
+
+{hidden}
+
 
 * It is now possible to easily disable checksum validation errors:
 
 {code}
 grails.project.dependency.resolution = {
     checksums false // whether to verify checksums or not
+}
+{code}
+{hidden}
+
+* Ahora es posible desactivar fácilmente los errores de validación de suma de comprobación:
+
+{code}
+Grails.Project.Dependency.Resolution = {}
+    sumas falso / / si desea verificar sumas de comprobación o no
 }
 {code}

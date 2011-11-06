@@ -1,3 +1,6 @@
+
+{hidden}
+
 Within the body of the filter you can then define one or several of the following interceptor types for the filter:
 
 * @before@ - Executed before the action. Return @false@ to indicate that the response has been handled that that all future filters and the action should not execute
@@ -20,5 +23,27 @@ class SecurityFilters {
    }
 }
 {code}
+{hidden}
+
+Dentro del cuerpo del filtro puede definir uno o varios de los siguientes tipos de interceptor para el filtro:
+
+* @ antes @ - ejecutado antes de la acción. Devolver false @ @ para indicar que la respuesta ha sido manejada que el futuros todos los filtros y la acción no deben ejecutar
+* @ después @ - ejecutado tras una acción. Toma un argumento primero como modelo para permitir la modificación del modelo antes de procesar la vista Vista
+* @ afterView @ - ejecutados después de la representación de la vista.  Toma una excepción como un argumento que va a ser non-@null @ si una excepción se produce durante el proceso. Nota: este cierre se llama antes de aplica el diseño.
+
+Por ejemplo, para cumplir con el caso de uso común de autenticación simplista podría definir un filtro como sigue:
+
+{code: java}
+clase SecurityFilters {}
+   filtros de Def = {}
+       loginCheck (controlador: ' *', acción: ' *') {}
+           antes = {}
+              Si (! session.user
+
+{hidden}
+
 
 Here the @loginCheck@ filter uses a @before@ interceptor to execute a block of code that checks if a user is in the session and if not redirects to the login action. Note how returning false ensure that the action itself is not executed.
+{hidden}
+
+Aquí la @ loginCheck @ filtro utiliza una @ antes @ interceptor para ejecutar un bloque de código que comprueba si es un usuario de la sesión y si no se redirige a la acción de inicio de sesión. Observe cómo devolver false garantizar que no se ejecuta la acción propiamente dicha.

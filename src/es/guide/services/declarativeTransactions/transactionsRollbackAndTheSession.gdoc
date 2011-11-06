@@ -1,3 +1,6 @@
+
+{hidden}
+
 h3. Understanding Transactions and the Hibernate Session
 
 When using transactions there are important considerations you must take into account with regards to how the underlying persistence session is handled by Hibernate. When a transaction is rolled back the Hibernate session used by GORM is cleared. This means any objects within the session become detached and accessing uninitialized lazy-loaded collections will lead to @LazyInitializationException@s.
@@ -12,6 +15,25 @@ class Author {
     static hasMany = [books: Book]
 }
 {code}
+{hidden}
+
+h3. Las transacciones de la comprensión y la hibernación sesión
+
+Cuando se utilizan las transacciones son consideraciones importantes que deben tener en cuenta con respecto a cómo se controla la sesión subyacente de la persistencia de hibernación. Cuando una transacción se deshace la sesión de Hibernate utilizada por GORM está desactivada. Esto significa que los objetos dentro de la sesión a ser separada y acceso a colecciones de perezoso cargado sin inicializar conducirá a @ LazyInitializationException@s.
+
+Para entender por qué es importante que la sesión de Hibernate está desactivada. Considere el siguiente ejemplo:
+
+{code}
+clase {autor
+    Nombre de la cadena
+    Edad entero
+
+estático hasMany = [libros: libro]
+}
+{code}
+
+{hidden}
+
 
 If you were to save two authors using consecutive transactions as follows:
 
@@ -25,6 +47,23 @@ Author.withTransaction { status ->
     new Author(name: "Stephen King", age: 40).save()
 }
 {code}
+{hidden}
+
+Si se guarda a dos autores mediante transacciones consecutivas como sigue:
+
+{code}
+Author.withTransaction {Estado->
+    nuevo autor (nombre: "Stephen King", edad: 40).save()
+    Status.setRollbackOnly()
+}
+
+Author.withTransaction {Estado->
+    nuevo autor (nombre: "Stephen King", edad: 40).save()
+}
+{code}
+
+{hidden}
+
 
 Only the second author would be saved since the first transaction rolls back the author @save()@ by clearing the Hibernate session. If the Hibernate session were not cleared then both author instances would be persisted and it would lead to very unexpected results.
 
@@ -44,6 +83,29 @@ class AuthorService {
     }
 }
 {code}
+{hidden}
+
+Sólo el segundo autor sería guardado desde la primera transacción deshace el autor @ save() @ desactivando la sesión de Hibernate. Si no se limpiaron la sesión de Hibernate tanto que podrían persistir autor instancias y daría lugar a resultados muy inesperados.
+
+Sin embargo, puede ser frustrante obtener @ LazyInitializationException@s debido a la sesión está desactivada.
+
+Por ejemplo, considere el siguiente ejemplo:
+
+{code}
+clase AuthorService {}
+
+void updateAge (id, int edad) {}
+        autor de Def = Author.get(id)
+        Author.Age = edad
+        Si ({author.isTooOld())}
+            throw new AuthorException ("demasiado viejo", autor)
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 {code}
 class AuthorController {
@@ -60,6 +122,26 @@ class AuthorController {
     }
 }
 {code}
+{hidden}
+
+{code}
+clase AuthorController {}
+
+Def authorService
+
+Def updateAge() {}
+        Intente {}
+            authorService.updateAge (params.id, params.int("age"))
+        }
+        catch(e) {}
+            procesar "Autor libros ${e.author.books}"
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 In the above example the transaction will be rolled back if the @Author@'s age exceeds the maximum value defined in the @isTooOld()@ method by throwing an @AuthorException@. The @AuthorException@ references the author but when the @books@ association is accessed a @LazyInitializationException@ will be thrown because the underlying Hibernate session has been cleared.
 
@@ -72,6 +154,22 @@ class AuthorService {
         def author = Author.findById(id, [fetch:[books:"eager"]])
         ...
 {code}
+{hidden}
+
+En el ejemplo anterior se rodó la transacción si la edad de @ Author@'s supera el valor máximo definido en el @ isTooOld() @ método lanzando un @ AuthorException @. @ AuthorException @ referencias del autor, pero cuando los libros @ @ asociación es habían visitada @ LazyInitializationException @ se producirá porque la sesión de Hibernate subyacente se ha borrado.
+
+Para resolver este problema tiene un número de opciones. Uno es para que realizar una consulta con impaciencia para obtener los datos que necesita:
+
+{code}
+clase AuthorService {}
+    ...
+    void updateAge (id, int edad) {}
+        autor de Def = Author.findById (id, [fetch:[books:"eager"]])
+        ...
+{code}
+
+{hidden}
+
 
 In this example the @books@ association will be queried when retrieving the @Author@.
 
@@ -97,6 +195,35 @@ class AuthorController {
     }
 }
 {code}
+{hidden}
+
+En este ejemplo, los libros @ @ asociación que se consultará al recuperar el autor @ @.
+
+{Nota}
+Esta es la solución óptima, ya que requiere menos consultas, a continuación, las siguientes soluciones sugeridas.
+{Nota}
+
+Otra solución es redirigir la petición después de una reversión de la transacción:
+
+{code}
+clase AuthorController {}
+
+AuthorService authorService
+
+Def updateAge() {}
+        Intente {}
+            authorService.updateAge (params.id, params.int("age"))
+        }
+        catch(e) {}
+            Flash.Message "no se puede actualizar edad"
+            redirigir la acción: "show", id:params.id
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 In this case a new request will deal with retrieving the @Author@ again. And, finally a third solution is to retrieve the data for the @Author@ again to make sure the session remains in the correct state:
 
@@ -116,6 +243,29 @@ class AuthorController {
     }
 }
 {code}
+{hidden}
+
+En este caso una nueva solicitud tratará de recuperar el autor @ @ nuevamente. Y finalmente una tercera solución consiste en recuperar los datos del autor @ @ nuevamente para asegurarse de que la misma permanece en el estado correcto:
+
+{code}
+clase AuthorController {}
+
+Def authorService
+
+Def updateAge() {}
+        Intente {}
+            authorService.updateAge (params.id, params.int("age"))
+        }
+        catch(e) {}
+            autor de Def = Author.read(params.id)
+            procesar "Autor libros ${author.books}"
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 h3. Validation Errors and Rollback
 
@@ -135,6 +285,29 @@ class AuthorService {
     }
 }
 {code}
+{hidden}
+
+h3. Rollback y errores de validación
+
+Es un caso de uso común para deshacer una transacción si hay errores de validación. Por ejemplo, considere este servicio:
+
+{code}
+grails.validation.ValidationException de importación
+
+clase AuthorService {}
+
+void updateAge (id, int edad) {}
+        autor de Def = Author.get(id)
+        Author.Age = edad
+        Si (! author.validate()) {}
+            throw new ValidationException ("El autor no es válido", author.errors)
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 To re-render the same view that a transaction was rolled back in you can re-associate the errors with a refreshed instance before rendering:
 
@@ -153,6 +326,29 @@ class AuthorController {
             def author = Author.read(params.id)
             author.errors = e.errors
             render view: "edit", model: [author:author]
+        }
+    }
+}
+{code}
+{hidden}
+
+Para procesar la misma opinión de que una transacción se deshace en TI puede reasociación los errores con una instancia actualiza antes de procesamiento:
+
+{code}
+grails.validation.ValidationException de importación
+
+clase AuthorController {}
+
+Def authorService
+
+Def updateAge() {}
+        Intente {}
+            authorService.updateAge (params.id, params.int("age"))
+        }
+        catch (ValidationException e) {}
+            autor de Def = Author.read(params.id)
+            Author.Errors = e.errors
+            vista de procesamiento: "Editar", modelo: [autor: autor]
         }
     }
 }

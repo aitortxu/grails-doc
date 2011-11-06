@@ -1,3 +1,6 @@
+
+{hidden}
+
 Plugins can easily provide their own artefacts so that they can easily find out what implementations are available and take part in reloading. All you need to do is create an @ArtefactHandler@ implementation and register it in your main plugin class:
 
 {code}
@@ -8,6 +11,21 @@ class MyGrailsPlugin {
 {code}
 
 The @artefacts@ list can contain either handler classes (as above) or instances of handlers.
+{hidden}
+
+Plugins puede proporcionar fácilmente sus propios artefactos para que pueda encontrar fácilmente lo implementaciones disponen y toman parte en la recarga. Todo lo que necesita hacer es crear un @ ArtefactHandler @ aplicación y registrarlo en la clase principal de plugin:
+
+{code}
+clase MyGrailsPlugin {}
+    Def artefactos = [org.somewhere.MyArtefactHandler]
+    ...
+}
+{code}
+
+Los artefactos @ @ lista puede contener clases de controlador (como arriba) o instancias de controladores.
+
+{hidden}
+
 
 So, what does an artefact handler look like? Well, put simply it is an implementation of the [ArtefactHandler|api:org.codehaus.groovy.grails.commons.ArtefactHandler] interface. To make life a bit easier, there is a skeleton implementation that can readily be extended: [ArtefactHandlerAdapter|api:org.codehaus.groovy.grails.commons.ArtefactHandlerAdapter].
 
@@ -18,5 +36,22 @@ The best way to understand how both the handler and wrapper classes work is to l
 * [GrailsJobClass|http://github.com/nebolsin/grails-quartz/blob/master/src/java/grails/plugins/quartz/GrailsJobClass.java]
 * [DefaultGrailsJobClass|http://github.com/nebolsin/grails-quartz/blob/master/src/java/grails/plugins/quartz/DefaultGrailsJobClass.java]
 * [JobArtefactHandler|http://github.com/nebolsin/grails-quartz/blob/master/src/java/grails/plugins/quartz/JobArtefactHandler.java]
+{hidden}
+
+¿Así que, un controlador artefacto aspecto? Poner bien, simplemente es una implementación de la interfaz de [ArtefactHandler|api:org.codehaus.groovy.grails.commons.ArtefactHandler]. Para hacer la vida un poco más fácil, hay una implementación esqueleto que puede ampliarse fácilmente: [ArtefactHandlerAdapter|api:org.codehaus.groovy.grails.commons.ArtefactHandlerAdapter].
+
+Además de controlador de sí mismo, cada nuevo artefacto necesita una clase contenedora correspondiente que implementa [GrailsClass|api:org.codehaus.groovy.grails.commons.GrailsClass]. Una vez más, las implementaciones esqueleto están disponibles como [AbstractInjectableGrailsClass|api:org.codehaus.groovy.grails.commons.AbstractInjectableGrailsClass], que es particularmente útil como se convierte el artefacto en un grano de primavera que se auto-wired, al igual que los controladores y servicios.
+
+La mejor manera de entender cómo funcionan las clases el controlador y el contenedor es mirar el plugin de cuarzo:
+
+* [GrailsJobClass|http://github.com/nebolsin/grails-quartz/blob/master/src/java/grails/plugins/quartz/GrailsJobClass.java]
+* [DefaultGrailsJobClass|http://github.com/nebolsin/grails-quartz/blob/master/src/java/grails/plugins/quartz/DefaultGrailsJobClass.java]
+* [JobArtefactHandler|http://github.com/nebolsin/grails-quartz/blob/master/src/java/grails/plugins/quartz/JobArtefactHandler.java]
+
+{hidden}
+
 
 Another example is the [Shiro plugin|http://github.com/pledbrook/grails-shiro] which adds a realm artefact.
+{hidden}
+
+Otro ejemplo es el [Shiro plugin|http://github.com/pledbrook/grails-shiro] que agrega un artefacto del Reino.

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. params
 
 h2. Purpose
@@ -14,6 +17,27 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. params
+
+h2. Fin
+
+Mutable multidimensional mapa (hash) de parámetros de solicitud (CGI).
+
+h2. Ejemplos
+
+Para obtener un parámetro de solicitud llamado @ id @:
+{code}
+clase BookController {}
+    Def show() {}
+        libro de Def = Book.get(params.id)
+    }
+}
+{code}
+
+{hidden}
+
 
 To perform data binding (see [Data Binding|guide:dataBinding] in the user guide):
 
@@ -24,6 +48,20 @@ def save() {
 {code}
 
 h2. Description
+{hidden}
+
+Para realizar el enlace de datos (véase la Guía del usuario [datos Binding|guide:dataBinding]):
+
+{code}
+Def save() {}
+    libro de Def = nuevo Book(params) / / enlazar parámetros de solicitud en propiedades de libro
+}
+{code}
+
+h2. Descripción
+
+{hidden}
+
 
 The standard Servlet API provides access to parameters with the @HttpServletRequest@ object. Although Grails provides the same capability through the [request|controllers] object, it goes a bit further by providing a mutable map of request parameters called @params@.
 
@@ -34,6 +72,19 @@ println params.foo
 
 The params object can also be used to bind request parameters onto the properties of a domain class using either the constructor or the [properties|domainClasses] property:
 
+{hidden}
+
+La norma Servlet API proporciona acceso a los parámetros con el @ HttpServletRequest @ objeto. Aunque Grails proporciona la misma capacidad a través del objeto [request|controllers], va un poco más al proporcionar un mapa mutable de parámetros de solicitud llamado @ params @.
+
+El @ params @ objeto pueden indexarse en mediante el operador de índice de matriz o de-reference operador, tan dado tan dada la URL @ / Hola? foo = barra @ usted puede acceder a @ foo @ con
+
+a c..
+Console.println params.foo
+
+El objeto params también puede utilizarse para enlazar parámetros de solicitud en las propiedades de una clase de dominio mediante el constructor o la propiedad [properties|domainClasses]:
+
+{hidden}
+
 {code}
 def book = new Book(params)
 book = Book.get(1)
@@ -41,3 +92,12 @@ book.properties = params
 {code}
 
 For further reading see [Data Binding|guide:dataBinding] in the user guide.
+{hidden}
+
+{code}
+libro de Def = Book(params) nueva
+libro = Book.get(1)
+Book.Properties = params
+{code}
+
+Para más información consulte [datos Binding|guide:dataBinding] en la Guía del usuario.

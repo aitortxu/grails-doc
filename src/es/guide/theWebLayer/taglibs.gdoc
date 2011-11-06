@@ -1,12 +1,9 @@
-{hidden}
-Like "Java Server Pages":http://www.oracle.com/technetwork/java/javaee/jsp/index.html (JSP), GSP supports the concept of custom tag libraries. Unlike JSP, Grails' tag library mechanism is simple, elegant and completely reloadable at runtime.
-{hidden}
-Como "Java Server Pages":http://www.oracle.com/technetwork/java/javaee/jsp/index.html (JSP), GSP soporta el concepto de librerias de etiquetas personalizadas. No como JSP, el mecanismo de la libreria de etiquetas de Grails es simple, elegante y completamente recargable en tiempo de ejecucion.
 
 {hidden}
+
+Like "Java Server Pages":http://www.oracle.com/technetwork/java/javaee/jsp/index.html (JSP), GSP supports the concept of custom tag libraries. Unlike JSP, Grails' tag library mechanism is simple, elegant and completely reloadable at runtime.
+
 Quite simply, to create a tag library create a Groovy class that ends with the convention @TagLib@ and place it within the @grails-app/taglib@ directory:
-{hidden}
-Simplemente, para crear una libreria de etiquetas, crea una clase de Groovy que termine con la convencion @TagLib@ y coloquela dentro del directorio @grails-app/taglib@: 
 
 {code:java}
 class SimpleTagLib {
@@ -15,9 +12,20 @@ class SimpleTagLib {
 {code}
 
 {hidden}
-Now to create a tag create a Closure property that takes two arguments: the tag attributes and the body content:
+
+Como "Pages":http://www.oracle.com/technetwork/java/javaee/jsp/index.html de servidor Java (JSP), SGP apoya el concepto de las bibliotecas de etiquetas personalizadas. A diferencia de JSP, mecanismo de biblioteca de etiquetas de Grails es simple, elegante y totalmente recargable en tiempo de ejecución.
+
+Sencillamente, para crear una etiqueta de biblioteca crear una clase Groovy que termina con la Convención @ TagLib @ y colocarlo dentro de la @ grails-app/taglib @ directorio:
+
+{code: java}
+clase SimpleTagLib {}
+
+}
+{code}
+
 {hidden}
-Ahora para crear una etiqueta, crea un Closure de propiedad que tome dos argumentos: los atributos de la etiqueta y el contenido del cuerpo:
+
+Now to create a tag create a Closure property that takes two arguments: the tag attributes and the body content:
 
 {code:java}
 class SimpleTagLib {
@@ -28,9 +36,20 @@ class SimpleTagLib {
 {code}
 
 {hidden}
-The @attrs@ argument is a Map of the attributes of the tag, whilst the @body@ argument is a Closure that returns the body content when invoked:
+
+Ahora para crear una etiqueta de crear una propiedad de cierre que toma dos argumentos: los atributos de la etiqueta y el contenido del cuerpo:
+
+{code: java}
+clase SimpleTagLib {}
+    Def simple = {attrs, cuerpo->
+
+}
+}
+{code}
+
 {hidden}
-El argumento @attrs@ es un Map de los atributos de la etiqueta, mientras que el argumento @body@ es un Closure que regresa el contenido del cuerpo cuando es invocado:
+
+The @attrs@ argument is a Map of the attributes of the tag, whilst the @body@ argument is a Closure that returns the body content when invoked:
 
 {code:java}
 class SimpleTagLib {
@@ -41,24 +60,44 @@ class SimpleTagLib {
 {code}
 
 {hidden}
-As demonstrated above there is an implicit @out@ variable that refers to the output @Writer@ which you can use to append content to the response. Then you can reference the tag inside your GSP; no imports are necessary:
+
+@ Attrs @ argumento es un mapa de los atributos de la etiqueta, mientras que el cuerpo @ @ argumento es un cierre que devuelve el contenido del cuerpo cuando se invoca:
+
+{code: java}
+clase SimpleTagLib {}
+    icono gestual Def = {attrs, cuerpo->
+       ¿a << body() << (attrs.happy == 'true'? " :-)" : " :-(")
+    }
+}
+{code}
+
 {hidden}
-Como se demostro arriba, existe una variable implicita @out@ que se refiere al output @Writer@ el cual puede usar para agregar contenido a la respuesta. Entonces puede referenciar la etiqueta dentro de su GSP; no son necesarios los imports:
+
+As demonstrated above there is an implicit @out@ variable that refers to the output @Writer@ which you can use to append content to the response. Then you can reference the tag inside your GSP; no imports are necessary:
 
 {code:xml}
 <g:emoticon happy="true">Hi John</g:emoticon>
 {code}
 
 {note}
-{hidden}
 To help IDEs like SpringSource Tool Suite (STS) and others autocomplete tag attributes, you should add Javadoc comments to your tag closures with @\@attr@ descriptions. Since taglibs use Groovy code it can be difficult to reliably detect all usable attributes.
-{hidden}
-Para ayudar a los IDEs como SpringSource Tool Suite (STS) y otros para autocompletar los atributos de la etiqueta, deberia de agregar comentarios Javadoc a los closures de su etiqueta con las descripciones @\@attr@. Desde que las taglibs usan codigo de Groovy puede ser dificil detectar de forma viable todos los atributos usables.
 
-{hidden}
 For example:
 {hidden}
+
+Como demostró anteriormente hay una implícita @ fuera @ variable que hace referencia al salida @ escritor @ que puede utilizar para añadir contenido a la respuesta. A continuación, puede hacer referencia a la etiqueta dentro de su sistema de preferencias Generalizadas; no las importaciones son necesarias:
+
+{Código: xml}
+<g:emoticon happy="true">Hola John</g:emoticon>
+{code}
+
+{Nota}
+Para ayudar a IDEs como SpringSource Tool Suite (STS) y otros atributos de la etiqueta de Autocompletar, debe agregar comentarios Javadoc para sus cierres de etiqueta con descripciones de @ \@attr@. Ya taglibs utilizar código Groovy puede ser difícil de detectar con fiabilidad todos los atributos utilizables.
+
 Por ejemplo:
+
+{hidden}
+
 
 {code:java}
 class SimpleTagLib {
@@ -74,11 +113,27 @@ class SimpleTagLib {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase SimpleTagLib {}
+
+/**
+     * Representa el cuerpo con un icono gestual.
+     *
+     * @ attr feliz si desea mostrar un icono gestual feliz ('verdadero') o
+     * un icono gestual triste ('false')
+     */
+    icono gestual Def = {attrs, cuerpo->
+       ¿a << body() << (attrs.happy == 'true'? " :-)" : " :-(")
+    }
+}
+{code}
 
 {hidden}
+
+
 and any mandatory attributes should include the REQUIRED keyword, e.g.
-{hidden}
-y cualquier atributo mandatorio debe de incluir la palabra reservada REQUIRED, por ejemplo:
 
 {code:java}
 class SimpleTagLib {
@@ -96,4 +151,30 @@ class SimpleTagLib {
     }
 }
 {code}
+{hidden}
+
+y todos los atributos obligatorios deben incluir la palabra clave requerido, por ejemplo
+
+{code: java}
+clase SimpleTagLib {}
+
+/**
+     * Crea un nuevo campo de contraseña.
+     *
+     * @ attr requiere el nombre del campo nombre
+     * @ attr valor el valor del campo
+     */
+    Def cursor = {attrs->
+        attrs.Type = "password"
+        attrs.TagName = "cursor"
+        fieldImpl (out, attrs)
+    }
+}
+{code}
+
+{hidden}
+
 {note}
+{hidden}
+
+{Nota}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 Associations in GORM are by default lazy. This is best explained by example:
 
 {code}
@@ -14,6 +17,27 @@ class Flight {
     static belongsTo = [airport: Airport]
 }
 {code}
+{hidden}
+
+Asociaciones en GORM son por defecto perezoso. Esto se explica por ejemplo:
+
+{code}
+clase {Aeropuerto
+    Nombre de la cadena
+    estático hasMany = [vuelos: vuelo]
+}
+{code}
+
+{code}
+clase vuelo {}
+    Número de cadena
+    Destino de ubicación
+    Static belongsTo = [Aeropuerto: Aeropuerto]
+}
+{code}
+
+{hidden}
+
 
 {code}
 class Location {
@@ -23,6 +47,19 @@ class Location {
 {code}
 
 Given the above domain classes and the following code:
+
+{hidden}
+
+{code}
+clase {ubicación
+    Ciudad de cadena
+    País de cadena
+}
+{code}
+
+Habida cuenta de las clases de dominio anterior y el siguiente código:
+
+{hidden}
 
 {code}
 def airport = Airport.findByName("Gatwick")
@@ -34,6 +71,21 @@ for (flight in airport.flights) {
 GORM will execute a single SQL query to fetch the @Airport@ instance, another to get its flights, and then 1 extra query for _each iteration_ over the @flights@ association to get the current flight's destination. In other words you get N+1 queries (if you exclude the original one to get the airport).
 
 h3. Configuring Eager Fetching
+{hidden}
+
+{code}
+Aeropuerto de Def = Airport.findByName("Gatwick")
+para (vuelo en airport.flights) {}
+    Console.println flight.destination.city
+}
+{code}
+
+GORM ejecutará una sola consulta SQL para recuperar el aeropuerto @ @ instancia, otro para obtener sus vuelos y luego 1 consulta adicional para iteration_ de _each sobre los vuelos @ @ Asociación para obtener el destino del vuelo actual. En otras palabras obtendrá N 1 consultas (si se excluye el uno original para obtener el aeropuerto).
+
+h3. Configurar deseoso de obtener
+
+{hidden}
+
 
 An alternative approach that avoids the N+1 queries is to use eager fetching, which can be specified as follows:
 
@@ -46,6 +98,22 @@ class Airport {
     }
 }
 {code}
+{hidden}
+
+Un enfoque alternativo que evita las consultas N 1 es utilizar deseoso de recuperar, que se detalla a continuación:
+
+{code}
+clase {Aeropuerto
+    Nombre de la cadena
+    estático hasMany = [vuelos: vuelo]
+    asignación estática = {}
+        vuelos perezosos: falso
+    }
+}
+{code}
+
+{hidden}
+
 
 In this case the @flights@ association will be loaded at the same time as its @Airport@ instance, although a second query will be executed to fetch the collection. You can also use @fetch: 'join'@ instead of @lazy: false@ , in which case GORM will only execute a single query to get the airports and their flights. This works well for single-ended associations, but you need to be careful with one-to-manys. Queries will work as you'd expect right up to the moment you add a limit to the number of results you want. At that point, you will likely end up with fewer results than you were expecting. The reason for this is quite technical but ultimately the problem arises from GORM using a left outer join.
 
@@ -56,6 +124,20 @@ Be careful how and where you use eager loading because you could load your entir
 h3. Using Batch Fetching
 
 Although eager fetching is appropriate for some cases, it is not always desirable. If you made everything eager you could quite possibly load your entire database into memory resulting in performance and memory problems. An alternative to eager fetching is to use batch fetching. You can configure Hibernate to lazily fetch results in "batches". For example:
+{hidden}
+
+En este caso los vuelos @ @ asociación se cargarán al mismo tiempo como su aeropuerto @ @ instancia, aunque se ejecutará una segunda consulta para obtener la colección. También puede utilizar @ fetch: 'unir' @ en vez de @ perezoso: falso @, en cuyo caso GORM sólo ejecutará una sola consulta para obtener sus vuelos y los aeropuertos. Esto funciona bien para asociaciones terminó solo, pero necesita tener cuidado con uno a manys. Consultas funcionará como era de esperar hasta el momento de que agregar un límite al número de resultados que desea. En ese momento, probablemente podrá acabar con menos resultados que esperaban. La razón de esto es bastante técnica, pero en última instancia, el problema surge de GORM utilizando una combinación externa izquierda.
+
+Por lo tanto, la recomendación es actualmente usar @ fetch: 'unir' @ para asociaciones terminó solo y @ perezoso: false @ para uno a manys.
+
+Tenga cuidado de cómo y dónde utilizar deseoso de carga porque podría cargar la base de datos completa en memoria con demasiadas asociaciones ansiosas. Puede encontrar más información sobre las opciones de asignación en [la sección sobre la DSL|guide:fetchingDSL de ORM].
+
+h3. Mediante la obtención de lotes
+
+Aunque deseoso de obtener es adecuado para algunos casos, no siempre es deseable. Si ha realizado todo deseoso de posiblemente podría cargar su base de datos completa en memoria como resultado de problemas de memoria y rendimiento. Una alternativa a deseoso de obtener es utilizar recuperar el lote. Puede configurar Hibernate mandos… obtener resultados en "lotes". Por ejemplo:
+
+{hidden}
+
 
 {code:java}
 class Airport {
@@ -66,6 +148,20 @@ class Airport {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase {Aeropuerto
+    Nombre de la cadena
+    estático hasMany = [vuelos: vuelo]
+    asignación estática = {}
+        vuelos batchSize: 10
+    }
+}
+{code}
+
+{hidden}
+
 
 In this case, due to the @batchSize@ argument, when you iterate over the @flights@ association, Hibernate will fetch results in batches of 10. For example if you had an @Airport@ that had 30 flights, if you didn't configure batch fetching you would get 1 query to fetch the @Airport@ and then @30@ queries to fetch each flight. With batch fetching you get 1 query to fetch the @Airport@ and 3 queries to fetch each @Flight@ in batches of 10. In other words, batch fetching is an optimization of the lazy fetching strategy. Batch fetching can also be configured at the class level as follows:
 
@@ -77,5 +173,23 @@ class Flight {
     }
 }
 {code}
+{hidden}
+
+En este caso, debido a la @ batchSize @ argumento, cuando usted iterar sobre los vuelos @ @ asociación, Hibernate será obtener resultados en lotes de 10. Por ejemplo si tuvieras un aeropuerto @ @ tenía 30 vuelos, si no configura recuperar el lote obtendría 1 consulta para recuperar el aeropuerto @ @ y luego 30 @ consultas para buscar cada vuelo. Con la obtención de lote obtendrá 1 consulta para recuperar el aeropuerto @ @ y 3 consultas para buscar cada vuelo @ @ en lotes de 10. En otras palabras, recuperar el lote es una optimización de la estrategia de obtener perezosa. Recuperar el lote también se puede configurar en el nivel de clase como sigue:
+
+{code: java}
+clase vuelo {}
+    ...
+    asignación estática = {}
+        batchSize 10
+    }
+}
+{code}
+
+{hidden}
+
 
 Check out [part 3|http://blog.springsource.com/2010/07/28/gorm-gotchas-part-3/] of the GORM Gotchas series for more in-depth coverage of this tricky topic.
+{hidden}
+
+Check out [parte 3|http://blog.springsource.com/2010/07/28/gorm-gotchas-part-3/] de la serie GORM trampas para una cobertura más a fondo de este delicado tema.

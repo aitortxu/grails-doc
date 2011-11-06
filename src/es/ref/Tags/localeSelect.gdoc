@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. localeSelect
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 // create a locale select
 <g:localeSelect name="myLocale" value="${locale}" />
 {code}
+{hidden}
+
+h1. localeSelect
+
+h2. Fin
+
+Genera una seleccione HTML con @ Locale@s como valores
+
+h2. Ejemplos
+
+{Código: xml}
+/ / crear un escenario, seleccione
+<g:localeselect name="myLocale" value="${locale}"></g:localeselect>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,5 +40,22 @@ Attributes
 
 h2. Source
 
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ - el nombre que se utilizará para el cuadro de selección
+* @ valor @ (opcional) - el seleccionado local @ @; el valor predeterminado es el actual escenario de solicitud si no se especifica
+
+h2. Fuente
+
+{hidden}
+
 {source:tag=FormTagLib.localeSelect}
 {source}
+{hidden}
+
+{source:tag=FormTagLib.localeSelect}
+origen de {}

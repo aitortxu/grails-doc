@@ -1,3 +1,6 @@
+
+{hidden}
+
 Within a domain class [constraints|domainClasses] are defined with the constraints property that is assigned a code block:
 
 {code:java}
@@ -12,6 +15,25 @@ class User {
     }
 }
 {code}
+{hidden}
+
+Dentro de un dominio de clase [constraints|domainClasses] se definen con la propiedad de las restricciones que se le asigna un bloque de código:
+
+{code: java}
+clase usuario {}
+    Inicio de sesión de cadena
+    Contraseña de cadena
+    Correo electrónico de la cadena
+    Edad entero
+
+restricciones estáticas = {}
+      ...
+    }
+}
+{code}
+
+{hidden}
+
 
 You then use method calls that match the property name for which the constraint applies in combination with named parameters to specify constraints:
 
@@ -27,6 +49,25 @@ class User {
     }
 }
 {code}
+{hidden}
+
+A continuación, utiliza llamadas de método que coincida con el nombre de propiedad que la restricción se aplica en combinación con parámetros con nombre para especificar las restricciones:
+
+{code: java}
+clase usuario {}
+    ...
+
+restricciones estáticas = {}
+        tamaño de inicio de sesión: 5..15, en blanco: falso, único: verdadero
+        tamaño de la contraseña: 5..15, en blanco: falso
+        correo electrónico del correo electrónico: true, en blanco: falso
+        edad mínima: 18
+    }
+}
+{code}
+
+{hidden}
+
 
 In this example we've declared that the @login@ property must be between 5 and 15 characters long, it cannot be blank and must be unique. We've also applied other constraints to the @password@, @email@ and @age@ properties.
 
@@ -37,6 +78,20 @@ By default, all domain class properties are not nullable (i.e. they have an impl
 A complete reference for the available constraints can be found in the Quick Reference section under the Constraints heading.
 
 h3. A word of warning - referencing domain class properties from constraints
+{hidden}
+
+En este ejemplo que nos hemos declarado que el login @ @ propiedad debe ser entre 5 y 15 caracteres de longitud, que no puede estar vacío y debe ser único. También nos hemos aplicado otras restricciones a la contraseña @ @, @ correo electrónico @ y @ edad @ propiedades.
+
+{Nota}
+De forma predeterminada, todas las propiedades de clase de dominio no son NULL (es decir, que tienen una implícita @ que acepta valores NULL: falso @ restricción). El mismo no es cierto para las propiedades de objeto de comando, que son valores NULL por defecto.
+{Nota}
+
+Una referencia completa para las restricciones disponibles puede encontrarse en la sección de referencia rápida en las restricciones de partida.
+
+h3. Una palabra de advertencia: referencia a propiedades de la clase de dominio de restricciones
+
+{hidden}
+
 
 It's very easy to attempt to reference instance variables from the static constraints block, but this isn't legal in Groovy (or Java). If you do so, you will get a @MissingPropertyException@ for your trouble. For example, you may try
 {code}
@@ -50,6 +105,23 @@ class Response {
     }
 }
 {code}
+{hidden}
+
+Es muy fácil intentar hacer referencia a variables de instancia del bloque restricciones estático, pero esto no es legal en Groovy (o Java). Si lo hace, recibirá un @ MissingPropertyException @ para sus problemas. Por ejemplo, puede probar
+{code}
+clase respuesta {}
+    Encuesta de encuesta
+    Respuesta de respuesta
+
+restricciones estáticas = {}
+        encuesta en blanco: falso
+        respuesta en blanco: false, inList: survey.answers
+    }
+}
+{code}
+
+{hidden}
+
 
 See how the @inList@ constraint references the instance property @survey@? That won't work. Instead, use a custom [validator|constraints]:
 
@@ -62,5 +134,24 @@ class Response {
     }
 }
 {code}
+{hidden}
+
+¿Vea cómo el @ inList @ restricción hace referencia a la instancia propiedad @ encuesta @? No funcionará. En su lugar, utilice una costumbre [validator|constraints]:
+
+{code}
+clase respuesta {}
+    ...
+    restricciones estáticas = {}
+        encuesta en blanco: falso
+        respuesta en blanco: falso, validador: {val, obj-> val en obj.survey.answers}
+    }
+}
+{code}
+
+{hidden}
+
 
 In this example, the @obj@ argument to the custom validator is the domain _instance_ that is being validated, so we can access its @survey@ property and return a boolean to indicate whether the new value for the @answer@ property, @val@, is valid.
+{hidden}
+
+En este ejemplo, el obj @ @ argumento para el validador personalizado es el dominio _instance_ que ser validada, para que podamos tener acceso a su encuesta @ @ propiedad y devolver un valor booleano para indicar si el nuevo valor para la respuesta @ @ propiedad, @ val @, es válido.

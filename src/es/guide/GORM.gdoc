@@ -1,3 +1,6 @@
+
+{hidden}
+
 Domain classes are core to any business application. They hold state about business processes and hopefully also implement behavior. They are linked together through relationships; one-to-one, one-to-many, or many-to-many.
 
 GORM is Grails' object relational mapping (ORM) implementation. Under the hood it uses Hibernate 3 (a very popular and flexible open source ORM solution) and thanks to the dynamic nature of Groovy with its static and dynamic typing, along with the convention of Grails, there is far less configuration involved in creating Grails domain classes.
@@ -11,4 +14,20 @@ book
   .addToAuthors(name:"Dierk Koenig")
   .addToAuthors(name:"Guillaume LaForge")
   .save()
+{code}
+{hidden}
+
+Clases de dominio son fundamentales para cualquier aplicación de negocios. Mantenga el estado acerca de los procesos de negocio y esperemos que también implementar el comportamiento. Se vinculan entre sí a través de relaciones; uno a uno, uno a muchos o muchos a muchos.
+
+GORM es aplicación de mapeo relacional de objetos (ORM) de Grails. Bajo el capó utiliza Hibernate 3 (un muy popular y flexible open source solución ORM) y gracias a la naturaleza dinámica de Groovy con su dinámica y estática escribiendo, junto con la Convención de Grails, hay mucho menos configuración involucrado en la creación de clases de dominio Grails.
+
+También puede escribir las clases de dominio Grails en Java. Consulte la sección sobre integración de hibernación para saber cómo escribir dominio clases en Java pero siguen utilizando los métodos dinámicos persistentes. A continuación se presenta una vista previa de GORM en acción:
+
+{code}
+libro de Def = Book.findByTitle ("Groovy en acción")
+
+libro
+  .addToAuthors (nombre: "Galería Koenig")
+  .addToAuthors (nombre: "Guillaume LaForge")
+  .Save()
 {code}

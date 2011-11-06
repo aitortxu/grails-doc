@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. find
 
 h2. Purpose
@@ -26,6 +29,39 @@ Book.find("from Book as b where b.author=:author",
 def example = new Book(author: "Dan Brown")
 Book.find(example)
 {code}
+{hidden}
+
+h1. Buscar
+
+h2. Fin
+
+Si no se encuentra ninguna instancia se encuentra el primer resultado coincidente para la consulta dada o @ null @
+
+h2. Ejemplos
+
+{code: java}
+/ Dan brown del primer libro
+Book.Find ("libro como b donde b.author='Dan Brown'")
+
+/ / con un parámetro posicional
+Book.Find ("libro como b donde b.author=?", ["Dan Brown'])
+
+/ / con un parámetro con nombre
+Book.Find ("libro como b donde b.author=:author", [autor: 'Dan Brown'])
+
+/ / usar la caché de consultas
+Book.Find ("libro como b donde b.author='Dan Brown'", [caché: verdadero])
+Book.Find ("libro como b donde b.author=:author",
+          [autor: "Dan Brown"],
+          [caché: verdadero])
+
+/ / consulta por ejemplo
+ejemplo de Def = nuevo libro (autor: "Dan Brown")
+Book.Find(Example)
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -39,6 +75,23 @@ Book.find(String query, Map namedParams)
 Book.find(String query, Map namedParams, Map queryParams)
 Book.find(Book example)
 {code}
+{hidden}
+
+h2. Descripción
+
+El hallazgo @ @ método permite consultar con lenguaje de consulta de hibernación [HQL|guide:hql] y consultar por ejemplo. La sintaxis básica es:
+
+{code: java}
+Book.Find (String consulta)
+Book.Find (String consulta, colección positionalParams)
+Book.Find (String consulta, colección positionalParams, mapa queryParams)
+Book.Find (String consulta, mapa namedParams)
+Book.Find (String consulta, namedParams mapa, mapa queryParams)
+Book.Find (ejemplo de libro)
+{code}
+
+{hidden}
+
 
 Parameters:
 
@@ -47,3 +100,12 @@ Parameters:
 * @namedParams@ - A @Map@ of named parameters a HQL query
 * @queryParams@ - A @Map@ of query parameters. Currently, only @cache@ is supported
 * @example@ - An instance of the domain class for query by example
+{hidden}
+
+Parámetros:
+
+* @ consulta @ - consulta An HQL
+* @ positionalParams @ - una lista @ @ de parámetros para las consultas parametrizadas posicional HQL
+* @ namedParams @ - un mapa @ @ de parámetros con nombre una consulta HQL
+* @ queryParams @ - un mapa @ @ de parámetros de consulta. Actualmente, se admite sólo caché @ @
+* @ ejemplo @ - una instancia de la clase de dominio para consulta por ejemplo

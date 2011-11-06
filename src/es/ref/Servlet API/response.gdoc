@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. response
 
 h2. Purpose
@@ -14,6 +17,27 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. respuesta
+
+h2. Fin
+
+La respuesta de @ @ objeto es una instancia de Servlet API [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] clase
+
+h2. Ejemplos
+
+{code}
+clase BookController {}
+    Def downloadFile() {}
+        [] bytes bytes = / / leen bytes
+        Response.OutputStream << bytes
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -24,6 +48,24 @@ The Servlet API's @HttpServletResponse@ class can be used within Grails to perfo
 
 Grails also overrides the left shift operator on the @response@ object making it easier to write to the response writer:
 
+{hidden}
+
+h2. Descripción
+
+@ HttpServletResponse la API Servlet @ clase puede utilizarse dentro de Grails para realizar todas las actividades típicas como escribir datos binarios, escribir directamente en la respuesta y códigos de respuesta de error envío a nombre de sólo unos cuantos. Consulte la documentación de la clase [HttpServletResponse|api:javax.servlet.http.HttpServletResponse] en el Servlet API para obtener más información. Grails proporciona los siguientes métodos adicionales o las propiedades sobre la respuesta de @ @ objeto
+
+* @ formato @ - el formato de solicitud, utilizado para [contenido negotiation|guide:contentNegotiation].
+* @ withFormat(Closure) @ - el método de withFormat, utilizado para [contenido negotiation|guide:contentNegotiation].
+
+Grails también reemplaza el operador de desplazamiento a la izquierda sobre la respuesta de @ @ objeto facilita la escritura al escritor de respuesta:
+
+{hidden}
+
 {code:java}
 response << "Hello World"
+{code}
+{hidden}
+
+{code: java}
+respuesta << "Hello World"
 {code}

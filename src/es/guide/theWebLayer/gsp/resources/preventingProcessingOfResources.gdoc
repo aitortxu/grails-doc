@@ -1,3 +1,6 @@
+
+{hidden}
+
 Sometimes you do not want a resource to be processed in a particular way, or even at all. Occasionally you may also want to disable all resource mapping.
 
 h4. Preventing the application of a specific mapper to an individual resource
@@ -14,6 +17,27 @@ modules = {
     }
 }
 {code}
+{hidden}
+
+A veces no desea un recurso para ser procesados de manera particular, o incluso a todos. En ocasiones también puede deshabilitar la asignación de recursos de todos.
+
+h4. Impedir la aplicación de un asignador específico a un recurso individual
+
+Todas las declaraciones de recursos apoyan un Convenio de noXXXX:true donde XXXX es un nombre de asignador.
+
+Por ejemplo para evitar que el asignador de "hashandcache" se aplica a un recurso (que cambia de nombre y se mueve, potencialmente romper vínculos relativos escritas en código JavaScript), haría esto:
+
+{code: java}
+módulos = {}
+    {formas
+        url del recurso: ' / css/forms.css', nohashandcache: verdadero
+        url del recurso: ' / js/forms.js', nohashandcache: verdadero
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Excluding/including paths and file types from specific mappers
 
@@ -28,6 +52,24 @@ grails.resources.zip.excludes = ['**/*.zip', '**/*.exe']
 // Perhaps for some reason we want to prevent bundling on "less" CSS files:
 grails.resources.bundle.excludes = ['**/*.less']
 {code}
+{hidden}
+
+h4. Excluyendo/incluyendo rutas y tipos de archivos de mapeados específicos
+
+Mapeados que incluye o excluye Ant patrones para controlar si se aplican a un recurso determinado. Mapeados establecer valores predeterminados razonables para estos basado en su actividad, por ejemplo asignador de "zip" del plugin recursos comprimido se establece para excluir imágenes por defecto.
+
+Puede configurar esto en tu @Config.groovy@ utilizando el nombre de asignador por ejemplo:
+
+{code: java}
+/ / No vinculamos a los archivos .exe utilizando recursos sino de ejemplo:
+Grails.Resources.zip.excludes = ["** / * zip ', ' ** / * exe ']
+
+Y tal vez por alguna razón queremos evitar que la agrupación "menos" archivos CSS:
+Grails.Resources.bundle.excludes = ["** / *.less']
+{code}
+
+{hidden}
+
 
 There is also an "includes" inverse. Note that settings these replaces the default includes/excludes for that mapper - it is not additive.
 
@@ -38,8 +80,28 @@ Ad-hoc resources are those undeclared, but linked to directly in your applicatio
 These may occur with some legacy plugins or code with hardcoded paths in.
 
 There is a Config.groovy setting *grails.resources.adhoc.patterns* which defines a list of Servlet API compliant filter URI mappings, which the Resources filter will use to detect such "ad-hoc resource" requests.
+{hidden}
+
+También hay un inverso "incluye". Nota que la configuración de estos reemplaza incluye o excluye de la opción predeterminada para ese mapper - no es aditivo.
+
+h4. Controlar lo que se trata como un recurso de "ad-hoc" (heredado)
+
+Recursos ad-hoc son aquellas no declarado, pero vinculado a directamente en su aplicación * sin * utilizando los recursos vinculación de etiquetas (recurso, img o externo) o Grails.
+
+Estos pueden ocurrir con algunos plugins heredados o código con rutas codificados en.
+
+Hay un *grails.resources.adhoc.patterns* de configuración de Config.groovy que define una lista de asignaciones de URI compatible con filtro de Servlet API, que utilizará el filtro recursos para detectar esas solicitudes "ad-hoc recursos".
+
+{hidden}
+
 
 By default this is set to:
 {code:java}
 grails.resources.adhoc.patterns = ['images/*', '*.js', '*.css']
+{code}
+{hidden}
+
+Por defecto se define como:
+{code: java}
+Grails.Resources.adhoc.Patterns = ["imágenes / *', ' * .js, ' *.css']
 {code}

@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. generate-views
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 grails generate-views org.bookstore.Book
 {code}
+{hidden}
+
+h1. generar vistas
+
+h2. Fin
+
+Genera vistas del SPG para la clase de dominio
+
+h2. Ejemplos
+
+{code: java}
+Grails generar vistas org.bookstore.Book
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -21,8 +40,30 @@ Usage:
 {code:java}
 grails generate-views [domain class name]
 {code}
+{hidden}
+
+h2. Descripción
+
+Grails admite una característica conocida como andamiaje que implica la generación de una interfaz CRUD (Create, Read, Update/Delete) para una clase de dominio dado.
+
+Las @ generar vistas @ comando genera vistas del SGP que implementan CRUD para la clase de dominio dado. Así que para un dominio se genera vistas de la clase @org.bookstore.Book@ en @ grails-app/views/libro @.
+
+Uso:
+
+{code: java}
+Grails generar vistas [nombre de la clase de dominio]
+{code}
+
+{hidden}
+
 
 Fired Events:
 
 * @StatusUpdate@ - When generation begins
 * @StatusFinal@ - When generation completes
+{hidden}
+
+Despedido de eventos:
+
+* @ StatusUpdate @ - cuando comienza la generación
+* @ StatusFinal @ - cuando termina la generación

@@ -1,3 +1,6 @@
+
+{hidden}
+
 One major different between GSP tags and other tagging technologies is that GSP tags can be called as either regular tags or as method calls from [controllers|guide:controllers], [tag libraries|guide:taglibs] or GSP views.
 
 h4. Tags as method calls from GSPs
@@ -7,6 +10,20 @@ Tags return their results as a String-like object (a @StreamCharBuffer@ which ha
 {code:xml}
 Static Resource: ${createLinkTo(dir: "images", file: "logo.jpg")}
 {code}
+
+{hidden}
+
+Uno de los mayores diferentes entre etiquetas del SGP y otras tecnologías el etiquetado es que SPG etiquetas puede llamarse como bien regulares etiquetas o llamadas a métodos de [controllers|guide:controllers], [etiqueta libraries|guide:taglibs] o vistas del SGP.
+
+h4. Etiquetas como llamadas a métodos de GSPs
+
+Etiquetas devolución sus resultados como un objeto de tipo cadena (@ StreamCharBuffer @ que tiene todos los mismos métodos como cadena) en lugar de escribir directamente en la respuesta al llamado como métodos. Por ejemplo:
+
+{Código: xml}
+Recurso estático: ${createLinkTo (dir: "imágenes", archivo: "logo.jpg")}
+{code}
+
+{hidden}
 
 This is particularly useful for using a tag within an attribute:
 
@@ -19,6 +36,22 @@ In view technologies that don't support this feature you have to nest tags withi
 {code:xml}
 <img src="<g:createLinkTo dir="images" file="logo.jpg" />" />
 {code}
+{hidden}
+
+Esto resulta especialmente útil para el uso de una etiqueta dentro de un atributo:
+
+{Código: xml}
+<img src="${createLinkTo(dir: 'images', file: 'logo.jpg')}">
+{code}
+
+A la vista tecnologías que no admiten esta función tiene que anidar etiquetas en las etiquetas, que se vuelve desordenado rápidamente y a menudo tiene un efecto adverso de herramientas WYSWIG como Dreamweaver que intenta representar la marcación no es correcto:
+
+{Código: xml}
+<img src="<g:createLinkTo dir=" images"="" file="logo.jpg">" />
+{code}
+
+{hidden}
+
 
 h4. Tags as method calls from Controllers and Tag Libraries
 
@@ -29,6 +62,20 @@ def imageLocation = createLinkTo(dir:"images", file:"logo.jpg").toString()
 {code}
 
 Prefix the namespace to avoid naming conflicts:
+{hidden}
+
+h4. Etiquetas como llamadas a métodos de controladores y bibliotecas de etiquetas
+
+También puede invocar etiquetas de controladores y bibliotecas de etiquetas. Etiquetas en el defecto @ g: @ [namespace|guide:namespaces] pueden invocarse sin el prefijo y @ StreamCharBuffer @ resultado devuelto:
+
+{code: java}
+Def imageLocation = createLinkTo (dir: "imágenes", file:"logo.jpg").toString()
+{code}
+
+Prefijo del espacio de nombres para evitar conflictos de nombres:
+
+{hidden}
+
 
 {code:java}
 def imageLocation = g.createLinkTo(dir:"images", file:"logo.jpg").toString()
@@ -38,4 +85,15 @@ For tags that use a [custom namespace|guide:namespaces], use that prefix for the
 
 {code:java}
 def editor = fckeditor.editor(name: "text", width: "100%", height: "400")
+{code}
+{hidden}
+
+{code: java}
+Def imageLocation = g.createLinkTo (dir: "imágenes", file:"logo.jpg").toString()
+{code}
+
+De las etiquetas que utilizan un [namespace|guide:namespaces personalizado], utilice ese prefijo para la llamada al método. Por ejemplo (de la [FCK Editor plugin|http://grails.org/plugin/fckeditor]):
+
+{code: java}
+editor de Def = fckeditor.editor (nombre: "texto", anchura: "100%", altura: "400")
 {code}

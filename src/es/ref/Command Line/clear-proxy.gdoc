@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. clear-proxy
 
 h2. Purpose
@@ -7,6 +10,20 @@ Clears the current proxy configuration Grails should use when communicating over
 Proxy configurations are defined using the [add-proxy|commandLine] command
 
 h2. Examples
+
+{hidden}
+
+h1. claro-proxy
+
+h2. Fin
+
+Borra la configuración actual de proxy que Grails deben utilizar cuando se comunican a través de internet, como con el comando [install-plugin|commandLine].
+
+Las configuraciones de proxy se definen mediante el comando [Agregar-proxy|commandLine]
+
+h2. Ejemplos
+
+{hidden}
 
 {code:java}
 grails clear-proxy
@@ -18,4 +35,22 @@ Usage:
 {code:java}
 grails clear-proxy
 {code}
+{hidden}
+
+{code: java}
+Grails claro-proxy
+{code}
+
+h2. Descripción
+
+Uso:
+{code: java}
+Grails claro-proxy
+{code}
+
+{hidden}
+
+
+{hidden}
+
 

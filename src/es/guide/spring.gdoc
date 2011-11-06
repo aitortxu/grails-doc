@@ -1,1 +1,7 @@
+
+{hidden}
+
 This section is for advanced users and those who are interested in how Grails integrates with and builds on the "Spring Framework":http://www.springframework.org/. It is also useful for [plugin developers|guide:plugins] considering doing runtime configuration Grails.
+{hidden}
+
+Esta sección es para usuarios avanzados y aquellos que estén interesados en saber cómo Grails se integra con y se basa en la "Framework":http://www.springframework.org/ de primavera. También es útil para [plugin developers|guide:plugins] piensa hacer Grails configuración de tiempo de ejecución.

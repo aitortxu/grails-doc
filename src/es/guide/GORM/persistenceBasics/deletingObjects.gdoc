@@ -1,3 +1,6 @@
+
+{hidden}
+
 An example of the [delete|domainClasses] method can be seen below:
 
 {code}
@@ -11,6 +14,24 @@ As with saves, Hibernate will use transactional write-behind to perform the dele
 def p = Person.get(1)
 p.delete(flush: true)
 {code}
+{hidden}
+
+Un ejemplo del método [delete|domainClasses] puede verse a continuación:
+
+{code}
+Def p = Person.get(1)
+p.Delete()
+{code}
+
+Como con guarda, hibernación utilizará transaccional de escritura retrasada para realizar la eliminación; para realizar el eliminación en el lugar puede utilizar la escalera @ @ argumento:
+
+{code}
+Def p = Person.get(1)
+p.Delete(flush: true)
+{code}
+
+{hidden}
+
 
 Using the @flush@ argument lets you catch any errors that occur during a delete. A common error that may occur is if you violate a database constraint, although this is normally down to a programming or schema error. The following example shows how to catch a @DataIntegrityViolationException@ that is thrown when you violate the database constraints:
 
@@ -25,6 +46,24 @@ catch (org.springframework.dao.DataIntegrityViolationException e) {
     redirect(action: "show", id: p.id)
 }
 {code}
+{hidden}
+
+Usando la escalera @ @ argumento permite detectar los errores que se producen durante una eliminación. Un error común que puede ocurrir es si violan una restricción de la base de datos, aunque esto es normalmente a un error de programación o esquema. En el ejemplo siguiente se muestra cómo atrapar un @ DataIntegrityViolationException @ se produce cuando se violen las restricciones de la base de datos:
+
+{code: java}
+Def p = Person.get(1)
+
+Intente {}
+    p.Delete(flush: true)
+}
+catch (org.springframework.dao.DataIntegrityViolationException e) {}
+    Flash.Message = "No se pudo eliminar el persona ${p.name}"
+    redirigir (acción: "Mostrar", id: p.id)
+}
+{code}
+
+{hidden}
+
 
 Note that Grails does not supply a @deleteAll@ method as deleting data is discouraged and can often be avoided through boolean flags/logic.
 
@@ -35,3 +74,13 @@ Customer.executeUpdate("delete Customer c where c.name = :oldName",
                        [oldName: "Fred"])
 {code}
 
+{hidden}
+
+Nota que Grails no suministrar una deleteAll @ @ método de eliminación de datos se desalienta y a menudo puede evitarse mediante la lógica de banderas booleana.
+
+Si es realmente necesario lote eliminar datos puede utilizar el método [executeUpdate|domainClasses] por lotes instrucciones DML:
+
+{code}
+Customer.ExecuteUpdate ("eliminar cliente c donde c.name =: Nombre_viejo",
+                       [Nombre_viejo: "Fred"])
+{code}

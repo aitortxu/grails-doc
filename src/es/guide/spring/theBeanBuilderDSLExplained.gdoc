@@ -1,3 +1,6 @@
+
+{hidden}
+
 h4. Using Constructor Arguments
 
 Constructor arguments can be defined using parameters to each bean-defining method. Put them after the first argument (the Class):
@@ -8,6 +11,21 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+h4. Usando argumentos de Constructor
+
+Argumentos del constructor pueden definirse mediante parámetros para cada método de definición de frijol. Ponerlos tras el primer argumento (la clase):
+{code: java}
+BB.beans {}
+    exampleBean (MyExampleBean, "firstArgument", 2) {}
+        someProperty = [1, 2, 3]
+    }
+}
+{code}
+
+{hidden}
+
 
 This configuration corresponds to a @MyExampleBean@ with a constructor that looks like this:
 
@@ -18,6 +36,20 @@ MyExampleBean(String foo, int bar) {
 {code}
 
 h4. Configuring the BeanDefinition (Using factory methods)
+{hidden}
+
+Esta configuración corresponde a un MyExampleBean @ @ con un constructor que tiene este aspecto:
+
+{code: java}
+{MyExampleBean (cadena foo, bar int)
+   ...
+}
+{code}
+
+h4. Configuración de la BeanDefinition (mediante métodos de fábrica)
+
+{hidden}
+
 
 The first argument to the closure is a reference to the bean configuration instance, which you can use to configure factory methods and invoke any method on the [AbstractBeanDefinition|api:org.springframework.beans.factory.support.AbstractBeanDefinition] class:
 
@@ -30,6 +62,22 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+El primer argumento para el cierre es una referencia a la instancia de configuración de frijol, que puede utilizar para configurar métodos de fábrica y invocar cualquier método en la clase [AbstractBeanDefinition|api:org.springframework.beans.factory.support.AbstractBeanDefinition]:
+
+{code: java}
+BB.beans {}
+    exampleBean(MyExampleBean) {bean->
+        Bean.factoryMethod = "getInstance"
+        Bean.Singleton = false
+        someProperty = [1, 2, 3]
+    }
+}
+{code}
+
+{hidden}
+
 
 As an alternative you can also use the return value of the bean defining method to configure the bean:
 
@@ -41,6 +89,21 @@ bb.beans {
     example.factoryMethod = "getInstance"
 }
 {code}
+{hidden}
+
+Como alternativa también puede utilizar el valor devuelto por el frijol definir el método para configurar el grano:
+
+{code: java}
+BB.beans {}
+    ejemplo de Def = {} exampleBean(MyExampleBean)
+        someProperty = [1, 2, 3]
+    }
+    Example.factoryMethod = "getInstance"
+}
+{code}
+
+{hidden}
+
 
 h4. Using Factory beans
 
@@ -58,6 +121,27 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+h4. Con granos de fábrica
+
+Primavera define el concepto de frijoles de fábrica y a menudo se crea un grano no directamente de una nueva instancia de una clase, sino de una de estas fábricas. En este caso el grano no tiene ningún argumento de clase y en su lugar debe pasar el nombre del grano de fábrica para el frijol definición de método:
+
+{code: java}
+BB.beans {}
+
+myFactory(ExampleFactoryBean) {}
+        someProperty = [1, 2, 3]
+    }
+
+myBean(myFactory) {}
+        nombre = "blah"
+    }
+}
+{code}
+
+{hidden}
+
 
 Another common approach is provide the name of the factory method to call on the factory bean. This can be done using Groovy's named parameter syntax:
 
@@ -73,6 +157,25 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+Otro enfoque común es proporcionar el nombre del método de fábrica para llamar en el grano de la fábrica. Esto puede hacerse usando Groovy del denominado sintaxis de parámetros:
+
+{code: java}
+BB.beans {}
+
+myFactory(ExampleFactoryBean) {}
+        someProperty = [1, 2, 3]
+    }
+
+myBean (myFactory: "getInstance") {}
+        nombre = "blah"
+    }
+}
+{code}
+
+{hidden}
+
 
 Here the @getInstance@ method on the @ExampleFactoryBean@ bean will be called to create the @myBean@ bean.
 
@@ -88,6 +191,25 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+Aquí se llamará @ getInstance @ método sobre la @ ExampleFactoryBean @ bean para crear la @ myBean @ bean.
+
+h4. Creación de referencias de Bean en tiempo de ejecución
+
+A veces no conoce el nombre de frijol que se creen hasta el tiempo de ejecución. En este caso puede utilizar una interpolación de cadena para invocar un grano definir método dinámicamente:
+
+{code: java}
+Def beanName = "example"
+BB.beans {}
+    "{${beanName}Bean"(MyExampleBean)}
+        someProperty = [1, 2, 3]
+    }
+}
+{code}
+
+{hidden}
+
 
 In this case the @beanName@ variable defined earlier is used when invoking a bean defining method. The example has a hard-coded value but would work just as well with a name that is generated programmatically based on configuration, system properties, etc.
 
@@ -106,6 +228,28 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+En este caso se utiliza el @ beanName @ variable definida anteriormente al invocar un grano definición de método. El ejemplo tiene un valor codificado pero funcionaría igual de bien con un nombre que se genera mediante programación basado en la configuración de las propiedades del sistema, etc..
+
+Por otra parte, porque a veces no se conocen nombres de frijol hasta el tiempo de ejecución debe consultarlos por nombre cuando cableado juntos otros frijoles, en este caso usando la ref @ @ método:
+
+{code: java}
+Def beanName = "example"
+BB.beans {}
+
+"{${beanName}Bean"(MyExampleBean)}
+        someProperty = [1, 2, 3]
+    }
+
+anotherBean(AnotherBean) {}
+        ejemplo = ref("${beanName}Bean")
+    }
+}
+{code}
+
+{hidden}
+
 
 Here the example property of @AnotherBean@ is set using a runtime reference to the @exampleBean@. The @ref@ method can also be used to refer to beans from a parent @ApplicationContext@ that is provided in the constructor of the @BeanBuilder@:
 
@@ -118,6 +262,22 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+Aquí la propiedad de ejemplo de @ AnotherBean @ se establece mediante una referencia de tiempo de ejecución a la @ exampleBean @. Ref @ @ método también puede utilizarse para referirse a los granos de un padre @ ApplicationContext @ que se proporciona en el constructor de la @ BeanBuilder @:
+
+{code: java}
+ApplicationContext padre =... / /
+der bb = BeanBuilder(parent) nueva
+BB.beans {}
+    anotherBean(AnotherBean) {}
+        ejemplo = ref ("$ {beanName} Bean", true)
+    }
+}
+{code}
+
+{hidden}
+
 
 Here the second parameter @true@ specifies that the reference will look for the bean in the parent context.
 
@@ -149,6 +309,41 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+Aquí el segundo parámetro @ verdadero @ especifica que la referencia buscará el frijol en el contexto padre.
+
+h4. Mediante anónimos frijoles (interior)
+
+Puede usar anónimos frijoles interiores estableciendo una propiedad de la soja en un bloque que toma un argumento que es el tipo de grano:
+
+{code: java}
+BB.beans {}
+
+Marge(person) {}
+        nombre = "Marge"
+        marido = {persona p->
+            nombre = "Homero"
+            edad = 45
+            puntales = [sobrepeso: true, altura: "1,8 m"]
+        }
+        los niños = [bart, lisa]
+    }
+
+Bart(person) {}
+        nombre = "Bart"
+        edad = 11
+    }
+
+Lisa(person) {}
+        nombre = "Lisa"
+        edad = 9
+    }
+}
+{code}
+
+{hidden}
+
 
 In the above example we set the @marge@ bean's husband property to a block that creates an inner bean reference. Alternatively if you have a factory bean you can omit the type and just use the specified bean definition instead to setup the factory:
 
@@ -170,6 +365,31 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+En el ejemplo anterior establecimos marge @ @ propiedad del esposo de bean a un bloque que crea una referencia interna bean. O bien si tienes un grano de fábrica puede omitir el tipo y sólo utilizar la definición de frijol especificado en lugar de la instalación de la fábrica:
+
+{code: java}
+BB.beans {}
+
+personFactory(PersonFactory)
+
+Marge(person) {}
+        nombre = "Marge"
+        marido = {bean->
+            Bean.factoryBean = "personFactory"
+            Bean.factoryMethod = "newInstance"
+            nombre = "Homero"
+            edad = 45
+            puntales = [sobrepeso: true, altura: "1,8 m"]
+        }
+        los niños = [bart, lisa]
+    }
+}
+{code}
+
+{hidden}
+
 
 h4. Abstract Beans and Parent Bean Definitions
 
@@ -180,6 +400,20 @@ class HolyGrailQuest {
     def start() { println "lets begin" }
 }
 {code}
+{hidden}
+
+h4. Resumen de frijoles y padre Bean definiciones
+
+Para crear una definición abstracta bean definir un grano sin una clase @ @ parámetro:
+
+{code: java}
+clase HolyGrailQuest {}
+    Def start() {Console.println "permite comenzar"}
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class KnightOfTheRoundTable {
@@ -197,6 +431,27 @@ class KnightOfTheRoundTable {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase KnightOfTheRoundTable {}
+
+Nombre de la cadena
+    Líder de cadena
+    Búsqueda de HolyGrailQuest
+
+{KnightOfTheRoundTable (String name)
+        this.name = nombre
+    }
+
+Def embarkOnQuest() {}
+        Quest.Start()
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 import grails.spring.BeanBuilder
@@ -209,6 +464,22 @@ bb.beans {
     ...
 }
 {code}
+{hidden}
+
+{code: java}
+grails.spring.BeanBuilder de importación
+
+Def bb = BeanBuilder() nueva
+BB.beans {}
+    abstractBean {}
+        líder = "Lancelot"
+    }
+    ...
+}
+{code}
+
+{hidden}
+
 
 Here we define an abstract bean that has a @leader@ property with the value of @"Lancelot"@. To use the abstract bean set it as the parent of the child bean:
 
@@ -223,6 +494,24 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+Aquí definimos un frijol abstracto que tiene un líder @ @ propiedad con el valor de @ "Lancelot" @. Para utilizar el resumen bean establece como el padre del bean infantil:
+
+{code: java}
+BB.beans {}
+    ...
+    Quest(HolyGrailQuest)
+
+Caballeros (KnightOfTheRoundTable, "Camelot") {bean->
+        Bean.Parent = abstractBean
+        Quest = ref('quest')
+    }
+}
+{code}
+
+{hidden}
+
 
 {note}
 When using a parent bean you must set the parent property of the bean before setting any other properties on the bean!
@@ -249,6 +538,36 @@ bb.beans {
     }
 }
 {code}
+{hidden}
+
+{Nota}
+Cuando se utiliza un grano principal debe establecer la propiedad principal del grano antes de establecer cualquier otras propiedades en el bean!
+{Nota}
+
+Si desea que un bean abstracto que tiene una clase @ @ especificado que puede hacerlo así:
+
+{code: java}
+grails.spring.BeanBuilder de importación
+
+Def bb = BeanBuilder() nueva
+BB.beans {}
+
+abstractBean(KnightOfTheRoundTable) {bean->
+        Bean. 'abstract' = true
+        líder = "Lancelot"
+    }
+
+Quest(HolyGrailQuest)
+
+Knights("Camelot") {bean->
+        Bean.Parent = abstractBean
+        Quest = quest
+    }
+}
+{code}
+
+{hidden}
+
 
 In this example we create an abstract bean of type @KnightOfTheRoundTable@ and use the bean argument to set it to abstract. Later we define a knights bean that has no @Class@ defined, but inherits the @Class@ from the parent bean.
 
@@ -259,6 +578,20 @@ Since Spring 2.0, users of Spring have had easier access to key features via XML
 {code:java}
 xmlns context:"http://www.springframework.org/schema/context"
 {code}
+{hidden}
+
+En este ejemplo creamos un frijol abstracta de tipo @ KnightOfTheRoundTable @ y utilizar el argumento de frijol a lo abstracto. Después definimos un grano de caballeros que no tenga ninguna clase de @ @ definido, pero hereda la clase @ @ el grano principal.
+
+h4. Utilizar espacios de nombres de primavera
+
+Desde primavera 2.0, los usuarios de primavera han tenido acceso más fácil a las características clave a través de espacios de nombres XML. Puede utilizar un espacio de nombres de primavera en BeanBuilder declarando con esta sintaxis:
+
+{code: java}
+xmlns context:"http://www.springframework.org/schema/context"
+{code}
+
+{hidden}
+
 
 and then invoking a method that matches the names of the Spring namespace tag and its associated attributes:
 
@@ -273,6 +606,24 @@ xmlns jee:"http://www.springframework.org/schema/jee"
 
 jee.'jndi-lookup'(id: "dataSource", 'jndi-name': "java:comp/env/myDataSource")
 {code}
+{hidden}
+
+y, a continuación, invocar un método que coincida con el nombre de la etiqueta de espacio de nombres de primavera y sus atributos asociados:
+
+{code: java}
+contexto.' análisis de componente ' (' paquete base': "my.company.domain")
+{code}
+
+Puede hacer algunas cosas útiles con espacios de nombres de primavera, tales como buscar un recurso JNDI:
+
+{code: java}
+xmlns jee:"http://www.springframework.org/schema/jee"
+
+JEE.' búsqueda jndi'(id: "dataSource", "nombre jndi':" java: comp/env/MiOrigendeDatos ")
+{code}
+
+{hidden}
+
 
 This example will create a Spring bean with the identifier @dataSource@ by performing a JNDI lookup on the given JNDI name. With Spring namespaces you also get full access to all of the powerful AOP support in Spring from BeanBuilder. For example given these two classes:
 
@@ -287,6 +638,24 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+Este ejemplo crea un grano de primavera con el identificador @ dataSource @ realizando una búsqueda JNDI sobre el nombre JNDI. Con espacios de nombres de primavera también puede obtener acceso completo a todos el poderoso apoyo AOP en primavera de BeanBuilder. Por ejemplo teniendo en cuenta estas dos clases:
+
+{code: java}
+clase persona {}
+
+int edad
+    Nombre de la cadena
+
+void birthday() {}
+          edad;
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 class BirthdayCardSender {
@@ -298,6 +667,21 @@ class BirthdayCardSender {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+clase BirthdayCardSender {}
+
+Lista de peopleSentCards =]
+
+void onBirthday (persona) {}
+        peopleSentCards << persona
+    }
+}
+{code}
+
+{hidden}
+
 
 You can define an aspect that uses a pointcut to detect whenever the @birthday()@ method is called:
 
@@ -316,6 +700,29 @@ aop {
         aspect(id: "sendBirthdayCard", ref: "birthdayCardSenderAspect") {
             after method: "onBirthday",
             pointcut: "execution(void ..Person.birthday()) and this(person)"
+        }
+    }
+}
+{code}
+{hidden}
+
+Puede definir un aspecto que utiliza un pointcut para detectar cada vez que se llama el @ birthday() @ método:
+
+{code: java}
+xmlns aop:"http://www.springframework.org/schema/aop"
+
+Fred(person) {}
+    nombre = "Fred"
+    edad = 45
+}
+
+birthdayCardSenderAspect(BirthdayCardSender)
+
+{AOP
+    config ("clase de proxy de destino": true) {}
+        aspecto (id: "sendBirthdayCard", ref: "birthdayCardSenderAspect") {}
+            método: "onBirthday",
+            pointcut: "la ejecución (vacío...Person.Birthday()) y this(person)"
         }
     }
 }

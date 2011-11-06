@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. withTransaction
 
 h2. Purpose
@@ -25,9 +28,48 @@ Account.withTransaction { status ->
     }
 }
 {code}
+{hidden}
+
+h1. withTransaction
+
+h2. Fin
+
+Permite transacciones mediante programación utilizando la abstracción de transacción de la primavera.
+
+h2. Ejemplos
+
+{code: java}
+Account.withTransaction {Estado->
+
+fuente de Def = Account.get(params.from)
+    Def dest = Account.get(params.to)
+
+int cantidad = params.amount.toInteger()
+    Si (source.active) {}
+        cantidad de-= de Source.balance
+
+Si (dest.active) {}
+            dest.amount = cantidad
+        }
+        Else {}
+            Status.setRollbackOnly()
+        }
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 The @withTransaction@ method accepts a Closure with a [TransactionStatus|api:org.springframework.transaction.TransactionStatus] argument. The @TransactionStatus@ object can be used to programmatically control rollback of the transaction.
 
 Refer to the user guide section of [Programmatic Transactions|guide:programmaticTransactions] for more information.
+{hidden}
+
+h2. Descripción
+
+@ WithTransaction @ método acepta un cierre con un argumento [TransactionStatus|api:org.springframework.transaction.TransactionStatus]. @ TransactionStatus @ objeto puede utilizarse para controlar mediante programación la reversión de la transacción.
+
+Consulte la sección de la Guía de usuario de [programáticos Transactions|guide:programmaticTransactions] para obtener más información.

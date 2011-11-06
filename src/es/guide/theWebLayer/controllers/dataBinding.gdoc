@@ -1,3 +1,6 @@
+
+{hidden}
+
 Data binding is the act of "binding" incoming request parameters onto the properties of an object or an entire graph of objects. Data binding should deal with all necessary type conversion since request parameters, which are typically delivered by a form submission, are always strings whilst the properties of a Groovy or Java object may well not be.
 
 Grails uses [Spring|http://www.springframework.org]'s underlying data binding capability to perform data binding.
@@ -12,6 +15,25 @@ def save() {
     b.save()
 }
 {code}
+{hidden}
+
+Enlace de datos es el acto de parámetros de solicitud entrante "vinculante" en las propiedades de un objeto o todo un gráfico de objetos. Enlace de datos debería ocuparse de conversión de tipo necesario todos desde parámetros de solicitud, que normalmente se entregan por un envío de formularios, siempre son cadenas, mientras que las propiedades de un objeto Groovy o Java no pueden ser.
+
+Grails utiliza [Spring|http://www.springframework.org]'s subyacente enlace de datos capacidad para realizar el enlace de datos.
+
+h4. Enlace de datos de solicitud para el modelo
+
+Hay dos formas para enlazar parámetros de solicitud en las propiedades de una clase de dominio. La primera consiste en usar constructor de mapa de clases de un dominio:
+
+{code: java}
+Def save() {}
+    Def b = Book(params) nueva
+    b.Save()
+}
+{code}
+
+{hidden}
+
 
 The data binding happens within the code @new Book(params)@. By passing the [params|controllers] object to the domain class constructor Grails automatically recognizes that you are trying to bind from request parameters. So if we had an incoming request like:
 
@@ -28,6 +50,15 @@ def save() {
     b.save()
 }
 {code}
+{hidden}
+
+El enlace de datos ocurre dentro del código @ nueva Book(params) @. Pasando el [params|controllers] objeto al constructor de la clase de dominio Grails reconoce automáticamente que intenta enlazar desde parámetros de solicitud. Así que si tuviéramos una solicitud entrante como:
+
+{code: java}
+/ libro/guardar? título = The Stand
+
+{hidden}
+
 
 This has the same effect as using the implicit constructor.
 
@@ -38,6 +69,20 @@ If you have a @one-to-one@ or @many-to-one@ association you can use Grails' data
 {code:java}
 /book/save?author.id=20
 {code}
+{hidden}
+
+Esto tiene el mismo efecto que utilizar el constructor implícito.
+
+h4. Enlace de datos y terminó solo asociaciones
+
+Si tienes un @ uno a uno @ o muchos @ a uno @ asociación puede utilizar la capacidad de enlace de datos de Grails para actualizar estas relaciones demasiado. Por ejemplo, si tiene una solicitud entrante tales como:
+
+{code: java}
+/Book/Save?Author.ID=20
+{code}
+
+{hidden}
+
 
 Grails will automatically detect the @.id@ suffix on the request parameter and look up the @Author@ instance for the given id when doing data binding such as:
 
@@ -50,6 +95,22 @@ An association property can be set to @null@ by passing the literal @String@ "nu
 {code:java}
 /book/save?author.id=null
 {code}
+{hidden}
+
+Grails automáticamente detectará el sufijo de @ .id en el parámetro de solicitud y buscar el autor @ @ instancia para el id de determinada cuando se realiza el enlace de datos tales como:
+
+{code: java}
+Def b = Book(params) nueva
+{code}
+
+Una propiedad de la asociación se puede establecer en null @ @ pasando el literal de cadena @ @ "null". Por ejemplo:
+
+{code: java}
+/Book/Save?Author.ID=NULL
+{code}
+
+{hidden}
+
 
 h4. Data Binding and Many-ended Associations
 
@@ -63,6 +124,20 @@ If you have a @Set@ based association (the default for a @hasMany@) then the sim
           size="5" multiple="yes" optionKey="id"
           value="${author?.books}" />
 {code}
+{hidden}
+
+h4. Enlace de datos y terminó de muchas asociaciones
+
+Si tiene una asociación de uno a varios o muchos a muchos existen diferentes técnicas para según el tipo de enlace de datos.
+
+Si tienes un @ Set @ basados en asociación (el valor predeterminado para un @ hasMany @) la forma más sencilla para rellenar una asociación es enviar una lista de identificadores. Por ejemplo considerar el uso de @<g:select>@ a continuación:
+
+{Código: xml}
+<g:select name="books" from="${Book.list()}" size="5" multiple="yes" optionkey="id" value="${author?.books}"></g:select>
+{código}</g:select>
+
+{hidden}
+
 
 This produces a select box that lets you select multiple values. In this case if you submit the form Grails will automatically use the identifiers from the select box to populate the @books@ association.
 
@@ -72,6 +147,19 @@ However, if you have a scenario where you want to update the properties of the a
 <g:textField name="books[0].title" value="the Stand" />
 <g:textField name="books[1].title" value="the Shining" />
 {code}
+
+{hidden}
+
+Esto produce un cuadro de selección que permite seleccionar varios valores. En este caso si envía el formulario Grails automáticamente utilizará los identificadores desde el cuadro de selección para rellenar los libros @ @ asociación.
+
+Sin embargo, si tiene un escenario donde desea actualizar las propiedades de los asociados objetos esta técnica no funcionará. En su lugar utiliza el operador subíndice:
+
+{Código: xml}
+<g:textfield name="books[0].title" value="the Stand"></g:textfield>
+<g:textfield name="books[1].title" value="the Shining"></g:textfield>
+{code}
+
+{hidden}
 
 However, with @Set@ based association it is critical that you render the mark-up in the same order that you plan to do the update in. This is because a @Set@ has no concept of order, so although we're referring to @books[0]@ and @books[1]@ it is not guaranteed that the order of the association will be correct on the server side unless you apply some explicit sorting yourself.
 
@@ -84,6 +172,22 @@ Note also that if the association you are binding to has a size of two and you r
 <g:textField name="books[1].title" value="the Shining" />
 <g:textField name="books[2].title" value="Red Madder" />
 {code}
+{hidden}
+
+Sin embargo, con @ Set @ basados en asociación es fundamental que procese la marcación en el mismo orden que planea hacer la actualización. Esto es porque un @ Set @ no tiene ningún concepto de orden, por lo que aunque nos estamos refiriendo a @ libros [0] @ y @ libros [1] @ no está garantizado que la orden de la Asociación será correcta en el servidor a menos que aplique alguna clasificación explícita usted mismo.
+
+Esto no es un problema si utiliza @ lista @ basados en asociaciones, desde una lista @ @ tiene un orden definido y un índice que puede consultar. Esto también es cierto de @ mapa @ basados en asociaciones.
+
+Tenga en cuenta también que si la asociación a que va a enlazar tiene un tamaño de dos y se hace referencia a un elemento que se encuentra fuera del tamaño de asociación:
+
+{Código: xml}
+<g:textfield name="books[0].title" value="the Stand"></g:textfield>
+<g:textfield name="books[1].title" value="the Shining"></g:textfield>
+<g:textfield name="books[2].title" value="Red Madder"></g:textfield>
+{code}
+
+{hidden}
+
 
 Then Grails will automatically create a new instance for you at the defined position. If you "skipped" a few elements in the middle:
 
@@ -94,6 +198,20 @@ Then Grails will automatically create a new instance for you at the defined posi
 {code}
 
 Then Grails will automatically create instances in between. For example in the above case Grails will create 4 additional instances if the association being bound had a size of 2.
+{hidden}
+
+Entonces Grails creará automáticamente una nueva instancia para usted en la posición definida. Si usted "omitió" algunos elementos en el medio:
+
+{Código: xml}
+<g:textfield name="books[0].title" value="the Stand"></g:textfield>
+<g:textfield name="books[1].title" value="the Shining"></g:textfield>
+<g:textfield name="books[5].title" value="Red Madder"></g:textfield>
+{code}
+
+Entonces Grails creará automáticamente instancias intermedias. Por ejemplo en el caso anterior Grails creará 4 instancias adicionales si la Asociación están enlazada tenía un tamaño de 2.
+
+{hidden}
+
 
 You can bind existing instances of the associated type to a @List@ using the same @.id@ syntax as you would use with a single-ended association. For example:
 
@@ -107,6 +225,20 @@ You can bind existing instances of the associated type to a @List@ using the sam
 <g:select name="books[2].id" from="${bookList}"
           value="${author?.books[2]?.id}" />
 {code}
+{hidden}
+
+Puede enlazar las instancias existentes del tipo asociado a una lista de @ @ usando la misma sintaxis @ .id como lo haría con una asociación de un extremo. Por ejemplo:
+
+{Código: xml}
+<g:select name="books[0].id" from="${bookList}" value="${author?.books[0]?.id}"></g:select>
+
+<g:select name="books[1].id" from="${bookList}" value="${author?.books[1]?.id}"></g:select>
+
+<g:select name="books[2].id" from="${bookList}" value="${author?.books[2]?.id}"></g:select>
+{code}
+
+{hidden}
+
 
 Would allow individual entries in the @books List@ to be selected separately.
 
@@ -118,6 +250,18 @@ Entries at particular indexes can be removed in the same way too. For example:
           value="${author?.books[0]?.id}"
           noSelection="['null': '']"/>
 {code}
+{hidden}
+
+Permitiría entradas individuales en los libros de @ lista para ser seleccionado por separado.
+
+Entradas en particulares índices pueden eliminarse en el mismo demasiado. Por ejemplo:
+
+{Código: xml}
+<g:select name="books[0].id" from="${Book.list()}" value="${author?.books[0]?.id}" noselection="['null': '']"></g:select>
+{code}
+
+{hidden}
+
 
 Will render a select box that will remove the association at @books[0]@ if the empty option is chosen.
 
@@ -129,6 +273,18 @@ Binding to a @Map@ property works the same way except that the list index in the
           value="${book?.images[cover]?.id}"
           noSelection="['null': '']"/>
 {code}
+{hidden}
+
+Se representa en un cuadro de selección que eliminará la Asociación @ libros [0] @ si se elige la opción vacía.
+
+Enlace a un mapa @ @ propiedad funciona del mismo modo salvo que el índice de la lista en el nombre del parámetro es reemplazado por la clave del mapa:
+
+{Código: xml}
+<g:select name="images[cover].id" from="${Image.list()}" value="${book?.images[cover]?.id}" noselection="['null': '']"></g:select>
+{code}
+
+{hidden}
+
 
 This would bind the selected image into the @Map@ property @images@ under a key of @"cover"@.
 
@@ -141,6 +297,21 @@ For example so you have an incoming request to:
 {code:java}
  /book/save?book.title=The%20Stand&author.name=Stephen%20King
 {code}
+{hidden}
+
+Esto vincularía la imagen seleccionada en el mapa @ @ propiedad @ imágenes @ bajo una clave de @ "cubierta" @.
+
+h4. Enlace de datos con varias clases de dominio
+
+Es posible enlazar datos a varios objetos de dominio desde el objeto [params|controllers].
+
+Así por ejemplo tiene una solicitud entrante para:
+
+{code: java}
+ /Book/Save?Book.Title=the stand
+
+{hidden}
+
 
 You'll notice the difference with the above request is that each parameter has a prefix such as @author.@ or @book.@ which is used to isolate which parameters belong to which type. Grails' @params@ object is like a multi-dimensional hash and you can index into it to isolate only a subset of the parameters to bind.
 
@@ -153,6 +324,22 @@ Notice how we use the prefix before the first dot of the @book.title@ parameter 
 {code:java}
 def a = new Author(params.author)
 {code}
+{hidden}
+
+Notará la diferencia con la anterior solicitud es que cada parámetro tiene un prefijo como autor @. @ o @ libro. @ que se utiliza para aislar los parámetros que pertenecen al tipo. Params @ de Grails @ objeto es como un hash multidimensional y puede crear un índice en ella para aislar sólo un subconjunto de los parámetros para enlazar.
+
+{code: java}
+Def b = Book(params.book) nueva
+{code}
+
+Observe cómo utilizar el prefijo antes el primer punto del parámetro @book.title@ para aislar los parámetros sólo por debajo de este nivel para enlazar. Podríamos hacer lo mismo con un autor @ @ clase de dominio:
+
+{code: java}
+Def un = nuevo Author(params.author)
+{code}
+
+{hidden}
+
 
 h4. Data Binding and Action Arguments
 
@@ -168,6 +355,25 @@ class AccountingController {
    }
 }
 {code}
+{hidden}
+
+h4. Enlace de datos y argumentos de acción
+
+Argumentos de acción del controlador son objeto de enlace de datos del parámetro de solicitud.  Hay dos categorías de argumentos de acción del controlador.  La primera categoría es los objetos de comando.  Tipos complejos son tratados como objetos de comando.  Consulte la sección [comando Objects|guide:commandObjects] de la Guía del usuario para obtener más detalles.  La otra categoría es tipos de objeto básico.  Tipos admitidos son las 8 primitivas y sus correspondientes contenedores de tipo y [java.lang.String|api:java.lang.String].  El comportamiento predeterminado es asignar parámetros de solicitud a los argumentos de acción por nombre:
+
+{code: java}
+clase AccountingController {}
+
+/ / accountNumber se inicializará con el valor de params.accountNumber
+   / / accountType se inicializará con params.accountType
+   Def displayInvoice (String accountNumber, int accountType) {}
+       // ...
+   }
+}
+{code}
+
+{hidden}
+
 
 For primitive arguments and arguments which are instances of any of the primitive type wrapper classes a type conversion has to be carried out before the request parameter value can be bound to the action argument.  The type conversion happens automatically.  In a case like the example shown above, the @params.accountType@ request parameter has to be converted to an @int@.  If type conversion fails for any reason, the argument will have its default value per normal Java behavior (null for type wrapper references, false for booleans and zero for numbers) and a corresponding error will be added to the @errors@ property of the defining controller.
 
@@ -178,6 +384,15 @@ For primitive arguments and arguments which are instances of any of the primitiv
 Since "bogusValue" cannot be converted to type int, the value of accountType will be zero, @controller.errors.hasErrors()@ will be true, @controller.errors.errorCount@ will be equal to 1 and @controller.errors.getFieldError('accountType')@ will contain the corresponding error.
 
 If the argument name does not match the name of the request parameter then the @\@grails.web.RequestParameter@ annotation may be applied to an argument to express the name of the request parameter which should be bound to that argument:
+{hidden}
+
+Argumentos primitivos y argumentos que son instancias de cualquiera de las clases contenedoras de tipo primitivo una conversión de tipos tiene que llevarse a cabo antes de que el valor del parámetro de solicitud se puede enlazar con el argumento de acción.  El tipo de conversión se realiza automáticamente.  En un caso como en el ejemplo anterior, el parámetro de solicitud de @params.accountType@ tiene que convertirse en un int @ @.  Si falla la conversión de tipo por cualquier razón, el argumento tendrá su valor predeterminado por el comportamiento normal de Java (null para referencias tipo contenedor, falsas valores booleanos y cero para los números) y un error correspondiente se agregará a los errores de @ @ propiedad del controlador de definición.
+
+{code: java}
+contabilidad/displayInvoice? accountNumber = B59786
+
+{hidden}
+
 
 {code:java}
 import grails.web.RequestParameter
@@ -191,6 +406,23 @@ class AccountingController {
    }
 }
 {code}
+{hidden}
+
+{code: java}
+grails.web.RequestParameter de importación
+
+clase AccountingController {}
+
+/ / mainAccountNumber se inicializará con el valor de params.accountNumber
+   / / accountType se inicializará con params.accountType
+   {} Def displayInvoice(@RequestParameter('accountNumber') cadena mainAccountNumber, accountType int)
+       // ...
+   }
+}
+{code}
+
+{hidden}
+
 
 
 h4. Data binding and type conversion errors
@@ -203,6 +435,21 @@ class Book {
     URL publisherURL
 }
 {code}
+{hidden}
+
+h4. Errores de conversión de enlace y el tipo de datos
+
+A veces cuando se realiza el enlace de datos no es posible convertir una cadena concreta en un tipo particular de destino. Esto produce un error de conversión de tipo. Grails conservará errores de conversión de tipo dentro de la propiedad [errors|domainClasses] de una clase de dominio Grails. Por ejemplo:
+
+{code: java}
+clase {libro
+    ...
+    URL publisherURL
+}
+{code}
+
+{hidden}
+
 
 Here we have a domain class @Book@ that uses the @java.net.URL@ class to represent URLs. Given an incoming request such as:
 
@@ -220,6 +467,26 @@ if (b.hasErrors()) {
             " is not a valid URL!"
 }
 {code}
+{hidden}
+
+Aquí tenemos un clase de dominio @ libro @ que utiliza la clase @java.net.URL@ para representar direcciones URL. Dada una solicitud entrante tales como:
+
+{code: java}
+  / libro/guardar? publisherURL = mala dirección url
+{code}
+
+no es posible enlazar la cadena @ a-mal-url @ publisherURL @ @ propiedad como se produce un error de coincidencia de tipo. Puede comprobar estos como este:
+
+{code: java}
+Def b = Book(params) nueva
+
+Si ({b.hasErrors())}
+    "El valor ${b.errors.getFieldError ('publisherURL') .rejectedvalue}" Console.println "no es una dirección URL válida!"
+}
+{code}
+
+{hidden}
+
 
 Although we have not yet covered error codes (for more information see the section on [Validation|guide:validation]), for type conversion errors you would want a message from the @grails-app/i18n/messages.properties@ file to use for the error. You can use a generic error message handler such as:
 
@@ -232,6 +499,22 @@ Or a more specific one:
 {code:java}
 typeMismatch.Book.publisherURL=The publisher URL you specified is not a valid URL
 {code}
+{hidden}
+
+Aunque todavía no hemos cubierto los códigos de error (para más información, consulte la sección [Validation|guide:validation]), por errores de conversión de tipo sería desea recibir un mensaje desde el archivo @grails-app/i18n/messages.properties@ que se utiliza para el error. Se puede utilizar como un controlador de mensaje de error genérico:
+
+{code: java}
+typeMismatch.java.net.URL=The campo {0} no es una dirección URL válida
+{code}
+
+O uno más específico:
+
+{code: java}
+typeMismatch.Book.publisherURL=The editor URL especificada no es una dirección URL válida
+{code}
+
+{hidden}
+
 
 h4. Data Binding and Security concerns
 
@@ -242,6 +525,20 @@ def p = Person.get(1)
 
 p.properties['firstName','lastName'] = params
 {code}
+{hidden}
+
+h4. Preocupaciones de seguridad y enlace de datos
+
+Propiedades de actualización por lotes de solicitan de parámetros debe tener cuidado de no permitir a los clientes enlazar datos malintencionados a clases de dominio y persistir en la base de datos. Puede limitar qué propiedades están obligadas a una clase de dominio mediante el operador subíndice:
+
+{code: java}
+Def p = Person.get(1)
+
+p.Properties['firstName','lastName'] = params
+{code}
+
+{hidden}
+
 
 In this case only the @firstName@ and @lastName@ properties will be bound.
 
@@ -253,6 +550,21 @@ The @bindData@ method allows the same data binding capability, but to arbitrary 
 def p = new Person()
 bindData(p, params)
 {code}
+{hidden}
+
+En este caso se enlazará sólo la @ firstName @ y @ lastName @ propiedades.
+
+Es otra forma de hacerlo es utilizar [comando Objects|guide:commandObjects] como destino de enlace de datos en lugar de las clases de dominio. También es el método flexible [bindData|controllers].
+
+@ BindData @ método permite los mismos capacidad de enlace de datos, sino objetos arbitrarios:
+
+{code: java}
+Def p = Person() nueva
+bindData (p, params)
+{code}
+
+{hidden}
+
 
 The @bindData@ method also lets you exclude certain parameters that you don't want updated:
 
@@ -263,6 +575,19 @@ bindData(p, params, [exclude: 'dateOfBirth'])
 
 Or include only certain properties:
 
+{hidden}
+
+@ BindData @ método también permite excluir ciertos parámetros que no desea actualizado:
+
+{code: java}
+Def p = Person() nueva
+bindData (p, params, [excluir: 'dateOfBirth'])
+{code}
+
+O incluir sólo ciertas propiedades:
+
+{hidden}
+
 {code:java}
 def p = new Person()
 bindData(p, params, [include: ['firstName', 'lastName]])
@@ -271,3 +596,13 @@ bindData(p, params, [include: ['firstName', 'lastName]])
 {note}
 Note that if an empty List is provided as a value for the @include@ parameter then all fields will be subject to binding if they are not explicitly excluded.
 {note}
+{hidden}
+
+{code: java}
+Def p = Person() nueva
+bindData (p, params, [incluyen: ['firstName', ' lastName]])
+{code}
+
+{Nota}
+Tenga en cuenta que si un vacío lista se proporciona como un valor para el @ incluyen @ parámetro, a continuación, todos los campos estarán sujetos a vinculante si no están explícitamente excluidos.
+{Nota}

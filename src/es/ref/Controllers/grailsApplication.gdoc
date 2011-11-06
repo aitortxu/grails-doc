@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. grailsApplication
 
 h2. Purpose
@@ -14,7 +17,33 @@ class BookController {
     }
 }
 {code}
+{hidden}
+
+h1. grailsApplication
+
+h2. Fin
+
+Una instancia de la clase [GrailsApplication|api:org.codehaus.groovy.grails.commons.GrailsApplication].
+
+h2. Ejemplos
+
+{code: java}
+clase BookController {}
+    Def list() {}
+        Def bookClass = grailsApplication.classLoader.loadClass("Book")
+        [libro: bookClass.newInstance()]
+    }
+}
+{code}
+
+{hidden}
+
 
 h2. Description
 
 The @GrailsApplication@ class provides information about the conventions within Grails and access to [metadata|api:org.codehaus.groovy.grails.commons.GrailsApplication#getMetadata()], [config|api:org.codehaus.groovy.grails.commons.GrailsApplication#getConfig()] and the [ClassLoader|api:org.codehaus.groovy.grails.commons.GrailsApplication#getClassLoader()]
+{hidden}
+
+h2. Descripción
+
+@ GrailsApplication @ clase proporciona información acerca de los convenios en Grails y acceso a [metadata|api:org.codehaus.groovy.grails.commons.GrailsApplication

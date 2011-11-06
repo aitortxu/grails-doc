@@ -1,3 +1,6 @@
+
+{hidden}
+
 Grails supports the concept of dynamic encode/decode methods.  A set of standard codecs are bundled with Grails.  Grails also supports a simple mechanism for developers to contribute their own codecs that will be recognized at runtime.
 
 h4. Codec Classes
@@ -7,6 +10,20 @@ A Grails codec class is one that may contain an encode closure, a decode closure
 The framework looks under @grails-app/utils/@ for class names that end with the convention @Codec@.  For example one of the standard codecs that ships with Grails is @HTMLCodec@.
 
 If a codec contains an @encode@ closure Grails will create a dynamic @encode@ method and add that method to the @Object@ class with a name representing the codec that defined the encode closure. For example, the @HTMLCodec@ class defines an @encode@ closure, so Grails attaches it with the name @encodeAsHTML@.
+
+{hidden}
+
+Grails es compatible con el concepto de métodos dinámicos codificar y descodificar.  Se incluye un conjunto de códecs estándar con Grails.  Grails también admite un mecanismo simple para desarrolladores contribuir sus propios códecs que se reconocerá en tiempo de ejecución.
+
+h4. Clases de Codec
+
+Una clase de códec de Grails es uno que puede contener un cierre de codificar, un cierre de descodificación o ambos.  Cuando se inicia una aplicación Grails el marco Grails carga dinámicamente codecs de la @ grails-app/utils / @ directorio.
+
+El marco se ve bajo @ grails-app/utils / @ clase nombres que terminan con el códec de Convención @ @.  Por ejemplo, uno de los códecs estándar que se suministra con Grails es @ HTMLCodec @.
+
+Si un códec contiene una codificación @ @ cierre Grails creará una dinámica @ codificar @ método y agregar ese método al objeto @ @ clase con un nombre que representa el códec que define el cierre de codificar. Por ejemplo, @ HTMLCodec @ clase define un @ codificar @ cierre, por lo que Grails lo conecta con el nombre @ encodeAsHTML @.
+
+{hidden}
 
 The @HTMLCodec@ and @URLCodec@ classes also define a @decode@ closure, so Grails attaches those with the names @decodeHTML@ and @decodeURL@ respectively. Dynamic codec methods may be invoked from anywhere in a Grails application. For example, consider a case where a report contains a property called 'description' which may contain special characters that must be escaped to be presented in an HTML document.  One way to deal with that in a GSP is to encode the description property using the dynamic encode method as shown below:
 
@@ -18,6 +35,20 @@ Decoding is performed using @value.decodeHTML()@ syntax.
 
 h4. Standard Codecs
 
+{hidden}
+
+El @ HTMLCodec @ y @ URLCodec @ clases también define un @ descodificar @ cierre, por lo que Grails con los nombres @ decodeHTML @ y @ decodeURL @ atribuye respectivamente. Métodos dinámicos codec podrán ser invocadas desde cualquier parte en una aplicación de Grails. Por ejemplo, considere un caso donde un informe contiene una propiedad denominada "descripción", que puede contener caracteres especiales que deben escapar a ser presentados en un documento HTML.  Una manera para tratar de que en un sistema de preferencias Generalizadas es codificar la propiedad Descripción de la dinámica codificar método como se muestra a continuación:
+
+{code: java}
+${report.description.encodeAsHTML()}
+{code}
+
+Decodificación se realiza con @ value.decodeHTML() @ sintaxis.
+
+h4. Códecs estándar
+
+{hidden}
+
 *HTMLCodec*
 
 This codec performs HTML escaping and unescaping, so that values can be rendered safely in an HTML page without creating any HTML tags or damaging the page layout. For example, given a value "Don't you know that 2 > 1?" you wouldn't be able to show this safely within an HTML page because the > will look like it closes a tag, which is especially bad if you render this data within an attribute, such as the value attribute of an input field.
@@ -27,6 +58,18 @@ Example of usage:
 {code:java}
 <input name="comment.message" value="${comment.message.encodeAsHTML()}"/>
 {code}
+
+{hidden}
+
+* HTMLCodec *
+
+Este códec realiza HTML escapar y unescaping, para que los valores pueden procesarse con seguridad en una página HTML sin crear etiquetas HTML o dañar el diseño de página. Por ejemplo, dado un valor de "no sé que 2 > 1?" sería capaz de mostrar con seguridad dentro de una página HTML porque la > se verá como se cierra una etiqueta, que es especialmente mala si se procesa estos datos dentro de un atributo, como el atributo de valor de un campo de entrada.
+
+Ejemplo de uso:
+
+{code: java}<input name="comment.message" value="${comment.message.encodeAsHTML()}">{code}
+
+{hidden}
 
 {note}
 Note that the HTML encoding does not re-encode apostrophe/single quote so you must use double quotes on attribute values to avoid text with apostrophes affecting your page.
@@ -38,6 +81,18 @@ URL encoding is required when creating URLs in links or form actions, or any tim
 
 Example of usage:
 
+{hidden}
+
+{Nota}
+Tenga en cuenta que la codificación HTML no codificar cita apóstrofe solo por lo que debe utilizar comillas dobles en valores de atributo para evitar texto con apóstrofes afectando su página.
+{Nota}
+
+* URLCodec *
+
+Codificación URL es necesaria al crear direcciones URL en enlaces o acciones de formulario, o los datos de tiempo se utilizan para crear una dirección URL. Evita que los caracteres no válidos en la dirección URL y cambiar su significado, por ejemplo "Apple
+
+{hidden}
+
 {code:java}
 <a href="/mycontroller/find?searchKey=${lastSearch.encodeAsURL()}">
 Repeat last search
@@ -47,6 +102,20 @@ Repeat last search
 *Base64Codec*
 
 Performs Base64 encode/decode functions. Example of usage:
+
+{hidden}
+
+{code: java}
+<a href="/mycontroller/find?searchKey=${lastSearch.encodeAsURL()}">
+Repetir la última búsqueda
+</a>
+{code}
+
+* Base64Codec *
+
+Realiza las funciones de codificación/descodificación Base64. Ejemplo de uso:
+
+{hidden}
 
 {code:java}
 Your registration code is: ${user.registrationCode.encodeAsBase64()}
@@ -60,6 +129,23 @@ Escapes Strings so they can be used as valid JavaScript strings. For example:
 Element.update('${elementId}',
     '${render(template: "/common/message").encodeAsJavaScript()}')
 {code}
+{hidden}
+
+{code: java}
+Su código de registro es: ${user.registrationCode.encodeAsBase64()}
+{code}
+
+* JavaScriptCodec *
+
+Escapa cadenas para que puedan ser usados como cadenas de JavaScript válidas. Por ejemplo:
+
+{code: java}
+Element.Update ('$ {elementId}',
+    '$ {procesar (plantilla: "/common/message").encodeAsJavaScript()}')
+{code}
+
+{hidden}
+
 
 *HexCodec*
 
@@ -70,6 +156,17 @@ Selected colour: #${[255,127,255].encodeAsHex()}
 {code}
 
 *MD5Codec*
+{hidden}
+
+* HexCodec *
+
+Codifica matrices de bytes o listas de números enteros en minúsculas cadenas hexadecimales y puede descifrar cadenas hexadecimales en matrices de bytes. Por ejemplo:
+
+{code: java}
+Color seleccionado:
+
+{hidden}
+
 
 Uses the MD5 algorithm to digest byte arrays or lists of integers, or the bytes of a string (in default system encoding), as a lowercase hexadecimal string. Example of usage:
 
@@ -80,6 +177,20 @@ Your API Key: ${user.uniqueID.encodeAsMD5()}
 *MD5BytesCodec*
 
 Uses the MD5 algorithm to digest byte arrays or lists of integers, or the bytes of a string (in default system encoding), as a byte array. Example of usage:
+{hidden}
+
+Utiliza el algoritmo MD5 para digerir matrices de bytes o listas de números enteros, o los bytes de una cadena (en sistema codificación predeterminada), como una cadena hexadecimal en minúsculas. Ejemplo de uso:
+
+{code: java}
+La clave API: ${user.uniqueID.encodeAsMD5()}
+{code}
+
+* MD5BytesCodec *
+
+Utiliza el algoritmo MD5 para digerir matrices de bytes o listas de números enteros, o los bytes de una cadena (en sistema codificación predeterminada), como una matriz de bytes. Ejemplo de uso:
+
+{hidden}
+
 
 {code:java}
 byte[] passwordHash = params.password.encodeAsMD5Bytes()
@@ -92,6 +203,22 @@ Uses the SHA1 algorithm to digest byte arrays or lists of integers, or the bytes
 {code:java}
 Your API Key: ${user.uniqueID.encodeAsSHA1()}
 {code}
+{hidden}
+
+{code: java}
+Byte [] passwordHash = params.password.encodeAsMD5Bytes()
+{code}
+
+* SHA1Codec *
+
+Utiliza el algoritmo SHA1 para digerir matrices de bytes o listas de números enteros, o los bytes de una cadena (en sistema codificación predeterminada), como una cadena hexadecimal en minúsculas. Ejemplo de uso:
+
+{code: java}
+La clave API: ${user.uniqueID.encodeAsSHA1()}
+{code}
+
+{hidden}
+
 
 *SHA1BytesCodec*
 
@@ -102,6 +229,20 @@ byte[] passwordHash = params.password.encodeAsSHA1Bytes()
 {code}
 
 *SHA256Codec*
+{hidden}
+
+* SHA1BytesCodec *
+
+Utiliza el algoritmo SHA1 para digerir matrices de bytes o listas de números enteros, o los bytes de una cadena (en sistema codificación predeterminada), como una matriz de bytes. Ejemplo de uso:
+
+{code: java}
+Byte [] passwordHash = params.password.encodeAsSHA1Bytes()
+{code}
+
+* SHA256Codec *
+
+{hidden}
+
 
 Uses the SHA256 algorithm to digest byte arrays or lists of integers, or the bytes of a string (in default system encoding), as a lowercase hexadecimal string. Example of usage:
 
@@ -112,6 +253,20 @@ Your API Key: ${user.uniqueID.encodeAsSHA256()}
 *SHA256BytesCodec*
 
 Uses the SHA256 algorithm to digest byte arrays or lists of integers, or the bytes of a string (in default system encoding), as a byte array. Example of usage:
+{hidden}
+
+Utiliza el algoritmo SHA256 digerir matrices de bytes o listas de números enteros, o los bytes de una cadena (en sistema codificación predeterminada), como una cadena hexadecimal en minúsculas. Ejemplo de uso:
+
+{code: java}
+La clave API: ${user.uniqueID.encodeAsSHA256()}
+{code}
+
+* SHA256BytesCodec *
+
+Utiliza el algoritmo SHA256 digerir matrices de bytes o listas de números enteros, o los bytes de una cadena (en sistema codificación predeterminada), como una matriz de bytes. Ejemplo de uso:
+
+{hidden}
+
 
 {code:java}
 byte[] passwordHash = params.password.encodeAsSHA256Bytes()
@@ -128,9 +283,36 @@ class PigLatinCodec {
   }
 }
 {code}
+{hidden}
+
+{code: java}
+Byte [] passwordHash = params.password.encodeAsSHA256Bytes()
+{code}
+
+h4. Códecs personalizado
+
+Las aplicaciones pueden definir sus propios códecs y Grails les cargará junto con los códecs estándar. Una clase personalizada codec debe definirse en el @ grails-app/utils / @ directorio y el nombre de clase debe terminar con Codec @ @. El códec puede contener un estático @ @ @ codificar @ cierre, descodificar un estático @ @ @ @ cierre o ambos. El cierre debe aceptar un solo argumento que será el objeto de que se invoca el método dinámico en. Por ejemplo:
+
+{code: java}
+clase PigLatinCodec {}
+  codificar estática = {str->
+    / / convertir la cadena latina de cerdo y devolver el resultado
+  }
+}
+{code}
+
+{hidden}
+
 
 With the above codec in place an application could do something like this:
 
 {code:xml}
+${lastName.encodeAsPigLatin()}
+{code}
+{hidden}
+
+Con el códec arriba en su lugar una aplicación podría hacer algo como esto:
+
+{Código: xml}
 ${lastName.encodeAsPigLatin()}
 {code}

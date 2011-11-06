@@ -1,3 +1,6 @@
+
+{hidden}
+
 An example of using the [save|domainClasses] method can be seen below:
 
 {code}
@@ -11,6 +14,24 @@ This save will be not be pushed to the database immediately - it will be pushed 
 def p = Person.get(1)
 p.save(flush: true)
 {code}
+{hidden}
+
+Un ejemplo de cómo utilizar el método [save|domainClasses] puede verse a continuación:
+
+{code}
+Def p = Person.get(1)
+p.Save()
+{code}
+
+Este guardar no ser empujados a la base de datos inmediatamente - se va ser empujado cuando se produce el siguiente color. Pero hay ocasiones cuando desea controlar cuándo se ejecutan esas declaraciones o, en terminología de hibernación, cuando el período de sesiones se "vacía". Para ello puede utilizar el argumento de vaciado para guardar método:
+
+{code}
+Def p = Person.get(1)
+p.Save(flush: true)
+{code}
+
+{hidden}
+
 
 Note that in this case _all_ pending SQL statements including previous saves, deletes, etc. will be synchronized with the database. This also lets you catch any exceptions, which is typically useful in highly concurrent scenarios involving [optimistic locking|guide:locking]:
 
@@ -23,6 +44,22 @@ catch (org.springframework.dao.DataIntegrityViolationException e) {
     // deal with exception
 }
 {code}
+{hidden}
+
+Tenga en cuenta que en este caso _all_ espera de sentencias SQL incluyendo guarda anterior, elimina, etc. se sincronizarán con la base de datos. Esto también le permite detectar cualquier excepciones, que es generalmente útil en escenarios altamente simultáneos con [locking|guide optimista: bloqueo]:
+
+{code}
+Def p = Person.get(1)
+Intente {}
+    p.Save(flush: true)
+}
+catch (org.springframework.dao.DataIntegrityViolationException e) {}
+    / / tratar con excepción
+}
+{code}
+
+{hidden}
+
 
 Another thing to bear in mind is that Grails [validates|guide:validation] a domain instance every time you save it. If that validation fails the domain instance will _not_ be persisted to the database. By default, @save()@ will simply return @null@ in this case, but if you would prefer it to throw an exception you can use the @failOnError@ argument:
 
@@ -35,7 +72,28 @@ catch (ValidationException e) {
     // deal with exception
 }
 {code}
+{hidden}
+
+Otro aspecto a tener en cuenta es que la instancia Grails [validates|guide:validation] un dominio cada vez que lo guarde. Si la validación falla la instancia de dominio se _no_ conservará la base de datos. De forma predeterminada, @ save() @ simplemente devolverá null @ @ en este caso, pero si usted prefiere que producir una excepción puede utilizar failOnError @ @ argumento:
+
+{code}
+Def p = Person.get(1)
+Intente {}
+    p.Save(failOnError: true)
+}
+catch (ValidationException e) {}
+    / / tratar con excepción
+}
+{code}
+
+{hidden}
+
 
 You can even change the default behaviour with a setting in @Config.groovy@, as described in the [section on configuration|guide:configGORM]. Just remember that when you are saving domain instances that have been bound with data provided by the user, the likelihood of validation exceptions is quite high and you won't want those exceptions propagating to the end user.
 
 You can find out more about the subtleties of saving data in [this article|http://blog.springsource.com/2010/06/23/gorm-gotchas-part-1/] - a must read!
+{hidden}
+
+Incluso puede cambiar el comportamiento predeterminado con un valor de @ Config.groovy@, como se describe en [sección] configuration|guide:configGORM. Recuerde que cuando se va a guardar instancias de dominio que han sido vinculadas con los datos proporcionados por el usuario, la probabilidad de excepciones de validación es bastante alta y que no desee dichas excepciones plantones al usuario final.
+
+Puede encontrar más información acerca de las sutilezas de guardar los datos en [este article|http://blog.springsource.com/2010/06/23/gorm-gotchas-part-1/] - un debe leer!

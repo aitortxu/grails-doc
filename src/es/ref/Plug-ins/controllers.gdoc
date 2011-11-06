@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. controllers
 
 h2. Purpose
@@ -7,6 +10,20 @@ A plugin that configures core Grails MVC architecture using the underlying Sprin
 h2. Examples
 
 A controller:
+
+{hidden}
+
+h1. controladores
+
+h2. Fin
+
+Un plugin que configura la arquitectura de núcleo Grails MVC utilizando el modelo de componente subyacente de Spring MVC
+
+h2. Ejemplos
+
+Un controlador:
+
+{hidden}
 
 {code}
 class BookController {
@@ -18,6 +35,20 @@ class BookController {
 
 A tag library:
 
+{hidden}
+
+{code}
+clase BookController {}
+    Def list() {}
+        [books:Book.list()]
+    }
+}
+{code}
+
+Una biblioteca de etiquetas:
+
+{hidden}
+
 {code}
 import java.text.SimpleDateFormat
 
@@ -27,6 +58,20 @@ class FormatTagLib {
     }
 }
 {code}
+
+{hidden}
+
+{code}
+java.text.SimpleDateFormat de importación
+
+clase FormatTagLib {}
+    Def dateFormat = {attrs->
+        cabo << SimpleDateFormat(attrs.format).format(attrs.value) nueva
+    }
+}
+{code}
+
+{hidden}
 
 h2. Description
 
@@ -38,7 +83,28 @@ Configured Spring Beans:
 * @multipartResolver@ - An instance of [CommonsMultipartResolver|api:org.springframework.web.multipart.commons.CommonsMultipartResolver] used for dealing with file uploads using Apache Commons File Upload. If you do not wish to use this, set grails.disableCommonsMultipart to true in Config.groovy. Be aware that disabling multipart handling will effect the behaviour of g:actionSubmit which needs to inspect the parameters (requiring the multipart request to be parsed) during the URL mapping phase.
 * @simpleGrailsController@ - An instance of [SimpleGrailsController|api:org.codehaus.groovy.grails.web.servlet.mvc.SimpleGrailsController], which is an instance of the Spring MVC Controller interface and deals with delegating onto actual Grails controller classes
 * @groovyPageResourceLoader@ - Configured in @development@ mode only or when the @grails.gsp.view.dir@ is set. This is a Spring ResourceLoader that knows how to load GSP views from the an arbitrary location
+{hidden}
+
+h2. Descripción
+
+Este plugin configura Grails para utilizar MVC de primavera en su núcleo para tratar las solicitudes web. El plugin configura el @ GrailsDispatcherServlet @ y frijoles de primavera necesarios (ve más abajo) para los controladores, las bibliotecas de etiquetas y páginas de servidor Groovy (SPG)
+
+Frijoles de primavera configurados:
+
+* @ exceptionHandler @ - una instancia de [GrailsExceptionResolver|api:org.codehaus.groovy.grails.web.errors.GrailsExceptionResolver] para tratar de excepciones
+* @ multipartResolver @ - una instancia de [CommonsMultipartResolver|api:org.springframework.web.multipart.commons.CommonsMultipartResolver] utilizada para lidiar con archivo de carga utilizando Apache Commons File Upload. Si no desea utilizar esto, grails.disableCommonsMultipart se establece en true en Config.groovy. Tenga en cuenta que la desactivación de manejo multiparte afectará el comportamiento de los g:actionSubmit que necesita para inspeccionar los parámetros (que requieren la solicitud multiparte para analizar) durante la fase de asignación de dirección URL.
+* @ simpleGrailsController @ - una instancia de [SimpleGrailsController|api:org.codehaus.groovy.grails.web.servlet.mvc.SimpleGrailsController], que es una instancia de la interfaz de controlador de MVC Spring y trata de delegar en clases reales de controlador de Grails
+* @ groovyPageResourceLoader @ - configurado en desarrollo @ @ sólo en modo o cuando se establece la @grails.gsp.view.dir@. Se trata de un ResourceLoader de primavera que sabe cómo cargar vistas del SGP de la una ubicación arbitraria
+
+{hidden}
+
 * @groovyPagesTemplateEngine@ - An instance of [GroovyPagesTemplateEngine|api:org.codehaus.groovy.grails.web.pages.GroovyPagesTemplateEngine], this class deals with rendering of GSP views
 * @jspViewResolver@ - An instance of [GrailsViewResolver|api:org.codehaus.groovy.grails.web.servlet.view.GrailsViewResolver] that knows how to resolve GSP views and is environment aware
 
 The plugin also configures each Grails controller class as a prototyped Spring bean and each Grails tag library as a singleton Spring bean
+{hidden}
+
+* @ groovyPagesTemplateEngine @ - una instancia de [GroovyPagesTemplateEngine|api:org.codehaus.groovy.grails.web.pages.GroovyPagesTemplateEngine], esta clase se ocupa de procesamiento de vistas del SGP
+* @ jspViewResolver @ - una instancia de [GrailsViewResolver|api:org.codehaus.groovy.grails.web.servlet.view.GrailsViewResolver] sabe cómo resolver vistas del SGP y es consciente de entorno
+
+El plugin también configura cada clase de controlador de Grails como un prototipo primavera y granos cada biblioteca de etiquetas de Grails como un grano de primavera singleton

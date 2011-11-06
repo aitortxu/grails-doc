@@ -1,3 +1,6 @@
+
+{hidden}
+
 To get the best performance out of your queries it is often necessary to tailor the table index definitions. How you tailor them is domain specific and a matter of monitoring usage patterns of your queries. With GORM's DSL you can specify which columns are used in which indexes:
 
 {code:java}
@@ -13,5 +16,28 @@ class Person {
     }
 }
 {code}
+{hidden}
+
+Para obtener el mejor rendimiento de las consultas a menudo es necesario adaptar las definiciones de índice de la tabla. ¿Cómo se les adaptar es dominio específico y una cuestión de patrones de uso de las consultas de seguimiento. Con DSL de GORM puede especificar las columnas que se utilizan en los índices:
+
+{code: java}
+clase persona {}
+    Cadena firstName
+    Dirección de la cadena
+    asignación estática = {}
+        tabla 'gente'
+        falsa versión
+        columna ID: 'person_id'
+        columna firstName: 'First_Name', índice: 'Name_Idx'
+        columna de dirección: 'Dirección', índice: 'Name_Idx, Address_Index'
+    }
+}
+{code}
+
+{hidden}
+
 
 Note that you cannot have any spaces in the value of the @index@ attribute; in this example @index:'Name_Idx, Address_Index'@ will cause an error.
+{hidden}
+
+Tenga en cuenta que no puede haber ningún espacio en el valor del índice @ @ atributo; en este ejemplo @ índice: 'Name_Idx, Address_Index' @ se producirá un error.

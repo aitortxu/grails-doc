@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. layoutBody
 
 h2. Purpose
@@ -7,6 +10,20 @@ Used in layouts to output the contents of the body tag of the decorated page.
 h2. Examples
 
 Example decorated page:
+
+{hidden}
+
+h1. layoutBody
+
+h2. Fin
+
+Utilizado en diseños para el contenido de la etiqueta body de la página decorada de salida.
+
+h2. Ejemplos
+
+Ejemplo decorada página:
+
+{hidden}
 
 {code:xml}
 <html>
@@ -20,6 +37,15 @@ Example decorated page:
 Example decorator layout:
 
 {code:xml}
+{hidden}
+
+{Código: xml}<html>
+   <head>
+        <meta name="layout" content="myLayout">
+        <script src="myscript.js"></script></head></html>
+
+{hidden}
+
 <html>
    <head>
         <script src="global.js" />
@@ -32,6 +58,14 @@ Example decorator layout:
 Results in:
 
 {code:xml}
+{hidden}
+
+<html>
+   <head>
+        <script src="global.js"></script></head></html>
+
+{hidden}
+
 <html>
    <head>
         <script src="global.js" />
@@ -45,3 +79,8 @@ h2. Source
 
 {source:tag=RenderTagLib.layoutBody}
 {source}
+{hidden}
+
+<html>
+   <head>
+        <script src="global.js"></script></head></html>

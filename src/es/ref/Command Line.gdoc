@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. Command Line Usage
 
 Grails incorporates the powerful build system [Gant|http://groovy.codehaus.org/Gant], which is a Groovy wrapper around [Apache Ant|http://ant.apache.org].
@@ -7,6 +10,20 @@ The basic usage scenario is:
 {code:java}
 grails [environment]* [command name]
 {code}
+
+{hidden}
+
+h1. Uso de línea de comandos
+
+Grails incorpora el sistema de compilación potente [Gant|http://groovy.codehaus.org/Gant], que es un contenedor Groovy [Apache Ant|http://ant.apache.org].
+
+El escenario de uso básico es:
+
+{code: java}
+Grails [entorno] * [nombre de comando]
+{code}
+
+{hidden}
 
 Grails searches in the following directories for Gant scripts to execute:
 
@@ -18,6 +35,21 @@ Grails searches in the following directories for Gant scripts to execute:
 If multiple matches are found Grails will give you a choice of which one to execute.
 
 You can specify the environment that the command executes in with an optional environment parameter, either with one of the built-in environment names:
+{hidden}
+
+Búsquedas de Grails en los siguientes directorios Gant secuencias de comandos ejecutar:
+
+* @USER_HOME/.grails/scripts@
+* @ PROJECT_HOME/scripts @
+* @ PROJECT_HOME/plugins / * / scripts @
+* @ GRAILS_HOME/scripts @
+
+Si coincide con múltiples se encuentran que Grails le dará una opción de que se ejecute.
+
+Puede especificar el entorno en el que se ejecuta el comando con un parámetro opcional de medio ambiente, ya sea con uno de los nombres del entorno integrado:
+
+{hidden}
+
 
 {code:java}
 grails dev run-app
@@ -30,5 +62,24 @@ Or using a -D argument if the name is not one of the three standard names:
 {code:java}
 grails -Dgrails.env=uat run-app
 {code}
+{hidden}
+
+{code: java}
+dev de Grails run-app
+prueba de Grails run-app
+Grails prod run-app
+{code}
+
+O utilizando un argumento -D si el nombre no es uno de los tres nombres estándar:
+
+{code: java}
+Grails-Dgrails.env=uat run-app
+{code}
+
+{hidden}
+
 
 Refer to the user guide section on [The Command Line|guide:commandLine] for more information.
+{hidden}
+
+Consulte la sección Guía de usuario de [el comando Line|guide:commandLine] para obtener más información.

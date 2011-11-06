@@ -1,3 +1,6 @@
+
+{hidden}
+
 Variables can be defined within a GSP using the [set|tags] tag:
 
 {code:xml}
@@ -11,6 +14,24 @@ Here we assign a variable called @now@ to the result of a GSP expression (which 
    Some re-usable code on: ${new Date()}
 </g:set>
 {code}
+{hidden}
+
+Las variables pueden definirse dentro de un sistema de preferencias Generalizadas utilizando la etiqueta [set|tags]:
+
+{Código: xml}
+<g:set var="now" value="${new Date()}"></g:set>
+{code}
+
+Aquí asignamos una variable denominada @ ahora @ al resultado de una expresión del SGP (que simplemente crea una nueva instancia de @java.util.Date@). También puede utilizar el cuerpo de la @<g:set>@ etiqueta para definir una variable:
+
+{Código: xml}
+<g:set var="myHTML">
+   Código reutilizable en: ${new Date()}
+</g:set>
+{código}</g:set>
+
+{hidden}
+
 
 Variables can also be placed in one of the following scopes:
 
@@ -21,7 +42,26 @@ Variables can also be placed in one of the following scopes:
 * @application@ - Application-wide scope.
 
 To specify the scope, use the @scope@ attribute:
+{hidden}
+
+Variables también pueden colocarse en uno de los ámbitos siguientes:
+
+* @ página @ - en el ámbito de la página actual (valor predeterminado)
+* @ solicitud @ - en el ámbito de la solicitud actual
+* @ flash @ - ahí disponibles para la siguiente solicitud y colocados dentro de ámbito [flash|controllers]
+* @ sesión @ - ámbito para la sesión de usuario
+* @ aplicación @ - alcance de toda la aplicación.
+
+Para especificar el ámbito de aplicación, utilice el ámbito @ @ atributo:
+
+{hidden}
+
 
 {code:xml}
 <g:set var="now" value="${new Date()}" scope="request" />
+{code}
+{hidden}
+
+{Código: xml}
+<g:set var="now" value="${new Date()}" scope="request"></g:set>
 {code}

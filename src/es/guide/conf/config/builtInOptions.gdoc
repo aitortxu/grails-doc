@@ -1,3 +1,4 @@
+
 {hidden}
 
 Grails also provides the following configuration options:
@@ -14,13 +15,13 @@ Grails also provides the following configuration options:
 
 Grails también proporciona las siguientes opciones de configuración:
 
-* @grails.config.locations@ - la ubicación de archivos de propiedades o archivos de configuración de Grails que deben combinarse con la configuración principal.
-* @grails.enable.native2ascii@ - se establece en false si no necesita convertir archivos de propiedades de i18n de Grails a native2ascii.
-* @grails.views.default.codec@ - establece la de codificación predeterminada para GSPs, puede ser 'none', 'html' o 'base64' (por defecto: 'none'). Para reducir el riesgo de ataques XSS, definir 'html'.
-* @grails.views.gsp.encoding@ - establece la codificación de archivos para los archivos GSP (el valor por defecto es 'utf-8').
-* @grails.mime.file.extensions@ - si se utiliza la extensión de archivo para dictar el tipo mime tipo en [contenido Negotiation|guide:contentNegotiation]
-* @grails.mime.types@ - un mapa de tipos mime admitidos utilizados al [negociar contenidos|guide:contentNegotiation]
-* @grails.serverURL@ - una cadena que especifica la parte URL del servidor de enlaces absolutos, incluyendo el nombre del servidor, por ejemplo, grails.serverURL="http://my.yourportal.com". Consulte [createLink|Tags].
+* @grails.config.locations@ - la ubicación de archivos de propiedades o archivos de configuración de Grails de adición que deben combinarse con la configuración principal
+* @grails.enable.native2ascii@ - se establece en false si no necesita conversión de native2ascii de archivos de propiedades de i18n de Grails
+* @grails.views.default.codec@ - establece el régimen de codificación predeterminada para GSPs - puede ser una 'None', 'html' o 'base64' (por defecto: 'ninguno'). Para reducir el riesgo de ataques XSS, definir 'html'.
+* @grails.views.gsp.encoding@ - utiliza la codificación de archivos para los archivos de origen del SGP (valor por defecto es 'utf-8')
+* @grails.mime.file.extensions@ - si se utiliza la extensión de archivo para dictar el mimo tipo en [contenido Negotiation|guide:contentNegotiation]
+* @grails.mime.types@ - un mapa de tipos mime admitidos utilizados para [contenido Negotiation|guide:contentNegotiation]
+* @grails.serverURL@ - una cadena que especifica la parte URL del servidor de vínculos absolutos, incluyendo el servidor de nombre, por ejemplo, grails.serverURL="http://my.yourportal.com". Consulte [createLink|Etiquetas].
 
 {hidden}
 
@@ -34,11 +35,11 @@ h3. War generation
 For more information on using these options, see the section on [deployment|guide:deployment]
 {hidden}
 
-h3. Generación de wars
+h3. Generación de guerra
 
-* @grails.project.war.file@ - establece el nombre y la ubicación del archivo war generado por el comando [war|commandLine].
-* @grails.war.dependencies@ - una closure que contiene la sintaxis del constructor de Ant o una lista de nombres de archivo JAR. Le permite personalizar qué librerías se incluyen en el archivo war.
-* @grails.war.copyToWebApp@ - una closure que contiene la sintaxis del constructor de Ant que es legal dentro de un copy de Ant, por ejemplo "fileset()". Le permite controlar qué se incluye en el archivo war desde el directorio "web-app".
-* @grails.war.resources@ - una closure que contiene la sintaxis del constructor de Ant. Permite a la aplicación hacer otros trabajos antes de construir el archivo war final.
+* @grails.project.war.file@ - establece el nombre y la ubicación del archivo guerra generado por el comando [war|commandLine]
+* @grails.war.dependencies@ - un cierre que contiene la sintaxis de generador de hormiga o una lista de nombres de archivo JAR. Le permite personalizar qué libaries se incluyen en el archivo de la guerra.
+* @grails.war.copyToWebApp@ - un cierre que contiene la sintaxis de generador de hormiga es legal dentro de una copia de la hormiga, por ejemplo "fileset()". Le permite controlar qué obtiene incluido en el archivo de guerra desde el directorio "web-app".
+* @grails.war.resources@ - un cierre que contiene la sintaxis de generador de hormiga. Permite a la aplicación de otros otros trabajar antes de construir el archivo final de la guerra
 
 Para obtener más información sobre estas opciones, consulte la sección [deployment|guide:deployment]

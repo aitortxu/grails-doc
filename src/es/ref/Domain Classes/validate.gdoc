@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. validate
 
 h2. Purpose
@@ -7,6 +10,20 @@ Validates a domain class against the applied constraints (see [Validation|guide:
 h2. Description
 
 The @validate@ method validates a domain class based on its defined [constraints|guide:constraints]. The errors are stored in the [errors|domainClasses] property of the domain class instance.
+
+{hidden}
+
+h1. validar
+
+h2. Fin
+
+Valida una clase de dominio contra las restricciones aplicadas (véase [Validation|guide:validation])
+
+h2. Descripción
+
+El @ validar método valida una clase de dominio basada en su definición [constraints|guide:constraints]. Los errores se almacenan en la propiedad [errors|domainClasses] de la instancia de la clase de dominio.
+
+{hidden}
 
 The @validate@ method accepts an optional @List@ argument which contains the names of the properties to be validated. When a @List@ of names is specified, only those properties will be validated.
 
@@ -20,6 +37,23 @@ if (!b.validate()) {
     }
 }
 {code}
+{hidden}
+
+El @ validar método acepta una lista @ opcional @ argumento que contiene los nombres de las propiedades que se valida. Cuando se especifica una lista @ @ de nombres, se validará sólo esas propiedades.
+
+h2. Ejemplos
+
+{code: java}
+Def b = nuevo libro (título: "El resplandor")
+Si (! b.validate()) {}
+    b.Errors.each {}
+        Console.println se
+    }
+}
+{code}
+
+{hidden}
+
 
 {code:java}
 def a = new Album(artist: "Genesis", title: "Nursery Cryme", releaseDate: 1971)
@@ -31,7 +65,27 @@ if (!a.validate(["title", "releaseDate"])) {
     }
 }
 {code}
+{hidden}
+
+{code: java}
+Def un = nuevo álbum (artista: "Génesis", título: "Nursery Cryme", releaseDate: 1971)
+
+/ / sólo validar el título y releaseDate
+Si (! a.validate (["título", "releaseDate"])) {}
+    a.Errors.each {}
+        Console.println se
+    }
+}
+{code}
+
+{hidden}
+
 
 Parameters:
 
 * @deepValidate@ (optional) - Whether associations of the domain instance should also be validated, i.e. whether validation cascades. This is @true@ by default; set it to @false@ to disable cascading validation.
+{hidden}
+
+Parámetros:
+
+* @ deepValidate @ (opcional) - si las asociaciones de la instancia de dominio deben también validar, es decir, si cascadas de validación. Esto es @ true @ por defecto; establecido en false @ @ para deshabilitar la validación en cascada.

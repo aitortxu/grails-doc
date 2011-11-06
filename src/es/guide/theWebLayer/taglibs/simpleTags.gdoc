@@ -1,8 +1,7 @@
-{hidden}
-As demonstrated it the previous example it is easy to write simple tags that have no body and just output content. Another example is a @dateFormat@ style tag:
+
 {hidden}
 
-Como se demostro en el ejemplo anterior es facil de escribir etiquetas simples que no tengan cuerpo y solo contenido de salida. Otro ejemplo es la etiqueta de estilo @dateFormat@:
+As demonstrated it the previous example it is easy to write simple tags that have no body and just output content. Another example is a @dateFormat@ style tag:
 
 {code:java}
 def dateFormat = { attrs, body ->
@@ -10,21 +9,27 @@ def dateFormat = { attrs, body ->
 }
 {code}
 
-{hidden}
 The above uses Java's @SimpleDateFormat@ class to format a date and then write it to the response. The tag can then be used within a GSP as follows:
+
 {hidden}
 
-El codigo de arriba usa la clase de Java @SimpleDateFormat@ para dar el formato a una fecha y entonces escribirla en la respuesta. La etiqueta puede entonces ser usada dentro del GSP como sigue:
+Como lo demuestra el ejemplo anterior es fácil escribir etiquetas simples que no tienen sólo salida contenido y cuerpo. Otro ejemplo es un dateFormat @ @ style (etiqueta):
+
+{code: java}
+Def dateFormat = {attrs, cuerpo->
+    cabo << java.text.SimpleDateFormat(attrs.format).format(attrs.date) nueva
+}
+{code}
+
+Lo anterior utiliza Java @ SimpleDateFormat @ clase para formatear una fecha y, a continuación, escribir la respuesta. La etiqueta puede usarse dentro de un sistema de preferencias Generalizadas como sigue:
+
+{hidden}
 
 {code:xml}
 <g:dateFormat format="dd-MM-yyyy" date="${new Date()}" />
 {code}
 
-{hidden}
 With simple tags sometimes you need to write HTML mark-up to the response. One approach would be to embed the content directly:
-{hidden}
-
-Con las etiquetas simples a veces necesitara escribir HTML mark-up en la respuesta. Una propuesta podria ser embeber el contenido directamente:
 
 {code:java}
 def formatBook = { attrs, body ->
@@ -33,12 +38,25 @@ def formatBook = { attrs, body ->
     out << "</div>"
 }
 {code}
+{hidden}
+
+{Código: xml}
+<g:dateformat format="dd-MM-yyyy" date="${new Date()}"></g:dateformat>
+{code}
+
+Con las etiquetas simples a veces necesitas escribir HTML mark-up a la respuesta. Un enfoque sería incrustar el contenido directamente:
+
+{code: java}
+Def formatBook = {attrs, cuerpo->
+    cabo<><div id="\"${attrs.book.id}\"">"
+    cabo< "title="" :="" ${attrs.book.title}"="" out=""><></div>"
+}
+{code}
 
 {hidden}
+
+
 Although this approach may be tempting it is not very clean. A better approach would be to reuse the [render|tags] tag:
-{hidden}
-
-A pesar que este propuesta pueda ser tentativa, no es muy limpia. Una propuesta mejor seria el reusar la etiqueta [render|tags]:
 
 {code:java}
 def formatBook = { attrs, body ->
@@ -46,7 +64,15 @@ def formatBook = { attrs, body ->
 }
 {code}
 
-{hidden}
 And then have a separate GSP template that does the actual rendering.
 {hidden}
-Y entonces tener una plantilla de GSP separada que haga el rendering actual.
+
+Aunque este enfoque puede resultar tentador no es muy limpio. Un mejor enfoque sería reutilizar la etiqueta [render|tags]:
+
+{code: java}
+Def formatBook = {attrs, cuerpo->
+    cabo << representar (plantilla: "bookTemplate", modelo: [libro: attrs.book])
+}
+{code}
+
+Y, a continuación, tiene una plantilla de SPG independiente que realiza el procesamiento real.

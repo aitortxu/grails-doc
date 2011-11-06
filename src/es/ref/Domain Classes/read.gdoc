@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. read
 
 h2. Purpose
@@ -9,6 +12,22 @@ h2. Examples
 {code:java}
 def b = Book.read(1)
 {code}
+{hidden}
+
+h1. leer
+
+h2. Fin
+
+Recupera una instancia de la clase de dominio para el id especificado en un Estado de sólo lectura. @ null @ se devuelve si la fila con el id especificado no existe.
+
+h2. Ejemplos
+
+{code: java}
+Def b = Book.read(1)
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -17,3 +36,12 @@ The @read@ method is similar to the [get|Domain Classes] method except that auto
 Parameters:
 
 * @id@ - The id of the object to retrieve
+{hidden}
+
+h2. Descripción
+
+La lectura @ @ método es similar a la [get|Método de las clases de dominio] salvo ese sucia detección automática está desactivada. La instancia no está verdaderamente sólo lectura - puede modificarlo - pero si no se guarda explícitamente pero se ha modificado, no se actualizarán en la base de datos durante una escalera. Pero se puede llamar explícitamente a @ save() @ y se actualizará. Hay una excepción a esto aunque - cualquiera asociado colecciones, por ejemplo un @ Author@'s @ libros @ colección, participará en la baja automática y detección de sucio. Esto es porque colecciones asignados reciben un trato diferente que propiedades regulares y administran su propios sucia indepenent comprobación de la clase contenedora de dominio.
+
+Parámetros:
+
+* @ id @ - el id del objeto para recuperar

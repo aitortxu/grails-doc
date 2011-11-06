@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. timeZoneSelect
 
 h2. Purpose
@@ -10,6 +13,23 @@ h2. Examples
 // Create a timezone selector
 <g:timeZoneSelect name="myTimeZone" value="${tz}" />
 {code}
+{hidden}
+
+h1. timeZoneSelect
+
+h2. Fin
+
+Etiqueta de auxiliar para crear HTML seleccione etiquetas para seleccionar de una lista de zonas horarias
+
+h2. Ejemplos
+
+{Código: xml}
+/ / Crear un selector de zona horaria
+<g:timezoneselect name="myTimeZone" value="${tz}"></g:timezoneselect>
+{code}
+
+{hidden}
+
 
 h2. Description
 
@@ -20,5 +40,22 @@ Attributes
 
 h2. Source
 
+{hidden}
+
+h2. Descripción
+
+Atributos
+
+* @ nombre @ (requerido) - el nombre de select
+* @ valor @ (opcional) - una instancia de @ java.util.TimeZone@. El valor predeterminado es el momento de zona para el actual escenario @ @ si no especificado
+
+h2. Fuente
+
+{hidden}
+
 {source:tag=FormTagLib.timeZoneSelect}
 {source}
+{hidden}
+
+{source:tag=FormTagLib.timeZoneSelect}
+origen de {}

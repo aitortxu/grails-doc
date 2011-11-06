@@ -1,3 +1,6 @@
+
+{hidden}
+
 h1. scaffolding
 
 h2. Purpose
@@ -8,6 +11,20 @@ h2. Examples
 
 An example of enabling "dynamic" scaffolding:
 
+{hidden}
+
+h1. Andamio
+
+h2. Fin
+
+Los andamios @ @ plugin configura el soporte de Grails para CRUD mediante [Scaffolding|guide:scaffolding].
+
+h2. Ejemplos
+
+Un ejemplo de activación andamios "dinámico":
+
+{hidden}
+
 {code:java}
 class BookController {
     static scaffold = true
@@ -17,3 +34,14 @@ class BookController {
 h2. Description
 
 Refer to the section on [Scaffolding|guide:scaffolding] in the Grails user guide which details Grails' scaffolding support.
+{hidden}
+
+{code: java}
+clase BookController {}
+    Andamio estática = true
+}
+{code}
+
+h2. Descripción
+
+Consulte la sección [Scaffolding|guide:scaffolding] en la Guía de usuario de Grails que detalla el apoyo de andamios de Grails.

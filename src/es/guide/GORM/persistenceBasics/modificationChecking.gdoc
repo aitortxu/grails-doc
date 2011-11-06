@@ -1,3 +1,6 @@
+
+{hidden}
+
 Once you have loaded and possibly modified a persistent domain class instance, it isn't straightforward to retrieve the original values. If you try to reload the instance using [get|domainClasses] Hibernate will return the current modified instance from its Session cache. Reloading using another query would trigger a flush which could cause problems if your data isn't ready to be flushed yet. So GORM provides some methods to retrieve the original values that Hibernate caches when it loads the instance (which it uses for dirty checking).
 
 h4. isDirty
@@ -13,6 +16,26 @@ if (airport.isDirty()) {
    // do something based on changed state
 }
 {code}
+{hidden}
+
+Una vez que haya cargado y posiblemente por última vez una instancia de la clase de dominio persistente, no es sencillo recuperar los valores originales. Si se intenta cargar la instancia mediante [get|domainClasses] Hibernate devolverá la actual instancia modificada desde la caché de la sesión. Recarga mediante otra consulta desencadenaría una escalera que podría causar problemas si los datos no está listos para ser vaciados todavía. Por lo tanto GORM proporciona algunos métodos para recuperar los valores originales que Hibernate almacena en caché cuando se carga la instancia (que utiliza para comprobar la sucia).
+
+h4. isDirty
+
+Puede utilizar el método [isDirty|domainClasses] para comprobar si se ha modificado ningún campo:
+
+{code}
+Aeropuerto de Def = Airport.get(10)
+valer! airport.isDirty()
+
+Airport.Properties = params
+Si ({airport.isDirty())}
+   / / hacer algo basado en estado modificado
+}
+{code}
+
+{hidden}
+
 
 {note}
 @isDirty()@ does not currently check collection associations, but it does check all other persistent properties and associations.
@@ -29,6 +52,26 @@ if (airport.isDirty('name')) {
    // do something based on changed name
 }
 {code}
+{hidden}
+
+{Nota}
+@ isDirty() @ actualmente no buscar asociaciones de colección, pero comprueba todas las demás propiedades persistentes y asociaciones.
+{Nota}
+
+También puede comprobar si se han modificado los campos individuales:
+
+{code}
+Aeropuerto de Def = Airport.get(10)
+valer! airport.isDirty()
+
+Airport.Properties = params
+Si ({airport.isDirty('name'))}
+   / / hacer algo basado en ha cambiado el nombre
+}
+{code}
+
+{hidden}
+
 
 h4. getDirtyPropertyNames
 
@@ -44,6 +87,25 @@ for (fieldName in modifiedFieldNames) {
    // do something based on changed value
 }
 {code}
+{hidden}
+
+h4. getDirtyPropertyNames
+
+Puede utilizar el método [getDirtyPropertyNames|domainClasses] para recuperar los nombres de campos modificados; Esto puede estar vacía, pero no será nulo:
+
+{code}
+Aeropuerto de Def = Airport.get(10)
+valer! airport.isDirty()
+
+Airport.Properties = params
+Def modifiedFieldNames = airport.getDirtyPropertyNames()
+para (fieldName en modifiedFieldNames) {}
+   / / hacer algo basado en el valor modificado
+}
+{code}
+
+{hidden}
+
 
 h4. getPersistentValue
 
@@ -63,4 +125,30 @@ for (fieldName in modifiedFieldNames) {
     }
 }
 {code}
+{hidden}
+
+h4. getPersistentValue
+
+Puede utilizar el método [getPersistentValue|domainClasses] para recuperar el valor de un campo modificado:
+
+{code}
+Aeropuerto de Def = Airport.get(10)
+valer! airport.isDirty()
+
+Airport.Properties = params
+Def modifiedFieldNames = airport.getDirtyPropertyNames()
+para (fieldName en modifiedFieldNames) {}
+    Def currentValue = aeropuerto. "$fieldName"
+    Def originalValue = airport.getPersistentValue(fieldName)
+    Si (currentValue! = originalValue) {}
+        / / hacer algo basado en el valor modificado
+    }
+}
+{code}
+
+{hidden}
+
+
+{hidden}
+
 
